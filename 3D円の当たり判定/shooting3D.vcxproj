@@ -135,11 +135,13 @@
   <ItemGroup>
     <ClCompile Include="src\collision.cpp" />
     <ClCompile Include="src\input\controllerInput.cpp" />
+    <ClCompile Include="src\input\KeyInput.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\collision.h" />
     <ClInclude Include="src\input\controllerInput.h" />
+    <ClInclude Include="src\input\keyInput.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

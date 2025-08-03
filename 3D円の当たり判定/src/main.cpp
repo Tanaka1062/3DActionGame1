@@ -2,6 +2,7 @@
 #include <memory>
 #include "DxLib.h"
 #include "collision.h"
+#include "input/controllerInput.h"
 
 //---------------------------------
 // 立方体同士の当たり判定
@@ -81,15 +82,20 @@ int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	// カメラのニアーファー設定
 	SetCameraNearFar(1.0f, 1000.0f);
 
+	CControllerInput::Init();
+
 	//ゲームメインループ
 	while (ProcessMessage() != -1)
 	{
+
 		//エスケープキーが押されたら終了
 		if (CheckHitKey(KEY_INPUT_ESCAPE) == 1) break;
 
 		ClearDrawScreen();	// 画面クリア
 
 		//ここにゲームの本体を書く
+
+		CControllerInput::Update();
 
 		// プレイヤー1の移動========================
 		float MOVE_SPEED = 0.1f;
@@ -99,7 +105,8 @@ int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		{
 			Player1Pos.y += MOVE_SPEED;
 		}
-		else if (CheckHitKey(KEY_INPUT_W) != 0)
+		else if (CheckHitKey(KEY_INPUT_W) != 0 ||
+			CControllerInput::IsTrg(PAD_INPUT_UP) == true)
 		{
 			Player1Pos.z += MOVE_SPEED;
 		}
@@ -108,7 +115,8 @@ int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		{
 			Player1Pos.y -= MOVE_SPEED;
 		}
-		else if (CheckHitKey(KEY_INPUT_S) != 0)
+		else if (CheckHitKey(KEY_INPUT_S) != 0 ||
+			CControllerInput::IsRep(PAD_INPUT_1) == true)
 		{
 			Player1Pos.z -= MOVE_SPEED;
 		}

@@ -27,12 +27,18 @@
     <ClCompile Include="src\input\controllerInput.cpp">
       <Filter>ソース ファイル\input</Filter>
     </ClCompile>
+    <ClCompile Include="src\input\KeyInput.cpp">
+      <Filter>ソース ファイル\input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\collision.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\input\controllerInput.h">
+      <Filter>ソース ファイル\input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\input\keyInput.h">
       <Filter>ソース ファイル\input</Filter>
     </ClInclude>
   </ItemGroup>
