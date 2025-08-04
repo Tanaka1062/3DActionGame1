@@ -106,7 +106,7 @@ int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 			Player1Pos.y += MOVE_SPEED;
 		}
 		else if (CheckHitKey(KEY_INPUT_W) != 0 ||
-			CControllerInput::IsTrg(PAD_INPUT_UP) == true)
+			CControllerInput::IsTrg(BUTTON_UP) == true)
 		{
 			Player1Pos.z += MOVE_SPEED;
 		}
@@ -116,7 +116,7 @@ int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 			Player1Pos.y -= MOVE_SPEED;
 		}
 		else if (CheckHitKey(KEY_INPUT_S) != 0 ||
-			CControllerInput::IsRep(PAD_INPUT_1) == true)
+			CControllerInput::IsRep(BUTTON_DOWN) == true)
 		{
 			Player1Pos.z -= MOVE_SPEED;
 		}

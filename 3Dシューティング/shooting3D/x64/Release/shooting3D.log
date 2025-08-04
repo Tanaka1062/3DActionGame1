@@ -1,0 +1,35 @@
+﻿  cameraManager.cpp
+  debugCamera.cpp
+  playCamera.cpp
+  collision.hManager.cpp
+  enemy.cpp
+  enemyManager.cpp
+  ground.cpp
+  main.cpp
+  player.cpp
+  playScene.cpp
+  resultScene.cpp
+  sceneBase.cpp
+  sceneManager.cpp
+  titleScene.cpp
+  scoreData.cpp
+  shot.cpp
+  shotManager.cpp
+  sky.cpp
+  soundManager.cpp
+  scoreText.cpp
+  コンパイル中...
+  2DUi.cpp
+  collision.cpp
+  effekseer.cpp
+  fps.cpp
+  input.cpp
+  3DObject.cpp
+  actor.cpp
+  myMath.cpp
+  number.cpp
+  コード生成しています。
+  Previous IPDB not found, fall back to full compilation.
+  All 524 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  コード生成が終了しました。
+  shooting3D.vcxproj -> D:\Users\2409417\Desktop\3Dシューティング\x64\Release\shooting3D.exe
