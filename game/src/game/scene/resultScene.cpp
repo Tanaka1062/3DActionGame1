@@ -80,7 +80,10 @@ void CResultScene::Load()
 //---------------------------
 void CResultScene::Step()
 {
-
+	if (CKeyInput::IsTrg(KEY_SELECT) == true)
+	{
+		m_state = END;
+	}
 }
 
 //---------------------------

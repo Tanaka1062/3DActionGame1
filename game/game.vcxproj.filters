@@ -40,11 +40,20 @@
     <Filter Include="ソース ファイル\game\camera">
       <UniqueIdentifier>{1694ab30-39a3-413c-94f4-4bb3fa4dda8f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\game\ground">
-      <UniqueIdentifier>{631421b6-6b23-4e5f-b246-f12021a2cbd3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\game\system">
       <UniqueIdentifier>{ba11f423-a14e-4529-a61c-5d144593fef5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\game\sky">
+      <UniqueIdentifier>{f1ed687f-70c3-411a-a303-8d7c2d78cd8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\game\map">
+      <UniqueIdentifier>{631421b6-6b23-4e5f-b246-f12021a2cbd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\game\character">
+      <UniqueIdentifier>{18d733f3-862c-49f6-bc9e-dc7243be1153}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\game\player">
+      <UniqueIdentifier>{cd707ba0-d16f-4ff7-b44a-4657daca714c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -78,9 +87,6 @@
     <ClCompile Include="src\lib\collision\collision.cpp">
       <Filter>ソース ファイル\lib\collision</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\ground\ground.cpp">
-      <Filter>ソース ファイル\game\ground</Filter>
-    </ClCompile>
     <ClCompile Include="src\game\camera\cameraManager.cpp">
       <Filter>ソース ファイル\game\camera</Filter>
     </ClCompile>
@@ -113,6 +119,18 @@
     </ClCompile>
     <ClCompile Include="src\game\system\soundManager.cpp">
       <Filter>ソース ファイル\game\system</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\sky\sky.cpp">
+      <Filter>ソース ファイル\game\sky</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\map\map.cpp">
+      <Filter>ソース ファイル\game\map</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\character\characterBase.cpp">
+      <Filter>ソース ファイル\game\character</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\player\player.cpp">
+      <Filter>ソース ファイル\game\player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -149,9 +167,6 @@
     <ClInclude Include="src\lib\collision\collision.h">
       <Filter>ソース ファイル\lib\collision</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\ground\ground.h">
-      <Filter>ソース ファイル\game\ground</Filter>
-    </ClInclude>
     <ClInclude Include="src\game\camera\cameraManager.h">
       <Filter>ソース ファイル\game\camera</Filter>
     </ClInclude>
@@ -181,6 +196,18 @@
     </ClInclude>
     <ClInclude Include="src\game\system\soundManager.h">
       <Filter>ソース ファイル\game\system</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\sky\sky.h">
+      <Filter>ソース ファイル\game\sky</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\map\map.h">
+      <Filter>ソース ファイル\game\map</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\character\characterBase.h">
+      <Filter>ソース ファイル\game\character</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\player\player.h">
+      <Filter>ソース ファイル\game\player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

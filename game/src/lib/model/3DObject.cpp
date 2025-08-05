@@ -54,6 +54,14 @@ void CObject::Draw()
 }
 
 //---------------------
+//オブジェクトのロード
+//---------------------
+void CObject::Load()
+{
+
+}
+
+//---------------------
 //	モデルデータロード
 //---------------------
 bool CObject::LoadModel(const char* _filePath)

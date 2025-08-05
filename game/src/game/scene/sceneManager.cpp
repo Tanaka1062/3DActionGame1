@@ -2,7 +2,7 @@
 #include "playScene.h"
 #include "titleScene.h"
 #include "resultScene.h"
-#include"../../lib/sound/soundManager.h"
+#include"../system/soundManager.h"
 
 //’è‹`ŠÖ˜A====================================
 

@@ -1,6 +1,7 @@
 #include "playScene.h"
 #include "../../lib/collision/collision.h"
 #include "../system/soundManager.h"
+#include "../../lib/input/keyInput.h"
 
 //’è‹`ŠÖ˜A====================================
 static const char LOAD_BACKGROUND_GRAPHIC_PATH[] = "data/graphic/game/LoadBackGround.png";
@@ -81,6 +82,12 @@ void CPlayScene::Step()
 	m_ground.Update();
 	m_sky.Update();
 	m_camera.Update();
+
+	if (CKeyInput::IsTrg(KEY_SELECT) == true)
+	{
+		m_state = END;
+	}
+
 }
 
 //---------------------------

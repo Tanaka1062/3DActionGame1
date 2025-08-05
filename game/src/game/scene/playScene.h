@@ -1,7 +1,7 @@
 #pragma once
 #include "sceneBase.h"
 #include "../camera/cameraManager.h"
-#include "../ground/ground.h"
+#include "../map/map.h"
 #include "../sky/sky.h"
 #include "../../lib/2DUi/2DUi.h"
 #include"../data.h"

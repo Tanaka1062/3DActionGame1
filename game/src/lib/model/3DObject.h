@@ -23,6 +23,8 @@ public:
 	virtual void Update();
 	//オブジェクトの描写
 	virtual void Draw();
+	//オブジェクトのロード
+	virtual void Load();
 
 	//モデルデータロード
 	//_filePath		:読み込みたいモデルデータパス
