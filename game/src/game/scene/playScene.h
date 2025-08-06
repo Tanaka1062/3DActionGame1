@@ -3,18 +3,22 @@
 #include "../camera/cameraManager.h"
 #include "../map/map.h"
 #include "../sky/sky.h"
-#include "../../lib/2DUi/2DUi.h"
 #include"../data.h"
+#include"../character/characterBase.h"
+#include<iostream>
+#include<vector>
+
+using namespace std;
 
 //ゲーム本編を管理するクラス
 class CPlayScene :public CSceneBase
 {
 private:
 
-	CGround m_ground;			//背景
-	CSky m_sky;					//空
-	CCameraManager m_camera;	//カメラ
-	C2DUi m_loadBackGround;		//ロード画面の背景
+	CGround m_ground;					//背景
+	CSky m_sky;							//空
+	CCameraManager m_camera;			//カメラ
+	vector<CCharacterBase*> m_chara;	//キャラクター
 
 public:
 

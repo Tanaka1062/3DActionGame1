@@ -24,6 +24,7 @@ void CObject::Init()
 	m_pos = { 0.0f,0.0f,0.0f };
 	m_rot = { 0.0f,0.0f,0.0f };
 	m_scale = { 1.0f,1.0f,1.0f };
+	m_speed = { 0.0f,0.0f,0.0f };
 	m_hndl = -1;
 }
 

@@ -2,10 +2,9 @@
 #include "../../lib/collision/collision.h"
 #include "../system/soundManager.h"
 #include "../../lib/input/keyInput.h"
+#include"../player/player.h"
 
-//定義関連====================================
-static const char LOAD_BACKGROUND_GRAPHIC_PATH[] = "data/graphic/game/LoadBackGround.png";
-//============================================
+
 
 //---------------------------
 //コンストラクタ
@@ -31,14 +30,11 @@ void CPlayScene::Draw()
 {
 	m_ground.Draw();
 	m_sky.Draw();
+	
 
 	m_camera.Draw();
 
 
-	if (m_state == LOAD)
-	{
-		m_loadBackGround.Draw();
-	}
 }
 
 //---------------------------
@@ -50,10 +46,14 @@ void CPlayScene::Init()
 	m_sky.Init();
 	m_camera.Init();
 
-	VECTOR loadBGPos;
-	loadBGPos.x = static_cast<float>(WINDOW_SIZE_X / 2);
-	loadBGPos.y = static_cast<float>(WINDOW_SIZE_Y / 2);
-	m_loadBackGround.Init(loadBGPos);
+	//プレイヤーの初期化
+	for (int i = 0; i < PLAYER_NUM; i++)
+	{
+		m_chara.push_back(new CPlayer);
+		m_chara[i]->SetType(TYPE_PLAYER);
+	}
+
+
 }
 
 //---------------------------
@@ -61,10 +61,13 @@ void CPlayScene::Init()
 //---------------------------
 void CPlayScene::Load()
 {
-	m_loadBackGround.Load(LOAD_BACKGROUND_GRAPHIC_PATH);
-	m_ground.LoadModel(GROUND_MODEL_PATH);
-	m_sky.LoadModel(SKY_MODEL_PATH);
+	m_ground.Load();
+	m_sky.Load();
 
+	for (int i = 0; i < m_chara.size(); i++)
+	{
+		m_chara[i]->Load();
+	}
 }
 
 //---------------------------
@@ -75,6 +78,12 @@ void CPlayScene::Step()
 	//各種計算処理を実行
 	m_sky.Step();
 
+	for (int i = 0; i < m_chara.size(); i++)
+	{
+		m_chara[i]->Step();
+	}
+
+	m_camera.Step(m_chara[0]->GetPos(),m_chara[0]->GetRot().y);
 	//当たり判定
 
 
@@ -82,6 +91,11 @@ void CPlayScene::Step()
 	m_ground.Update();
 	m_sky.Update();
 	m_camera.Update();
+
+	for (int i = 0; i < m_chara.size(); i++)
+	{
+		m_chara[i]->Update();
+	}
 
 	if (CKeyInput::IsTrg(KEY_SELECT) == true)
 	{
@@ -97,6 +111,20 @@ void CPlayScene::Exit()
 {
 	m_ground.Exit();
 	m_sky.Exit();
+
+	//キャラクターの終了処理
+	for (int i = 0; i < m_chara.size(); i++)
+	{
+		m_chara[i]->Exit();
+
+		delete m_chara[i];
+	}
+
+	//キャラクターの要素削除
+	for (int i = 0; i < m_chara.size(); i++)
+	{
+		m_chara.pop_back();
+	}
 
 	CSoundManager::StopAll();
 }

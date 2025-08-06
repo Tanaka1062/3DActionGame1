@@ -1,7 +1,7 @@
 #pragma once
 #include "../character/characterBase.h"
 
-
+static const int PLAYER_NUM = 1;	//プレイヤーの数
 
 class CPlayer:public CCharacterBase
 {
@@ -12,6 +12,9 @@ public:
 	CPlayer();
 	~CPlayer();
 
+	//初期化
+	void Init();
+
 	//モデルロード
 	void Load();
 
@@ -19,20 +22,23 @@ public:
 	void Step();
 
 private:
-	//待機処理
+	//待機状態処理
 	void Wait();
 
-	//歩く処理
+	//歩く状態処理
 	void Walk();
 
-	//ジャンプ
+	//ジャンプ状態処理
 	void Jump();
 
-	//攻撃
+	//攻撃状態処理
 	void Attack();
 
-	//怯み
+	//怯み状態処理
 	void Stagger();
+
+	//移動処理
+	void Move();
 
 };
 

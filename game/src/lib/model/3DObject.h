@@ -39,4 +39,12 @@ public:
 	//モデルデータ削除
 	void DeleteModel();
 
+	//取得・設定---------------------
+	//座標を取得
+	VECTOR GetPos() { return m_pos; }
+
+	//回転角度を取得
+	VECTOR GetRot() { return m_rot; }
+
+	//-------------------------------
 };

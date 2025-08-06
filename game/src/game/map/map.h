@@ -2,8 +2,6 @@
 #include<DxLib.h>
 #include "../../lib/model/3DObject.h"
 
-static const char GROUND_MODEL_PATH[] =
-{ "data/model/map/mapTest.mv1" };		//ロードするファイル名
 
 
 class CGround :public CObject
@@ -19,7 +17,8 @@ public:
 	//初期化
 	void Init();
 
-
+	//画像ロード
+	void Load();
 
 };
 

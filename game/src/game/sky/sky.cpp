@@ -5,10 +5,12 @@ static const float ALL_SCALE = 18.0f;
 static const VECTOR SCALE = VGet(ALL_SCALE, ALL_SCALE, ALL_SCALE);
 static const float ROTATE_SPEED = 0.1f;				//回転速度
 static const VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
+static const char SKY_MODEL_PATH[] =
+{ "data/model/sky/sky.mv1" };	//ロードするファイル名
 //==========================================
 
 //---------------------------
-//	コンストラクタ
+//		コンストラクタ
 //---------------------------
 CSky::CSky()
 {
@@ -17,7 +19,7 @@ CSky::CSky()
 }
 
 //---------------------------
-//	デストラクタ
+//		デストラクタ
 //---------------------------
 CSky::~CSky()
 {
@@ -25,7 +27,7 @@ CSky::~CSky()
 }
 
 //---------------------------
-//	初期化
+//		初期化
 //---------------------------
 void CSky::Init()
 {
@@ -34,6 +36,14 @@ void CSky::Init()
 	m_rot = ZERO;
 	m_hndl = -1;
 
+}
+
+//---------------------------
+//		画像ロード
+//---------------------------
+void CSky::Load()
+{
+	LoadModel(SKY_MODEL_PATH);
 }
 
 //---------------------------
@@ -47,7 +57,7 @@ void CSky::Step()
 }
 
 //---------------------------
-//		回転
+//			回転
 //---------------------------
 void CSky::Rotate()
 {
