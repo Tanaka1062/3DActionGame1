@@ -5,8 +5,7 @@
 #include "../sky/sky.h"
 #include"../data.h"
 #include"../character/characterBase.h"
-#include<iostream>
-#include<vector>
+#include "../player/player.h"
 
 using namespace std;
 
@@ -18,7 +17,7 @@ private:
 	CGround m_ground;					//背景
 	CSky m_sky;							//空
 	CCameraManager m_camera;			//カメラ
-	vector<CCharacterBase*> m_chara;	//キャラクター
+	CPlayer m_player;					//プレイヤー
 
 public:
 

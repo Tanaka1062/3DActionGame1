@@ -55,11 +55,11 @@
     <Filter Include="ソース ファイル\game\player">
       <UniqueIdentifier>{cd707ba0-d16f-4ff7-b44a-4657daca714c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\lib\lib">
+      <UniqueIdentifier>{6ae4d0cc-985d-4251-b18b-ab33e640b65d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\lib\myMath.cpp">
-      <Filter>ソース ファイル\lib</Filter>
-    </ClCompile>
     <ClCompile Include="src\lib\number.cpp">
       <Filter>ソース ファイル\lib</Filter>
     </ClCompile>
@@ -132,11 +132,11 @@
     <ClCompile Include="src\game\player\player.cpp">
       <Filter>ソース ファイル\game\player</Filter>
     </ClCompile>
+    <ClCompile Include="src\lib\myMath\myMath.cpp">
+      <Filter>ソース ファイル\lib\lib</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\lib\myMath.h">
-      <Filter>ソース ファイル\lib</Filter>
-    </ClInclude>
     <ClInclude Include="src\lib\number.h">
       <Filter>ソース ファイル\lib</Filter>
     </ClInclude>
@@ -208,6 +208,9 @@
     </ClInclude>
     <ClInclude Include="src\game\player\player.h">
       <Filter>ソース ファイル\game\player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lib\myMath\myMath.h">
+      <Filter>ソース ファイル\lib\lib</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

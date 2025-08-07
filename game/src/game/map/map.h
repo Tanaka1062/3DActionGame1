@@ -20,5 +20,7 @@ public:
 	//‰æ‘œƒ[ƒh
 	void Load();
 
+	void Draw();
+
 };
 

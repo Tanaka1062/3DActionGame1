@@ -29,5 +29,11 @@ public:
 
 	//Šp“x‚ğæ“¾
 	VECTOR GetRot() { return m_rot; }
+
+private:
+
+	//ƒJƒƒ‰‚Ì‰ñ“]ˆ—
+	void Rotate();
+
 };
 

@@ -19,7 +19,7 @@ D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\lib\input\controllerInput
 D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\lib\input\KeyInput.cpp;D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\game\x64\Debug\KeyInput.obj
 D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\lib\model\3DObject.cpp;D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\game\x64\Debug\3DObject.obj
 D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\lib\model\actor.cpp;D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\game\x64\Debug\actor.obj
-D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\lib\myMath.cpp;D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\game\x64\Debug\myMath.obj
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\lib\myMath\myMath.cpp;D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\game\x64\Debug\myMath.obj
 D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\lib\number.cpp;D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\game\x64\Debug\number.obj
 D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\lib\system\fade.cpp;D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\game\x64\Debug\fade.obj
 D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\lib\system\fps.cpp;D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\game\x64\Debug\fps.obj

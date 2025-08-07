@@ -7,7 +7,7 @@ static const float CAMERA_FAR = 5000.0f;			//ファー
 //============================================
 
 //---------------------------
-//コンストラクタ
+//		コンストラクタ
 //---------------------------
 CCameraManager::CCameraManager() {
 	//初期カメラはプレイカメラ
@@ -16,9 +16,8 @@ CCameraManager::CCameraManager() {
 
 
 //---------------------------
-//初期化
+//			初期化
 //---------------------------
-
 void CCameraManager::Init()
 {
 	//プレイカメラの初期化
@@ -29,11 +28,13 @@ void CCameraManager::Init()
 	// カメラのニアーファー設定
 	SetCameraNearFar(CAMERA_NEAR, CAMERA_FAR);
 
+	//カメラの回転値を取得
+	m_rot = { 0.0f,0.0f,0.0f };
 
 }
 
 //---------------------------
-//毎フレームする処理
+//	毎フレームする処理
 //---------------------------
 void CCameraManager::Step(VECTOR _vFocus, float _fRotY)
 {
@@ -63,12 +64,14 @@ void CCameraManager::Step(VECTOR _vFocus, float _fRotY)
 		m_id = CAMERA_ID_PLAY;
 	}
 
+	//回転値を設定
+	m_rot = m_play.GetRot();
+
 }
 
 //---------------------------
-// 画像処理
+//			画像処理
 //---------------------------
-
 void CCameraManager::Draw()
 {
 	switch (m_id)
@@ -85,9 +88,8 @@ void CCameraManager::Draw()
 }
 
 //---------------------------
-//カメラの更新
+//		カメラの更新
 //---------------------------
-
 void CCameraManager::Update()
 {
 	switch (m_id)

@@ -156,7 +156,7 @@
     <ClCompile Include="src\lib\input\KeyInput.cpp" />
     <ClCompile Include="src\lib\model\3DObject.cpp" />
     <ClCompile Include="src\lib\model\actor.cpp" />
-    <ClCompile Include="src\lib\myMath.cpp" />
+    <ClCompile Include="src\lib\myMath\myMath.cpp" />
     <ClCompile Include="src\lib\number.cpp" />
     <ClCompile Include="src\lib\system\fade.cpp" />
     <ClCompile Include="src\lib\system\fps.cpp" />
@@ -183,7 +183,7 @@
     <ClInclude Include="src\lib\input\keyInput.h" />
     <ClInclude Include="src\lib\model\3DObject.h" />
     <ClInclude Include="src\lib\model\actor.h" />
-    <ClInclude Include="src\lib\myMath.h" />
+    <ClInclude Include="src\lib\myMath\myMath.h" />
     <ClInclude Include="src\lib\number.h" />
     <ClInclude Include="src\lib\system\fade.h" />
     <ClInclude Include="src\lib\system\fps.h" />

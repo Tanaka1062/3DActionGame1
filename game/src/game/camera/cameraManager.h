@@ -18,9 +18,10 @@ public:
 	};
 
 private:
-	CPlayCamera m_play;
-	CDbugCamera m_debug;
-	tagCAMERA_ID m_id;
+	CPlayCamera m_play;		//ゲームカメラ
+	CDbugCamera m_debug;	//デバックカメラ
+	tagCAMERA_ID m_id;		//カメラのタイプ
+	VECTOR m_rot;			//カメラの回転値
 
 public:
 
@@ -45,6 +46,9 @@ public:
 	void ChangeCamera(tagCAMERA_ID _id) { m_id = _id; };
 	//カメラタイプの取得
 	tagCAMERA_ID GetID() { return m_id; }
+
+	//カメラの回転値の取得
+	VECTOR  GetRot() { return m_rot; }
 
 };
 

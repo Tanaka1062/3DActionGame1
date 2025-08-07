@@ -19,7 +19,7 @@ public:
 	void Load();
 
 	//–ˆƒtƒŒ[ƒ€‚·‚éˆ—
-	void Step();
+	void Step(float _rotY);
 
 private:
 	//‘Ò‹@ó‘Ôˆ—

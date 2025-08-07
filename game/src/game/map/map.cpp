@@ -46,4 +46,8 @@ void CGround::Load()
 	LoadModel(GROUND_MODEL_PATH);
 }
 
+void CGround::Draw()
+{
+	CObject::Draw();
+}
 
