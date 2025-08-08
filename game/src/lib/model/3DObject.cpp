@@ -24,8 +24,8 @@ void CObject::Init()
 	m_pos = { 0.0f,0.0f,0.0f };
 	m_rot = { 0.0f,0.0f,0.0f };
 	m_scale = { 1.0f,1.0f,1.0f };
-	m_speed = { 0.0f,0.0f,0.0f };
 	m_hndl = -1;
+	m_isActive = true;
 }
 
 //---------------------
@@ -41,6 +41,7 @@ void CObject::Exit()
 //---------------------
 void CObject::Update()
 {
+
 	MV1SetPosition(m_hndl, m_pos);
 	MV1SetRotationXYZ(m_hndl, m_rot);
 	MV1SetScale(m_hndl, m_scale);

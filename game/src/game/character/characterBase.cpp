@@ -17,6 +17,7 @@ void CCharacterBase::Init()
 
 	m_hp = 0;
 	m_attack = 0;
+	m_radius = 0;
 	m_state = WAIT;
 }
 
@@ -57,6 +58,14 @@ void CCharacterBase::Step()
 }
 
 //------------------------------
+//		“–‚½‚è”»’èŒã‚Ìˆ—
+//------------------------------
+void CCharacterBase::HitCalc()
+{
+	
+}
+
+//------------------------------
 //			‘Ò‹@ˆ—
 //------------------------------
 void CCharacterBase::Wait()
@@ -94,4 +103,15 @@ void CCharacterBase::Attack()
 void CCharacterBase::Stagger()
 {
 
+}
+
+//------------------------------
+//		’†SÀ•W‚ğæ“¾
+//------------------------------
+VECTOR CCharacterBase::GetCenter()
+{
+	VECTOR center = m_pos;
+	center.y += m_radius;
+
+	return center;
 }

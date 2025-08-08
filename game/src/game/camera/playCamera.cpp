@@ -74,12 +74,12 @@ void CPlayCamera::Rotate()
 {
 	if (CheckHitKey(KEY_INPUT_LEFT) != 0)
 	{
-		m_rot.y += ROT_Y_SPEED;
+		m_rot.y -= ROT_Y_SPEED;
 	}
 
 	if (CheckHitKey(KEY_INPUT_RIGHT) != 0)
 	{
-		m_rot.y -= ROT_Y_SPEED;
+		m_rot.y += ROT_Y_SPEED;
 	}
 
 }

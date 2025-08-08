@@ -21,6 +21,9 @@ public:
 	//–ˆƒtƒŒ[ƒ€‚·‚éˆ—
 	void Step(float _rotY);
 
+	//•`Êˆ—
+	void Draw();
+
 private:
 	//‘Ò‹@ó‘Ôˆ—
 	void Wait();
@@ -38,7 +41,7 @@ private:
 	void Stagger();
 
 	//ˆÚ“®ˆ—
-	void Move();
+	void Move(float _rotY);
 
 };
 

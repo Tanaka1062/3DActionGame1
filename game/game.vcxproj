@@ -167,6 +167,7 @@
     <ClInclude Include="src\game\camera\downCamera.h" />
     <ClInclude Include="src\game\camera\playCamera.h" />
     <ClInclude Include="src\game\character\characterBase.h" />
+    <ClInclude Include="src\game\common.h" />
     <ClInclude Include="src\game\data.h" />
     <ClInclude Include="src\game\map\map.h" />
     <ClInclude Include="src\game\player\player.h" />

@@ -1,14 +1,24 @@
 #include "player.h"
 #include "../data.h"
 #include "../../lib/myMath/myMath.h"
+#include <math.h>
+#include "../common.h"
 
 //定義関連---------------------------
+
+//プレイヤー関連--------------------------------
 static const char MODEL_PATH[] =
 { "data/model/player/playerTest.mv1" };				//ロードするファイル名
-static const VECTOR INIT_POS = { 0.0f,10.0f,0.0f };	//初期座標
+static const VECTOR INIT_POS = { 0.0f,1.0f,0.0f };	//初期座標
 static const int MAX_HP = 100;						//体力
 static const int ATTACK = 10;						//攻撃力
 static const float MOVE_SPEED = 2.0f;				//移動スピード
+static const float RADIUS = 2.5f;					//半径
+//----------------------------------------------
+
+static const float ATTACK_SIZE = 3.0f;				//攻撃範囲
+static const int ATTACK_TIME = 2;					//攻撃の判定の時間
+static const float ATTACK_LENGTH = 1.0f;			//攻撃の長さ
 //-----------------------------------
 
 //-----------------------
@@ -35,6 +45,7 @@ void CPlayer::Init()
 	CCharacterBase::Init();
 
 	m_pos = INIT_POS;
+	m_radius = RADIUS;
 	m_hp = MAX_HP;
 	m_attack = ATTACK;
 }
@@ -54,9 +65,22 @@ void CPlayer::Step(float _rotY)
 {
 	CCharacterBase::Step();
 
-	m_rot.y = _rotY;
+	Move(_rotY);
 
-	Move();
+}
+
+//-----------------------
+//		描写処理
+//-----------------------
+void CPlayer::Draw()
+{
+	CCharacterBase::Draw();
+
+#ifdef DEBUG
+
+	DrawSphere3D(GetCenter(), m_radius, 16, GetColor(255, 0, 0), GetColor(255, 0, 0), FALSE);
+
+#endif // DEBUG
 
 }
 
@@ -103,7 +127,7 @@ void CPlayer::Stagger()
 //-----------------------
 //		移動処理
 //-----------------------
-void CPlayer::Move()
+void CPlayer::Move(float _rotY)
 {
 	float speedZ = 0.0f;
 	//前進
@@ -121,12 +145,12 @@ void CPlayer::Move()
 	//前進
 	if (CheckHitKey(KEY_INPUT_A) != 0)
 	{
-		speedX = -MOVE_SPEED;
+		speedX = MOVE_SPEED;
 	}
 	//後退
 	if (CheckHitKey(KEY_INPUT_D) != 0)
 	{
-		speedX = MOVE_SPEED;
+		speedX = -MOVE_SPEED;
 	}
 
 
@@ -135,9 +159,9 @@ void CPlayer::Move()
 	//上記を行列に変換
 	MATRIX dir = CMyMath::GetTranslateMatrix(defaultDir);
 	//Y軸回転行列
-	MATRIX mRotY = CMyMath::GetYawMatrix(m_rot.y);
+	MATRIX mRotY = CMyMath::GetYawMatrix(_rotY);
 	//行列の合成
-	MATRIX res = CMyMath::MatMult(dir, mRotY);
+	MATRIX res = CMyMath::MatMult(mRotY, dir);
 
 	VECTOR move;
 	move.x = res.m[0][3];
@@ -147,5 +171,9 @@ void CPlayer::Move()
 	//計算結果をプレイヤーの現在の座標に足す
 	m_pos = CMyMath::VecAdd(m_pos, move);
 
+	//プレイヤーが移動してる方向を向く
+	if(move.x != 0 || move.z != 0)
+		m_rot.y = atan2(-move.x, -move.z);
 
 }
+

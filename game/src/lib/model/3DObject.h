@@ -7,8 +7,8 @@ protected:
 	VECTOR m_pos;			//座標
 	VECTOR m_rot;			//回転角度
 	VECTOR m_scale;			//拡大縮小率
-	VECTOR m_speed;			//スピード
 	int m_hndl;				//オブジェクトのハンドル
+	bool m_isActive;		//生存フラグ
 
 public:
 	//コンストラクタ・デストラクタ

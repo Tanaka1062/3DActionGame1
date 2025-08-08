@@ -1,2 +1,3 @@
 ﻿  player.cpp
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\player\player.cpp(169,18): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
   game.vcxproj -> D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\x64\Debug\game.exe

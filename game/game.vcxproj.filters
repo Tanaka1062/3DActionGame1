@@ -212,5 +212,8 @@
     <ClInclude Include="src\lib\myMath\myMath.h">
       <Filter>ソース ファイル\lib\lib</Filter>
     </ClInclude>
+    <ClInclude Include="src\game\common.h">
+      <Filter>ソース ファイル\game</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
