@@ -158,8 +158,8 @@ MATRIX CMyMath::GetPitchMatrix(float _rotX)
 	MATRIX mat = GetIdentityMatrix();
 	mat.m[1][1] = cosf(_rotX);
 	mat.m[1][2] = -sinf(_rotX);
-	mat.m[2][1] = sin(_rotX);
-	mat.m[2][2] = cos(_rotX);
+	mat.m[2][1] = sinf(_rotX);
+	mat.m[2][2] = cosf(_rotX);
 
 	return mat;
 }

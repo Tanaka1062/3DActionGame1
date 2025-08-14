@@ -58,6 +58,9 @@
     <Filter Include="ソース ファイル\lib\lib">
       <UniqueIdentifier>{6ae4d0cc-985d-4251-b18b-ab33e640b65d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\game\attack">
+      <UniqueIdentifier>{e20188aa-02ca-463b-8487-1d9485533a9e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\number.cpp">
@@ -83,9 +86,6 @@
     </ClCompile>
     <ClCompile Include="src\lib\system\fps.cpp">
       <Filter>ソース ファイル\lib\system</Filter>
-    </ClCompile>
-    <ClCompile Include="src\lib\collision\collision.cpp">
-      <Filter>ソース ファイル\lib\collision</Filter>
     </ClCompile>
     <ClCompile Include="src\game\camera\cameraManager.cpp">
       <Filter>ソース ファイル\game\camera</Filter>
@@ -135,6 +135,12 @@
     <ClCompile Include="src\lib\myMath\myMath.cpp">
       <Filter>ソース ファイル\lib\lib</Filter>
     </ClCompile>
+    <ClCompile Include="src\lib\collision\collision.cpp">
+      <Filter>ソース ファイル\lib\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\attack\attack.cpp">
+      <Filter>ソース ファイル\game\attack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\lib\number.h">
@@ -163,9 +169,6 @@
     </ClInclude>
     <ClInclude Include="src\lib\system\fps.h">
       <Filter>ソース ファイル\lib\system</Filter>
-    </ClInclude>
-    <ClInclude Include="src\lib\collision\collision.h">
-      <Filter>ソース ファイル\lib\collision</Filter>
     </ClInclude>
     <ClInclude Include="src\game\camera\cameraManager.h">
       <Filter>ソース ファイル\game\camera</Filter>
@@ -214,6 +217,12 @@
     </ClInclude>
     <ClInclude Include="src\game\common.h">
       <Filter>ソース ファイル\game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lib\collision\collision.h">
+      <Filter>ソース ファイル\lib\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\attack\attack.h">
+      <Filter>ソース ファイル\game\attack</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

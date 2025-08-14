@@ -43,11 +43,12 @@ CPlayer::~CPlayer()
 void CPlayer::Init()
 {
 	CCharacterBase::Init();
+	m_attack.Init();
 
 	m_pos = INIT_POS;
-	m_radius = RADIUS;
+	m_rad = RADIUS;
 	m_hp = MAX_HP;
-	m_attack = ATTACK;
+	m_atk = ATTACK;
 }
 
 //-----------------------
@@ -64,8 +65,15 @@ void CPlayer::Load()
 void CPlayer::Step(float _rotY)
 {
 	CCharacterBase::Step();
+	m_attack.Step();
 
 	Move(_rotY);
+
+	
+	if (CheckHitKey(KEY_INPUT_J) != 0)
+	{
+		m_attack;
+	}
 
 }
 
@@ -78,10 +86,10 @@ void CPlayer::Draw()
 
 #ifdef DEBUG
 
-	DrawSphere3D(GetCenter(), m_radius, 16, GetColor(255, 0, 0), GetColor(255, 0, 0), FALSE);
+	DrawSphere3D(GetCenter(), m_rad, 16, GetColor(255, 0, 0), GetColor(255, 0, 0), FALSE);
 
 #endif // DEBUG
-
+	
 }
 
 //-----------------------
@@ -172,8 +180,8 @@ void CPlayer::Move(float _rotY)
 	m_pos = CMyMath::VecAdd(m_pos, move);
 
 	//ƒvƒŒƒCƒ„[‚ªˆÚ“®‚µ‚Ä‚é•ûŒü‚ğŒü‚­
-	if(move.x != 0 || move.z != 0)
-		m_rot.y = atan2(-move.x, -move.z);
+	if (move.x != 0 || move.z != 0)
+		m_rot.y = static_cast<float>(atan2(static_cast<float>(-move.x), static_cast<float>(-move.z)));
 
 }
 

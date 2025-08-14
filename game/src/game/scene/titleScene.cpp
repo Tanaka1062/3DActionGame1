@@ -96,6 +96,7 @@ void CTitleScene::Step()
 	{
 		m_state = END;
 	}
+
 }
 
 //---------------------------

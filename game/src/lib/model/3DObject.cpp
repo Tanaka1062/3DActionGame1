@@ -100,3 +100,14 @@ void CObject::DeleteModel()
 		m_hndl = -1;
 	}
 }
+
+//------------------------------
+//		’†SÀ•W‚ğæ“¾
+//------------------------------
+VECTOR CObject::GetCenter()
+{
+	VECTOR center = m_pos;
+	center.y += m_rad;
+
+	return center;
+}

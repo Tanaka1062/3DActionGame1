@@ -12,8 +12,7 @@ class CCharacterBase:public CActor
 {
 protected:
 	int m_hp;					//体力
-	int m_attack;				//攻撃力
-	float m_radius;				//半径
+	int m_atk;					//攻撃力
 	enum tagState				//キャラクターの状態
 	{
 		WAIT,					//待機
@@ -43,7 +42,7 @@ public:
 	int GetHp() { return m_hp; }
 
 	//攻撃力を取得
-	int GetAttack() { return m_attack; }
+	int GetAttack() { return m_atk; }
 
 	//種類を取得
 	tagCharacterType GetType() { return m_type; }
@@ -51,8 +50,6 @@ public:
 	//種類を設定
 	void SetType(tagCharacterType _type) { m_type = _type; }
 
-	//中心座標を取得
-	VECTOR GetCenter();
 
 
 protected:

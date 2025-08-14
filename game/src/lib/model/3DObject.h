@@ -8,6 +8,7 @@ protected:
 	VECTOR m_rot;			//回転角度
 	VECTOR m_scale;			//拡大縮小率
 	int m_hndl;				//オブジェクトのハンドル
+	float m_rad;			//半径
 	bool m_isActive;		//生存フラグ
 
 public:
@@ -46,5 +47,9 @@ public:
 	//回転角度を取得
 	VECTOR GetRot() { return m_rot; }
 
+	//中心座標を取得
+	VECTOR GetCenter();
+
 	//-------------------------------
 };
+

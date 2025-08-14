@@ -14,10 +14,10 @@ CCharacterBase::CCharacterBase()
 void CCharacterBase::Init()
 {
 	CActor::Init();
-
+	
 	m_hp = 0;
-	m_attack = 0;
-	m_radius = 0;
+	m_atk = 0;
+	m_rad = 0;
 	m_state = WAIT;
 }
 
@@ -105,13 +105,3 @@ void CCharacterBase::Stagger()
 
 }
 
-//------------------------------
-//		’†SÀ•W‚ğæ“¾
-//------------------------------
-VECTOR CCharacterBase::GetCenter()
-{
-	VECTOR center = m_pos;
-	center.y += m_radius;
-
-	return center;
-}
