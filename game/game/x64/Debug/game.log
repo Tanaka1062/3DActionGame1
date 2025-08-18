@@ -1,8 +1,2 @@
-﻿  characterBase.cpp
-  main.cpp
-  player.cpp
-  playScene.cpp
-  sceneManager.cpp
-  actor.cpp
-  コードを生成中...
-  game.vcxproj -> C:\Users\Owner\Desktop\GitHub\3DActionGame1\game\x64\Debug\game.exe
+﻿  playCamera.cpp
+  game.vcxproj -> D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\x64\Debug\game.exe

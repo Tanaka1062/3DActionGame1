@@ -4,6 +4,7 @@
 
 static const int PLAYER_NUM = 1;	//プレイヤーの数
 
+//プレイヤークラス
 class CPlayer:public CCharacterBase
 {
 private:

@@ -17,8 +17,9 @@ static const float RADIUS = 2.5f;					//”¼Œa
 //----------------------------------------------
 
 static const float ATTACK_SIZE = 3.0f;				//UŒ‚”ÍˆÍ
-static const int ATTACK_TIME = 2;					//UŒ‚‚Ì”»’è‚ÌŠÔ
-static const float ATTACK_LENGTH = 1.0f;			//UŒ‚‚Ì’·‚³
+static const float ATTACK_LENGTH = 2.0f;			//UŒ‚‚Ì’·‚³
+static const int ATTACK_TIME = 120;					//UŒ‚‚Ì”»’è‚ÌŠÔ(ƒtƒŒ[ƒ€)
+
 //-----------------------------------
 
 //-----------------------
@@ -65,15 +66,21 @@ void CPlayer::Load()
 void CPlayer::Step(float _rotY)
 {
 	CCharacterBase::Step();
+	//UŒ‚‚Ì–ˆƒtƒŒ[ƒ€‚·‚éˆ—
 	m_attack.Step();
 
+	//ˆÚ“®ˆ—
 	Move(_rotY);
 
-	
-	if (CheckHitKey(KEY_INPUT_J) != 0)
+	//UŒ‚ˆ—
+	if (CheckHitKey(KEY_INPUT_J) != 0 &&
+		m_attack.GetActive() == false)
 	{
-		m_attack;
+		m_attack.Request(m_pos,m_rot, ATTACK_SIZE, ATTACK_LENGTH, ATTACK_TIME);
 	}
+
+	//UŒ‚‚ÌXV
+	m_attack.Update(m_pos, m_rot);
 
 }
 

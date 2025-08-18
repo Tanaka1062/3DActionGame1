@@ -5,7 +5,7 @@
 //定義関連====================================
 static const VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
 static const float CAMERA_BACK = 30.0f;				//カメラとプレイヤーの距離
-static const float CAMERA_OFFSET_Y = 10.0f;			//カメラの修正Y
+static const float CAMERA_OFFSET_Y = 18.5f;			//カメラの修正Y
 static const float TARGET_OFFSET_Y = 5.0f;			//ターゲットの修正Y
 static const float ROT_Y_SPEED = 0.1f;				//カメラのY軸回転スピード
 //============================================

@@ -40,6 +40,9 @@ public:
 	//モデルデータ削除
 	void DeleteModel();
 
+	//当たり判定後の処理
+	virtual void HitCalc();
+
 	//取得・設定---------------------
 	//座標を取得
 	VECTOR GetPos() { return m_pos; }
@@ -49,6 +52,9 @@ public:
 
 	//中心座標を取得
 	VECTOR GetCenter();
+
+	//生存フラグを取得
+	bool GetActive() { return m_isActive; }
 
 	//-------------------------------
 };

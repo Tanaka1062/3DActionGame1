@@ -1,0 +1,101 @@
+#include "enemyManager.h"
+#include "enemy.h"
+
+static const int ENEMY_NUM = 1;			//敵の数
+
+//------------------------
+//	  コンストラクタ
+//------------------------
+CEnemyManager::CEnemyManager()
+{
+	Init();
+}
+
+//------------------------
+//	  デストラクタ
+//------------------------
+CEnemyManager::~CEnemyManager()
+{
+	for (int i = 0; i < ENEMY_NUM; i++)
+	{
+		delete m_enemy[i];
+	}
+
+}
+
+//------------------------
+//		  初期化
+//------------------------
+void CEnemyManager::Init()
+{
+	for (int i = 0; i < ENEMY_NUM; i++)
+	{
+		if (m_enemy.size() <= ENEMY_NUM) 
+		{
+			m_enemy.push_back(new CEnemy);
+
+		}
+		m_enemy[i]->Init();
+	}
+}
+
+//------------------------
+//	オブジェクトのロード
+//------------------------
+void CEnemyManager::Load()
+{
+	for (int i = 0; i < m_enemy.size(); i++)
+	{
+		m_enemy[i]->Load();
+	}
+}
+
+//------------------------
+//	毎フレームする処理
+//------------------------
+void CEnemyManager::Step()
+{
+	for (int i = 0; i < m_enemy.size(); i++)
+	{
+		m_enemy[i]->Step();
+	}
+}
+
+//------------------------
+//		 数値の更新
+//------------------------
+void CEnemyManager::Update()
+{
+	for (int i = 0; i < m_enemy.size(); i++)
+	{
+		m_enemy[i]->Update();
+	}
+}
+
+//------------------------
+//	オブジェクトの描写
+//------------------------
+void CEnemyManager::Draw()
+{
+	for (int i = 0; i < m_enemy.size(); i++)
+	{
+		m_enemy[i]->Draw();
+	}
+}
+
+
+//------------------------
+//		  終了処理
+//------------------------
+void CEnemyManager::Exit()
+{
+	for (int i = 0; i < ENEMY_NUM; i++)
+	{
+		m_enemy[i]->Exit();
+
+		//delete m_enemy[i];
+	}
+	
+}
+
+

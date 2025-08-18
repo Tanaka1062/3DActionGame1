@@ -7,6 +7,7 @@ class CAttack :public CObject
 private:
 	int m_time;				//攻撃判定の時間(フレーム)
 	int m_timeCount;		//時間のカウント
+	float m_length;			//攻撃の射程
 public:
 	//コンストラクタ
 	CAttack();
@@ -17,12 +18,18 @@ public:
 	//毎フレームする処理
 	void Step();
 
+	//更新処理
+	//  _pos	:攻撃を出すオブジェクの座標
+	//  _rot	:攻撃を出すオブジェクトの向き
+	void Update(VECTOR _pos, VECTOR _rot);
+
 	//攻撃の呼び出し
-	//　_obj	:攻撃を出すオブジェクト
+	//  _pos	:攻撃を出すオブジェクの座標
+	//  _rot	:攻撃を出すオブジェクトの向き
 	// _rad		:攻撃範囲の半径
 	// _length	:オブジェクトからの射程距離
 	// _time	:攻撃判定の時間(フレーム)
-	void Request(const CObject& _obj,float _rad,float _length,int _time);
+	void Request(VECTOR _pos,VECTOR _rot,float _rad,float _length,int _time);
 
 };
 

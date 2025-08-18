@@ -29,6 +29,7 @@ void CPlayScene::Draw()
 	m_ground.Draw();
 	m_sky.Draw();
 	m_player.Draw();
+	m_enemy.Draw();
 
 	m_camera.Draw();
 
@@ -44,6 +45,7 @@ void CPlayScene::Init()
 	m_sky.Init();
 	m_camera.Init();
 	m_player.Init();
+	m_enemy.Init();
 
 
 }
@@ -56,6 +58,7 @@ void CPlayScene::Load()
 	m_ground.Load();
 	m_sky.Load();
 	m_player.Load();
+	m_enemy.Load();
 
 }
 
@@ -69,6 +72,8 @@ void CPlayScene::Step()
 
 	m_player.Step(m_camera.GetRot().y);
 
+	m_enemy.Step();
+
 	m_camera.Step(m_player.GetPos(),m_player.GetRot().y);
 	//“–‚½‚è”»’è
 
@@ -78,6 +83,7 @@ void CPlayScene::Step()
 	m_sky.Update();
 	m_camera.Update();
 	m_player.Update();
+	m_enemy.Update();
 
 	if (CKeyInput::IsTrg(KEY_SELECT) == true)
 	{
@@ -94,6 +100,7 @@ void CPlayScene::Exit()
 	m_ground.Exit();
 	m_sky.Exit();
 	m_player.Exit();
+	m_enemy.Exit();
 
 	CSoundManager::StopAll();
 }

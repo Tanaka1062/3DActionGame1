@@ -35,9 +35,6 @@ public:
 	//–ˆƒtƒŒ[ƒ€‚·‚éˆ—
 	virtual void Step();
 
-	//“–‚½‚è”»’èŒã‚Ìˆ—
-	virtual void HitCalc();
-
 	//‘Ì—Í‚ğæ“¾
 	int GetHp() { return m_hp; }
 

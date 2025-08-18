@@ -61,6 +61,12 @@
     <Filter Include="ソース ファイル\game\attack">
       <UniqueIdentifier>{e20188aa-02ca-463b-8487-1d9485533a9e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\game\enemy">
+      <UniqueIdentifier>{311b7cbb-a292-449b-bf39-05638ecd2d43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\game\FOV">
+      <UniqueIdentifier>{a48d1bf0-35fe-49f7-a1c0-e5097585396c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\number.cpp">
@@ -140,6 +146,15 @@
     </ClCompile>
     <ClCompile Include="src\game\attack\attack.cpp">
       <Filter>ソース ファイル\game\attack</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\enemy\enemy.cpp">
+      <Filter>ソース ファイル\game\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\enemy\enemyManager.cpp">
+      <Filter>ソース ファイル\game\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\FOV\FOV.cpp">
+      <Filter>ソース ファイル\game\FOV</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -223,6 +238,15 @@
     </ClInclude>
     <ClInclude Include="src\game\attack\attack.h">
       <Filter>ソース ファイル\game\attack</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\enemy\enemy.h">
+      <Filter>ソース ファイル\game\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\enemy\enemyManager.h">
+      <Filter>ソース ファイル\game\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\FOV\FOV.h">
+      <Filter>ソース ファイル\game\FOV</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

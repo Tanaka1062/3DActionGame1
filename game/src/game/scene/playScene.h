@@ -6,6 +6,7 @@
 #include"../data.h"
 #include"../character/characterBase.h"
 #include "../player/player.h"
+#include "../enemy/enemyManager.h"
 
 using namespace std;
 
@@ -18,6 +19,7 @@ private:
 	CSky m_sky;							//空
 	CCameraManager m_camera;			//カメラ
 	CPlayer m_player;					//プレイヤー
+	CEnemyManager m_enemy;				//敵
 
 public:
 
