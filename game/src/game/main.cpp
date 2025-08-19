@@ -7,6 +7,7 @@
 #include "../lib/input/keyInput.h"
 #include"data.h"
 #include"../lib/system/fps.h"
+#include"../lib/input/controllerInput.h"
 
 // プログラムは WinMain から始まります
 int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
@@ -38,6 +39,8 @@ int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 	//キー入力の初期化
 	CKeyInput::Init();
+	//コントローラー入力の初期化
+	CControllerInput::Init();
 	//FPSの初期化
 	CFps::Init();
 
@@ -58,6 +61,9 @@ int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 		//キー入力の更新処理
 		CKeyInput::Update();
+
+		//コントローラー入力の更新処理
+		CControllerInput::Update();
 		
 		//Fps更新処理
 		CFps::Update();

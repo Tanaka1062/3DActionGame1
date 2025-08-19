@@ -4,6 +4,7 @@ D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\camera\debugCamera.c
 D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\camera\downCamera.cpp;D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\game\x64\Debug\downCamera.obj
 D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\camera\playCamera.cpp;D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\game\x64\Debug\playCamera.obj
 D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\character\characterBase.cpp;D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\game\x64\Debug\characterBase.obj
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\collisionManager\collisionManager.cpp;D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\game\x64\Debug\collisionManager.obj
 D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\enemy\enemy.cpp;D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\game\x64\Debug\enemy.obj
 D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\enemy\enemyManager.cpp;D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\game\x64\Debug\enemyManager.obj
 D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\FOV\FOV.cpp;D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\game\x64\Debug\FOV.obj

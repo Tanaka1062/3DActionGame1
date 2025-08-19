@@ -4,6 +4,7 @@
 #include "../../lib/input/keyInput.h"
 
 
+
 //---------------------------
 //		コンストラクタ
 //---------------------------
@@ -72,7 +73,7 @@ void CPlayScene::Step()
 
 	m_player.Step(m_camera.GetRot().y);
 
-	m_enemy.Step();
+	m_enemy.Step(m_player.GetCenter());
 
 	m_camera.Step(m_player.GetPos(),m_player.GetRot().y);
 	//当たり判定

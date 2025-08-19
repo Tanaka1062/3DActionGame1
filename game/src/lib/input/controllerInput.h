@@ -1,5 +1,6 @@
 #pragma once
 
+
 enum tagControllerButton
 {
 	BUTTON_DOWN,		//下ボタン
@@ -25,7 +26,10 @@ class CControllerInput
 private:
 	static unsigned int m_nowButton;		//現在のボタン情報
 	static unsigned int m_beforeButton;		//1フレーム前のボタン
-
+	static int m_LX;						//左レバーを左右の入力情報
+	static int m_LY;						//左レバーを上下の入力情報
+	static int m_RX;						//右レバーを左右の入力情報
+	static int m_RY;						//右レバーを上下の入力情報
 public:
 	//コンストラクタ
 	CControllerInput();
@@ -38,6 +42,16 @@ public:
 	static bool IsRep(tagControllerButton _button);
 	//ボタン入力判定（トリガー判定）
 	static bool IsTrg(tagControllerButton _button);
+
+	//レバーの値は1～0～(-1)の間で出力する
+	//左レバーの左右の入力情報を取得
+	static float GetLX() { return static_cast<float>(m_LX) / 1000.0f; }
+	//左レバーの上下の入力情報を取得
+	static float GetLY() { return static_cast<float>(m_LY) / 1000.0f; }
+	//右レバーの左右の入力情報を取得
+	static float GetRX() { return static_cast<float>(m_RX) / 1000.0f; }
+	//右レバーの上下の入力情報を取得
+	static float GetRY() { return static_cast<float>(m_RY) / 1000.0f; }
 
 };
 

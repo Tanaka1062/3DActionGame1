@@ -35,6 +35,9 @@ public:
 	//毎フレームする処理
 	virtual void Step();
 
+	//毎フレームする処理(座標取得用)
+	virtual void Step(VECTOR _pos);
+
 	//体力を取得
 	int GetHp() { return m_hp; }
 

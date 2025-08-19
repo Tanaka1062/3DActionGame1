@@ -21,6 +21,10 @@ static const int BUTTON_PATH[BUTTON_NUM] = {
 
 unsigned int CControllerInput::m_nowButton;
 unsigned int CControllerInput::m_beforeButton;
+int CControllerInput::m_LX;
+int CControllerInput::m_LY;
+int CControllerInput::m_RX;
+int CControllerInput::m_RY;
 
 //--------------------------------
 //		コンストラクタ
@@ -37,6 +41,8 @@ void CControllerInput::Init()
 {
 	m_nowButton = 0;
 	m_beforeButton = 0;
+	m_LX = 0;
+	m_LY = 0;
 }
 
 //--------------------------------
@@ -52,6 +58,13 @@ void CControllerInput::Update()
 	//現在の入力情報を取得
 	m_nowButton = GetJoypadInputState(DX_INPUT_PAD1);
 
+	//レバーの入力情報を取得
+	DINPUT_JOYSTATE leverInput;
+	GetJoypadDirectInputState(DX_INPUT_PAD1, &leverInput);
+	m_LX = leverInput.X;
+	m_LY = leverInput.Y;
+	m_RX = leverInput.Z;
+	m_RY = leverInput.Rz;
 }
 
 //--------------------------------
@@ -73,3 +86,4 @@ bool CControllerInput::IsTrg(tagControllerButton _button)
 	else return false;
 
 }
+

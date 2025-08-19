@@ -67,6 +67,9 @@
     <Filter Include="ソース ファイル\game\FOV">
       <UniqueIdentifier>{a48d1bf0-35fe-49f7-a1c0-e5097585396c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\game\collisionManager">
+      <UniqueIdentifier>{87ef989f-fff0-49d3-827e-d45086156d04}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\number.cpp">
@@ -155,6 +158,9 @@
     </ClCompile>
     <ClCompile Include="src\game\FOV\FOV.cpp">
       <Filter>ソース ファイル\game\FOV</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\collisionManager\collisionManager.cpp">
+      <Filter>ソース ファイル\game\collisionManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -247,6 +253,9 @@
     </ClInclude>
     <ClInclude Include="src\game\FOV\FOV.h">
       <Filter>ソース ファイル\game\FOV</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\collisionManager\collisionManager.h">
+      <Filter>ソース ファイル\game\collisionManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

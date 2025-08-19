@@ -1,5 +1,4 @@
 #include "enemyManager.h"
-#include "enemy.h"
 
 static const int ENEMY_NUM = 1;			//“G‚Ì”
 
@@ -53,11 +52,11 @@ void CEnemyManager::Load()
 //------------------------
 //	–ˆƒtƒŒ[ƒ€‚·‚éˆ—
 //------------------------
-void CEnemyManager::Step()
+void CEnemyManager::Step(VECTOR _pos)
 {
 	for (int i = 0; i < m_enemy.size(); i++)
 	{
-		m_enemy[i]->Step();
+		m_enemy[i]->Step(_pos);
 	}
 }
 

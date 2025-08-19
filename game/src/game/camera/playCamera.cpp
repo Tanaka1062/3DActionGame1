@@ -1,6 +1,7 @@
 #include "PlayCamera.h"
 #include <math.h>
 #include"../../lib/input/keyInput.h"
+#include"../../lib/input/controllerInput.h"
 
 //定義関連====================================
 static const VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
@@ -72,12 +73,19 @@ void CPlayCamera::Update()
 //---------------------------------
 void CPlayCamera::Rotate()
 {
-	if (CheckHitKey(KEY_INPUT_LEFT) != 0)
+	//コントローラー用カメラ回転
+	if (CControllerInput::GetRX() != 0)
+	{
+		//スティックを入力した力分だけ回転する
+		m_rot.y += ROT_Y_SPEED * CControllerInput::GetRX();
+	}
+	//キーボード用左回転
+	else if (CheckHitKey(KEY_INPUT_LEFT) != 0)
 	{
 		m_rot.y -= ROT_Y_SPEED;
 	}
-
-	if (CheckHitKey(KEY_INPUT_RIGHT) != 0)
+	//キーボード用右回転
+	else if (CheckHitKey(KEY_INPUT_RIGHT) != 0)
 	{
 		m_rot.y += ROT_Y_SPEED;
 	}

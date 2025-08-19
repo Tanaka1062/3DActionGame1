@@ -12,11 +12,12 @@ static const char MODEL_PATH[] =
 static const VECTOR INIT_POS = { 0.0f,1.0f,0.0f };	//初期座標
 static const int MAX_HP = 100;						//体力
 static const int ATTACK = 10;						//攻撃力
-static const float MOVE_SPEED = 2.0f;				//移動スピード
+static const float MOVE_SPEED = 0.25f;				//移動スピード
 static const float RADIUS = 2.5f;					//半径
 static const float FOV_RADIUS = 50.0f;				//視界範囲(半径)
 //----------------------------------------------
 
+//攻撃関連---------------------------
 static const float ATTACK_SIZE = 3.0f;				//攻撃範囲
 static const float ATTACK_LENGTH = 2.0f;			//攻撃の長さ
 static const int ATTACK_TIME = 120;					//攻撃の判定の時間(フレーム)
@@ -65,14 +66,15 @@ void CEnemy::Load()
 //-----------------------
 //毎フレームする処理
 //-----------------------
-void CEnemy::Step()
+void CEnemy::Step(VECTOR _pos)
 {
 	CCharacterBase::Step();
 	//攻撃の毎フレームする処理
 	m_attack.Step();
 	//視界範囲の毎フレームする処理
 	m_FOV.Step();
-
+	//移動処理
+	Move(_pos);
 
 	//攻撃処理
 	if (CheckHitKey(KEY_INPUT_J) != 0 &&
@@ -99,7 +101,6 @@ void CEnemy::Draw()
 
 	DrawSphere3D(GetCenter(), m_rad, 16, GetColor(255, 0, 0), GetColor(255, 0, 0), FALSE);
 
-	//DrawSphere3D(GetCenter(), FOV_RADIUS, 16, GetColor(0, 255, 0), GetColor(255, 0, 0), FALSE);
 
 #endif // DEBUG
 	
@@ -148,8 +149,28 @@ void CEnemy::Stagger()
 //-----------------------
 //		移動処理
 //-----------------------
-void CEnemy::Move(float _rotY)
+void CEnemy::Move(VECTOR _pos)
 {
+	//敵がプレイヤーの方向を向く
+	m_rot.y = static_cast<float>(atan2(static_cast<float>(m_pos.x -_pos.x), static_cast<float>(m_pos.z - _pos.z)));
+
+	//プレイヤーが目の前にいる時に進む速度
+	VECTOR defaultDir = { 0.0f,0.0f,-MOVE_SPEED };
+	//上記を行列に変換
+	MATRIX dir = CMyMath::GetTranslateMatrix(defaultDir);
+	//Y軸回転行列
+	MATRIX mRotY = CMyMath::GetYawMatrix(m_rot.y);
+	//行列の合成
+	MATRIX res = CMyMath::MatMult(mRotY, dir);
+
+	VECTOR move;
+	move.x = res.m[0][3];
+	move.y = res.m[1][3];
+	move.z = res.m[2][3];
+
+	//計算結果を敵の現在の座標に足す
+	m_pos = CMyMath::VecAdd(m_pos, move);
+
 
 }
 

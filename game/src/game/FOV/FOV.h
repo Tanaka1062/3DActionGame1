@@ -5,7 +5,9 @@
 class CFOV :public CObject
 {
 private:
-	bool m_isHit;				//当たり判定
+	int m_time;					//当たったかが消えるまでの時間(フレーム)
+	int m_timeCount;			//時間のカウント
+	bool m_isHit;				//当たったか
 public:
 	//コンストラクタ
 	CFOV();

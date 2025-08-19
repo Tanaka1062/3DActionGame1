@@ -3,7 +3,6 @@
 #include "../attack/attack.h"
 #include "../FOV/FOV.h"
 
-static const int PLAYER_NUM = 1;	//プレイヤーの数
 
 //敵のクラス
 class CEnemy:public CCharacterBase
@@ -24,7 +23,8 @@ public:
 	void Load();
 
 	//毎フレームする処理
-	void Step();
+	//追いかける相手の座標
+	void Step(VECTOR _pos);
 
 	//描写処理
 	void Draw();
@@ -46,7 +46,13 @@ private:
 	void Stagger();
 
 	//移動処理
-	void Move(float _rotY);
+	void Move(VECTOR _pos);
+
+	//視界範囲を取得
+	CFOV& GetFOV() { return m_FOV; }
+
+	//視界範囲に当たった処理
+	void HitFOV() { m_FOV.HitCalc(); }
 
 };
 
