@@ -102,9 +102,6 @@
     <ClCompile Include="src\game\camera\debugCamera.cpp">
       <Filter>ソース ファイル\game\camera</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\camera\downCamera.cpp">
-      <Filter>ソース ファイル\game\camera</Filter>
-    </ClCompile>
     <ClCompile Include="src\game\camera\playCamera.cpp">
       <Filter>ソース ファイル\game\camera</Filter>
     </ClCompile>
@@ -195,9 +192,6 @@
       <Filter>ソース ファイル\game\camera</Filter>
     </ClInclude>
     <ClInclude Include="src\game\camera\debugCamera.h">
-      <Filter>ソース ファイル\game\camera</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\camera\downCamera.h">
       <Filter>ソース ファイル\game\camera</Filter>
     </ClInclude>
     <ClInclude Include="src\game\camera\playCamera.h">

@@ -17,12 +17,11 @@ public:
 	void Init();
 
 	//毎フレームする処理
-	// @_vFocus		:プレイヤーの座標
-	// @_fRotY		:プレイヤーの回転角度Y
-	void Step(VECTOR _vFocus,float _fRotY);
+	void Step();
 
 	//カメラの更新
-	void Update();
+	// @_pos		:プレイヤーの座標
+	void Update(VECTOR _pos);
 
 	//カメラの座標取得
 	VECTOR GetPos() { return m_cameraPos; }

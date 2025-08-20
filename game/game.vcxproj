@@ -138,7 +138,6 @@
     <ClCompile Include="src\game\attack\attack.cpp" />
     <ClCompile Include="src\game\camera\cameraManager.cpp" />
     <ClCompile Include="src\game\camera\debugCamera.cpp" />
-    <ClCompile Include="src\game\camera\downCamera.cpp" />
     <ClCompile Include="src\game\camera\playCamera.cpp" />
     <ClCompile Include="src\game\character\characterBase.cpp" />
     <ClCompile Include="src\game\collisionManager\collisionManager.cpp" />
@@ -170,7 +169,6 @@
     <ClInclude Include="src\game\attack\attack.h" />
     <ClInclude Include="src\game\camera\cameraManager.h" />
     <ClInclude Include="src\game\camera\debugCamera.h" />
-    <ClInclude Include="src\game\camera\downCamera.h" />
     <ClInclude Include="src\game\camera\playCamera.h" />
     <ClInclude Include="src\game\character\characterBase.h" />
     <ClInclude Include="src\game\collisionManager\collisionManager.h" />

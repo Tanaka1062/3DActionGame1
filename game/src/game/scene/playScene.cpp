@@ -2,6 +2,7 @@
 #include "../../lib/collision/collision.h"
 #include "../system/soundManager.h"
 #include "../../lib/input/keyInput.h"
+#include"../collisionManager/collisionManager.h"
 
 
 
@@ -44,9 +45,9 @@ void CPlayScene::Init()
 {
 	m_ground.Init();
 	m_sky.Init();
-	m_camera.Init();
 	m_player.Init();
 	m_enemy.Init();
+	m_camera.Init();
 
 
 }
@@ -75,16 +76,21 @@ void CPlayScene::Step()
 
 	m_enemy.Step(m_player.GetCenter());
 
-	m_camera.Step(m_player.GetPos(),m_player.GetRot().y);
-	//“–‚½‚è”»’è
+	m_camera.Step();
 
+
+	//“–‚½‚è”»’è----------------------------------
+	//“G‚Ì‹ŠE”ÍˆÍ‚ÆƒvƒŒƒCƒ„[‚Ì“–‚½‚è”»’è
+	CCollisionManager::CheckHitEnemyFOVToPlayer(m_enemy, m_player);
+	CCollisionManager::CheckHitEnemyToPlayer(m_enemy, m_player);
+	//--------------------------------------------
 
 	//‚·‚×‚Ä‚ÌŒ‹‰Ê‚ğ”½‰f‚³‚¹‚é
 	m_ground.Update();
 	m_sky.Update();
-	m_camera.Update();
 	m_player.Update();
 	m_enemy.Update();
+	m_camera.Update(m_player.GetCenter());
 
 	if (CKeyInput::IsTrg(KEY_SELECT) == true)
 	{

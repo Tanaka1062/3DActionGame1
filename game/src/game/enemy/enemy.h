@@ -29,6 +29,12 @@ public:
 	//•`Êˆ—
 	void Draw();
 
+	//‹ŠE”ÍˆÍ‚ğæ“¾
+	CFOV* GetFOV() { return &m_FOV; }
+
+	//‹ŠE”ÍˆÍ‚É“–‚½‚Á‚½ˆ—
+	void HitFOV() { m_FOV.HitCalc(); }
+
 private:
 	//‘Ò‹@ó‘Ôˆ—
 	void Wait();
@@ -48,11 +54,6 @@ private:
 	//ˆÚ“®ˆ—
 	void Move(VECTOR _pos);
 
-	//‹ŠE”ÍˆÍ‚ğæ“¾
-	CFOV& GetFOV() { return m_FOV; }
-
-	//‹ŠE”ÍˆÍ‚É“–‚½‚Á‚½ˆ—
-	void HitFOV() { m_FOV.HitCalc(); }
 
 };
 

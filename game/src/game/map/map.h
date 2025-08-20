@@ -17,9 +17,10 @@ public:
 	//初期化
 	void Init();
 
-	//画像ロード
+	//モデルロード
 	void Load();
 
+	//モデル描写
 	void Draw();
 
 };

@@ -32,15 +32,14 @@ public:
 	void Init();
 
 	//毎フレームする処理
-	// @_vFocus	:プレイヤーの座標
-	// @_fRotY		:プレイヤーの回転角度Y
-	void Step(VECTOR _vFocus, float _fRotY);
+	void Step();
 
 	//表示
 	void Draw();
 
 	//カメラの更新
-	void Update();
+	// @_tagetPos	:カメラの注視点の座標
+	void Update(VECTOR _tagetPos);
 
 	//カメラのタイプ切り替え
 	void ChangeCamera(tagCAMERA_ID _id) { m_id = _id; };

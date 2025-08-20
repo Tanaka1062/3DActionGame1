@@ -39,13 +39,16 @@ void CGround::Init()
 }
 
 //------------------------
-//		画像ロード
+//		モデルロード
 //------------------------
 void CGround::Load()
 {
 	LoadModel(GROUND_MODEL_PATH);
 }
 
+//------------------------
+//		モデル描写
+//------------------------
 void CGround::Draw()
 {
 	CObject::Draw();

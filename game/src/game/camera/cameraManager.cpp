@@ -36,13 +36,13 @@ void CCameraManager::Init()
 //---------------------------
 //	毎フレームする処理
 //---------------------------
-void CCameraManager::Step(VECTOR _vFocus, float _fRotY)
+void CCameraManager::Step()
 {
 	switch (m_id)
 	{
 		//ゲーム中のメインカメラ
 	case CAMERA_ID_PLAY:
-		m_play.Step(_vFocus,_fRotY);
+		m_play.Step();
 		break;
 		//デバック用カメラ
 	case CAMERA_ID_DEBUG:
@@ -90,13 +90,13 @@ void CCameraManager::Draw()
 //---------------------------
 //		カメラの更新
 //---------------------------
-void CCameraManager::Update()
+void CCameraManager::Update(VECTOR _tagetPos)
 {
 	switch (m_id)
 	{
 		//ゲーム中のメインカメラ
 	case CAMERA_ID_PLAY:
-		m_play.Update();
+		m_play.Update(_tagetPos);
 		break;
 		//デバック用カメラ
 	case CAMERA_ID_DEBUG:

@@ -37,33 +37,29 @@ void CPlayCamera::Init()
 //---------------------------------
 //		毎フレームする処理
 //---------------------------------
-void CPlayCamera::Step(VECTOR _vFocus, float _fRotY)
+void CPlayCamera::Step()
 {
-	//m_rot.y = _fRotY;
-
 	//カメラ回転処理
 	Rotate();
-
-
-	//カメラの座標設定
-	m_cameraPos.x = sinf(m_rot.y) * CAMERA_BACK;
-	m_cameraPos.y = CAMERA_OFFSET_Y;
-	m_cameraPos.z = cosf(m_rot.y) * CAMERA_BACK;
-
-	m_cameraPos = VAdd(m_cameraPos, _vFocus);
-	//=========================================
-
-	m_tagetPos = _vFocus;
-	m_tagetPos.y += TARGET_OFFSET_Y;
-
 }
 
 //---------------------------------
 //			カメラの更新
 //---------------------------------
-void CPlayCamera::Update()
+void CPlayCamera::Update(VECTOR _pos)
 {
-	// カメラ設定
+	//カメラの座標設定
+	m_cameraPos.x = sinf(m_rot.y) * CAMERA_BACK;
+	m_cameraPos.y = CAMERA_OFFSET_Y;
+	m_cameraPos.z = cosf(m_rot.y) * CAMERA_BACK;
+
+	m_cameraPos = VAdd(m_cameraPos, _pos);
+	//=========================================
+
+	m_tagetPos = _pos;
+	m_tagetPos.y += TARGET_OFFSET_Y;
+
+	// カメラ設定更新
 	SetCameraPositionAndTargetAndUpVec(m_cameraPos, m_tagetPos, m_upVec);
 
 }

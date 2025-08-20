@@ -5,6 +5,7 @@
 class CObject{
 protected:
 	VECTOR m_pos;			//座標
+	VECTOR m_speed;			//速度
 	VECTOR m_rot;			//回転角度
 	VECTOR m_scale;			//拡大縮小率
 	int m_hndl;				//オブジェクトのハンドル
@@ -43,12 +44,25 @@ public:
 	//当たり判定後の処理
 	virtual void HitCalc();
 
+	//オブジェクトを押し出す
+	// _push	:押し出す力		
+	void ObjPush(VECTOR _push);
+
 	//取得・設定---------------------
 	//座標を取得
 	VECTOR GetPos() { return m_pos; }
 
+	//移動後の座標を取得
+	VECTOR GetMovePos() { return VAdd(GetCenter(), m_speed); }
+
+	//速度を取得
+	VECTOR GetSpeed() { return m_speed; }
+
 	//回転角度を取得
 	VECTOR GetRot() { return m_rot; }
+
+	//半径を取得
+	float GetRad() { return m_rad; }
 
 	//中心座標を取得
 	VECTOR GetCenter();

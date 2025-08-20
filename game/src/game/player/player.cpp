@@ -192,7 +192,6 @@ void CPlayer::Move(float _rotY)
 		speedX = -MOVE_SPEED;
 	}
 
-
 	//カメラの角度がオールゼロの時に進む速度
 	VECTOR defaultDir = { speedX,0.0f,speedZ };
 	//上記を行列に変換
@@ -202,17 +201,14 @@ void CPlayer::Move(float _rotY)
 	//行列の合成
 	MATRIX res = CMyMath::MatMult(mRotY, dir);
 
-	VECTOR move;
-	move.x = res.m[0][3];
-	move.y = res.m[1][3];
-	move.z = res.m[2][3];
+	//移動をスピードに代入
+	m_speed.x = res.m[0][3];
+	m_speed.y = res.m[1][3];
+	m_speed.z = res.m[2][3];
 
-	//計算結果をプレイヤーの現在の座標に足す
-	m_pos = CMyMath::VecAdd(m_pos, move);
-
-	//プレイヤーが移動してる方向を向く
-	if (move.x != 0 || move.z != 0)
-		m_rot.y = static_cast<float>(atan2(static_cast<float>(-move.x), static_cast<float>(-move.z)));
+	//移動方向を向く
+	if (m_speed.x != 0 || m_speed.z != 0)
+		m_rot.y = static_cast<float>(atan2(static_cast<float>(-m_speed.x), static_cast<float>(-m_speed.z)));
 
 }
 

@@ -22,6 +22,7 @@ CObject::~CObject()
 void CObject::Init()
 {
 	m_pos = { 0.0f,0.0f,0.0f };
+	m_speed = { 0.0f,0.0f,0.0f };
 	m_rot = { 0.0f,0.0f,0.0f };
 	m_scale = { 1.0f,1.0f,1.0f };
 	m_hndl = -1;
@@ -41,6 +42,11 @@ void CObject::Exit()
 //---------------------
 void CObject::Update()
 {
+	//現在の座標にスピードを加算
+	m_pos = VAdd(m_pos, m_speed);
+
+	//スピードをリセット
+	m_speed = { 0.0f,0.0f,0.0f };
 
 	MV1SetPosition(m_hndl, m_pos);
 	MV1SetRotationXYZ(m_hndl, m_rot);
@@ -106,6 +112,18 @@ void CObject::DeleteModel()
 //------------------------------
 void CObject::HitCalc()
 {
+
+}
+
+//------------------------------
+//	オブジェクトを押し出す
+//------------------------------
+void CObject::ObjPush(VECTOR _push)
+{
+	//押し出す量をスピードに加算
+	m_speed.x += _push.x;
+	m_speed.y += _push.y;
+	m_speed.z += _push.z;
 
 }
 
