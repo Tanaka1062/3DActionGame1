@@ -10,9 +10,16 @@ public:
 	static void CheckHitEnemyFOVToPlayer(CEnemyManager& _enemyManager,
 		CPlayer& _player);
 
+	//“G‚ÌUŒ‚”ÍˆÍ‚ÆƒvƒŒƒCƒ„[‚Ì“–‚½‚è”»’è
+	static void CheckHitEnemyAttackToPlayer(CEnemyManager& _enemyManager,
+		CPlayer& _player);
+
 	//“G‚ÆƒvƒŒƒCƒ„[‚Ì“–‚½‚è”»’è
 	static void CheckHitEnemyToPlayer(CEnemyManager& _enemyManager,
 		CPlayer& _player);
+
+	//“G‚Æ“G‚Ì“–‚½‚è”»’è
+	static void CheckHitEnemyToEnemy(CEnemyManager& _enemyManager);
 
 };
 

@@ -51,24 +51,48 @@ public:
 	//取得・設定---------------------
 	//座標を取得
 	VECTOR GetPos() { return m_pos; }
+	//座標を設定
+	void SetPos(VECTOR _pos) { m_pos = _pos; }
 
 	//移動後の座標を取得
 	VECTOR GetMovePos() { return VAdd(GetCenter(), m_speed); }
 
 	//速度を取得
 	VECTOR GetSpeed() { return m_speed; }
+	//速度を設定(floot)
+	void SetSpeed(float _x = 0.0f, float _y = 0.0f, float _z = 0.0f) 
+	{
+		m_speed.x = _x;
+		m_speed.y = _y;
+		m_speed.z = _z;
+	}
+	//速度を設定(VECTOR)
+	void SetSpeed(VECTOR _speed) { m_speed = _speed; }
 
 	//回転角度を取得
 	VECTOR GetRot() { return m_rot; }
+	//回転角度を設定(float)
+	void SetRot(float _x = 0.0f, float _y = 0.0f, float _z = 0.0f)
+	{
+		m_rot.x = _x;
+		m_rot.y = _y;
+		m_rot.z = _z;
+	}
+	//回転角度を設定(VECTOR)
+	void SetRot(VECTOR _rot) { m_rot = _rot; }
 
 	//半径を取得
 	float GetRad() { return m_rad; }
+	//半径を設定
+	void SetRad(float _rad) { m_rad = _rad; }
 
 	//中心座標を取得
 	VECTOR GetCenter();
 
 	//生存フラグを取得
 	bool GetActive() { return m_isActive; }
+	//生存フラグを設定
+	void SetActive(bool _isActive) { m_isActive = _isActive; }
 
 	//-------------------------------
 };

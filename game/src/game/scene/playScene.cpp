@@ -82,7 +82,9 @@ void CPlayScene::Step()
 	//“–‚½‚è”»’è----------------------------------
 	//“G‚Ì‹ŠE”ÍˆÍ‚ÆƒvƒŒƒCƒ„[‚Ì“–‚½‚è”»’è
 	CCollisionManager::CheckHitEnemyFOVToPlayer(m_enemy, m_player);
+	CCollisionManager::CheckHitEnemyAttackToPlayer(m_enemy, m_player);
 	CCollisionManager::CheckHitEnemyToPlayer(m_enemy, m_player);
+	CCollisionManager::CheckHitEnemyToEnemy(m_enemy);
 	//--------------------------------------------
 
 	//‚·‚×‚Ä‚ÌŒ‹‰Ê‚ğ”½‰f‚³‚¹‚é

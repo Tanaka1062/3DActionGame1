@@ -19,7 +19,7 @@ static const float FOV_RADIUS = 50.0f;				//視界範囲(半径)
 
 //攻撃関連---------------------------
 static const float ATTACK_SIZE = 3.0f;				//攻撃範囲
-static const float ATTACK_LENGTH = 2.0f;			//攻撃の長さ
+static const float ATTACK_LENGTH = 4.0f;			//攻撃の長さ
 static const int ATTACK_TIME = 120;					//攻撃の判定の時間(フレーム)
 
 //-----------------------------------
@@ -43,13 +43,13 @@ CEnemy::~CEnemy()
 //-----------------------
 //		初期化
 //-----------------------
-void CEnemy::Init()
+void CEnemy::Init(VECTOR _pos)
 {
 	CCharacterBase::Init();
-	m_attack.Init();
+	m_attack.Init(ATTACK_SIZE,ATTACK_LENGTH);
 	m_FOV.Init(FOV_RADIUS);
 
-	m_pos = INIT_POS;
+	m_pos = _pos;
 	m_rad = RADIUS;
 	m_hp = MAX_HP;
 	m_atk = ATTACK;
@@ -73,20 +73,19 @@ void CEnemy::Step(VECTOR _pos)
 	m_attack.Step();
 	//視界範囲の毎フレームする処理
 	m_FOV.Step();
-	//移動処理
-	Move(_pos);
+
+	if (m_attack.GetIsAttackable() == false)
+	{
+		//移動処理
+		Move(_pos);
+	}
 
 	//攻撃処理
 	if (CheckHitKey(KEY_INPUT_J) != 0 &&
 		m_attack.GetActive() == false)
 	{
-		m_attack.Request(m_pos,m_rot, ATTACK_SIZE, ATTACK_LENGTH, ATTACK_TIME);
+		m_attack.Request(GetCenter(), m_rot, ATTACK_TIME);
 	}
-
-	//攻撃の更新
-	m_attack.Update(m_pos, m_rot);
-	//視界範囲の更新
-	m_FOV.Update(m_pos);
 
 }
 
@@ -101,10 +100,24 @@ void CEnemy::Draw()
 
 	DrawSphere3D(GetCenter(), m_rad, 16, GetColor(255, 0, 0), GetColor(255, 0, 0), FALSE);
 
-
 #endif // DEBUG
 	
 }
+
+//-----------------------
+//		更新処理
+//-----------------------
+void CEnemy::Update()
+{
+	CCharacterBase::Update();
+
+	//攻撃の更新
+	m_attack.Update(GetCenter(), m_rot);
+	//視界範囲の更新
+	m_FOV.Update(m_pos);
+
+}
+
 
 //-----------------------
 //		待機処理

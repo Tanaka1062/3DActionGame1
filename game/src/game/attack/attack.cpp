@@ -13,13 +13,15 @@ CAttack::CAttack()
 //------------------------
 //		初期化
 //------------------------
-void CAttack::Init()
+void CAttack::Init(float _rad, float _length)
 {
 	CObject::Init();
+	m_rad = _rad;;
 	m_time = 0;
 	m_timeCount = 0;
-	m_length = 0;
+	m_length = _length;
 	m_isActive = false;
+	m_isAttackable = false;
 }
 
 //------------------------
@@ -27,6 +29,8 @@ void CAttack::Init()
 //------------------------
 void CAttack::Step()
 {
+	DrawSphere3D(m_pos, m_rad, 16, GetColor(0, 255, 0), GetColor(255, 0, 0), FALSE);
+
 	if (m_isActive == false)return;
 
 	m_timeCount++;
@@ -52,14 +56,13 @@ void CAttack::Step()
 //------------------------
 void CAttack::Update(VECTOR _pos, VECTOR _rot)
 {
-	if (m_isActive == false)return;
 
 	//値を更新
 	m_rot = _rot;
 
 	//攻撃判定の座標設定
 	m_pos.x = -sinf(m_rot.y) * m_length;
-	m_pos.y = _pos.y;
+	m_pos.y = 0.0f;
 	m_pos.z = -cosf(m_rot.y) * m_length;
 
 	m_pos = VAdd(m_pos, _pos);
@@ -69,12 +72,10 @@ void CAttack::Update(VECTOR _pos, VECTOR _rot)
 //------------------------
 //		攻撃の呼び出し
 //------------------------
-void CAttack::Request(VECTOR _pos, VECTOR _rot, float _rad, float _length, int _time)
+void CAttack::Request(VECTOR _pos, VECTOR _rot, int _time)
 {
 	//値を入力
 	m_rot = _rot;
-	m_length = _length;
-	m_rad = _rad;
 	m_time = _time;
 	m_isActive = true;
 

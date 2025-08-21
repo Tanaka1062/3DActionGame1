@@ -27,6 +27,9 @@ public:
 	//•`Êˆ—
 	void Draw();
 
+	//XVˆ—
+	void Update();
+
 private:
 	//‘Ò‹@ó‘Ôˆ—
 	void Wait();

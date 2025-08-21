@@ -1,6 +1,6 @@
 #include "enemyManager.h"
 
-static const int ENEMY_NUM = 1;			//敵の数
+static const int ENEMY_NUM = 2;			//敵の数
 
 //------------------------
 //	  コンストラクタ
@@ -29,12 +29,13 @@ void CEnemyManager::Init()
 {
 	for (int i = 0; i < ENEMY_NUM; i++)
 	{
-		if (m_enemy.size() <= ENEMY_NUM) 
+		if (m_enemy.size() < ENEMY_NUM) 
 		{
 			m_enemy.push_back(new CEnemy);
-
 		}
-		m_enemy[i]->Init();
+		VECTOR initPos = { 0.0f,0.0f,20.0f };
+		initPos.x = static_cast<float>(10 * i);
+		m_enemy[i]->Init(initPos);
 	}
 }
 

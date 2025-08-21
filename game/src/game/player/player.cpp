@@ -19,7 +19,7 @@ static const float RADIUS = 2.5f;					//”¼Œa
 
 //UŒ‚ŠÖ˜A---------------------------
 static const float ATTACK_SIZE = 3.0f;				//UŒ‚”ÍˆÍ
-static const float ATTACK_LENGTH = 2.0f;			//UŒ‚‚Ì’·‚³
+static const float ATTACK_LENGTH = 5.0f;			//UŒ‚‚Ì’·‚³
 static const int ATTACK_TIME = 120;					//UŒ‚‚Ì”»’è‚ÌŠÔ(ƒtƒŒ[ƒ€)
 
 //-----------------------------------
@@ -46,7 +46,7 @@ CPlayer::~CPlayer()
 void CPlayer::Init()
 {
 	CCharacterBase::Init();
-	m_attack.Init();
+	m_attack.Init(ATTACK_SIZE,ATTACK_LENGTH);
 
 	m_pos = INIT_POS;
 	m_rad = RADIUS;
@@ -78,11 +78,9 @@ void CPlayer::Step(float _rotY)
 	if (CheckHitKey(KEY_INPUT_J) != 0 &&
 		m_attack.GetActive() == false)
 	{
-		m_attack.Request(m_pos,m_rot, ATTACK_SIZE, ATTACK_LENGTH, ATTACK_TIME);
+		m_attack.Request(GetCenter(), m_rot, ATTACK_TIME);
 	}
 
-	//UŒ‚‚ÌXV
-	m_attack.Update(m_pos, m_rot);
 
 }
 
@@ -100,6 +98,18 @@ void CPlayer::Draw()
 #endif // DEBUG
 	
 }
+
+//-----------------------
+//		XVˆ—
+//-----------------------
+void CPlayer::Update()
+{
+	CCharacterBase::Update();
+
+	//UŒ‚‚ÌXV
+	m_attack.Update(GetCenter(), m_rot);
+}
+
 
 //-----------------------
 //		‘Ò‹@ˆ—
@@ -208,7 +218,7 @@ void CPlayer::Move(float _rotY)
 
 	//ˆÚ“®•ûŒü‚ğŒü‚­
 	if (m_speed.x != 0 || m_speed.z != 0)
-		m_rot.y = static_cast<float>(atan2(static_cast<float>(-m_speed.x), static_cast<float>(-m_speed.z)));
+		m_rot.y = atan2f(-m_speed.x,-m_speed.z);
 
 }
 

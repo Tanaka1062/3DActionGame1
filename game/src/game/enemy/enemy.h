@@ -17,7 +17,7 @@ public:
 	~CEnemy();
 
 	//初期化
-	void Init();
+	void Init(VECTOR _pos = {0.0f,0.0f,0.0f});
 
 	//モデルロード
 	void Load();
@@ -29,8 +29,14 @@ public:
 	//描写処理
 	void Draw();
 
+	//更新処理
+	void Update();
+
 	//視界範囲を取得
 	CFOV* GetFOV() { return &m_FOV; }
+
+	//攻撃を取得
+	CAttack* GetAttack() { return &m_attack; }
 
 	//視界範囲に当たった処理
 	void HitFOV() { m_FOV.HitCalc(); }

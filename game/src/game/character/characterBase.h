@@ -42,7 +42,7 @@ public:
 	int GetHp() { return m_hp; }
 
 	//UŒ‚—Í‚ğæ“¾
-	int GetAttack() { return m_atk; }
+	int GetAtk() { return m_atk; }
 
 	//í—Ş‚ğæ“¾
 	tagCharacterType GetType() { return m_type; }
