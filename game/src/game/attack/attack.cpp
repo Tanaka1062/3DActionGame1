@@ -13,7 +13,8 @@ CAttack::CAttack()
 //------------------------
 //		初期化
 //------------------------
-void CAttack::Init(float _rad, float _length)
+void CAttack::Init(float _rad, float _length,
+	float _attackable_rad)
 {
 	CObject::Init();
 	m_rad = _rad;;
@@ -21,7 +22,9 @@ void CAttack::Init(float _rad, float _length)
 	m_timeCount = 0;
 	m_length = _length;
 	m_isActive = false;
-	m_isAttackable = false;
+	m_attackable.m_pos = { 0.0f,0.0f,0.0f };
+	m_attackable.m_rad = _attackable_rad;
+	m_attackable.m_isPossible = false;
 }
 
 //------------------------
@@ -29,9 +32,19 @@ void CAttack::Init(float _rad, float _length)
 //------------------------
 void CAttack::Step()
 {
-	DrawSphere3D(m_pos, m_rad, 16, GetColor(0, 255, 0), GetColor(255, 0, 0), FALSE);
 
-	if (m_isActive == false)return;
+	if (m_isActive == false)
+	{
+		#ifdef DEBUG
+				//攻撃範囲の視覚化
+				DrawSphere3D(m_pos, m_rad, 16, GetColor(0, 255, 0), GetColor(0, 255, 0), FALSE);
+
+				//攻撃可能範囲の視覚化
+				DrawSphere3D(m_attackable.m_pos, m_attackable.m_rad, 16, GetColor(0, 0, 255), GetColor(0, 0, 255), FALSE);
+		#endif // DEBUG
+
+		return;
+	}
 
 	m_timeCount++;
 
@@ -44,9 +57,11 @@ void CAttack::Step()
 	}
 	
 #ifdef DEBUG
-
+	//攻撃範囲の視覚化
 	DrawSphere3D(m_pos, m_rad, 16, GetColor(255, 0, 0), GetColor(255, 0, 0), FALSE);
 
+	//攻撃可能範囲の視覚化
+	DrawSphere3D(m_attackable.m_pos, m_attackable.m_rad, 16, GetColor(0, 0, 255), GetColor(0, 0, 255), FALSE);
 #endif // DEBUG
 
 }
@@ -57,7 +72,7 @@ void CAttack::Step()
 void CAttack::Update(VECTOR _pos, VECTOR _rot)
 {
 
-	//値を更新
+	//攻撃角度を更新
 	m_rot = _rot;
 
 	//攻撃判定の座標設定
@@ -66,6 +81,9 @@ void CAttack::Update(VECTOR _pos, VECTOR _rot)
 	m_pos.z = -cosf(m_rot.y) * m_length;
 
 	m_pos = VAdd(m_pos, _pos);
+
+	//攻撃可能範囲の座標を設定
+	m_attackable.m_pos = _pos;
 
 }
 

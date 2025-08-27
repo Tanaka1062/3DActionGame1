@@ -21,7 +21,7 @@ static const float FOV_RADIUS = 50.0f;				//‹ŠE”ÍˆÍ(”¼Œa)
 static const float ATTACK_SIZE = 3.0f;				//UŒ‚”ÍˆÍ
 static const float ATTACK_LENGTH = 4.0f;			//UŒ‚‚Ì’·‚³
 static const int ATTACK_TIME = 120;					//UŒ‚‚Ì”»’è‚ÌŠÔ(ƒtƒŒ[ƒ€)
-
+static const float ATTACKABLE_RAD = 5.0f;			//UŒ‚‰Â”\”ÍˆÍ‚Ì”¼Œa
 //-----------------------------------
 
 //-----------------------
@@ -46,7 +46,7 @@ CEnemy::~CEnemy()
 void CEnemy::Init(VECTOR _pos)
 {
 	CCharacterBase::Init();
-	m_attack.Init(ATTACK_SIZE,ATTACK_LENGTH);
+	m_attack.Init(ATTACK_SIZE,ATTACK_LENGTH, ATTACKABLE_RAD);
 	m_FOV.Init(FOV_RADIUS);
 
 	m_pos = _pos;
