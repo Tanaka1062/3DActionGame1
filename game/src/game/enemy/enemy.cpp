@@ -21,6 +21,7 @@ static const float FOV_RADIUS = 50.0f;				//視界範囲(半径)
 static const float ATTACK_SIZE = 3.0f;				//攻撃範囲
 static const float ATTACK_LENGTH = 4.0f;			//攻撃の長さ
 static const int ATTACK_TIME = 120;					//攻撃の判定の時間(フレーム)
+static const int ATTACK_WAIT_TIME = 60;				//攻撃のクールタイム(フレーム)
 static const float ATTACKABLE_RAD = 5.0f;			//攻撃可能範囲の半径
 //-----------------------------------
 
@@ -74,11 +75,8 @@ void CEnemy::Step(VECTOR _pos)
 	//視界範囲の毎フレームする処理
 	m_FOV.Step();
 
-	if (m_attack.GetIsAttackable() == false)
-	{
-		//移動処理
-		Move(_pos);
-	}
+	//移動処理
+	Move(_pos);
 
 	//攻撃処理
 	if (CheckHitKey(KEY_INPUT_J) != 0 &&
@@ -169,6 +167,9 @@ void CEnemy::Move(VECTOR _pos)
 
 	//敵がプレイヤーの方向を向く
 	m_rot.y = static_cast<float>(atan2(static_cast<float>(m_pos.x -_pos.x), static_cast<float>(m_pos.z - _pos.z)));
+
+	//プレイヤーが攻撃可能範囲にいる場合移動しない
+	if (m_attack.GetIsAttackable() == true)return;
 
 	//プレイヤーが目の前にいる時に進む速度
 	VECTOR defaultDir = { 0.0f,0.0f,-MOVE_SPEED };

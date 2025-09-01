@@ -92,9 +92,10 @@ void CPlayer::Draw()
 	CCharacterBase::Draw();
 
 #ifdef DEBUG
-
+	//当たり判定を表示
 	DrawSphere3D(GetCenter(), m_rad, 16, GetColor(255, 0, 0), GetColor(255, 0, 0), FALSE);
-
+	//体力を表示
+	DrawFormatString(32, 32, GetColor(0, 255, 0), "hp:%d", m_hp);
 #endif // DEBUG
 	
 }
@@ -166,44 +167,45 @@ void CPlayer::Move(float _rotY)
 		isController = true;
 	}
 
-	//前後にどれだけ移動するか
-	float speedZ = 0.0f;
+	//移動ベクトル
+	VECTOR speed = { 0.0f,0.0f,0.0f };
+	speed.z = 0.0f;
 	//コントローラー用前進後退
 	if (isController == true)
 	{
-		speedZ = MOVE_SPEED * CControllerInput::GetLY();
+		speed.z = MOVE_SPEED * CControllerInput::GetLY();
 	}
 	//キーボード用前進
 	else if (CheckHitKey(KEY_INPUT_W) != 0)
 	{
-		speedZ = -MOVE_SPEED;
+		speed.z = -MOVE_SPEED;
 	}
 	//キーボード用後退
 	else if (CheckHitKey(KEY_INPUT_S) != 0)
 	{
-		speedZ = MOVE_SPEED;
+		speed.z = MOVE_SPEED;
 	}
 
 	//左右にどれだけ移動するか
-	float speedX = 0.0f;
+	speed.x = 0.0f;
 	//コントローラー用左右移動
 	if (isController == true)
 	{
-		speedX = -MOVE_SPEED * CControllerInput::GetLX();
+		speed.x = -MOVE_SPEED * CControllerInput::GetLX();
 	}
 	//キーボード用左移動
 	else if (CheckHitKey(KEY_INPUT_A) != 0)
 	{
-		speedX = MOVE_SPEED;
+		speed.x = MOVE_SPEED;
 	}
 	//キーボード用右移動
 	else if (CheckHitKey(KEY_INPUT_D) != 0)
 	{
-		speedX = -MOVE_SPEED;
+		speed.x = -MOVE_SPEED;
 	}
 
 	//カメラの角度がオールゼロの時に進む速度
-	VECTOR defaultDir = { speedX,0.0f,speedZ };
+	VECTOR defaultDir = { speed.x,0.0f,speed.z };
 	//上記を行列に変換
 	MATRIX dir = CMyMath::GetTranslateMatrix(defaultDir);
 	//Y軸回転行列

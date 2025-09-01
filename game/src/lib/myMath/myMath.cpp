@@ -52,6 +52,7 @@ VECTOR CMyMath::VecNormalize(VECTOR vec, float veclen)
 	return vecize;
 }
 
+//ベクトルのスカラー倍
 VECTOR CMyMath::VecScale(VECTOR vec, float scale)
 {
 	vec.x *= scale;

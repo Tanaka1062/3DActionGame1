@@ -52,7 +52,7 @@ void CCollisionManager::CheckHitEnemyAttackToPlayer(CEnemyManager& _enemyManager
 		CAttack* attack = enemy->GetAttack();
 
 		//“G‚ÌUŒ‚”ÍˆÍ‚ÉƒvƒŒƒCƒ„[‚ª“ü‚Á‚Ä‚¢‚é‚©‚Ç‚¤‚©
-		if (CCollision::CheckHitSphereToSphere(_player.GetCenter(), _player.GetRad(), attack->GetPos(), attack->GetRad()) == true)
+		if (CCollision::CheckHitSphereToSphere(_player.GetCenter(), _player.GetRad(), enemy->GetCenter(), attack->GetAttackableRad()) == true)
 		{
 			attack->SetIsAttackable(true);
 		}

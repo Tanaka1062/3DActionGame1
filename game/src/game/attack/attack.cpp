@@ -14,13 +14,17 @@ CAttack::CAttack()
 //		‰Šú‰»
 //------------------------
 void CAttack::Init(float _rad, float _length,
-	float _attackable_rad)
+	float _attackable_rad, int _waitTime)
 {
 	CObject::Init();
 	m_rad = _rad;;
-	m_time = 0;
+	m_attackWaitTime = 0;
+	m_attackTime = 0;
+	m_attackWaitTime = _waitTime;
+	m_coolDownTime = 0;
 	m_timeCount = 0;
 	m_length = _length;
+	m_state = WAIT;
 	m_isActive = false;
 	m_attackable.m_pos = { 0.0f,0.0f,0.0f };
 	m_attackable.m_rad = _attackable_rad;
@@ -46,15 +50,36 @@ void CAttack::Step()
 		return;
 	}
 
+	switch (m_state)
+	{
+	case WAIT:
+		m_timeCount++;
+
+		break;
+	case ATTACK:
+		m_timeCount++;
+		//ŠÔ‚ª‚·‚¬‚½‚çUŒ‚‚ğÁ‚·
+		if (m_timeCount >= m_attackTime)
+		{
+			m_attackTime = 0;
+			m_timeCount = 0;
+			m_isActive = false;
+			m_state = COOLDOWN;
+		}
+		break;
+	case COOLDOWN:
+		m_timeCount++;
+		//ŠÔ‚ª‰ß‚¬‚½‚ç‘Ò‹@ó‘Ô‚É
+		if (m_timeCount >= m_coolDownTime)
+		{
+			m_timeCount = 0;
+			m_state = WAIT;
+		}
+		break;
+	}
+
 	m_timeCount++;
 
-	//ŠÔ‚ª‚·‚¬‚½‚çUŒ‚‚ğÁ‚·
-	if (m_timeCount>= m_time)
-	{
-		m_time = 0;
-		m_timeCount = 0;
-		m_isActive = false;
-	}
 	
 #ifdef DEBUG
 	//UŒ‚”ÍˆÍ‚Ì‹Šo‰»
@@ -90,11 +115,13 @@ void CAttack::Update(VECTOR _pos, VECTOR _rot)
 //------------------------
 //		UŒ‚‚ÌŒÄ‚Ño‚µ
 //------------------------
-void CAttack::Request(VECTOR _pos, VECTOR _rot, int _time)
+void CAttack::Request(VECTOR _pos, VECTOR _rot, int _attackTime,
+	int _coolDownTime)
 {
 	//’l‚ğ“ü—Í
 	m_rot = _rot;
-	m_time = _time;
+	m_attackTime = _attackTime;
+	m_coolDownTime = _coolDownTime;
 	m_isActive = true;
 
 	//UŒ‚”»’è‚ÌÀ•Wİ’è
