@@ -1,33 +1,6 @@
-﻿  attack.cpp
-  cameraManager.cpp
-  debugCamera.cpp
-  playCamera.cpp
-  characterBase.cpp
-  collisionManager.cpp
-  enemy.cpp
-  enemyManager.cpp
-  FOV.cpp
+﻿  collisionManager.cpp
   main.cpp
-  map.cpp
-  player.cpp
-  playScene.cpp
-  resultScene.cpp
-  sceneBase.cpp
-  sceneManager.cpp
-  titleScene.cpp
-  sky.cpp
-  soundManager.cpp
   2DUi.cpp
-  コードを生成中...
-  コンパイル中...
-  collision.cpp
-  controllerInput.cpp
-  KeyInput.cpp
-  3DObject.cpp
-  actor.cpp
-  myMath.cpp
-  number.cpp
-  fade.cpp
   fps.cpp
   コードを生成中...
-  game.vcxproj -> C:\Users\Owner\Desktop\GitHub\3DActionGame1\game\x64\Debug\game.exe
+  game.vcxproj -> D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\x64\Debug\game.exe
