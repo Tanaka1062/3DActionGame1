@@ -1,5 +1,6 @@
 #pragma once
 #include "../../lib/model/actor.h"
+#include "../attack/attack.h"
 
 enum tagCharacterType	//キャラクターの種類
 {
@@ -24,6 +25,7 @@ protected:
 	};
 	tagState m_state;			//状態
 	tagCharacterType m_type;	//種類
+	CAttack m_attack;			//攻撃クラス
 
 public:
 	//コンストラクタ
@@ -38,6 +40,12 @@ public:
 	//毎フレームする処理(座標取得用)
 	virtual void Step(VECTOR _pos);
 
+	//攻撃を食らった時にする処理
+	virtual void HitAttack(int _atk);
+
+	//数値の更新
+	void Update();
+
 	//体力を取得
 	int GetHp() { return m_hp; }
 
@@ -50,7 +58,8 @@ public:
 	//種類を設定
 	void SetType(tagCharacterType _type) { m_type = _type; }
 
-
+	//攻撃を取得
+	CAttack* GetAttack() { return &m_attack; }
 
 protected:
 

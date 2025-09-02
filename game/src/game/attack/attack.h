@@ -10,6 +10,7 @@ private:
 	int m_attackTime;				//攻撃判定の時間(フレーム)
 	int m_timeCount;				//時間のカウント
 	float m_length;					//攻撃の射程
+	int m_hitCount;					//攻撃が当たる回数
 	//攻撃の状態
 	enum tagState
 	{
@@ -33,7 +34,7 @@ public:
 
 	//初期化
 	void Init(float _rad = 0.0f, float _length = 0.0f,
-		float _attackable_rad = 0.0f, int _waitTime = 0);
+		float _attackable_rad = 0.0f, int _waitTime = 0,int _hitNum = 1);
 
 	//毎フレームする処理
 	void Step();

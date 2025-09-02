@@ -51,7 +51,7 @@ void CCollisionManager::CheckHitEnemyAttackToPlayer(CEnemyManager& _enemyManager
 		//“G‚ÌUŒ‚ƒNƒ‰ƒX‚ðŽæ“¾
 		CAttack* attack = enemy->GetAttack();
 
-		//“G‚ÌUŒ‚”ÍˆÍ‚ÉƒvƒŒƒCƒ„[‚ª“ü‚Á‚Ä‚¢‚é‚©‚Ç‚¤‚©
+		//“G‚ÌUŒ‚‰Â”\”ÍˆÍ‚ÉƒvƒŒƒCƒ„[‚ª“ü‚Á‚Ä‚¢‚é‚©
 		if (CCollision::CheckHitSphereToSphere(_player.GetCenter(), _player.GetRad(), enemy->GetCenter(), attack->GetAttackableRad()) == true)
 		{
 			attack->SetIsAttackable(true);
@@ -59,6 +59,23 @@ void CCollisionManager::CheckHitEnemyAttackToPlayer(CEnemyManager& _enemyManager
 		else
 		{
 			attack->SetIsAttackable(false);
+		}
+
+		//“G‚ÌUŒ‚‚ªƒvƒŒƒCƒ„[‚É“–‚½‚Á‚Ä‚¢‚é‚©
+		if (CCollision::CheckHitSphereToSphere(_player.GetCenter(), _player.GetRad(), attack->GetCenter(), attack->GetRad()) == true)
+		{
+			//ƒvƒŒƒCƒ„[‚É“G‚ÌUŒ‚—Í•ªƒ_ƒ[ƒW
+			_player.HitAttack(enemy->GetAtk());
+		}
+
+		//ƒvƒŒƒCƒ„[‚ÌUŒ‚ƒNƒ‰ƒX‚ðŽæ“¾
+		attack = _player.GetAttack();
+
+		//ƒvƒŒƒCƒ„[‚ÌUŒ‚‚ª“G‚É“–‚½‚Á‚Ä‚¢‚é‚©
+		if (CCollision::CheckHitSphereToSphere(enemy->GetCenter(), enemy->GetRad(), attack->GetCenter(), attack->GetRad()) == true)
+		{
+			//“G‚ÉƒvƒŒƒCƒ„[‚ÌUŒ‚—Í•ªƒ_ƒ[ƒW
+			enemy->HitAttack(_player.GetAtk());
 		}
 	}
 }

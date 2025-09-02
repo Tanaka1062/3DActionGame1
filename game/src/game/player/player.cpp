@@ -21,7 +21,7 @@ static const float RADIUS = 2.5f;					//半径
 static const float ATTACK_SIZE = 3.0f;				//攻撃範囲
 static const float ATTACK_LENGTH = 5.0f;			//攻撃の長さ
 static const int ATTACK_TIME = 120;					//攻撃の判定の時間(フレーム)
-
+static const int ATTACK_COOL_TIME = 30;				//攻撃のクールタイム(フレーム)
 //-----------------------------------
 
 //-----------------------
@@ -78,7 +78,7 @@ void CPlayer::Step(float _rotY)
 	if (CheckHitKey(KEY_INPUT_J) != 0 &&
 		m_attack.GetActive() == false)
 	{
-		m_attack.Request(GetCenter(), m_rot, ATTACK_TIME);
+		m_attack.Request(GetCenter(), m_rot, ATTACK_TIME,ATTACK_COOL_TIME);
 	}
 
 

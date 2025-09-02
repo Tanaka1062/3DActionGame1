@@ -1,6 +1,5 @@
 #pragma once
 #include "../character/characterBase.h"
-#include "../attack/attack.h"
 #include "../FOV/FOV.h"
 
 
@@ -8,7 +7,6 @@
 class CEnemy:public CCharacterBase
 {
 private:
-	CAttack m_attack;		//UŒ‚ƒNƒ‰ƒX
 	CFOV m_FOV;				//‹ŠE”ÍˆÍƒNƒ‰ƒX
 
 public:
@@ -34,9 +32,6 @@ public:
 
 	//‹ŠE”ÍˆÍ‚ğæ“¾
 	CFOV* GetFOV() { return &m_FOV; }
-
-	//UŒ‚‚ğæ“¾
-	CAttack* GetAttack() { return &m_attack; }
 
 	//‹ŠE”ÍˆÍ‚É“–‚½‚Á‚½ˆ—
 	void HitFOV() { m_FOV.HitCalc(); }

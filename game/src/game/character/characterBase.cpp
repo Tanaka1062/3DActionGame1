@@ -66,6 +66,29 @@ void CCharacterBase::Step(VECTOR _pos)
 }
 
 //------------------------------
+//			数値の更新
+//------------------------------
+void CCharacterBase::Update()
+{
+	CActor::Update();
+
+	//Hpがマイナスにならないように設定
+	if (m_hp <= 0)
+	{
+		m_hp = 0;
+	}
+
+}
+
+//------------------------------
+//	攻撃を食らった時にする処理
+//------------------------------
+void CCharacterBase::HitAttack(int _atk)
+{
+	m_hp -= _atk;
+}
+
+//------------------------------
 //			待機処理
 //------------------------------
 void CCharacterBase::Wait()

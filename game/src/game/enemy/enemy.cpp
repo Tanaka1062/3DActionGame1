@@ -21,7 +21,7 @@ static const float FOV_RADIUS = 50.0f;				//視界範囲(半径)
 static const float ATTACK_SIZE = 3.0f;				//攻撃範囲
 static const float ATTACK_LENGTH = 4.0f;			//攻撃の長さ
 static const int ATTACK_TIME = 120;					//攻撃の判定の時間(フレーム)
-static const int ATTACK_WAIT_TIME = 60;				//攻撃のクールタイム(フレーム)
+static const int ATTACK_COOL_TIME = 180;			//攻撃のクールタイム(フレーム)
 static const float ATTACKABLE_RAD = 5.0f;			//攻撃可能範囲の半径
 //-----------------------------------
 
@@ -78,11 +78,10 @@ void CEnemy::Step(VECTOR _pos)
 	//移動処理
 	Move(_pos);
 
-	//攻撃処理
-	if (CheckHitKey(KEY_INPUT_J) != 0 &&
-		m_attack.GetActive() == false)
+	//プレイヤーが攻撃可能距離にいた場合攻撃する
+	if (m_attack.GetIsAttackable() == true)
 	{
-		m_attack.Request(GetCenter(), m_rot, ATTACK_TIME);
+		m_attack.Request(GetCenter(), m_rot, ATTACK_TIME,ATTACK_COOL_TIME);
 	}
 
 }
@@ -162,8 +161,9 @@ void CEnemy::Stagger()
 //-----------------------
 void CEnemy::Move(VECTOR _pos)
 {
-	//視界範囲内にプレイヤーが入っていなかったら追わない
-	if (m_FOV.GetHit() == false)return;
+	//視界範囲内にプレイヤーが入っていないか、攻撃中なら追わない
+	if (m_FOV.GetHit() == false ||
+		m_attack.GetActive() == true)return;
 
 	//敵がプレイヤーの方向を向く
 	m_rot.y = static_cast<float>(atan2(static_cast<float>(m_pos.x -_pos.x), static_cast<float>(m_pos.z - _pos.z)));

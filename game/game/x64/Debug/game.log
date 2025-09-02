@@ -1,21 +1,2 @@
-﻿  attack.cpp
-  collisionManager.cpp
-  enemy.cpp
-  enemyManager.cpp
-D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\enemy\enemy.cpp(85,12): error C2660: 'CAttack::Request': 関数に 3 個の引数を指定できません。
-      D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\attack\attack.h(51,7):
-      'CAttack::Request' の宣言を確認してください
-      D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\enemy\enemy.cpp(85,12):
-      引数リスト '(DxLib::VECTOR, DxLib::VECTOR, const int)' を一致させようとしているとき
-  
-  main.cpp
-  player.cpp
-D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\player\player.cpp(81,12): error C2660: 'CAttack::Request': 関数に 3 個の引数を指定できません。
-      D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\attack\attack.h(51,7):
-      'CAttack::Request' の宣言を確認してください
-      D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\player\player.cpp(81,12):
-      引数リスト '(DxLib::VECTOR, DxLib::VECTOR, const int)' を一致させようとしているとき
-  
-  playScene.cpp
-  sceneManager.cpp
-  コードを生成中...
+﻿  enemy.cpp
+  game.vcxproj -> D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\x64\Debug\game.exe

@@ -14,7 +14,7 @@ CAttack::CAttack()
 //		初期化
 //------------------------
 void CAttack::Init(float _rad, float _length,
-	float _attackable_rad, int _waitTime)
+	float _attackable_rad, int _waitTime, int _hitNum)
 {
 	CObject::Init();
 	m_rad = _rad;;
@@ -24,6 +24,7 @@ void CAttack::Init(float _rad, float _length,
 	m_coolDownTime = 0;
 	m_timeCount = 0;
 	m_length = _length;
+	m_hitCount = _hitNum;
 	m_state = WAIT;
 	m_isActive = false;
 	m_attackable.m_pos = { 0.0f,0.0f,0.0f };
@@ -37,24 +38,14 @@ void CAttack::Init(float _rad, float _length,
 void CAttack::Step()
 {
 
-	if (m_isActive == false)
-	{
-		#ifdef DEBUG
-				//攻撃範囲の視覚化
-				DrawSphere3D(m_pos, m_rad, 16, GetColor(0, 255, 0), GetColor(0, 255, 0), FALSE);
-
-				//攻撃可能範囲の視覚化
-				DrawSphere3D(m_attackable.m_pos, m_attackable.m_rad, 16, GetColor(0, 0, 255), GetColor(0, 0, 255), FALSE);
-		#endif // DEBUG
-
-		return;
-	}
-
 	switch (m_state)
 	{
 	case WAIT:
 		m_timeCount++;
+		if (m_timeCount >= m_attackWaitTime)
+		{
 
+		}
 		break;
 	case ATTACK:
 		m_timeCount++;
@@ -82,8 +73,18 @@ void CAttack::Step()
 
 	
 #ifdef DEBUG
-	//攻撃範囲の視覚化
-	DrawSphere3D(m_pos, m_rad, 16, GetColor(255, 0, 0), GetColor(255, 0, 0), FALSE);
+
+	//攻撃中は当たり判定の色が赤色になる
+	if (m_state == ATTACK)
+	{
+		//攻撃中範囲の視覚化
+		DrawSphere3D(m_pos, m_rad, 16, GetColor(255, 0, 0), GetColor(255, 0, 0), FALSE);
+	}
+	else
+	{
+		//攻撃範囲の視覚化
+		DrawSphere3D(m_pos, m_rad, 16, GetColor(0, 255, 0), GetColor(0, 255, 0), FALSE);
+	}
 
 	//攻撃可能範囲の視覚化
 	DrawSphere3D(m_attackable.m_pos, m_attackable.m_rad, 16, GetColor(0, 0, 255), GetColor(0, 0, 255), FALSE);
@@ -118,11 +119,17 @@ void CAttack::Update(VECTOR _pos, VECTOR _rot)
 void CAttack::Request(VECTOR _pos, VECTOR _rot, int _attackTime,
 	int _coolDownTime)
 {
+	//攻撃待機状態以外は攻撃を呼び出さない
+	if (m_state != WAIT)return;
+
 	//値を入力
 	m_rot = _rot;
 	m_attackTime = _attackTime;
 	m_coolDownTime = _coolDownTime;
 	m_isActive = true;
+	
+	//状態を攻撃中に設定
+	m_state = ATTACK;
 
 	//攻撃判定の座標設定
 	m_pos.x = -sinf(m_rot.y) * m_length;

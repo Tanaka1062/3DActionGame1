@@ -1,6 +1,5 @@
 #pragma once
 #include "../character/characterBase.h"
-#include "../attack/attack.h"
 
 static const int PLAYER_NUM = 1;	//プレイヤーの数
 
@@ -8,7 +7,6 @@ static const int PLAYER_NUM = 1;	//プレイヤーの数
 class CPlayer:public CCharacterBase
 {
 private:
-	CAttack m_attack;		//攻撃クラス
 
 public:
 	//コンストラクタ・デストラクタ
