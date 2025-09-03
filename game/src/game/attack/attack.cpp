@@ -44,7 +44,8 @@ void CAttack::Step()
 		m_timeCount++;
 		if (m_timeCount >= m_attackWaitTime)
 		{
-
+			m_timeCount = 0;
+			m_state = ATTACK;
 		}
 		break;
 	case ATTACK:
@@ -119,9 +120,6 @@ void CAttack::Update(VECTOR _pos, VECTOR _rot)
 void CAttack::Request(VECTOR _pos, VECTOR _rot, int _attackTime,
 	int _coolDownTime)
 {
-	//攻撃待機状態以外は攻撃を呼び出さない
-	if (m_state != WAIT)return;
-
 	//値を入力
 	m_rot = _rot;
 	m_attackTime = _attackTime;

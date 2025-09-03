@@ -20,15 +20,31 @@ static const float RADIUS = 2.5f;					//半径
 //攻撃関連---------------------------
 static const float ATTACK_SIZE = 3.0f;				//攻撃範囲
 static const float ATTACK_LENGTH = 5.0f;			//攻撃の長さ
-static const int ATTACK_TIME = 120;					//攻撃の判定の時間(フレーム)
-static const int ATTACK_COOL_TIME = 30;				//攻撃のクールタイム(フレーム)
+static const int ATTACK_TIME = 60;					//攻撃の判定の時間(フレーム)
+static const int ATTACK_COOL_TIME = 60;				//攻撃のクールタイム(フレーム)
 //-----------------------------------
+
+//プレイヤーのアニメーション一覧---------------------------
+enum tagAnim {
+	ANIMID_ATTACK,			//攻撃中アニメーション
+	ANIMID_ATTACK_IN,		//攻撃前のアニメーション
+	ANIMID_ATTACK_OUT,		//攻撃後のアニメーション
+	ANIMID_DEFAULT,			//デフォルトのアニメーション
+	ANIMID_HIT,				//被弾のアニメーション
+	ANIMID_ITEM_USE,		//アイテムを使用中のアニメーション
+	ANIMID_ITEM_USE_IN,		//アイテムを使用する前のアニメーション
+	ANIMID_ITEM_USE_OUT,	//アイテムを使用した後のアニメーション
+	ANIMID_WAIT,			//待機状態のアニメーション
+	ANIMID_WALK,			//歩きのアニメーション
+};
+//---------------------------------------------------------
 
 //-----------------------
 //	コンストラクタ
 //-----------------------
 CPlayer::CPlayer()
 {
+	
 	Init();
 }
 
@@ -67,20 +83,13 @@ void CPlayer::Load()
 //-----------------------
 void CPlayer::Step(float _rotY)
 {
-	CCharacterBase::Step();
 	//攻撃の毎フレームする処理
 	m_attack.Step();
 
 	//移動処理
 	Move(_rotY);
 
-	//攻撃処理
-	if (CheckHitKey(KEY_INPUT_J) != 0 &&
-		m_attack.GetActive() == false)
-	{
-		m_attack.Request(GetCenter(), m_rot, ATTACK_TIME,ATTACK_COOL_TIME);
-	}
-
+	CCharacterBase::Step();
 
 }
 
@@ -117,6 +126,24 @@ void CPlayer::Update()
 //-----------------------
 void CPlayer::Wait()
 {
+	//待機アニメーションを再生
+	if (m_animData.m_id != ANIMID_WAIT)
+	{
+		Request(ANIMID_WAIT, 1.0f, true);
+	}
+
+	//動いていたら歩き状態に移行
+	if (m_speed.x != 0.0f ||
+		m_speed.z != 0.0f)
+	{
+		m_state = WALK;
+	}
+	
+	if (CheckHitKey(KEY_INPUT_J) != 0)
+	{
+		m_attack.Request(GetCenter(), m_rot, ATTACK_TIME, ATTACK_COOL_TIME);
+		m_state = ATTACK;
+	}
 
 }
 
@@ -125,6 +152,24 @@ void CPlayer::Wait()
 //-----------------------
 void CPlayer::Walk()
 {
+	//歩くアニメーション
+	if (m_animData.m_id != ANIMID_WALK)
+	{
+		Request(ANIMID_WALK, 1.0f, true);
+	}
+
+	//止まっていたら待機状態に移行
+	if (m_speed.x == 0.0f &&
+		m_speed.z == 0.0f)
+	{
+		m_state = WAIT;
+	}
+
+	if (CheckHitKey(KEY_INPUT_J) != 0)
+	{
+		m_attack.Request(GetCenter(), m_rot, ATTACK_TIME, ATTACK_COOL_TIME);
+		m_state = ATTACK;
+	}
 
 }
 
@@ -142,6 +187,18 @@ void CPlayer::Jump()
 void CPlayer::Attack()
 {
 
+	//攻撃のアニメーション
+	if (m_animData.m_id != ANIMID_ATTACK_IN)
+	{
+		Request(ANIMID_ATTACK_IN, 1.0f);
+	}
+
+	//攻撃が終わったら戻す
+	if (m_attack.GetActive() == false)
+	{
+		m_state = WAIT;
+	}
+
 }
 
 //-----------------------
@@ -157,6 +214,8 @@ void CPlayer::Stagger()
 //-----------------------
 void CPlayer::Move(float _rotY)
 {
+	//攻撃中は移動を出来ないようにする
+	if (m_state == ATTACK)return;
 
 	//コントローラーを使っているか
 	bool isController = false;

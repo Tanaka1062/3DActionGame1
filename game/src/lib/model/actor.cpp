@@ -83,7 +83,7 @@ void CActor::Request(int _id, float _speed,bool _isLoop)
 	//初期フレームは0フレーム目に設定
 	m_animData.m_frame = 0.0f;
 	//このアニメの最終フレーム数を保存
-	m_animData.m_endFrame = MV1GetAnimTotalTime(m_hndl, m_animData.m_hndl);
+	m_animData.m_endFrame = MV1GetAnimTotalTime(m_hndl, _id);
 	//何番目のアニメを再生しているかを保存
 	m_animData.m_id = _id;
 	//アニメーションの再生速度を保存

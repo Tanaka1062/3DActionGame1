@@ -8,6 +8,7 @@ class CPlayer:public CCharacterBase
 {
 private:
 
+
 public:
 	//コンストラクタ・デストラクタ
 	CPlayer();
