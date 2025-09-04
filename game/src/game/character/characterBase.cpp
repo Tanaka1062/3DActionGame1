@@ -72,9 +72,10 @@ void CCharacterBase::Update()
 {
 	CActor::Update();
 
-	//Hpがマイナスにならないように設定
+	//Hpが０以下になるとActiveをfalseに
 	if (m_hp <= 0)
 	{
+		m_isActive = false;
 		m_hp = 0;
 	}
 
@@ -85,6 +86,9 @@ void CCharacterBase::Update()
 //------------------------------
 void CCharacterBase::HitAttack(int _atk)
 {
+	//怯み状態にする
+	m_state = STAGGER;
+	//Hpを攻撃力分減らす
 	m_hp -= _atk;
 }
 

@@ -12,6 +12,7 @@ protected:
 		int		m_hndl;			//アニメハンドル
 		int		m_id;			//再生中のアニメID
 		int		m_state;		//アニメの状態(ループ再生かどうか)	
+		bool	m_isEnd;		//アニメが終了しているかどうか
 	}ANIM_DATA;
 
 	ANIM_DATA m_animData;		//アニメ再生関連データ

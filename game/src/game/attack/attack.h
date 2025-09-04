@@ -49,7 +49,8 @@ public:
 	//  _rot		:攻撃を出すオブジェクトの向き
 	// _attackTime	:攻撃判定の時間(フレーム)
 	// _coolDownTime:攻撃のクールタイム
-	void Request(VECTOR _pos,VECTOR _rot,int _attackTime,
+	// return		:攻撃を呼び出せたかどうか
+	bool Request(VECTOR _pos,VECTOR _rot,int _attackTime,
 		int _coolDownTime);
 
 	//攻撃可能範囲の半径を取得

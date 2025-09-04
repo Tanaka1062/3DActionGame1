@@ -28,6 +28,7 @@ void CActor::Init()
 	//初期値が-1のものだけ設定
 	m_animData.m_hndl = -1;
 	m_animData.m_id = -1;
+	m_animData.m_isEnd = false;
 }
 
 //--------------------------
@@ -58,6 +59,8 @@ void CActor::Update()
 		case ANIM_ENDLOOP:
 			//最終フレームで止めるなら値を固定
 			m_animData.m_frame = m_animData.m_endFrame;
+			//isEndをtrueに
+			m_animData.m_isEnd = true;
 			break;
 		}
 	}

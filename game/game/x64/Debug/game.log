@@ -1,2 +1,5 @@
-﻿  player.cpp
-  game.vcxproj -> D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\x64\Debug\game.exe
+﻿  characterBase.cpp
+  enemy.cpp
+  player.cpp
+  コードを生成中...
+  game.vcxproj -> C:\Users\2409417\Desktop\GitHub\3DActionGame1\game\x64\Debug\game.exe

@@ -58,6 +58,9 @@ void CObject::Update()
 //---------------------
 void CObject::Draw()
 {
+	//Active‚ªfalse‚È‚ç•`‰æ‚ð‚µ‚È‚¢
+	if (m_isActive == false)return;
+
 	MV1DrawModel(m_hndl);
 }
 

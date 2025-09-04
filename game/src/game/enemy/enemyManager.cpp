@@ -33,7 +33,7 @@ void CEnemyManager::Init()
 		{
 			m_enemy.push_back(new CEnemy);
 		}
-		VECTOR initPos = { 0.0f,0.0f,20.0f };
+		VECTOR initPos = { 0.0f,1.0f,20.0f };
 		initPos.x = static_cast<float>(10 * i);
 		m_enemy[i]->Init(initPos);
 	}

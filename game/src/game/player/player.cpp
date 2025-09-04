@@ -12,7 +12,7 @@ static const char MODEL_PATH[] =
 { "data/model/player/playerTest.mv1" };				//ロードするファイル名
 static const VECTOR INIT_POS = { 0.0f,1.0f,0.0f };	//初期座標
 static const int MAX_HP = 100;						//体力
-static const int ATTACK = 10;						//攻撃力
+static const int ATK = 10;							//攻撃力
 static const float MOVE_SPEED = 0.5f;				//移動スピード
 static const float RADIUS = 2.5f;					//半径
 //----------------------------------------------
@@ -20,11 +20,11 @@ static const float RADIUS = 2.5f;					//半径
 //攻撃関連---------------------------
 static const float ATTACK_SIZE = 3.0f;				//攻撃範囲
 static const float ATTACK_LENGTH = 5.0f;			//攻撃の長さ
-static const int ATTACK_TIME = 60;					//攻撃の判定の時間(フレーム)
-static const int ATTACK_COOL_TIME = 60;				//攻撃のクールタイム(フレーム)
+static const int ATTACK_TIME = 20;					//攻撃の判定の時間(フレーム)
+static const int ATTACK_COOL_TIME = 30;				//攻撃のクールタイム(フレーム)
 //-----------------------------------
 
-//プレイヤーのアニメーション一覧---------------------------
+//アニメーション一覧---------------------------
 enum tagAnim {
 	ANIMID_ATTACK,			//攻撃中アニメーション
 	ANIMID_ATTACK_IN,		//攻撃前のアニメーション
@@ -67,7 +67,7 @@ void CPlayer::Init()
 	m_pos = INIT_POS;
 	m_rad = RADIUS;
 	m_hp = MAX_HP;
-	m_atk = ATTACK;
+	m_atk = ATK;
 }
 
 //-----------------------
@@ -103,10 +103,10 @@ void CPlayer::Draw()
 #ifdef DEBUG
 	//当たり判定を表示
 	DrawSphere3D(GetCenter(), m_rad, 16, GetColor(255, 0, 0), GetColor(255, 0, 0), FALSE);
+#endif // DEBUG
 	//体力を表示
 	DrawFormatString(32, 32, GetColor(0, 255, 0), "hp:%d", m_hp);
-#endif // DEBUG
-	
+
 }
 
 //-----------------------
@@ -141,8 +141,12 @@ void CPlayer::Wait()
 	
 	if (CheckHitKey(KEY_INPUT_J) != 0)
 	{
-		m_attack.Request(GetCenter(), m_rot, ATTACK_TIME, ATTACK_COOL_TIME);
-		m_state = ATTACK;
+		//攻撃の呼び出しに成功したら攻撃状態に移行
+		if (m_attack.Request(GetCenter(), m_rot,
+			ATTACK_TIME, ATTACK_COOL_TIME) == true)
+		{
+			m_state = ATTACK;
+		}
 	}
 
 }
@@ -167,8 +171,12 @@ void CPlayer::Walk()
 
 	if (CheckHitKey(KEY_INPUT_J) != 0)
 	{
-		m_attack.Request(GetCenter(), m_rot, ATTACK_TIME, ATTACK_COOL_TIME);
-		m_state = ATTACK;
+		//攻撃の呼び出しに成功したら攻撃状態に移行
+		if (m_attack.Request(GetCenter(), m_rot,
+			ATTACK_TIME, ATTACK_COOL_TIME) == true)
+		{
+			m_state = ATTACK;
+		}
 	}
 
 }
@@ -206,6 +214,11 @@ void CPlayer::Attack()
 //-----------------------
 void CPlayer::Stagger()
 {
+	//被弾のアニメーション
+	if (m_animData.m_id != ANIMID_HIT)
+	{
+		Request(ANIMID_HIT, 1.0f);
+	}
 
 }
 
@@ -214,8 +227,9 @@ void CPlayer::Stagger()
 //-----------------------
 void CPlayer::Move(float _rotY)
 {
-	//攻撃中は移動を出来ないようにする
-	if (m_state == ATTACK)return;
+	//攻撃中と怯み中は移動を出来ないようにする
+	if (m_state == ATTACK ||
+		m_state == STAGGER)return;
 
 	//コントローラーを使っているか
 	bool isController = false;

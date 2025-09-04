@@ -62,7 +62,9 @@ void CCollisionManager::CheckHitEnemyAttackToPlayer(CEnemyManager& _enemyManager
 		}
 
 		//敵の攻撃がプレイヤーに当たっているか
-		if (CCollision::CheckHitSphereToSphere(_player.GetCenter(), _player.GetRad(), attack->GetCenter(), attack->GetRad()) == true)
+		if (CCollision::CheckHitSphereToSphere(_player.GetCenter(), _player.GetRad(),
+			attack->GetCenter(), attack->GetRad()) == true &&
+			attack->GetActive() == true)
 		{
 			//プレイヤーに敵の攻撃力分ダメージ
 			_player.HitAttack(enemy->GetAtk());
@@ -72,7 +74,9 @@ void CCollisionManager::CheckHitEnemyAttackToPlayer(CEnemyManager& _enemyManager
 		attack = _player.GetAttack();
 
 		//プレイヤーの攻撃が敵に当たっているか
-		if (CCollision::CheckHitSphereToSphere(enemy->GetCenter(), enemy->GetRad(), attack->GetCenter(), attack->GetRad()) == true)
+		if (CCollision::CheckHitSphereToSphere(enemy->GetCenter(), enemy->GetRad(),
+			attack->GetCenter(), attack->GetRad()) == true &&
+			attack->GetActive() == true)
 		{
 			//敵にプレイヤーの攻撃力分ダメージ
 			enemy->HitAttack(_player.GetAtk());
