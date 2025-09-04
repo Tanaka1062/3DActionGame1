@@ -99,6 +99,18 @@ void CActor::Request(int _id, float _speed,bool _isLoop)
 }
 
 //--------------------------
+//現在再生されているアニメーションが終了したかを取得
+//--------------------------
+bool CActor::GetAnimEnd()
+{
+	//アニメの再生タイプがループの場合はfalseを返す
+	if (m_animData.m_state == ANIM_LOOP)
+		return false;
+
+	return m_animData.m_isEnd;
+}
+
+//--------------------------
 //	アニメーションをデタッチ
 //--------------------------
 void CActor::DetachAnim()

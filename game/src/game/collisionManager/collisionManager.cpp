@@ -101,54 +101,99 @@ void CCollisionManager::CheckHitEnemyToPlayer(CEnemyManager& _enemyManager,
 		//敵が死んでいたら処理をしない
 		if (enemy->GetActive() == false)continue;
 
-		//移動後の敵とプレイヤーが当たっているかどうか
-		if (CCollision::CheckHitSphereToSphere(enemy->GetMovePos(), enemy->GetRad(), _player.GetMovePos(), _player.GetRad()) == true)
-		{
-			// 敵からプレイヤーまでの距離を計算
-			float lengthX = _player.GetMovePos().x - enemy->GetMovePos().x;	// どうせ2乗するとマイナスが消えるので、順番はどうでもいい
-			lengthX *= lengthX;
-			float lengthY = _player.GetMovePos().y - enemy->GetMovePos().y;	// どうせ2乗するとマイナスが消えるので、順番はどうでもいい
-			lengthY *= lengthY;
-			float lengthZ = _player.GetMovePos().z - enemy->GetMovePos().z;	// どうせ2乗するとマイナスが消えるので、順番はどうでもいい
-			lengthZ *= lengthZ;
-			float length = lengthX + lengthY + lengthZ;		// これがaの2乗＋bの2乗
-
-			// 2つの円の半径を加算し、2乗する
-			float lengthRadius = _player.GetRad() + enemy->GetRad();
-			lengthRadius *= lengthRadius;
-
-			//押し出す量を求める
-			float push = (lengthRadius - length) / 2.0f;
-
-			//プレイヤーの押し出す角度
-			float playerRotY = atan2f(_player.GetMovePos().x - enemy->GetMovePos().x,
-				_player.GetMovePos().z - enemy->GetMovePos().z);
-
-			//プレイヤーの押し出し計算
-			VECTOR playerPush;
-			playerPush.x = cosf(playerRotY) * push;
-			playerPush.y = 0;
-			playerPush.z = sinf(playerRotY) * push;
-			
-			//プレイヤーを押し出す
-			//_player.ObjPush(playerPush);
-			//_player.SetSpeed();
-
-			//敵の押し出し角度
-			float enemyRotY = atan2f(enemy->GetMovePos().x -_player.GetMovePos().x,
-				enemy->GetMovePos().z - _player.GetMovePos().z);
-
-			//敵の押し出し計算
-			VECTOR enemyPush;
-			enemyPush.x = cosf(enemyRotY) * push;
-			enemyPush.y = 0;
-			enemyPush.z = sinf(enemyRotY) * push;
-
-			//敵を押し出す
-			//enemy->ObjPush(enemyPush);
-			enemy->SetSpeed();
-		}
+		//プレイヤーの押し戻し処理-------------------------------------
 		
+		//判定用のプレイヤー座標を保存
+		VECTOR playerPos = _player.GetCenter();
+		//プレイヤーの速度を保存
+		VECTOR playerSpeed = _player.GetSpeed();
+
+		//Xだけ移動した時の座標
+		playerPos.x += playerSpeed.x;
+
+		//Xだけ移動したプレイヤーと敵の当たり判定
+		if (CCollision::CheckHitSphereToSphere(playerPos, _player.GetRad(),
+			enemy->GetCenter(), enemy->GetRad() == true))
+		{
+			//Xの移動だけを取り消す
+			playerSpeed.x = 0.0f;
+		}
+
+		//Yだけ移動したときの座標
+		playerPos = _player.GetCenter();
+		playerPos.y += playerSpeed.y;
+
+		//Yだけ移動したプレイヤーと敵の当たり判定
+		if (CCollision::CheckHitSphereToSphere(playerPos, _player.GetRad(),
+			enemy->GetCenter(), enemy->GetRad() == true))
+		{
+			//Yの移動だけを取り消す
+			playerSpeed.y = 0.0f;
+		}
+
+		//Zだけ移動したときの座標
+		playerPos = _player.GetCenter();
+		playerPos.z += playerSpeed.z;
+
+		//Zだけ移動したプレイヤーと敵の当たり判定
+		if (CCollision::CheckHitSphereToSphere(playerPos, _player.GetRad(),
+			enemy->GetCenter(), enemy->GetRad() == true))
+		{
+			//Zの移動だけを取り消す
+			playerSpeed.z = 0.0f;
+		}
+
+		//変更したスピードをセット
+		_player.SetSpeed(playerSpeed);
+
+		//-------------------------------------------------------------
+
+		//敵の押し戻し処理------------------------------------------------
+
+		//判定用の敵座標を保存
+		VECTOR enemyPos = enemy->GetCenter();
+		//敵の速度を保存
+		VECTOR enemySpeed = enemy->GetSpeed();
+
+		//Xだけ移動した時の座標
+		enemyPos.x += enemySpeed.x;
+
+		//Xだけ移動した敵とプレイヤーの当たり判定
+		if (CCollision::CheckHitSphereToSphere(enemyPos, enemy->GetRad(),
+			_player.GetCenter(), _player.GetRad() == true))
+		{
+			//Xの移動だけを取り消す
+			enemySpeed.x = 0.0f;
+		}
+
+		//Yだけ移動したときの座標
+		enemyPos = enemy->GetCenter();
+		enemyPos.y += enemySpeed.y;
+
+		//Yだけ移動した敵とプレイヤーの当たり判定
+		if (CCollision::CheckHitSphereToSphere(enemyPos, enemy->GetRad(),
+			_player.GetCenter(), _player.GetRad() == true))
+		{
+			//Zの移動だけを取り消す
+			enemySpeed.y = 0.0f;
+		}
+
+		//Zだけ移動したときの座標
+		enemyPos = enemy->GetCenter();
+		enemyPos.z += enemySpeed.z;
+
+		//Zだけ移動した敵とプレイヤーの当たり判定
+		if (CCollision::CheckHitSphereToSphere(enemyPos, enemy->GetRad(),
+			_player.GetCenter(), _player.GetRad() == true))
+		{
+			//Zの移動だけを取り消す
+			enemySpeed.z = 0.0f;
+		}
+
+		//変更したスピードをセット
+		enemy->SetSpeed(enemySpeed);
+		//----------------------------------------------------------------
+
 	}
 }
 
@@ -173,51 +218,98 @@ void CCollisionManager::CheckHitEnemyToEnemy(CEnemyManager& _enemyManager)
 			//敵２が死ぬまたは敵１と敵２が同じだったらスキップ
 			if (enemy2->GetActive() == false || i == j)continue;
 
-			//当たっているかどうか
-			if (CCollision::CheckHitSphereToSphere(enemy1->GetMovePos(), enemy1->GetRad(), enemy2->GetMovePos(), enemy2->GetRad()) == true)
+			//敵1の押し戻し処理------------------------------------------------
+
+			//判定用の敵1座標を保存
+			VECTOR enemy1Pos = enemy1->GetCenter();
+			//敵1の速度を保存
+			VECTOR enemy1Speed = enemy1->GetSpeed();
+
+			//Xだけ移動した時の座標
+			enemy1Pos.x += enemy1Speed.x;
+
+			//Xだけ移動した敵1と敵2の当たり判定
+			if (CCollision::CheckHitSphereToSphere(enemy1Pos, enemy1->GetRad(),
+				enemy2->GetCenter(), enemy2->GetRad() == true))
 			{
-				// 敵１から敵２までの距離を計算
-				float lengthX = enemy1->GetMovePos().x - enemy2->GetMovePos().x;	// どうせ2乗するとマイナスが消えるので、順番はどうでもいい
-				lengthX *= lengthX;
-				float lengthY =  enemy1->GetMovePos().y - enemy2->GetMovePos().y;	// どうせ2乗するとマイナスが消えるので、順番はどうでもいい
-				lengthY *= lengthY;
-				float lengthZ = enemy1->GetMovePos().z - enemy2->GetMovePos().z;	// どうせ2乗するとマイナスが消えるので、順番はどうでもいい
-				lengthZ *= lengthZ;
-				float length = lengthX + lengthY + lengthZ;		// これがaの2乗＋bの2乗
-
-				// 2つの円の半径を加算し、2乗する
-				float lengthRadius = enemy1->GetRad() + enemy2->GetRad();
-				lengthRadius *= lengthRadius;
-
-				//押し出す量を求める
-				float push = (lengthRadius - length) / 2.0f;
-
-				//プレイヤーの押し出す角度
-				float enemy1RotY = atan2f(enemy1->GetMovePos().x - enemy2->GetMovePos().x,
-					enemy1->GetMovePos().z - enemy2->GetMovePos().z);
-
-				//プレイヤーの押し出し計算
-				VECTOR enemy1Push;
-				enemy1Push.x = cosf(enemy1RotY) * push;
-				enemy1Push.y = 0;
-				enemy1Push.z = sinf(enemy1RotY) * push;
-
-				//プレイヤーを押し出す
-				enemy1->ObjPush(enemy1Push);
-
-				//敵の押し出し角度
-				float enemy2RotY = atan2f(enemy2->GetMovePos().x - enemy1->GetMovePos().x,
-					enemy2->GetMovePos().z - enemy2->GetMovePos().z);
-
-				//敵の押し出し計算
-				VECTOR enemy2Push;
-				enemy2Push.x = cosf(enemy2RotY) * push;
-				enemy2Push.y = 0;
-				enemy2Push.z = sinf(enemy2RotY) * push;
-
-				//敵を押し出す
-				enemy2->ObjPush(enemy2Push);
+				//Xの移動だけを取り消す
+				enemy1Speed.x = 0.0f;
 			}
+
+			//Yだけ移動したときの座標
+			enemy1Pos = enemy1->GetCenter();
+			enemy1Pos.y += enemy1Speed.y;
+
+			//Yだけ移動した敵1と敵2の当たり判定
+			if (CCollision::CheckHitSphereToSphere(enemy1Pos, enemy1->GetRad(),
+				enemy2->GetCenter(), enemy2->GetRad() == true))
+			{
+				//Zの移動だけを取り消す
+				enemy1Speed.y = 0.0f;
+			}
+
+			//Zだけ移動したときの座標
+			enemy1Pos = enemy1->GetCenter();
+			enemy1Pos.z += enemy1Speed.z;
+
+			//Zだけ移動した敵1と敵2の当たり判定
+			if (CCollision::CheckHitSphereToSphere(enemy1Pos, enemy1->GetRad(),
+				enemy2->GetCenter(), enemy2->GetRad() == true))
+			{
+				//Zの移動だけを取り消す
+				enemy1Speed.z = 0.0f;
+			}
+
+			//変更したスピードをセット
+			enemy1->SetSpeed(enemy1Speed);
+			//----------------------------------------------------------------
+
+			//敵2の押し戻し処理------------------------------------------------
+
+			//判定用の敵2座標を保存
+			VECTOR enemy2Pos = enemy2->GetCenter();
+			//敵1の速度を保存
+			VECTOR enemy2Speed = enemy2->GetSpeed();
+
+			//Xだけ移動した時の座標
+			enemy2Pos.x += enemy2Speed.x;
+
+			//Xだけ移動した敵2と敵1の当たり判定
+			if (CCollision::CheckHitSphereToSphere(enemy2Pos, enemy2->GetRad(),
+				enemy1->GetCenter(), enemy1->GetRad() == true))
+			{
+				//Xの移動だけを取り消す
+				enemy2Speed.x = 0.0f;
+			}
+
+			//Yだけ移動したときの座標
+			enemy2Pos = enemy2->GetCenter();
+			enemy2Pos.y += enemy2Speed.y;
+
+			//Yだけ移動した敵2と敵1の当たり判定
+			if (CCollision::CheckHitSphereToSphere(enemy2Pos, enemy2->GetRad(),
+				enemy1->GetCenter(), enemy1->GetRad() == true))
+			{
+				//Zの移動だけを取り消す
+				enemy2Speed.y = 0.0f;
+			}
+
+			//Zだけ移動したときの座標
+			enemy2Pos = enemy2->GetCenter();
+			enemy2Pos.z += enemy2Speed.z;
+
+			//Zだけ移動した敵1と敵2の当たり判定
+			if (CCollision::CheckHitSphereToSphere(enemy2Pos, enemy2->GetRad(),
+				enemy1->GetCenter(), enemy1->GetRad() == true))
+			{
+				//Zの移動だけを取り消す
+				enemy2Speed.z = 0.0f;
+			}
+
+			//変更したスピードをセット
+			enemy2->SetSpeed(enemy2Speed);
+			//----------------------------------------------------------------
+
 		}
 
 	}

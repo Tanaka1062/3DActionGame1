@@ -4,6 +4,7 @@
 #include <math.h>
 #include "../common.h"
 #include "../../lib/input/controllerInput.h"
+#include"../../lib/input/keyInput.h"
 
 //定義関連---------------------------
 
@@ -12,7 +13,7 @@ static const char MODEL_PATH[] =
 { "data/model/player/playerTest.mv1" };				//ロードするファイル名
 static const VECTOR INIT_POS = { 0.0f,1.0f,0.0f };	//初期座標
 static const int MAX_HP = 100;						//体力
-static const int ATK = 10;							//攻撃力
+static const int ATK = 2;							//攻撃力
 static const float MOVE_SPEED = 0.5f;				//移動スピード
 static const float RADIUS = 2.5f;					//半径
 //----------------------------------------------
@@ -139,7 +140,8 @@ void CPlayer::Wait()
 		m_state = WALK;
 	}
 	
-	if (CheckHitKey(KEY_INPUT_J) != 0)
+	if (CheckHitKey(KEY_INPUT_J) != 0 ||
+		CControllerInput::IsTrg(BUTTON_X))
 	{
 		//攻撃の呼び出しに成功したら攻撃状態に移行
 		if (m_attack.Request(GetCenter(), m_rot,
@@ -169,7 +171,8 @@ void CPlayer::Walk()
 		m_state = WAIT;
 	}
 
-	if (CheckHitKey(KEY_INPUT_J) != 0)
+	if (CheckHitKey(KEY_INPUT_J) != 0 ||
+		CControllerInput::IsTrg(BUTTON_X))
 	{
 		//攻撃の呼び出しに成功したら攻撃状態に移行
 		if (m_attack.Request(GetCenter(), m_rot,
@@ -220,6 +223,11 @@ void CPlayer::Stagger()
 		Request(ANIMID_HIT, 1.0f);
 	}
 
+	//被弾のアニメーションが終わったら戻す
+	if (GetAnimEnd() == true)
+	{
+		m_state = WAIT;
+	}
 }
 
 //-----------------------

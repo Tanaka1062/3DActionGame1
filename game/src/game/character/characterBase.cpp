@@ -86,6 +86,9 @@ void CCharacterBase::Update()
 //------------------------------
 void CCharacterBase::HitAttack(int _atk)
 {
+	//Šù‚É‹¯‚İó‘Ô‚È‚çˆ—‚ğ‚µ‚È‚¢
+	if (m_state == STAGGER)return;
+
 	//‹¯‚İó‘Ô‚É‚·‚é
 	m_state = STAGGER;
 	//Hp‚ğUŒ‚—Í•ªŒ¸‚ç‚·

@@ -234,6 +234,12 @@ void CEnemy::Stagger()
 		Request(ANIMID_HIT, 1.0f);
 	}
 
+	//被弾のアニメーションが終わったら戻す
+	if (GetAnimEnd() == true)
+	{
+		m_state = WAIT;
+	}
+
 }
 
 //-----------------------

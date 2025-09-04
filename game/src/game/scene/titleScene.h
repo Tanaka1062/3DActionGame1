@@ -8,8 +8,6 @@ class CTitleScene :public CSceneBase
 {
 private:
 	C2DUi m_backGround;		//背景
-	C2DUi m_startText;		//スタートテキスト
-	C2DUi m_title;			//タイトル
 public:
 
 	//コンストラクタ

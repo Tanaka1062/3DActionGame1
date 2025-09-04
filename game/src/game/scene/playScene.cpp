@@ -5,7 +5,6 @@
 #include"../collisionManager/collisionManager.h"
 
 
-
 //---------------------------
 //		コンストラクタ
 //---------------------------

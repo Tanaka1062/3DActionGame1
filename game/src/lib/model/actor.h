@@ -33,6 +33,9 @@ public:
 	//_isLoop	:アニメーションをループ再生するかどうか
 	void Request(int _id, float _speed ,bool _isLoop = false);
 
+	//現在再生されているアニメーションが終了したかを取得
+	bool GetAnimEnd();
+
 private:
 	//アニメーションをデタッチ
 	void DetachAnim();
