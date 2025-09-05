@@ -32,6 +32,23 @@ public:
 	//“G‚Ì”‚ğæ“¾
 	int GetEnemyNum() { return static_cast<int>(m_enemy.size()); }
 
+	//“G‚ª‘S•”€‚ñ‚¾‚©‚ğæ“¾
+	bool GetIsAllDie() {
+		int num = 0;
+		for (int i = 0; i < m_enemy.size(); i++)
+		{
+			if (m_enemy[i]->GetActive() == false)
+			{
+				num++;
+			}
+		}
+		if (num == m_enemy.size())
+		{
+			return true;
+		}
+		return false;
+	};
+
 	//“G‚ğæ“¾
 	CEnemy* GetEnemy(int _num) { return m_enemy[_num]; }
 };

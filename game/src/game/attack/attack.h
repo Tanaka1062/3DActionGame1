@@ -61,5 +61,12 @@ public:
 	//攻撃可能かを設定
 	void SetIsAttackable(bool _isAttack) { m_attackable.m_isPossible = _isAttack; }
 
+	//攻撃のクールタイムが終わったかを取得
+	bool GetIsCoolDown() {
+		if (m_state == WAIT)
+			return true;
+		else
+			return false;
+	}
 };
 

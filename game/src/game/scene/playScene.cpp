@@ -92,7 +92,8 @@ void CPlayScene::Step()
 	m_camera.Update(m_player.GetCenter());
 
 	if (CKeyInput::IsTrg(KEY_SELECT) == true ||
-		m_player.GetActive() == false)
+		m_player.GetActive() == false ||
+		m_enemy.GetIsAllDie() == true)
 	{
 		m_state = END;
 	}

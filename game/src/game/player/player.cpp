@@ -13,7 +13,7 @@ static const char MODEL_PATH[] =
 { "data/model/player/playerTest.mv1" };				//ロードするファイル名
 static const VECTOR INIT_POS = { 0.0f,1.0f,0.0f };	//初期座標
 static const int MAX_HP = 100;						//体力
-static const int ATK = 2;							//攻撃力
+static const int ATK = 4;							//攻撃力
 static const float MOVE_SPEED = 0.5f;				//移動スピード
 static const float RADIUS = 2.5f;					//半径
 //----------------------------------------------
@@ -106,7 +106,34 @@ void CPlayer::Draw()
 	DrawSphere3D(GetCenter(), m_rad, 16, GetColor(255, 0, 0), GetColor(255, 0, 0), FALSE);
 #endif // DEBUG
 	//体力を表示
-	DrawFormatString(32, 32, GetColor(0, 255, 0), "hp:%d", m_hp);
+	DrawFormatString(32, 32, GetColor(255, 0, 0), "hp:%d", m_hp);
+
+	//switch (m_state)
+	//{
+	//case CCharacterBase::WAIT:	
+	//	DrawFormatString(32, 64, GetColor(0, 255, 0), "待機");
+	//	break;
+	//case CCharacterBase::WALK:
+	//	DrawFormatString(32, 64, GetColor(0, 255, 0), "歩き");
+	//	break;
+	//case CCharacterBase::JUMP:
+	//	DrawFormatString(32, 64, GetColor(0, 255, 0), "ジャンプ");
+	//	break;
+	//case CCharacterBase::ATTACK_IN:
+	//	DrawFormatString(32, 64, GetColor(0, 255, 0), "攻撃前");
+	//	break;
+	//case CCharacterBase::ATTACK:
+	//	DrawFormatString(32, 64, GetColor(0, 255, 0), "攻撃中");
+	//	break;
+	//case CCharacterBase::ATTACK_OUT:
+	//	DrawFormatString(32, 64, GetColor(0, 255, 0), "攻撃後");
+	//	break;
+	//case CCharacterBase::STAGGER:
+	//	DrawFormatString(32, 64, GetColor(0, 255, 0), "怯み");
+	//	break;
+	//}
+
+	//DrawFormatString(64, 64, GetColor(255, 0, 0), "アニメフレーム = %f",m_animData.m_frame);
 
 }
 
@@ -143,11 +170,11 @@ void CPlayer::Wait()
 	if (CheckHitKey(KEY_INPUT_J) != 0 ||
 		CControllerInput::IsTrg(BUTTON_X))
 	{
-		//攻撃の呼び出しに成功したら攻撃状態に移行
-		if (m_attack.Request(GetCenter(), m_rot,
-			ATTACK_TIME, ATTACK_COOL_TIME) == true)
+
+		//攻撃してない時に攻撃前に移行する
+		if (m_attack.GetIsCoolDown() == true)
 		{
-			m_state = ATTACK;
+			m_state = ATTACK_IN;
 		}
 	}
 
@@ -174,11 +201,11 @@ void CPlayer::Walk()
 	if (CheckHitKey(KEY_INPUT_J) != 0 ||
 		CControllerInput::IsTrg(BUTTON_X))
 	{
-		//攻撃の呼び出しに成功したら攻撃状態に移行
-		if (m_attack.Request(GetCenter(), m_rot,
-			ATTACK_TIME, ATTACK_COOL_TIME) == true)
+
+		//攻撃してない時に攻撃前に移行する
+		if (m_attack.GetIsCoolDown() == true)
 		{
-			m_state = ATTACK;
+			m_state = ATTACK_IN;
 		}
 	}
 
@@ -193,19 +220,63 @@ void CPlayer::Jump()
 }
 
 //-----------------------
-//		攻撃
+//		攻撃前
 //-----------------------
-void CPlayer::Attack()
+void CPlayer::AttackIn()
 {
 
-	//攻撃のアニメーション
+	//攻撃前のアニメーション
 	if (m_animData.m_id != ANIMID_ATTACK_IN)
 	{
 		Request(ANIMID_ATTACK_IN, 1.0f);
 	}
 
-	//攻撃が終わったら戻す
+	//アニメーションが終わったら攻撃中に移行
+	if (m_animData.m_isEnd == true)
+	{
+		m_state = ATTACK;
+	}
+
+}
+
+//-----------------------
+//		攻撃中
+//-----------------------
+void CPlayer::Attack()
+{
+
+	//攻撃中のアニメーション
+	if (m_animData.m_id != ANIMID_ATTACK)
+	{
+		Request(ANIMID_ATTACK, 1.0f,true);
+
+		//攻撃の呼び出し
+		m_attack.Request(GetCenter(), m_rot,
+			ATTACK_TIME, ATTACK_COOL_TIME);
+	}
+
+	//攻撃が終わったら攻撃後に移動
 	if (m_attack.GetActive() == false)
+	{
+		m_state = ATTACK_OUT;
+	}
+
+}
+
+//-----------------------
+//		攻撃後
+//-----------------------
+void CPlayer::AttackOut()
+{
+
+	//攻撃後のアニメーション
+	if (m_animData.m_id != ANIMID_ATTACK_OUT)
+	{
+		Request(ANIMID_ATTACK_OUT, 1.0f);
+	}
+
+	//アニメーションが終わったら待機状態に戻す
+	if (m_animData.m_isEnd == true)
 	{
 		m_state = WAIT;
 	}
@@ -235,9 +306,15 @@ void CPlayer::Stagger()
 //-----------------------
 void CPlayer::Move(float _rotY)
 {
-	//攻撃中と怯み中は移動を出来ないようにする
-	if (m_state == ATTACK ||
-		m_state == STAGGER)return;
+	//待機状態と移動状態以外は移動を出来ないようにする
+	switch (m_state)
+	{
+	case WAIT:
+	case WALK:
+		break;
+	default:
+		return;
+	}
 
 	//コントローラーを使っているか
 	bool isController = false;

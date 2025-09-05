@@ -1,6 +1,6 @@
 #include "enemyManager.h"
 
-static const int ENEMY_NUM = 10;			//敵の数
+static const int ENEMY_NUM = 5;			//敵の数
 
 //------------------------
 //	  コンストラクタ

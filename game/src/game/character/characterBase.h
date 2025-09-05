@@ -19,7 +19,9 @@ protected:
 		WAIT,					//待機
 		WALK,					//歩く
 		JUMP,					//ジャンプ
-		ATTACK,					//攻撃
+		ATTACK_IN,				//攻撃前
+		ATTACK,					//攻撃中
+		ATTACK_OUT,				//攻撃後
 		STAGGER,				//怯み
 
 	};
@@ -72,8 +74,14 @@ protected:
 	//ジャンプ
 	virtual void Jump();
 
-	//攻撃
+	//攻撃前
+	virtual void AttackIn();
+
+	//攻撃中
 	virtual void Attack();
+
+	//攻撃後
+	virtual void AttackOut();
 
 	//怯み
 	virtual void Stagger();

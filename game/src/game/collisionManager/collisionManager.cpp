@@ -113,7 +113,7 @@ void CCollisionManager::CheckHitEnemyToPlayer(CEnemyManager& _enemyManager,
 
 		//X‚¾‚¯ˆÚ“®‚µ‚½ƒvƒŒƒCƒ„[‚Æ“G‚Ì“–‚½‚è”»’è
 		if (CCollision::CheckHitSphereToSphere(playerPos, _player.GetRad(),
-			enemy->GetCenter(), enemy->GetRad() == true))
+			enemy->GetCenter(), enemy->GetRad()) == true)
 		{
 			//X‚ÌˆÚ“®‚¾‚¯‚ğæ‚èÁ‚·
 			playerSpeed.x = 0.0f;
@@ -125,7 +125,7 @@ void CCollisionManager::CheckHitEnemyToPlayer(CEnemyManager& _enemyManager,
 
 		//Y‚¾‚¯ˆÚ“®‚µ‚½ƒvƒŒƒCƒ„[‚Æ“G‚Ì“–‚½‚è”»’è
 		if (CCollision::CheckHitSphereToSphere(playerPos, _player.GetRad(),
-			enemy->GetCenter(), enemy->GetRad() == true))
+			enemy->GetCenter(), enemy->GetRad()) == true)
 		{
 			//Y‚ÌˆÚ“®‚¾‚¯‚ğæ‚èÁ‚·
 			playerSpeed.y = 0.0f;
@@ -137,7 +137,7 @@ void CCollisionManager::CheckHitEnemyToPlayer(CEnemyManager& _enemyManager,
 
 		//Z‚¾‚¯ˆÚ“®‚µ‚½ƒvƒŒƒCƒ„[‚Æ“G‚Ì“–‚½‚è”»’è
 		if (CCollision::CheckHitSphereToSphere(playerPos, _player.GetRad(),
-			enemy->GetCenter(), enemy->GetRad() == true))
+			enemy->GetCenter(), enemy->GetRad()) == true)
 		{
 			//Z‚ÌˆÚ“®‚¾‚¯‚ğæ‚èÁ‚·
 			playerSpeed.z = 0.0f;
@@ -160,7 +160,7 @@ void CCollisionManager::CheckHitEnemyToPlayer(CEnemyManager& _enemyManager,
 
 		//X‚¾‚¯ˆÚ“®‚µ‚½“G‚ÆƒvƒŒƒCƒ„[‚Ì“–‚½‚è”»’è
 		if (CCollision::CheckHitSphereToSphere(enemyPos, enemy->GetRad(),
-			_player.GetCenter(), _player.GetRad() == true))
+			_player.GetCenter(), _player.GetRad()) == true)
 		{
 			//X‚ÌˆÚ“®‚¾‚¯‚ğæ‚èÁ‚·
 			enemySpeed.x = 0.0f;
@@ -172,7 +172,7 @@ void CCollisionManager::CheckHitEnemyToPlayer(CEnemyManager& _enemyManager,
 
 		//Y‚¾‚¯ˆÚ“®‚µ‚½“G‚ÆƒvƒŒƒCƒ„[‚Ì“–‚½‚è”»’è
 		if (CCollision::CheckHitSphereToSphere(enemyPos, enemy->GetRad(),
-			_player.GetCenter(), _player.GetRad() == true))
+			_player.GetCenter(), _player.GetRad()) == true)
 		{
 			//Z‚ÌˆÚ“®‚¾‚¯‚ğæ‚èÁ‚·
 			enemySpeed.y = 0.0f;
@@ -184,7 +184,7 @@ void CCollisionManager::CheckHitEnemyToPlayer(CEnemyManager& _enemyManager,
 
 		//Z‚¾‚¯ˆÚ“®‚µ‚½“G‚ÆƒvƒŒƒCƒ„[‚Ì“–‚½‚è”»’è
 		if (CCollision::CheckHitSphereToSphere(enemyPos, enemy->GetRad(),
-			_player.GetCenter(), _player.GetRad() == true))
+			_player.GetCenter(), _player.GetRad()) == true)
 		{
 			//Z‚ÌˆÚ“®‚¾‚¯‚ğæ‚èÁ‚·
 			enemySpeed.z = 0.0f;
@@ -230,7 +230,7 @@ void CCollisionManager::CheckHitEnemyToEnemy(CEnemyManager& _enemyManager)
 
 			//X‚¾‚¯ˆÚ“®‚µ‚½“G1‚Æ“G2‚Ì“–‚½‚è”»’è
 			if (CCollision::CheckHitSphereToSphere(enemy1Pos, enemy1->GetRad(),
-				enemy2->GetCenter(), enemy2->GetRad() == true))
+				enemy2->GetCenter(), enemy2->GetRad()) == true)
 			{
 				//X‚ÌˆÚ“®‚¾‚¯‚ğæ‚èÁ‚·
 				enemy1Speed.x = 0.0f;
@@ -242,7 +242,7 @@ void CCollisionManager::CheckHitEnemyToEnemy(CEnemyManager& _enemyManager)
 
 			//Y‚¾‚¯ˆÚ“®‚µ‚½“G1‚Æ“G2‚Ì“–‚½‚è”»’è
 			if (CCollision::CheckHitSphereToSphere(enemy1Pos, enemy1->GetRad(),
-				enemy2->GetCenter(), enemy2->GetRad() == true))
+				enemy2->GetCenter(), enemy2->GetRad()) == true)
 			{
 				//Z‚ÌˆÚ“®‚¾‚¯‚ğæ‚èÁ‚·
 				enemy1Speed.y = 0.0f;
@@ -254,7 +254,7 @@ void CCollisionManager::CheckHitEnemyToEnemy(CEnemyManager& _enemyManager)
 
 			//Z‚¾‚¯ˆÚ“®‚µ‚½“G1‚Æ“G2‚Ì“–‚½‚è”»’è
 			if (CCollision::CheckHitSphereToSphere(enemy1Pos, enemy1->GetRad(),
-				enemy2->GetCenter(), enemy2->GetRad() == true))
+				enemy2->GetCenter(), enemy2->GetRad()) == true)
 			{
 				//Z‚ÌˆÚ“®‚¾‚¯‚ğæ‚èÁ‚·
 				enemy1Speed.z = 0.0f;
@@ -276,7 +276,7 @@ void CCollisionManager::CheckHitEnemyToEnemy(CEnemyManager& _enemyManager)
 
 			//X‚¾‚¯ˆÚ“®‚µ‚½“G2‚Æ“G1‚Ì“–‚½‚è”»’è
 			if (CCollision::CheckHitSphereToSphere(enemy2Pos, enemy2->GetRad(),
-				enemy1->GetCenter(), enemy1->GetRad() == true))
+				enemy1->GetCenter(), enemy1->GetRad()) == true)
 			{
 				//X‚ÌˆÚ“®‚¾‚¯‚ğæ‚èÁ‚·
 				enemy2Speed.x = 0.0f;
@@ -288,7 +288,7 @@ void CCollisionManager::CheckHitEnemyToEnemy(CEnemyManager& _enemyManager)
 
 			//Y‚¾‚¯ˆÚ“®‚µ‚½“G2‚Æ“G1‚Ì“–‚½‚è”»’è
 			if (CCollision::CheckHitSphereToSphere(enemy2Pos, enemy2->GetRad(),
-				enemy1->GetCenter(), enemy1->GetRad() == true))
+				enemy1->GetCenter(), enemy1->GetRad()) == true)
 			{
 				//Z‚ÌˆÚ“®‚¾‚¯‚ğæ‚èÁ‚·
 				enemy2Speed.y = 0.0f;
@@ -300,7 +300,7 @@ void CCollisionManager::CheckHitEnemyToEnemy(CEnemyManager& _enemyManager)
 
 			//Z‚¾‚¯ˆÚ“®‚µ‚½“G1‚Æ“G2‚Ì“–‚½‚è”»’è
 			if (CCollision::CheckHitSphereToSphere(enemy2Pos, enemy2->GetRad(),
-				enemy1->GetCenter(), enemy1->GetRad() == true))
+				enemy1->GetCenter(), enemy1->GetRad()) == true)
 			{
 				//Z‚ÌˆÚ“®‚¾‚¯‚ğæ‚èÁ‚·
 				enemy2Speed.z = 0.0f;

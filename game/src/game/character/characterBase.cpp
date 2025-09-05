@@ -44,9 +44,19 @@ void CCharacterBase::Step()
 		Jump();
 		break;
 
+		//UŒ‚‘O
+	case ATTACK_IN:
+		AttackIn();
+		break;
+
 		//UŒ‚
 	case ATTACK:
 		Attack();
+		break;
+
+		//UŒ‚Œã
+	case ATTACK_OUT:
+		AttackOut();
 		break;
 
 		//‹¯‚İ
@@ -120,9 +130,25 @@ void CCharacterBase::Jump()
 }
 
 //------------------------------
-//			UŒ‚
+//			UŒ‚‘O
+//------------------------------
+void CCharacterBase::AttackIn()
+{
+
+}
+
+//------------------------------
+//			UŒ‚’†
 //------------------------------
 void CCharacterBase::Attack()
+{
+
+}
+
+//------------------------------
+//			UŒ‚Œã
+//------------------------------
+void CCharacterBase::AttackOut()
 {
 
 }
