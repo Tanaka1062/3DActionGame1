@@ -34,7 +34,6 @@ void CPlayScene::Draw()
 
 	m_camera.Draw();
 
-
 }
 
 //---------------------------
@@ -47,7 +46,6 @@ void CPlayScene::Init()
 	m_player.Init();
 	m_enemy.Init();
 	m_camera.Init();
-
 
 }
 

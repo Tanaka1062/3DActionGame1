@@ -8,7 +8,6 @@ class CResultScene :public CSceneBase
 {
 private:
 	C2DUi m_backGround;		//”wŒi
-	C2DUi m_text;			//•¶Žš
 
 public:
 
