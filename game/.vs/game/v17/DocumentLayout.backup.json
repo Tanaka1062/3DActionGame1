@@ -143,8 +143,7 @@
               "RelativeToolTip": "src\\game\\player\\player.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-09-02T07:08:22.877Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-02T07:08:22.877Z"
             }
           ]
         },
@@ -162,8 +161,7 @@
               "RelativeToolTip": "src\\game\\enemy\\enemy.h",
               "ViewState": "AgIAACcAAAAAAAAAAAAAAD4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-08-18T03:38:23.849Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-18T03:38:23.849Z"
             },
             {
               "$type": "Document",
@@ -200,8 +198,7 @@
               "RelativeToolTip": "src\\game\\character\\characterBase.cpp",
               "ViewState": "AgIAADUAAAAAAAAAAAAYwEQAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-09-02T07:01:11.07Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-02T07:01:11.07Z"
             },
             {
               "$type": "Document",
@@ -213,8 +210,7 @@
               "RelativeToolTip": "src\\game\\character\\characterBase.h",
               "ViewState": "AgIAADkAAAAAAAAAAAAAAFoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-08-08T03:16:28.477Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-08T03:16:28.477Z"
             },
             {
               "$type": "Document",

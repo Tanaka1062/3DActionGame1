@@ -162,7 +162,7 @@
     <ClCompile Include="src\game\collisionManager\collisionManager.cpp">
       <Filter>ソース ファイル\game\collisionManager</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\shot\playerShot.cpp">
+    <ClCompile Include="src\game\shot\shotBase.cpp">
       <Filter>ソース ファイル\game\shot</Filter>
     </ClCompile>
     <ClCompile Include="src\game\shot\shotManager.cpp">
@@ -260,7 +260,7 @@
     <ClInclude Include="src\game\collisionManager\collisionManager.h">
       <Filter>ソース ファイル\game\collisionManager</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\shot\playerShot.h">
+    <ClInclude Include="src\game\shot\shotBase.h">
       <Filter>ソース ファイル\game\shot</Filter>
     </ClInclude>
     <ClInclude Include="src\game\shot\shotManager.h">

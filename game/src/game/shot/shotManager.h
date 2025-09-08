@@ -1,27 +1,28 @@
 #pragma once
 #include <iostream>
 #include <vector>
-#include "enemy.h"
+#include "shotBase.h"
 
 using namespace std;
 
+
 //エネミーマネージャーのクラス
-class CEnemyManager
+class CShotManager
 {
 private:
-	vector<CEnemy*> m_enemy;			//敵のクラス
+	vector<CShotBase*> m_shot;			//弾のクラス
 
 public:
 	//コンストラクタ・デストラクタ
-	CEnemyManager();
-	~CEnemyManager();
+	CShotManager();
+	~CShotManager();
 
 	//初期化
 	void Init();
 	//オブジェクトのロード
 	void Load();
 	//毎フレームする処理
-	void Step(VECTOR _pos);
+	void Step();
 	//数値の更新
 	void Update();
 	//オブジェクトの描写
@@ -29,27 +30,13 @@ public:
 	//終了処理
 	void Exit();
 
-	//敵の数を取得
-	int GetEnemyNum() { return static_cast<int>(m_enemy.size()); }
+	//ショットの呼び出し
+	// _pos			:呼び出す座標
+	// _rot			:打ち出す方向
+	// _speed		:弾の速度
+	// _atk			:攻撃力
+	// _lostTime	:消えるまでの時間
+	void Request(VECTOR _pos, VECTOR _rot, VECTOR _speed, int _atk, int _lostTime);
 
-	//敵が全部死んだかを取得
-	bool GetIsAllDie() {
-		int num = 0;
-		for (int i = 0; i < m_enemy.size(); i++)
-		{
-			if (m_enemy[i]->GetActive() == false)
-			{
-				num++;
-			}
-		}
-		if (num == m_enemy.size())
-		{
-			return true;
-		}
-		return false;
-	};
-
-	//敵を取得
-	CEnemy* GetEnemy(int _num) { return m_enemy[_num]; }
 };
 

@@ -1,11 +1,12 @@
-#include "enemyManager.h"
+#include "shotManager.h"
 
-static const int ENEMY_NUM = 5;			//敵の数
+static const char MODEL_PATH[] =
+{ "data/model/shot/shotTest.mv1" };				//ロードするファイル名
 
 //------------------------
 //	  コンストラクタ
 //------------------------
-CEnemyManager::CEnemyManager()
+CShotManager::CShotManager()
 {
 	Init();
 }
@@ -13,11 +14,12 @@ CEnemyManager::CEnemyManager()
 //------------------------
 //	  デストラクタ
 //------------------------
-CEnemyManager::~CEnemyManager()
+CShotManager::~CShotManager()
 {
-	for (int i = 0; i < ENEMY_NUM; i++)
+	int shotNum = m_shot.size();
+	for (int i = 0; i < shotNum; i++)
 	{
-		delete m_enemy[i];
+		delete m_shot[i];
 	}
 
 }
@@ -25,77 +27,83 @@ CEnemyManager::~CEnemyManager()
 //------------------------
 //		  初期化
 //------------------------
-void CEnemyManager::Init()
+void CShotManager::Init()
 {
-	for (int i = 0; i < ENEMY_NUM; i++)
-	{
-		if (m_enemy.size() < ENEMY_NUM) 
-		{
-			m_enemy.push_back(new CEnemy);
-		}
-		VECTOR initPos = { 0.0f,1.0f,20.0f };
-		initPos.x = static_cast<float>(10 * i);
-		m_enemy[i]->Init(initPos);
-	}
+
 }
 
 //------------------------
 //	オブジェクトのロード
 //------------------------
-void CEnemyManager::Load()
+void CShotManager::Load()
 {
-	for (int i = 0; i < m_enemy.size(); i++)
+	for (int i = 0; i < m_shot.size(); i++)
 	{
-		m_enemy[i]->Load();
+		m_shot[i]->Load(MODEL_PATH);
 	}
 }
 
 //------------------------
 //	毎フレームする処理
 //------------------------
-void CEnemyManager::Step(VECTOR _pos)
+void CShotManager::Step()
 {
-	for (int i = 0; i < m_enemy.size(); i++)
+	for (int i = 0; i < m_shot.size(); i++)
 	{
-		m_enemy[i]->Step(_pos);
+		m_shot[i]->Step();
 	}
 }
 
 //------------------------
 //		 数値の更新
 //------------------------
-void CEnemyManager::Update()
+void CShotManager::Update()
 {
-	for (int i = 0; i < m_enemy.size(); i++)
+	for (int i = 0; i < m_shot.size(); i++)
 	{
-		m_enemy[i]->Update();
+		m_shot[i]->Update();
 	}
 }
 
 //------------------------
 //	オブジェクトの描写
 //------------------------
-void CEnemyManager::Draw()
+void CShotManager::Draw()
 {
-	for (int i = 0; i < m_enemy.size(); i++)
+	for (int i = 0; i < m_shot.size(); i++)
 	{
-		m_enemy[i]->Draw();
+		m_shot[i]->Draw();
 	}
 }
 
 
 //------------------------
-//		  終了処理
+//		 終了処理
 //------------------------
-void CEnemyManager::Exit()
+void CShotManager::Exit()
 {
-	for (int i = 0; i < ENEMY_NUM; i++)
+	for (int i = 0; i < m_shot.size(); i++)
 	{
-		m_enemy[i]->Exit();
+		m_shot[i]->Exit();
 
-		//delete m_enemy[i];
 	}
 	
 }
 
+//------------------------
+//	ショットの呼び出し
+//------------------------
+void CShotManager::Request(VECTOR _pos, VECTOR _rot, VECTOR _speed, int _atk, int _lostTime)
+{
+	//弾のベースクラスにデータを入力
+	CShotBase* shot;
+	shot->Request(_pos,_rot,_speed,_atk,_lostTime);
+	for (int i = 0; i < m_shot.size(); i++)
+	{
+		if (m_shot[i]->GetActive() == false)
+		{
+			m_shot[i] = new shot;
+		}
+	}
+}
 
