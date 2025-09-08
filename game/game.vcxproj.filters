@@ -70,6 +70,9 @@
     <Filter Include="ソース ファイル\game\collisionManager">
       <UniqueIdentifier>{87ef989f-fff0-49d3-827e-d45086156d04}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\game\shot">
+      <UniqueIdentifier>{865b34c6-7fde-43a3-b510-81d189e164ed}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\number.cpp">
@@ -158,6 +161,12 @@
     </ClCompile>
     <ClCompile Include="src\game\collisionManager\collisionManager.cpp">
       <Filter>ソース ファイル\game\collisionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\shot\playerShot.cpp">
+      <Filter>ソース ファイル\game\shot</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\shot\shotManager.cpp">
+      <Filter>ソース ファイル\game\shot</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -250,6 +259,12 @@
     </ClInclude>
     <ClInclude Include="src\game\collisionManager\collisionManager.h">
       <Filter>ソース ファイル\game\collisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\shot\playerShot.h">
+      <Filter>ソース ファイル\game\shot</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\shot\shotManager.h">
+      <Filter>ソース ファイル\game\shot</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

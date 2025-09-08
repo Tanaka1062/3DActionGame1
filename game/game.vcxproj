@@ -152,6 +152,8 @@
     <ClCompile Include="src\game\scene\sceneBase.cpp" />
     <ClCompile Include="src\game\scene\sceneManager.cpp" />
     <ClCompile Include="src\game\scene\titleScene.cpp" />
+    <ClCompile Include="src\game\shot\playerShot.cpp" />
+    <ClCompile Include="src\game\shot\shotManager.cpp" />
     <ClCompile Include="src\game\sky\sky.cpp" />
     <ClCompile Include="src\game\system\soundManager.cpp" />
     <ClCompile Include="src\lib\2DUi\2DUi.cpp" />
@@ -184,6 +186,8 @@
     <ClInclude Include="src\game\scene\sceneBase.h" />
     <ClInclude Include="src\game\scene\sceneManager.h" />
     <ClInclude Include="src\game\scene\titleScene.h" />
+    <ClInclude Include="src\game\shot\playerShot.h" />
+    <ClInclude Include="src\game\shot\shotManager.h" />
     <ClInclude Include="src\game\sky\sky.h" />
     <ClInclude Include="src\game\system\soundManager.h" />
     <ClInclude Include="src\lib\2DUi\2DUi.h" />

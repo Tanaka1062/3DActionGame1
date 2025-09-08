@@ -23,7 +23,7 @@ protected:
 		ATTACK,					//UŒ‚’†
 		ATTACK_OUT,				//UŒ‚Œã
 		STAGGER,				//‹¯‚İ
-
+		DIE,					//€–S
 	};
 	tagState m_state;			//ó‘Ô
 	tagCharacterType m_type;	//í—Ş
@@ -86,5 +86,7 @@ protected:
 	//‹¯‚İ
 	virtual void Stagger();
 
+	//€–S
+	virtual void Die();
 };
 

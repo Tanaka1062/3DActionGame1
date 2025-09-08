@@ -8,7 +8,7 @@
 
 //プレイヤー関連--------------------------------
 static const char MODEL_PATH[] =
-{ "data/model/enemy/enemyTest1.mv1" };				//ロードするファイル名
+{ "data/model/enemy/enemyTest.mv1" };				//ロードするファイル名
 static const VECTOR INIT_POS = { 0.0f,1.0f,0.0f };	//初期座標
 static const int MAX_HP = 100;						//体力
 static const int ATK = 1;							//攻撃力
@@ -31,6 +31,7 @@ enum tagAnim {
 	ANIMID_ATTACK_IN,		//攻撃前のアニメーション
 	ANIMID_ATTACK_OUT,		//攻撃後のアニメーション
 	ANIMID_DEFAULT,			//デフォルトのアニメーション
+	ANIMID_DIE,				//死亡時のアニメーション
 	ANIMID_HIT,				//被弾のアニメーション
 	ANIMID_ITEM_USE,		//アイテムを使用中のアニメーション
 	ANIMID_ITEM_USE_IN,		//アイテムを使用する前のアニメーション
@@ -285,14 +286,43 @@ void CEnemy::Stagger()
 }
 
 //-----------------------
+//		死亡
+//-----------------------
+void CEnemy::Die()
+{
+	//死亡のアニメーション
+	if (m_animData.m_id != ANIMID_DIE)
+	{
+		Request(ANIMID_DIE, 0.5f);
+	}
+
+	//死亡アニメーションが終わったら消える
+	if (GetAnimEnd() == true)
+	{
+		m_isActive = false;
+	}
+}
+
+//-----------------------
 //		移動処理
 //-----------------------
 void CEnemy::Move(VECTOR _pos)
 {
-	//視界範囲内にプレイヤーが入っていないか、攻撃中と怯み中なら追わない
-	if (m_FOV.GetHit() == false ||
-		m_attack.GetActive() == true ||
-		m_state == STAGGER)return;
+
+	//待機状態と移動状態以外は移動を出来ないようにする
+	switch (m_state)
+	{
+	case WAIT:
+	case WALK:
+		//視界にプレイヤーが入ってなかったら追わない
+		if (m_FOV.GetHit() == false)
+		{
+			return;
+		}
+		break;
+	default:
+		return;
+	}
 
 	//敵がプレイヤーの方向を向く
 	m_rot.y = static_cast<float>(atan2(static_cast<float>(m_pos.x -_pos.x), static_cast<float>(m_pos.z - _pos.z)));

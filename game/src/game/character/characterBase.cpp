@@ -63,6 +63,10 @@ void CCharacterBase::Step()
 	case STAGGER:
 		Stagger();
 		break;
+
+	case DIE:
+		Die();
+		break;
 	}
 
 }
@@ -83,10 +87,10 @@ void CCharacterBase::Update()
 	CActor::Update();
 
 	//Hp‚ª‚OˆÈ‰º‚É‚È‚é‚ÆActive‚ðfalse‚É
-	if (m_hp <= 0)
+	if (m_hp <= 0 && m_state != DIE)
 	{
-		m_isActive = false;
 		m_hp = 0;
+		m_state = DIE;
 	}
 
 }
@@ -161,3 +165,10 @@ void CCharacterBase::Stagger()
 
 }
 
+//------------------------------
+//			Ž€–S
+//------------------------------
+void CCharacterBase::Die()
+{
+
+}

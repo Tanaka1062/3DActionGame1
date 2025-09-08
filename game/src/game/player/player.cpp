@@ -13,7 +13,7 @@ static const char MODEL_PATH[] =
 { "data/model/player/playerTest.mv1" };				//ロードするファイル名
 static const VECTOR INIT_POS = { 0.0f,1.0f,0.0f };	//初期座標
 static const int MAX_HP = 100;						//体力
-static const int ATK = 4;							//攻撃力
+static const int ATK = 400;							//攻撃力
 static const float MOVE_SPEED = 0.5f;				//移動スピード
 static const float RADIUS = 2.5f;					//半径
 //----------------------------------------------
@@ -31,6 +31,7 @@ enum tagAnim {
 	ANIMID_ATTACK_IN,		//攻撃前のアニメーション
 	ANIMID_ATTACK_OUT,		//攻撃後のアニメーション
 	ANIMID_DEFAULT,			//デフォルトのアニメーション
+	ANIMID_DIE,				//死亡時のアニメーション
 	ANIMID_HIT,				//被弾のアニメーション
 	ANIMID_ITEM_USE,		//アイテムを使用中のアニメーション
 	ANIMID_ITEM_USE_IN,		//アイテムを使用する前のアニメーション
@@ -271,6 +272,24 @@ void CPlayer::Stagger()
 	if (GetAnimEnd() == true)
 	{
 		m_state = WAIT;
+	}
+}
+
+//-----------------------
+//		死亡
+//-----------------------
+void CPlayer::Die()
+{
+	//死亡のアニメーション
+	if (m_animData.m_id != ANIMID_DIE)
+	{
+		Request(ANIMID_DIE, 0.5f);
+	}
+
+	//死亡アニメーションが終わったら消える
+	if (GetAnimEnd() == true)
+	{
+		m_isActive = false;
 	}
 }
 

@@ -58,6 +58,9 @@ private:
 	//‹¯‚İó‘Ôˆ—
 	void Stagger();
 
+	//€–S
+	void Die();
+
 	//ˆÚ“®ˆ—
 	void Move(VECTOR _pos);
 

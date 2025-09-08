@@ -51,6 +51,9 @@ private:
 	//‹¯‚İó‘Ôˆ—
 	void Stagger();
 
+	//€–S
+	void Die();
+
 	//ˆÚ“®ˆ—
 	void Move(float _rotY);
 
