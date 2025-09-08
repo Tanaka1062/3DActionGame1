@@ -46,8 +46,14 @@ private:
 	//ƒWƒƒƒ“ƒvó‘Ôˆ—
 	void Jump();
 
+	//UŒ‚‘Oˆ—
+	void AttackIn();
+
 	//UŒ‚ó‘Ôˆ—
 	void Attack();
+
+	//UŒ‚Œãˆ—
+	void AttackOut();
 
 	//‹¯‚İó‘Ôˆ—
 	void Stagger();

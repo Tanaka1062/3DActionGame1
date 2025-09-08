@@ -91,6 +91,8 @@ void CActor::Request(int _id, float _speed,bool _isLoop)
 	m_animData.m_id = _id;
 	//アニメーションの再生速度を保存
 	m_animData.m_speed = _speed;
+	//アニメーションの終了フラグをfalse
+	m_animData.m_isEnd = false;
 	//アニメーションの再生タイプを保存
 	if (_isLoop == true)
 		m_animData.m_state = ANIM_LOOP;

@@ -20,7 +20,7 @@ static const float FOV_RADIUS = 50.0f;				//視界範囲(半径)
 //攻撃関連---------------------------
 static const float ATTACK_SIZE = 3.0f;				//攻撃範囲
 static const float ATTACK_LENGTH = 4.0f;			//攻撃の長さ
-static const int ATTACK_TIME = 20;					//攻撃の判定の時間(フレーム)
+static const int ATTACK_TIME = 10;					//攻撃の判定の時間(フレーム)
 static const int ATTACK_COOL_TIME = 180;			//攻撃のクールタイム(フレーム)
 static const float ATTACKABLE_RAD = 5.0f;			//攻撃可能範囲の半径
 //-----------------------------------
@@ -155,11 +155,10 @@ void CEnemy::Wait()
 	//プレイヤーが攻撃可能距離にいた場合攻撃する
 	if (m_attack.GetIsAttackable() == true)
 	{
-		//攻撃の呼び出しに成功したら攻撃状態に移行
-		if (m_attack.Request(GetCenter(), m_rot,
-			ATTACK_TIME, ATTACK_COOL_TIME) == true)
+		//攻撃してない時に攻撃前に移行する
+		if (m_attack.GetIsCoolDown() == true)
 		{
-			m_state = ATTACK;
+			m_state = ATTACK_IN;
 		}
 	}
 
@@ -186,11 +185,10 @@ void CEnemy::Walk()
 	//プレイヤーが攻撃可能距離にいた場合攻撃する
 	if (m_attack.GetIsAttackable() == true)
 	{
-		//攻撃の呼び出しに成功したら攻撃状態に移行
-		if (m_attack.Request(GetCenter(), m_rot,
-			ATTACK_TIME, ATTACK_COOL_TIME) == true)
+		//攻撃してない時に攻撃前に移行する
+		if (m_attack.GetIsCoolDown() == true)
 		{
-			m_state = ATTACK;
+			m_state = ATTACK_IN;
 		}
 	}
 
@@ -205,18 +203,62 @@ void CEnemy::Jump()
 }
 
 //-----------------------
-//		攻撃
+//		攻撃前
 //-----------------------
-void CEnemy::Attack()
+void CEnemy::AttackIn()
 {
-	//攻撃のアニメーション
+
+	//攻撃前のアニメーション
 	if (m_animData.m_id != ANIMID_ATTACK_IN)
 	{
 		Request(ANIMID_ATTACK_IN, 1.0f);
 	}
 
-	//攻撃が終わったら戻す
+	//アニメーションが終わったら攻撃中に移行
+	if (GetAnimEnd() == true)
+	{
+		m_state = ATTACK;
+	}
+
+}
+
+//-----------------------
+//		攻撃
+//-----------------------
+void CEnemy::Attack()
+{
+	//攻撃中のアニメーション
+	if (m_animData.m_id != ANIMID_ATTACK)
+	{
+		Request(ANIMID_ATTACK, 1.0f, true);
+
+		//攻撃の呼び出し
+		m_attack.Request(GetCenter(), m_rot,
+			ATTACK_TIME, ATTACK_COOL_TIME);
+	}
+
+	//攻撃が終わったら攻撃後に移動
 	if (m_attack.GetActive() == false)
+	{
+		m_state = ATTACK_OUT;
+	}
+
+}
+
+//-----------------------
+//		攻撃後
+//-----------------------
+void CEnemy::AttackOut()
+{
+
+	//攻撃後のアニメーション
+	if (m_animData.m_id != ANIMID_ATTACK_OUT)
+	{
+		Request(ANIMID_ATTACK_OUT, 1.0f);
+	}
+
+	//アニメーションが終わったら待機状態に戻す
+	if (GetAnimEnd() == true)
 	{
 		m_state = WAIT;
 	}

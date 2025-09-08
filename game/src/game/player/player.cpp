@@ -21,7 +21,7 @@ static const float RADIUS = 2.5f;					//半径
 //攻撃関連---------------------------
 static const float ATTACK_SIZE = 3.0f;				//攻撃範囲
 static const float ATTACK_LENGTH = 5.0f;			//攻撃の長さ
-static const int ATTACK_TIME = 20;					//攻撃の判定の時間(フレーム)
+static const int ATTACK_TIME = 10;					//攻撃の判定の時間(フレーム)
 static const int ATTACK_COOL_TIME = 30;				//攻撃のクールタイム(フレーム)
 //-----------------------------------
 
@@ -107,33 +107,6 @@ void CPlayer::Draw()
 #endif // DEBUG
 	//体力を表示
 	DrawFormatString(32, 32, GetColor(255, 0, 0), "hp:%d", m_hp);
-
-	//switch (m_state)
-	//{
-	//case CCharacterBase::WAIT:	
-	//	DrawFormatString(32, 64, GetColor(0, 255, 0), "待機");
-	//	break;
-	//case CCharacterBase::WALK:
-	//	DrawFormatString(32, 64, GetColor(0, 255, 0), "歩き");
-	//	break;
-	//case CCharacterBase::JUMP:
-	//	DrawFormatString(32, 64, GetColor(0, 255, 0), "ジャンプ");
-	//	break;
-	//case CCharacterBase::ATTACK_IN:
-	//	DrawFormatString(32, 64, GetColor(0, 255, 0), "攻撃前");
-	//	break;
-	//case CCharacterBase::ATTACK:
-	//	DrawFormatString(32, 64, GetColor(0, 255, 0), "攻撃中");
-	//	break;
-	//case CCharacterBase::ATTACK_OUT:
-	//	DrawFormatString(32, 64, GetColor(0, 255, 0), "攻撃後");
-	//	break;
-	//case CCharacterBase::STAGGER:
-	//	DrawFormatString(32, 64, GetColor(0, 255, 0), "怯み");
-	//	break;
-	//}
-
-	//DrawFormatString(64, 64, GetColor(255, 0, 0), "アニメフレーム = %f",m_animData.m_frame);
 
 }
 
@@ -232,7 +205,7 @@ void CPlayer::AttackIn()
 	}
 
 	//アニメーションが終わったら攻撃中に移行
-	if (m_animData.m_isEnd == true)
+	if (GetAnimEnd() == true)
 	{
 		m_state = ATTACK;
 	}
@@ -276,7 +249,7 @@ void CPlayer::AttackOut()
 	}
 
 	//アニメーションが終わったら待機状態に戻す
-	if (m_animData.m_isEnd == true)
+	if (GetAnimEnd() == true)
 	{
 		m_state = WAIT;
 	}
