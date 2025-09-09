@@ -1,5 +1,6 @@
 #pragma once
 #include "../character/characterBase.h"
+#include "../shot/shotManager.h"
 
 static const int PLAYER_NUM = 1;	//プレイヤーの数
 
@@ -21,7 +22,7 @@ public:
 	void Load();
 
 	//毎フレームする処理
-	void Step(float _rotY);
+	void Step(float _rotY,CShotManager* _shot);
 
 	//描写処理
 	void Draw();

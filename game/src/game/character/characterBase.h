@@ -22,6 +22,9 @@ protected:
 		ATTACK_IN,				//攻撃前
 		ATTACK,					//攻撃中
 		ATTACK_OUT,				//攻撃後
+		ITEM_IN,				//アイテム使用前
+		ITEM,					//アイテム使用中
+		ITEM_OUT,				//アイテム使用後
 		STAGGER,				//怯み
 		DIE,					//死亡
 	};
@@ -82,6 +85,15 @@ protected:
 
 	//攻撃後
 	virtual void AttackOut();
+
+	//アイテム前
+	virtual void ItemIn();
+
+	//アイテム中
+	virtual void Item();
+
+	//アイテム後
+	virtual void ItemOut();
 
 	//怯み
 	virtual void Stagger();

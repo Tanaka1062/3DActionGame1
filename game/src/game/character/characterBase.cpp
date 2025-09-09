@@ -59,6 +59,21 @@ void CCharacterBase::Step()
 		AttackOut();
 		break;
 
+		//アイテム前
+	case ITEM_IN:
+		ItemIn();
+		break;
+
+		//アイテム中
+	case ITEM:
+		Item();
+		break;
+
+		//アイテム後
+	case ITEM_OUT:
+		ItemOut();
+		break;
+
 		//怯み
 	case STAGGER:
 		Stagger();
@@ -153,6 +168,30 @@ void CCharacterBase::Attack()
 //			攻撃後
 //------------------------------
 void CCharacterBase::AttackOut()
+{
+
+}
+
+//------------------------------
+//		アイテム前
+//------------------------------
+void CCharacterBase::ItemIn()
+{
+
+}
+
+//------------------------------
+//		アイテム中
+//------------------------------
+void CCharacterBase::Item()
+{
+
+}
+
+//------------------------------
+//		アイテム後
+//------------------------------
+void CCharacterBase::ItemOut()
 {
 
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include <vector>
+#include <list>
 #include "shotBase.h"
 
 using namespace std;
@@ -10,17 +10,13 @@ using namespace std;
 class CShotManager
 {
 private:
-	vector<CShotBase*> m_shot;			//弾のクラス
+	list<CShotBase*> m_shot;			//弾のクラス
 
 public:
 	//コンストラクタ・デストラクタ
 	CShotManager();
 	~CShotManager();
 
-	//初期化
-	void Init();
-	//オブジェクトのロード
-	void Load();
 	//毎フレームする処理
 	void Step();
 	//数値の更新

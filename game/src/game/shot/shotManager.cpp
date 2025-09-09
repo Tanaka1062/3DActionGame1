@@ -8,7 +8,7 @@ static const char MODEL_PATH[] =
 //------------------------
 CShotManager::CShotManager()
 {
-	Init();
+
 }
 
 //------------------------
@@ -16,41 +16,29 @@ CShotManager::CShotManager()
 //------------------------
 CShotManager::~CShotManager()
 {
-	int shotNum = m_shot.size();
-	for (int i = 0; i < shotNum; i++)
-	{
-		delete m_shot[i];
-	}
-
+	Exit();
 }
 
-//------------------------
-//		  初期化
-//------------------------
-void CShotManager::Init()
-{
-
-}
-
-//------------------------
-//	オブジェクトのロード
-//------------------------
-void CShotManager::Load()
-{
-	for (int i = 0; i < m_shot.size(); i++)
-	{
-		m_shot[i]->Load(MODEL_PATH);
-	}
-}
 
 //------------------------
 //	毎フレームする処理
 //------------------------
 void CShotManager::Step()
 {
-	for (int i = 0; i < m_shot.size(); i++)
+	for (auto ite = m_shot.begin(); ite != m_shot.end();)
 	{
-		m_shot[i]->Step();
+		//毎フレームする処理
+		(*ite)->Step();
+
+		//生存してない弾を消す
+		if ((*ite)->GetActive() == false)
+		{
+			ite = m_shot.erase(ite);
+		}
+		else
+		{
+			++ite;
+		}
 	}
 }
 
@@ -59,9 +47,10 @@ void CShotManager::Step()
 //------------------------
 void CShotManager::Update()
 {
-	for (int i = 0; i < m_shot.size(); i++)
+	for (auto ite = m_shot.begin(); ite != m_shot.end();++ite)
 	{
-		m_shot[i]->Update();
+		//更新処理
+		(*ite)->Update();
 	}
 }
 
@@ -70,9 +59,10 @@ void CShotManager::Update()
 //------------------------
 void CShotManager::Draw()
 {
-	for (int i = 0; i < m_shot.size(); i++)
+	for (auto ite = m_shot.begin(); ite != m_shot.end();++ite)
 	{
-		m_shot[i]->Draw();
+		//描写処理
+		(*ite)->Draw();
 	}
 }
 
@@ -82,12 +72,14 @@ void CShotManager::Draw()
 //------------------------
 void CShotManager::Exit()
 {
-	for (int i = 0; i < m_shot.size(); i++)
+	for (auto ite = m_shot.begin(); ite != m_shot.end();)
 	{
-		m_shot[i]->Exit();
+		//終了処理
+		(*ite)->Exit();
 
+		//終了処理が終わった弾を消す
+		ite = m_shot.erase(ite);
 	}
-	
 }
 
 //------------------------
@@ -97,13 +89,11 @@ void CShotManager::Request(VECTOR _pos, VECTOR _rot, VECTOR _speed, int _atk, in
 {
 	//弾のベースクラスにデータを入力
 	CShotBase* shot;
+	shot->Init();
+	shot->Load(MODEL_PATH);
 	shot->Request(_pos,_rot,_speed,_atk,_lostTime);
-	for (int i = 0; i < m_shot.size(); i++)
-	{
-		if (m_shot[i]->GetActive() == false)
-		{
-			m_shot[i] = new shot;
-		}
-	}
+	
+	//弾を追加
+	m_shot.push_back(shot);
 }
 

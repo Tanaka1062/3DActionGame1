@@ -1,2 +1,13 @@
-﻿  player.cpp
-  game.vcxproj -> D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\x64\Debug\game.exe
+﻿  characterBase.cpp
+  collisionManager.cpp
+  enemy.cpp
+  enemyManager.cpp
+  main.cpp
+  player.cpp
+  playScene.cpp
+  sceneManager.cpp
+  shotBase.cpp
+  shotManager.cpp
+  コードを生成中...
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\shot\shotManager.cpp(92,1): error C4700: 初期化されていないローカル変数 'shot' が使用されます
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\shot\shotBase.cpp(38,1): warning C4717: 'CShotBase::Init': すべてのコントロールのパス、関数を回帰するとランタイム スタック オーバーフローが発生します。

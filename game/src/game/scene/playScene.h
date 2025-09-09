@@ -7,6 +7,7 @@
 #include"../character/characterBase.h"
 #include "../player/player.h"
 #include "../enemy/enemyManager.h"
+#include "../shot/shotManager.h"
 
 using namespace std;
 
@@ -20,6 +21,7 @@ private:
 	CCameraManager m_camera;			//カメラ
 	CPlayer m_player;					//プレイヤー
 	CEnemyManager m_enemy;				//敵
+	CShotManager m_shot;				//弾
 
 public:
 

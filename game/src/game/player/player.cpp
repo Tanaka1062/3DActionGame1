@@ -83,7 +83,7 @@ void CPlayer::Load()
 //-----------------------
 //毎フレームする処理
 //-----------------------
-void CPlayer::Step(float _rotY)
+void CPlayer::Step(float _rotY, CShotManager* _shot)
 {
 	//攻撃の毎フレームする処理
 	m_attack.Step();
@@ -92,7 +92,6 @@ void CPlayer::Step(float _rotY)
 	Move(_rotY);
 
 	CCharacterBase::Step();
-
 }
 
 //-----------------------

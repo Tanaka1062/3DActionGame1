@@ -7,8 +7,6 @@
 //定義関連---------------------------
 
 //プレイヤー関連--------------------------------
-static const char MODEL_PATH[] =
-{ "data/model/shot/shotTest.mv1" };				//ロードするファイル名
 static const float RADIUS = 2.5f;				//半径
 static const float MOVE_SPEED = 0.5f;			//スピード
 //----------------------------------------------
@@ -74,7 +72,7 @@ void CShotBase::Step()
 //-----------------------
 void CShotBase::Draw()
 {
-	CShotBase::Draw();
+	CActor::Draw();
 
 
 #ifdef DEBUG
@@ -93,7 +91,7 @@ void CShotBase::Draw()
 //-----------------------
 void CShotBase::Update()
 {
-	CShotBase::Update();
+	CActor::Update();
 }
 
 //-----------------------
