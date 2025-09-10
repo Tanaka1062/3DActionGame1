@@ -43,7 +43,7 @@ void CPlayScene::Init()
 {
 	m_ground.Init();
 	m_sky.Init();
-	m_player.Init();
+	m_player.Init(&m_shot);
 	m_enemy.Init();
 	m_camera.Init();
 
@@ -69,7 +69,7 @@ void CPlayScene::Step()
 	//ŠeíŒvZˆ—‚ğÀs
 	m_sky.Step();
 
-	m_player.Step(m_camera.GetRot().y,&m_shot);
+	m_player.Step(m_camera.GetRot().y);
 
 	m_enemy.Step(m_player.GetCenter());
 
@@ -95,8 +95,7 @@ void CPlayScene::Step()
 	m_camera.Update(m_player.GetCenter());
 
 	if (CKeyInput::IsTrg(KEY_SELECT) == true ||
-		m_player.GetActive() == false ||
-		m_enemy.GetIsAllDie() == true)
+		m_player.GetActive() == false )
 	{
 		m_state = END;
 	}

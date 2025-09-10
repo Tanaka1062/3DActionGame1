@@ -39,6 +39,7 @@ void CShotManager::Step()
 		{
 			++ite;
 		}
+
 	}
 }
 
@@ -85,15 +86,15 @@ void CShotManager::Exit()
 //------------------------
 //	ショットの呼び出し
 //------------------------
-void CShotManager::Request(VECTOR _pos, VECTOR _rot, VECTOR _speed, int _atk, int _lostTime)
+void CShotManager::Request(VECTOR _pos, VECTOR _rot, float _speed, int _atk, int _lostTime)
 {
 	//弾のベースクラスにデータを入力
-	CShotBase* shot;
-	shot->Init();
-	shot->Load(MODEL_PATH);
-	shot->Request(_pos,_rot,_speed,_atk,_lostTime);
+	CShotBase shot;
+	shot.Init();
+	shot.Load(MODEL_PATH);
+	shot.Request(_pos,_rot,_speed,_atk,_lostTime);
 	
 	//弾を追加
-	m_shot.push_back(shot);
+	m_shot.push_back(&shot);
 }
 

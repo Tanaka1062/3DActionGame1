@@ -32,7 +32,7 @@ public:
 	// _speed		:’e‚Ì‘¬“x
 	// _atk			:UŒ‚—Í
 	// _lostTime	:Á‚¦‚é‚Ü‚Å‚ÌŠÔ
-	void Request(VECTOR _pos, VECTOR _rot, VECTOR _speed, int _atk, int _lostTime);
+	void Request(VECTOR _pos, VECTOR _rot, float _speed, int _atk, int _lostTime);
 
 };
 

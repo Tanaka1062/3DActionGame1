@@ -25,6 +25,12 @@ static const int ATTACK_TIME = 10;					//攻撃の判定の時間(フレーム)
 static const int ATTACK_COOL_TIME = 30;				//攻撃のクールタイム(フレーム)
 //-----------------------------------
 
+//アイテム関連--------------------------------
+static const int SHOT_ATK = 400;					//弾の攻撃力
+static const float SHOT_MOVE_SPEED = 1.0f;			//弾の移動スピード
+static const int SHOT_LOST_TIME = 240;				//弾の消えるまでのスピード
+//----------------------------------------------
+
 //アニメーション一覧---------------------------
 enum tagAnim {
 	ANIMID_ATTACK,			//攻撃中アニメーション
@@ -46,8 +52,7 @@ enum tagAnim {
 //-----------------------
 CPlayer::CPlayer()
 {
-	
-	Init();
+	CCharacterBase::Init();
 }
 
 //-----------------------
@@ -61,9 +66,9 @@ CPlayer::~CPlayer()
 //-----------------------
 //		初期化
 //-----------------------
-void CPlayer::Init()
+void CPlayer::Init(CShotManager* _shot)
 {
-	CCharacterBase::Init();
+	CCharacterBase::Init(_shot);
 	m_attack.Init(ATTACK_SIZE,ATTACK_LENGTH);
 
 	m_pos = INIT_POS;
@@ -83,13 +88,16 @@ void CPlayer::Load()
 //-----------------------
 //毎フレームする処理
 //-----------------------
-void CPlayer::Step(float _rotY, CShotManager* _shot)
+void CPlayer::Step(float _rotY)
 {
 	//攻撃の毎フレームする処理
 	m_attack.Step();
 
 	//移動処理
 	Move(_rotY);
+
+	//アイテム使用処理
+	Item();
 
 	CCharacterBase::Step();
 }
@@ -257,6 +265,67 @@ void CPlayer::AttackOut()
 }
 
 //-----------------------
+//	  アイテム使用前
+//-----------------------
+void CPlayer::ItemUseIn()
+{
+	//アイテム使用前のアニメーション
+	if (m_animData.m_id != ANIMID_ITEM_USE_IN)
+	{
+		Request(ANIMID_ITEM_USE_IN, 1.0f);
+	}
+
+	//アニメーションが終わったら待機状態に戻す
+	if (GetAnimEnd() == true)
+	{
+		m_state = ITEM_USE;
+	}
+
+}
+
+//-----------------------
+//	 アイテム使用中
+//-----------------------
+void CPlayer::ItemUse()
+{
+	//アイテム使用中のアニメーション
+	if (m_animData.m_id != ANIMID_ITEM_USE)
+	{
+		Request(ANIMID_ITEM_USE, 1.0f);
+
+		//弾を呼び出す
+		m_shot->Request(GetCenter(), m_rot, SHOT_MOVE_SPEED,
+			SHOT_ATK, SHOT_LOST_TIME);
+	}
+
+	//アニメーションが終わったら待機状態に戻す
+	if (GetAnimEnd() == true)
+	{
+		m_state = ITEM_USE_OUT;
+	}
+
+}
+
+//-----------------------
+//	 アイテム使用後
+//-----------------------
+void CPlayer::ItemUseOut()
+{
+	//アイテム使用後のアニメーション
+	if (m_animData.m_id != ANIMID_ITEM_USE_OUT)
+	{
+		Request(ANIMID_ITEM_USE_OUT, 1.0f);
+	}
+
+	//アニメーションが終わったら待機状態に戻す
+	if (GetAnimEnd() == true)
+	{
+		m_state = WAIT;
+	}
+
+}
+
+//-----------------------
 //		怯み
 //-----------------------
 void CPlayer::Stagger()
@@ -373,3 +442,26 @@ void CPlayer::Move(float _rotY)
 
 }
 
+//-----------------------
+//	   アイテム処理
+//-----------------------
+void CPlayer::Item()
+{
+	//待機状態と歩いてる状態以外は処理をしない
+	switch (m_state)
+	{
+	case WAIT:
+	case WALK:
+		break;
+	default:
+		return;
+	}
+
+	//ボタンを押されたらアイテム使用前状態に移行
+	if (CheckHitKey(KEY_INPUT_K) != 0 ||
+		CControllerInput::IsTrg(BUTTON_A) == true)
+	{
+		m_state = ITEM_USE_IN;
+	}
+
+}

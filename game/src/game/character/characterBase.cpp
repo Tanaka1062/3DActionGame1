@@ -21,6 +21,13 @@ void CCharacterBase::Init()
 	m_state = WAIT;
 }
 
+//初期化(弾を出すキャラ用)
+void CCharacterBase::Init(CShotManager* _shot)
+{
+	Init();
+	m_shot = _shot;
+}
+
 //------------------------------
 //		毎フレームする処理
 //------------------------------
@@ -60,18 +67,18 @@ void CCharacterBase::Step()
 		break;
 
 		//アイテム前
-	case ITEM_IN:
-		ItemIn();
+	case ITEM_USE_IN:
+		ItemUseIn();
 		break;
 
 		//アイテム中
-	case ITEM:
-		Item();
+	case ITEM_USE:
+		ItemUse();
 		break;
 
 		//アイテム後
-	case ITEM_OUT:
-		ItemOut();
+	case ITEM_USE_OUT:
+		ItemUseOut();
 		break;
 
 		//怯み
@@ -173,25 +180,25 @@ void CCharacterBase::AttackOut()
 }
 
 //------------------------------
-//		アイテム前
+//		アイテム使用前
 //------------------------------
-void CCharacterBase::ItemIn()
+void CCharacterBase::ItemUseIn()
 {
 
 }
 
 //------------------------------
-//		アイテム中
+//		アイテム使用中
 //------------------------------
-void CCharacterBase::Item()
+void CCharacterBase::ItemUse()
 {
 
 }
 
 //------------------------------
-//		アイテム後
+//		アイテム使用後
 //------------------------------
-void CCharacterBase::ItemOut()
+void CCharacterBase::ItemUseOut()
 {
 
 }

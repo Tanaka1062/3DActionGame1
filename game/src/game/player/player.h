@@ -16,13 +16,13 @@ public:
 	~CPlayer();
 
 	//初期化
-	void Init();
+	void Init(CShotManager* _shot);
 
 	//モデルロード
 	void Load();
 
 	//毎フレームする処理
-	void Step(float _rotY,CShotManager* _shot);
+	void Step(float _rotY);
 
 	//描写処理
 	void Draw();
@@ -49,6 +49,15 @@ private:
 	//攻撃後処理
 	void AttackOut();
 
+	//アイテム使用前
+	void ItemUseIn();
+
+	//アイテム使用中
+	void ItemUse();
+
+	//アイテム使用後
+	void ItemUseOut();
+
 	//怯み状態処理
 	void Stagger();
 
@@ -58,5 +67,7 @@ private:
 	//移動処理
 	void Move(float _rotY);
 
+	//アイテム処理
+	void Item();
 };
 

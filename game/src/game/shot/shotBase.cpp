@@ -32,8 +32,11 @@ CShotBase::~CShotBase()
 //-----------------------
 void CShotBase::Init()
 {
-	CShotBase::Init();
+	CActor::Init();
 
+	m_lostTime = 0;
+	m_timeCount = 0;
+	m_atk = 0;
 	m_rad = RADIUS;
 }
 
@@ -97,12 +100,12 @@ void CShotBase::Update()
 //-----------------------
 //		åƒÇ—èoÇµ
 //-----------------------
-void CShotBase::Request(VECTOR _pos, VECTOR _rot, VECTOR _speed, int _atk, int _lostTime)
+void CShotBase::Request(VECTOR _pos, VECTOR _rot, float _speed, int _atk, int _lostTime)
 {
 	//íeÇÃê›íË
 	m_pos = _pos;
 	m_rot = _rot;
-	m_speed = _speed;
+	m_speed.z = _speed;
 	m_atk = _atk;
 	m_lostTime = _lostTime;
 

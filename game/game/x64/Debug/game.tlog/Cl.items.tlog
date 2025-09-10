@@ -15,6 +15,8 @@ D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\scene\resultScene.cp
 D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\scene\sceneBase.cpp;D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\game\x64\Debug\sceneBase.obj
 D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\scene\sceneManager.cpp;D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\game\x64\Debug\sceneManager.obj
 D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\scene\titleScene.cpp;D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\game\x64\Debug\titleScene.obj
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\shot\shotBase.cpp;D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\game\x64\Debug\shotBase.obj
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\shot\shotManager.cpp;D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\game\x64\Debug\shotManager.obj
 D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\sky\sky.cpp;D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\game\x64\Debug\sky.obj
 D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\system\soundManager.cpp;D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\game\x64\Debug\soundManager.obj
 D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\lib\2DUi\2DUi.cpp;D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\game\x64\Debug\2DUi.obj

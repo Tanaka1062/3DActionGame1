@@ -1,6 +1,7 @@
 #pragma once
 #include "../../lib/model/actor.h"
 #include "../attack/attack.h"
+#include "../shot/shotManager.h"
 
 enum tagCharacterType	//キャラクターの種類
 {
@@ -22,15 +23,16 @@ protected:
 		ATTACK_IN,				//攻撃前
 		ATTACK,					//攻撃中
 		ATTACK_OUT,				//攻撃後
-		ITEM_IN,				//アイテム使用前
-		ITEM,					//アイテム使用中
-		ITEM_OUT,				//アイテム使用後
+		ITEM_USE_IN,			//アイテム使用前
+		ITEM_USE,				//アイテム使用中
+		ITEM_USE_OUT,			//アイテム使用後
 		STAGGER,				//怯み
 		DIE,					//死亡
 	};
 	tagState m_state;			//状態
 	tagCharacterType m_type;	//種類
 	CAttack m_attack;			//攻撃クラス
+	CShotManager* m_shot;		//弾のアドレス
 
 public:
 	//コンストラクタ
@@ -38,6 +40,9 @@ public:
 
 	//初期化
 	virtual void Init();
+
+	//初期化(弾を出すキャラ用)
+	virtual void Init(CShotManager* _shot);
 
 	//毎フレームする処理
 	virtual void Step();
@@ -86,14 +91,14 @@ protected:
 	//攻撃後
 	virtual void AttackOut();
 
-	//アイテム前
-	virtual void ItemIn();
+	//アイテム使用前
+	virtual void ItemUseIn();
 
-	//アイテム中
-	virtual void Item();
+	//アイテム使用中
+	virtual void ItemUse();
 
-	//アイテム後
-	virtual void ItemOut();
+	//アイテム使用後
+	virtual void ItemUseOut();
 
 	//怯み
 	virtual void Stagger();
