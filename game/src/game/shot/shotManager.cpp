@@ -8,7 +8,7 @@ static const char MODEL_PATH[] =
 //------------------------
 CShotManager::CShotManager()
 {
-
+	Init();
 }
 
 //------------------------
@@ -19,6 +19,24 @@ CShotManager::~CShotManager()
 	Exit();
 }
 
+//------------------------
+//		 初期化
+//------------------------
+void CShotManager::Init()
+{
+	m_hndl = -1;
+}
+
+//------------------------
+//	   モデルロード
+//------------------------
+void CShotManager::Load()
+{
+	if (m_hndl == -1)
+	{
+		m_hndl = MV1LoadModel(MODEL_PATH);
+	}
+}
 
 //------------------------
 //	毎フレームする処理
@@ -78,6 +96,8 @@ void CShotManager::Exit()
 		//終了処理
 		(*ite)->Exit();
 
+		delete (*ite);
+
 		//終了処理が終わった弾を消す
 		ite = m_shot.erase(ite);
 	}
@@ -89,12 +109,33 @@ void CShotManager::Exit()
 void CShotManager::Request(VECTOR _pos, VECTOR _rot, float _speed, int _atk, int _lostTime)
 {
 	//弾のベースクラスにデータを入力
-	CShotBase shot;
-	shot.Init();
-	shot.Load(MODEL_PATH);
-	shot.Request(_pos,_rot,_speed,_atk,_lostTime);
+	CShotBase* shot = new CShotBase;
+	shot->Init();
+	shot->Load(m_hndl);
+	shot->Request(_pos,_rot,_speed,_atk,_lostTime);
 	
 	//弾を追加
-	m_shot.push_back(&shot);
+	m_shot.push_back(shot);
 }
 
+//------------------------
+//	 弾のアドレスを取得
+//------------------------
+bool CShotManager::GetShot(int _num, CShotBase* _shot)
+{
+	//引数より弾の数が少なければfalseを返す
+	if (_num > m_shot.size())return false;
+	//弾の数をカウントする変数
+	int count = 0;
+	for (auto ite = m_shot.begin(); ite != m_shot.end(); ++ite)
+	{
+		//引数の数字と同じならアドレスを返す
+		if (count == _num)
+		{
+			_shot = (*ite);
+			return true;
+		}
+
+	}
+	return false;
+}

@@ -11,12 +11,16 @@ class CShotManager
 {
 private:
 	list<CShotBase*> m_shot;			//弾のクラス
-
+	int m_hndl;							//弾のモデルハンドル
 public:
 	//コンストラクタ・デストラクタ
 	CShotManager();
 	~CShotManager();
 
+	//初期化
+	void Init();
+	//モデルロード
+	void Load();
 	//毎フレームする処理
 	void Step();
 	//数値の更新
@@ -33,6 +37,12 @@ public:
 	// _atk			:攻撃力
 	// _lostTime	:消えるまでの時間
 	void Request(VECTOR _pos, VECTOR _rot, float _speed, int _atk, int _lostTime);
+
+	//弾の数を取得
+	int GetNum() { return m_shot.size();}
+
+	//弾のアドレスを取得
+	bool GetShot(int _num,CShotBase* _shot);
 
 };
 

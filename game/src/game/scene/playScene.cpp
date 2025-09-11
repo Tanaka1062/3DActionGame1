@@ -31,6 +31,7 @@ void CPlayScene::Draw()
 	m_sky.Draw();
 	m_player.Draw();
 	m_enemy.Draw();
+	m_shot.Draw();
 
 	m_camera.Draw();
 
@@ -45,6 +46,7 @@ void CPlayScene::Init()
 	m_sky.Init();
 	m_player.Init(&m_shot);
 	m_enemy.Init();
+	m_shot.Init();
 	m_camera.Init();
 
 }
@@ -58,6 +60,7 @@ void CPlayScene::Load()
 	m_sky.Load();
 	m_player.Load();
 	m_enemy.Load();
+	m_shot.Load();
 
 }
 
@@ -84,6 +87,7 @@ void CPlayScene::Step()
 	CCollisionManager::CheckHitEnemyAttackToPlayer(m_enemy, m_player);
 	CCollisionManager::CheckHitEnemyToPlayer(m_enemy, m_player);
 	CCollisionManager::CheckHitEnemyToEnemy(m_enemy);
+	CCollisionManager::CheckHitShotToEnemy(m_shot, m_enemy);
 	//--------------------------------------------
 
 	//‚·‚×‚Ä‚ÌŒ‹‰Ê‚ð”½‰f‚³‚¹‚é

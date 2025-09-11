@@ -1,5 +1,6 @@
 #pragma once
 #include "../enemy/enemyManager.h"
+#include"../shot/shotManager.h"
 #include "../player/player.h"
 
 class CCollisionManager
@@ -21,5 +22,8 @@ public:
 	//“G‚Æ“G‚Ì“–‚½‚è”»’è
 	static void CheckHitEnemyToEnemy(CEnemyManager& _enemyManager);
 
+	//’e‚Æ“G‚Ì“–‚½‚è”»’è
+	static void CheckHitShotToEnemy(CShotManager& _shotManager,
+		CEnemyManager& _enemyManager);
 };
 

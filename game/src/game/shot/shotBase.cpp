@@ -43,9 +43,9 @@ void CShotBase::Init()
 //-----------------------
 //	モデルロード
 //-----------------------
-void CShotBase::Load(const char* _filePath)
+void CShotBase::Load(int _modelHndl)
 {
-	CActor::LoadModel(_filePath);
+	CActor::DuplicateModel(_modelHndl);
 }
 
 //-----------------------
@@ -53,6 +53,7 @@ void CShotBase::Load(const char* _filePath)
 //-----------------------
 void CShotBase::Step()
 {
+
 	//Activeがfalseなら処理をしない
 	if (m_isActive == false)return;
 
@@ -66,7 +67,6 @@ void CShotBase::Step()
 		m_isActive = false;
 	}
 
-	CShotBase::Step();
 
 }
 
@@ -83,7 +83,7 @@ void CShotBase::Draw()
 	//Activeがfalseなら描写しない
 	if (m_isActive == false)return;
 
-	DrawSphere3D(GetCenter(), m_rad, 16, GetColor(255, 0, 0), GetColor(255, 0, 0), FALSE);
+	DrawSphere3D(m_pos, m_rad, 16, GetColor(255, 0, 0), GetColor(255, 0, 0), FALSE);
 
 #endif // DEBUG
 	
@@ -121,6 +121,7 @@ void CShotBase::Move()
 
 	//プレイヤーが目の前にいる時に進む速度
 	VECTOR defaultDir = { 0.0f,0.0f,-MOVE_SPEED };
+
 	//上記を行列に変換
 	MATRIX dir = CMyMath::GetTranslateMatrix(defaultDir);
 	//Y軸回転行列

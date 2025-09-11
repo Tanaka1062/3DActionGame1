@@ -17,7 +17,7 @@ public:
 	void Init();
 
 	//モデルロード
-	void Load(const char* _filePath);
+	void Load(int _modelHndl);
 
 	//毎フレームする処理
 	void Step();
@@ -35,6 +35,9 @@ public:
 	// _atk			:攻撃力
 	// _lostTime	:消えるまでの時間
 	void Request(VECTOR _pos,VECTOR _rot,float _speed,int _atk,int _lostTime);
+
+	//攻撃力を取得
+	int GetAtk() { return m_atk; }
 
 private:
 
