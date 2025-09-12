@@ -8,6 +8,7 @@
 #include "../player/player.h"
 #include "../enemy/enemyManager.h"
 #include "../shot/shotManager.h"
+#include "../goal/goal.h"
 
 using namespace std;
 
@@ -22,6 +23,7 @@ private:
 	CPlayer m_player;					//ƒvƒŒƒCƒ„[
 	CEnemyManager m_enemy;				//“G
 	CShotManager m_shot;				//’e
+	CGoal m_goal;						//ƒS[ƒ‹
 
 public:
 

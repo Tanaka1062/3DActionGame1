@@ -121,10 +121,10 @@ void CShotManager::Request(VECTOR _pos, VECTOR _rot, float _speed, int _atk, int
 //------------------------
 //	 弾のアドレスを取得
 //------------------------
-bool CShotManager::GetShot(int _num, CShotBase* _shot)
+CShotBase* CShotManager::GetShot(int _num)
 {
 	//引数より弾の数が少なければfalseを返す
-	if (_num > m_shot.size())return false;
+	if (_num > m_shot.size())return NULL;
 	//弾の数をカウントする変数
 	int count = 0;
 	for (auto ite = m_shot.begin(); ite != m_shot.end(); ++ite)
@@ -132,10 +132,10 @@ bool CShotManager::GetShot(int _num, CShotBase* _shot)
 		//引数の数字と同じならアドレスを返す
 		if (count == _num)
 		{
-			_shot = (*ite);
-			return true;
+			return *ite;
 		}
+		count++;
 
 	}
-	return false;
+	return NULL;
 }

@@ -327,31 +327,31 @@ void CCollisionManager::CheckHitShotToEnemy(CShotManager& _shotManager,
 	if (_enemyManager.GetIsAllDie() == true)return;
 
 	//’e‚ÌƒNƒ‰ƒX•Û‘¶—p
-	CShotBase shot ;
+	CShotBase* shot ;
 	for (int i = 0; i < _shotManager.GetNum(); i++)
 	{
-		//’e‚ªÁ‚¦‚Ä‚¢‚½‚çˆ—‚ðI—¹‚·‚é
-		if (_shotManager.GetShot(i, &shot) == false)return;
+		//’e‚ð•Û‘¶
+		shot = _shotManager.GetShot(i);
 
 		for (int j = 0; j < _enemyManager.GetEnemyNum(); j++)
 		{
 			//“G‚ð•Û‘¶
-			CEnemy* enemy = _enemyManager.GetEnemy(i);
+			CEnemy* enemy = _enemyManager.GetEnemy(j);
 
 			//“G‚ªŽ€‚ñ‚¾‚çƒXƒLƒbƒv
 			if (enemy->GetActive() == false)continue;
 
 			//’e‚Æ“G‚Ì“–‚½‚è”»’è
-			if (CCollision::CheckHitSphereToSphere(shot.GetCenter(), shot.GetRad(),
+			if (CCollision::CheckHitSphereToSphere(shot->GetCenter(), shot->GetRad(),
 				enemy->GetCenter(), enemy->GetRad()) == true)
 			{
 				//“G‚É’e‚ÌUŒ‚—Í•ª‚Ìƒ_ƒ[ƒW‚ð—^‚¦‚é
-				enemy->HitAttack(shot.GetAtk());
+				enemy->HitAttack(shot->GetAtk());
 
 				//’e‚ðÁ‚·
-				shot.SetActive(false);
-				break;
+				shot->SetActive(false);
 			}
+			
 		}
 	}
 }

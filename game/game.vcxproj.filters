@@ -73,6 +73,9 @@
     <Filter Include="ソース ファイル\game\shot">
       <UniqueIdentifier>{865b34c6-7fde-43a3-b510-81d189e164ed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\game\goal">
+      <UniqueIdentifier>{e7bbbaea-5814-4c25-aae9-3defa60c22a4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\number.cpp">
@@ -167,6 +170,9 @@
     </ClCompile>
     <ClCompile Include="src\game\shot\shotManager.cpp">
       <Filter>ソース ファイル\game\shot</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\goal\goal.cpp">
+      <Filter>ソース ファイル\game\goal</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -265,6 +271,9 @@
     </ClInclude>
     <ClInclude Include="src\game\shot\shotManager.h">
       <Filter>ソース ファイル\game\shot</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\goal\goal.h">
+      <Filter>ソース ファイル\game\goal</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

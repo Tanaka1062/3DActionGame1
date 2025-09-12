@@ -42,7 +42,7 @@ public:
 	int GetNum() { return m_shot.size();}
 
 	//’e‚ÌƒAƒhƒŒƒX‚ğæ“¾
-	bool GetShot(int _num,CShotBase* _shot);
+	CShotBase* GetShot(int _num);
 
 };
 

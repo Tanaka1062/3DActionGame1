@@ -29,6 +29,7 @@ void CPlayScene::Draw()
 {
 	m_ground.Draw();
 	m_sky.Draw();
+	m_goal.Draw();
 	m_player.Draw();
 	m_enemy.Draw();
 	m_shot.Draw();
@@ -44,6 +45,7 @@ void CPlayScene::Init()
 {
 	m_ground.Init();
 	m_sky.Init();
+	m_goal.Init();
 	m_player.Init(&m_shot);
 	m_enemy.Init();
 	m_shot.Init();
@@ -58,6 +60,7 @@ void CPlayScene::Load()
 {
 	m_ground.Load();
 	m_sky.Load();
+	m_goal.Load();
 	m_player.Load();
 	m_enemy.Load();
 	m_shot.Load();
@@ -93,6 +96,7 @@ void CPlayScene::Step()
 	//‚·‚×‚Ä‚ÌŒ‹‰Ê‚ð”½‰f‚³‚¹‚é
 	m_ground.Update();
 	m_sky.Update();
+	m_goal.Update();
 	m_player.Update();
 	m_enemy.Update();
 	m_shot.Update();
@@ -113,6 +117,7 @@ void CPlayScene::Exit()
 {
 	m_ground.Exit();
 	m_sky.Exit();
+	m_goal.Exit();
 	m_player.Exit();
 	m_enemy.Exit();
 

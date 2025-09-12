@@ -1,4 +1,5 @@
 #include"3DObject.h"
+#include "../../game/common.h"
 
 //---------------------
 //	コンストラクタ
@@ -60,6 +61,11 @@ void CObject::Draw()
 {
 	//Activeがfalseなら描画をしない
 	if (m_isActive == false)return;
+
+#ifdef DEBUG
+	//当たり判定を表示
+	DrawSphere3D(GetCenter(), m_rad, 16, GetColor(255, 0, 0), GetColor(255, 0, 0), FALSE);
+#endif // DEBUG
 
 	MV1DrawModel(m_hndl);
 }
