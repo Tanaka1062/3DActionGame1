@@ -327,7 +327,7 @@ void CCollisionManager::CheckHitShotToEnemy(CShotManager& _shotManager,
 	if (_enemyManager.GetIsAllDie() == true)return;
 
 	//’e‚ÌƒNƒ‰ƒX•Û‘¶—p
-	CShotBase shot;
+	CShotBase shot ;
 	for (int i = 0; i < _shotManager.GetNum(); i++)
 	{
 		//’e‚ªÁ‚¦‚Ä‚¢‚½‚çˆ—‚ðI—¹‚·‚é
@@ -350,6 +350,7 @@ void CCollisionManager::CheckHitShotToEnemy(CShotManager& _shotManager,
 
 				//’e‚ðÁ‚·
 				shot.SetActive(false);
+				break;
 			}
 		}
 	}
