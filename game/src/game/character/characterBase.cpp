@@ -15,6 +15,7 @@ void CCharacterBase::Init()
 {
 	CActor::Init();
 	
+	m_gravity = 0.0f;
 	m_hp = 0;
 	m_atk = 0;
 	m_rad = 0;
@@ -33,6 +34,9 @@ void CCharacterBase::Init(CShotManager* _shot)
 //------------------------------
 void CCharacterBase::Step()
 {
+	//重力処理
+	Gravity();
+
 	//状態によって行動を変える
 	switch (m_state)
 	{
@@ -108,6 +112,8 @@ void CCharacterBase::Update()
 {
 	CActor::Update();
 
+	m_speed.y -= m_gravity;
+
 	//Hpが０以下になるとActiveをfalseに
 	if (m_hp <= 0 && m_state != DIE)
 	{
@@ -129,6 +135,14 @@ void CCharacterBase::HitAttack(int _atk)
 	m_state = STAGGER;
 	//Hpを攻撃力分減らす
 	m_hp -= _atk;
+}
+
+//------------------------------
+//		重力リセット
+//------------------------------
+void CCharacterBase::GravityReset()
+{
+	m_gravity = 0.0f;
 }
 
 //------------------------------
@@ -218,3 +232,13 @@ void CCharacterBase::Die()
 {
 
 }
+
+//-----------------------
+//		重力処理
+//-----------------------
+void CCharacterBase::Gravity()
+{
+	m_gravity += 0.09f;
+
+}
+

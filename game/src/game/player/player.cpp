@@ -76,7 +76,6 @@ void CPlayer::Init(CShotManager* _shot)
 	m_hp = MAX_HP;
 	m_atk = ATK;
 
-	m_gravity = 0.0f;
 }
 
 //-----------------------
@@ -97,9 +96,6 @@ void CPlayer::Step(float _rotY)
 
 	//移動処理
 	Move(_rotY);
-
-	//重力処理
-	Gravity();
 
 	//アイテム使用処理
 	Item();
@@ -471,18 +467,4 @@ void CPlayer::Item()
 
 }
 
-//-----------------------
-//		重力処理
-//-----------------------
-void CPlayer::Gravity()
-{
-	m_gravity += 0.09f;
 
-	m_speed.y -= m_gravity;
-}
-
-//重力リセット
-void CPlayer::GravityReset()
-{
-	m_gravity = 0.0f;
-}

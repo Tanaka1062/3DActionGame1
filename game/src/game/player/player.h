@@ -8,7 +8,6 @@ static const int PLAYER_NUM = 1;	//プレイヤーの数
 class CPlayer:public CCharacterBase
 {
 private:
-	float m_gravity;
 
 public:
 	//コンストラクタ・デストラクタ
@@ -30,8 +29,6 @@ public:
 	//更新処理
 	void Update();
 
-	//重力リセット
-	void GravityReset();
 
 private:
 	//待機状態処理

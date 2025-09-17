@@ -33,5 +33,8 @@ public:
 
 	//プレイヤーとマップの当たり判定
 	static void CheckHitPlayerToMap(CPlayer& _player,CMap& _map);
+
+	//敵とマップの当たり判定
+	static void CheckHitEnemyToMap(CEnemyManager& _enemy, CMap& _map);
 };
 

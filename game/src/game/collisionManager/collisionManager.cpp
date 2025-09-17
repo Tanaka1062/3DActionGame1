@@ -415,3 +415,54 @@ void CCollisionManager::CheckHitPlayerToMap(CPlayer& _player,CMap& _map)
 		MV1CollResultPolyDimTerminate(col);
 	}
 }
+
+//----------------------------------------------
+//			敵とマップの当たり判定
+//----------------------------------------------
+void CCollisionManager::CheckHitEnemyToMap(CEnemyManager& _enemy, CMap& _map)
+{
+	//当たり判定情報が格納される構造体
+	MV1_COLL_RESULT_POLY_DIM col;
+
+	for (int i = 0; i < _enemy.GetEnemyNum(); i++)
+	{
+		//敵のクラスを取得
+		CEnemy* enemy = _enemy.GetEnemy(i);
+		//敵が生きていなかったらスキップ
+		if (enemy->GetActive() == false)continue;
+
+		col = MV1CollCheck_Sphere(_map.GetHndl(), -1,
+			enemy->GetCenter(), enemy->GetRad());
+
+		//ポリゴンと当たっていたか
+		if (col.HitNum != 0)
+		{
+			//押し戻しの計算-----------------------
+
+			for (int i = 0; i < col.HitNum; i++)
+			{
+
+				//中心点から最近点を引き算
+				VECTOR vLen = VSub(enemy->GetCenter(), col.Dim[i].HitPosition);
+				//取得した距離を三平方の定理の長さに変換
+				float fLen = VSize(vLen);
+				//実際にめり込んだ距離を計算
+				fLen = enemy->GetRad() - fLen;
+				//法線をめり込んだ距離分掛け算する
+				vLen = VScale(col.Dim[i].Normal, fLen);
+
+				//プレイヤーの座標を計算した分だけ移動させる
+				enemy->SetPos(VAdd(enemy->GetPos(), vLen));
+
+				//重力をリセット
+				enemy->GravityReset();
+
+			}
+			//-------------------------------------
+
+		}
+		//毎回データを削除
+		MV1CollResultPolyDimTerminate(col);
+	}
+
+}

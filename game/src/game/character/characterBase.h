@@ -13,6 +13,7 @@ enum tagCharacterType	//キャラクターの種類
 class CCharacterBase:public CActor
 {
 protected:
+	float m_gravity;			//重力
 	int m_hp;					//体力
 	int m_atk;					//攻撃力
 	enum tagState				//キャラクターの状態
@@ -71,6 +72,9 @@ public:
 	//攻撃を取得
 	CAttack* GetAttack() { return &m_attack; }
 
+	//重力リセット
+	void GravityReset();
+
 protected:
 
 	//待機処理
@@ -105,5 +109,9 @@ protected:
 
 	//死亡
 	virtual void Die();
+
+	//重力処理
+	void Gravity();
+
 };
 
