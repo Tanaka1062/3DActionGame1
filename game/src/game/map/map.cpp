@@ -5,14 +5,14 @@
 static const VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
 static const VECTOR SCALE = { 0.1f,0.1f,0.1f };		//大きさ
 static const char GROUND_MODEL_PATH[] =
-{ "data/model/map/mapTest.mv1" };					//ロードするファイル名
+{ "data/model/map/testMap.mv1" };					//ロードするファイル名
 //==========================================
 
 
 //------------------------
 //	コンストラクタ
 //------------------------
-CGround::CGround()
+CMap::CMap()
 {
 	CObject::Init();
 	Init();
@@ -21,7 +21,7 @@ CGround::CGround()
 //------------------------
 //	デストラクタ
 //------------------------
-CGround::~CGround()
+CMap::~CMap()
 {
 	Exit();
 }
@@ -29,7 +29,7 @@ CGround::~CGround()
 //------------------------
 //		初期化
 //------------------------
-void CGround::Init()
+void CMap::Init()
 {
 	m_pos = ZERO;
 	m_scale = SCALE;
@@ -41,15 +41,18 @@ void CGround::Init()
 //------------------------
 //		モデルロード
 //------------------------
-void CGround::Load()
+void CMap::Load()
 {
 	LoadModel(GROUND_MODEL_PATH);
+
+	//マップの当たり判定を取るためにコリジョン情報を構築する
+	MV1SetupCollInfo(m_hndl);
 }
 
 //------------------------
 //		モデル描写
 //------------------------
-void CGround::Draw()
+void CMap::Draw()
 {
 	CObject::Draw();
 }

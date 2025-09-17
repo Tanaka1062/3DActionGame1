@@ -4,14 +4,14 @@
 
 
 
-class CGround :public CObject
+class CMap :public CObject
 {
 private:
 
 public:
 	//コンストラクタ・デストラクタ
-	CGround();
-	~CGround();
+	CMap();
+	~CMap();
 
 
 	//初期化

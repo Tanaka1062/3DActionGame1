@@ -355,3 +355,63 @@ void CCollisionManager::CheckHitShotToEnemy(CShotManager& _shotManager,
 		}
 	}
 }
+
+//----------------------------------------------
+//		  プレイヤーとゴールの当たり判定
+//----------------------------------------------
+void CCollisionManager::CheckHitPlayerToGoal(CPlayer& _player, CGoal& _goal)
+{
+	//プレイヤーかゴールが無ければ処理をしない
+	if (_player.GetActive() == false ||
+		_goal.GetActive() == false)return;
+
+	//プレイヤーがゴールに触れているか
+	if (CCollision::CheckHitSphereToSphere(_player.GetCenter(),_player.GetRad(),
+		_goal.GetCenter(),_goal.GetRad()) == true)
+	{
+		//ゴールフラグをtrueに
+		_goal.HitCalc();
+	}
+}
+
+//----------------------------------------------
+//		  プレイヤーとマップの当たり判定
+//----------------------------------------------
+void CCollisionManager::CheckHitPlayerToMap(CPlayer& _player,CMap& _map)
+{
+	//当たり判定情報が格納される構造体
+	MV1_COLL_RESULT_POLY_DIM col;
+
+	col = MV1CollCheck_Sphere(_map.GetHndl(), -1,
+		_player.GetCenter(), _player.GetRad());
+
+	//ポリゴンと当たっていたか
+	if (col.HitNum != 0)
+	{
+		//押し戻しの計算-----------------------
+		
+		for (int i = 0; i < col.HitNum; i++)
+		{
+
+			//中心点から最近点を引き算
+			VECTOR vLen = VSub(_player.GetCenter(), col.Dim[i].HitPosition);
+			//取得した距離を三平方の定理の長さに変換
+			float fLen = VSize(vLen);
+			//実際にめり込んだ距離を計算
+			fLen = _player.GetRad() - fLen;
+			//法線をめり込んだ距離分掛け算する
+			vLen = VScale(col.Dim[i].Normal, fLen);
+
+			//プレイヤーの座標を計算した分だけ移動させる
+			_player.SetPos(VAdd(_player.GetPos(), vLen));
+
+			//重力をリセット
+			_player.GravityReset();
+
+		}
+		//-------------------------------------
+
+		//毎回データを削除
+		MV1CollResultPolyDimTerminate(col);
+	}
+}

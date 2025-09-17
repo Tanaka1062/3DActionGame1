@@ -94,6 +94,9 @@ public:
 	//生存フラグを設定
 	void SetActive(bool _isActive) { m_isActive = _isActive; }
 
+	//ハンドルを取得
+	int GetHndl() { return m_hndl; }
+
 	//-------------------------------
 };
 

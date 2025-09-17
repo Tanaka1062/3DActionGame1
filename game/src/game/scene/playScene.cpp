@@ -91,6 +91,8 @@ void CPlayScene::Step()
 	CCollisionManager::CheckHitEnemyToPlayer(m_enemy, m_player);
 	CCollisionManager::CheckHitEnemyToEnemy(m_enemy);
 	CCollisionManager::CheckHitShotToEnemy(m_shot, m_enemy);
+	CCollisionManager::CheckHitPlayerToGoal(m_player, m_goal);
+	CCollisionManager::CheckHitPlayerToMap(m_player, m_ground);
 	//--------------------------------------------
 
 	//‚·‚×‚Ä‚ÌŒ‹‰Ê‚ð”½‰f‚³‚¹‚é
@@ -104,6 +106,11 @@ void CPlayScene::Step()
 
 	if (CKeyInput::IsTrg(KEY_SELECT) == true ||
 		m_player.GetActive() == false )
+	{
+		m_state = END;
+	}
+
+	if (m_goal.GetIsGoal() == true)
 	{
 		m_state = END;
 	}

@@ -17,7 +17,7 @@ class CPlayScene :public CSceneBase
 {
 private:
 
-	CGround m_ground;					//”wŒi
+	CMap m_ground;					//”wŒi
 	CSky m_sky;							//‹ó
 	CCameraManager m_camera;			//ƒJƒƒ‰
 	CPlayer m_player;					//ƒvƒŒƒCƒ„[

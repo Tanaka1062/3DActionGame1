@@ -18,5 +18,8 @@ public:
 	//“–‚½‚è”»’èŒã‚Ìˆ—
 	void HitCalc();
 
+	//ƒS[ƒ‹ƒtƒ‰ƒO‚ğæ“¾
+	bool GetIsGoal() { return m_isGoal; }
+
 };
 

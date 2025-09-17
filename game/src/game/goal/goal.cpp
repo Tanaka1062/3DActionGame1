@@ -4,7 +4,7 @@
 static const char MODEL_PATH[] =
 { "data/model/goal/goalTest.mv1" };					//ロードするファイル名
 static const VECTOR INIT_POS = { 0.0f,1.0f,10.0f };	//初期座標
-static const float RADIUS = 5.0f;					//半径
+static const float RADIUS = 7.0f;					//半径
 //-----------------------------------
 
 //-----------------

@@ -1,5 +1,2 @@
-﻿  playScene.cpp
-D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\shot\shotManager.h(42,35): warning C4267: 'return': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
-  (ソース ファイル 'src/game/scene/playScene.cpp' をコンパイルしています)
-  
+﻿  collisionManager.cpp
   game.vcxproj -> D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\x64\Debug\game.exe

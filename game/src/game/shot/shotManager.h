@@ -39,7 +39,7 @@ public:
 	void Request(VECTOR _pos, VECTOR _rot, float _speed, int _atk, int _lostTime);
 
 	//’e‚Ì”‚ğæ“¾
-	int GetNum() { return m_shot.size();}
+	int GetNum() { return static_cast<int>(m_shot.size());}
 
 	//’e‚ÌƒAƒhƒŒƒX‚ğæ“¾
 	CShotBase* GetShot(int _num);
