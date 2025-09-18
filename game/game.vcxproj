@@ -145,6 +145,9 @@
     <ClCompile Include="src\game\enemy\enemyManager.cpp" />
     <ClCompile Include="src\game\FOV\FOV.cpp" />
     <ClCompile Include="src\game\goal\goal.cpp" />
+    <ClCompile Include="src\game\item\fireRing\fireRing.cpp" />
+    <ClCompile Include="src\game\item\itemBase.cpp" />
+    <ClCompile Include="src\game\item\itemManager.cpp" />
     <ClCompile Include="src\game\main.cpp" />
     <ClCompile Include="src\game\map\map.cpp" />
     <ClCompile Include="src\game\player\player.cpp" />
@@ -181,6 +184,9 @@
     <ClInclude Include="src\game\enemy\enemyManager.h" />
     <ClInclude Include="src\game\FOV\FOV.h" />
     <ClInclude Include="src\game\goal\goal.h" />
+    <ClInclude Include="src\game\item\fireRing\fireRing.h" />
+    <ClInclude Include="src\game\item\itemBase.h" />
+    <ClInclude Include="src\game\item\itemManager.h" />
     <ClInclude Include="src\game\map\map.h" />
     <ClInclude Include="src\game\player\player.h" />
     <ClInclude Include="src\game\scene\playScene.h" />

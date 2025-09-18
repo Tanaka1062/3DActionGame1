@@ -76,6 +76,12 @@
     <Filter Include="ソース ファイル\game\goal">
       <UniqueIdentifier>{e7bbbaea-5814-4c25-aae9-3defa60c22a4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\game\item">
+      <UniqueIdentifier>{055b67e1-9aaa-445a-848b-92d59ba63e9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\game\item\fireRing">
+      <UniqueIdentifier>{a06ca225-e74d-4abc-9e83-5f8889888b45}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\number.cpp">
@@ -173,6 +179,15 @@
     </ClCompile>
     <ClCompile Include="src\game\goal\goal.cpp">
       <Filter>ソース ファイル\game\goal</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\item\itemBase.cpp">
+      <Filter>ソース ファイル\game\item</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\item\fireRing\fireRing.cpp">
+      <Filter>ソース ファイル\game\item\fireRing</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\item\itemManager.cpp">
+      <Filter>ソース ファイル\game\item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -274,6 +289,15 @@
     </ClInclude>
     <ClInclude Include="src\game\goal\goal.h">
       <Filter>ソース ファイル\game\goal</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\item\itemBase.h">
+      <Filter>ソース ファイル\game\item</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\item\fireRing\fireRing.h">
+      <Filter>ソース ファイル\game\item\fireRing</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\item\itemManager.h">
+      <Filter>ソース ファイル\game\item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

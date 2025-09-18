@@ -29,4 +29,3 @@ public:
 	static void AddScore(int _addScore) { m_score += _addScore; }
 };
 
-//int CData::m_score;

@@ -3,7 +3,7 @@
 
 //定義関連==================================
 static const VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
-static const VECTOR SCALE = { 0.1f,0.1f,0.1f };		//大きさ
+static const VECTOR SCALE = { 1.0f,1.0f,1.0f };		//大きさ
 static const char GROUND_MODEL_PATH[] =
 { "data/model/map/testMap.mv1" };					//ロードするファイル名
 //==========================================
@@ -14,7 +14,6 @@ static const char GROUND_MODEL_PATH[] =
 //------------------------
 CMap::CMap()
 {
-	CObject::Init();
 	Init();
 }
 
@@ -31,6 +30,7 @@ CMap::~CMap()
 //------------------------
 void CMap::Init()
 {
+	CObject::Init();
 	m_pos = ZERO;
 	m_scale = SCALE;
 	m_rot = ZERO;

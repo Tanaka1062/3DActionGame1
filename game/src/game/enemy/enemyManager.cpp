@@ -1,6 +1,6 @@
 #include "enemyManager.h"
 
-static const int ENEMY_NUM = 1;			//敵の数
+static const int ENEMY_NUM = 2;			//敵の数
 
 //------------------------
 //	  コンストラクタ
@@ -93,7 +93,6 @@ void CEnemyManager::Exit()
 	{
 		m_enemy[i]->Exit();
 
-		//delete m_enemy[i];
 	}
 	
 }

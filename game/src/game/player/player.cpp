@@ -100,6 +100,11 @@ void CPlayer::Step(float _rotY)
 	//アイテム使用処理
 	Item();
 
+	if (CheckHitKey(KEY_INPUT_SPACE))
+	{
+		m_speed.y += 10.0f;
+	}
+
 	CCharacterBase::Step();
 }
 

@@ -110,9 +110,10 @@ void CCharacterBase::Step(VECTOR _pos)
 //------------------------------
 void CCharacterBase::Update()
 {
-	CActor::Update();
-
+	//d—Í‚ğ‘¬“x‚É‰ÁZ
 	m_speed.y -= m_gravity;
+
+	CActor::Update();
 
 	//Hp‚ª‚OˆÈ‰º‚É‚È‚é‚ÆActive‚ğfalse‚É
 	if (m_hp <= 0 && m_state != DIE)
