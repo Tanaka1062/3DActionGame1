@@ -9,6 +9,7 @@
 #include "../enemy/enemyManager.h"
 #include "../shot/shotManager.h"
 #include "../goal/goal.h"
+#include "../item/itemManager.h"
 
 using namespace std;
 
@@ -17,13 +18,14 @@ class CPlayScene :public CSceneBase
 {
 private:
 
-	CMap m_ground;					//”wŒi
+	CMap m_ground;						//”wŒi
 	CSky m_sky;							//‹ó
 	CCameraManager m_camera;			//ƒJƒƒ‰
 	CPlayer m_player;					//ƒvƒŒƒCƒ„[
 	CEnemyManager m_enemy;				//“G
 	CShotManager m_shot;				//’e
 	CGoal m_goal;						//ƒS[ƒ‹
+	CItemManager m_item;				//ƒAƒCƒeƒ€
 
 public:
 

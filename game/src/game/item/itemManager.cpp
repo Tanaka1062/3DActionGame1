@@ -1,16 +1,12 @@
 #include "itemManager.h"
 
-static const int ITEM_NUM = 1;	//アイテムの個数
 
 //-----------------------
 //	  コンストラクタ
 //-----------------------
 CItemManager::CItemManager()
 {
-	for (int i = 0; i < ITEM_NUM; i++)
-	{
-		
-	}
+	Init();
 }
 
 //-----------------------
@@ -18,7 +14,7 @@ CItemManager::CItemManager()
 //-----------------------
 CItemManager::~CItemManager()
 {
-
+	Exit();
 }
 
 //-----------------------
@@ -26,7 +22,19 @@ CItemManager::~CItemManager()
 //-----------------------
 void CItemManager::Init()
 {
-	
+	//モデルハンドルを初期化
+	for (int i = 0; i < ITEM_NUM; i++)
+	{
+		m_hndl[i] = -1;
+	}
+
+	//アイテムクラスを生成し初期化
+	for (int i = 0; i < ITEM_NUM; i++)
+	{
+		CItemBase* item = new CItemBase;
+		item->Init();
+		m_item.push_back(item);
+	}
 }
 
 //-----------------------
@@ -37,10 +45,22 @@ void CItemManager::Load()
 	//アイテムのモデルのパスを管理======
 	const char* MODEL_PATH[ITEM_NUM] =
 	{
-		"data/model/item/fireRing.mv1",
+		"data/model/item/fireRing.mv1"
 
 	};
 	//==================================
+
+	//モデルのハンドルを設定
+	for (int i = 0; i < ITEM_NUM; i++)
+	{
+		m_hndl[i] = MV1LoadModel(MODEL_PATH[i]);
+	}
+
+	//モデルをロード
+	for (auto ite = m_item.begin(); ite != m_item.end();++ite)
+	{
+		(*ite)->DuplicateModel(m_hndl[(*ite)->GetName()]);
+	}
 
 }
 
@@ -49,7 +69,11 @@ void CItemManager::Load()
 //-----------------------
 void CItemManager::Step()
 {
-
+	//アイテムの処理
+	for (auto ite = m_item.begin(); ite != m_item.end(); ++ite)
+	{
+		(*ite)->Step();
+	}
 }
 
 //-----------------------
@@ -57,7 +81,11 @@ void CItemManager::Step()
 //-----------------------
 void CItemManager::Update()
 {
-
+	//アイテムの更新
+	for (auto ite = m_item.begin(); ite != m_item.end(); ++ite)
+	{
+		(*ite)->Update();
+	}
 }
 
 //-----------------------
@@ -65,7 +93,11 @@ void CItemManager::Update()
 //-----------------------
 void CItemManager::Draw()
 {
-
+	//アイテムの描写
+	for (auto ite = m_item.begin(); ite != m_item.end(); ++ite)
+	{
+		(*ite)->Draw();
+	}
 }
 
 //-----------------------
@@ -73,5 +105,15 @@ void CItemManager::Draw()
 //-----------------------
 void CItemManager::Exit()
 {
+	//アイテムの終了処理
+	for (auto ite = m_item.begin(); ite != m_item.end();)
+	{
+		(*ite)->Exit();
 
+		delete (*ite);
+
+		//終了処理が終わったアイテムを消す
+		ite = m_item.erase(ite);
+
+	}
 }

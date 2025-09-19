@@ -1,25 +1,45 @@
 #include "itemBase.h"
 
+static const float RADIUS = 7.5f;		//半径
 static const float ROT_SPEED = 0.05f;	//回転速度
 
-//コンストラクタ
+//--------------------------
+//	   コンストラクタ
+//--------------------------
 CItemBase::CItemBase()
 {
 	Init();
 }
 
-//初期化
+//--------------------------
+//		  初期化
+//--------------------------
 void CItemBase::Init()
 {
 	CObject::Init();
 
-	//アイテムを何もないに設定
-	m_name = ITEM_NONE;
+	m_rad = RADIUS;
+
+	m_name = ITEM_FIRE_RING;
+	m_type = TYPE_NONE;
+	m_shot = nullptr;
+	m_player = nullptr;
 }
 
-//毎フレームする処理
+//--------------------------
+//	 毎フレームする処理
+//--------------------------
 void CItemBase::Step()
 {
 	//少しずつ回転させる
 	m_rot.y += ROT_SPEED;
 }
+
+//--------------------------
+//	 使用した時の処理
+//--------------------------
+void CItemBase::Use()
+{
+
+}
+

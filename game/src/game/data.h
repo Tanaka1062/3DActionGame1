@@ -10,6 +10,15 @@ static VECTOR ZERO = { 0.0f,0.0f,0.0f };	//VECTORの初期化用
 
 //------------------------------
 
+//アイテムの名前
+enum tagItemName
+{
+	ITEM_NONE = -1,		//何もない			
+	ITEM_FIRE_RING,		//ファイアリング
+
+	ITEM_NUM,			//アイテムの種類
+};
+
 
 class CData
 {

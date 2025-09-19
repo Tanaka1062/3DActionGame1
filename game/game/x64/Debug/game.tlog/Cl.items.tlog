@@ -8,6 +8,9 @@ D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\enemy\enemy.cpp;D:\U
 D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\enemy\enemyManager.cpp;D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\game\x64\Debug\enemyManager.obj
 D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\FOV\FOV.cpp;D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\game\x64\Debug\FOV.obj
 D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\goal\goal.cpp;D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\game\x64\Debug\goal.obj
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\fireRing\fireRing.cpp;D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\game\x64\Debug\fireRing.obj
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.cpp;D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\game\x64\Debug\itemBase.obj
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemManager.cpp;D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\game\x64\Debug\itemManager.obj
 D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\main.cpp;D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\game\x64\Debug\main.obj
 D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\map\map.cpp;D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\game\x64\Debug\map.obj
 D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\player\player.cpp;D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\game\x64\Debug\player.obj

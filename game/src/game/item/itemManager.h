@@ -1,9 +1,11 @@
 #pragma once
-#include "itemBase.h"
 #include <iostream>
 #include <list>
+#include "itemBase.h"
+#include "../data.h"
 
 using namespace std;
+
 
 //アイテムマネージャークラス
 class CItemManager
