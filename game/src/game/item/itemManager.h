@@ -19,7 +19,7 @@ public:
 	~CItemManager();
 
 	//初期化
-	void Init();
+	void Init(CShotManager* _shot, CPlayer* _player);
 	//モデルロード
 	void Load();
 	//毎フレームする処理

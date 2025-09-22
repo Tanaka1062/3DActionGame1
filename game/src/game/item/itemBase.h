@@ -8,7 +8,7 @@
 //アイテムのベースクラス
 class CItemBase :public CObject
 {
-private:
+protected:
 	tagItemName m_name;		//アイテムの名前
 
 	//アイテムのタイプ
@@ -28,7 +28,7 @@ public:
 	CItemBase();
 
 	//初期化
-	virtual void Init();
+	virtual void Init(CShotManager* _shot,CPlayer* _player);
 
 	//毎フレームする処理
 	virtual void Step();
@@ -36,6 +36,9 @@ public:
 	//使用した時の処理
 	virtual void Use();
 
+
+	//アイテムの名前を設定
+	void SetName(tagItemName _name) { m_name = _name; }
 	//アイテムの名前を取得
 	tagItemName GetName() { return m_name; }
 

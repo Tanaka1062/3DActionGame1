@@ -6,7 +6,7 @@
 //-----------------------
 CItemManager::CItemManager()
 {
-	Init();
+	Init(nullptr,nullptr);
 }
 
 //-----------------------
@@ -20,7 +20,7 @@ CItemManager::~CItemManager()
 //-----------------------
 //		初期化
 //-----------------------
-void CItemManager::Init()
+void CItemManager::Init(CShotManager* _shot, CPlayer* _player)
 {
 	//モデルハンドルを初期化
 	for (int i = 0; i < ITEM_NUM; i++)
@@ -32,9 +32,22 @@ void CItemManager::Init()
 	for (int i = 0; i < ITEM_NUM; i++)
 	{
 		CItemBase* item = new CItemBase;
-		item->Init();
+		item->Init(_shot,_player);
+		//座標を設定
+		item->SetPos(VGet((float)(i*20.0f),0.0f,0.0f));
+		//アイテムの名前を設定
+		switch (i)
+		{
+		case 0:
+			item->SetName(ITEM_FIRE_RING);
+			break;
+		case 1:
+			item->SetName(ITME_HARB_AMULENT);
+			break;
+		}
 		m_item.push_back(item);
 	}
+
 }
 
 //-----------------------
@@ -45,8 +58,8 @@ void CItemManager::Load()
 	//アイテムのモデルのパスを管理======
 	const char* MODEL_PATH[ITEM_NUM] =
 	{
-		"data/model/item/fireRing.mv1"
-
+		"data/model/item/fireRing.mv1",
+		"data/model/item/harbAmulent.mv1",
 	};
 	//==================================
 
