@@ -1,6 +1,7 @@
 #pragma once
 #include "../character/characterBase.h"
 #include "../shot/shotManager.h"
+#include"../item/itemBase.h"
 
 static const int PLAYER_NUM = 1;	//プレイヤーの数
 
@@ -8,6 +9,8 @@ static const int PLAYER_NUM = 1;	//プレイヤーの数
 class CPlayer:public CCharacterBase
 {
 private:
+	bool m_isPickUpItem;		//アイテムを取ろうとしているかフラグ		
+	CItemBase* m_item;			//アイテム
 
 public:
 	//コンストラクタ・デストラクタ
@@ -29,6 +32,11 @@ public:
 	//更新処理
 	void Update();
 
+	//アイテムを取るかを取得
+	bool GetItem();
+
+	//アイテムを設定
+	void SetItem(CItemBase* _item) { m_item = new CItemBase(*_item); }
 
 private:
 	//待機状態処理
@@ -67,11 +75,14 @@ private:
 	//移動処理
 	void Move(float _rotY);
 
+	//攻撃を呼び出す処理
+	void RequestAttack();
+
 	//アイテム処理
 	void Item();
 
-	//重力処理
-	void Gravity();
+	//アイテムを拾う
+	void PickUpItem();
 
 };
 

@@ -130,3 +130,53 @@ void CItemManager::Exit()
 
 	}
 }
+
+//-----------------------
+//アイテムのアドレスを取得
+//-----------------------
+CItemBase* CItemManager::GetItem(int _num)
+{
+	//引数よりアイテムの数がすくなければnullを返す
+	if (_num > m_item.size())return nullptr;
+	//アイテムの数をカウントする変数
+	int count = 0;
+	for (auto ite = m_item.begin(); ite != m_item.end(); ++ite)
+	{
+		//引数の数字と同じならアドレスを返す
+		if (count == _num)
+		{
+			return *ite;
+		}
+		count++;
+
+	}
+	return nullptr;
+
+}
+
+//-----------------------
+//	   アイテムを消す
+//-----------------------
+void CItemManager::DeleteItem(int _num)
+{
+	//アイテムの数をカウントする変数
+	int count = 0;
+	for (auto ite = m_item.begin(); ite != m_item.end();)
+	{
+		//引数の数字と同じなら消す
+		if (count == _num)
+		{
+			//終了処理
+			(*ite)->Exit();
+
+			delete (*ite);
+
+			ite = m_item.erase(ite);
+			return;
+		}
+		count++;
+
+	}
+
+}
+

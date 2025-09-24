@@ -53,6 +53,9 @@ enum tagAnim {
 CPlayer::CPlayer()
 {
 	CCharacterBase::Init();
+
+	m_isPickUpItem = false;
+	m_item = nullptr;
 }
 
 //-----------------------
@@ -100,6 +103,7 @@ void CPlayer::Step(float _rotY)
 	//アイテム使用処理
 	Item();
 
+
 	if (CheckHitKey(KEY_INPUT_SPACE))
 	{
 		m_speed.y += 10.0f;
@@ -133,6 +137,24 @@ void CPlayer::Update()
 
 	//攻撃の更新
 	m_attack.Update(GetCenter(), m_rot);
+
+	//アイテムを取ろうとしているかを初期化
+	m_isPickUpItem = false;
+
+}
+
+//-----------------------
+//アイテムを取るかを取得
+//-----------------------
+bool CPlayer::GetItem()
+{
+	//フラグ保存用
+	bool flg = m_isPickUpItem;
+
+	//アイテムを取ろうとしているかを初期化
+	m_isPickUpItem = false;
+
+	return flg;
 }
 
 
@@ -154,17 +176,8 @@ void CPlayer::Wait()
 		m_state = WALK;
 	}
 	
-	if (CheckHitKey(KEY_INPUT_J) != 0 ||
-		CControllerInput::IsTrg(BUTTON_X))
-	{
-
-		//攻撃してない時に攻撃前に移行する
-		if (m_attack.GetIsCoolDown() == true)
-		{
-			m_state = ATTACK_IN;
-		}
-	}
-
+	//攻撃の呼び出し
+	RequestAttack();
 }
 
 //-----------------------
@@ -185,16 +198,8 @@ void CPlayer::Walk()
 		m_state = WAIT;
 	}
 
-	if (CheckHitKey(KEY_INPUT_J) != 0 ||
-		CControllerInput::IsTrg(BUTTON_X))
-	{
-
-		//攻撃してない時に攻撃前に移行する
-		if (m_attack.GetIsCoolDown() == true)
-		{
-			m_state = ATTACK_IN;
-		}
-	}
+	//攻撃の呼び出し
+	RequestAttack();
 
 }
 
@@ -299,9 +304,8 @@ void CPlayer::ItemUse()
 	{
 		Request(ANIMID_ITEM_USE, 1.0f);
 
-		//弾を呼び出す
-		m_shot->Request(GetCenter(), m_rot, SHOT_MOVE_SPEED,
-			SHOT_ATK, SHOT_LOST_TIME);
+		//アイテムを使用する
+		m_item->Use();
 	}
 
 	//アニメーションが終わったら待機状態に戻す
@@ -449,10 +453,31 @@ void CPlayer::Move(float _rotY)
 }
 
 //-----------------------
+//攻撃を呼び出す処理
+//-----------------------
+void CPlayer::RequestAttack()
+{
+	//攻撃ボタンを押したか
+	if (CheckHitKey(KEY_INPUT_J) != 0 ||
+		CControllerInput::IsTrg(BUTTON_X))
+	{
+
+		//攻撃してない時に攻撃前に移行する
+		if (m_attack.GetIsCoolDown() == true)
+		{
+			m_state = ATTACK_IN;
+		}
+	}
+}
+
+//-----------------------
 //	   アイテム処理
 //-----------------------
 void CPlayer::Item()
 {
+	//アイテムが何もなかったら処理をしない
+	if (m_item == nullptr)return;
+
 	//待機状態と歩いてる状態以外は処理をしない
 	switch (m_state)
 	{
@@ -472,4 +497,15 @@ void CPlayer::Item()
 
 }
 
+//-----------------------
+//	   アイテムを拾う
+//-----------------------
+void CPlayer::PickUpItem()
+{
+	if (CheckHitKey(KEY_INPUT_I) != 0 ||
+		CControllerInput::IsTrg(BUTTON_B) == true)
+	{
+		m_isPickUpItem = true;
+	}
+}
 

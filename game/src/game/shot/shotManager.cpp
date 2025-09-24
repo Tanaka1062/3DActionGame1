@@ -51,6 +51,11 @@ void CShotManager::Step()
 		//¶‘¶‚µ‚Ä‚È‚¢’e‚ğÁ‚·
 		if ((*ite)->GetActive() == false)
 		{
+			//I—¹ˆ—
+			(*ite)->Exit();
+
+			delete (*ite);
+
 			ite = m_shot.erase(ite);
 		}
 		else
@@ -123,8 +128,8 @@ void CShotManager::Request(VECTOR _pos, VECTOR _rot, float _speed, int _atk, int
 //------------------------
 CShotBase* CShotManager::GetShot(int _num)
 {
-	//ˆø”‚æ‚è’e‚Ì”‚ª­‚È‚¯‚ê‚Îfalse‚ğ•Ô‚·
-	if (_num > m_shot.size())return NULL;
+	//ˆø”‚æ‚è’e‚Ì”‚ª­‚È‚¯‚ê‚Înull‚ğ•Ô‚·
+	if (_num > m_shot.size())return nullptr;
 	//’e‚Ì”‚ğƒJƒEƒ“ƒg‚·‚é•Ï”
 	int count = 0;
 	for (auto ite = m_shot.begin(); ite != m_shot.end(); ++ite)
@@ -137,5 +142,5 @@ CShotBase* CShotManager::GetShot(int _num)
 		count++;
 
 	}
-	return NULL;
+	return nullptr;
 }

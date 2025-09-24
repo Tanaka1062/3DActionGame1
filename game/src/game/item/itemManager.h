@@ -13,6 +13,8 @@ class CItemManager
 private:
 	list<CItemBase*> m_item;	//アイテムのクラス
 	int m_hndl[ITEM_NUM];		//アイテムのモデルハンドル
+	CShotManager* m_shot;		//弾のマネージャークラスのアドレス保存用
+	CPlayer* m_player;			//プレイヤークラスのアドレス保存用
 public:
 	//コンストラクタ・デストラクタ
 	CItemManager();
@@ -31,5 +33,13 @@ public:
 	//終了処理
 	void Exit();
 
+	//アイテムの数を取得
+	int GetNum() { return static_cast<int>(m_item.size()); }
+
+	//アイテムのアドレスを取得
+	CItemBase* GetItem(int _num);
+
+	//アイテムを消す
+	void DeleteItem(int _num);
 };
 

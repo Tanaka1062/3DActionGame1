@@ -466,3 +466,36 @@ void CCollisionManager::CheckHitEnemyToMap(CEnemyManager& _enemy, CMap& _map)
 	}
 
 }
+
+//----------------------------------------------
+//		アイテムとプレイヤーの当たり判定
+//----------------------------------------------
+void CCollisionManager::CheckHitItemToPlayer(CItemManager& _item, CPlayer& _player)
+{
+	//プレイヤーが死んでいたら処理をしない
+	if (_player.GetActive() == false)return;
+
+	for (int i = 0; i < _item.GetNum(); i++)
+	{
+		//アイテムのクラスを取得
+		CItemBase* item = _item.GetItem(i);
+		
+		//アイテムにプレイヤーが当たっているか
+		if (CCollision::CheckHitSphereToSphere(item->GetCenter(), item->GetRad(),
+			_player.GetCenter(), _player.GetRad()) == true)
+		{
+			//アイテムを取っていたらプレイヤーがアイテムを取得する
+			if (_player.GetItem() == true)
+			{
+				_player.SetItem(item);
+				//取得したアイテムを消す
+				_item.DeleteItem(i);
+
+				//アイテムを取得したら処理を終了する
+				return;
+			}
+		}
+
+	}
+}
+

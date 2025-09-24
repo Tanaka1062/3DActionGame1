@@ -98,6 +98,7 @@ void CPlayScene::Step()
 	CCollisionManager::CheckHitPlayerToGoal(m_player, m_goal);
 	CCollisionManager::CheckHitPlayerToMap(m_player, m_ground);
 	CCollisionManager::CheckHitEnemyToMap(m_enemy, m_ground);
+	CCollisionManager::CheckHitItemToPlayer(m_item, m_player);
 	//--------------------------------------------
 
 	//‚·‚×‚Ä‚ÌŒ‹‰Ê‚ð”½‰f‚³‚¹‚é

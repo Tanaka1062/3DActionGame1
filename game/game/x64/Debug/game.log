@@ -1,4 +1,168 @@
-﻿  playScene.cpp
+﻿  collisionManager.cpp
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(24,9): error C2143: 構文エラー: ';' が '*' の前にありません。
+  (ソース ファイル 'src/game/collisionManager/collisionManager.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(24,2): error C4430: 型指定子がありません - int と仮定しました。メモ: C++ は int を既定値としてサポートしていません
+  (ソース ファイル 'src/game/collisionManager/collisionManager.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(24,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル 'src/game/collisionManager/collisionManager.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(31,40): error C2061: 構文エラー: 識別子 'CPlayer'
+  (ソース ファイル 'src/game/collisionManager/collisionManager.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(49,17): error C2061: 構文エラー: 識別子 'CPlayer'
+  (ソース ファイル 'src/game/collisionManager/collisionManager.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(49,37): error C2065: 'm_player': 定義されていない識別子です。
+  (ソース ファイル 'src/game/collisionManager/collisionManager.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(49,48): error C2065: '_player': 定義されていない識別子です。
+  (ソース ファイル 'src/game/collisionManager/collisionManager.cpp' をコンパイルしています)
+  
+  fireRing.cpp
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\player\player.h(13,11): error C2143: 構文エラー: ';' が '*' の前にありません。
+  (ソース ファイル 'src/game/item/fireRing/fireRing.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\player\player.h(13,2): error C4430: 型指定子がありません - int と仮定しました。メモ: C++ は int を既定値としてサポートしていません
+  (ソース ファイル 'src/game/item/fireRing/fireRing.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\player\player.h(13,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル 'src/game/item/fireRing/fireRing.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\player\player.h(39,15): error C2061: 構文エラー: 識別子 'CItemBase'
+  (ソース ファイル 'src/game/item/fireRing/fireRing.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\player\player.h(39,35): error C2065: 'm_item': 定義されていない識別子です。
+  (ソース ファイル 'src/game/item/fireRing/fireRing.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\player\player.h(39,48): error C2061: 構文エラー: 識別子 'CItemBase'
+  (ソース ファイル 'src/game/item/fireRing/fireRing.cpp' をコンパイルしています)
+  
+  itemBase.cpp
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\player\player.h(13,11): error C2143: 構文エラー: ';' が '*' の前にありません。
+  (ソース ファイル 'src/game/item/itemBase.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\player\player.h(13,2): error C4430: 型指定子がありません - int と仮定しました。メモ: C++ は int を既定値としてサポートしていません
+  (ソース ファイル 'src/game/item/itemBase.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\player\player.h(13,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル 'src/game/item/itemBase.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\player\player.h(39,15): error C2061: 構文エラー: 識別子 'CItemBase'
+  (ソース ファイル 'src/game/item/itemBase.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\player\player.h(39,35): error C2065: 'm_item': 定義されていない識別子です。
+  (ソース ファイル 'src/game/item/itemBase.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\player\player.h(39,48): error C2061: 構文エラー: 識別子 'CItemBase'
+  (ソース ファイル 'src/game/item/itemBase.cpp' をコンパイルしています)
+  
+  itemManager.cpp
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\player\player.h(13,11): error C2143: 構文エラー: ';' が '*' の前にありません。
+  (ソース ファイル 'src/game/item/itemManager.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\player\player.h(13,2): error C4430: 型指定子がありません - int と仮定しました。メモ: C++ は int を既定値としてサポートしていません
+  (ソース ファイル 'src/game/item/itemManager.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\player\player.h(13,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル 'src/game/item/itemManager.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\player\player.h(39,15): error C2061: 構文エラー: 識別子 'CItemBase'
+  (ソース ファイル 'src/game/item/itemManager.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\player\player.h(39,35): error C2065: 'm_item': 定義されていない識別子です。
+  (ソース ファイル 'src/game/item/itemManager.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\player\player.h(39,48): error C2061: 構文エラー: 識別子 'CItemBase'
+  (ソース ファイル 'src/game/item/itemManager.cpp' をコンパイルしています)
+  
+  main.cpp
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(24,9): error C2143: 構文エラー: ';' が '*' の前にありません。
+  (ソース ファイル 'src/game/main.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(24,2): error C4430: 型指定子がありません - int と仮定しました。メモ: C++ は int を既定値としてサポートしていません
+  (ソース ファイル 'src/game/main.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(24,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル 'src/game/main.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(31,40): error C2061: 構文エラー: 識別子 'CPlayer'
+  (ソース ファイル 'src/game/main.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(49,17): error C2061: 構文エラー: 識別子 'CPlayer'
+  (ソース ファイル 'src/game/main.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(49,37): error C2065: 'm_player': 定義されていない識別子です。
+  (ソース ファイル 'src/game/main.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(49,48): error C2065: '_player': 定義されていない識別子です。
+  (ソース ファイル 'src/game/main.cpp' をコンパイルしています)
+  
+  player.cpp
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(24,9): error C2143: 構文エラー: ';' が '*' の前にありません。
+  (ソース ファイル 'src/game/player/player.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(24,2): error C4430: 型指定子がありません - int と仮定しました。メモ: C++ は int を既定値としてサポートしていません
+  (ソース ファイル 'src/game/player/player.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(24,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル 'src/game/player/player.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(31,40): error C2061: 構文エラー: 識別子 'CPlayer'
+  (ソース ファイル 'src/game/player/player.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(49,17): error C2061: 構文エラー: 識別子 'CPlayer'
+  (ソース ファイル 'src/game/player/player.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(49,37): error C2065: 'm_player': 定義されていない識別子です。
+  (ソース ファイル 'src/game/player/player.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(49,48): error C2065: '_player': 定義されていない識別子です。
+  (ソース ファイル 'src/game/player/player.cpp' をコンパイルしています)
+  
+  playScene.cpp
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(24,9): error C2143: 構文エラー: ';' が '*' の前にありません。
+  (ソース ファイル 'src/game/scene/playScene.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(24,2): error C4430: 型指定子がありません - int と仮定しました。メモ: C++ は int を既定値としてサポートしていません
+  (ソース ファイル 'src/game/scene/playScene.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(24,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル 'src/game/scene/playScene.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(31,40): error C2061: 構文エラー: 識別子 'CPlayer'
+  (ソース ファイル 'src/game/scene/playScene.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(49,17): error C2061: 構文エラー: 識別子 'CPlayer'
+  (ソース ファイル 'src/game/scene/playScene.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(49,37): error C2065: 'm_player': 定義されていない識別子です。
+  (ソース ファイル 'src/game/scene/playScene.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(49,48): error C2065: '_player': 定義されていない識別子です。
+  (ソース ファイル 'src/game/scene/playScene.cpp' をコンパイルしています)
+  
   sceneManager.cpp
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(24,9): error C2143: 構文エラー: ';' が '*' の前にありません。
+  (ソース ファイル 'src/game/scene/sceneManager.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(24,2): error C4430: 型指定子がありません - int と仮定しました。メモ: C++ は int を既定値としてサポートしていません
+  (ソース ファイル 'src/game/scene/sceneManager.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(24,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル 'src/game/scene/sceneManager.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(31,40): error C2061: 構文エラー: 識別子 'CPlayer'
+  (ソース ファイル 'src/game/scene/sceneManager.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(49,17): error C2061: 構文エラー: 識別子 'CPlayer'
+  (ソース ファイル 'src/game/scene/sceneManager.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(49,37): error C2065: 'm_player': 定義されていない識別子です。
+  (ソース ファイル 'src/game/scene/sceneManager.cpp' をコンパイルしています)
+  
+D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(49,48): error C2065: '_player': 定義されていない識別子です。
+  (ソース ファイル 'src/game/scene/sceneManager.cpp' をコンパイルしています)
+  
   コードを生成中...
-  game.vcxproj -> D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\x64\Debug\game.exe

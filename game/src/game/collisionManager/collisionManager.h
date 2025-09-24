@@ -4,6 +4,7 @@
 #include "../player/player.h"
 #include "../goal/goal.h"
 #include "../map/map.h"
+#include "../item/itemManager.h"
 
 class CCollisionManager
 {
@@ -36,5 +37,8 @@ public:
 
 	//敵とマップの当たり判定
 	static void CheckHitEnemyToMap(CEnemyManager& _enemy, CMap& _map);
+
+	//アイテムとプレイヤーの当たり判定
+	static void CheckHitItemToPlayer(CItemManager& _item, CPlayer& _player);
 };
 

@@ -5,7 +5,7 @@
 #include "../sky/sky.h"
 #include"../data.h"
 #include"../character/characterBase.h"
-#include "../player/player.h"
+#include"../player/player.h"
 #include "../enemy/enemyManager.h"
 #include "../shot/shotManager.h"
 #include "../goal/goal.h"
