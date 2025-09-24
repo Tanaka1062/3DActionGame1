@@ -10,7 +10,7 @@ class CPlayer:public CCharacterBase
 {
 private:
 	bool m_isPickUpItem;		//アイテムを取ろうとしているかフラグ		
-	CItemBase* m_item;			//アイテム
+	CItemBase* m_item;			//アイテムのアドレス保存用
 
 public:
 	//コンストラクタ・デストラクタ

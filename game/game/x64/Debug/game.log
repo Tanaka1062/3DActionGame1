@@ -165,4 +165,5 @@ D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(49,3
 D:\Users\2409417\Desktop\gitHub\3DActionGame1\game\src\game\item\itemBase.h(49,48): error C2065: '_player': 定義されていない識別子です。
   (ソース ファイル 'src/game/scene/sceneManager.cpp' をコンパイルしています)
   
+  shotManager.cpp
   コードを生成中...
