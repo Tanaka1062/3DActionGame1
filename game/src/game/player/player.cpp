@@ -55,7 +55,6 @@ CPlayer::CPlayer()
 	CCharacterBase::Init();
 
 	m_isPickUpItem = false;
-	m_item = nullptr;
 }
 
 //-----------------------
@@ -304,8 +303,6 @@ void CPlayer::ItemUse()
 	{
 		Request(ANIMID_ITEM_USE, 1.0f);
 
-		//アイテムを使用する
-		m_item->Use();
 	}
 
 	//アニメーションが終わったら待機状態に戻す
@@ -475,8 +472,6 @@ void CPlayer::RequestAttack()
 //-----------------------
 void CPlayer::Item()
 {
-	//アイテムが何もなかったら処理をしない
-	if (m_item == nullptr)return;
 
 	//待機状態と歩いてる状態以外は処理をしない
 	switch (m_state)

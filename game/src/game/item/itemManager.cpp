@@ -6,7 +6,7 @@
 //-----------------------
 CItemManager::CItemManager()
 {
-	Init(nullptr,nullptr);
+	Init();
 }
 
 //-----------------------
@@ -20,7 +20,7 @@ CItemManager::~CItemManager()
 //-----------------------
 //		初期化
 //-----------------------
-void CItemManager::Init(CShotManager* _shot, CPlayer* _player)
+void CItemManager::Init()
 {
 	//モデルハンドルを初期化
 	for (int i = 0; i < ITEM_NUM; i++)
@@ -32,7 +32,7 @@ void CItemManager::Init(CShotManager* _shot, CPlayer* _player)
 	for (int i = 0; i < ITEM_NUM; i++)
 	{
 		CItemBase* item = new CItemBase;
-		item->Init(_shot,_player);
+		item->Init();
 		//座標を設定
 		item->SetPos(VGet((float)(i*20.0f),0.0f,0.0f));
 		//アイテムの名前を設定

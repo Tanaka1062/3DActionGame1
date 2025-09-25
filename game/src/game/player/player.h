@@ -10,7 +10,6 @@ class CPlayer:public CCharacterBase
 {
 private:
 	bool m_isPickUpItem;		//アイテムを取ろうとしているかフラグ		
-	CItemBase* m_item;			//アイテムのアドレス保存用
 
 public:
 	//コンストラクタ・デストラクタ
@@ -35,8 +34,6 @@ public:
 	//アイテムを取るかを取得
 	bool GetItem();
 
-	//アイテムを設定
-	void SetItem(CItemBase* _item) { m_item = new CItemBase(*_item); }
 
 private:
 	//待機状態処理

@@ -82,6 +82,9 @@
     <Filter Include="ソース ファイル\game\item\fireRing">
       <UniqueIdentifier>{a06ca225-e74d-4abc-9e83-5f8889888b45}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\game\item\itemInventory">
+      <UniqueIdentifier>{17650638-a1bc-4bf9-a5f1-b8bfebcbb656}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\number.cpp">
@@ -188,6 +191,9 @@
     </ClCompile>
     <ClCompile Include="src\game\item\itemManager.cpp">
       <Filter>ソース ファイル\game\item</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\item\itemInventory\itemInventory.cpp">
+      <Filter>ソース ファイル\game\item\itemInventory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -298,6 +304,9 @@
     </ClInclude>
     <ClInclude Include="src\game\item\itemManager.h">
       <Filter>ソース ファイル\game\item</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\item\itemInventory\itemInventory.h">
+      <Filter>ソース ファイル\game\item\itemInventory</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
