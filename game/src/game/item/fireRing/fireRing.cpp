@@ -9,9 +9,7 @@ static const int SHOT_LOST_TIME = 240;				//弾の消えるまでのスピード
 //使用した時の処理
 void CFireRing::Use()
 {
-	//弾を呼び出す
-	m_shot->Request(m_player->GetCenter(),m_player->GetRot(),
-		SHOT_SPEED,SHOT_ATK, SHOT_LOST_TIME);
+
 
 }
 

@@ -20,15 +20,13 @@ protected:
 	};
 
 	tagType m_type;			//アイテムのタイプ
-	CShotManager* m_shot;	//弾のマネージャークラスのアドレス保存用
-	CPlayer* m_player;		//プレイヤークラスのアドレス保存用
 
 public:
 	//コンストラクタ
 	CItemBase();
 
 	//初期化
-	virtual void Init(CShotManager* _shot,CPlayer* _player);
+	virtual void Init();
 
 	//毎フレームする処理
 	virtual void Step();
@@ -41,12 +39,6 @@ public:
 	void SetName(tagItemName _name) { m_name = _name; }
 	//アイテムの名前を取得
 	tagItemName GetName() { return m_name; }
-
-	//弾のマネージャークラスのアドレスを取得
-	void SetShot(CShotManager* _shot) { m_shot = _shot; }
-
-	//プレイヤークラスのアドレスを取得
-	void SetPlayer(CPlayer* _player) { m_player = _player; }
 
 };
 

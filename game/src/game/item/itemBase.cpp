@@ -8,13 +8,13 @@ static const float ROT_SPEED = 0.05f;	//âÒì]ë¨ìx
 //--------------------------
 CItemBase::CItemBase()
 {
-	Init(nullptr,nullptr);
+	Init();
 }
 
 //--------------------------
 //		  èâä˙âª
 //--------------------------
-void CItemBase::Init(CShotManager* _shot, CPlayer* _player)
+void CItemBase::Init()
 {
 	CObject::Init();
 
@@ -22,8 +22,6 @@ void CItemBase::Init(CShotManager* _shot, CPlayer* _player)
 
 	m_name = ITEM_FIRE_RING;
 	m_type = TYPE_NONE;
-	m_shot = _shot;
-	m_player = _player;
 }
 
 //--------------------------
