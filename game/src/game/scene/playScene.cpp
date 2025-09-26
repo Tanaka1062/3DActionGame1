@@ -51,6 +51,7 @@ void CPlayScene::Init()
 	m_enemy.Init();
 	m_shot.Init();
 	m_item.Init();
+	m_itemInventory.Init(&m_player);
 	m_camera.Init();
 
 }
@@ -85,6 +86,8 @@ void CPlayScene::Step()
 
 	m_item.Step();
 
+	m_itemInventory.Step();
+
 	m_camera.Step();
 
 
@@ -98,7 +101,7 @@ void CPlayScene::Step()
 	CCollisionManager::CheckHitPlayerToGoal(m_player, m_goal);
 	CCollisionManager::CheckHitPlayerToMap(m_player, m_ground);
 	CCollisionManager::CheckHitEnemyToMap(m_enemy, m_ground);
-	CCollisionManager::CheckHitItemToPlayer(m_item, m_player);
+	CCollisionManager::CheckHitItemToPlayer(m_item,m_itemInventory, m_player);
 	//--------------------------------------------
 
 	//‚·‚×‚Ä‚ÌŒ‹‰Ê‚ð”½‰f‚³‚¹‚é
@@ -109,6 +112,7 @@ void CPlayScene::Step()
 	m_enemy.Update();
 	m_shot.Update();
 	m_item.Update();
+	m_itemInventory.Update();
 	m_camera.Update(m_player.GetCenter());
 
 	if (CKeyInput::IsTrg(KEY_SELECT) == true ||

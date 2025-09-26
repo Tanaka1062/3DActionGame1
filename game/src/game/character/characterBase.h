@@ -14,6 +14,7 @@ class CCharacterBase:public CActor
 {
 protected:
 	float m_gravity;			//重力
+	int m_maxHp;				//体力の最大値
 	int m_hp;					//体力
 	int m_atk;					//攻撃力
 	enum tagState				//キャラクターの状態

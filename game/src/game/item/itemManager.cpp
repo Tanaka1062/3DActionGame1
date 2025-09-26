@@ -28,6 +28,8 @@ void CItemManager::Init()
 		m_hndl[i] = -1;
 	}
 
+	if (m_item.size() == ITEM_NUM)return;
+
 	//アイテムクラスを生成し初期化
 	for (int i = 0; i < ITEM_NUM; i++)
 	{
@@ -161,7 +163,7 @@ void CItemManager::DeleteItem(int _num)
 {
 	//アイテムの数をカウントする変数
 	int count = 0;
-	for (auto ite = m_item.begin(); ite != m_item.end();)
+	for (auto ite = m_item.begin(); ite != m_item.end();++ite)
 	{
 		//引数の数字と同じなら消す
 		if (count == _num)

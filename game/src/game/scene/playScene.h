@@ -10,6 +10,7 @@
 #include "../shot/shotManager.h"
 #include "../goal/goal.h"
 #include "../item/itemManager.h"
+#include "../item/itemInventory/itemInventory.h"
 
 using namespace std;
 
@@ -26,6 +27,7 @@ private:
 	CShotManager m_shot;				//弾
 	CGoal m_goal;						//ゴール
 	CItemManager m_item;				//アイテム
+	CItemInventory m_itemInventory;		//アイテムインベントリ
 
 public:
 

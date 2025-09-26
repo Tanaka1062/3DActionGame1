@@ -3,14 +3,16 @@
 #include "../shot/shotManager.h"
 #include"../item/itemBase.h"
 
-static const int PLAYER_NUM = 1;	//プレイヤーの数
+static const int PLAYER_NUM = 1;			//プレイヤーの数
+static const int ITEM_INVENTORY_MAX = 1;	//アイテムインベントリの最大数
 
 //プレイヤークラス
 class CPlayer:public CCharacterBase
 {
 private:
 	bool m_isPickUpItem;		//アイテムを取ろうとしているかフラグ		
-
+	bool m_isItemUse;			//アイテム使用フラグ
+	int m_itemSelectNum;		//現在選択しているアイテムの番号				
 public:
 	//コンストラクタ・デストラクタ
 	CPlayer();
@@ -32,8 +34,13 @@ public:
 	void Update();
 
 	//アイテムを取るかを取得
-	bool GetItem();
+	bool GetIsPickUp() { return m_isPickUpItem; }
 
+	//アイテム使用しているかを取得
+	bool GetIsItemUse() { return m_isItemUse; }
+	
+	//現在選択しているアイテムの番号を取得
+	int GetItemSelectNum() { return m_itemSelectNum; }
 
 private:
 	//待機状態処理

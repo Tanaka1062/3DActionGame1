@@ -5,6 +5,7 @@
 #include "../goal/goal.h"
 #include "../map/map.h"
 #include "../item/itemManager.h"
+#include "../item/itemInventory/itemInventory.h"
 
 class CCollisionManager
 {
@@ -39,6 +40,8 @@ public:
 	static void CheckHitEnemyToMap(CEnemyManager& _enemy, CMap& _map);
 
 	//アイテムとプレイヤーの当たり判定
-	static void CheckHitItemToPlayer(CItemManager& _item, CPlayer& _player);
+	static void CheckHitItemToPlayer(CItemManager& _item,
+		CItemInventory& _itemInventory, CPlayer& _player);
+
 };
 

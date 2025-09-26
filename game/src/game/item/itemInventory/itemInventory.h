@@ -3,13 +3,12 @@
 #include "../itemBase.h"
 #include "../../player/player.h"
 
-static const int ITEM_INVENTORY_NUM = 1;	//アイテムインベントリの数
 
 //アイテムのインベントリ
 class CItemInventory
 {
 private:
-	CItemBase m_item[ITEM_INVENTORY_NUM];		//アイテム
+	CItemBase* m_item[ITEM_INVENTORY_MAX];		//アイテム
 	int m_itemNum;								//選択されているアイテムの番号
 	CPlayer* m_player;							//プレイヤーのアドレス保存用
 
@@ -22,6 +21,9 @@ public:
 	void Step();
 	//数値の更新
 	void Update();
+	
+	//アイテムを設定
+	void SetItem(CItemBase* _item) { m_item[m_player->GetItemSelectNum()] = _item; }
 
 };
 

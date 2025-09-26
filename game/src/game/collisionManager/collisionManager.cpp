@@ -470,7 +470,8 @@ void CCollisionManager::CheckHitEnemyToMap(CEnemyManager& _enemy, CMap& _map)
 //----------------------------------------------
 //		アイテムとプレイヤーの当たり判定
 //----------------------------------------------
-void CCollisionManager::CheckHitItemToPlayer(CItemManager& _item, CPlayer& _player)
+void CCollisionManager::CheckHitItemToPlayer(CItemManager& _item,
+	CItemInventory& _itemInventory, CPlayer& _player)
 {
 	//プレイヤーが死んでいたら処理をしない
 	if (_player.GetActive() == false)return;
@@ -485,9 +486,12 @@ void CCollisionManager::CheckHitItemToPlayer(CItemManager& _item, CPlayer& _play
 			_player.GetCenter(), _player.GetRad()) == true)
 		{
 			//アイテムを取っていたらプレイヤーがアイテムを取得する
-			if (_player.GetItem() == true)
+			if (_player.GetIsPickUp() == true)
 			{
+				//アイテムをインベントリに入れる
+				_itemInventory.SetItem(item);
 
+				_item.DeleteItem(i);
 				//アイテムを取得したら処理を終了する
 				return;
 			}

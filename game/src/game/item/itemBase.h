@@ -2,7 +2,6 @@
 
 #include "../../lib/model/3DObject.h"
 #include "../data.h"
-#include "../shot/shotManager.h"
 #include "../player/player.h"
 
 //アイテムのベースクラス
@@ -20,13 +19,14 @@ protected:
 	};
 
 	tagType m_type;			//アイテムのタイプ
+	CPlayer* m_player;		//プレイヤーのアドレス保存用
 
 public:
 	//コンストラクタ
 	CItemBase();
 
 	//初期化
-	virtual void Init();
+	virtual void Init(CPlayer* _player);
 
 	//毎フレームする処理
 	virtual void Step();

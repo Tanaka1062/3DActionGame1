@@ -17,6 +17,7 @@ void CCharacterBase::Init()
 	
 	m_gravity = 0.0f;
 	m_hp = 0;
+	m_maxHp = 0;
 	m_atk = 0;
 	m_rad = 0;
 	m_state = WAIT;

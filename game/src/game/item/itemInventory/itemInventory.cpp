@@ -13,9 +13,9 @@ CItemInventory::CItemInventory()
 //------------------
 void CItemInventory::Init(CPlayer* _player)
 {
-	for (int i = 0; i < ITEM_INVENTORY_NUM; i++)
+	for (int i = 0; i < ITEM_INVENTORY_MAX; i++)
 	{
-		m_item[i].Init();
+		m_item[i]->Init();
 	}
 
 	m_itemNum = 0;
@@ -27,7 +27,7 @@ void CItemInventory::Init(CPlayer* _player)
 //------------------
 void CItemInventory::Step()
 {
-	
+	if()
 }
 
 //------------------

@@ -13,7 +13,7 @@ static const char MODEL_PATH[] =
 { "data/model/player/playerTest.mv1" };				//ロードするファイル名
 static const VECTOR INIT_POS = { 0.0f,1.0f,0.0f };	//初期座標
 static const int MAX_HP = 100;						//体力
-static const int ATK = 400;							//攻撃力
+static const int ATK = 10;							//攻撃力
 static const float MOVE_SPEED = 0.5f;				//移動スピード
 static const float RADIUS = 2.5f;					//半径
 //----------------------------------------------
@@ -75,9 +75,12 @@ void CPlayer::Init(CShotManager* _shot)
 
 	m_pos = INIT_POS;
 	m_rad = RADIUS;
-	m_hp = MAX_HP;
+	m_maxHp = MAX_HP;
+	m_hp = m_maxHp;
 	m_atk = ATK;
-
+	m_isItemUse = false;
+	m_isPickUpItem = false;
+	m_itemSelectNum = 0;
 }
 
 //-----------------------
@@ -102,6 +105,31 @@ void CPlayer::Step(float _rotY)
 	//アイテム使用処理
 	Item();
 
+	//アイテムを拾う処理
+	PickUpItem();
+
+	//選択しているアイテムを切り替える処理----------
+	
+	//左に一つ切り替える
+	if (CControllerInput::IsTrg(BUTTON_LEFT))
+	{
+		//アイテム番号が0以下なら変わらないように
+		if (m_itemSelectNum - 1 > -1)
+		{
+			m_itemSelectNum--;
+		}
+	}
+	//右に一つ切り替える
+	if (CControllerInput::IsTrg(BUTTON_RIGHT))
+	{
+		//アイテム番号がインベントの最大値以上なら変わらないように
+		if (m_itemSelectNum + 1 < ITEM_INVENTORY_MAX)
+		{
+			m_itemSelectNum++;
+		}
+	}
+
+	//----------------------------------------------
 
 	if (CheckHitKey(KEY_INPUT_SPACE))
 	{
@@ -139,23 +167,9 @@ void CPlayer::Update()
 
 	//アイテムを取ろうとしているかを初期化
 	m_isPickUpItem = false;
-
+	//アイテムを使用したかを初期化
+	m_isItemUse = false;
 }
-
-//-----------------------
-//アイテムを取るかを取得
-//-----------------------
-bool CPlayer::GetItem()
-{
-	//フラグ保存用
-	bool flg = m_isPickUpItem;
-
-	//アイテムを取ろうとしているかを初期化
-	m_isPickUpItem = false;
-
-	return flg;
-}
-
 
 //-----------------------
 //		待機処理
@@ -246,7 +260,7 @@ void CPlayer::Attack()
 			ATTACK_TIME, ATTACK_COOL_TIME);
 	}
 
-	//攻撃が終わったら攻撃後に移動
+	//攻撃が終わったら攻撃後に移行
 	if (m_attack.GetActive() == false)
 	{
 		m_state = ATTACK_OUT;
@@ -285,7 +299,7 @@ void CPlayer::ItemUseIn()
 		Request(ANIMID_ITEM_USE_IN, 1.0f);
 	}
 
-	//アニメーションが終わったら待機状態に戻す
+	//アニメーションが終わったらアイテム使用中に移行
 	if (GetAnimEnd() == true)
 	{
 		m_state = ITEM_USE;
@@ -303,6 +317,8 @@ void CPlayer::ItemUse()
 	{
 		Request(ANIMID_ITEM_USE, 1.0f);
 
+		//アイテム使用フラグをtrueに
+		m_isItemUse = true;
 	}
 
 	//アニメーションが終わったら待機状態に戻す
