@@ -1,2 +1,5 @@
 ﻿  itemManager.cpp
-  game.vcxproj -> C:\Users\2409417\Desktop\GitHub\3DActionGame1\game\x64\Debug\game.exe
+  sceneManager.cpp
+  コードを生成中...
+itemManager.obj : error LNK2019: 未解決の外部シンボル "public: __cdecl CHarbAmulent::CHarbAmulent(void)" (??0CHarbAmulent@@QEAA@XZ) が関数 "public: void __cdecl CItemManager::Init(class CPlayer *,class CShotManager *)" (?Init@CItemManager@@QEAAXPEAVCPlayer@@PEAVCShotManager@@@Z) で参照されました
+C:\Users\Owner\Desktop\gitHub\3DActionGame1\game\x64\Debug\game.exe : fatal error LNK1120: 1 件の未解決の外部参照

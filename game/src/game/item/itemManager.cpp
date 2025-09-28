@@ -1,12 +1,21 @@
 #include "itemManager.h"
-
+#include "fireRing/fireRing.h"
+#include "harbAmulent/harbAmulent.h"
 
 //-----------------------
 //	  コンストラクタ
 //-----------------------
 CItemManager::CItemManager()
 {
-	Init();
+	//Init(nullptr,nullptr);
+	m_shot = nullptr;
+	m_player = nullptr;
+
+	for (int i = 0; i < ITEM_NUM; i++)
+	{
+		m_hndl[i] = -1;
+	}
+
 }
 
 //-----------------------
@@ -20,8 +29,12 @@ CItemManager::~CItemManager()
 //-----------------------
 //		初期化
 //-----------------------
-void CItemManager::Init()
+void CItemManager::Init(CPlayer* _player, CShotManager* _shot)
 {
+	//アドレスを保存
+	m_player = _player;
+	m_shot = _shot;
+
 	//モデルハンドルを初期化
 	for (int i = 0; i < ITEM_NUM; i++)
 	{
@@ -33,21 +46,29 @@ void CItemManager::Init()
 	//アイテムクラスを生成し初期化
 	for (int i = 0; i < ITEM_NUM; i++)
 	{
-		CItemBase* item = new CItemBase;
-		item->Init();
-		//座標を設定
-		item->SetPos(VGet((float)(i*20.0f),0.0f,0.0f));
+		//CItemBase* item = new CItemBase;
+		//item->Init(_player);
+
+		CItemBase* item = nullptr;
+
 		//アイテムの名前を設定
 		switch (i)
 		{
 		case 0:
+			item = new CFireRing;
 			item->SetName(ITEM_FIRE_RING);
 			break;
 		case 1:
+			item = new CHarbAmulent;
 			item->SetName(ITME_HARB_AMULENT);
 			break;
 		}
+
+		item->Init(_player);
+		//座標を設定
+		item->SetPos(VGet((float)(i * 20.0f), 0.0f, 0.0f));
 		m_item.push_back(item);
+
 	}
 
 }

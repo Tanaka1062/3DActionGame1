@@ -50,7 +50,7 @@ void CPlayScene::Init()
 	m_player.Init(&m_shot);
 	m_enemy.Init();
 	m_shot.Init();
-	m_item.Init();
+	m_item.Init(&m_player,&m_shot);
 	m_itemInventory.Init(&m_player);
 	m_camera.Init();
 

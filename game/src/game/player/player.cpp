@@ -162,6 +162,12 @@ void CPlayer::Update()
 {
 	CCharacterBase::Update();
 
+	//‘Ì—Í‚ª‘‚¦‚·‚¬‚È‚¢‚æ‚¤‚É
+	if (m_hp >= m_maxHp)
+	{
+		m_hp = m_maxHp;
+	}
+
 	//UŒ‚‚ÌXV
 	m_attack.Update(GetCenter(), m_rot);
 

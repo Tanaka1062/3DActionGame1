@@ -23,7 +23,7 @@ public:
 	void Update();
 	
 	//ƒAƒCƒeƒ€‚ðÝ’è
-	void SetItem(CItemBase* _item) { m_item[m_player->GetItemSelectNum()] = _item; }
+	void SetItem(CItemBase* _item); 
 
 };
 

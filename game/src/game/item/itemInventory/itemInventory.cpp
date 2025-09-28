@@ -13,10 +13,10 @@ CItemInventory::CItemInventory()
 //------------------
 void CItemInventory::Init(CPlayer* _player)
 {
-	for (int i = 0; i < ITEM_INVENTORY_MAX; i++)
-	{
-		m_item[i]->Init();
-	}
+	//for (int i = 0; i < ITEM_INVENTORY_MAX; i++)
+	//{
+	//	m_item[i]->Init(nullptr);
+	//}
 
 	m_itemNum = 0;
 	m_player = _player;
@@ -27,7 +27,11 @@ void CItemInventory::Init(CPlayer* _player)
 //------------------
 void CItemInventory::Step()
 {
-	if()
+	//アイテムを使用していたら現在選択されているアイテムを使用
+	if (m_player->GetIsItemUse() == true)
+	{
+		m_item[m_player->GetItemSelectNum()]->Use();
+	}
 }
 
 //------------------
@@ -38,3 +42,15 @@ void CItemInventory::Update()
 
 }
 
+//アイテムを設定
+void CItemInventory::SetItem(CItemBase* _item)
+{
+	//すでにアイテムが入っている場合消す
+	if (m_item[m_player->GetItemSelectNum()] != nullptr)
+	{
+		delete m_item[m_player->GetItemSelectNum()];
+	}
+
+	//アイテムのコピーを作成し設定
+	m_item[m_player->GetItemSelectNum()] = new CItemBase(*_item);
+}

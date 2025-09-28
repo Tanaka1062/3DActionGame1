@@ -1,7 +1,7 @@
 #pragma once
 #include "../character/characterBase.h"
 #include "../shot/shotManager.h"
-#include"../item/itemBase.h"
+
 
 static const int PLAYER_NUM = 1;			//プレイヤーの数
 static const int ITEM_INVENTORY_MAX = 1;	//アイテムインベントリの最大数
@@ -41,6 +41,9 @@ public:
 	
 	//現在選択しているアイテムの番号を取得
 	int GetItemSelectNum() { return m_itemSelectNum; }
+
+	//体力を増やす
+	void AddHp(int _addNum) { m_hp += _addNum; }
 
 private:
 	//待機状態処理

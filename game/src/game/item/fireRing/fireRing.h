@@ -1,18 +1,17 @@
 #pragma once
-#include "../itemBase.h"
+#include"../itemShotBase.h"
 #include "../../shot/shotManager.h"
 
-class CFireRing:public CItemBase
+class CFireRing:public CItemShotBase
 {
 private:
 	CShotManager* m_shot;
 
 public:
 	CFireRing();
-	~CFireRing();
 
 	//‰Šú‰»
-	void Init(CPlayer* _player);
+	void Init(CPlayer* _player, CShotManager* _shot);
 
 	//g—p‚µ‚½‚Ìˆ—
 	void Use();
