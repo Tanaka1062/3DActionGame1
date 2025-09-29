@@ -46,34 +46,22 @@ void CItemManager::Init(CPlayer* _player, CShotManager* _shot)
 	//アイテムクラスを生成し初期化
 	for (int i = 0; i < ITEM_NUM; i++)
 	{
-		//CItemBase* item = new CItemBase;
-		//item->Init(_player);
-
 		CItemBase* item = nullptr;
 
 		//アイテムの名前を設定
 		switch (i)
 		{
 		case 0:
-			//item = new CFireRing;
-			//item->SetName(ITEM_FIRE_RING);
 			item = new CFireRing;
 			item->Init(m_player);
 			m_item.push_back(item);
 			break;
 		case 1:
-			//item = new CHarbAmulent;
-			//item->SetName(ITME_HARB_AMULENT);
 			item = new CHarbAmulent;
 			item->Init(m_player);
 			m_item.push_back(item);
 			break;
 		}
-
-		//item->Init(_player);
-		////座標を設定
-		//item->SetPos(VGet((float)(i * 20.0f), 0.0f, 0.0f));
-		//m_item.push_back(item);
 
 	}
 
@@ -82,11 +70,6 @@ void CItemManager::Init(CPlayer* _player, CShotManager* _shot)
 	{
 		(*ite)->SetPos(VGet((float)(num * 20.0f), 0.0f, 0.0f));
 
-		if ((*ite)->GetName() == ITEM_FIRE_RING)
-		{
-			CItemShotBase* itemShot = dynamic_cast<CItemShotBase*>(*ite);
-			itemShot->SetShot(_shot);
-		}
 		num++;
 	}
 }
@@ -196,23 +179,28 @@ CItemBase* CItemManager::GetItem(int _num)
 }
 
 //-----------------------
-//	   アイテムを消す
+//	   アイテムを設定
 //-----------------------
-void CItemManager::DeleteItem(int _num)
+void CItemManager::SetItem(int _num,CItemBase* _item)
 {
 	//アイテムの数をカウントする変数
 	int count = 0;
 	for (auto ite = m_item.begin(); ite != m_item.end();++ite)
 	{
-		//引数の数字と同じなら消す
+		//引数の数字と同じならアイテムを入れ替える
 		if (count == _num)
 		{
-			//終了処理
-			(*ite)->Exit();
-
-			delete (*ite);
-
-			ite = m_item.erase(ite);
+			//入れ替えるアイテムがnullptrなら消す
+			if (_item == nullptr)
+			{
+				ite = m_item.erase(ite);
+			}
+			else
+			{
+				*ite = _item;
+				//プレイヤーの位置に座標を設定
+				(*ite)->SetPos(m_player->GetPos());
+			}
 			return;
 		}
 		count++;

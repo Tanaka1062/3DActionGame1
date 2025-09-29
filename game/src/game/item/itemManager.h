@@ -42,7 +42,7 @@ public:
 	//アイテムのアドレスを取得
 	CItemBase* GetItem(int _num);
 
-	//アイテムを消す
-	void DeleteItem(int _num);
+	//アイテムを設定
+	void SetItem(int _num, CItemBase* _item);
 };
 

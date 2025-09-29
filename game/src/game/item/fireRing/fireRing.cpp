@@ -1,8 +1,8 @@
 #include "fireRing.h"
 //ƒAƒCƒeƒ€ŠÖ˜A--------------------------------
-static const float SHOT_SIZE = 3.0f;				//’e‚Ì‘å‚«‚³
-static const float SHOT_SPEED = 3.0f;				//’e‚ÌƒXƒs[ƒh
-static const int SHOT_ATK = 10;						//’e‚ÌUŒ‚—Í
+static const float SHOT_RADIUS = 5.0f;				//’e‚Ì‘å‚«‚³
+static const float SHOT_SPEED = 1.0f;				//’e‚ÌƒXƒs[ƒh
+static const int SHOT_ATK = 20;						//’e‚ÌUŒ‚—Í
 static const int SHOT_LOST_TIME = 240;				//’e‚ÌÁ‚¦‚é‚Ü‚Å‚ÌƒXƒs[ƒh
 //----------------------------------------------
 
@@ -26,10 +26,10 @@ void CFireRing::Init(CPlayer* _player)
 //-------------------
 // Žg—p‚µ‚½Žž‚Ìˆ—
 //-------------------
-void CFireRing::Use()
+void CFireRing::Use(CShotManager* _shot)
 {
-	m_shot->Request(m_player->GetCenter(), m_player->GetRot(),
-		SHOT_SPEED, SHOT_ATK, SHOT_LOST_TIME);
+	_shot->Request(m_player->GetCenter(), m_player->GetRot(),
+		SHOT_RADIUS,SHOT_SPEED, SHOT_ATK, SHOT_LOST_TIME);
 
 }
 

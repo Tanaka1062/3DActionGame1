@@ -1,4 +1,5 @@
 #include "itemInventory.h"
+#include "../itemShotBase.h"
 
 //------------------
 //	コンストラクタ
@@ -13,10 +14,10 @@ CItemInventory::CItemInventory()
 //------------------
 void CItemInventory::Init(CPlayer* _player)
 {
-	//for (int i = 0; i < ITEM_INVENTORY_MAX; i++)
-	//{
-	//	m_item[i]->Init(nullptr);
-	//}
+	for (int i = 0; i < ITEM_INVENTORY_MAX; i++)
+	{
+		m_item[i] = nullptr;
+	}
 
 	m_itemNum = 0;
 	m_player = _player;
@@ -25,13 +26,22 @@ void CItemInventory::Init(CPlayer* _player)
 //------------------
 //毎フレームする処理
 //------------------
-void CItemInventory::Step()
+void CItemInventory::Step(CShotManager* _shot)
 {
 	//アイテムを使用していたら現在選択されているアイテムを使用
 	if (m_player->GetIsItemUse() == true &&
 		m_item[m_player->GetItemSelectNum()] != nullptr)
 	{
-		m_item[m_player->GetItemSelectNum()]->Use();
+		switch (m_item[m_player->GetItemSelectNum()]->GetType())
+		{
+		case ITEM_TYPE_USE:
+			m_item[m_player->GetItemSelectNum()]->Use();
+			break;
+		case ITEM_TYPE_SHOT:
+			CItemShotBase* shotItem = dynamic_cast<CItemShotBase*>(m_item[m_player->GetItemSelectNum()]);
+			shotItem->Use(_shot);
+			break;
+		}
 	}
 }
 

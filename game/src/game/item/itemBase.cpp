@@ -21,7 +21,7 @@ void CItemBase::Init(CPlayer* _player)
 	m_rad = RADIUS;
 
 	m_name = ITEM_NONE;
-	m_type = TYPE_NONE;
+	m_type = ITEM_TYPE_NONE;
 	m_player = _player;
 }
 

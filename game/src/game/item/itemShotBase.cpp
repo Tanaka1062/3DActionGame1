@@ -14,7 +14,15 @@ CItemShotBase::CItemShotBase()
 void CItemShotBase::Init(CPlayer* _player)
 {
 	CItemBase::Init(_player);
-	m_type = TYPE_SHOT;
+	m_type = ITEM_TYPE_SHOT;
+
+}
+
+//-------------------
+//  égópÇµÇΩéûÇÃèàóù
+//-------------------
+void CItemShotBase::Use(CShotManager* _shot)
+{
 
 }
 

@@ -16,7 +16,7 @@ CHarbAmulent::CHarbAmulent()
 void CHarbAmulent::Init(CPlayer* _player)
 {
 	CItemBase::Init(_player);
-	m_type = TYPE_USE;
+	m_type = ITEM_TYPE_USE;
 	m_name = ITEM_HARB_AMULENT;
 }
 

@@ -7,7 +7,6 @@
 //定義関連---------------------------
 
 //プレイヤー関連--------------------------------
-static const float RADIUS = 2.5f;				//半径
 static const float MOVE_SPEED = 0.5f;			//スピード
 //----------------------------------------------
 
@@ -33,11 +32,11 @@ CShotBase::~CShotBase()
 void CShotBase::Init()
 {
 	CActor::Init();
-
 	m_lostTime = 0;
 	m_timeCount = 0;
 	m_atk = 0;
-	m_rad = RADIUS;
+	m_rad = 0.0f;
+	m_moveSpeed = 0.0f;
 }
 
 //-----------------------
@@ -100,14 +99,17 @@ void CShotBase::Update()
 //-----------------------
 //		呼び出し
 //-----------------------
-void CShotBase::Request(VECTOR _pos, VECTOR _rot, float _speed, int _atk, int _lostTime)
+void CShotBase::Request(VECTOR _pos, VECTOR _rot, float _rad, float _speed, int _atk, int _lostTime)
 {
 	//弾の設定
 	m_pos = _pos;
 	m_rot = _rot;
-	m_speed.z = _speed;
+	m_rad = _rad;
+	m_moveSpeed = _speed;
 	m_atk = _atk;
 	m_lostTime = _lostTime;
+
+	m_scale = { _rad/2.2f ,_rad/2.2f,_rad/2.2f };
 
 	m_isActive = true;
 }
@@ -120,7 +122,7 @@ void CShotBase::Move()
 	if (m_isActive == false)return;
 
 	//プレイヤーが目の前にいる時に進む速度
-	VECTOR defaultDir = { 0.0f,0.0f,-MOVE_SPEED };
+	VECTOR defaultDir = { 0.0f,0.0f,-m_moveSpeed};
 
 	//上記を行列に変換
 	MATRIX dir = CMyMath::GetTranslateMatrix(defaultDir);

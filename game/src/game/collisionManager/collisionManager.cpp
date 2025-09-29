@@ -488,11 +488,13 @@ void CCollisionManager::CheckHitItemToPlayer(CItemManager& _item,
 			//アイテムを取っていたらプレイヤーがアイテムを取得する
 			if (_player.GetIsPickUp() == true)
 			{
+				//インベントリのアイテム保存用
+				CItemBase* inventoryItem = nullptr;
 				//アイテムをインベントリに入れる
-				_itemInventory.SetItem(item);
+				inventoryItem = _itemInventory.SetItem(item);
+				//インベントリからアイテムに入れる
+				_item.SetItem(i,inventoryItem);
 
-				_item.DeleteItem(i);
-				//アイテムを取得したら処理を終了する
 				return;
 			}
 		}

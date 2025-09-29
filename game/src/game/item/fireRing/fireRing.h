@@ -5,7 +5,6 @@
 class CFireRing:public CItemShotBase
 {
 private:
-	CShotManager* m_shot;
 
 public:
 	CFireRing();
@@ -14,7 +13,7 @@ public:
 	void Init(CPlayer* _player);
 
 	//g—p‚µ‚½‚Ìˆ—
-	void Use();
+	void Use(CShotManager* _shot);
 
 };
 

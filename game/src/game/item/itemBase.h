@@ -10,15 +10,8 @@ class CItemBase :public CObject
 protected:
 	tagItemName m_name;		//アイテムの名前
 
-	//アイテムのタイプ
-	enum tagType
-	{
-		TYPE_NONE = -1,		//何もないタイプ
-		TYPE_SHOT,			//弾発射タイプ
-		TYPE_USE,			//使用タイプ
-	};
 
-	tagType m_type;			//アイテムのタイプ
+	tagItemType m_type;			//アイテムのタイプ
 	CPlayer* m_player;		//プレイヤーのアドレス保存用
 
 public:
@@ -39,6 +32,8 @@ public:
 	void SetName(tagItemName _name) { m_name = _name; }
 	//アイテムの名前を取得
 	tagItemName GetName() { return m_name; }
+	//アイテムのタイプを取得
+	tagItemType GetType() { return m_type; }
 
 };
 

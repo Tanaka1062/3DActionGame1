@@ -18,7 +18,7 @@ public:
 	//初期化
 	void Init(CPlayer* _player);
 	//毎フレームする処理
-	void Step();
+	void Step(CShotManager* _shot);
 	//数値の更新
 	void Update();
 	//描写処理

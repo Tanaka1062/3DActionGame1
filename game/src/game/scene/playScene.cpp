@@ -87,7 +87,7 @@ void CPlayScene::Step()
 
 	m_item.Step();
 
-	m_itemInventory.Step();
+	m_itemInventory.Step(&m_shot);
 
 	m_camera.Step();
 

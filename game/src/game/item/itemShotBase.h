@@ -6,7 +6,6 @@
 class CItemShotBase :public CItemBase
 {
 protected:
-	CShotManager* m_shot;			//弾のマネージャーのアドレス保存用
 
 public:
 	//コンストラクタ
@@ -15,8 +14,8 @@ public:
 	//初期化
 	virtual void Init(CPlayer* _player);
 
-	//弾のマネージャーのアドレスを設定
-	void SetShot(CShotManager* _shot) { m_shot = _shot; }
+	//使用した時の処理
+	virtual void Use(CShotManager* _shot);
 
 };
 
