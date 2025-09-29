@@ -12,7 +12,7 @@ public:
 	void Init(CPlayer* _player);
 
 	//g—p‚µ‚½‚Ìˆ—
-	void Use();
+	void Use() override;
 
 };
 

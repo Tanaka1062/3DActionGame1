@@ -28,7 +28,8 @@ void CItemInventory::Init(CPlayer* _player)
 void CItemInventory::Step()
 {
 	//アイテムを使用していたら現在選択されているアイテムを使用
-	if (m_player->GetIsItemUse() == true)
+	if (m_player->GetIsItemUse() == true &&
+		m_item[m_player->GetItemSelectNum()] != nullptr)
 	{
 		m_item[m_player->GetItemSelectNum()]->Use();
 	}
@@ -42,15 +43,43 @@ void CItemInventory::Update()
 
 }
 
-//アイテムを設定
-void CItemInventory::SetItem(CItemBase* _item)
+//------------------
+//	  描写処理
+//------------------
+void CItemInventory::Draw()
 {
-	//すでにアイテムが入っている場合消す
-	if (m_item[m_player->GetItemSelectNum()] != nullptr)
+	if (m_item[0] == nullptr)
 	{
-		delete m_item[m_player->GetItemSelectNum()];
+		DrawFormatString(32, 128, GetColor(255, 0, 0), "何もない");
+		return;
 	}
 
-	//アイテムのコピーを作成し設定
-	m_item[m_player->GetItemSelectNum()] = new CItemBase(*_item);
+	switch (m_item[0]->GetName())
+	{
+	case ITEM_FIRE_RING:
+		DrawFormatString(32, 128, GetColor(255, 0, 0), "ファイアリング");
+		break;
+	case ITEM_HARB_AMULENT:
+		DrawFormatString(32, 128, GetColor(255, 0, 0), "薬草のお守り");
+		break;
+	}
+}
+
+//アイテムを設定
+CItemBase* CItemInventory::SetItem(CItemBase* _item)
+{
+	//アドレス保存用
+	CItemBase* item = nullptr;
+	//すでにアイテムが入っている場合交換する
+	if (m_item[m_player->GetItemSelectNum()] != nullptr)
+	{
+		//今のアイテムのアドレスを保存
+		item = m_item[m_player->GetItemSelectNum()];
+	}
+
+	//インベントリにアイテムのアドレスを取得
+	m_item[m_player->GetItemSelectNum()] = _item;
+
+	//アドレスを渡す
+	return item;
 }

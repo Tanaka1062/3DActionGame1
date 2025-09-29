@@ -34,6 +34,7 @@ void CPlayScene::Draw()
 	m_enemy.Draw();
 	m_shot.Draw();
 	m_item.Draw();
+	m_itemInventory.Draw();
 
 	m_camera.Draw();
 

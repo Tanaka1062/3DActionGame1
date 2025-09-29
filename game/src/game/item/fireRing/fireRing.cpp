@@ -11,15 +11,15 @@ static const int SHOT_LOST_TIME = 240;				//弾の消えるまでのスピード
 //-------------------
 CFireRing::CFireRing()
 {
-	Init(nullptr, nullptr);
+	Init(nullptr);
 }
 
 //-------------------
 //		初期化
 //-------------------
-void CFireRing::Init(CPlayer* _player, CShotManager* _shot)
+void CFireRing::Init(CPlayer* _player)
 {
-	CItemShotBase::Init(_player, _shot);
+	CItemShotBase::Init(_player);
 	m_name = ITEM_FIRE_RING;
 }
 

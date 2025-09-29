@@ -5,7 +5,7 @@
 static const VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
 static const VECTOR SCALE = { 1.0f,1.0f,1.0f };		//大きさ
 static const char GROUND_MODEL_PATH[] =
-{ "data/model/map/testMap.mv1" };					//ロードするファイル名
+{ "data/model/map/Map1.mv1" };					//ロードするファイル名
 //==========================================
 
 

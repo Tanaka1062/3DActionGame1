@@ -13,7 +13,7 @@ static const char MODEL_PATH[] =
 { "data/model/player/playerTest.mv1" };				//ロードするファイル名
 static const VECTOR INIT_POS = { 0.0f,1.0f,0.0f };	//初期座標
 static const int MAX_HP = 100;						//体力
-static const int ATK = 10;							//攻撃力
+static const int ATK = 30;							//攻撃力
 static const float MOVE_SPEED = 0.5f;				//移動スピード
 static const float RADIUS = 2.5f;					//半径
 //----------------------------------------------
@@ -26,7 +26,7 @@ static const int ATTACK_COOL_TIME = 30;				//攻撃のクールタイム(フレーム)
 //-----------------------------------
 
 //アイテム関連--------------------------------
-static const int SHOT_ATK = 400;					//弾の攻撃力
+static const int SHOT_ATK = 50;						//弾の攻撃力
 static const float SHOT_MOVE_SPEED = 1.0f;			//弾の移動スピード
 static const int SHOT_LOST_TIME = 240;				//弾の消えるまでのスピード
 //----------------------------------------------

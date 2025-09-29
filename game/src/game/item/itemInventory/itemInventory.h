@@ -21,9 +21,11 @@ public:
 	void Step();
 	//数値の更新
 	void Update();
+	//描写処理
+	void Draw();
 	
 	//アイテムを設定
-	void SetItem(CItemBase* _item); 
+	CItemBase* SetItem(CItemBase* _item); 
 
 };
 

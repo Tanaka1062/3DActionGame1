@@ -13,7 +13,10 @@ public:
 	CItemShotBase();
 
 	//初期化
-	virtual void Init(CPlayer* _player,CShotManager* _shot);
+	virtual void Init(CPlayer* _player);
+
+	//弾のマネージャーのアドレスを設定
+	void SetShot(CShotManager* _shot) { m_shot = _shot; }
 
 };
 

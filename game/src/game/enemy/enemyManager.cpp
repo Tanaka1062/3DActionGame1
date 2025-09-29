@@ -1,6 +1,7 @@
 #include "enemyManager.h"
 
-static const int ENEMY_NUM = 2;			//敵の数
+static const int ENEMY_NUM = 7;						//敵の数
+static const int POS_ID[] = { 1,6,8,10,12,14,16 };	//初期座標番号
 
 //------------------------
 //	  コンストラクタ
@@ -27,15 +28,15 @@ CEnemyManager::~CEnemyManager()
 //------------------------
 void CEnemyManager::Init()
 {
+	m_posHndl = -1;
+
 	for (int i = 0; i < ENEMY_NUM; i++)
 	{
 		if (m_enemy.size() < ENEMY_NUM) 
 		{
 			m_enemy.push_back(new CEnemy);
 		}
-		VECTOR initPos = { 0.0f,1.0f,20.0f };
-		initPos.x = static_cast<float>(10 * i);
-		m_enemy[i]->Init(initPos);
+		m_enemy[i]->Init();
 	}
 }
 
@@ -44,8 +45,15 @@ void CEnemyManager::Init()
 //------------------------
 void CEnemyManager::Load()
 {
+	if (m_posHndl == -1)
+	{
+		m_posHndl = MV1LoadModel("data/model/map/map1FramePos.mv1");
+	}
+
 	for (int i = 0; i < m_enemy.size(); i++)
 	{
+		VECTOR pos = MV1GetFramePosition(m_posHndl, POS_ID[i]);
+		m_enemy[i]->SetPos(pos);
 		m_enemy[i]->Load();
 	}
 }

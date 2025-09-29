@@ -5,6 +5,7 @@ class CGoal:public CObject
 {
 private:
 	bool m_isGoal;			//ゴールフラグ
+	int m_posHndl;			//初期座標用のハンドル
 public:
 	//コンストラクタ・デストラクタ
 	CGoal();

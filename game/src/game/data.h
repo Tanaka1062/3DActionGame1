@@ -15,7 +15,7 @@ enum tagItemName
 {
 	ITEM_NONE = -1,		//何もない			
 	ITEM_FIRE_RING,		//ファイアリング
-	ITME_HARB_AMULENT,	//薬草のお守り
+	ITEM_HARB_AMULENT,	//薬草のお守り
 
 	ITEM_NUM,			//アイテムの種類
 };

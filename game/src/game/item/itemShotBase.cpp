@@ -5,17 +5,16 @@
 //-------------------
 CItemShotBase::CItemShotBase()
 {
-	Init(nullptr, nullptr);
+	Init(nullptr);
 }
 
 //-------------------
 //		èâä˙âª
 //-------------------
-void CItemShotBase::Init(CPlayer* _player, CShotManager* _shot)
+void CItemShotBase::Init(CPlayer* _player)
 {
 	CItemBase::Init(_player);
 	m_type = TYPE_SHOT;
-	m_shot = _shot;
 
 }
 

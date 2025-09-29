@@ -55,22 +55,40 @@ void CItemManager::Init(CPlayer* _player, CShotManager* _shot)
 		switch (i)
 		{
 		case 0:
+			//item = new CFireRing;
+			//item->SetName(ITEM_FIRE_RING);
 			item = new CFireRing;
-			item->SetName(ITEM_FIRE_RING);
+			item->Init(m_player);
+			m_item.push_back(item);
 			break;
 		case 1:
+			//item = new CHarbAmulent;
+			//item->SetName(ITME_HARB_AMULENT);
 			item = new CHarbAmulent;
-			item->SetName(ITME_HARB_AMULENT);
+			item->Init(m_player);
+			m_item.push_back(item);
 			break;
 		}
 
-		item->Init(_player);
-		//À•W‚ðÝ’è
-		item->SetPos(VGet((float)(i * 20.0f), 0.0f, 0.0f));
-		m_item.push_back(item);
+		//item->Init(_player);
+		////À•W‚ðÝ’è
+		//item->SetPos(VGet((float)(i * 20.0f), 0.0f, 0.0f));
+		//m_item.push_back(item);
 
 	}
 
+	int num = 0;
+	for (auto ite = m_item.begin(); ite != m_item.end(); ++ite)
+	{
+		(*ite)->SetPos(VGet((float)(num * 20.0f), 0.0f, 0.0f));
+
+		if ((*ite)->GetName() == ITEM_FIRE_RING)
+		{
+			CItemShotBase* itemShot = dynamic_cast<CItemShotBase*>(*ite);
+			itemShot->SetShot(_shot);
+		}
+		num++;
+	}
 }
 
 //-----------------------

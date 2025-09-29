@@ -2,7 +2,8 @@
 
 //定義関連---------------------------
 static const char MODEL_PATH[] =
-{ "data/model/goal/goalTest.mv1" };					//ロードするファイル名
+{ "data/model/goal/goalTest.mv1" };	//ロードするファイル名
+static const int POS_ID =  22;	//初期座標番号
 static const VECTOR INIT_POS = { 0.0f,1.0f,10.0f };	//初期座標
 static const float RADIUS = 7.0f;					//半径
 //-----------------------------------
@@ -33,6 +34,8 @@ void CGoal::Init()
 	m_pos = INIT_POS;
 	m_rad = RADIUS;
 	m_isGoal = false;
+
+	m_posHndl = -1;
 }
 
 //-----------------
@@ -41,6 +44,13 @@ void CGoal::Init()
 void CGoal::Load()
 {
 	CObject::LoadModel(MODEL_PATH);
+
+	if (m_posHndl == -1)
+	{
+		m_posHndl = MV1LoadModel("data/model/map/map1FramePos.mv1");
+	}
+
+	m_pos = MV1GetFramePosition(m_posHndl, POS_ID);
 }
 
 //-----------------
