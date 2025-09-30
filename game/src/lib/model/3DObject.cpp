@@ -46,8 +46,6 @@ void CObject::Update()
 	//現在の座標にスピードを加算
 	m_pos = VAdd(m_pos, m_speed);
 
-	//スピードをリセット
-	m_speed = { 0.0f,0.0f,0.0f };
 
 	MV1SetPosition(m_hndl, m_pos);
 	MV1SetRotationXYZ(m_hndl, m_rot);
@@ -146,3 +144,13 @@ VECTOR CObject::GetCenter()
 
 	return center;
 }
+
+//-----------------------------
+//		  速度のリセット
+//------------------------------
+void CObject::ResetSpeed()
+{
+	//スピードをリセット
+	m_speed = { 0.0f,0.0f,0.0f };
+}
+

@@ -53,7 +53,7 @@ public:
 	virtual void Step(VECTOR _pos);
 
 	//攻撃を食らった時にする処理
-	virtual void HitAttack(int _atk);
+	virtual void HitAttack(int _atk,float _rotY = 0.0f);
 
 	//数値の更新
 	void Update();
@@ -113,6 +113,9 @@ protected:
 
 	//重力処理
 	void Gravity();
+
+	//ノックバック処理
+	void MoveBack();
 
 };
 

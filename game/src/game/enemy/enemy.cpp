@@ -127,13 +127,19 @@ void CEnemy::Update()
 {
 	CCharacterBase::Update();
 
+	//怯み状態以外はスピードをリセット
+	if (m_state != STAGGER)
+	{
+		//速度のリセット
+		ResetSpeed();
+	}
+
 	//攻撃の更新
 	m_attack.Update(GetCenter(), m_rot);
 	//視界範囲の更新
 	m_FOV.Update(m_pos);
 
 }
-
 
 //-----------------------
 //		待機処理
@@ -277,11 +283,13 @@ void CEnemy::Stagger()
 		Request(ANIMID_HIT, 1.0f);
 	}
 
+	MoveBack();
+
 	//被弾のアニメーションが終わったら戻す
-	if (GetAnimEnd() == true)
-	{
-		m_state = WAIT;
-	}
+	//if (GetAnimEnd() == true)
+	//{
+	//	m_state = WAIT;
+	//}
 
 }
 

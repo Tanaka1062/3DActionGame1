@@ -78,8 +78,12 @@ void CCollisionManager::CheckHitEnemyAttackToPlayer(CEnemyManager& _enemyManager
 			attack->GetCenter(), attack->GetRad()) == true &&
 			attack->GetActive() == true)
 		{
+			//ƒmƒbƒNƒoƒbƒN‚Ì•ûŒü
+			float rot = atan2f(_player.GetCenter().x - enemy->GetCenter().x,
+				_player.GetCenter().z - enemy->GetCenter().z);
+
 			//“G‚ÉƒvƒŒƒCƒ„[‚ÌUŒ‚—Í•ªƒ_ƒ[ƒW
-			enemy->HitAttack(_player.GetAtk());
+			enemy->HitAttack(_player.GetAtk(),rot);
 		}
 	}
 }
@@ -345,8 +349,13 @@ void CCollisionManager::CheckHitShotToEnemy(CShotManager& _shotManager,
 			if (CCollision::CheckHitSphereToSphere(shot->GetCenter(), shot->GetRad(),
 				enemy->GetCenter(), enemy->GetRad()) == true)
 			{
+				
+				//ƒmƒbƒNƒoƒbƒN‚Ì•ûŒü
+				float rot = atan2f(shot->GetCenter().x - enemy->GetCenter().x,
+					shot->GetCenter().z - enemy->GetCenter().z);
+
 				//“G‚É’e‚ÌUŒ‚—Í•ª‚Ìƒ_ƒ[ƒW‚ð—^‚¦‚é
-				enemy->HitAttack(shot->GetAtk());
+				enemy->HitAttack(shot->GetAtk(),rot);
 
 				//’e‚ðÁ‚·
 				shot->SetActive(false);

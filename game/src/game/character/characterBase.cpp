@@ -1,4 +1,8 @@
 #include "characterBase.h"
+#include "../../lib/myMath/myMath.h"
+
+static const VECTOR BACK_SPEED = { 0.0f,0.5f,-1.0f };
+static const float BACK_DOWN_SPEED = 0.9f;
 
 //------------------------------
 //		コンストラクタ
@@ -128,10 +132,29 @@ void CCharacterBase::Update()
 //------------------------------
 //	攻撃を食らった時にする処理
 //------------------------------
-void CCharacterBase::HitAttack(int _atk)
+void CCharacterBase::HitAttack(int _atk, float _rotY)
 {
 	//既に怯み状態なら処理をしない
 	if (m_state == STAGGER)return;
+
+	//ノックバックの速度を設定------------
+	
+	//プレイヤーが目の前にいる時に進む速度
+	VECTOR defaultDir = BACK_SPEED;
+	//上記を行列に変換
+	MATRIX dir = CMyMath::GetTranslateMatrix(defaultDir);
+	//Y軸回転行列
+	MATRIX mRotY = CMyMath::GetYawMatrix(_rotY);
+	//行列の合成
+	MATRIX res = CMyMath::MatMult(mRotY, dir);
+
+	//移動をスピードに代入
+	m_speed.x = res.m[0][3];
+	m_speed.y = res.m[1][3];
+	m_speed.z = res.m[2][3];
+
+	//------------------------------------
+
 
 	//怯み状態にする
 	m_state = STAGGER;
@@ -242,5 +265,19 @@ void CCharacterBase::Gravity()
 {
 	m_gravity += 0.09f;
 
+}
+
+//-----------------------
+//	 ノックバック処理
+//-----------------------
+void CCharacterBase::MoveBack()
+{
+	//速度を徐々に下げていく
+	m_speed = VScale(m_speed, BACK_DOWN_SPEED);
+	//一定速度より遅くなったらノックバック
+	if (VSize(m_speed) < 0.1f)
+	{
+		m_state = WAIT;
+	}
 }
 

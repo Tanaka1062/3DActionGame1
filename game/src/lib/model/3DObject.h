@@ -98,5 +98,11 @@ public:
 	int GetHndl() { return m_hndl; }
 
 	//-------------------------------
+
+protected:
+	
+	//速度のリセット
+	void ResetSpeed();
+
 };
 
