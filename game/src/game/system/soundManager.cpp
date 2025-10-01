@@ -135,3 +135,4 @@ void CSoundManager::SetVolume(tagSound _id, float _vol)
 	if (_vol < 0.0f || _vol>1.0f)return;
 	ChangeVolumeSoundMem((int)(255.0f * _vol), m_hndl[_id]);
 }
+

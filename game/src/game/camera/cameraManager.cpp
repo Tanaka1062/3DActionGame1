@@ -34,11 +34,6 @@ void CCameraManager::Init()
 		m_camera[i]->Init();
 	}
 
-	//プレイカメラの初期化
-	m_play.Init();
-	//デバックカメラ初期化
-	m_debug.Init();
-
 	// カメラのニアーファー設定
 	SetCameraNearFar(CAMERA_NEAR, CAMERA_FAR);
 
@@ -56,26 +51,12 @@ void CCameraManager::Init()
 void CCameraManager::Step()
 {
 	//カメラの処理
-	m_camera[m_id];
-
-	switch (m_id)
-	{
-		//ゲーム中のメインカメラ
-	case CAMERA_ID_PLAY:
-		m_play.Step();
-		break;
-		//デバック用カメラ
-	case CAMERA_ID_DEBUG:
-		m_debug.Step();
-		break;
-	}
+	m_camera[m_id]->Step();
 
 	//カメラのモード切替
 	//デバックモードに変更
 	if (CheckHitKey(KEY_INPUT_B) != 0)
 	{
-		m_debug.SetPos(m_play.GetPos(),m_play.GetRot());
-
 		//変更前のカメラの座標
 		VECTOR pos = m_camera[m_id]->GetPos();
 		//変更前のカメラの角度
@@ -103,15 +84,11 @@ void CCameraManager::Step()
 //---------------------------
 void CCameraManager::Draw()
 {
-	switch (m_id)
+	//デバックカメラの描写処理
+	if (m_id == CAMERA_ID_DEBUG)
 	{
-		//ゲーム中のメインカメラ
-	case CAMERA_ID_PLAY:
-		break;
-		//デバック用カメラ
-	case CAMERA_ID_DEBUG:
-		m_debug.Draw();
-		break;
+		CDbugCamera* camera = dynamic_cast<CDbugCamera*>(m_camera[m_id]);
+		camera->Draw();
 	}
 
 }
@@ -121,24 +98,25 @@ void CCameraManager::Draw()
 //---------------------------
 void CCameraManager::Update(VECTOR _tagetPos)
 {
-	//カメラの座標
-	VECTOR pos = ZERO;
-	//カメラの角度
-	VECTOR rot = ZERO;
-	//カメラの上方向
-	VECTOR upVec = ZERO;
 
-	switch (m_id)
+	//カメラの更新
+	//プレイカメラの場合はプレイヤーの座標を入れる
+	if (m_id == CAMERA_ID_PLAY)
 	{
-		//ゲーム中のメインカメラ
-	case CAMERA_ID_PLAY:
-		m_play.Update(_tagetPos);
-		break;
-		//デバック用カメラ
-	case CAMERA_ID_DEBUG:
-		m_debug.Update();
-		break;
+		CPlayCamera* camera = dynamic_cast<CPlayCamera*>(m_camera[m_id]);
+		camera->Update(_tagetPos);
+	}
+	else
+	{
+		m_camera[m_id]->Update();
 	}
 
+	//カメラの情報
+	VECTOR pos = m_camera[m_id]->GetPos();
+	VECTOR rot = m_camera[m_id]->GetRot();
+	VECTOR up = m_camera[m_id]->GetUp();
+
+	CEffekseerCtrl::SetCameraRotMtx(pos, rot, up);
+	CEffekseerCtrl::Update();
 }
 

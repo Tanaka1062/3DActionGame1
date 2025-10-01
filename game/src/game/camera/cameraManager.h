@@ -19,8 +19,6 @@ public:
 
 private:
 	CCameraBase* m_camera[CAMERA_ID_NUM];	//カメラ
-	CPlayCamera m_play;		//ゲームカメラ
-	CDbugCamera m_debug;	//デバックカメラ
 	tagCAMERA_ID m_id;		//カメラのタイプ
 	VECTOR m_rot;			//カメラの回転値
 

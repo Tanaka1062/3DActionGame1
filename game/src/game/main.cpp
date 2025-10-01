@@ -9,6 +9,7 @@
 #include"../lib/system/fps.h"
 #include"../lib/input/controllerInput.h"
 #include"../lib/effekseer/effekseer.h"
+#include"system/effectData/effectData.h"
 
 static const int EFFECT_MAX_NUM = 10;			//一度に表示できるエフェクトの最大数
 static const int PARTICLE_MAX_NUM = 2000;		//一度に表示できるパーティクルの最大数
@@ -43,6 +44,12 @@ int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 	//エフェクシアの初期化
 	CEffekseerCtrl::Init(EFFECT_MAX_NUM,PARTICLE_MAX_NUM);
+
+	//エフェクトデータの初期化
+	CEffectData::Init();
+
+	//エフェクトデータのロード
+	CEffectData::Load();
 
 	//キー入力の初期化
 	CKeyInput::Init();

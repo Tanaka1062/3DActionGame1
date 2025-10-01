@@ -97,6 +97,9 @@
     <Filter Include="ソース ファイル\game\camera\debugCamera">
       <UniqueIdentifier>{578ef763-b049-4f80-ba2b-727e3fe82f73}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\game\system\effectData">
+      <UniqueIdentifier>{fb345ed7-3d28-46b3-95c0-5b3036b6b10e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\number.cpp">
@@ -218,6 +221,9 @@
     </ClCompile>
     <ClCompile Include="src\game\camera\cameraBase.cpp">
       <Filter>ソース ファイル\game\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\system\effectData\effectData.cpp">
+      <Filter>ソース ファイル\game\system\effectData</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -343,6 +349,9 @@
     </ClInclude>
     <ClInclude Include="src\game\camera\cameraBase.h">
       <Filter>ソース ファイル\game\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\system\effectData\effectData.h">
+      <Filter>ソース ファイル\game\system\effectData</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

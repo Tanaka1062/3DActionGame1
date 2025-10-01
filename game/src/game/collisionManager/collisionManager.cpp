@@ -2,6 +2,8 @@
 #include "../../lib/collision/collision.h"
 #include "../FOV/FOV.h"
 #include "../attack/attack.h"
+#include "../../lib/effekseer/effekseer.h"
+#include "../system/effectData/effectData.h"
 
 //----------------------------------------------
 //		敵の視界とプレイヤーの当たり判定
@@ -78,6 +80,12 @@ void CCollisionManager::CheckHitEnemyAttackToPlayer(CEnemyManager& _enemyManager
 			attack->GetCenter(), attack->GetRad()) == true &&
 			attack->GetActive() == true)
 		{
+			//呼び出すエフェクトのID
+			int effectId = CEffectData::GetId(EFFECT3);
+
+			//エフェクトを呼び出す
+			CEffekseerCtrl::Request(effectId,attack->GetCenter(),true);
+
 			//ノックバックの方向
 			float rot = atan2f(_player.GetCenter().x - enemy->GetCenter().x,
 				_player.GetCenter().z - enemy->GetCenter().z);
