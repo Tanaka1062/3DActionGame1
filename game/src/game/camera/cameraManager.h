@@ -1,6 +1,7 @@
 #pragma once
-#include "playCamera.h"
-#include "debugCamera.h"
+#include "playCamera/playCamera.h"
+#include "debugCamera/debugCamera.h"
+#include "cameraBase.h"
 
 //複数のカメラタイプを管理するクラス
 class CCameraManager
@@ -10,14 +11,14 @@ public:
 	//カメラタイプID
 	enum tagCAMERA_ID
 	{
-		CAMERA_ID_PLAY,		//ゲームのメインカメラ
-		CAMERA_ID_DOWN,		//見下ろし視点のカメラ
-		CAMERA_ID_DEBUG,	//デバッグ時のカメラ
+		CAMERA_ID_PLAY,						//ゲームのメインカメラ
+		CAMERA_ID_DEBUG,					//デバッグ時のカメラ
 
-		CAMERA_ID_NUM,		//カメラのタイプの数
+		CAMERA_ID_NUM,						//カメラのタイプの数
 	};
 
 private:
+	CCameraBase* m_camera[CAMERA_ID_NUM];	//カメラ
 	CPlayCamera m_play;		//ゲームカメラ
 	CDbugCamera m_debug;	//デバックカメラ
 	tagCAMERA_ID m_id;		//カメラのタイプ

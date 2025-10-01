@@ -3,6 +3,42 @@
   "WorkspaceRootPath": "D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\camera\\cameraManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\camera\\cameraManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\camera\\cameraManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\camera\\cameraManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\camera\\cameraBase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\camera\\cameraBase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\camera\\playCamera\\playCamera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\camera\\playCamera\\playCamera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\camera\\debugCamera\\debugCamera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\camera\\debugCamera\\debugCamera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\camera\\debugCamera\\debugCamera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\camera\\debugCamera\\debugCamera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\camera\\playCamera\\playCamera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\camera\\playCamera\\playCamera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\camera\\cameraBase.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\camera\\cameraBase.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\character\\characterBase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\character\\characterBase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -34,11 +70,132 @@
       "DocumentGroups": [
         {
           "DockedWidth": 7,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "debugCamera.h",
+              "DocumentMoniker": "D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\camera\\debugCamera\\debugCamera.h",
+              "RelativeDocumentMoniker": "src\\game\\camera\\debugCamera\\debugCamera.h",
+              "ToolTip": "D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\camera\\debugCamera\\debugCamera.h",
+              "RelativeToolTip": "src\\game\\camera\\debugCamera\\debugCamera.h",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-10-01T02:01:17.061Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "playCamera.h",
+              "DocumentMoniker": "D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\camera\\playCamera\\playCamera.h",
+              "RelativeDocumentMoniker": "src\\game\\camera\\playCamera\\playCamera.h",
+              "ToolTip": "D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\camera\\playCamera\\playCamera.h",
+              "RelativeToolTip": "src\\game\\camera\\playCamera\\playCamera.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-10-01T01:44:10.779Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "cameraBase.cpp",
+              "DocumentMoniker": "D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\camera\\cameraBase.cpp",
+              "RelativeDocumentMoniker": "src\\game\\camera\\cameraBase.cpp",
+              "ToolTip": "D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\camera\\cameraBase.cpp",
+              "RelativeToolTip": "src\\game\\camera\\cameraBase.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-10-01T01:44:54.917Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "cameraManager.h",
+              "DocumentMoniker": "D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\camera\\cameraManager.h",
+              "RelativeDocumentMoniker": "src\\game\\camera\\cameraManager.h",
+              "ToolTip": "D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\camera\\cameraManager.h",
+              "RelativeToolTip": "src\\game\\camera\\cameraManager.h",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAABAAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-10-01T01:43:00.659Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "cameraManager.cpp",
+              "DocumentMoniker": "D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\camera\\cameraManager.cpp",
+              "RelativeDocumentMoniker": "src\\game\\camera\\cameraManager.cpp",
+              "ToolTip": "D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\camera\\cameraManager.cpp",
+              "RelativeToolTip": "src\\game\\camera\\cameraManager.cpp",
+              "ViewState": "AgIAAHcAAAAAAAAAAAAAAHwAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-10-01T01:22:07.389Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "debugCamera.cpp",
+              "DocumentMoniker": "D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\camera\\debugCamera\\debugCamera.cpp",
+              "RelativeDocumentMoniker": "src\\game\\camera\\debugCamera\\debugCamera.cpp",
+              "ToolTip": "D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\camera\\debugCamera\\debugCamera.cpp",
+              "RelativeToolTip": "src\\game\\camera\\debugCamera\\debugCamera.cpp",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAAKIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-10-01T01:45:44.489Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "playCamera.cpp",
+              "DocumentMoniker": "D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\camera\\playCamera\\playCamera.cpp",
+              "RelativeDocumentMoniker": "src\\game\\camera\\playCamera\\playCamera.cpp",
+              "ToolTip": "D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\camera\\playCamera\\playCamera.cpp",
+              "RelativeToolTip": "src\\game\\camera\\playCamera\\playCamera.cpp",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-10-01T01:54:28.173Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "cameraBase.h",
+              "DocumentMoniker": "D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\camera\\cameraBase.h",
+              "RelativeDocumentMoniker": "src\\game\\camera\\cameraBase.h",
+              "ToolTip": "D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\camera\\cameraBase.h",
+              "RelativeToolTip": "src\\game\\camera\\cameraBase.h",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAAMAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-10-01T01:45:01.513Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "main.cpp",
+              "DocumentMoniker": "D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\main.cpp",
+              "RelativeDocumentMoniker": "src\\game\\main.cpp",
+              "ToolTip": "D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\main.cpp",
+              "RelativeToolTip": "src\\game\\main.cpp",
+              "ViewState": "AgIAADwAAAAAAAAAAAAAAFEAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-10-01T01:09:03.816Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "characterBase.h",
               "DocumentMoniker": "D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\character\\characterBase.h",
               "RelativeDocumentMoniker": "src\\game\\character\\characterBase.h",
@@ -46,25 +203,24 @@
               "RelativeToolTip": "src\\game\\character\\characterBase.h",
               "ViewState": "AgIAACEAAAAAAAAAAAAAADgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-09-30T08:30:09.014Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-30T08:30:09.014Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 9,
               "Title": "characterBase.cpp",
               "DocumentMoniker": "D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\character\\characterBase.cpp",
               "RelativeDocumentMoniker": "src\\game\\character\\characterBase.cpp",
               "ToolTip": "D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\character\\characterBase.cpp",
               "RelativeToolTip": "src\\game\\character\\characterBase.cpp",
-              "ViewState": "AgIAAEQAAAAAAAAAAAAAAAMAAAAvAAAAAAAAAA==",
+              "ViewState": "AgIAAEQAAAAAAAAAAAAAAEwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-09-30T08:24:23.231Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 13,
               "Title": "3DObject.cpp",
               "DocumentMoniker": "D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\lib\\model\\3DObject.cpp",
               "RelativeDocumentMoniker": "src\\lib\\model\\3DObject.cpp",
@@ -72,12 +228,11 @@
               "RelativeToolTip": "src\\lib\\model\\3DObject.cpp",
               "ViewState": "AgIAAI8AAAAAAAAAAAAAAJwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-09-30T07:43:06.619Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-30T07:43:06.619Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 14,
               "Title": "3DObject.h",
               "DocumentMoniker": "D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\lib\\model\\3DObject.h",
               "RelativeDocumentMoniker": "src\\lib\\model\\3DObject.h",
@@ -85,12 +240,11 @@
               "RelativeToolTip": "src\\lib\\model\\3DObject.h",
               "ViewState": "AgIAAF0AAAAAAAAAAAAAAGkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-09-30T07:41:06.065Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-30T07:41:06.065Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 12,
               "Title": "enemy.h",
               "DocumentMoniker": "D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\enemy\\enemy.h",
               "RelativeDocumentMoniker": "src\\game\\enemy\\enemy.h",
@@ -98,12 +252,11 @@
               "RelativeToolTip": "src\\game\\enemy\\enemy.h",
               "ViewState": "AgIAAC0AAAAAAAAAAAAAACUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-09-30T07:20:35.903Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-30T07:20:35.903Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 11,
               "Title": "player.cpp",
               "DocumentMoniker": "D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\player\\player.cpp",
               "RelativeDocumentMoniker": "src\\game\\player\\player.cpp",
@@ -111,8 +264,7 @@
               "RelativeToolTip": "src\\game\\player\\player.cpp",
               "ViewState": "AgIAALYBAAAAAAAAAAAAAMYBAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-09-30T07:05:58.849Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-30T07:05:58.849Z"
             }
           ]
         }

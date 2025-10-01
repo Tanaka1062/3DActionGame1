@@ -88,6 +88,15 @@
     <Filter Include="ソース ファイル\game\item\harbAmulent">
       <UniqueIdentifier>{5d3e3841-9c5e-4242-984f-29f53be8534b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\lib\effekseer">
+      <UniqueIdentifier>{f8cc2464-89a2-42d1-809b-271ec42468ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\game\camera\playCamera">
+      <UniqueIdentifier>{22017e20-cc7b-422a-9575-377e026daeae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\game\camera\debugCamera">
+      <UniqueIdentifier>{578ef763-b049-4f80-ba2b-727e3fe82f73}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\number.cpp">
@@ -115,12 +124,6 @@
       <Filter>ソース ファイル\lib\system</Filter>
     </ClCompile>
     <ClCompile Include="src\game\camera\cameraManager.cpp">
-      <Filter>ソース ファイル\game\camera</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\camera\debugCamera.cpp">
-      <Filter>ソース ファイル\game\camera</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\camera\playCamera.cpp">
       <Filter>ソース ファイル\game\camera</Filter>
     </ClCompile>
     <ClCompile Include="src\game\scene\playScene.cpp">
@@ -204,6 +207,18 @@
     <ClCompile Include="src\game\item\harbAmulent\harbAmulent.cpp">
       <Filter>ソース ファイル\game\item\harbAmulent</Filter>
     </ClCompile>
+    <ClCompile Include="src\lib\effekseer\effekseer.cpp">
+      <Filter>ソース ファイル\lib\effekseer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\camera\debugCamera\debugCamera.cpp">
+      <Filter>ソース ファイル\game\camera\debugCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\camera\playCamera\playCamera.cpp">
+      <Filter>ソース ファイル\game\camera\playCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\camera\cameraBase.cpp">
+      <Filter>ソース ファイル\game\camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\lib\number.h">
@@ -234,12 +249,6 @@
       <Filter>ソース ファイル\lib\system</Filter>
     </ClInclude>
     <ClInclude Include="src\game\camera\cameraManager.h">
-      <Filter>ソース ファイル\game\camera</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\camera\debugCamera.h">
-      <Filter>ソース ファイル\game\camera</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\camera\playCamera.h">
       <Filter>ソース ファイル\game\camera</Filter>
     </ClInclude>
     <ClInclude Include="src\game\scene\playScene.h">
@@ -322,6 +331,18 @@
     </ClInclude>
     <ClInclude Include="src\game\item\harbAmulent\harbAmulent.h">
       <Filter>ソース ファイル\game\item\harbAmulent</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lib\effekseer\effekseer.h">
+      <Filter>ソース ファイル\lib\effekseer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\camera\debugCamera\debugCamera.h">
+      <Filter>ソース ファイル\game\camera\debugCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\camera\playCamera\playCamera.h">
+      <Filter>ソース ファイル\game\camera\playCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\camera\cameraBase.h">
+      <Filter>ソース ファイル\game\camera</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

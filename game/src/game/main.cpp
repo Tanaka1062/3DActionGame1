@@ -8,6 +8,10 @@
 #include"data.h"
 #include"../lib/system/fps.h"
 #include"../lib/input/controllerInput.h"
+#include"../lib/effekseer/effekseer.h"
+
+static const int EFFECT_MAX_NUM = 10;			//一度に表示できるエフェクトの最大数
+static const int PARTICLE_MAX_NUM = 2000;		//一度に表示できるパーティクルの最大数
 
 // プログラムは WinMain から始まります
 int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
@@ -36,6 +40,9 @@ int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 	//シーンの初期化
 	CSceneManager scene;
+
+	//エフェクシアの初期化
+	CEffekseerCtrl::Init(EFFECT_MAX_NUM,PARTICLE_MAX_NUM);
 
 	//キー入力の初期化
 	CKeyInput::Init();
@@ -68,7 +75,11 @@ int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		//Fps更新処理
 		CFps::Update();
 
+		//シーンの描画処理
 		scene.Draw();
+
+		//エフェクシアの描画処理
+		CEffekseerCtrl::Draw();
 
 		//Fpsの表示
 		CFps::Print();
@@ -78,6 +89,8 @@ int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 	}
 
+	//エフェクシアの終了処理
+	CEffekseerCtrl::Exit();
 
 	DxLib_End();			// ＤＸライブラリ使用の終了処理
 
