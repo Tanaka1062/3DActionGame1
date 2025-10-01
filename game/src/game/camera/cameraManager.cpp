@@ -117,6 +117,7 @@ void CCameraManager::Update(VECTOR _tagetPos)
 	VECTOR up = m_camera[m_id]->GetUp();
 
 	CEffekseerCtrl::SetCameraRotMtx(pos, rot, up);
-	CEffekseerCtrl::Update();
+	//CEffekseerCtrl::Update();
+	CEffekseerCtrl::UpdateAutoCamera();
 }
 

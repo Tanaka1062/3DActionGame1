@@ -66,6 +66,8 @@ void CEnemy::Init(VECTOR _pos)
 	m_attack.Init(ATTACK_SIZE,ATTACK_LENGTH, ATTACKABLE_RAD);
 	m_FOV.Init(FOV_RADIUS);
 
+	m_rootHndl = -1;
+	m_rootId = -1;
 	m_pos = _pos;
 	m_rad = RADIUS;
 	m_hp = MAX_HP;
@@ -75,9 +77,16 @@ void CEnemy::Init(VECTOR _pos)
 //-----------------------
 //	モデルロード
 //-----------------------
-void CEnemy::Load()
+void CEnemy::Load(const char* _rootPath)
 {
 	CActor::LoadModel(MODEL_PATH);
+
+	if (m_rootHndl == -1)
+	{
+		m_rootHndl = MV1LoadModel(_rootPath);
+	}
+
+
 }
 
 //-----------------------
@@ -139,6 +148,14 @@ void CEnemy::Update()
 	//視界範囲の更新
 	m_FOV.Update(m_pos);
 
+}
+
+//-----------------------
+//	   ルートを設定
+//-----------------------
+void CEnemy::SetRoot(int _root)
+{
+	m_root.push_back(_root);
 }
 
 //-----------------------
@@ -351,6 +368,16 @@ void CEnemy::Move(VECTOR _pos)
 	m_speed.x = res.m[0][3];
 	m_speed.y = res.m[1][3];
 	m_speed.z = res.m[2][3];
+
+}
+
+//-----------------------
+//		ルートを歩く
+//-----------------------
+void CEnemy::MoveRoot()
+{
+	//次の目的地の座標取得
+	VECTOR targetPos = MV1GetFramePosition(m_rootHndl,m_root[m_rootId]);
 
 }
 

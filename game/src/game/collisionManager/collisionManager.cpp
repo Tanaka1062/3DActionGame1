@@ -68,6 +68,13 @@ void CCollisionManager::CheckHitEnemyAttackToPlayer(CEnemyManager& _enemyManager
 			attack->GetCenter(), attack->GetRad()) == true &&
 			attack->GetActive() == true)
 		{
+
+			//呼び出すエフェクトのID
+			int effectId = CEffectData::GetId(EFFECT_ATTACK);
+
+			//エフェクトを呼び出す
+			CEffekseerCtrl::Request(effectId, _player.GetCenter(), false);
+
 			//プレイヤーに敵の攻撃力分ダメージ
 			_player.HitAttack(enemy->GetAtk());
 		}
@@ -81,10 +88,10 @@ void CCollisionManager::CheckHitEnemyAttackToPlayer(CEnemyManager& _enemyManager
 			attack->GetActive() == true)
 		{
 			//呼び出すエフェクトのID
-			int effectId = CEffectData::GetId(EFFECT3);
+			int effectId = CEffectData::GetId(EFFECT_ATTACK);
 
 			//エフェクトを呼び出す
-			CEffekseerCtrl::Request(effectId,attack->GetCenter(),true);
+			CEffekseerCtrl::Request(effectId,enemy->GetCenter(),false);
 
 			//ノックバックの方向
 			float rot = atan2f(_player.GetCenter().x - enemy->GetCenter().x,
