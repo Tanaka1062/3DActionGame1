@@ -13,8 +13,8 @@ static const char MODEL_PATH[] =
 { "data/model/player/playerTest.mv1" };				//ロードするファイル名
 static const VECTOR INIT_POS = { 0.0f,1.0f,0.0f };	//初期座標
 static const int MAX_HP = 100;						//体力
-static const int ATK = 1;							//攻撃力
-static const float MOVE_SPEED = 0.5f;				//移動スピード
+static const int ATK = 30;							//攻撃力
+static const float MOVE_SPEED = 1.0f;				//移動スピード
 static const float RADIUS = 2.5f;					//半径
 //----------------------------------------------
 

@@ -1,7 +1,6 @@
 #include "enemyManager.h"
 #include "enemyRootData.h"
 
-static const int POS_ID[] = { 1,6,8,10,12,14,16 };	//初期座標番号
 
 //------------------------
 //	  コンストラクタ
@@ -9,6 +8,7 @@ static const int POS_ID[] = { 1,6,8,10,12,14,16 };	//初期座標番号
 CEnemyManager::CEnemyManager()
 {
 	Init();
+
 }
 
 //------------------------
@@ -28,7 +28,7 @@ CEnemyManager::~CEnemyManager()
 //------------------------
 void CEnemyManager::Init()
 {
-	m_posHndl = -1;
+	m_rootHndl = -1;
 
 	for (int i = 0; i < ENEMY_NUM; i++)
 	{
@@ -37,7 +37,17 @@ void CEnemyManager::Init()
 			m_enemy.push_back(new CEnemy);
 		}
 		m_enemy[i]->Init();
+		//ルートを設定
+		for (int j = 0; j < ENEMY_ROOT_MAX; j++)
+		{
+			//ルートが-1なら処理を終了
+			if (ENEMY_ROOT[i][j] == -1)continue;
+
+			m_enemy[i]->SetRoot(ENEMY_ROOT[i][j]);
+		}
 	}
+
+
 }
 
 //------------------------
@@ -45,16 +55,14 @@ void CEnemyManager::Init()
 //------------------------
 void CEnemyManager::Load()
 {
-	if (m_posHndl == -1)
+	if (m_rootHndl == -1)
 	{
-		m_posHndl = MV1LoadModel("data/model/map/map1FramePos.mv1");
+		m_rootHndl = MV1LoadModel("data/model/map/map1FramePos.mv1");
 	}
 
 	for (int i = 0; i < m_enemy.size(); i++)
 	{
-		VECTOR pos = MV1GetFramePosition(m_posHndl, POS_ID[i]);
-		m_enemy[i]->SetPos(pos);
-		m_enemy[i]->Load();
+		m_enemy[i]->Load(m_rootHndl);
 	}
 }
 

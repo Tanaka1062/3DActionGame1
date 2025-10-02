@@ -3,6 +3,7 @@
 #include "../../lib/myMath/myMath.h"
 #include <math.h>
 #include "../common.h"
+#include "../../lib/effekseer/effekseer.h"
 
 //定義関連---------------------------
 
@@ -37,6 +38,7 @@ void CShotBase::Init()
 	m_atk = 0;
 	m_rad = 0.0f;
 	m_moveSpeed = 0.0f;
+	m_effectHndl = -1;
 }
 
 //-----------------------
@@ -94,12 +96,29 @@ void CShotBase::Draw()
 void CShotBase::Update()
 {
 	CActor::Update();
+
+	//エフェクトハンドルが初期値だったら処理をしない
+	if (m_effectHndl == -1)return;
+
+	//エフェクトの座標を動かす
+	CEffekseerCtrl::SetPosition(m_effectHndl, GetCenter());
+}
+
+//-----------------------
+//		終了処理
+//-----------------------
+void CShotBase::Exit()
+{
+	CActor::Exit();
+	//CEffekseerCtrl::Stop(m_effectHndl);
+	//m_effectHndl = -1;
 }
 
 //-----------------------
 //		呼び出し
 //-----------------------
-void CShotBase::Request(VECTOR _pos, VECTOR _rot, float _rad, float _speed, int _atk, int _lostTime)
+void CShotBase::Request(VECTOR _pos, VECTOR _rot, float _rad, float _speed, int _atk, int _lostTime,
+	int _effectHndl)
 {
 	//弾の設定
 	m_pos = _pos;
@@ -108,8 +127,15 @@ void CShotBase::Request(VECTOR _pos, VECTOR _rot, float _rad, float _speed, int 
 	m_moveSpeed = _speed;
 	m_atk = _atk;
 	m_lostTime = _lostTime;
+	m_effectHndl = _effectHndl;
 
 	m_scale = { _rad/2.2f ,_rad/2.2f,_rad/2.2f };
+
+	//エフェクトあったらエフェクトを呼び出す
+	if (m_effectHndl != -1)
+	{
+		CEffekseerCtrl::Request(m_effectHndl, GetCenter(), false);
+	}
 
 	m_isActive = true;
 }

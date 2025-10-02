@@ -1,5 +1,6 @@
 #pragma once
 
+
 enum tagEffectKind	//エフェクトの種類
 {
 	EFFECT_ATTACK,			//攻撃エフェクト

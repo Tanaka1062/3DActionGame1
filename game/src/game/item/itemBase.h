@@ -11,7 +11,7 @@ protected:
 	tagItemName m_name;		//アイテムの名前
 
 
-	tagItemType m_type;			//アイテムのタイプ
+	tagItemType m_type;		//アイテムのタイプ
 	CPlayer* m_player;		//プレイヤーのアドレス保存用
 
 public:

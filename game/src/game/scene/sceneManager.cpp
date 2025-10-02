@@ -3,6 +3,7 @@
 #include "titleScene.h"
 #include "resultScene.h"
 #include"../system/soundManager.h"
+#include"../../lib/effekseer/effekseer.h"
 
 //定義関連====================================
 
@@ -50,18 +51,23 @@ int CSceneManager::Loop()
 		if (m_scene[TITLE]->Loop() != -1)
 		{
 			m_sceneID = GAME;
+
 		}
 		break;
 	case GAME:
 		if (m_scene[GAME]->Loop() != -1)
 		{
 			m_sceneID = RESULT;
+
+			//エフェクトを全て消す
+			CEffekseerCtrl::StopAll();
 		}
 		break;
 	case RESULT:
 		if (m_scene[RESULT]->Loop() != -1)
 		{
 			m_sceneID = TITLE;
+
 		}
 		break;
 	}

@@ -12,7 +12,7 @@ static const char MODEL_PATH[] =
 static const VECTOR INIT_POS = { 0.0f,0.0f,0.0f };	//初期座標
 static const int MAX_HP = 100;						//体力
 static const int ATK = 10;							//攻撃力
-static const float MOVE_SPEED = 0.25f;				//移動スピード
+static const float MOVE_SPEED = 0.75f;				//移動スピード
 static const float RADIUS = 2.5f;					//半径
 static const float FOV_RADIUS = 50.0f;				//視界範囲(半径)
 //----------------------------------------------
@@ -77,13 +77,13 @@ void CEnemy::Init()
 //-----------------------
 //	モデルロード
 //-----------------------
-void CEnemy::Load(const char* _rootPath)
+void CEnemy::Load(int _rootHndl)
 {
 	CActor::LoadModel(MODEL_PATH);
 
 	if (m_rootHndl == -1)
 	{
-		m_rootHndl = MV1LoadModel(_rootPath);
+		m_rootHndl = _rootHndl;
 	}
 
 	//ルート移動の初期化設定------------------
@@ -336,6 +336,7 @@ void CEnemy::Die()
 	{
 		m_isActive = false;
 	}
+
 }
 
 //-----------------------
@@ -383,6 +384,8 @@ void CEnemy::MoveRoot()
 {
 	//次の目的地の座標取得
 	VECTOR targetPos = MV1GetFramePosition(m_rootHndl,m_root[m_rootId]);
+	//高さは無視する
+	targetPos.y = m_pos.y;
 	//目的地に向けてのベクトルを計算
 	VECTOR dir = VSub(targetPos, m_pos);
 	//目的地までの距離を取得

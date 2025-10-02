@@ -25,7 +25,7 @@ public:
 	void Init();
 
 	//モデルロード
-	void Load(const char* _rootPath = nullptr);
+	void Load(int _rootHndl);
 
 	//毎フレームする処理
 	//追いかける相手の座標

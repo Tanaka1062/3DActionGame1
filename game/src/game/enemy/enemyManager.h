@@ -10,7 +10,7 @@ class CEnemyManager
 {
 private:
 	vector<CEnemy*> m_enemy;			//敵のクラス
-	int m_posHndl;						//初期座標用のハンドル
+	int m_rootHndl;						//移動ルートのハンドル
 
 public:
 	//コンストラクタ・デストラクタ

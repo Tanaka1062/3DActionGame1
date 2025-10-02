@@ -37,7 +37,9 @@ public:
 	// _speed		:弾の速度
 	// _atk			:攻撃力
 	// _lostTime	:消えるまでの時間
-	void Request(VECTOR _pos, VECTOR _rot,float _rad, float _speed, int _atk, int _lostTime);
+	// _effectHndl	:弾のエフェクト
+	void Request(VECTOR _pos, VECTOR _rot,float _rad, float _speed, int _atk, int _lostTime,
+				int _effectHndl = -1);
 
 	//弾の数を取得
 	int GetNum() { return static_cast<int>(m_shot.size());}
