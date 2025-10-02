@@ -13,6 +13,8 @@
 
 static const int EFFECT_MAX_NUM = 10;			//一度に表示できるエフェクトの最大数
 static const int PARTICLE_MAX_NUM = 2000;		//一度に表示できるパーティクルの最大数
+static const char* GAME_NAME =					//ゲームのタイトル
+"アクションゲーム";
 
 // プログラムは WinMain から始まります
 int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
@@ -34,6 +36,7 @@ int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 	//一番最初に１回だけやる処理
 	SetDrawScreen(DX_SCREEN_BACK);
+	SetMainWindowText(GAME_NAME);
 
 	//当たり判定の球をきれいに表示
 	SetUseZBuffer3D(TRUE);

@@ -353,5 +353,8 @@
     <ClInclude Include="src\game\system\effectData\effectData.h">
       <Filter>ソース ファイル\game\system\effectData</Filter>
     </ClInclude>
+    <ClInclude Include="src\game\enemy\enemyRootData.h">
+      <Filter>ソース ファイル\game\enemy</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -9,7 +9,7 @@
 //プレイヤー関連--------------------------------
 static const char MODEL_PATH[] =
 { "data/model/enemy/enemyTest.mv1" };				//ロードするファイル名
-static const VECTOR INIT_POS = { 0.0f,1.0f,0.0f };	//初期座標
+static const VECTOR INIT_POS = { 0.0f,0.0f,0.0f };	//初期座標
 static const int MAX_HP = 100;						//体力
 static const int ATK = 10;							//攻撃力
 static const float MOVE_SPEED = 0.25f;				//移動スピード
@@ -60,15 +60,15 @@ CEnemy::~CEnemy()
 //-----------------------
 //		初期化
 //-----------------------
-void CEnemy::Init(VECTOR _pos)
+void CEnemy::Init()
 {
 	CCharacterBase::Init();
 	m_attack.Init(ATTACK_SIZE,ATTACK_LENGTH, ATTACKABLE_RAD);
 	m_FOV.Init(FOV_RADIUS);
 
 	m_rootHndl = -1;
-	m_rootId = -1;
-	m_pos = _pos;
+	m_rootId = 0;
+	m_pos = INIT_POS;
 	m_rad = RADIUS;
 	m_hp = MAX_HP;
 	m_atk = ATK;
@@ -86,6 +86,13 @@ void CEnemy::Load(const char* _rootPath)
 		m_rootHndl = MV1LoadModel(_rootPath);
 	}
 
+	//ルート移動の初期化設定------------------
+	//最初の位置を取得し、そこに配置する
+	VECTOR start = MV1GetFramePosition(m_rootHndl, m_root[m_rootId]);
+	m_pos = start;
+	//ルートを次の位置に変更
+	m_rootId++;
+	//----------------------------------------
 
 }
 
@@ -102,9 +109,17 @@ void CEnemy::Step(VECTOR _pos)
 	//視界範囲の毎フレームする処理
 	m_FOV.Step();
 
-	//移動処理
-	Move(_pos);
-
+	//視界にプレイヤーが入ってなかったら追わない
+	if (m_FOV.GetHit() == false)
+	{
+		//ルート移動処理
+		MoveRoot();
+	}
+	else
+	{
+		//追いかける移動処理
+		MoveChase(_pos);
+	}
 
 	CCharacterBase::Step();
 
@@ -300,13 +315,8 @@ void CEnemy::Stagger()
 		Request(ANIMID_HIT, 1.0f);
 	}
 
+	//ノックバック
 	MoveBack();
-
-	//被弾のアニメーションが終わったら戻す
-	//if (GetAnimEnd() == true)
-	//{
-	//	m_state = WAIT;
-	//}
 
 }
 
@@ -329,9 +339,9 @@ void CEnemy::Die()
 }
 
 //-----------------------
-//		移動処理
+//	追いかける移動処理
 //-----------------------
-void CEnemy::Move(VECTOR _pos)
+void CEnemy::MoveChase(VECTOR _pos)
 {
 
 	//待機状態と移動状態以外は移動を出来ないようにする
@@ -339,11 +349,6 @@ void CEnemy::Move(VECTOR _pos)
 	{
 	case WAIT:
 	case WALK:
-		//視界にプレイヤーが入ってなかったら追わない
-		if (m_FOV.GetHit() == false)
-		{
-			return;
-		}
 		break;
 	default:
 		return;
@@ -372,12 +377,38 @@ void CEnemy::Move(VECTOR _pos)
 }
 
 //-----------------------
-//		ルートを歩く
+//	 ルートを移動処理
 //-----------------------
 void CEnemy::MoveRoot()
 {
 	//次の目的地の座標取得
 	VECTOR targetPos = MV1GetFramePosition(m_rootHndl,m_root[m_rootId]);
+	//目的地に向けてのベクトルを計算
+	VECTOR dir = VSub(targetPos, m_pos);
+	//目的地までの距離を取得
+	float len = VSize(dir);
 
+	//目的地までの距離が一定範囲内
+	if (len <= 1.5f)
+	{
+		//目的地に一気に移動
+		m_pos = targetPos;
+		//ルートを次の目的地に変更
+		m_rootId = (m_rootId + 1) % m_root.size();
+	}
+	//目的地まで、まだ距離がある
+	else
+	{
+		//高さは無視して正規化
+		dir.y = 0.0f;
+		dir = VNorm(dir);
+		//移動速度分の長さに変更
+		dir = VScale(dir, MOVE_SPEED);
+		//現在の速度に加算
+		m_speed = VAdd(m_speed, dir);
+	}
+
+	//進行方向を向かせる
+	m_rot.y = atan2f(-dir.x, -dir.z);
 }
 

@@ -193,6 +193,7 @@
     <ClInclude Include="src\game\data.h" />
     <ClInclude Include="src\game\enemy\enemy.h" />
     <ClInclude Include="src\game\enemy\enemyManager.h" />
+    <ClInclude Include="src\game\enemy\enemyRootData.h" />
     <ClInclude Include="src\game\FOV\FOV.h" />
     <ClInclude Include="src\game\goal\goal.h" />
     <ClInclude Include="src\game\item\fireRing\fireRing.h" />

@@ -1,6 +1,6 @@
 #include "enemyManager.h"
+#include "enemyRootData.h"
 
-static const int ENEMY_NUM = 7;						//“G‚Ì”
 static const int POS_ID[] = { 1,6,8,10,12,14,16 };	//‰ŠúÀ•W”Ô†
 
 //------------------------

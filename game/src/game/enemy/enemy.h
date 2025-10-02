@@ -22,10 +22,10 @@ public:
 	~CEnemy();
 
 	//初期化
-	void Init(VECTOR _pos = {0.0f,0.0f,0.0f});
+	void Init();
 
 	//モデルロード
-	void Load(const char* _rootPath = NULL);
+	void Load(const char* _rootPath = nullptr);
 
 	//毎フレームする処理
 	//追いかける相手の座標
@@ -71,10 +71,10 @@ private:
 	//死亡
 	void Die();
 
-	//移動処理
-	void Move(VECTOR _pos);
+	//追いかける移動処理
+	void MoveChase(VECTOR _pos);
 
-	//ルートを歩く
+	//ルートを移動処理
 	void MoveRoot();
 };
 
