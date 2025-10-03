@@ -34,8 +34,11 @@ void CFireRing::Use(CShotManager* _shot)
 	//呼び出すエフェクトのID
 	int effectId = CEffectData::GetId(EFFECT2);
 
+	//エフェクトのハンドル
+	int effectHndl = CEffekseerCtrl::Request(effectId, GetCenter(), false);
+
 	_shot->Request(m_player->GetCenter(), m_player->GetRot(),
-		SHOT_RADIUS,SHOT_SPEED, SHOT_ATK, SHOT_LOST_TIME, effectId);
+		SHOT_RADIUS,SHOT_SPEED, SHOT_ATK, SHOT_LOST_TIME, effectHndl);
 
 }
 

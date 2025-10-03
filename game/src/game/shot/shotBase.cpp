@@ -97,11 +97,13 @@ void CShotBase::Update()
 {
 	CActor::Update();
 
-	//エフェクトハンドルが初期値だったら処理をしない
-	if (m_effectHndl == -1)return;
+	//エフェクトハンドルがある時だけ
+	if (m_effectHndl != -1)
+	{
+		//エフェクトの座標を動かす
+		CEffekseerCtrl::SetPosition(m_effectHndl, GetCenter());
+	}
 
-	//エフェクトの座標を動かす
-	CEffekseerCtrl::SetPosition(m_effectHndl, GetCenter());
 }
 
 //-----------------------
@@ -110,8 +112,11 @@ void CShotBase::Update()
 void CShotBase::Exit()
 {
 	CActor::Exit();
-	//CEffekseerCtrl::Stop(m_effectHndl);
-	//m_effectHndl = -1;
+	if (m_effectHndl != -1)
+	{
+		CEffekseerCtrl::Stop(m_effectHndl);
+		m_effectHndl = -1;
+	}
 }
 
 //-----------------------
@@ -130,12 +135,6 @@ void CShotBase::Request(VECTOR _pos, VECTOR _rot, float _rad, float _speed, int 
 	m_effectHndl = _effectHndl;
 
 	m_scale = { _rad/2.2f ,_rad/2.2f,_rad/2.2f };
-
-	//エフェクトあったらエフェクトを呼び出す
-	if (m_effectHndl != -1)
-	{
-		CEffekseerCtrl::Request(m_effectHndl, GetCenter(), false);
-	}
 
 	m_isActive = true;
 }
