@@ -8,9 +8,8 @@
 class CItemBase :public CObject
 {
 protected:
+	int m_useCount;			//アイテムの使用回数
 	tagItemName m_name;		//アイテムの名前
-
-
 	tagItemType m_type;		//アイテムのタイプ
 	CPlayer* m_player;		//プレイヤーのアドレス保存用
 
@@ -34,6 +33,9 @@ public:
 	tagItemName GetName() { return m_name; }
 	//アイテムのタイプを取得
 	tagItemType GetType() { return m_type; }
+
+	//アイテムの使用回数を取得
+	int GetUseCount() { return m_useCount; }
 
 };
 

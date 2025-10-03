@@ -5,7 +5,10 @@
 static const VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
 static const VECTOR SCALE = { 1.0f,1.0f,1.0f };		//大きさ
 static const char GROUND_MODEL_PATH[] =
-{ "data/model/map/Map1.mv1" };					//ロードするファイル名
+{ "data/model/map/map1.mv1" };						//ロードするファイル名
+static const char GROUND_HIT_MODEL_PATH[] =
+{ "data/model/map/mapHit1.mv1" };					//ロードするファイル名
+
 //==========================================
 
 
@@ -35,7 +38,7 @@ void CMap::Init()
 	m_scale = SCALE;
 	m_rot = ZERO;
 	m_hndl = -1;
-
+	m_hitHndl = -1;
 }
 
 //------------------------
@@ -45,8 +48,10 @@ void CMap::Load()
 {
 	LoadModel(GROUND_MODEL_PATH);
 
+	m_hitHndl = MV1LoadModel(GROUND_HIT_MODEL_PATH);
+
 	//マップの当たり判定を取るためにコリジョン情報を構築する
-	MV1SetupCollInfo(m_hndl);
+	MV1SetupCollInfo(m_hitHndl);
 }
 
 //------------------------

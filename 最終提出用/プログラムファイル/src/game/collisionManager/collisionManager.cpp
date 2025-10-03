@@ -1,0 +1,531 @@
+#include "collisionManager.h"
+#include "../../lib/collision/collision.h"
+#include "../FOV/FOV.h"
+#include "../attack/attack.h"
+#include "../../lib/effekseer/effekseer.h"
+#include "../system/effectData/effectData.h"
+
+//----------------------------------------------
+//		敵の視界とプレイヤーの当たり判定
+//----------------------------------------------
+void CCollisionManager::CheckHitEnemyFOVToPlayer(CEnemyManager& _enemyManager,
+	CPlayer& _player)
+{
+	//プレイヤーが死んでいたら処理をしない
+	if (_player.GetActive() == false)return;
+
+	for (int i = 0; i < _enemyManager.GetEnemyNum(); i++)
+	{
+		//敵のクラスを取得
+		CEnemy* enemy = _enemyManager.GetEnemy(i);
+		
+		//敵が死んでいたら処理をしない
+		if (enemy->GetActive() == false)continue;
+
+		//敵の視界範囲クラスを取得
+		CFOV* enemyFOV = enemy->GetFOV();
+
+		//プレイヤーが敵の視界範囲に入っているかを確認
+		if (CCollision::CheckHitSphereToSphere(_player.GetCenter(), _player.GetRad(), enemyFOV->GetPos(), enemyFOV->GetRad()) == true)
+		{
+			enemyFOV->HitCalc();
+		}
+	}
+}
+
+//----------------------------------------------
+//	  敵の攻撃範囲とプレイヤーの当たり判定
+//----------------------------------------------
+void CCollisionManager::CheckHitEnemyAttackToPlayer(CEnemyManager& _enemyManager,
+	CPlayer& _player)
+{
+	//プレイヤーが死んでいたら処理をしない
+	if (_player.GetActive() == false)return;
+
+	for (int i = 0; i < _enemyManager.GetEnemyNum(); i++)
+	{
+		//敵のクラスを取得
+		CEnemy* enemy = _enemyManager.GetEnemy(i);
+
+		//敵が死んでいたら処理をしない
+		if (enemy->GetActive() == false)continue;
+
+		//敵の攻撃クラスを取得
+		CAttack* attack = enemy->GetAttack();
+
+		//敵の攻撃可能範囲にプレイヤーが入っているか
+		if (CCollision::CheckHitSphereToSphere(_player.GetCenter(), _player.GetRad(), enemy->GetCenter(), attack->GetAttackableRad()) == true)
+		{
+			attack->SetIsAttackable(true);
+		}
+		else
+		{
+			attack->SetIsAttackable(false);
+		}
+
+		//敵の攻撃がプレイヤーに当たっているか
+		if (CCollision::CheckHitSphereToSphere(_player.GetCenter(), _player.GetRad(),
+			attack->GetCenter(), attack->GetRad()) == true &&
+			attack->GetActive() == true)
+		{
+
+			//呼び出すエフェクトのID
+			int effectId = CEffectData::GetId(EFFECT_ATTACK);
+
+			//エフェクトを呼び出す
+			CEffekseerCtrl::Request(effectId, _player.GetCenter(), false);
+
+			//プレイヤーに敵の攻撃力分ダメージ
+			_player.HitAttack(enemy->GetAtk());
+		}
+
+		//プレイヤーの攻撃クラスを取得
+		attack = _player.GetAttack();
+
+		//プレイヤーの攻撃が敵に当たっているか
+		if (CCollision::CheckHitSphereToSphere(enemy->GetCenter(), enemy->GetRad(),
+			attack->GetCenter(), attack->GetRad()) == true &&
+			attack->GetActive() == true)
+		{
+			//呼び出すエフェクトのID
+			int effectId = CEffectData::GetId(EFFECT_ATTACK);
+
+			//エフェクトを呼び出す
+			CEffekseerCtrl::Request(effectId,enemy->GetCenter(),false);
+
+			//ノックバックの方向
+			float rot = atan2f(_player.GetCenter().x - enemy->GetCenter().x,
+				_player.GetCenter().z - enemy->GetCenter().z);
+
+			//敵にプレイヤーの攻撃力分ダメージ
+			enemy->HitAttack(_player.GetAtk(),rot);
+		}
+	}
+}
+
+//----------------------------------------------
+//			敵とプレイヤーの当たり判定
+//----------------------------------------------
+void CCollisionManager::CheckHitEnemyToPlayer(CEnemyManager& _enemyManager,
+	CPlayer& _player)
+{
+	//プレイヤーが死んでいたら処理をしない
+	if (_player.GetActive() == false)return;
+
+	for (int i = 0; i < _enemyManager.GetEnemyNum(); i++)
+	{
+		//敵のクラスを取得
+		CEnemy* enemy = _enemyManager.GetEnemy(i);
+
+		//敵が死んでいたら処理をしない
+		if (enemy->GetActive() == false)continue;
+
+		//プレイヤーの押し戻し処理-------------------------------------
+		
+		//判定用のプレイヤー座標を保存
+		VECTOR playerPos = _player.GetCenter();
+		//プレイヤーの速度を保存
+		VECTOR playerSpeed = _player.GetSpeed();
+
+		//Xだけ移動した時の座標
+		playerPos.x += playerSpeed.x;
+
+		//Xだけ移動したプレイヤーと敵の当たり判定
+		if (CCollision::CheckHitSphereToSphere(playerPos, _player.GetRad(),
+			enemy->GetCenter(), enemy->GetRad()) == true)
+		{
+			//Xの移動だけを取り消す
+			playerSpeed.x = 0.0f;
+		}
+
+		//Yだけ移動したときの座標
+		playerPos = _player.GetCenter();
+		playerPos.y += playerSpeed.y;
+
+		//Yだけ移動したプレイヤーと敵の当たり判定
+		if (CCollision::CheckHitSphereToSphere(playerPos, _player.GetRad(),
+			enemy->GetCenter(), enemy->GetRad()) == true)
+		{
+			//Yの移動だけを取り消す
+			playerSpeed.y = 0.0f;
+		}
+
+		//Zだけ移動したときの座標
+		playerPos = _player.GetCenter();
+		playerPos.z += playerSpeed.z;
+
+		//Zだけ移動したプレイヤーと敵の当たり判定
+		if (CCollision::CheckHitSphereToSphere(playerPos, _player.GetRad(),
+			enemy->GetCenter(), enemy->GetRad()) == true)
+		{
+			//Zの移動だけを取り消す
+			playerSpeed.z = 0.0f;
+		}
+
+		//変更したスピードをセット
+		_player.SetSpeed(playerSpeed);
+
+		//-------------------------------------------------------------
+
+		//敵の押し戻し処理------------------------------------------------
+
+		//判定用の敵座標を保存
+		VECTOR enemyPos = enemy->GetCenter();
+		//敵の速度を保存
+		VECTOR enemySpeed = enemy->GetSpeed();
+
+		//Xだけ移動した時の座標
+		enemyPos.x += enemySpeed.x;
+
+		//Xだけ移動した敵とプレイヤーの当たり判定
+		if (CCollision::CheckHitSphereToSphere(enemyPos, enemy->GetRad(),
+			_player.GetCenter(), _player.GetRad()) == true)
+		{
+			//Xの移動だけを取り消す
+			enemySpeed.x = 0.0f;
+		}
+
+		//Yだけ移動したときの座標
+		enemyPos = enemy->GetCenter();
+		enemyPos.y += enemySpeed.y;
+
+		//Yだけ移動した敵とプレイヤーの当たり判定
+		if (CCollision::CheckHitSphereToSphere(enemyPos, enemy->GetRad(),
+			_player.GetCenter(), _player.GetRad()) == true)
+		{
+			//Zの移動だけを取り消す
+			enemySpeed.y = 0.0f;
+		}
+
+		//Zだけ移動したときの座標
+		enemyPos = enemy->GetCenter();
+		enemyPos.z += enemySpeed.z;
+
+		//Zだけ移動した敵とプレイヤーの当たり判定
+		if (CCollision::CheckHitSphereToSphere(enemyPos, enemy->GetRad(),
+			_player.GetCenter(), _player.GetRad()) == true)
+		{
+			//Zの移動だけを取り消す
+			enemySpeed.z = 0.0f;
+		}
+
+		//変更したスピードをセット
+		enemy->SetSpeed(enemySpeed);
+		//----------------------------------------------------------------
+
+	}
+}
+
+//----------------------------------------------
+//				敵と敵の当たり判定
+//----------------------------------------------
+void CCollisionManager::CheckHitEnemyToEnemy(CEnemyManager& _enemyManager)
+{
+	for (int i = 0; i < _enemyManager.GetEnemyNum(); i++)
+	{
+		//敵１を保存
+		CEnemy* enemy1 = _enemyManager.GetEnemy(i);
+
+		//敵１が死んだらスキップ
+		if (enemy1->GetActive() == false)continue;
+
+		for (int j = 0; j < _enemyManager.GetEnemyNum(); j++)
+		{
+			//敵２を保存
+			CEnemy* enemy2 = _enemyManager.GetEnemy(j);
+
+			//敵２が死ぬまたは敵１と敵２が同じだったらスキップ
+			if (enemy2->GetActive() == false || i == j)continue;
+
+			//敵1の押し戻し処理------------------------------------------------
+
+			//判定用の敵1座標を保存
+			VECTOR enemy1Pos = enemy1->GetCenter();
+			//敵1の速度を保存
+			VECTOR enemy1Speed = enemy1->GetSpeed();
+
+			//Xだけ移動した時の座標
+			enemy1Pos.x += enemy1Speed.x;
+
+			//Xだけ移動した敵1と敵2の当たり判定
+			if (CCollision::CheckHitSphereToSphere(enemy1Pos, enemy1->GetRad(),
+				enemy2->GetCenter(), enemy2->GetRad()) == true)
+			{
+				//Xの移動だけを取り消す
+				enemy1Speed.x = 0.0f;
+			}
+
+			//Yだけ移動したときの座標
+			enemy1Pos = enemy1->GetCenter();
+			enemy1Pos.y += enemy1Speed.y;
+
+			//Yだけ移動した敵1と敵2の当たり判定
+			if (CCollision::CheckHitSphereToSphere(enemy1Pos, enemy1->GetRad(),
+				enemy2->GetCenter(), enemy2->GetRad()) == true)
+			{
+				//Zの移動だけを取り消す
+				enemy1Speed.y = 0.0f;
+			}
+
+			//Zだけ移動したときの座標
+			enemy1Pos = enemy1->GetCenter();
+			enemy1Pos.z += enemy1Speed.z;
+
+			//Zだけ移動した敵1と敵2の当たり判定
+			if (CCollision::CheckHitSphereToSphere(enemy1Pos, enemy1->GetRad(),
+				enemy2->GetCenter(), enemy2->GetRad()) == true)
+			{
+				//Zの移動だけを取り消す
+				enemy1Speed.z = 0.0f;
+			}
+
+			//変更したスピードをセット
+			enemy1->SetSpeed(enemy1Speed);
+			//----------------------------------------------------------------
+
+			//敵2の押し戻し処理------------------------------------------------
+
+			//判定用の敵2座標を保存
+			VECTOR enemy2Pos = enemy2->GetCenter();
+			//敵1の速度を保存
+			VECTOR enemy2Speed = enemy2->GetSpeed();
+
+			//Xだけ移動した時の座標
+			enemy2Pos.x += enemy2Speed.x;
+
+			//Xだけ移動した敵2と敵1の当たり判定
+			if (CCollision::CheckHitSphereToSphere(enemy2Pos, enemy2->GetRad(),
+				enemy1->GetCenter(), enemy1->GetRad()) == true)
+			{
+				//Xの移動だけを取り消す
+				enemy2Speed.x = 0.0f;
+			}
+
+			//Yだけ移動したときの座標
+			enemy2Pos = enemy2->GetCenter();
+			enemy2Pos.y += enemy2Speed.y;
+
+			//Yだけ移動した敵2と敵1の当たり判定
+			if (CCollision::CheckHitSphereToSphere(enemy2Pos, enemy2->GetRad(),
+				enemy1->GetCenter(), enemy1->GetRad()) == true)
+			{
+				//Zの移動だけを取り消す
+				enemy2Speed.y = 0.0f;
+			}
+
+			//Zだけ移動したときの座標
+			enemy2Pos = enemy2->GetCenter();
+			enemy2Pos.z += enemy2Speed.z;
+
+			//Zだけ移動した敵1と敵2の当たり判定
+			if (CCollision::CheckHitSphereToSphere(enemy2Pos, enemy2->GetRad(),
+				enemy1->GetCenter(), enemy1->GetRad()) == true)
+			{
+				//Zの移動だけを取り消す
+				enemy2Speed.z = 0.0f;
+			}
+
+			//変更したスピードをセット
+			enemy2->SetSpeed(enemy2Speed);
+			//----------------------------------------------------------------
+
+		}
+
+	}
+}
+
+//----------------------------------------------
+//				弾と敵の当たり判定
+//----------------------------------------------
+void CCollisionManager::CheckHitShotToEnemy(CShotManager& _shotManager,
+	CEnemyManager& _enemyManager)
+{
+	//弾の数が0発なら処理をしない
+	if (_shotManager.GetNum() == 0)return;
+	//敵が全部死んでいたら処理をしない
+	if (_enemyManager.GetIsAllDie() == true)return;
+
+	//弾のクラス保存用
+	CShotBase* shot ;
+	for (int i = 0; i < _shotManager.GetNum(); i++)
+	{
+		//弾を保存
+		shot = _shotManager.GetShot(i);
+
+		for (int j = 0; j < _enemyManager.GetEnemyNum(); j++)
+		{
+			//敵を保存
+			CEnemy* enemy = _enemyManager.GetEnemy(j);
+
+			//敵が死んだらスキップ
+			if (enemy->GetActive() == false)continue;
+
+			//弾と敵の当たり判定
+			if (CCollision::CheckHitSphereToSphere(shot->GetCenter(), shot->GetRad(),
+				enemy->GetCenter(), enemy->GetRad()) == true)
+			{
+				
+				//ノックバックの方向
+				float rot = atan2f(shot->GetCenter().x - enemy->GetCenter().x,
+					shot->GetCenter().z - enemy->GetCenter().z);
+
+				//敵に弾の攻撃力分のダメージを与える
+				enemy->HitAttack(shot->GetAtk(),rot);
+
+				//弾を消す
+				shot->SetActive(false);
+			}
+			
+		}
+	}
+}
+
+//----------------------------------------------
+//		  プレイヤーとゴールの当たり判定
+//----------------------------------------------
+void CCollisionManager::CheckHitPlayerToGoal(CPlayer& _player, CGoal& _goal, bool _isFlg)
+{
+	if (_isFlg == false)return;
+
+	//プレイヤーかゴールが無ければ処理をしない
+	if (_player.GetActive() == false ||
+		_goal.GetActive() == false)return;
+
+	//プレイヤーがゴールに触れているか
+	if (CCollision::CheckHitSphereToSphere(_player.GetCenter(),_player.GetRad(),
+		_goal.GetCenter(),_goal.GetRad()) == true)
+	{
+		//ゴールフラグをtrueに
+		_goal.HitCalc();
+	}
+}
+
+//----------------------------------------------
+//		  プレイヤーとマップの当たり判定
+//----------------------------------------------
+void CCollisionManager::CheckHitPlayerToMap(CPlayer& _player,CMap& _map)
+{
+
+	//当たり判定情報が格納される構造体
+	MV1_COLL_RESULT_POLY_DIM col;
+
+	col = MV1CollCheck_Sphere(_map.GetHitHndl(), -1,
+		_player.GetCenter(), _player.GetRad());
+
+	//ポリゴンと当たっていたか
+	if (col.HitNum != 0)
+	{
+		//押し戻しの計算-----------------------
+		
+		for (int i = 0; i < col.HitNum; i++)
+		{
+
+			//中心点から最近点を引き算
+			VECTOR vLen = VSub(_player.GetCenter(), col.Dim[i].HitPosition);
+			//取得した距離を三平方の定理の長さに変換
+			float fLen = VSize(vLen);
+			//実際にめり込んだ距離を計算
+			fLen = _player.GetRad() - fLen;
+			//法線をめり込んだ距離分掛け算する
+			vLen = VScale(col.Dim[i].Normal, fLen);
+
+			//プレイヤーの座標を計算した分だけ移動させる
+			_player.SetPos(VAdd(_player.GetPos(), vLen));
+
+			//重力をリセット
+			_player.GravityReset();
+
+		}
+		//-------------------------------------
+
+		//毎回データを削除
+		MV1CollResultPolyDimTerminate(col);
+	}
+}
+
+//----------------------------------------------
+//			敵とマップの当たり判定
+//----------------------------------------------
+void CCollisionManager::CheckHitEnemyToMap(CEnemyManager& _enemy, CMap& _map)
+{
+	//当たり判定情報が格納される構造体
+	MV1_COLL_RESULT_POLY_DIM col;
+
+	for (int i = 0; i < _enemy.GetEnemyNum(); i++)
+	{
+		//敵のクラスを取得
+		CEnemy* enemy = _enemy.GetEnemy(i);
+		//敵が生きていなかったらスキップ
+		if (enemy->GetActive() == false)continue;
+
+		col = MV1CollCheck_Sphere(_map.GetHitHndl(), -1,
+			enemy->GetCenter(), enemy->GetRad());
+
+		//ポリゴンと当たっていたか
+		if (col.HitNum != 0)
+		{
+			//押し戻しの計算-----------------------
+
+			for (int i = 0; i < col.HitNum; i++)
+			{
+
+				//中心点から最近点を引き算
+				VECTOR vLen = VSub(enemy->GetCenter(), col.Dim[i].HitPosition);
+				//取得した距離を三平方の定理の長さに変換
+				float fLen = VSize(vLen);
+				//実際にめり込んだ距離を計算
+				fLen = enemy->GetRad() - fLen;
+				//法線をめり込んだ距離分掛け算する
+				vLen = VScale(col.Dim[i].Normal, fLen);
+
+				//プレイヤーの座標を計算した分だけ移動させる
+				enemy->SetPos(VAdd(enemy->GetPos(), vLen));
+
+				//重力をリセット
+				enemy->GravityReset();
+
+			}
+			//-------------------------------------
+
+		}
+		//毎回データを削除
+		MV1CollResultPolyDimTerminate(col);
+	}
+
+}
+
+//----------------------------------------------
+//		アイテムとプレイヤーの当たり判定
+//----------------------------------------------
+void CCollisionManager::CheckHitItemToPlayer(CItemManager& _item,
+	CItemInventory& _itemInventory, CPlayer& _player)
+{
+	//プレイヤーが死んでいたら処理をしない
+	if (_player.GetActive() == false)return;
+
+	for (int i = 0; i < _item.GetNum(); i++)
+	{
+		//アイテムのクラスを取得
+		CItemBase* item = _item.GetItem(i);
+		
+		//アイテムにプレイヤーが当たっているか
+		if (CCollision::CheckHitSphereToSphere(item->GetCenter(), item->GetRad(),
+			_player.GetCenter(), _player.GetRad()) == true)
+		{
+			//アイテムを取っていたらプレイヤーがアイテムを取得する
+			if (_player.GetIsPickUp() == true)
+			{
+				//インベントリのアイテム保存用
+				CItemBase* inventoryItem = nullptr;
+				//アイテムをインベントリに入れる
+				inventoryItem = _itemInventory.SetItem(item);
+				//インベントリからアイテムに入れる
+				_item.SetItem(i,inventoryItem);
+
+				return;
+			}
+		}
+
+	}
+}
+

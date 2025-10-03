@@ -24,6 +24,7 @@ void CEffectData::Load()
 	// ロードするエフェクトを管理----------
 	const char* EFFECT_PATH[EFFECT_NUM] = {
 		"data/effect/attack_effect.efk",
+		"data/effect/heal_effect.efk",
 		"data/effect/eff_loop.efk",
 		"data/effect/effect.efk",
 

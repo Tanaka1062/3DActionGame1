@@ -67,12 +67,13 @@ void CItemInventory::Draw()
 	switch (m_item[0]->GetName())
 	{
 	case ITEM_FIRE_RING:
-		DrawFormatString(32, 128, GetColor(255, 0, 0), "ファイアリング");
+		DrawFormatString(32, 128, GetColor(255, 0, 0), "ファイアリング\n%d回使える",m_item[0]->GetUseCount());
 		break;
 	case ITEM_HARB_AMULENT:
-		DrawFormatString(32, 128, GetColor(255, 0, 0), "薬草のお守り");
+		DrawFormatString(32, 128, GetColor(255, 0, 0), "薬草のお守り\n%d回使える", m_item[0]->GetUseCount());
 		break;
 	}
+
 }
 
 //アイテムを設定

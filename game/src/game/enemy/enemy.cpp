@@ -90,6 +90,9 @@ void CEnemy::Load(int _rootHndl)
 	//最初の位置を取得し、そこに配置する
 	VECTOR start = MV1GetFramePosition(m_rootHndl, m_root[m_rootId]);
 	m_pos = start;
+	//視界も最初の位置を設定
+	m_FOV.SetPos(start);
+
 	//ルートを次の位置に変更
 	m_rootId++;
 	//----------------------------------------
@@ -250,7 +253,7 @@ void CEnemy::AttackIn()
 	//攻撃前のアニメーション
 	if (m_animData.m_id != ANIMID_ATTACK_IN)
 	{
-		Request(ANIMID_ATTACK_IN, 1.0f);
+		Request(ANIMID_ATTACK_IN, 0.40f);
 	}
 
 	//アニメーションが終わったら攻撃中に移行
@@ -382,6 +385,16 @@ void CEnemy::MoveChase(VECTOR _pos)
 //-----------------------
 void CEnemy::MoveRoot()
 {
+	//待機状態と移動状態以外は移動を出来ないようにする
+	switch (m_state)
+	{
+	case WAIT:
+	case WALK:
+		break;
+	default:
+		return;
+	}
+
 	//次の目的地の座標取得
 	VECTOR targetPos = MV1GetFramePosition(m_rootHndl,m_root[m_rootId]);
 	//高さは無視する

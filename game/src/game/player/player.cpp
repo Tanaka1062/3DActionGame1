@@ -68,9 +68,9 @@ CPlayer::~CPlayer()
 //-----------------------
 //		èâä˙âª
 //-----------------------
-void CPlayer::Init(CShotManager* _shot)
+void CPlayer::Init()
 {
-	CCharacterBase::Init(_shot);
+	CCharacterBase::Init();
 	m_attack.Init(ATTACK_SIZE,ATTACK_LENGTH);
 
 	m_pos = INIT_POS;
@@ -130,11 +130,6 @@ void CPlayer::Step(float _rotY)
 	}
 
 	//----------------------------------------------
-
-	if (CheckHitKey(KEY_INPUT_SPACE))
-	{
-		m_speed.y += 10.0f;
-	}
 
 	CCharacterBase::Step();
 }

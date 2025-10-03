@@ -101,7 +101,7 @@ void CShotBase::Update()
 	if (m_effectHndl != -1)
 	{
 		//エフェクトの座標を動かす
-		CEffekseerCtrl::SetPosition(m_effectHndl, GetCenter());
+		CEffekseerCtrl::SetPosition(m_effectHndl, m_pos);
 	}
 
 }

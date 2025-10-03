@@ -19,7 +19,7 @@ public:
 	~CPlayer();
 
 	//‰Šú‰»
-	void Init(CShotManager* _shot);
+	void Init();
 
 	//ƒ‚ƒfƒ‹ƒ[ƒh
 	void Load();

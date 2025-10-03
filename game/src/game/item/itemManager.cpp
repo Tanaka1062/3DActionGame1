@@ -7,7 +7,6 @@
 //-----------------------
 CItemManager::CItemManager()
 {
-	//Init(nullptr,nullptr);
 	m_shot = nullptr;
 	m_player = nullptr;
 
@@ -66,9 +65,24 @@ void CItemManager::Init(CPlayer* _player, CShotManager* _shot)
 	}
 
 	int num = 0;
+	
+	int rootHndl = MV1LoadModel("data/model/map/map1FramePos.mv1");
+
 	for (auto ite = m_item.begin(); ite != m_item.end(); ++ite)
 	{
-		(*ite)->SetPos(VGet((float)(num * 20.0f), 0.0f, 0.0f));
+		VECTOR start = VGet(0.0f, 0.0f, 0.0f);
+
+		switch (num)
+		{
+		case 0:
+			start = MV1GetFramePosition(rootHndl,18);
+			break;
+		case 1:
+			start = MV1GetFramePosition(rootHndl,20);
+			break;
+		}
+
+		(*ite)->SetPos(start);
 
 		num++;
 	}

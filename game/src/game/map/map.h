@@ -7,7 +7,7 @@
 class CMap :public CObject
 {
 private:
-
+	int m_hitHndl;		//当たり判定ようのマップのハンドル
 public:
 	//コンストラクタ・デストラクタ
 	CMap();
@@ -23,5 +23,7 @@ public:
 	//モデル描写
 	void Draw();
 
+	//当たり判定ようのマップのハンドルを取得
+	int GetHitHndl() { return m_hitHndl; }
 };
 

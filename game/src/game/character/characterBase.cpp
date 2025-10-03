@@ -27,13 +27,6 @@ void CCharacterBase::Init()
 	m_state = WAIT;
 }
 
-//初期化(弾を出すキャラ用)
-void CCharacterBase::Init(CShotManager* _shot)
-{
-	Init();
-	m_shot = _shot;
-}
-
 //------------------------------
 //		毎フレームする処理
 //------------------------------

@@ -383,8 +383,10 @@ void CCollisionManager::CheckHitShotToEnemy(CShotManager& _shotManager,
 //----------------------------------------------
 //		  プレイヤーとゴールの当たり判定
 //----------------------------------------------
-void CCollisionManager::CheckHitPlayerToGoal(CPlayer& _player, CGoal& _goal)
+void CCollisionManager::CheckHitPlayerToGoal(CPlayer& _player, CGoal& _goal, bool _isFlg)
 {
+	if (_isFlg == false)return;
+
 	//プレイヤーかゴールが無ければ処理をしない
 	if (_player.GetActive() == false ||
 		_goal.GetActive() == false)return;
@@ -403,10 +405,11 @@ void CCollisionManager::CheckHitPlayerToGoal(CPlayer& _player, CGoal& _goal)
 //----------------------------------------------
 void CCollisionManager::CheckHitPlayerToMap(CPlayer& _player,CMap& _map)
 {
+
 	//当たり判定情報が格納される構造体
 	MV1_COLL_RESULT_POLY_DIM col;
 
-	col = MV1CollCheck_Sphere(_map.GetHndl(), -1,
+	col = MV1CollCheck_Sphere(_map.GetHitHndl(), -1,
 		_player.GetCenter(), _player.GetRad());
 
 	//ポリゴンと当たっていたか
@@ -455,7 +458,7 @@ void CCollisionManager::CheckHitEnemyToMap(CEnemyManager& _enemy, CMap& _map)
 		//敵が生きていなかったらスキップ
 		if (enemy->GetActive() == false)continue;
 
-		col = MV1CollCheck_Sphere(_map.GetHndl(), -1,
+		col = MV1CollCheck_Sphere(_map.GetHitHndl(), -1,
 			enemy->GetCenter(), enemy->GetRad());
 
 		//ポリゴンと当たっていたか

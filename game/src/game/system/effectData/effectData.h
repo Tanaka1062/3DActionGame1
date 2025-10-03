@@ -4,6 +4,7 @@
 enum tagEffectKind	//エフェクトの種類
 {
 	EFFECT_ATTACK,			//攻撃エフェクト
+	EFFECT_HEAL,			//回復エフェクト
 	EFFECT2,				//エフェクト２
 	EFFECT3,				//エフェクト３
 

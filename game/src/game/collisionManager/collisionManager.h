@@ -31,7 +31,7 @@ public:
 		CEnemyManager& _enemyManager);
 
 	//プレイヤーとゴールの当たり判定
-	static void CheckHitPlayerToGoal(CPlayer& _player, CGoal& _goal);
+	static void CheckHitPlayerToGoal(CPlayer& _player, CGoal& _goal, bool _isFlg);
 
 	//プレイヤーとマップの当たり判定
 	static void CheckHitPlayerToMap(CPlayer& _player,CMap& _map);

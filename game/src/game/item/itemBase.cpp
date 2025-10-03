@@ -19,7 +19,7 @@ void CItemBase::Init(CPlayer* _player)
 	CObject::Init();
 
 	m_rad = RADIUS;
-
+	m_useCount = 0;
 	m_name = ITEM_NONE;
 	m_type = ITEM_TYPE_NONE;
 	m_player = _player;
