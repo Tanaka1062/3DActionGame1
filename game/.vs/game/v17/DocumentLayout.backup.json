@@ -120,9 +120,9 @@
               "Title": "itemInventory.cpp",
               "DocumentMoniker": "D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\item\\itemInventory\\itemInventory.cpp",
               "RelativeDocumentMoniker": "src\\game\\item\\itemInventory\\itemInventory.cpp",
-              "ToolTip": "D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\item\\itemInventory\\itemInventory.cpp*",
-              "RelativeToolTip": "src\\game\\item\\itemInventory\\itemInventory.cpp*",
-              "ViewState": "AgIAADwAAAAAAAAAAAAAAEsAAAAAAAAAAAAAAA==",
+              "ToolTip": "D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\item\\itemInventory\\itemInventory.cpp",
+              "RelativeToolTip": "src\\game\\item\\itemInventory\\itemInventory.cpp",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAmwEsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-10-03T08:15:28.185Z",
               "EditorCaption": ""
@@ -137,8 +137,7 @@
               "RelativeToolTip": "src\\game\\item\\fireRing\\fireRing.cpp",
               "ViewState": "AgIAACAAAAAAAAAAAAAmwCUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-10-03T08:08:51.504Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-03T08:08:51.504Z"
             },
             {
               "$type": "Document",
@@ -150,8 +149,7 @@
               "RelativeToolTip": "src\\game\\item\\itemBase.cpp",
               "ViewState": "AgIAABUAAAAAAAAAAAAqwCkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-10-03T08:06:16.763Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-03T08:06:16.763Z"
             },
             {
               "$type": "Document",
@@ -411,8 +409,7 @@
               "RelativeToolTip": "src\\game\\common.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-10-02T06:58:06.023Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-02T06:58:06.023Z"
             }
           ]
         }
