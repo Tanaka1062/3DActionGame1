@@ -100,6 +100,9 @@
     <Filter Include="ソース ファイル\game\system\effectData">
       <UniqueIdentifier>{fb345ed7-3d28-46b3-95c0-5b3036b6b10e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\game\weapon">
+      <UniqueIdentifier>{f7909f27-5431-4ff4-93aa-f4c37b51a76b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\number.cpp">
@@ -224,6 +227,9 @@
     </ClCompile>
     <ClCompile Include="src\game\system\effectData\effectData.cpp">
       <Filter>ソース ファイル\game\system\effectData</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\weapon\weapon.cpp">
+      <Filter>ソース ファイル\game\weapon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -355,6 +361,9 @@
     </ClInclude>
     <ClInclude Include="src\game\enemy\enemyRootData.h">
       <Filter>ソース ファイル\game\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\weapon\weapon.h">
+      <Filter>ソース ファイル\game\weapon</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

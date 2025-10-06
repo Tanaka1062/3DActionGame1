@@ -33,17 +33,23 @@ static const int SHOT_LOST_TIME = 240;				//弾の消えるまでのスピード
 
 //アニメーション一覧---------------------------
 enum tagAnim {
-	ANIMID_ATTACK,			//攻撃中アニメーション
-	ANIMID_ATTACK_IN,		//攻撃前のアニメーション
-	ANIMID_ATTACK_OUT,		//攻撃後のアニメーション
-	ANIMID_DEFAULT,			//デフォルトのアニメーション
-	ANIMID_DIE,				//死亡時のアニメーション
-	ANIMID_HIT,				//被弾のアニメーション
-	ANIMID_ITEM_USE,		//アイテムを使用中のアニメーション
-	ANIMID_ITEM_USE_IN,		//アイテムを使用する前のアニメーション
-	ANIMID_ITEM_USE_OUT,	//アイテムを使用した後のアニメーション
-	ANIMID_WAIT,			//待機状態のアニメーション
-	ANIMID_WALK,			//歩きのアニメーション
+	ANIMID_ATTACK,				//攻撃中アニメーション
+	ANIMID_ATTACKB,				//攻撃2中アニメーション
+	ANIMID_ATTACKB_CHARGE,		//攻撃2のチャージ中アニメーション
+	ANIMID_ATTACKB_CHARGEIN,	//攻撃2のチャージ前アニメーション
+	ANIMID_ATTACKB_IN,			//攻撃2前アニメーション
+	ANIMID_ATTACKB_OUT,			//攻撃2後アニメーション
+	ANIMID_ATTACK_IN,			//攻撃前のアニメーション
+	ANIMID_ATTACK_OUT,			//攻撃後のアニメーション
+	ANIMID_DEFAULT,				//デフォルトのアニメーション
+	ANIMID_DIE,					//死亡時のアニメーション
+	ANIMID_HIT,					//被弾のアニメーション
+	ANIMID_ITEM_USE,			//アイテムを使用中のアニメーション
+	ANIMID_ITEM_USE_IN,			//アイテムを使用する前のアニメーション
+	ANIMID_ITEM_USE_OUT,		//アイテムを使用した後のアニメーション
+	ANIMID_WAIT,				//待機状態のアニメーション
+	ANIMID_WALK,				//歩きのアニメーション
+
 };
 //---------------------------------------------------------
 
