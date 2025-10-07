@@ -5,20 +5,19 @@
 class CWeapon : public CObject
 {
 private:
-	int m_playerHndl;		//プレイヤーのモデルハンドル
 public:
 	//コンストラクタ・デストラクタ
 	CWeapon();
 	~CWeapon();
 
 	//初期化
-	void Init(int _hndl = -1);
+	void Init();
 
 	//モデルロード
 	void Load();
 
 	//毎フレームする処理
-	void Step();
+	void Step(int _hndl,VECTOR _pos);
 
 };
 

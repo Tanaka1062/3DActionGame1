@@ -22,10 +22,9 @@ CWeapon::~CWeapon()
 //--------------
 //	  èâä˙âª
 //--------------
-void CWeapon::Init(int _hndl)
+void CWeapon::Init()
 {
 	CObject::Init();
-	m_playerHndl = _hndl;
 
 }
 
@@ -40,13 +39,16 @@ void CWeapon::Load()
 //--------------
 //ñàÉtÉåÅ[ÉÄÇ∑ÇÈèàóù
 //--------------
-void CWeapon::Step()
+void CWeapon::Step(int _hndl, VECTOR _pos)
 {
-	MATRIX size = MGetScale(VGet(1.0f, 1.0f, 1.0f));
+	MATRIX world = MV1GetFrameLocalWorldMatrix(_hndl, 15);
 	MATRIX rotX = MGetRotX(0.0f);
 	MATRIX rotY = MGetRotY(0.0f);
 	MATRIX rotZ = MGetRotZ(0.0f);
-	
-
+	MATRIX mat = MGetTranslate(_pos);
+	mat = MMult(mat, world);
+	m_pos.x = mat.m[3][0];
+	m_pos.y = mat.m[3][1];
+	m_pos.z = mat.m[3][2];
 }
 

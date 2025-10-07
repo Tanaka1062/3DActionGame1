@@ -35,6 +35,7 @@ void CPlayScene::Draw()
 	m_shot.Draw();
 	m_item.Draw();
 	m_itemInventory.Draw();
+	m_weapon.Draw();
 
 	m_camera.Draw();
 
@@ -53,6 +54,7 @@ void CPlayScene::Init()
 	m_shot.Init();
 	m_item.Init(&m_player,&m_shot);
 	m_itemInventory.Init(&m_player);
+	m_weapon.Init();
 	m_camera.Init();
 
 }
@@ -69,6 +71,7 @@ void CPlayScene::Load()
 	m_enemy.Load();
 	m_shot.Load();
 	m_item.Load();
+	m_weapon.Load();
 }
 
 //---------------------------
@@ -88,6 +91,8 @@ void CPlayScene::Step()
 	m_item.Step();
 
 	m_itemInventory.Step(&m_shot);
+
+	m_weapon.Step(m_player.GetHndl(),m_player.GetPos());
 
 	m_camera.Step();
 
@@ -114,6 +119,7 @@ void CPlayScene::Step()
 	m_shot.Update();
 	m_item.Update();
 	m_itemInventory.Update();
+	m_weapon.Update();
 	m_camera.Update(m_player.GetCenter());
 
 	if (CKeyInput::IsTrg(KEY_SELECT) == true ||
@@ -141,6 +147,7 @@ void CPlayScene::Exit()
 	m_enemy.Exit();
 	m_shot.Exit();
 	m_item.Exit();
+	m_weapon.Exit();
 
 	CSoundManager::StopAll();
 }

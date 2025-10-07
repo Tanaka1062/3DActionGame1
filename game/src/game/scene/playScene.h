@@ -11,6 +11,7 @@
 #include "../goal/goal.h"
 #include "../item/itemManager.h"
 #include "../item/itemInventory/itemInventory.h"
+#include "../weapon/weapon.h"
 
 using namespace std;
 
@@ -28,6 +29,7 @@ private:
 	CGoal m_goal;						//ゴール
 	CItemManager m_item;				//アイテム
 	CItemInventory m_itemInventory;		//アイテムインベントリ
+	CWeapon m_weapon;					//武器
 
 public:
 
