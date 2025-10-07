@@ -147,7 +147,9 @@
     <ClCompile Include="src\game\character\characterBase.cpp" />
     <ClCompile Include="src\game\collisionManager\collisionManager.cpp" />
     <ClCompile Include="src\game\enemy\enemy.cpp" />
+    <ClCompile Include="src\game\enemy\enemyBase.cpp" />
     <ClCompile Include="src\game\enemy\enemyManager.cpp" />
+    <ClCompile Include="src\game\enemy\flyEnemy\flyEnemy.cpp" />
     <ClCompile Include="src\game\FOV\FOV.cpp" />
     <ClCompile Include="src\game\goal\goal.cpp" />
     <ClCompile Include="src\game\item\fireRing\fireRing.cpp" />
@@ -193,8 +195,10 @@
     <ClInclude Include="src\game\common.h" />
     <ClInclude Include="src\game\data.h" />
     <ClInclude Include="src\game\enemy\enemy.h" />
+    <ClInclude Include="src\game\enemy\enemyBase.h" />
     <ClInclude Include="src\game\enemy\enemyManager.h" />
     <ClInclude Include="src\game\enemy\enemyRootData.h" />
+    <ClInclude Include="src\game\enemy\flyEnemy\flyEnemy.h" />
     <ClInclude Include="src\game\FOV\FOV.h" />
     <ClInclude Include="src\game\goal\goal.h" />
     <ClInclude Include="src\game\item\fireRing\fireRing.h" />

@@ -92,8 +92,6 @@ void CPlayScene::Step()
 
 	m_itemInventory.Step(&m_shot);
 
-	m_weapon.Step(m_player.GetHndl(),m_player.GetPos());
-
 	m_camera.Step();
 
 
@@ -119,7 +117,7 @@ void CPlayScene::Step()
 	m_shot.Update();
 	m_item.Update();
 	m_itemInventory.Update();
-	m_weapon.Update();
+	m_weapon.Update(m_player.GetHndl());
 	m_camera.Update(m_player.GetCenter());
 
 	if (CKeyInput::IsTrg(KEY_SELECT) == true ||

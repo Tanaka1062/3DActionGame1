@@ -22,20 +22,20 @@ public:
 	~CEnemy();
 
 	//初期化
-	void Init();
+	virtual void Init();
 
 	//モデルロード
-	void Load(int _rootHndl);
+	virtual void Load(int _rootHndl);
 
 	//毎フレームする処理
 	//追いかける相手の座標
-	void Step(VECTOR _pos);
+	virtual void Step(VECTOR _pos);
 
 	//描写処理
-	void Draw();
+	virtual void Draw();
 
 	//更新処理
-	void Update();
+	virtual void Update();
 
 	//視界範囲を取得
 	CFOV* GetFOV() { return &m_FOV; }

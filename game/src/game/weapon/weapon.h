@@ -4,7 +4,6 @@
 //武器のクラス
 class CWeapon : public CObject
 {
-private:
 public:
 	//コンストラクタ・デストラクタ
 	CWeapon();
@@ -16,8 +15,8 @@ public:
 	//モデルロード
 	void Load();
 
-	//毎フレームする処理
-	void Step(int _hndl,VECTOR _pos);
+	//更新処理
+	void Update(int _hndl);
 
 };
 

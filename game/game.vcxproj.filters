@@ -103,6 +103,9 @@
     <Filter Include="ソース ファイル\game\weapon">
       <UniqueIdentifier>{f7909f27-5431-4ff4-93aa-f4c37b51a76b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\game\enemy\flyEnemy">
+      <UniqueIdentifier>{5383299c-94bb-424b-b57a-912edd1ce6c8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\number.cpp">
@@ -230,6 +233,12 @@
     </ClCompile>
     <ClCompile Include="src\game\weapon\weapon.cpp">
       <Filter>ソース ファイル\game\weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\enemy\flyEnemy\flyEnemy.cpp">
+      <Filter>ソース ファイル\game\enemy\flyEnemy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\enemy\enemyBase.cpp">
+      <Filter>ソース ファイル\game\enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -364,6 +373,12 @@
     </ClInclude>
     <ClInclude Include="src\game\weapon\weapon.h">
       <Filter>ソース ファイル\game\weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\enemy\flyEnemy\flyEnemy.h">
+      <Filter>ソース ファイル\game\enemy\flyEnemy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\enemy\enemyBase.h">
+      <Filter>ソース ファイル\game\enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

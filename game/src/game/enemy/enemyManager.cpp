@@ -1,6 +1,6 @@
 #include "enemyManager.h"
 #include "enemyRootData.h"
-
+#include "flyEnemy/flyEnemy.h"
 
 //------------------------
 //	  コンストラクタ
@@ -34,7 +34,10 @@ void CEnemyManager::Init()
 	{
 		if (m_enemy.size() < ENEMY_NUM) 
 		{
-			m_enemy.push_back(new CEnemy);
+			if (i == 0)
+				m_enemy.push_back(new CFlyEnemy);
+			else
+				m_enemy.push_back(new CEnemy);
 		}
 		m_enemy[i]->Init();
 		//ルートを設定

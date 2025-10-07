@@ -37,18 +37,21 @@ void CWeapon::Load()
 }
 
 //--------------
-//毎フレームする処理
+//   更新処理
 //--------------
-void CWeapon::Step(int _hndl, VECTOR _pos)
+void CWeapon::Update(int _hndl)
 {
+	CObject::Update();
+
+	MATRIX scale = MGetScale(VGet(0.2f, 0.1f, 0.1f));
+	//MATRIX rotX = MGetRotX(-120.0f * DX_PI_F / 180.0f);
+	//MATRIX rotY = MGetRotY(0.0f * DX_PI_F / 180.0f);
+	MATRIX rotZ = MGetRotZ(90.0f * DX_PI_F / 180.0f);
+	MATRIX mat = MMult(scale, rotZ);
 	MATRIX world = MV1GetFrameLocalWorldMatrix(_hndl, 15);
-	MATRIX rotX = MGetRotX(0.0f);
-	MATRIX rotY = MGetRotY(0.0f);
-	MATRIX rotZ = MGetRotZ(0.0f);
-	MATRIX mat = MGetTranslate(_pos);
-	mat = MMult(mat, world);
-	m_pos.x = mat.m[3][0];
-	m_pos.y = mat.m[3][1];
-	m_pos.z = mat.m[3][2];
+	 mat = MMult(mat, world);
+
+	MV1SetMatrix(m_hndl, mat);
+
 }
 
