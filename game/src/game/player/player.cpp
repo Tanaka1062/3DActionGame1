@@ -287,12 +287,14 @@ void CPlayer::Attack()
 		{
 			Request(ANIMID_ATTACK, 1.0f, true);
 
-			//UŒ‚‚ÌŒÄ‚Ño‚µ
-			m_attack.Request(GetCenter(), m_rot,
-				ATTACK_TIME, ATTACK_COOL_TIME);
+			VECTOR attackPos;
+			attackPos.x = -sinf(m_rot.y) * ATTACK_LENGTH;
+			attackPos.y = m_pos.y;
+			attackPos.z = -cosf(m_rot.y) * ATTACK_LENGTH;
 
+			attackPos = VAdd(attackPos, m_pos);
 
-			m_attackManager->Request()
+			m_attackManager->Request(attackPos,ATTACK_SIZE,m_atk,ATTACK_TYPE_PLAYER);
 		}
 		break;
 	case ATTACK_ID_B:

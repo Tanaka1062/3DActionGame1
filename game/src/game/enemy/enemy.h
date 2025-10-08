@@ -1,5 +1,5 @@
 #pragma once
-#include "../character/characterBase.h"
+#include "../enemy/enemyBase.h"
 #include "../FOV/FOV.h"
 #include <iostream>
 #include <vector>
@@ -8,13 +8,9 @@ using namespace std;
 
 
 //敵のクラス
-class CEnemy:public CCharacterBase
+class CEnemy:public CEnemyBase
 {
 protected:
-	CFOV m_FOV;					//視界範囲クラス
-	int m_rootHndl;				//ルート用のモデルハンドル
-	int m_rootId;				//今の自分の目的地
-	vector<int>m_root;			//ルート
 
 public:
 	//コンストラクタ・デストラクタ
@@ -36,16 +32,6 @@ public:
 
 	//更新処理
 	virtual void Update();
-
-	//視界範囲を取得
-	CFOV* GetFOV() { return &m_FOV; }
-
-	//視界範囲に当たった処理
-	void HitFOV() { m_FOV.HitCalc(); }
-
-	//ルートを設定
-	void SetRoot(int _root);
-
 
 private:
 	//待機状態処理

@@ -9,7 +9,7 @@ using namespace std;
 //敵のクラス
 class CEnemyBase :public CCharacterBase
 {
-private:
+protected:
 	CFOV m_FOV;				//視界範囲クラス
 	int m_rootHndl;			//ルート用のモデルハンドル
 	int m_rootId;			//今の自分の目的地
@@ -48,33 +48,33 @@ public:
 
 private:
 	//待機状態処理
-	void Wait();
+	virtual void Wait();
 
 	//歩く状態処理
-	void Walk();
+	virtual void Walk();
 
 	//ジャンプ状態処理
-	void Jump();
+	virtual void Jump();
 
 	//攻撃前処理
-	void AttackIn();
+	virtual void AttackIn();
 
 	//攻撃状態処理
-	void Attack();
+	virtual void Attack();
 
 	//攻撃後処理
-	void AttackOut();
+	virtual void AttackOut();
 
 	//怯み状態処理
-	void Stagger();
+	virtual void Stagger();
 
 	//死亡
-	void Die();
+	virtual void Die();
 
 	//追いかける移動処理
-	void MoveChase(VECTOR _pos);
+	virtual void MoveChase(VECTOR _pos);
 
 	//ルートを移動処理
-	void MoveRoot();
+	virtual void MoveRoot();
 };
 
