@@ -23,6 +23,12 @@ static const float ATTACK_SIZE = 3.0f;				//攻撃範囲
 static const float ATTACK_LENGTH = 5.0f;			//攻撃の長さ
 static const int ATTACK_TIME = 10;					//攻撃の判定の時間(フレーム)
 static const int ATTACK_COOL_TIME = 30;				//攻撃のクールタイム(フレーム)
+
+enum tagAttackId
+{
+	ATTACK_ID_A,									//攻撃AのID
+	ATTACK_ID_B,									//攻撃BのID
+};
 //-----------------------------------
 
 //アイテム関連--------------------------------
@@ -36,7 +42,7 @@ enum tagAnim {
 	ANIMID_ATTACK,				//攻撃中アニメーション
 	ANIMID_ATTACKB,				//攻撃2中アニメーション
 	ANIMID_ATTACKB_CHARGE,		//攻撃2のチャージ中アニメーション
-	ANIMID_ATTACKB_CHARGEIN,	//攻撃2のチャージ前アニメーション
+	ANIMID_ATTACKB_CHARGE_IN,	//攻撃2のチャージ前アニメーション
 	ANIMID_ATTACKB_IN,			//攻撃2前アニメーション
 	ANIMID_ATTACKB_OUT,			//攻撃2後アニメーション
 	ANIMID_ATTACK_IN,			//攻撃前のアニメーション
@@ -87,6 +93,7 @@ void CPlayer::Init()
 	m_isItemUse = false;
 	m_isPickUpItem = false;
 	m_itemSelectNum = 0;
+	m_attackId = -1;
 }
 
 //-----------------------
@@ -239,11 +246,22 @@ void CPlayer::Jump()
 //-----------------------
 void CPlayer::AttackIn()
 {
-
-	//攻撃前のアニメーション
-	if (m_animData.m_id != ANIMID_ATTACK_IN)
+	switch (m_attackId)
 	{
-		Request(ANIMID_ATTACK_IN, 1.0f);
+	case ATTACK_ID_A:
+		//攻撃前のアニメーション
+		if (m_animData.m_id != ANIMID_ATTACK_IN)
+		{
+			Request(ANIMID_ATTACK_IN, 1.0f);
+		}
+		break;
+	case ATTACK_ID_B:
+		//攻撃前のアニメーション
+		if (m_animData.m_id != ANIMID_ATTACKB_IN)
+		{
+			Request(ANIMID_ATTACKB_IN, 1.0f);
+		}
+		break;
 	}
 
 	//アニメーションが終わったら攻撃中に移行
@@ -259,15 +277,30 @@ void CPlayer::AttackIn()
 //-----------------------
 void CPlayer::Attack()
 {
-
-	//攻撃中のアニメーション
-	if (m_animData.m_id != ANIMID_ATTACK)
+	switch (m_attackId)
 	{
-		Request(ANIMID_ATTACK, 1.0f,true);
+	case ATTACK_ID_A:
+		//攻撃中のアニメーション
+		if (m_animData.m_id != ANIMID_ATTACK)
+		{
+			Request(ANIMID_ATTACK, 1.0f, true);
 
-		//攻撃の呼び出し
-		m_attack.Request(GetCenter(), m_rot,
-			ATTACK_TIME, ATTACK_COOL_TIME);
+			//攻撃の呼び出し
+			m_attack.Request(GetCenter(), m_rot,
+				ATTACK_TIME, ATTACK_COOL_TIME);
+		}
+		break;
+	case ATTACK_ID_B:
+		//攻撃中のアニメーション
+		if (m_animData.m_id != ANIMID_ATTACKB)
+		{
+			Request(ANIMID_ATTACKB, 1.0f, true);
+
+			//攻撃の呼び出し
+			m_attack.Request(GetCenter(), m_rot,
+				ATTACK_TIME, ATTACK_COOL_TIME);
+		}
+		break;
 	}
 
 	//攻撃が終わったら攻撃後に移行
@@ -284,16 +317,67 @@ void CPlayer::Attack()
 void CPlayer::AttackOut()
 {
 
-	//攻撃後のアニメーション
-	if (m_animData.m_id != ANIMID_ATTACK_OUT)
+	switch (m_attackId)
 	{
-		Request(ANIMID_ATTACK_OUT, 1.0f);
+	case ATTACK_ID_A:
+		//攻撃後のアニメーション
+		if (m_animData.m_id != ANIMID_ATTACK_OUT)
+		{
+			Request(ANIMID_ATTACK_OUT, 1.0f);
+		}
+		break;
+	case ATTACK_ID_B:
+		//攻撃後のアニメーション
+		if (m_animData.m_id != ANIMID_ATTACKB_OUT)
+		{
+			Request(ANIMID_ATTACKB_OUT, 1.0f);
+		}
+		break;
 	}
+
 
 	//アニメーションが終わったら待機状態に戻す
 	if (GetAnimEnd() == true)
 	{
 		m_state = WAIT;
+	}
+
+}
+
+//-----------------------
+//	   攻撃チャージ前
+//-----------------------
+void CPlayer::AttackChargeIn()
+{
+	//アイテム使用前のアニメーション
+	if (m_animData.m_id != ANIMID_ATTACKB_CHARGE_IN)
+	{
+		Request(ANIMID_ATTACKB_CHARGE_IN, 0.5f);
+	}
+
+	//アニメーションが終わったらアイテム使用中に移行
+	if (GetAnimEnd() == true)
+	{
+		m_state = ATTACK_CHARGE;
+	}
+
+}
+
+//-----------------------
+//	   攻撃チャージ
+//-----------------------
+void CPlayer::AttackCharge()
+{
+	//アイテム使用前のアニメーション
+	if (m_animData.m_id != ANIMID_ATTACKB_CHARGE)
+	{
+		Request(ANIMID_ATTACKB_CHARGE, 0.5f);
+	}
+
+	//アニメーションが終わったらアイテム使用中に移行
+	if (GetAnimEnd() == true)
+	{
+		m_state = ATTACK_IN;
 	}
 
 }
@@ -488,9 +572,24 @@ void CPlayer::RequestAttack()
 		//攻撃してない時に攻撃前に移行する
 		if (m_attack.GetIsCoolDown() == true)
 		{
+			m_attackId = ATTACK_ID_A;
 			m_state = ATTACK_IN;
 		}
 	}
+
+	//攻撃ボタンを押したか
+	if (CheckHitKey(KEY_INPUT_U) != 0 ||
+		CControllerInput::IsTrg(BUTTON_Y))
+	{
+
+		//攻撃してない時に攻撃前に移行する
+		if (m_attack.GetIsCoolDown() == true)
+		{
+			m_attackId = ATTACK_ID_B;
+			m_state = ATTACK_CHARGE_IN;
+		}
+	}
+
 }
 
 //-----------------------

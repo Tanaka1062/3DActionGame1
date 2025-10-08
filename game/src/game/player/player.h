@@ -12,7 +12,8 @@ class CPlayer:public CCharacterBase
 private:
 	bool m_isPickUpItem;		//アイテムを取ろうとしているかフラグ		
 	bool m_isItemUse;			//アイテム使用フラグ
-	int m_itemSelectNum;		//現在選択しているアイテムの番号				
+	int m_itemSelectNum;		//現在選択しているアイテムの番号	
+	int m_attackId;				//攻撃のID
 public:
 	//コンストラクタ・デストラクタ
 	CPlayer();
@@ -63,6 +64,12 @@ private:
 
 	//攻撃後処理
 	void AttackOut();
+
+	//攻撃チャージ前
+	void AttackChargeIn();
+
+	//攻撃チャージ
+	void AttackCharge();
 
 	//アイテム使用前
 	void ItemUseIn();

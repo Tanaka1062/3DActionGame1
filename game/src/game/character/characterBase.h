@@ -25,6 +25,8 @@ protected:
 		ATTACK_IN,				//攻撃前
 		ATTACK,					//攻撃中
 		ATTACK_OUT,				//攻撃後
+		ATTACK_CHARGE_IN,		//攻撃チャージ前
+		ATTACK_CHARGE,			//攻撃チャージ
 		ITEM_USE_IN,			//アイテム使用前
 		ITEM_USE,				//アイテム使用中
 		ITEM_USE_OUT,			//アイテム使用後
@@ -50,6 +52,9 @@ public:
 
 	//攻撃を食らった時にする処理
 	virtual void HitAttack(int _atk,float _rotY = 0.0f);
+
+	//弾を食らった時にする処理
+	virtual void ShotAttack(int _atk, float _rotY = 0.0f);
 
 	//数値の更新
 	void Update();
@@ -91,6 +96,12 @@ protected:
 
 	//攻撃後
 	virtual void AttackOut();
+
+	//攻撃チャージ前
+	virtual void AttackChargeIn();
+
+	//攻撃チャージ
+	virtual void AttackCharge();
 
 	//アイテム使用前
 	virtual void ItemUseIn();

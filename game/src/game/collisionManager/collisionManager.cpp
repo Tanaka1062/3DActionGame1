@@ -370,7 +370,7 @@ void CCollisionManager::CheckHitShotToEnemy(CShotManager& _shotManager,
 					shot->GetCenter().z - enemy->GetCenter().z);
 
 				//“G‚É’e‚ÌUŒ‚—Í•ª‚Ìƒ_ƒ[ƒW‚ð—^‚¦‚é
-				enemy->HitAttack(shot->GetAtk(),rot);
+				enemy->ShotAttack(shot->GetAtk(),rot);
 
 				//’e‚ðÁ‚·
 				shot->SetActive(false);

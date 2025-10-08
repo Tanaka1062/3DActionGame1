@@ -4,6 +4,9 @@
 class CFlyEnemy : public CEnemy
 {
 private:
+	int m_downTime;			//ダウンする時間
+	int m_downTimeCount;	//ダウンする時間のカウント
+	bool m_isDown;			//ダウン状態かどうか
 
 public:
 
@@ -16,6 +19,9 @@ public:
 
 	//更新処理
 	void Update();
+
+	//弾を食らった時にする処理
+	void ShotAttack(int _atk, float _rotY = 0.0f);
 
 };
 

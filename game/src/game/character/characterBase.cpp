@@ -68,6 +68,16 @@ void CCharacterBase::Step()
 		AttackOut();
 		break;
 
+		//攻撃チャージ前
+	case ATTACK_CHARGE_IN:
+		AttackChargeIn();
+		break;
+
+		//攻撃チャージ
+	case ATTACK_CHARGE:
+		AttackCharge();
+		break;
+
 		//アイテム前
 	case ITEM_USE_IN:
 		ItemUseIn();
@@ -155,6 +165,12 @@ void CCharacterBase::HitAttack(int _atk, float _rotY)
 	m_hp -= _atk;
 }
 
+//弾を食らった時にする処理
+void CCharacterBase::ShotAttack(int _atk, float _rotY)
+{
+	HitAttack(_atk, _rotY);
+}
+
 //------------------------------
 //		重力リセット
 //------------------------------
@@ -207,6 +223,22 @@ void CCharacterBase::Attack()
 //			攻撃後
 //------------------------------
 void CCharacterBase::AttackOut()
+{
+
+}
+
+//------------------------------
+//		  攻撃チャージ前
+//------------------------------
+void CCharacterBase::AttackChargeIn()
+{
+
+}
+
+//------------------------------
+//		   攻撃チャージ
+//------------------------------
+void CCharacterBase::AttackCharge()
 {
 
 }
