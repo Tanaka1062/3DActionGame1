@@ -104,6 +104,50 @@ void CCollisionManager::CheckHitEnemyAttackToPlayer(CEnemyManager& _enemyManager
 }
 
 //----------------------------------------------
+//		プレイヤーの攻撃と敵の当たり判定
+//----------------------------------------------
+void CCollisionManager::CheckHitPlayerAttackToEnemy(CAttackManager& _attackManager,
+	CEnemyManager& _enemyManager)
+{
+	for (int i = 0; i < _attackManager.GetNum(); i++)
+	{
+		//攻撃のクラスを取得
+		CAttackBase* attack = _attackManager.GetAttack(i);
+		
+		//プレイヤー以外の攻撃はスキップ
+		if (attack->GetAttackType() != ATTACK_TYPE_PLAYER)continue;
+
+		for (int j = 0; j < _enemyManager.GetEnemyNum(); j++)
+		{
+			//敵のクラスを取得
+			CEnemy* enemy = _enemyManager.GetEnemy(j);
+
+			//敵が死んでいたらスキップ
+			if (enemy->GetActive() == false)continue;
+
+			//プレイヤーの攻撃が敵に当たっているか
+			if (CCollision::CheckHitSphereToSphere(attack->GetCenter(), attack->GetRad(),
+				enemy->GetCenter(), enemy->GetRad()) == true)
+			{
+				//呼び出すエフェクトのID
+				int effectId = CEffectData::GetId(EFFECT_ATTACK);
+
+				//エフェクトを呼び出す
+				CEffekseerCtrl::Request(effectId, enemy->GetCenter(), false);
+
+				//ノックバックの方向
+				float rot = atan2f(attack->GetCenter().x - enemy->GetCenter().x,
+					attack->GetCenter().z - enemy->GetCenter().z);
+
+				//敵にプレイヤーの攻撃力分ダメージ
+				enemy->HitAttack(attack->GetAtk(), rot);
+			}
+
+		}
+	}
+}
+
+//----------------------------------------------
 //			敵とプレイヤーの当たり判定
 //----------------------------------------------
 void CCollisionManager::CheckHitEnemyToPlayer(CEnemyManager& _enemyManager,

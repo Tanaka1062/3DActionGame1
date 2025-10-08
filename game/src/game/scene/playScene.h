@@ -12,6 +12,7 @@
 #include "../item/itemManager.h"
 #include "../item/itemInventory/itemInventory.h"
 #include "../weapon/weapon.h"
+#include "../attack/attackManager.h"
 
 using namespace std;
 
@@ -30,6 +31,7 @@ private:
 	CItemManager m_item;				//アイテム
 	CItemInventory m_itemInventory;		//アイテムインベントリ
 	CWeapon m_weapon;					//武器
+	CAttackManager m_attackManager;		//攻撃のマネージャークラス
 
 public:
 

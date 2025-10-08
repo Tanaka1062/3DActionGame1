@@ -13,7 +13,7 @@ static const char MODEL_PATH[] =
 { "data/model/player/playerTest.mv1" };				//ロードするファイル名
 static const VECTOR INIT_POS = { 0.0f,1.0f,0.0f };	//初期座標
 static const int MAX_HP = 100;						//体力
-static const int ATK = 30;							//攻撃力
+static const int ATK = 20;							//攻撃力
 static const float MOVE_SPEED = 1.0f;				//移動スピード
 static const float RADIUS = 2.5f;					//半径
 //----------------------------------------------
@@ -23,6 +23,8 @@ static const float ATTACK_SIZE = 3.0f;				//攻撃範囲
 static const float ATTACK_LENGTH = 5.0f;			//攻撃の長さ
 static const int ATTACK_TIME = 10;					//攻撃の判定の時間(フレーム)
 static const int ATTACK_COOL_TIME = 30;				//攻撃のクールタイム(フレーム)
+static const float ATTACKB_SIZE = 10.0f;			//攻撃B範囲
+static const int ATTACKB_ATK = 50;					//攻撃Bの攻撃力
 
 enum tagAttackId
 {
@@ -80,9 +82,9 @@ CPlayer::~CPlayer()
 //-----------------------
 //		初期化
 //-----------------------
-void CPlayer::Init()
+void CPlayer::Init(CAttackManager* _attackManager)
 {
-	CCharacterBase::Init();
+	CCharacterBase::Init(_attackManager);
 	m_attack.Init(ATTACK_SIZE,ATTACK_LENGTH);
 
 	m_pos = INIT_POS;
@@ -259,7 +261,7 @@ void CPlayer::AttackIn()
 		//攻撃前のアニメーション
 		if (m_animData.m_id != ANIMID_ATTACKB_IN)
 		{
-			Request(ANIMID_ATTACKB_IN, 1.0f);
+			Request(ANIMID_ATTACKB_IN, 0.5f);
 		}
 		break;
 	}
@@ -288,17 +290,19 @@ void CPlayer::Attack()
 			//攻撃の呼び出し
 			m_attack.Request(GetCenter(), m_rot,
 				ATTACK_TIME, ATTACK_COOL_TIME);
+
+
+			m_attackManager->Request()
 		}
 		break;
 	case ATTACK_ID_B:
 		//攻撃中のアニメーション
 		if (m_animData.m_id != ANIMID_ATTACKB)
 		{
-			Request(ANIMID_ATTACKB, 1.0f, true);
+			Request(ANIMID_ATTACKB, 0.1f, true);
 
 			//攻撃の呼び出し
-			m_attack.Request(GetCenter(), m_rot,
-				ATTACK_TIME, ATTACK_COOL_TIME);
+			m_attackManager->Request(GetCenter(), ATTACKB_SIZE, ATTACKB_ATK, ATTACK_TYPE_PLAYER);
 		}
 		break;
 	}
@@ -330,7 +334,7 @@ void CPlayer::AttackOut()
 		//攻撃後のアニメーション
 		if (m_animData.m_id != ANIMID_ATTACKB_OUT)
 		{
-			Request(ANIMID_ATTACKB_OUT, 1.0f);
+			Request(ANIMID_ATTACKB_OUT, 0.3f);
 		}
 		break;
 	}
@@ -352,7 +356,7 @@ void CPlayer::AttackChargeIn()
 	//アイテム使用前のアニメーション
 	if (m_animData.m_id != ANIMID_ATTACKB_CHARGE_IN)
 	{
-		Request(ANIMID_ATTACKB_CHARGE_IN, 0.5f);
+		Request(ANIMID_ATTACKB_CHARGE_IN, 0.3f);
 	}
 
 	//アニメーションが終わったらアイテム使用中に移行
@@ -371,7 +375,7 @@ void CPlayer::AttackCharge()
 	//アイテム使用前のアニメーション
 	if (m_animData.m_id != ANIMID_ATTACKB_CHARGE)
 	{
-		Request(ANIMID_ATTACKB_CHARGE, 0.5f);
+		Request(ANIMID_ATTACKB_CHARGE, 0.3f);
 	}
 
 	//アニメーションが終わったらアイテム使用中に移行
@@ -564,6 +568,17 @@ void CPlayer::Move(float _rotY)
 //-----------------------
 void CPlayer::RequestAttack()
 {
+
+	//待機状態と歩いてる状態以外は処理をしない
+	switch (m_state)
+	{
+	case WAIT:
+	case WALK:
+		break;
+	default:
+		return;
+	}
+
 	//攻撃ボタンを押したか
 	if (CheckHitKey(KEY_INPUT_J) != 0 ||
 		CControllerInput::IsTrg(BUTTON_X))

@@ -1,7 +1,7 @@
 #pragma once
 #include "../../lib/model/actor.h"
 #include "../attack/attack.h"
-#include "../shot/shotManager.h"
+#include "../attack/attackManager.h"
 
 enum tagCharacterType	//キャラクターの種類
 {
@@ -36,13 +36,13 @@ protected:
 	tagState m_state;			//状態
 	tagCharacterType m_type;	//種類
 	CAttack m_attack;			//攻撃クラス
-
+	CAttackManager* m_attackManager;
 public:
 	//コンストラクタ
 	CCharacterBase();
 
 	//初期化
-	virtual void Init();
+	virtual void Init(CAttackManager* _attackManager = nullptr);
 
 	//毎フレームする処理
 	virtual void Step();

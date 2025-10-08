@@ -6,6 +6,7 @@
 #include "../map/map.h"
 #include "../item/itemManager.h"
 #include "../item/itemInventory/itemInventory.h"
+#include "../attack/attackManager.h"
 
 class CCollisionManager
 {
@@ -18,6 +19,10 @@ public:
 	//敵の攻撃範囲とプレイヤーの当たり判定
 	static void CheckHitEnemyAttackToPlayer(CEnemyManager& _enemyManager,
 		CPlayer& _player);
+
+	//プレイヤーの攻撃と敵の当たり判定
+	static void CheckHitPlayerAttackToEnemy(CAttackManager& _attackManager,
+		CEnemyManager& _enemyManager);
 
 	//敵とプレイヤーの当たり判定
 	static void CheckHitEnemyToPlayer(CEnemyManager& _enemyManager,

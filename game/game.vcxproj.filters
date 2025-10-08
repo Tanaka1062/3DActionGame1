@@ -240,6 +240,12 @@
     <ClCompile Include="src\game\enemy\enemyBase.cpp">
       <Filter>ソース ファイル\game\enemy</Filter>
     </ClCompile>
+    <ClCompile Include="src\game\attack\attackManager.cpp">
+      <Filter>ソース ファイル\game\attack</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\attack\attackBase.cpp">
+      <Filter>ソース ファイル\game\attack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\lib\number.h">
@@ -379,6 +385,12 @@
     </ClInclude>
     <ClInclude Include="src\game\enemy\enemyBase.h">
       <Filter>ソース ファイル\game\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\attack\attackManager.h">
+      <Filter>ソース ファイル\game\attack</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\attack\attackBase.h">
+      <Filter>ソース ファイル\game\attack</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

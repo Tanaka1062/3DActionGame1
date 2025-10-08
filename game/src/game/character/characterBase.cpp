@@ -15,7 +15,7 @@ CCharacterBase::CCharacterBase()
 //------------------------------
 //			‰Šú‰»
 //------------------------------
-void CCharacterBase::Init()
+void CCharacterBase::Init(CAttackManager* _attackManager)
 {
 	CActor::Init();
 	
@@ -25,6 +25,7 @@ void CCharacterBase::Init()
 	m_atk = 0;
 	m_rad = 0;
 	m_state = WAIT;
+	m_attackManager = _attackManager;
 }
 
 //------------------------------

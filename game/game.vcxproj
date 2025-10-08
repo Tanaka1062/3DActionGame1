@@ -140,6 +140,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\game\attack\attack.cpp" />
+    <ClCompile Include="src\game\attack\attackBase.cpp" />
+    <ClCompile Include="src\game\attack\attackManager.cpp" />
     <ClCompile Include="src\game\camera\cameraBase.cpp" />
     <ClCompile Include="src\game\camera\cameraManager.cpp" />
     <ClCompile Include="src\game\camera\debugCamera\debugCamera.cpp" />
@@ -186,6 +188,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game\attack\attack.h" />
+    <ClInclude Include="src\game\attack\attackBase.h" />
+    <ClInclude Include="src\game\attack\attackManager.h" />
     <ClInclude Include="src\game\camera\cameraBase.h" />
     <ClInclude Include="src\game\camera\cameraManager.h" />
     <ClInclude Include="src\game\camera\debugCamera\debugCamera.h" />

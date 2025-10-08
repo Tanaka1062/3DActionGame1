@@ -33,6 +33,7 @@ void CPlayScene::Draw()
 	m_player.Draw();
 	m_enemy.Draw();
 	m_shot.Draw();
+	m_attackManager.Draw();
 	m_item.Draw();
 	m_itemInventory.Draw();
 	m_weapon.Draw();
@@ -49,7 +50,7 @@ void CPlayScene::Init()
 	m_ground.Init();
 	m_sky.Init();
 	m_goal.Init();
-	m_player.Init();
+	m_player.Init(&m_attackManager);
 	m_enemy.Init();
 	m_shot.Init();
 	m_item.Init(&m_player,&m_shot);
@@ -99,6 +100,7 @@ void CPlayScene::Step()
 	//“G‚Ì‹ŠE”ÍˆÍ‚ÆƒvƒŒƒCƒ„[‚Ì“–‚½‚è”»’è
 	CCollisionManager::CheckHitEnemyFOVToPlayer(m_enemy, m_player);
 	CCollisionManager::CheckHitEnemyAttackToPlayer(m_enemy, m_player);
+	CCollisionManager::CheckHitPlayerAttackToEnemy(m_attackManager, m_enemy);
 	CCollisionManager::CheckHitEnemyToPlayer(m_enemy, m_player);
 	CCollisionManager::CheckHitEnemyToEnemy(m_enemy);
 	CCollisionManager::CheckHitShotToEnemy(m_shot, m_enemy);
@@ -115,6 +117,7 @@ void CPlayScene::Step()
 	m_player.Update();
 	m_enemy.Update();
 	m_shot.Update();
+	m_attackManager.Update();
 	m_item.Update();
 	m_itemInventory.Update();
 	m_weapon.Update(m_player.GetHndl());
@@ -143,6 +146,7 @@ void CPlayScene::Exit()
 	m_goal.Exit();
 	m_player.Exit();
 	m_enemy.Exit();
+	m_attackManager.Exit();
 	m_shot.Exit();
 	m_item.Exit();
 	m_weapon.Exit();

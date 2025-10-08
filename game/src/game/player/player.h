@@ -20,7 +20,7 @@ public:
 	~CPlayer();
 
 	//‰Šú‰»
-	void Init();
+	void Init(CAttackManager* _attackManager = nullptr);
 
 	//ƒ‚ƒfƒ‹ƒ[ƒh
 	void Load();
