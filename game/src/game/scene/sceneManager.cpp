@@ -59,8 +59,6 @@ int CSceneManager::Loop()
 		{
 			m_sceneID = RESULT;
 
-			//エフェクトを全て消す
-			CEffekseerCtrl::StopAll();
 		}
 		break;
 	case RESULT:

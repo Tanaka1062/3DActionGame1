@@ -3,6 +3,7 @@
 #include "../system/soundManager.h"
 #include "../../lib/input/keyInput.h"
 #include"../collisionManager/collisionManager.h"
+#include "../../lib/effekseer/effekseer.h"
 
 
 //---------------------------
@@ -151,5 +152,7 @@ void CPlayScene::Exit()
 	m_item.Exit();
 	m_weapon.Exit();
 
+	//エフェクトを全て消す
+	CEffekseerCtrl::StopAll();
 	CSoundManager::StopAll();
 }

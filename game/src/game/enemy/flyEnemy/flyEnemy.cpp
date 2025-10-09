@@ -42,8 +42,8 @@ void CFlyEnemy::Step(VECTOR _pos)
 	else
 	{
 		m_pos.y = 13.0f;
-		CEnemy::Step(_pos);
 	}
+	CEnemy::Step(_pos);
 
 	VECTOR attackPos = m_attack.GetPos();
 	attackPos.y = 3.0f;
@@ -62,7 +62,11 @@ void CFlyEnemy::Update()
 		m_pos.y = 13.0f;
 
 	}
-
+	else
+	{
+		m_speed.x = 0.0f;
+		m_speed.z = 0.0f;
+	}
 	CEnemy::Update();
 	VECTOR attackPos = m_attack.GetPos();
 	attackPos.y = 3.0f;
