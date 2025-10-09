@@ -63,8 +63,8 @@ void CControllerInput::Update()
 	GetJoypadDirectInputState(DX_INPUT_PAD1, &leverInput);
 	m_LX = leverInput.X;
 	m_LY = leverInput.Y;
-	m_RX = leverInput.Z;
-	m_RY = leverInput.Rz;
+	m_RX = leverInput.Rx;
+	m_RY = leverInput.Ry;
 }
 
 //--------------------------------

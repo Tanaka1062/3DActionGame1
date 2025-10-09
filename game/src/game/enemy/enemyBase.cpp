@@ -45,9 +45,9 @@ CEnemyBase::~CEnemyBase()
 //-----------------------
 //		‰Šú‰»
 //-----------------------
-void CEnemyBase::Init()
+void CEnemyBase::Init(CAttackManager* _attackManager)
 {
-	CCharacterBase::Init();
+	CCharacterBase::Init(_attackManager);
 	m_attack.Init();
 	m_FOV.Init(0.0f);
 

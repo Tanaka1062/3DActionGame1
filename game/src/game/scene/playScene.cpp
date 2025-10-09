@@ -94,7 +94,7 @@ void CPlayScene::Step()
 
 	m_itemInventory.Step(&m_shot);
 
-	m_camera.Step();
+	m_camera.Step(m_player.GetCenter(),m_player.GetRad());
 
 
 	//“–‚½‚è”»’è----------------------------------

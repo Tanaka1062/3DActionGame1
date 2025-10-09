@@ -10,7 +10,7 @@
 
 //プレイヤー関連--------------------------------
 static const char MODEL_PATH[] =
-{ "data/model/player/playerTest.mv1" };				//ロードするファイル名
+{ "data/model/player/playerTest2.mv1" };				//ロードするファイル名
 static const VECTOR INIT_POS = { 0.0f,1.0f,0.0f };	//初期座標
 static const int MAX_HP = 100;						//体力
 static const int ATK = 20;							//攻撃力
@@ -21,23 +21,15 @@ static const float RADIUS = 2.5f;					//半径
 //攻撃関連---------------------------
 static const float ATTACK_SIZE = 3.0f;				//攻撃範囲
 static const float ATTACK_LENGTH = 5.0f;			//攻撃の長さ
-static const int ATTACK_TIME = 10;					//攻撃の判定の時間(フレーム)
-static const int ATTACK_COOL_TIME = 30;				//攻撃のクールタイム(フレーム)
 static const float ATTACKB_SIZE = 10.0f;			//攻撃B範囲
 static const int ATTACKB_ATK = 50;					//攻撃Bの攻撃力
 
-enum tagAttackId
+enum tagAttackId									//攻撃のID
 {
-	ATTACK_ID_A,									//攻撃AのID
-	ATTACK_ID_B,									//攻撃BのID
+	ATTACK_ID_A,									//攻撃A
+	ATTACK_ID_B,									//攻撃B
 };
 //-----------------------------------
-
-//アイテム関連--------------------------------
-static const int SHOT_ATK = 50;						//弾の攻撃力
-static const float SHOT_MOVE_SPEED = 1.0f;			//弾の移動スピード
-static const int SHOT_LOST_TIME = 240;				//弾の消えるまでのスピード
-//----------------------------------------------
 
 //アニメーション一覧---------------------------
 enum tagAnim {
@@ -66,7 +58,7 @@ enum tagAnim {
 //-----------------------
 CPlayer::CPlayer()
 {
-	CCharacterBase::Init();
+	Init();
 
 	m_isPickUpItem = false;
 }
@@ -159,6 +151,8 @@ void CPlayer::Draw()
 #ifdef DEBUG
 	//当たり判定を表示
 	DrawSphere3D(GetCenter(), m_rad, 16, GetColor(255, 0, 0), GetColor(255, 0, 0), FALSE);
+
+
 #endif // DEBUG
 	//体力を表示
 	DrawFormatString(32, 32, GetColor(255, 0, 0), "hp:%d", m_hp);
@@ -261,7 +255,7 @@ void CPlayer::AttackIn()
 		//攻撃前のアニメーション
 		if (m_animData.m_id != ANIMID_ATTACKB_IN)
 		{
-			Request(ANIMID_ATTACKB_IN, 0.5f);
+			Request(ANIMID_ATTACKB_IN, 0.4f);
 		}
 		break;
 	}
@@ -285,7 +279,7 @@ void CPlayer::Attack()
 		//攻撃中のアニメーション
 		if (m_animData.m_id != ANIMID_ATTACK)
 		{
-			Request(ANIMID_ATTACK, 1.0f, true);
+			Request(ANIMID_ATTACK, 1.0f);
 
 			VECTOR attackPos;
 			attackPos.x = -sinf(m_rot.y) * ATTACK_LENGTH;
@@ -301,7 +295,7 @@ void CPlayer::Attack()
 		//攻撃中のアニメーション
 		if (m_animData.m_id != ANIMID_ATTACKB)
 		{
-			Request(ANIMID_ATTACKB, 0.1f, true);
+			Request(ANIMID_ATTACKB, 0.1f);
 
 			//攻撃の呼び出し
 			m_attackManager->Request(GetCenter(), ATTACKB_SIZE, ATTACKB_ATK, ATTACK_TYPE_PLAYER);
@@ -310,7 +304,13 @@ void CPlayer::Attack()
 	}
 
 	//攻撃が終わったら攻撃後に移行
-	if (m_attack.GetActive() == false)
+	//if (m_attack.GetActive() == false)
+	//{
+	//	m_state = ATTACK_OUT;
+	//}
+
+	//アニメーションが終わったら待機状態に戻す
+	if (GetAnimEnd() == true)
 	{
 		m_state = ATTACK_OUT;
 	}

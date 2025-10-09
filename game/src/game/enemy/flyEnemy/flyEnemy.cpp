@@ -2,6 +2,9 @@
 
 static const int DOWN_TIME = 240;					//ƒ_ƒEƒ“‚·‚éŠÔ
 
+static const int MAX_HP = 100;						//‘Ì—Í
+static const int ATK = 5;							//UŒ‚—Í
+
 //UŒ‚ŠÖ˜A---------------------------
 static const float ATTACK_SIZE = 12.0f;				//UŒ‚”ÍˆÍ
 static const float ATTACK_LENGTH = 6.0f;			//UŒ‚‚Ì’·‚³
@@ -13,13 +16,15 @@ static const float ATTACKABLE_RAD = 11.0f;			//UŒ‚‰Â”\”ÍˆÍ‚Ì”¼Œa
 //----------------
 //	   ‰Šú‰»
 //----------------
-void CFlyEnemy::Init()
+void CFlyEnemy::Init(CAttackManager* _attackManager)
 {
-	CEnemy::Init();
+	CEnemy::Init(_attackManager);
 	m_attack.Init(ATTACK_SIZE, ATTACK_LENGTH, ATTACKABLE_RAD);
 	m_downTime = DOWN_TIME;
 	m_downTimeCount = 0;
 	m_isDown = false;
+	m_hp = MAX_HP;
+	m_atk = ATK;
 }
 
 //----------------
@@ -38,6 +43,8 @@ void CFlyEnemy::Step(VECTOR _pos)
 			m_downTimeCount = 0;
 		}
 		Gravity();
+
+		m_state = WAIT;
 	}
 	else
 	{

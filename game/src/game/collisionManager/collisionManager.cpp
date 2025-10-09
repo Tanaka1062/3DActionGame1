@@ -17,7 +17,7 @@ void CCollisionManager::CheckHitEnemyFOVToPlayer(CEnemyManager& _enemyManager,
 	for (int i = 0; i < _enemyManager.GetEnemyNum(); i++)
 	{
 		//“G‚ÌƒNƒ‰ƒX‚ðŽæ“¾
-		CEnemy* enemy = _enemyManager.GetEnemy(i);
+		CEnemyBase* enemy = _enemyManager.GetEnemy(i);
 		
 		//“G‚ªŽ€‚ñ‚Å‚¢‚½‚çˆ—‚ð‚µ‚È‚¢
 		if (enemy->GetActive() == false)continue;
@@ -45,7 +45,7 @@ void CCollisionManager::CheckHitEnemyAttackToPlayer(CEnemyManager& _enemyManager
 	for (int i = 0; i < _enemyManager.GetEnemyNum(); i++)
 	{
 		//“G‚ÌƒNƒ‰ƒX‚ðŽæ“¾
-		CEnemy* enemy = _enemyManager.GetEnemy(i);
+		CEnemyBase* enemy = _enemyManager.GetEnemy(i);
 
 		//“G‚ªŽ€‚ñ‚Å‚¢‚½‚çˆ—‚ð‚µ‚È‚¢
 		if (enemy->GetActive() == false)continue;
@@ -120,14 +120,15 @@ void CCollisionManager::CheckHitPlayerAttackToEnemy(CAttackManager& _attackManag
 		for (int j = 0; j < _enemyManager.GetEnemyNum(); j++)
 		{
 			//“G‚ÌƒNƒ‰ƒX‚ðŽæ“¾
-			CEnemy* enemy = _enemyManager.GetEnemy(j);
+			CEnemyBase* enemy = _enemyManager.GetEnemy(j);
 
 			//“G‚ªŽ€‚ñ‚Å‚¢‚½‚çƒXƒLƒbƒv
 			if (enemy->GetActive() == false)continue;
 
 			//ƒvƒŒƒCƒ„[‚ÌUŒ‚‚ª“G‚É“–‚½‚Á‚Ä‚¢‚é‚©
-			if (CCollision::CheckHitSphereToSphere(attack->GetCenter(), attack->GetRad(),
-				enemy->GetCenter(), enemy->GetRad()) == true)
+			if (CCollision::CheckHitSphereToSphere(attack->GetPos(), attack->GetRad(),
+				enemy->GetCenter(), enemy->GetRad()) == true &&
+				attack->GetIsAttack() == true)
 			{
 				//ŒÄ‚Ño‚·ƒGƒtƒFƒNƒg‚ÌID
 				int effectId = CEffectData::GetId(EFFECT_ATTACK);
@@ -136,8 +137,8 @@ void CCollisionManager::CheckHitPlayerAttackToEnemy(CAttackManager& _attackManag
 				CEffekseerCtrl::Request(effectId, enemy->GetCenter(), false);
 
 				//ƒmƒbƒNƒoƒbƒN‚Ì•ûŒü
-				float rot = atan2f(attack->GetCenter().x - enemy->GetCenter().x,
-					attack->GetCenter().z - enemy->GetCenter().z);
+				float rot = atan2f(attack->GetPos().x - enemy->GetCenter().x,
+					attack->GetPos().z - enemy->GetCenter().z);
 
 				//“G‚ÉƒvƒŒƒCƒ„[‚ÌUŒ‚—Í•ªƒ_ƒ[ƒW
 				enemy->HitAttack(attack->GetAtk(), rot);
@@ -159,7 +160,7 @@ void CCollisionManager::CheckHitEnemyToPlayer(CEnemyManager& _enemyManager,
 	for (int i = 0; i < _enemyManager.GetEnemyNum(); i++)
 	{
 		//“G‚ÌƒNƒ‰ƒX‚ðŽæ“¾
-		CEnemy* enemy = _enemyManager.GetEnemy(i);
+		CEnemyBase* enemy = _enemyManager.GetEnemy(i);
 
 		//“G‚ªŽ€‚ñ‚Å‚¢‚½‚çˆ—‚ð‚µ‚È‚¢
 		if (enemy->GetActive() == false)continue;
@@ -268,7 +269,7 @@ void CCollisionManager::CheckHitEnemyToEnemy(CEnemyManager& _enemyManager)
 	for (int i = 0; i < _enemyManager.GetEnemyNum(); i++)
 	{
 		//“G‚P‚ð•Û‘¶
-		CEnemy* enemy1 = _enemyManager.GetEnemy(i);
+		CEnemyBase* enemy1 = _enemyManager.GetEnemy(i);
 
 		//“G‚P‚ªŽ€‚ñ‚¾‚çƒXƒLƒbƒv
 		if (enemy1->GetActive() == false)continue;
@@ -276,7 +277,7 @@ void CCollisionManager::CheckHitEnemyToEnemy(CEnemyManager& _enemyManager)
 		for (int j = 0; j < _enemyManager.GetEnemyNum(); j++)
 		{
 			//“G‚Q‚ð•Û‘¶
-			CEnemy* enemy2 = _enemyManager.GetEnemy(j);
+			CEnemyBase* enemy2 = _enemyManager.GetEnemy(j);
 
 			//“G‚Q‚ªŽ€‚Ê‚Ü‚½‚Í“G‚P‚Æ“G‚Q‚ª“¯‚¶‚¾‚Á‚½‚çƒXƒLƒbƒv
 			if (enemy2->GetActive() == false || i == j)continue;
@@ -399,7 +400,7 @@ void CCollisionManager::CheckHitShotToEnemy(CShotManager& _shotManager,
 		for (int j = 0; j < _enemyManager.GetEnemyNum(); j++)
 		{
 			//“G‚ð•Û‘¶
-			CEnemy* enemy = _enemyManager.GetEnemy(j);
+			CEnemyBase* enemy = _enemyManager.GetEnemy(j);
 
 			//“G‚ªŽ€‚ñ‚¾‚çƒXƒLƒbƒv
 			if (enemy->GetActive() == false)continue;
@@ -498,7 +499,7 @@ void CCollisionManager::CheckHitEnemyToMap(CEnemyManager& _enemy, CMap& _map)
 	for (int i = 0; i < _enemy.GetEnemyNum(); i++)
 	{
 		//“G‚ÌƒNƒ‰ƒX‚ðŽæ“¾
-		CEnemy* enemy = _enemy.GetEnemy(i);
+		CEnemyBase* enemy = _enemy.GetEnemy(i);
 		//“G‚ª¶‚«‚Ä‚¢‚È‚©‚Á‚½‚çƒXƒLƒbƒv
 		if (enemy->GetActive() == false)continue;
 

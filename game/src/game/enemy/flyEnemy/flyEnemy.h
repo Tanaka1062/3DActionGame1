@@ -11,7 +11,7 @@ private:
 public:
 
 	//‰Šú‰»
-	void Init();
+	void Init(CAttackManager* _attackManager = nullptr);
 
 	//–ˆƒtƒŒ[ƒ€‚·‚éˆ—
 	//’Ç‚¢‚©‚¯‚é‘Šè‚ÌÀ•W

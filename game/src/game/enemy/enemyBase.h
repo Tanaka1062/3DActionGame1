@@ -22,7 +22,7 @@ public:
 	~CEnemyBase();
 
 	//‰Šú‰»
-	virtual void Init();
+	virtual void Init(CAttackManager* _attackManager = nullptr);
 
 	//ƒ‚ƒfƒ‹ƒ[ƒh
 	virtual void Load(int _rootHndl,int _modelHndl);

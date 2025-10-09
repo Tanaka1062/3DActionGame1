@@ -15,10 +15,11 @@ void CCameraBase::Init()
 	m_pos = ZERO;
 	m_rot = ZERO;
 	m_upVec = CAMERA_UP;
+
 }
 
 //–ˆƒtƒŒ[ƒ€‚·‚éˆ—
-void CCameraBase::Step()
+void CCameraBase::Step(VECTOR _focus, float _rot)
 {
 
 }

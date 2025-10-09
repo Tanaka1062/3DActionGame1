@@ -17,7 +17,9 @@ public:
 	virtual void Init();
 
 	//毎フレームする処理
-	virtual void Step();
+	//_focus	:	プレイヤーの座標
+	//_rot		:	プレイヤーの回転角度
+	virtual void Step(VECTOR _focus, float _rot);
 
 	//カメラの更新
 	virtual void Update();

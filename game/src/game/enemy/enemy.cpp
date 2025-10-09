@@ -11,7 +11,7 @@ static const char MODEL_PATH[] =
 { "data/model/enemy/enemyTest.mv1" };				//ロードするファイル名
 static const VECTOR INIT_POS = { 0.0f,0.0f,0.0f };	//初期座標
 static const int MAX_HP = 100;						//体力
-static const int ATK = 10;							//攻撃力
+static const int ATK = 5;							//攻撃力
 static const float MOVE_SPEED = 0.75f;				//移動スピード
 static const float RADIUS = 2.5f;					//半径
 static const float FOV_RADIUS = 50.0f;				//視界範囲(半径)
@@ -60,9 +60,9 @@ CEnemy::~CEnemy()
 //-----------------------
 //		初期化
 //-----------------------
-void CEnemy::Init()
+void CEnemy::Init(CAttackManager* _attackManager)
 {
-	CCharacterBase::Init();
+	CCharacterBase::Init(_attackManager);
 	m_attack.Init(ATTACK_SIZE,ATTACK_LENGTH, ATTACKABLE_RAD);
 	m_FOV.Init(FOV_RADIUS);
 
@@ -72,100 +72,6 @@ void CEnemy::Init()
 	m_rad = RADIUS;
 	m_hp = MAX_HP;
 	m_atk = ATK;
-}
-
-//-----------------------
-//	モデルロード
-//-----------------------
-void CEnemy::Load(int _rootHndl)
-{
-	CActor::LoadModel(MODEL_PATH);
-
-	if (m_rootHndl == -1)
-	{
-		m_rootHndl = _rootHndl;
-	}
-
-	//ルート移動の初期化設定------------------
-	//最初の位置を取得し、そこに配置する
-	VECTOR start = MV1GetFramePosition(m_rootHndl, m_root[m_rootId]);
-	m_pos = start;
-	//視界も最初の位置を設定
-	m_FOV.SetPos(start);
-
-	//ルートを次の位置に変更
-	m_rootId++;
-	//----------------------------------------
-
-}
-
-//-----------------------
-//毎フレームする処理
-//-----------------------
-void CEnemy::Step(VECTOR _pos)
-{
-	//Activeがfalseなら処理をしない
-	if (m_isActive == false)return;
-
-	//攻撃の毎フレームする処理
-	m_attack.Step();
-	//視界範囲の毎フレームする処理
-	m_FOV.Step();
-
-	//視界にプレイヤーが入ってなかったら追わない
-	if (m_FOV.GetHit() == false)
-	{
-		//ルート移動処理
-		MoveRoot();
-	}
-	else
-	{
-		//追いかける移動処理
-		MoveChase(_pos);
-	}
-
-	CCharacterBase::Step();
-
-}
-
-//-----------------------
-//		描写処理
-//-----------------------
-void CEnemy::Draw()
-{
-	CCharacterBase::Draw();
-
-
-#ifdef DEBUG
-	
-	//Activeがfalseなら描写しない
-	if (m_isActive == false)return;
-
-	DrawSphere3D(GetCenter(), m_rad, 16, GetColor(255, 0, 0), GetColor(255, 0, 0), FALSE);
-
-#endif // DEBUG
-	
-}
-
-//-----------------------
-//		更新処理
-//-----------------------
-void CEnemy::Update()
-{
-	CCharacterBase::Update();
-
-	//怯み状態以外はスピードをリセット
-	if (m_state != STAGGER)
-	{
-		//速度のリセット
-		ResetSpeed();
-	}
-
-	//攻撃の更新
-	m_attack.Update(GetCenter(), m_rot);
-	//視界範囲の更新
-	m_FOV.Update(m_pos);
-
 }
 
 //-----------------------

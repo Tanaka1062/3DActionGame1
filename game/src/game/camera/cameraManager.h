@@ -31,7 +31,7 @@ public:
 	void Init();
 
 	//–ˆƒtƒŒ[ƒ€‚·‚éˆ—
-	void Step();
+	void Step(VECTOR _focus, float _rot);
 
 	//•\¦
 	void Draw();

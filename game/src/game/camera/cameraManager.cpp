@@ -48,10 +48,10 @@ void CCameraManager::Init()
 //---------------------------
 //	毎フレームする処理
 //---------------------------
-void CCameraManager::Step()
+void CCameraManager::Step(VECTOR _focus, float _rot)
 {
 	//カメラの処理
-	m_camera[m_id]->Step();
+	m_camera[m_id]->Step(_focus,_rot);
 
 	//カメラのモード切替
 	//デバックモードに変更
@@ -117,7 +117,6 @@ void CCameraManager::Update(VECTOR _tagetPos)
 	VECTOR up = m_camera[m_id]->GetUp();
 
 	CEffekseerCtrl::SetCameraRotMtx(pos, rot, up);
-	//CEffekseerCtrl::Update();
 	CEffekseerCtrl::UpdateAutoCamera();
 }
 

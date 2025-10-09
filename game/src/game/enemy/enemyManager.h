@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <vector>
-#include "enemy.h"
+#include "enemyBase.h"
 
 using namespace std;
 
@@ -9,8 +9,9 @@ using namespace std;
 class CEnemyManager
 {
 private:
-	vector<CEnemy*> m_enemy;			//敵のクラス
-	int m_rootHndl;						//移動ルートのハンドル
+	vector<CEnemyBase*> m_enemy;			//敵のクラス
+	int m_rootHndl;							//移動ルートのハンドル
+	int m_modelHndl;						//モデルのハンドル
 
 public:
 	//コンストラクタ・デストラクタ
@@ -18,7 +19,7 @@ public:
 	~CEnemyManager();
 
 	//初期化
-	void Init();
+	void Init(CAttackManager* _attackManager = nullptr);
 	//オブジェクトのロード
 	void Load();
 	//毎フレームする処理
@@ -51,6 +52,6 @@ public:
 	};
 
 	//敵を取得
-	CEnemy* GetEnemy(int _num) { return m_enemy[_num]; }
+	CEnemyBase* GetEnemy(int _num) { return m_enemy[_num]; }
 };
 

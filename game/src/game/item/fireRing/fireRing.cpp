@@ -6,7 +6,7 @@
 static const int SHOT_NUM = 3;						//弾を撃つ回数
 static const float SHOT_RADIUS = 2.0f;				//弾の大きさ
 static const float SHOT_SPEED = 2.0f;				//弾のスピード
-static const int SHOT_ATK = 20;						//弾の攻撃力
+static const int SHOT_ATK = 10;						//弾の攻撃力
 static const int SHOT_LOST_TIME = 60;				//弾の消えるまでのスピード
 //----------------------------------------------
 static const int USE_MAX = 10;		//使用回数

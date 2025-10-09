@@ -2,6 +2,13 @@
 #include "enemyRootData.h"
 #include "flyEnemy/flyEnemy.h"
 
+static const char MODEL_PATH[] =
+{ "data/model/enemy/enemyTest.mv1" };				//ロードするファイル名
+
+static const char ROOT_PATH[] =
+{ "data/model/map/map1FramePos.mv1" };				//ロードするファイル名
+
+
 //------------------------
 //	  コンストラクタ
 //------------------------
@@ -26,9 +33,10 @@ CEnemyManager::~CEnemyManager()
 //------------------------
 //		  初期化
 //------------------------
-void CEnemyManager::Init()
+void CEnemyManager::Init(CAttackManager* _attackManager)
 {
 	m_rootHndl = -1;
+	m_modelHndl = -1;
 
 	for (int i = 0; i < ENEMY_NUM; i++)
 	{
@@ -39,7 +47,7 @@ void CEnemyManager::Init()
 			else
 				m_enemy.push_back(new CEnemy);
 		}
-		m_enemy[i]->Init();
+		m_enemy[i]->Init(_attackManager);
 		//ルートを設定
 		for (int j = 0; j < ENEMY_ROOT_MAX; j++)
 		{
@@ -58,14 +66,19 @@ void CEnemyManager::Init()
 //------------------------
 void CEnemyManager::Load()
 {
+	if (m_modelHndl == -1)
+	{
+		m_modelHndl = MV1LoadModel(MODEL_PATH);
+	}
+
 	if (m_rootHndl == -1)
 	{
-		m_rootHndl = MV1LoadModel("data/model/map/map1FramePos.mv1");
+		m_rootHndl = MV1LoadModel(ROOT_PATH);
 	}
 
 	for (int i = 0; i < m_enemy.size(); i++)
 	{
-		m_enemy[i]->Load(m_rootHndl);
+		m_enemy[i]->Load(m_rootHndl, m_modelHndl);
 	}
 }
 
