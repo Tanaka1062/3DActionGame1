@@ -10,7 +10,7 @@
 
 //プレイヤー関連--------------------------------
 static const char MODEL_PATH[] =
-{ "data/model/player/playerTest2.mv1" };				//ロードするファイル名
+{ "data/model/player/playerTest3.mv1" };			//ロードするファイル名
 static const VECTOR INIT_POS = { 0.0f,1.0f,0.0f };	//初期座標
 static const int MAX_HP = 100;						//体力
 static const int ATK = 20;							//攻撃力
@@ -35,12 +35,12 @@ enum tagAttackId									//攻撃のID
 enum tagAnim {
 	ANIMID_ATTACK,				//攻撃中アニメーション
 	ANIMID_ATTACKB,				//攻撃2中アニメーション
-	ANIMID_ATTACKB_CHARGE,		//攻撃2のチャージ中アニメーション
-	ANIMID_ATTACKB_CHARGE_IN,	//攻撃2のチャージ前アニメーション
 	ANIMID_ATTACKB_IN,			//攻撃2前アニメーション
 	ANIMID_ATTACKB_OUT,			//攻撃2後アニメーション
 	ANIMID_ATTACK_IN,			//攻撃前のアニメーション
 	ANIMID_ATTACK_OUT,			//攻撃後のアニメーション
+	ANIMID_ATTACKB_CHARGE,		//攻撃2のチャージ中アニメーション
+	ANIMID_ATTACKB_CHARGE_IN,	//攻撃2のチャージ前アニメーション
 	ANIMID_DEFAULT,				//デフォルトのアニメーション
 	ANIMID_DIE,					//死亡時のアニメーション
 	ANIMID_HIT,					//被弾のアニメーション
@@ -192,7 +192,7 @@ void CPlayer::Wait()
 	//待機アニメーションを再生
 	if (m_animData.m_id != ANIMID_WAIT)
 	{
-		Request(ANIMID_WAIT, 1.0f, true);
+		Request(ANIMID_WAIT, 0.5f, true);
 	}
 
 	//動いていたら歩き状態に移行
@@ -248,14 +248,14 @@ void CPlayer::AttackIn()
 		//攻撃前のアニメーション
 		if (m_animData.m_id != ANIMID_ATTACK_IN)
 		{
-			Request(ANIMID_ATTACK_IN, 1.0f);
+			Request(ANIMID_ATTACK_IN, 0.8f);
 		}
 		break;
 	case ATTACK_ID_B:
 		//攻撃前のアニメーション
 		if (m_animData.m_id != ANIMID_ATTACKB_IN)
 		{
-			Request(ANIMID_ATTACKB_IN, 0.4f);
+			Request(ANIMID_ATTACKB_IN, 1.2f);
 		}
 		break;
 	}
@@ -295,7 +295,7 @@ void CPlayer::Attack()
 		//攻撃中のアニメーション
 		if (m_animData.m_id != ANIMID_ATTACKB)
 		{
-			Request(ANIMID_ATTACKB, 0.1f);
+			Request(ANIMID_ATTACKB, 1.0f);
 
 			//攻撃の呼び出し
 			m_attackManager->Request(GetCenter(), ATTACKB_SIZE, ATTACKB_ATK, ATTACK_TYPE_PLAYER);

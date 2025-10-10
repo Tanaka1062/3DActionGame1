@@ -92,3 +92,21 @@ void CFlyEnemy::ShotAttack(int _atk, float _rotY)
 	m_hp -= _atk;
 }
 
+//-----------------------
+//		UŒ‚
+//-----------------------
+void CFlyEnemy::Attack()
+{
+	CEnemy::Attack();
+
+	//VECTOR attackPos;
+	//attackPos.x = -sinf(m_rot.y) * ATTACK_LENGTH;
+	//attackPos.y = 3.0f;
+	//attackPos.z = -cosf(m_rot.y) * ATTACK_LENGTH;
+
+	//attackPos = VAdd(attackPos, m_pos);
+
+	//m_attackManager->Request(attackPos, ATTACKABLE_RAD, ATK, ATTACK_TYPE_ENEMY);
+
+}
+

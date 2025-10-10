@@ -10,8 +10,8 @@ static const float TARGET_OFFSET_Y = 2.0f;			//ターゲットの修正Y
 
 static const float MAX_LEN_NEAR = 30.0f;			//この距離より離れるとカメラ移動開始
 static const float MAX_LEN_FAR = 35.0f;				//これ以上は離させない
-static const float MIN_LEN_NEAR = 20.0f;			//この距離より近づくとカメラ移動開始
-static const float MIN_LEN_FAR = 15.0f;				//これ以上は近づけさせない
+static const float MIN_LEN_NEAR = 25.0f;			//この距離より近づくとカメラ移動開始
+static const float MIN_LEN_FAR = 20.0f;				//これ以上は近づけさせない
 static const float CAMERA_MOVE_SPEED = 0.5f;		//カメラのデフォルト移動速度
 static const float CAMERA_ROT_SPEED = 2.0f;			//カメラの回転速度
 //============================================
@@ -20,16 +20,20 @@ static const float CAMERA_ROT_SPEED = 2.0f;			//カメラの回転速度
 //		コンストラクタ
 //---------------------------------
 CPlayCamera::CPlayCamera() {
-	Init();
+	Init(ZERO);
 }
 
 //---------------------------------
 //			初期化
 //---------------------------------
-void CPlayCamera::Init()
+void CPlayCamera::Init(VECTOR _focus)
 {
-	CCameraBase::Init();
-	m_focusPos = ZERO;						//カメラの注視点
+	CCameraBase::Init(_focus);
+	m_focusPos = _focus;						//カメラの注視点
+
+	m_pos = _focus;
+	m_pos.z += MAX_LEN_NEAR;
+	
 }
 
 //---------------------------------

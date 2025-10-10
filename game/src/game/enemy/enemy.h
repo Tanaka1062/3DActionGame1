@@ -20,7 +20,7 @@ public:
 	//‰Šú‰»
 	virtual void Init(CAttackManager* _attackManager = nullptr);
 
-private:
+protected:
 	//‘Ò‹@ó‘Ôˆ—
 	void Wait();
 
@@ -34,7 +34,7 @@ private:
 	void AttackIn();
 
 	//UŒ‚ó‘Ôˆ—
-	void Attack();
+	virtual void Attack();
 
 	//UŒ‚Œãˆ—
 	void AttackOut();

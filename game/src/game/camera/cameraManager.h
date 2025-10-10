@@ -28,7 +28,7 @@ public:
 	CCameraManager();
 
 	//‰Šú‰»
-	void Init();
+	void Init(VECTOR _focus);
 
 	//–ˆƒtƒŒ[ƒ€‚·‚éˆ—
 	void Step(VECTOR _focus, float _rot);

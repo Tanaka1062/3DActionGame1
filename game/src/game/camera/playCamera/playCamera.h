@@ -12,7 +12,7 @@ public:
 	CPlayCamera();
 
 	//初期化
-	void Init();
+	void Init(VECTOR _focus);
 
 	// 毎フレーム呼ぶ処理
 	//_focus	:	プレイヤーの座標

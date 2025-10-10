@@ -19,7 +19,7 @@ CDbugCamera::CDbugCamera()
 //‰Šú‰»
 void CDbugCamera::Init()
 {
-	CCameraBase::Init();
+	CCameraBase::Init(ZERO);
 }
 
 //–ˆƒtƒŒ[ƒ€‚·‚éˆ—

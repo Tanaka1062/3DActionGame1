@@ -23,5 +23,9 @@ public:
 	//’e‚ğH‚ç‚Á‚½‚É‚·‚éˆ—
 	void ShotAttack(int _atk, float _rotY = 0.0f);
 
+protected:
+	//UŒ‚ó‘Ôˆ—
+	void Attack();
+
 };
 

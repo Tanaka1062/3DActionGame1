@@ -57,7 +57,7 @@ void CPlayScene::Init()
 	m_item.Init(&m_player,&m_shot);
 	m_itemInventory.Init(&m_player);
 	m_weapon.Init();
-	m_camera.Init();
+	m_camera.Init(m_player.GetCenter());
 
 }
 

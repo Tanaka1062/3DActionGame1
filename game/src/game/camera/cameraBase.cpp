@@ -6,11 +6,11 @@ static const VECTOR CAMERA_UP = { 0.0f,1.0f,0.0f };	//カメラの上方向
 //コンストラクタ
 CCameraBase::CCameraBase()
 {
-	Init();
+	Init(ZERO);
 }
 
 //初期化
-void CCameraBase::Init()
+void CCameraBase::Init(VECTOR _focus)
 {
 	m_pos = ZERO;
 	m_rot = ZERO;

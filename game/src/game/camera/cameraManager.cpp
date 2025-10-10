@@ -22,7 +22,7 @@ CCameraManager::CCameraManager() {
 //---------------------------
 //			初期化
 //---------------------------
-void CCameraManager::Init()
+void CCameraManager::Init(VECTOR _focus)
 {
 	//カメラを設定
 	m_camera[CAMERA_ID_PLAY] = new CPlayCamera;
@@ -31,7 +31,7 @@ void CCameraManager::Init()
 	//カメラの初期化
 	for (int i = 0; i < CAMERA_ID_NUM; i++)
 	{
-		m_camera[i]->Init();
+		m_camera[i]->Init(_focus);
 	}
 
 	// カメラのニアーファー設定

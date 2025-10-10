@@ -14,7 +14,7 @@ public:
 	CCameraBase();
 
 	//初期化
-	virtual void Init();
+	virtual void Init(VECTOR _focus);
 
 	//毎フレームする処理
 	//_focus	:	プレイヤーの座標
