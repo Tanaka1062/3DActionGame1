@@ -60,5 +60,6 @@ void CMap::Load()
 void CMap::Draw()
 {
 	CObject::Draw();
+
 }
 

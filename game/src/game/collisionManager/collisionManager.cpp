@@ -171,7 +171,12 @@ void CCollisionManager::CheckHitEnemyToPlayer(CEnemyManager& _enemyManager,
 		float len1 = enemy->GetRad() + _player.GetRad();
 
 		//実際に離れている距離を求める
-		VECTOR dir = VSub(enemy->GetCenter(), _player.GetCenter());
+		VECTOR playerPos = _player.GetPos();
+		playerPos.y = 0.0f;
+		VECTOR enemyPos = enemy->GetPos();
+		enemyPos.y = 0.0f;
+
+		VECTOR dir = VSub(enemyPos, playerPos);
 		float len2 = VSize(dir);
 
 		//めり込んでいたら
@@ -189,118 +194,21 @@ void CCollisionManager::CheckHitEnemyToPlayer(CEnemyManager& _enemyManager,
 
 			dir = VScale(dir,len3);
 
-			VECTOR enemyPos = enemy->GetPos();
+			enemyPos = VAdd(enemy->GetPos(), dir);
 
-			enemyPos = VAdd(enemyPos,dir);
-
-			enemy->SetPos(enemyPos);
+			enemy->SetPos(VAdd(enemy->GetPos(), dir));
 
 
-			VECTOR dir2 = VSub(_player.GetCenter(), enemy->GetCenter());
+			VECTOR dir2 = VSub(playerPos, enemyPos);
 			dir2 = VNorm(dir2);
 			dir2 = VScale(dir2, len3);
 
-			VECTOR playerPos = _player.GetPos();
+			//playerPos = VAdd(playerPos, dir2);
 
-			playerPos = VAdd(playerPos, dir2);
-
-			//_player.SetPos(playerPos);
+			//_player.SetPos(VAdd(playerPos, dir2));
 		}
 
 		//-------------------------------------------------------------
-
-		//プレイヤーの押し戻し処理-------------------------------------
-		
-		//判定用のプレイヤー座標を保存
-		//VECTOR playerPos = _player.GetCenter();
-		////プレイヤーの速度を保存
-		//VECTOR playerSpeed = _player.GetSpeed();
-
-		////Xだけ移動した時の座標
-		//playerPos.x += playerSpeed.x;
-
-		////Xだけ移動したプレイヤーと敵の当たり判定
-		//if (CCollision::CheckHitSphereToSphere(playerPos, _player.GetRad(),
-		//	enemy->GetCenter(), enemy->GetRad()) == true)
-		//{
-		//	//Xの移動だけを取り消す
-		//	playerSpeed.x = 0.0f;
-		//}
-
-		////Yだけ移動したときの座標
-		//playerPos = _player.GetCenter();
-		//playerPos.y += playerSpeed.y;
-
-		////Yだけ移動したプレイヤーと敵の当たり判定
-		//if (CCollision::CheckHitSphereToSphere(playerPos, _player.GetRad(),
-		//	enemy->GetCenter(), enemy->GetRad()) == true)
-		//{
-		//	//Yの移動だけを取り消す
-		//	playerSpeed.y = 0.0f;
-		//}
-
-		////Zだけ移動したときの座標
-		//playerPos = _player.GetCenter();
-		//playerPos.z += playerSpeed.z;
-
-		////Zだけ移動したプレイヤーと敵の当たり判定
-		//if (CCollision::CheckHitSphereToSphere(playerPos, _player.GetRad(),
-		//	enemy->GetCenter(), enemy->GetRad()) == true)
-		//{
-		//	//Zの移動だけを取り消す
-		//	playerSpeed.z = 0.0f;
-		//}
-
-		////変更したスピードをセット
-		//_player.SetSpeed(playerSpeed);
-
-		////-------------------------------------------------------------
-
-		////敵の押し戻し処理------------------------------------------------
-
-		////判定用の敵座標を保存
-		//VECTOR enemyPos = enemy->GetCenter();
-		////敵の速度を保存
-		//VECTOR enemySpeed = enemy->GetSpeed();
-
-		////Xだけ移動した時の座標
-		//enemyPos.x += enemySpeed.x;
-
-		////Xだけ移動した敵とプレイヤーの当たり判定
-		//if (CCollision::CheckHitSphereToSphere(enemyPos, enemy->GetRad(),
-		//	_player.GetCenter(), _player.GetRad()) == true)
-		//{
-		//	//Xの移動だけを取り消す
-		//	enemySpeed.x = 0.0f;
-		//}
-
-		////Yだけ移動したときの座標
-		//enemyPos = enemy->GetCenter();
-		//enemyPos.y += enemySpeed.y;
-
-		////Yだけ移動した敵とプレイヤーの当たり判定
-		//if (CCollision::CheckHitSphereToSphere(enemyPos, enemy->GetRad(),
-		//	_player.GetCenter(), _player.GetRad()) == true)
-		//{
-		//	//Zの移動だけを取り消す
-		//	enemySpeed.y = 0.0f;
-		//}
-
-		////Zだけ移動したときの座標
-		//enemyPos = enemy->GetCenter();
-		//enemyPos.z += enemySpeed.z;
-
-		////Zだけ移動した敵とプレイヤーの当たり判定
-		//if (CCollision::CheckHitSphereToSphere(enemyPos, enemy->GetRad(),
-		//	_player.GetCenter(), _player.GetRad()) == true)
-		//{
-		//	//Zの移動だけを取り消す
-		//	enemySpeed.z = 0.0f;
-		//}
-
-		////変更したスピードをセット
-		//enemy->SetSpeed(enemySpeed);
-		//----------------------------------------------------------------
 
 	}
 }
@@ -332,7 +240,12 @@ void CCollisionManager::CheckHitEnemyToEnemy(CEnemyManager& _enemyManager)
 			float len1 = enemy1->GetRad() + enemy2->GetRad();
 
 			//実際に離れている距離を求める
-			VECTOR dir = VSub(enemy1->GetCenter(), enemy2->GetCenter());
+			VECTOR enemy1Pos = enemy1->GetPos();
+			enemy1Pos.y = 0.0f;
+			VECTOR enemy2Pos = enemy2->GetPos();
+			enemy2Pos.y = 0.0f;
+
+			VECTOR dir = VSub(enemy1Pos, enemy2Pos);
 			float len2 = VSize(dir);
 
 			//めり込んでいたら
@@ -350,114 +263,20 @@ void CCollisionManager::CheckHitEnemyToEnemy(CEnemyManager& _enemyManager)
 
 				dir = VScale(dir, len3);
 
-				VECTOR enemy1Pos = enemy1->GetPos();
+				//enemy1Pos = VAdd(enemy1->GetPos(), dir);
 
-				enemy1Pos = VAdd(enemy1Pos, dir);
+				enemy1->SetPos(VAdd(enemy1->GetPos(), dir));
 
-				enemy1->SetPos(enemy1Pos);
-
-				VECTOR dir2 = VSub(enemy2->GetCenter(), enemy1->GetCenter());
+				VECTOR dir2 = VSub(enemy2Pos, enemy1Pos);
 				dir2 = VNorm(dir2);
 				dir2 = VScale(dir2, len3);
 
-				VECTOR enemy2Pos = enemy2->GetPos();
-
-				enemy2Pos = VAdd(enemy2Pos, dir2);
+				enemy2Pos = VAdd(enemy2->GetPos(), dir2);
 
 				enemy2->SetPos(enemy2Pos);
 			}
 
-			//敵1の押し戻し処理------------------------------------------------
-
-			////判定用の敵1座標を保存
-			//VECTOR enemy1Pos = enemy1->GetCenter();
-			////敵1の速度を保存
-			//VECTOR enemy1Speed = enemy1->GetSpeed();
-
-			////Xだけ移動した時の座標
-			//enemy1Pos.x += enemy1Speed.x;
-
-			////Xだけ移動した敵1と敵2の当たり判定
-			//if (CCollision::CheckHitSphereToSphere(enemy1Pos, enemy1->GetRad(),
-			//	enemy2->GetCenter(), enemy2->GetRad()) == true)
-			//{
-			//	//Xの移動だけを取り消す
-			//	enemy1Speed.x = 0.0f;
-			//}
-
-			////Yだけ移動したときの座標
-			//enemy1Pos = enemy1->GetCenter();
-			//enemy1Pos.y += enemy1Speed.y;
-
-			////Yだけ移動した敵1と敵2の当たり判定
-			//if (CCollision::CheckHitSphereToSphere(enemy1Pos, enemy1->GetRad(),
-			//	enemy2->GetCenter(), enemy2->GetRad()) == true)
-			//{
-			//	//Zの移動だけを取り消す
-			//	enemy1Speed.y = 0.0f;
-			//}
-
-			////Zだけ移動したときの座標
-			//enemy1Pos = enemy1->GetCenter();
-			//enemy1Pos.z += enemy1Speed.z;
-
-			////Zだけ移動した敵1と敵2の当たり判定
-			//if (CCollision::CheckHitSphereToSphere(enemy1Pos, enemy1->GetRad(),
-			//	enemy2->GetCenter(), enemy2->GetRad()) == true)
-			//{
-			//	//Zの移動だけを取り消す
-			//	enemy1Speed.z = 0.0f;
-			//}
-
-			////変更したスピードをセット
-			//enemy1->SetSpeed(enemy1Speed);
-			////----------------------------------------------------------------
-
-			////敵2の押し戻し処理------------------------------------------------
-
-			////判定用の敵2座標を保存
-			//VECTOR enemy2Pos = enemy2->GetCenter();
-			////敵1の速度を保存
-			//VECTOR enemy2Speed = enemy2->GetSpeed();
-
-			////Xだけ移動した時の座標
-			//enemy2Pos.x += enemy2Speed.x;
-
-			////Xだけ移動した敵2と敵1の当たり判定
-			//if (CCollision::CheckHitSphereToSphere(enemy2Pos, enemy2->GetRad(),
-			//	enemy1->GetCenter(), enemy1->GetRad()) == true)
-			//{
-			//	//Xの移動だけを取り消す
-			//	enemy2Speed.x = 0.0f;
-			//}
-
-			////Yだけ移動したときの座標
-			//enemy2Pos = enemy2->GetCenter();
-			//enemy2Pos.y += enemy2Speed.y;
-
-			////Yだけ移動した敵2と敵1の当たり判定
-			//if (CCollision::CheckHitSphereToSphere(enemy2Pos, enemy2->GetRad(),
-			//	enemy1->GetCenter(), enemy1->GetRad()) == true)
-			//{
-			//	//Zの移動だけを取り消す
-			//	enemy2Speed.y = 0.0f;
-			//}
-
-			////Zだけ移動したときの座標
-			//enemy2Pos = enemy2->GetCenter();
-			//enemy2Pos.z += enemy2Speed.z;
-
-			////Zだけ移動した敵1と敵2の当たり判定
-			//if (CCollision::CheckHitSphereToSphere(enemy2Pos, enemy2->GetRad(),
-			//	enemy1->GetCenter(), enemy1->GetRad()) == true)
-			//{
-			//	//Zの移動だけを取り消す
-			//	enemy2Speed.z = 0.0f;
-			//}
-
-			////変更したスピードをセット
-			//enemy2->SetSpeed(enemy2Speed);
-			////----------------------------------------------------------------
+			//-------------------------------------------------------------
 
 		}
 
@@ -608,7 +427,7 @@ void CCollisionManager::CheckHitEnemyToMap(CEnemyManager& _enemy, CMap& _map)
 				//法線をめり込んだ距離分掛け算する
 				vLen = VScale(col.Dim[i].Normal, fLen);
 
-				//プレイヤーの座標を計算した分だけ移動させる
+				//敵の座標を計算した分だけ移動させる
 				enemy->SetPos(VAdd(enemy->GetPos(), vLen));
 
 				//重力をリセット
