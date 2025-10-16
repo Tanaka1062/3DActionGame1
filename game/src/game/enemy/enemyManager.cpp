@@ -6,7 +6,7 @@ static const char MODEL_PATH[] =
 { "data/model/enemy/enemyTest.mv1" };				//ロードするファイル名
 
 static const char ROOT_PATH[] =
-{ "data/model/map/map1FramePos.mv1" };				//ロードするファイル名
+{ "data/model/map/TestMap4FramePos.mv1" };				//ロードするファイル名
 
 
 //------------------------
@@ -42,7 +42,7 @@ void CEnemyManager::Init(CAttackManager* _attackManager)
 	{
 		if (m_enemy.size() < ENEMY_NUM) 
 		{
-			if (i == 0)
+			if (i != 0)
 				m_enemy.push_back(new CFlyEnemy);
 			else
 				m_enemy.push_back(new CEnemy);

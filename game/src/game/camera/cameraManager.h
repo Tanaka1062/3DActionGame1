@@ -19,8 +19,8 @@ public:
 
 private:
 	CCameraBase* m_camera[CAMERA_ID_NUM];	//カメラ
-	tagCAMERA_ID m_id;		//カメラのタイプ
-	VECTOR m_rot;			//カメラの回転値
+	tagCAMERA_ID m_id;						//カメラのタイプ
+	VECTOR m_rot;							//カメラの回転値
 
 public:
 
