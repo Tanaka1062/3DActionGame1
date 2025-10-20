@@ -13,6 +13,7 @@
 #include "../item/itemInventory/itemInventory.h"
 #include "../weapon/weapon.h"
 #include "../attack/attackManager.h"
+#include "../box/box.h"
 
 using namespace std;
 
@@ -32,6 +33,7 @@ private:
 	CItemInventory m_itemInventory;		//アイテムインベントリ
 	CWeapon m_weapon;					//武器
 	CAttackManager m_attackManager;		//攻撃のマネージャークラス
+	CBox m_box;							//箱
 
 public:
 

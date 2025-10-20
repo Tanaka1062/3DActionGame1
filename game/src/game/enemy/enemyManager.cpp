@@ -6,7 +6,7 @@ static const char MODEL_PATH[] =
 { "data/model/enemy/enemyTest.mv1" };				//ロードするファイル名
 
 static const char ROOT_PATH[] =
-{ "data/model/map/TestMap4FramePos.mv1" };				//ロードするファイル名
+{ "data/model/map/TestMap4FramePos.mv1" };			//ロードするファイル名
 
 
 //------------------------

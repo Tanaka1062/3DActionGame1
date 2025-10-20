@@ -106,6 +106,9 @@
     <Filter Include="ソース ファイル\game\enemy\flyEnemy">
       <UniqueIdentifier>{5383299c-94bb-424b-b57a-912edd1ce6c8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\game\box">
+      <UniqueIdentifier>{90fd580d-8741-458a-b196-b951d36cdcf0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\number.cpp">
@@ -245,6 +248,12 @@
     </ClCompile>
     <ClCompile Include="src\game\attack\attackBase.cpp">
       <Filter>ソース ファイル\game\attack</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\box\box.cpp">
+      <Filter>ソース ファイル\game\box</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\box\boxManager.cpp">
+      <Filter>ソース ファイル\game\box</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -391,6 +400,12 @@
     </ClInclude>
     <ClInclude Include="src\game\attack\attackBase.h">
       <Filter>ソース ファイル\game\attack</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\box\box.h">
+      <Filter>ソース ファイル\game\box</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\box\boxManager.h">
+      <Filter>ソース ファイル\game\box</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

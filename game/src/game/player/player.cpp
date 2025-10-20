@@ -10,7 +10,7 @@
 
 //プレイヤー関連--------------------------------
 static const char MODEL_PATH[] =
-{ "data/model/player/playerTest3.mv1" };			//ロードするファイル名
+{ "data/model/player/playerTest4.mv1" };			//ロードするファイル名
 static const VECTOR INIT_POS = { 0.0f,1.0f,0.0f };	//初期座標
 static const int MAX_HP = 100;						//体力
 static const int ATK = 20;							//攻撃力
@@ -43,6 +43,10 @@ enum tagAnim {
 	ANIMID_ATTACKB_CHARGE_IN,	//攻撃2のチャージ前アニメーション
 	ANIMID_DEFAULT,				//デフォルトのアニメーション
 	ANIMID_DIE,					//死亡時のアニメーション
+	ANIMID_DODGEROLL,			//回避のアニメーション
+	ANIMID_GUARD,				//ガード中アニメーション
+	ANIMID_GUARD_IN,			//ガード前アニメーション
+	ANIMID_GUARD_OUT,			//ガード後アニメーション
 	ANIMID_HIT,					//被弾のアニメーション
 	ANIMID_ITEM_USE,			//アイテムを使用中のアニメーション
 	ANIMID_ITEM_USE_IN,			//アイテムを使用する前のアニメーション

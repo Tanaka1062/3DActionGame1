@@ -38,6 +38,7 @@ void CPlayScene::Draw()
 	m_item.Draw();
 	m_itemInventory.Draw();
 	m_weapon.Draw();
+	m_box.Draw();
 
 	m_camera.Draw();
 
@@ -57,6 +58,7 @@ void CPlayScene::Init()
 	m_item.Init(&m_player,&m_shot);
 	m_itemInventory.Init(&m_player);
 	m_weapon.Init();
+	m_box.Init();
 	m_camera.Init(m_player.GetCenter());
 
 }
@@ -74,6 +76,7 @@ void CPlayScene::Load()
 	m_shot.Load();
 	m_item.Load();
 	m_weapon.Load();
+	m_box.Load();
 }
 
 //---------------------------
@@ -122,6 +125,7 @@ void CPlayScene::Step()
 	m_item.Update();
 	m_itemInventory.Update();
 	m_weapon.Update(m_player.GetHndl());
+	m_box.Update();
 	m_camera.Update(m_player.GetCenter());
 
 	if (CKeyInput::IsTrg(KEY_SELECT) == true ||
@@ -151,6 +155,7 @@ void CPlayScene::Exit()
 	m_shot.Exit();
 	m_item.Exit();
 	m_weapon.Exit();
+	m_box.Exit();
 
 	//エフェクトを全て消す
 	CEffekseerCtrl::StopAll();

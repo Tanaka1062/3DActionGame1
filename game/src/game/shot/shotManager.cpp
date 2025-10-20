@@ -145,3 +145,4 @@ CShotBase* CShotManager::GetShot(int _num)
 	}
 	return nullptr;
 }
+
