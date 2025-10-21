@@ -44,7 +44,7 @@ void CBoxManager::Load()
 //---------------------------
 //	   毎フレームする処理
 //---------------------------
-void CBoxManager::Step()
+void CBoxManager::Update()
 {
 	for (auto ite = m_box.begin(); ite != m_box.end(); ite++)
 	{
@@ -70,10 +70,33 @@ void CBoxManager::Draw()
 //---------------------------
 void CBoxManager::Exit()
 {
-	for (auto ite = m_box.begin(); ite != m_box.end(); ite++)
+	for (auto ite = m_box.begin(); ite != m_box.end();)
 	{
 		(*ite)->Exit();
+
+		delete (*ite);
+
+		ite = m_box.erase(ite);
 	}
 
+}
+
+//箱を取得する
+CBox* CBoxManager::GetBox(int _num)
+{
+	//引数より箱の数が少なければnullをかえす
+	if (_num > m_box.size())return nullptr;
+	//箱の数をカウントする変数
+	int count = 0;
+	for (auto ite = m_box.begin(); ite != m_box.end();++ite)
+	{
+		//引数の数字と同じならアドレスを返す
+		if (count == _num)
+		{
+			return *ite;
+		}
+		count++;
+	}
+	return nullptr;
 }
 

@@ -103,3 +103,4 @@ bool CFade::IsEndFadeOut()
 	else
 		return true;
 }
+

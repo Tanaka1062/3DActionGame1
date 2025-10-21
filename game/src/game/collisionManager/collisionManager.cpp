@@ -478,3 +478,27 @@ void CCollisionManager::CheckHitItemToPlayer(CItemManager& _item,
 	}
 }
 
+//----------------------------------------------
+//			  攻撃と箱の当たり判定
+//----------------------------------------------
+void CCollisionManager::CheckHitAttackToBox(CAttackManager& _attack, CBoxManager& _box)
+{
+	for (int i = 0; i < _attack.GetNum(); i++)
+	{
+		//攻撃のクラスを取得
+		CAttackBase* attack = _attack.GetAttack(i);
+
+		if (attack->GetActive() == false)continue;
+
+		for (int j = 0; j < _box.GetNum(); j++)
+		{
+			//箱のクラスを取得
+			CBox* box = _box.GetBox(j);
+
+			if (box->GetActive() == false)continue;
+
+			
+		}
+	}
+}
+

@@ -161,3 +161,4 @@ void CPlayScene::Exit()
 	CEffekseerCtrl::StopAll();
 	CSoundManager::StopAll();
 }
+

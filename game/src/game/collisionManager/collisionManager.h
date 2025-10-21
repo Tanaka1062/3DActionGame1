@@ -7,6 +7,7 @@
 #include "../item/itemManager.h"
 #include "../item/itemInventory/itemInventory.h"
 #include "../attack/attackManager.h"
+#include "../box/boxManager.h"
 
 class CCollisionManager
 {
@@ -47,6 +48,9 @@ public:
 	//アイテムとプレイヤーの当たり判定
 	static void CheckHitItemToPlayer(CItemManager& _item,
 		CItemInventory& _itemInventory, CPlayer& _player);
+
+	//攻撃と箱の当たり判定
+	static void CheckHitAttackToBox(CAttackManager& _attack, CBoxManager& _box);
 
 };
 

@@ -4,6 +4,7 @@
 class CBox : public CObject
 {
 private:
+	int m_hp;
 
 public:
 	//コンストラクタ・デストラクタ
@@ -15,5 +16,7 @@ public:
 	//モデルロード
 	void Load();
 
+	//体力を減らす
+	void SubHp(int _subHp);
 };
 
