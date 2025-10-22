@@ -40,5 +40,5 @@ void CHarbAmulent::Use()
 
 	//m_player->AddHp(ADD_HP);
 
-	m_player->SetAttackId(ATTACK_ID_B);
+	m_player->SetSkillId(SKILL_ID_A);
 }

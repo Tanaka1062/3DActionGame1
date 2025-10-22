@@ -13,30 +13,34 @@ enum tagCharacterType	//キャラクターの種類
 class CCharacterBase:public CActor
 {
 protected:
-	float m_gravity;			//重力
-	int m_maxHp;				//体力の最大値
-	int m_hp;					//体力
-	int m_atk;					//攻撃力
-	enum tagState				//キャラクターの状態
+	float m_gravity;					//重力
+	int m_maxHp;						//体力の最大値
+	int m_hp;							//体力
+	int m_atk;							//攻撃力
+	enum tagState						//キャラクターの状態
 	{
-		WAIT,					//待機
-		WALK,					//歩く
-		JUMP,					//ジャンプ
-		ATTACK_IN,				//攻撃前
-		ATTACK,					//攻撃中
-		ATTACK_OUT,				//攻撃後
-		ATTACK_CHARGE_IN,		//攻撃チャージ前
-		ATTACK_CHARGE,			//攻撃チャージ
-		ITEM_USE_IN,			//アイテム使用前
-		ITEM_USE,				//アイテム使用中
-		ITEM_USE_OUT,			//アイテム使用後
-		STAGGER,				//怯み
-		DIE,					//死亡
+		WAIT,							//待機
+		WALK,							//歩く
+		JUMP,							//ジャンプ
+		ATTACK_IN,						//攻撃前
+		ATTACK,							//攻撃中
+		ATTACK_OUT,						//攻撃後
+		ATTACK_CHARGE_IN,				//攻撃チャージ前
+		ATTACK_CHARGE,					//攻撃チャージ
+		SKILL_IN,						//スキル使用前
+		SKILL,							//スキル
+		SKILL_OUT,						//スキル使用後
+		ITEM_USE_IN,					//アイテム使用前
+		ITEM_USE,						//アイテム使用中
+		ITEM_USE_OUT,					//アイテム使用後
+		STAGGER,						//怯み
+		DIE,							//死亡
 	};
-	tagState m_state;			//状態
-	tagCharacterType m_type;	//種類
-	CAttack m_attack;			//攻撃クラス
-	CAttackManager* m_attackManager;
+	tagState m_state;					//状態
+	tagCharacterType m_type;			//種類
+	CAttack m_attack;					//攻撃クラス
+	CAttackManager* m_attackManager;	//攻撃マネージャークラス
+
 public:
 	//コンストラクタ
 	CCharacterBase();
@@ -102,6 +106,15 @@ protected:
 
 	//攻撃チャージ
 	virtual void AttackCharge();
+
+	//スキル使用前
+	virtual void SkillIn();
+
+	//スキル使用
+	virtual void Skill();
+
+	//スキル使用後
+	virtual void SkillOut();
 
 	//アイテム使用前
 	virtual void ItemUseIn();

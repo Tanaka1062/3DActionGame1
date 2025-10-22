@@ -279,11 +279,6 @@ void CPlayer::Attack()
 		break;
 	}
 
-	//攻撃が終わったら攻撃後に移行
-	//if (m_attack.GetActive() == false)
-	//{
-	//	m_state = ATTACK_OUT;
-	//}
 
 	//アニメーションが終わったら待機状態に戻す
 	if (GetAnimEnd() == true)
@@ -359,7 +354,82 @@ void CPlayer::AttackCharge()
 	//アニメーションが終わったらアイテム使用中に移行
 	if (GetAnimEnd() == true)
 	{
-		m_state = ATTACK_IN;
+		m_state = SKILL_IN;
+	}
+
+}
+
+//-----------------------
+//		スキル使用前
+//-----------------------
+void CPlayer::SkillIn()
+{
+	switch (m_skillId)
+	{
+	case SKILL_ID_A:
+		//攻撃前のアニメーション
+		if (m_animData.m_id != ANIMID_ATTACKB_IN)
+		{
+			Request(ANIMID_ATTACKB_IN, 1.2f);
+		}
+		break;
+	}
+
+	//アニメーションが終わったら攻撃中に移行
+	if (GetAnimEnd() == true)
+	{
+		m_state = SKILL;
+	}
+
+}
+
+//-----------------------
+//		スキル使用
+//-----------------------
+void CPlayer::Skill()
+{
+	switch (m_skillId)
+	{
+	case SKILL_ID_A:
+		//攻撃中のアニメーション
+		if (m_animData.m_id != ANIMID_ATTACKB)
+		{
+			Request(ANIMID_ATTACKB, 1.0f);
+
+			//攻撃の呼び出し
+			m_attackManager->Request(GetCenter(), ATTACKB_SIZE, ATTACKB_ATK, ATTACK_TYPE_PLAYER);
+		}
+		break;
+	}
+
+	//アニメーションが終わったら待機状態に戻す
+	if (GetAnimEnd() == true)
+	{
+		m_state = SKILL_OUT;
+	}
+
+}
+
+//-----------------------
+//		スキル使用後
+//-----------------------
+void CPlayer::SkillOut()
+{
+	switch (m_skillId)
+	{
+	case SKILL_ID_A:
+		//攻撃後のアニメーション
+		if (m_animData.m_id != ANIMID_ATTACKB_OUT)
+		{
+			Request(ANIMID_ATTACKB_OUT, 0.3f);
+		}
+		break;
+	}
+
+	//アニメーションが終わったら待機状態に戻す
+	if (GetAnimEnd() == true)
+	{
+		m_state = WAIT;
 	}
 
 }

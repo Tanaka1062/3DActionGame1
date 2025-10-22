@@ -79,6 +79,21 @@ void CCharacterBase::Step()
 		AttackCharge();
 		break;
 
+		//スキル使用前
+	case SKILL_IN:
+		SkillIn();
+		break;
+
+		//スキル使用前
+	case SKILL:
+		Skill();
+		break;
+
+		//スキル使用前
+	case SKILL_OUT:
+		SkillOut();
+		break;
+
 		//アイテム前
 	case ITEM_USE_IN:
 		ItemUseIn();
@@ -240,6 +255,30 @@ void CCharacterBase::AttackChargeIn()
 //		   攻撃チャージ
 //------------------------------
 void CCharacterBase::AttackCharge()
+{
+
+}
+
+//------------------------------
+//		  スキル使用前
+//------------------------------
+void CCharacterBase::SkillIn()
+{
+
+}
+
+//------------------------------
+//		  スキル使用
+//------------------------------
+void CCharacterBase::Skill()
+{
+
+}
+
+//------------------------------
+//		  スキル使用後
+//------------------------------
+void CCharacterBase::SkillOut()
 {
 
 }

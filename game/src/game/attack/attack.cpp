@@ -135,3 +135,4 @@ bool CAttack::Request(VECTOR _pos, VECTOR _rot, int _attackTime,
 
 	return true;
 }
+

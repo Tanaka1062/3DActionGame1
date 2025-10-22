@@ -60,6 +60,9 @@ public:
 	//攻撃のID設定
 	void SetAttackId(tagAttackId _id) { m_attackId = _id; }
 
+	//スキルのID設定
+	void SetSkillId(tagSkillId _id) { m_skillId = _id; }
+
 	//体力を増やす
 	void AddHp(int _addNum) { m_hp += _addNum; }
 
@@ -87,6 +90,15 @@ private:
 
 	//攻撃チャージ
 	void AttackCharge();
+
+	//スキル使用前
+	void SkillIn();
+
+	//スキル使用
+	void Skill();
+
+	//スキル使用後
+	void SkillOut();
 
 	//アイテム使用前
 	void ItemUseIn();

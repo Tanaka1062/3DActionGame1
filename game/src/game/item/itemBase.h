@@ -26,7 +26,6 @@ public:
 	//使用した時の処理
 	virtual void Use();
 
-
 	//アイテムの名前を設定
 	void SetName(tagItemName _name) { m_name = _name; }
 	//アイテムの名前を取得
