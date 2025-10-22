@@ -19,7 +19,7 @@ CHarbAmulent::CHarbAmulent()
 void CHarbAmulent::Init(CPlayer* _player)
 {
 	CItemBase::Init(_player);
-	m_type = ITEM_TYPE_USE;
+	m_type = ITEM_TYPE_SKILL;
 	m_name = ITEM_HARB_AMULENT;
 	m_useCount = USE_MAX;
 }
@@ -29,14 +29,16 @@ void CHarbAmulent::Init(CPlayer* _player)
 //-------------
 void CHarbAmulent::Use()
 {
-	if (m_useCount <= 0)return;
-	m_useCount--;
+	//if (m_useCount <= 0)return;
+	//m_useCount--;
 
-	//呼び出すエフェクトのID
-	int effectId = CEffectData::GetId(EFFECT_HEAL);
+	////呼び出すエフェクトのID
+	//int effectId = CEffectData::GetId(EFFECT_HEAL);
 
-	//エフェクトのハンドル
-	int effectHndl = CEffekseerCtrl::Request(effectId, m_player->GetPos(), false);
+	////エフェクトのハンドル
+	//int effectHndl = CEffekseerCtrl::Request(effectId, m_player->GetPos(), false);
 
-	m_player->AddHp(ADD_HP);
+	//m_player->AddHp(ADD_HP);
+
+	m_player->SetAttackId(ATTACK_ID_B);
 }

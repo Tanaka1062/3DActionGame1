@@ -14,12 +14,8 @@ CItemInventory::CItemInventory()
 //------------------
 void CItemInventory::Init(CPlayer* _player)
 {
-	for (int i = 0; i < ITEM_INVENTORY_MAX; i++)
-	{
-		m_item[i] = nullptr;
-	}
-
-	m_itemNum = 0;
+	m_useItem = nullptr;
+	m_skillItem = nullptr;
 	m_player = _player;
 }
 
@@ -28,36 +24,36 @@ void CItemInventory::Init(CPlayer* _player)
 //------------------
 void CItemInventory::Step(CShotManager* _shot)
 {
-	//アイテムを使用していたら現在選択されているアイテムを使用
+	//アイテムを使用していたらアイテムを使用する
 	if (m_player->GetIsItemUse() == true &&
-		m_item[m_player->GetItemSelectNum()] != nullptr)
+		m_useItem != nullptr)
 	{
-		switch (m_item[m_player->GetItemSelectNum()]->GetType())
+		switch (m_useItem->GetType())
 		{
 		case ITEM_TYPE_USE:
-			m_item[m_player->GetItemSelectNum()]->Use();
+			m_useItem->Use();
 			break;
 		case ITEM_TYPE_SHOT:
-			CItemShotBase* shotItem = dynamic_cast<CItemShotBase*>(m_item[m_player->GetItemSelectNum()]);
+			CItemShotBase* shotItem = dynamic_cast<CItemShotBase*>(m_useItem);
 			shotItem->Use(_shot);
 			break;
 		}
+
+		//アイテムの使用回数がなくなっていたら消す
+		if (m_useItem->GetUseCount() <= 0)
+		{
+			m_useItem->Exit();
+
+			delete m_useItem;
+
+			m_useItem = nullptr;
+		}
 	}
 
-	//アイテムの使用回数がなくなっていたら消す
-	for (int i = 0; i < ITEM_INVENTORY_MAX; i++)
+	//スキルを使用していたらスキルを使用する
+	if (m_skillItem != nullptr)
 	{
-		//アイテムが無かったらスキップ
-		if (m_item[i] == nullptr)continue;
-
-		if (m_item[i]->GetUseCount() <= 0) 
-		{
-			m_item[i]->Exit();
-
-			delete m_item[i];
-
-			m_item[i] = nullptr;
-		}
+		m_skillItem->Use();
 	}
 
 }
@@ -75,19 +71,19 @@ void CItemInventory::Update()
 //------------------
 void CItemInventory::Draw()
 {
-	if (m_item[0] == nullptr)
+	if (m_useItem == nullptr)
 	{
 		DrawFormatString(32, 128, GetColor(255, 0, 0), "何もない");
 		return;
 	}
 
-	switch (m_item[0]->GetName())
+	switch (m_useItem->GetName())
 	{
 	case ITEM_FIRE_RING:
-		DrawFormatString(32, 128, GetColor(255, 0, 0), "ファイアリング\n%d回使える",m_item[0]->GetUseCount());
+		DrawFormatString(32, 128, GetColor(255, 0, 0), "ファイアリング\n%d回使える", m_useItem->GetUseCount());
 		break;
 	case ITEM_HARB_AMULENT:
-		DrawFormatString(32, 128, GetColor(255, 0, 0), "薬草のお守り\n%d回使える", m_item[0]->GetUseCount());
+		DrawFormatString(32, 128, GetColor(255, 0, 0), "薬草のお守り\n%d回使える", m_useItem->GetUseCount());
 		break;
 	}
 
@@ -98,15 +94,34 @@ CItemBase* CItemInventory::SetItem(CItemBase* _item)
 {
 	//アドレス保存用
 	CItemBase* item = nullptr;
-	//すでにアイテムが入っている場合交換する
-	if (m_item[m_player->GetItemSelectNum()] != nullptr)
-	{
-		//今のアイテムのアドレスを保存
-		item = m_item[m_player->GetItemSelectNum()];
-	}
 
-	//インベントリにアイテムのアドレスを取得
-	m_item[m_player->GetItemSelectNum()] = _item;
+	//スキルアイテムの交換
+	if (_item->GetType() == ITEM_TYPE_SKILL)
+	{
+		//すでにアイテムが入っている場合交換する
+		if (m_skillItem != nullptr)
+		{
+			//今のアイテムのアドレスを保存
+			item = m_skillItem;
+		}
+
+		//インベントリにアイテムのアドレスを取得
+		m_skillItem = _item;
+
+	}
+	//使用するアイテムの交換
+	else
+	{
+		//すでにアイテムが入っている場合交換する
+		if (m_useItem != nullptr)
+		{
+			//今のアイテムのアドレスを保存
+			item = m_useItem;
+		}
+
+		//インベントリにアイテムのアドレスを取得
+		m_useItem = _item;
+	}
 
 	//アドレスを渡す
 	return item;

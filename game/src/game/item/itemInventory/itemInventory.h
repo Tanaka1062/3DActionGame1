@@ -8,9 +8,9 @@
 class CItemInventory
 {
 private:
-	CItemBase* m_item[ITEM_INVENTORY_MAX];		//アイテム
-	int m_itemNum;								//選択されているアイテムの番号
-	CPlayer* m_player;							//プレイヤーのアドレス保存用
+	CItemBase* m_useItem;	//使用するアイテム
+	CItemBase* m_skillItem;	//スキルアイテム
+	CPlayer* m_player;		//プレイヤーのアドレス保存用
 
 public:
 	CItemInventory();

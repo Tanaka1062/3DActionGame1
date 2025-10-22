@@ -24,11 +24,6 @@ static const float ATTACK_LENGTH = 5.0f;			//攻撃の長さ
 static const float ATTACKB_SIZE = 10.0f;			//攻撃B範囲
 static const int ATTACKB_ATK = 50;					//攻撃Bの攻撃力
 
-enum tagAttackId									//攻撃のID
-{
-	ATTACK_ID_A,									//攻撃A
-	ATTACK_ID_B,									//攻撃B
-};
 //-----------------------------------
 
 //アニメーション一覧---------------------------
@@ -90,8 +85,8 @@ void CPlayer::Init(CAttackManager* _attackManager)
 	m_atk = ATK;
 	m_isItemUse = false;
 	m_isPickUpItem = false;
-	m_itemSelectNum = 0;
 	m_attackId = -1;
+	m_skillId = -1;
 }
 
 //-----------------------
@@ -118,29 +113,6 @@ void CPlayer::Step(float _rotY)
 
 	//アイテムを拾う処理
 	PickUpItem();
-
-	//選択しているアイテムを切り替える処理----------
-	
-	//左に一つ切り替える
-	if (CControllerInput::IsTrg(BUTTON_LEFT))
-	{
-		//アイテム番号が0以下なら変わらないように
-		if (m_itemSelectNum - 1 > -1)
-		{
-			m_itemSelectNum--;
-		}
-	}
-	//右に一つ切り替える
-	if (CControllerInput::IsTrg(BUTTON_RIGHT))
-	{
-		//アイテム番号がインベントの最大値以上なら変わらないように
-		if (m_itemSelectNum + 1 < ITEM_INVENTORY_MAX)
-		{
-			m_itemSelectNum++;
-		}
-	}
-
-	//----------------------------------------------
 
 	CCharacterBase::Step();
 }
@@ -604,9 +576,11 @@ void CPlayer::RequestAttack()
 	{
 
 		//攻撃してない時に攻撃前に移行する
-		if (m_attack.GetIsCoolDown() == true)
+		if (m_attack.GetIsCoolDown() == true &&
+			m_skillId != -1)
 		{
-			m_attackId = ATTACK_ID_B;
+
+			//m_attackId = ATTACK_ID_B;
 			m_state = ATTACK_CHARGE_IN;
 		}
 	}

@@ -6,15 +6,31 @@
 static const int PLAYER_NUM = 1;			//プレイヤーの数
 static const int ITEM_INVENTORY_MAX = 1;	//アイテムインベントリの最大数
 
+enum tagAttackId							//攻撃のID
+{
+	ATTACK_ID_A,							//攻撃A
+	ATTACK_ID_B,							//攻撃B
+
+	ATTACK_NUM,								//攻撃の数						
+};
+
+enum tagSkillId
+{
+	SKILL_ID_NONE = -1,						//スキルが無い
+	SKILL_ID_A,								//スキルA
+
+	SKILL_NUM,								//スキルの数
+};
+
 //プレイヤークラス
 class CPlayer:public CCharacterBase
 {
 private:
-	bool m_isPickUpItem;		//アイテムを取ろうとしているかフラグ		
-	bool m_isItemUse;			//アイテム使用フラグ
-	int m_itemSelectNum;		//現在選択しているアイテムの番号	
-	int m_attackId;				//攻撃のID
-
+	bool m_isPickUpItem;			//アイテムを取ろうとしているかフラグ		
+	bool m_isItemUse;				//アイテム使用フラグ
+	int m_attackId;					//攻撃のID
+	int m_skillId;					//スキルのID
+	
 public:
 	//コンストラクタ・デストラクタ
 	CPlayer();
@@ -41,8 +57,8 @@ public:
 	//アイテム使用しているかを取得
 	bool GetIsItemUse() { return m_isItemUse; }
 	
-	//現在選択しているアイテムの番号を取得
-	int GetItemSelectNum() { return m_itemSelectNum; }
+	//攻撃のID設定
+	void SetAttackId(tagAttackId _id) { m_attackId = _id; }
 
 	//体力を増やす
 	void AddHp(int _addNum) { m_hp += _addNum; }

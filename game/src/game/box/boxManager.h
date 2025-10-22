@@ -33,6 +33,6 @@ public:
 	CBox* GetBox(int _num);
 
 	//” ‚Ì”‚ğæ“¾‚·‚é
-	int GetNum() { return m_box.size(); }
+	int GetNum() { return static_cast<int>(m_box.size()); }
 };
 
