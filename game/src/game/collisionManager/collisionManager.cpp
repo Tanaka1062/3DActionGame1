@@ -488,16 +488,24 @@ void CCollisionManager::CheckHitAttackToBox(CAttackManager& _attack, CBoxManager
 		//攻撃のクラスを取得
 		CAttackBase* attack = _attack.GetAttack(i);
 
+		//攻撃していなかったらスキップ
 		if (attack->GetActive() == false)continue;
 
 		for (int j = 0; j < _box.GetNum(); j++)
 		{
 			//箱のクラスを取得
 			CBox* box = _box.GetBox(j);
-
+			
+			//箱が無かったらスキップする
 			if (box->GetActive() == false)continue;
 
-			
+			//攻撃に触れていたら箱にダメージを与える
+			if (CCollision::CheckHitSphereToSphere(attack->GetCenter(), attack->GetRad(),
+				box->GetCenter(), box->GetRad()))
+			{
+				//攻撃の攻撃力分、箱の体力を減らす
+				box->SubHp(attack->GetAtk());
+			}
 		}
 	}
 }

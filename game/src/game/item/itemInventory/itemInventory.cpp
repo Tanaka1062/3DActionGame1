@@ -43,6 +43,23 @@ void CItemInventory::Step(CShotManager* _shot)
 			break;
 		}
 	}
+
+	//アイテムの使用回数がなくなっていたら消す
+	for (int i = 0; i < ITEM_INVENTORY_MAX; i++)
+	{
+		//アイテムが無かったらスキップ
+		if (m_item[i] == nullptr)continue;
+
+		if (m_item[i]->GetUseCount() <= 0) 
+		{
+			m_item[i]->Exit();
+
+			delete m_item[i];
+
+			m_item[i] = nullptr;
+		}
+	}
+
 }
 
 //------------------

@@ -44,6 +44,35 @@ void CBoxManager::Load()
 //---------------------------
 //	   毎フレームする処理
 //---------------------------
+void CBoxManager::Step(CItemManager* _itemManager)
+{
+	for (auto ite = m_box.begin(); ite != m_box.end();)
+	{
+		//毎フレームする処理
+		(*ite)->Step();
+
+		//箱が壊れていたら消してそこにアイテムを出す
+		if ((*ite)->GetActive() == false)
+		{
+			_itemManager->SpawnItem((*ite)->GetPos());
+
+			//終了処理
+			(*ite)->Exit();
+
+			delete (*ite);
+
+			ite = m_box.erase(ite);
+		}
+		else
+		{
+			++ite;
+		}
+	}
+}
+
+//---------------------------
+//	   毎フレームする処理
+//---------------------------
 void CBoxManager::Update()
 {
 	for (auto ite = m_box.begin(); ite != m_box.end(); ite++)

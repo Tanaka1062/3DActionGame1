@@ -44,5 +44,11 @@ public:
 
 	//アイテムを設定
 	void SetItem(int _num, CItemBase* _item);
+
+	//アイテムを出現させる
+	// _pos		:出現させるアイテムの位置
+	// _name	:出現させるアイテムの名前
+	//			:名前を入力しない場合ランダムなアイテムが出現する
+	void SpawnItem(VECTOR _pos, tagItemName _name = ITEM_NONE);
 };
 

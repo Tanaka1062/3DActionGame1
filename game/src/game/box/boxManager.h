@@ -2,6 +2,7 @@
 #include <iostream>
 #include <list>
 #include "box.h"
+#include "../item/itemManager.h"
 
 using namespace std;
 
@@ -19,6 +20,8 @@ public:
 	void Init();
 	//モデルロード
 	void Load();
+	//毎フレームする処理
+	void Step(CItemManager* _itemManager);
 	//毎フレームする処理
 	void Update();
 	//モデル描写

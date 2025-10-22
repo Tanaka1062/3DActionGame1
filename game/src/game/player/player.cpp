@@ -19,7 +19,7 @@ static const float RADIUS = 2.5f;					//”¼Œa
 //----------------------------------------------
 
 //UŒ‚ŠÖ˜A---------------------------
-static const float ATTACK_SIZE = 3.0f;				//UŒ‚”ÍˆÍ
+static const float ATTACK_SIZE = 5.0f;				//UŒ‚”ÍˆÍ
 static const float ATTACK_LENGTH = 5.0f;			//UŒ‚‚Ì’·‚³
 static const float ATTACKB_SIZE = 10.0f;			//UŒ‚B”ÍˆÍ
 static const int ATTACKB_ATK = 50;					//UŒ‚B‚ÌUŒ‚—Í

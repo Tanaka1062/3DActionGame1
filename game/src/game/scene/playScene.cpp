@@ -97,6 +97,8 @@ void CPlayScene::Step()
 
 	m_itemInventory.Step(&m_shot);
 
+	m_box.Step(&m_item);
+
 	m_camera.Step(m_player.GetCenter(),m_player.GetRad());
 
 
@@ -112,6 +114,7 @@ void CPlayScene::Step()
 	CCollisionManager::CheckHitPlayerToMap(m_player, m_ground);
 	CCollisionManager::CheckHitEnemyToMap(m_enemy, m_ground);
 	CCollisionManager::CheckHitItemToPlayer(m_item,m_itemInventory, m_player);
+	CCollisionManager::CheckHitAttackToBox(m_attackManager, m_box);
 	//--------------------------------------------
 
 	//‚·‚×‚Ä‚ÌŒ‹‰Ê‚ð”½‰f‚³‚¹‚é

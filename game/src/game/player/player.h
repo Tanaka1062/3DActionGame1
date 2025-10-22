@@ -14,6 +14,7 @@ private:
 	bool m_isItemUse;			//アイテム使用フラグ
 	int m_itemSelectNum;		//現在選択しているアイテムの番号	
 	int m_attackId;				//攻撃のID
+
 public:
 	//コンストラクタ・デストラクタ
 	CPlayer();

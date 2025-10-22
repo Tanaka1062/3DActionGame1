@@ -223,3 +223,39 @@ void CItemManager::SetItem(int _num,CItemBase* _item)
 
 }
 
+//-----------------------
+// アイテムを出現させる
+//-----------------------
+void CItemManager::SpawnItem(VECTOR _pos, tagItemName _name)
+{
+	//名前の保存用
+	tagItemName name = _name;
+
+	//アイテムの保存用
+	CItemBase* item = nullptr;
+
+	//アイテムが何もない場合ランダムなアイテムが選ばれる
+	if (name == ITEM_NONE)
+	{
+		//アイテムの名前を設定
+		name = static_cast<tagItemName>(GetRand(ITEM_NUM -1));
+	}
+
+	//アイテム事に設定をする
+	switch (name)
+	{
+	case ITEM_FIRE_RING:
+		item = new CFireRing;
+		break;
+	case ITEM_HARB_AMULENT:
+		item = new CHarbAmulent;
+		break;
+	}
+
+	item->Init(m_player);
+	item->DuplicateModel(m_hndl[item->GetName()]);
+	item->SetPos(_pos);
+	m_item.push_back(item);
+
+}
+

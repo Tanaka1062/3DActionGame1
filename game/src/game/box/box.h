@@ -15,6 +15,8 @@ public:
 	void Init();
 	//モデルロード
 	void Load();
+	//毎フレームする処理
+	void Step();
 
 	//体力を減らす
 	void SubHp(int _subHp);
