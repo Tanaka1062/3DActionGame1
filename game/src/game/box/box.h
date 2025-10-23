@@ -5,7 +5,7 @@ class CBox : public CObject
 {
 private:
 	int m_hp;
-
+	VECTOR m_size;
 public:
 	//コンストラクタ・デストラクタ
 	CBox();
