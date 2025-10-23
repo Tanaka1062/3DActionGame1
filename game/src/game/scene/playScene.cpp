@@ -115,6 +115,8 @@ void CPlayScene::Step()
 	CCollisionManager::CheckHitEnemyToMap(m_enemy, m_ground);
 	CCollisionManager::CheckHitItemToPlayer(m_item,m_itemInventory, m_player);
 	CCollisionManager::CheckHitAttackToBox(m_attackManager, m_box);
+	CCollisionManager::CheckHitPlayerToBox(m_player, m_box);
+	CCollisionManager::CheckHitBoxToMap(m_box, m_ground);
 	//--------------------------------------------
 
 	//‚·‚×‚Ä‚ÌŒ‹‰Ê‚ð”½‰f‚³‚¹‚é

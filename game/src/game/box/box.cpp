@@ -33,6 +33,7 @@ void CBox::Init()
 	m_pos = VGet(0.0f, 0.0f, 0.0f);
 	m_rad = 6.0f;
 	m_hp = BOX_HP;
+	m_gravity = 0.0f;
 	m_size = BOX_SIZE;
 }
 
@@ -50,11 +51,28 @@ void CBox::Load()
 //---------------------------
 void CBox::Step()
 {
+	//重力処理
+	Gravity();
+
 	//体力が0以下なら壊れる
 	if (m_hp <= 0)
 	{
 		m_isActive = false;
 	}
+}
+
+//---------------------------
+//		   数値の更新
+//---------------------------
+void CBox::Update()
+{
+	//重力を速度に加算
+	m_speed.y -= m_gravity;
+
+	CObject::Update();
+
+	//速度をリセット
+	m_speed = { 0.0f,0.0f,0.0f };
 }
 
 //---------------------------
@@ -79,3 +97,10 @@ void CBox::SubHp(int _subHp)
 	m_hp -= _subHp;
 }
 
+//---------------------------
+//		   重力処理
+//---------------------------
+void CBox::Gravity()
+{
+	m_gravity += 0.09f;
+}

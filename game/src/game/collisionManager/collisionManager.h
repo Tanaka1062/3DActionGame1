@@ -52,6 +52,10 @@ public:
 	//攻撃と箱の当たり判定
 	static void CheckHitAttackToBox(CAttackManager& _attack, CBoxManager& _box);
 
-	//
+	//プレイヤーと箱の当たり判定
+	static void CheckHitPlayerToBox(CPlayer& _player, CBoxManager& _box);
+
+	//箱とマップの当たり判定
+	static void CheckHitBoxToMap(CBoxManager& _box, CMap& _map);
 };
 

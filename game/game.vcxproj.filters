@@ -109,6 +109,9 @@
     <Filter Include="ソース ファイル\game\box">
       <UniqueIdentifier>{90fd580d-8741-458a-b196-b951d36cdcf0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\game\camera\mapCamera">
+      <UniqueIdentifier>{e2ce5c7e-279e-45c6-a776-b43ae1df1890}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\number.cpp">
@@ -254,6 +257,9 @@
     </ClCompile>
     <ClCompile Include="src\game\box\boxManager.cpp">
       <Filter>ソース ファイル\game\box</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\camera\mapCamera\mapCamera.cpp">
+      <Filter>ソース ファイル\game\camera\mapCamera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -406,6 +412,9 @@
     </ClInclude>
     <ClInclude Include="src\game\box\boxManager.h">
       <Filter>ソース ファイル\game\box</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\camera\mapCamera\mapCamera.h">
+      <Filter>ソース ファイル\game\camera\mapCamera</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -147,6 +147,7 @@
     <ClCompile Include="src\game\camera\cameraBase.cpp" />
     <ClCompile Include="src\game\camera\cameraManager.cpp" />
     <ClCompile Include="src\game\camera\debugCamera\debugCamera.cpp" />
+    <ClCompile Include="src\game\camera\mapCamera\mapCamera.cpp" />
     <ClCompile Include="src\game\camera\playCamera\playCamera.cpp" />
     <ClCompile Include="src\game\character\characterBase.cpp" />
     <ClCompile Include="src\game\collisionManager\collisionManager.cpp" />
@@ -197,6 +198,7 @@
     <ClInclude Include="src\game\camera\cameraBase.h" />
     <ClInclude Include="src\game\camera\cameraManager.h" />
     <ClInclude Include="src\game\camera\debugCamera\debugCamera.h" />
+    <ClInclude Include="src\game\camera\mapCamera\mapCamera.h" />
     <ClInclude Include="src\game\camera\playCamera\playCamera.h" />
     <ClInclude Include="src\game\character\characterBase.h" />
     <ClInclude Include="src\game\collisionManager\collisionManager.h" />

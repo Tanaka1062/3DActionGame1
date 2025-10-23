@@ -510,3 +510,113 @@ void CCollisionManager::CheckHitAttackToBox(CAttackManager& _attack, CBoxManager
 	}
 }
 
+//----------------------------------------------
+//			プレイヤーと箱の当たり判定
+//----------------------------------------------
+void CCollisionManager::CheckHitPlayerToBox(CPlayer& _player, CBoxManager& _box)
+{
+	//プレイヤーが死んでいたら処理をしない
+	if (_player.GetActive() == false)return;
+
+	for (int i = 0; i < _box.GetNum(); i++)
+	{
+		//ボックス保存用
+		CBox* box = _box.GetBox(i);
+
+		//ボックスがなかったらスキップ
+		if (box->GetActive() == false)continue;
+
+		
+		//押し戻し処理-------------------------------------------------
+
+		//本来離れてほしい距離を求める
+		float len1 = box->GetRad() + _player.GetRad();
+
+		//実際に離れている距離を求める
+		VECTOR playerPos = _player.GetPos();
+		playerPos.y = 0.0f;
+		VECTOR boxPos = box->GetPos();
+		boxPos.y = 0.0f;
+
+		VECTOR dir = VSub(playerPos, boxPos);
+		float len2 = VSize(dir);
+
+		//めり込んでいたら
+		if (len1 > len2)
+		{
+			//めり込み量を求める
+			float len3 = len1 - len2;
+
+			//len3 = len3 * 0.5f;
+
+			//移動させるベクトルを求める
+
+			//方向ベクトルなので正規化する
+			dir = VNorm(dir);
+
+			dir = VScale(dir, len3);
+
+			playerPos = VAdd(_player.GetPos(), dir);
+
+			_player.SetPos(VAdd(_player.GetPos(), dir));
+
+
+		}
+
+		//-------------------------------------------------------------
+
+	}
+}
+
+//----------------------------------------------
+//			   箱とマップの当たり判定
+//----------------------------------------------
+void CCollisionManager::CheckHitBoxToMap(CBoxManager& _box, CMap& _map)
+{
+		//当たり判定情報が格納される構造体
+	MV1_COLL_RESULT_POLY_DIM col;
+
+	for (int i = 0; i < _box.GetNum(); i++)
+	{
+		//ボックス保存用
+		CBox* box = _box.GetBox(i);
+
+		//ボックスがなかったらスキップ
+		if (box->GetActive() == false)continue;
+
+		col = MV1CollCheck_Sphere(_map.GetHitHndl(), -1,
+			box->GetCenter(), box->GetRad());
+	
+		//ポリゴンと当たっていたか
+		if (col.HitNum != 0)
+		{
+			//押し戻しの計算-----------------------
+			
+			for (int j = 0; j < col.HitNum; j++)
+			{
+	
+				//中心点から最近点を引き算
+				VECTOR vLen = VSub(box->GetCenter(), col.Dim[j].HitPosition);
+				//取得した距離を三平方の定理の長さに変換
+				float fLen = VSize(vLen);
+				//実際にめり込んだ距離を計算
+				fLen = box->GetRad() - fLen;
+				//法線をめり込んだ距離分掛け算する
+				vLen = VScale(col.Dim[j].Normal, fLen);
+	
+				//プレイヤーの座標を計算した分だけ移動させる
+				box->SetPos(VAdd(box->GetPos(), vLen));
+	
+				//重力をリセット
+				box->GravityReset();
+	
+			}
+			//-------------------------------------
+	
+			//毎回データを削除
+			MV1CollResultPolyDimTerminate(col);
+		}
+	}
+
+}
+

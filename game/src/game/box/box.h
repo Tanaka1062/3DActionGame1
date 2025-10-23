@@ -5,6 +5,7 @@ class CBox : public CObject
 {
 private:
 	int m_hp;				//箱の体力
+	float m_gravity;		//重力
 	VECTOR m_size;			//当たり判定用の箱のサイズ
 public:
 	//コンストラクタ・デストラクタ
@@ -17,6 +18,8 @@ public:
 	void Load();
 	//毎フレームする処理
 	void Step();
+	//数値の更新
+	void Update();
 
 	//中心座標を取得
 	VECTOR GetCenter();
@@ -27,6 +30,12 @@ public:
 	//当たり判定ようの箱のサイズを取得
 	VECTOR GetSize() { return m_size; }
 
+	//重力リセット
+	void GravityReset() { m_gravity = 0.0f; }
+
+private:
+	//重力処理
+	void Gravity();
 
 };
 

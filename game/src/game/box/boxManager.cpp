@@ -25,7 +25,7 @@ void CBoxManager::Init()
 	CBox* box = new CBox;
 
 	box->Init();
-	box->SetPos(VGet(0.0f,0.0f,0.0f));
+	box->SetPos(VGet(40.0f,10.0f,0.0f));
 
 	m_box.push_back(box);
 }

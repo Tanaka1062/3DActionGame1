@@ -10,12 +10,13 @@ static const float ASPECT_RATIO =							//アスペクト比
 static_cast<float>(WINDOW_SIZE_X / WINDOW_SIZE_Y);
 //============================================
 
+
 //---------------------------
 //		コンストラクタ
 //---------------------------
 CCameraManager::CCameraManager() {
 	//初期カメラはプレイカメラ
-	m_id = CAMERA_ID_PLAY;
+	m_id = CAMERA_ID_MAP;
 }
 
 
@@ -26,6 +27,7 @@ void CCameraManager::Init(VECTOR _focus)
 {
 	//カメラを設定
 	m_camera[CAMERA_ID_PLAY] = new CPlayCamera;
+	m_camera[CAMERA_ID_MAP] = new CMapCamera;
 	m_camera[CAMERA_ID_DEBUG] = new CDbugCamera;
 
 	//カメラの初期化
@@ -50,7 +52,6 @@ void CCameraManager::Init(VECTOR _focus)
 //---------------------------
 void CCameraManager::Step(VECTOR _focus, float _rot)
 {
-	//カメラの処理
 	m_camera[m_id]->Step(_focus,_rot);
 
 	//カメラのモード切替
