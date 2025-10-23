@@ -52,5 +52,6 @@ public:
 	//UŒ‚‚Æ” ‚Ì“–‚½‚è”»’è
 	static void CheckHitAttackToBox(CAttackManager& _attack, CBoxManager& _box);
 
+	//
 };
 

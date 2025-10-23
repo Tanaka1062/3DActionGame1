@@ -6,6 +6,8 @@ static const char MODEL_PATH[] =
 
 static const int BOX_HP = 50;
 
+static const VECTOR BOX_SIZE = { 10.0f,10.0f,10.0f };
+
 //---------------------------
 //		  コンストラクタ
 //---------------------------
@@ -31,7 +33,7 @@ void CBox::Init()
 	m_pos = VGet(0.0f, 0.0f, 0.0f);
 	m_rad = 6.0f;
 	m_hp = BOX_HP;
-
+	m_size = BOX_SIZE;
 }
 
 //---------------------------
@@ -53,6 +55,20 @@ void CBox::Step()
 	{
 		m_isActive = false;
 	}
+}
+
+//---------------------------
+//		 中心座標を取得
+//---------------------------
+VECTOR CBox::GetCenter()
+{
+	//中心座標保存用
+	VECTOR center = m_pos;
+
+	//高さの半分を足す
+	center.y += (m_size.y * 0.5f);
+
+	return center;
 }
 
 //---------------------------

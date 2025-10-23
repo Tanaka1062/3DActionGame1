@@ -87,7 +87,7 @@ public:
 	void SetRad(float _rad) { m_rad = _rad; }
 
 	//中心座標を取得
-	VECTOR GetCenter();
+	virtual VECTOR GetCenter();
 
 	//生存フラグを取得
 	bool GetActive() { return m_isActive; }

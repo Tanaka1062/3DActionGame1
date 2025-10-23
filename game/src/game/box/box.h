@@ -4,8 +4,8 @@
 class CBox : public CObject
 {
 private:
-	int m_hp;
-	VECTOR m_size;
+	int m_hp;				//箱の体力
+	VECTOR m_size;			//当たり判定用の箱のサイズ
 public:
 	//コンストラクタ・デストラクタ
 	CBox();
@@ -18,7 +18,15 @@ public:
 	//毎フレームする処理
 	void Step();
 
+	//中心座標を取得
+	VECTOR GetCenter();
+
 	//体力を減らす
 	void SubHp(int _subHp);
+
+	//当たり判定ようの箱のサイズを取得
+	VECTOR GetSize() { return m_size; }
+
+
 };
 
