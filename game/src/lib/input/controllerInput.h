@@ -1,6 +1,6 @@
 #pragma once
 
-
+//コントローラーのボタン一覧
 enum tagControllerButton
 {
 	BUTTON_DOWN,		//下ボタン
@@ -21,15 +21,26 @@ enum tagControllerButton
 	BUTTON_NUM,			//ボタンの数
 };
 
+//コントローラーのID一覧
+enum tagControllerId
+{
+	CONTROLLER_ID_PLAYER_1,		//プレイヤー１			
+	CONTROLLER_ID_PLAYER_2,		//プレイヤー２
+
+	CONTROLLER_ID_NUM,			//コントローラーのIDの数
+};
+
 class CControllerInput
 {
 private:
-	static unsigned int m_nowButton;		//現在のボタン情報
-	static unsigned int m_beforeButton;		//1フレーム前のボタン
-	static int m_LX;						//左レバーを左右の入力情報
-	static int m_LY;						//左レバーを上下の入力情報
-	static int m_RX;						//右レバーを左右の入力情報
-	static int m_RY;						//右レバーを上下の入力情報
+	static unsigned int m_nowButton;				//現在のボタン情報
+	static unsigned int m_beforeButton;				//1フレーム前のボタン
+	static int m_LX;								//左レバーを左右の入力情報
+	static int m_LY;								//左レバーを上下の入力情報
+	static int m_RX;								//右レバーを左右の入力情報
+	static int m_RY;								//右レバーを上下の入力情報
+
+	static int m_controllerId[CONTROLLER_ID_NUM];	//コントローラーのID情報
 public:
 	//コンストラクタ
 	CControllerInput();

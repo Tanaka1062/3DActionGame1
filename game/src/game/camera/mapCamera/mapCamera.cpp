@@ -1,4 +1,5 @@
 #include "mapCamera.h"
+#include <math.h>
 
 //定義関連====================================
 static const VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
@@ -42,6 +43,9 @@ void CMapCamera::Init(VECTOR _focus)
 //---------------------------------
 void CMapCamera::Step(VECTOR _focus, float _rot)
 {
+	//カメラの方向ベクトルを基にY軸回転角度を計算
+	VECTOR dir = VSub(m_pos, m_focusPos);
+	m_rot.y = atan2f(dir.x, dir.z);
 
 }
 

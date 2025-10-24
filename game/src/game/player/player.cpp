@@ -10,7 +10,7 @@
 
 //プレイヤー関連--------------------------------
 static const char MODEL_PATH[] =
-{ "data/model/player/playerTest4.mv1" };			//ロードするファイル名
+{ "data/model/player/playerTest4-2.mv1" };			//ロードするファイル名
 static const VECTOR INIT_POS = { 0.0f,1.0f,0.0f };	//初期座標
 static const int MAX_HP = 100;						//体力
 static const int ATK = 20;							//攻撃力
@@ -50,6 +50,10 @@ enum tagAnim {
 	ANIMID_WALK,				//歩きのアニメーション
 
 };
+
+static const char POS_PATH[] =
+{ "data/model/map/TestMap4FramePos.mv1" };			//ロードするファイル名
+
 //---------------------------------------------------------
 
 //-----------------------
@@ -78,7 +82,11 @@ void CPlayer::Init(CAttackManager* _attackManager)
 	CCharacterBase::Init(_attackManager);
 	m_attack.Init(ATTACK_SIZE,ATTACK_LENGTH);
 
-	m_pos = INIT_POS;
+	//フレームのハンドルをロード
+	int frameHndl = MV1LoadModel(POS_PATH);
+
+	m_pos = MV1GetFramePosition(frameHndl, 4);
+
 	m_rad = RADIUS;
 	m_maxHp = MAX_HP;
 	m_hp = m_maxHp;

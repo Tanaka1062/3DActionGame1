@@ -76,7 +76,7 @@ void CCameraManager::Step(VECTOR _focus, float _rot)
 	}
 
 	//プレイカメラの回転値を設定
-	m_rot = m_camera[CAMERA_ID_PLAY]->GetRot();
+	m_rot = m_camera[CAMERA_ID_MAP]->GetRot();
 
 }
 

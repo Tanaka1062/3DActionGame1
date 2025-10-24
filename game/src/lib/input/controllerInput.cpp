@@ -25,6 +25,8 @@ int CControllerInput::m_LX;
 int CControllerInput::m_LY;
 int CControllerInput::m_RX;
 int CControllerInput::m_RY;
+int CControllerInput::m_controllerId[CONTROLLER_ID_NUM];	//コントローラーのID情報
+
 
 //--------------------------------
 //		コンストラクタ
@@ -43,6 +45,16 @@ void CControllerInput::Init()
 	m_beforeButton = 0;
 	m_LX = 0;
 	m_LY = 0;
+	
+	//仮の初期化
+	m_controllerId[0] = DX_INPUT_PAD1;
+	m_controllerId[1] = DX_INPUT_PAD2;
+
+	//後で初期化に使うやつ
+	//for (int i = 0; i < CONTROLLER_ID_NUM; i++)
+	//{
+	//	m_controllerId[i] = -1;
+	//}
 }
 
 //--------------------------------

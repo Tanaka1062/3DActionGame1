@@ -10,6 +10,7 @@ private:
 	enum tagScene
 	{
 		TITLE,		//タイトル画面
+		SELECT,		//セレクト画面
 		GAME,		//ゲーム本編
 		RESULT,		//リザルト画面
 

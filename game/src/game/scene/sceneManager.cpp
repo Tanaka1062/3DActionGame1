@@ -2,6 +2,7 @@
 #include "playScene.h"
 #include "titleScene.h"
 #include "resultScene.h"
+#include "selectScene.h"
 #include"../system/soundManager.h"
 #include"../../lib/effekseer/effekseer.h"
 
@@ -17,8 +18,9 @@ CSceneManager::CSceneManager() {
 	m_sceneID = TITLE;
 
 	m_scene[0] = new CTitleScene;
-	m_scene[1] = new CPlayScene;
-	m_scene[2] = new CResultScene;
+	m_scene[1] = new CSelectScene;
+	m_scene[2] = new CPlayScene;
+	m_scene[3] = new CResultScene;
 
 	CSoundManager::Init();
 	CSoundManager::Load();
@@ -50,9 +52,17 @@ int CSceneManager::Loop()
 	case TITLE:
 		if (m_scene[TITLE]->Loop() != -1)
 		{
+			m_sceneID = SELECT;
+
+		}
+		break;
+	case SELECT:
+		if (m_scene[SELECT]->Loop() != -1)
+		{
 			m_sceneID = GAME;
 
 		}
+
 		break;
 	case GAME:
 		if (m_scene[GAME]->Loop() != -1)
@@ -83,6 +93,9 @@ void CSceneManager::Draw()
 	{
 	case TITLE:
 		m_scene[TITLE]->Draw();
+		break;
+	case SELECT:
+		m_scene[SELECT]->Draw();
 		break;
 	case GAME:
 		m_scene[GAME]->Draw();

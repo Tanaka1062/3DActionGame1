@@ -170,6 +170,7 @@
     <ClCompile Include="src\game\scene\resultScene.cpp" />
     <ClCompile Include="src\game\scene\sceneBase.cpp" />
     <ClCompile Include="src\game\scene\sceneManager.cpp" />
+    <ClCompile Include="src\game\scene\selectScene.cpp" />
     <ClCompile Include="src\game\scene\titleScene.cpp" />
     <ClCompile Include="src\game\shot\shotBase.cpp" />
     <ClCompile Include="src\game\shot\shotManager.cpp" />
@@ -223,6 +224,7 @@
     <ClInclude Include="src\game\scene\resultScene.h" />
     <ClInclude Include="src\game\scene\sceneBase.h" />
     <ClInclude Include="src\game\scene\sceneManager.h" />
+    <ClInclude Include="src\game\scene\selectScene.h" />
     <ClInclude Include="src\game\scene\titleScene.h" />
     <ClInclude Include="src\game\shot\shotBase.h" />
     <ClInclude Include="src\game\shot\shotManager.h" />

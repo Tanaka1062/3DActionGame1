@@ -261,6 +261,9 @@
     <ClCompile Include="src\game\camera\mapCamera\mapCamera.cpp">
       <Filter>ソース ファイル\game\camera\mapCamera</Filter>
     </ClCompile>
+    <ClCompile Include="src\game\scene\selectScene.cpp">
+      <Filter>ソース ファイル\game\scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\lib\number.h">
@@ -415,6 +418,9 @@
     </ClInclude>
     <ClInclude Include="src\game\camera\mapCamera\mapCamera.h">
       <Filter>ソース ファイル\game\camera\mapCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\scene\selectScene.h">
+      <Filter>ソース ファイル\game\scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
