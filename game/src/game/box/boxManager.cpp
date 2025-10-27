@@ -2,6 +2,9 @@
 
 static const int BOX_MAX = 1;
 
+static const char MODEL_PATH[] =
+{ "data/model/box/box.mv1" };			//ロードするファイル名
+
 //---------------------------
 //		コンストラクタ
 //---------------------------
@@ -22,6 +25,8 @@ CBoxManager::~CBoxManager()
 //---------------------------
 void CBoxManager::Init()
 {
+	m_modelHndl = -1;
+
 	CBox* box = new CBox;
 
 	box->Init();
@@ -35,9 +40,14 @@ void CBoxManager::Init()
 //---------------------------
 void CBoxManager::Load()
 {
+	if (m_modelHndl == -1)
+	{
+		m_modelHndl = MV1LoadModel(MODEL_PATH);
+	}
+
 	for (auto ite = m_box.begin(); ite != m_box.end(); ite++)
 	{
-		(*ite)->Load();
+		(*ite)->Load(m_modelHndl);
 	}
 }
 

@@ -1,12 +1,14 @@
 #include "box.h"
 
+static const int   HP = 50;			//体力
+static const float RADIUS = 10.0f;	//半径
 
-static const char MODEL_PATH[] =
-{ "data/model/box/box.mv1" };			//ロードするファイル名
-
-static const int BOX_HP = 50;
-
-static const VECTOR BOX_SIZE = { 10.0f,10.0f,10.0f };
+//アニメーション一覧---------------------------
+enum tagAnim {
+	ANIMID_DEFAULT,					//デフォルトのアニメーション
+	ANIMID_HIT,						//攻撃を受けた時のアニメーション
+};
+//---------------------------------------------
 
 //---------------------------
 //		  コンストラクタ
@@ -29,20 +31,19 @@ CBox::~CBox()
 //---------------------------
 void CBox::Init()
 {
-	CObject::Init();
+	CActor::Init();
 	m_pos = VGet(0.0f, 0.0f, 0.0f);
-	m_rad = 6.0f;
-	m_hp = BOX_HP;
+	m_rad = RADIUS;
+	m_hp = HP;
 	m_gravity = 0.0f;
-	m_size = BOX_SIZE;
 }
 
 //---------------------------
 //		  モデルロード
 //---------------------------
-void CBox::Load()
+void CBox::Load(int _modelHndl)
 {
-	CObject::LoadModel(MODEL_PATH);
+	CActor::DuplicateModel(_modelHndl);
 
 }
 
@@ -69,24 +70,10 @@ void CBox::Update()
 	//重力を速度に加算
 	m_speed.y -= m_gravity;
 
-	CObject::Update();
+	CActor::Update();
 
 	//速度をリセット
 	m_speed = { 0.0f,0.0f,0.0f };
-}
-
-//---------------------------
-//		 中心座標を取得
-//---------------------------
-VECTOR CBox::GetCenter()
-{
-	//中心座標保存用
-	VECTOR center = m_pos;
-
-	//高さの半分を足す
-	center.y += (m_size.y * 0.5f);
-
-	return center;
 }
 
 //---------------------------
@@ -95,6 +82,8 @@ VECTOR CBox::GetCenter()
 void CBox::SubHp(int _subHp)
 {
 	m_hp -= _subHp;
+
+	Request(ANIMID_HIT, 1.0f);
 }
 
 //---------------------------

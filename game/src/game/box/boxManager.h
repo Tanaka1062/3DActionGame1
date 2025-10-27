@@ -10,6 +10,7 @@ using namespace std;
 class CBoxManager
 {
 private:
+	int m_modelHndl;		//モデルのハンドル
 	list<CBox*> m_box;		//箱
 public:
 	//コンストラクタ・デストラクタ

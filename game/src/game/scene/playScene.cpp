@@ -31,7 +31,7 @@ void CPlayScene::Draw()
 	m_ground.Draw();
 	m_sky.Draw();
 	m_goal.Draw();
-	m_player.Draw();
+	m_playerManager.Draw();
 	m_enemy.Draw();
 	m_shot.Draw();
 	m_attackManager.Draw();
@@ -52,7 +52,7 @@ void CPlayScene::Init()
 	m_ground.Init();
 	m_sky.Init();
 	m_goal.Init();
-	m_player.Init(&m_attackManager);
+	m_playerManager.Init(&m_attackManager);
 	m_enemy.Init();
 	m_shot.Init();
 	m_item.Init(&m_player,&m_shot);
@@ -71,7 +71,7 @@ void CPlayScene::Load()
 	m_ground.Load();
 	m_sky.Load();
 	m_goal.Load();
-	m_player.Load();
+	m_playerManager.Load();
 	m_enemy.Load();
 	m_shot.Load();
 	m_item.Load();
@@ -87,7 +87,7 @@ void CPlayScene::Step()
 	//ŠeíŒvZˆ—‚ğÀs
 	m_sky.Step();
 
-	m_player.Step(m_camera.GetRot().y);
+	m_playerManager.Step(m_camera.GetRot().y);
 
 	m_enemy.Step(m_player.GetCenter());
 
@@ -123,7 +123,7 @@ void CPlayScene::Step()
 	m_ground.Update();
 	m_sky.Update();
 	m_goal.Update();
-	m_player.Update();
+	m_playerManager.Update();
 	m_enemy.Update();
 	m_shot.Update();
 	m_attackManager.Update();
@@ -154,7 +154,7 @@ void CPlayScene::Exit()
 	m_ground.Exit();
 	m_sky.Exit();
 	m_goal.Exit();
-	m_player.Exit();
+	m_playerManager.Exit();
 	m_enemy.Exit();
 	m_attackManager.Exit();
 	m_shot.Exit();

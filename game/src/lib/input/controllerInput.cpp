@@ -19,15 +19,6 @@ static const int BUTTON_PATH[BUTTON_NUM] = {
 
 };
 
-unsigned int CControllerInput::m_nowButton;
-unsigned int CControllerInput::m_beforeButton;
-int CControllerInput::m_LX;
-int CControllerInput::m_LY;
-int CControllerInput::m_RX;
-int CControllerInput::m_RY;
-int CControllerInput::m_controllerId[CONTROLLER_ID_NUM];	//コントローラーのID情報
-
-
 //--------------------------------
 //		コンストラクタ
 //--------------------------------
@@ -44,17 +35,8 @@ void CControllerInput::Init()
 	m_nowButton = 0;
 	m_beforeButton = 0;
 	m_LX = 0;
-	m_LY = 0;
-	
-	//仮の初期化
-	m_controllerId[0] = DX_INPUT_PAD1;
-	m_controllerId[1] = DX_INPUT_PAD2;
-
-	//後で初期化に使うやつ
-	//for (int i = 0; i < CONTROLLER_ID_NUM; i++)
-	//{
-	//	m_controllerId[i] = -1;
-	//}
+	m_LY = 0;	
+	m_controllerId = -1;
 }
 
 //--------------------------------
@@ -62,17 +44,20 @@ void CControllerInput::Init()
 //--------------------------------
 void CControllerInput::Update()
 {
+	//コントローラーのIDが無かったら処理をしない
+	if (m_controllerId == -1)return;
+
 	//一フレーム前の情報を保存
 	m_beforeButton = m_nowButton;
 	//最新情報を初期化
 	m_nowButton = 0;
 
 	//現在の入力情報を取得
-	m_nowButton = GetJoypadInputState(DX_INPUT_PAD1);
+	m_nowButton = GetJoypadInputState(m_controllerId);
 
 	//レバーの入力情報を取得
 	DINPUT_JOYSTATE leverInput;
-	GetJoypadDirectInputState(DX_INPUT_PAD1, &leverInput);
+	GetJoypadDirectInputState(m_controllerId, &leverInput);
 	m_LX = leverInput.X;
 	m_LY = leverInput.Y;
 	m_RX = leverInput.Rx;

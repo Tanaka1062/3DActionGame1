@@ -5,7 +5,6 @@
 #include "../sky/sky.h"
 #include"../data.h"
 #include"../character/characterBase.h"
-#include"../player/player.h"
 #include "../enemy/enemyManager.h"
 #include "../shot/shotManager.h"
 #include "../goal/goal.h"
@@ -14,6 +13,7 @@
 #include "../weapon/weapon.h"
 #include "../attack/attackManager.h"
 #include "../box/boxManager.h"
+#include "../player/playerManager.h"
 
 using namespace std;
 
@@ -25,7 +25,7 @@ private:
 	CMap m_ground;						//”wŒi
 	CSky m_sky;							//‹ó
 	CCameraManager m_camera;			//ƒJƒƒ‰
-	CPlayer m_player;					//ƒvƒŒƒCƒ„[
+	CPlayerManager m_playerManager;		//ƒvƒŒƒCƒ„[
 	CEnemyManager m_enemy;				//“G
 	CShotManager m_shot;				//’e
 	CGoal m_goal;						//ƒS[ƒ‹

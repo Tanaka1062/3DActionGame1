@@ -15,13 +15,13 @@ static const VECTOR INIT_POS = { 0.0f,1.0f,0.0f };	//初期座標
 static const int MAX_HP = 100;						//体力
 static const int ATK = 20;							//攻撃力
 static const float MOVE_SPEED = 1.0f;				//移動スピード
-static const float RADIUS = 2.5f;					//半径
+static const float RADIUS = 10.0f;					//半径
 //----------------------------------------------
 
 //攻撃関連---------------------------
-static const float ATTACK_SIZE = 5.0f;				//攻撃範囲
-static const float ATTACK_LENGTH = 5.0f;			//攻撃の長さ
-static const float ATTACKB_SIZE = 10.0f;			//攻撃B範囲
+static const float ATTACK_SIZE = 12.0f;				//攻撃範囲
+static const float ATTACK_LENGTH = 15.0f;			//攻撃の長さ
+static const float ATTACKB_SIZE = 25.0f;			//攻撃B範囲
 static const int ATTACKB_ATK = 50;					//攻撃Bの攻撃力
 
 //-----------------------------------
@@ -50,6 +50,8 @@ enum tagAnim {
 	ANIMID_WALK,				//歩きのアニメーション
 
 };
+//---------------------------------------------
+
 
 static const char POS_PATH[] =
 { "data/model/map/TestMap4FramePos.mv1" };			//ロードするファイル名
@@ -100,9 +102,9 @@ void CPlayer::Init(CAttackManager* _attackManager)
 //-----------------------
 //	モデルロード
 //-----------------------
-void CPlayer::Load()
+void CPlayer::Load(int _modelHndl)
 {
-	CActor::LoadModel(MODEL_PATH);
+	CObject::DuplicateModel(_modelHndl);
 }
 
 //-----------------------
@@ -136,7 +138,14 @@ void CPlayer::Draw()
 	//当たり判定を表示
 	DrawSphere3D(GetCenter(), m_rad, 16, GetColor(255, 0, 0), GetColor(255, 0, 0), FALSE);
 
+	VECTOR attackPos;
+	attackPos.x = -sinf(m_rot.y) * ATTACK_LENGTH;
+	attackPos.y = GetCenter().y;
+	attackPos.z = -cosf(m_rot.y) * ATTACK_LENGTH;
 
+	attackPos = VAdd(attackPos, m_pos);
+
+	DrawSphere3D(GetCenter(), ATTACKB_SIZE, 16, GetColor(0, 255, 0), GetColor(0, 255, 0), FALSE);
 #endif // DEBUG
 	//体力を表示
 	DrawFormatString(32, 32, GetColor(255, 0, 0), "hp:%d", m_hp);
@@ -267,7 +276,7 @@ void CPlayer::Attack()
 
 			VECTOR attackPos;
 			attackPos.x = -sinf(m_rot.y) * ATTACK_LENGTH;
-			attackPos.y = m_pos.y;
+			attackPos.y = GetCenter().y;
 			attackPos.z = -cosf(m_rot.y) * ATTACK_LENGTH;
 
 			attackPos = VAdd(attackPos, m_pos);

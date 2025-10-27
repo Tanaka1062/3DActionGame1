@@ -264,6 +264,12 @@
     <ClCompile Include="src\game\scene\selectScene.cpp">
       <Filter>ソース ファイル\game\scene</Filter>
     </ClCompile>
+    <ClCompile Include="src\game\player\playerManager.cpp">
+      <Filter>ソース ファイル\game\player</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lib\input\controllerManager.cpp">
+      <Filter>ソース ファイル\lib\input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\lib\number.h">
@@ -421,6 +427,12 @@
     </ClInclude>
     <ClInclude Include="src\game\scene\selectScene.h">
       <Filter>ソース ファイル\game\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\player\playerManager.h">
+      <Filter>ソース ファイル\game\player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lib\input\controllerManager.h">
+      <Filter>ソース ファイル\lib\input</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

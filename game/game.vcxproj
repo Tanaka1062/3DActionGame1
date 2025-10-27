@@ -166,6 +166,7 @@
     <ClCompile Include="src\game\main.cpp" />
     <ClCompile Include="src\game\map\map.cpp" />
     <ClCompile Include="src\game\player\player.cpp" />
+    <ClCompile Include="src\game\player\playerManager.cpp" />
     <ClCompile Include="src\game\scene\playScene.cpp" />
     <ClCompile Include="src\game\scene\resultScene.cpp" />
     <ClCompile Include="src\game\scene\sceneBase.cpp" />
@@ -182,6 +183,7 @@
     <ClCompile Include="src\lib\collision\collision.cpp" />
     <ClCompile Include="src\lib\effekseer\effekseer.cpp" />
     <ClCompile Include="src\lib\input\controllerInput.cpp" />
+    <ClCompile Include="src\lib\input\controllerManager.cpp" />
     <ClCompile Include="src\lib\input\KeyInput.cpp" />
     <ClCompile Include="src\lib\model\3DObject.cpp" />
     <ClCompile Include="src\lib\model\actor.cpp" />
@@ -220,6 +222,7 @@
     <ClInclude Include="src\game\item\itemShotBase.h" />
     <ClInclude Include="src\game\map\map.h" />
     <ClInclude Include="src\game\player\player.h" />
+    <ClInclude Include="src\game\player\playerManager.h" />
     <ClInclude Include="src\game\scene\playScene.h" />
     <ClInclude Include="src\game\scene\resultScene.h" />
     <ClInclude Include="src\game\scene\sceneBase.h" />
@@ -236,6 +239,7 @@
     <ClInclude Include="src\lib\collision\collision.h" />
     <ClInclude Include="src\lib\effekseer\effekseer.h" />
     <ClInclude Include="src\lib\input\controllerInput.h" />
+    <ClInclude Include="src\lib\input\controllerManager.h" />
     <ClInclude Include="src\lib\input\keyInput.h" />
     <ClInclude Include="src\lib\model\3DObject.h" />
     <ClInclude Include="src\lib\model\actor.h" />

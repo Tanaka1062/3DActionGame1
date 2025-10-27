@@ -40,7 +40,7 @@ public:
 	void Init(CAttackManager* _attackManager = nullptr);
 
 	//モデルロード
-	void Load();
+	void Load(int _modelHndl);
 
 	//毎フレームする処理
 	void Step(float _rotY);
