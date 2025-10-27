@@ -1,7 +1,7 @@
 #include "playerManager.h"
 
 
-static const char* MODEL_PATH[PLAYER_MODEL_ID_NUM] =
+static const char* MODEL_PATH[PLAYER_ID_NUM] =
 { "data/model/player/playerTest4-2.mv1" ,
   "data/model/player/playerTest4-2.mv1" ,};			//ロードするファイル名
 
@@ -37,7 +37,7 @@ CPlayerManager::~CPlayerManager()
 void CPlayerManager::Init(CAttackManager* _attackManager)
 {
 
-	for (int i = 0; i < PLAYER_MODEL_ID_NUM; i++)
+	for (int i = 0; i < PLAYER_ID_NUM; i++)
 	{
 		m_modelHndl[i] = -1;
 	}
@@ -46,7 +46,7 @@ void CPlayerManager::Init(CAttackManager* _attackManager)
 	{
 		m_player.push_back(new CPlayer);
 
-		m_player[i]->Init(_attackManager);
+		m_player[i]->Init(_attackManager,i);
 	}
 
 
@@ -57,7 +57,7 @@ void CPlayerManager::Init(CAttackManager* _attackManager)
 //------------------------
 void CPlayerManager::Load()
 {
-	for (int i = 0; i < PLAYER_MODEL_ID_NUM; i++)
+	for (int i = 0; i < PLAYER_ID_NUM; i++)
 	{
 		if (m_modelHndl[i] == -1)
 		{

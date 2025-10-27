@@ -7,7 +7,7 @@
 #include "../lib/input/keyInput.h"
 #include"data.h"
 #include"../lib/system/fps.h"
-#include"../lib/input/controllerInput.h"
+#include"../lib/input/controllerManager.h"
 #include"../lib/effekseer/effekseer.h"
 #include"system/effectData/effectData.h"
 
@@ -57,7 +57,7 @@ int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	//キー入力の初期化
 	CKeyInput::Init();
 	//コントローラー入力の初期化
-	CControllerInput::Init();
+	CControllerManager::Init();
 	//FPSの初期化
 	CFps::Init();
 
@@ -80,7 +80,7 @@ int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		CKeyInput::Update();
 
 		//コントローラー入力の更新処理
-		CControllerInput::Update();
+		CControllerManager::Update();
 		
 		//Fps更新処理
 		CFps::Update();

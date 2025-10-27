@@ -1,7 +1,7 @@
 #pragma once
 #include "../enemy/enemyManager.h"
 #include"../shot/shotManager.h"
-#include "../player/player.h"
+#include "../player/playerManager.h"
 #include "../goal/goal.h"
 #include "../map/map.h"
 #include "../item/itemManager.h"
@@ -15,11 +15,11 @@ public:
 
 	//敵の視界とプレイヤーの当たり判定
 	static void CheckHitEnemyFOVToPlayer(CEnemyManager& _enemyManager,
-		CPlayer& _player);
+		CPlayerManager& _player);
 
 	//敵の攻撃範囲とプレイヤーの当たり判定
 	static void CheckHitEnemyAttackToPlayer(CEnemyManager& _enemyManager,
-		CPlayer& _player);
+		CPlayerManager& _player);
 
 	//プレイヤーの攻撃と敵の当たり判定
 	static void CheckHitPlayerAttackToEnemy(CAttackManager& _attackManager,
@@ -27,7 +27,7 @@ public:
 
 	//敵とプレイヤーの当たり判定
 	static void CheckHitEnemyToPlayer(CEnemyManager& _enemyManager,
-		CPlayer& _player);
+		CPlayerManager& _player);
 
 	//敵と敵の当たり判定
 	static void CheckHitEnemyToEnemy(CEnemyManager& _enemyManager);
@@ -36,24 +36,21 @@ public:
 	static void CheckHitShotToEnemy(CShotManager& _shotManager,
 		CEnemyManager& _enemyManager);
 
-	//プレイヤーとゴールの当たり判定
-	static void CheckHitPlayerToGoal(CPlayer& _player, CGoal& _goal, bool _isFlg);
-
 	//プレイヤーとマップの当たり判定
-	static void CheckHitPlayerToMap(CPlayer& _player,CMap& _map);
+	static void CheckHitPlayerToMap(CPlayerManager& _player,CMap& _map);
 
 	//敵とマップの当たり判定
 	static void CheckHitEnemyToMap(CEnemyManager& _enemy, CMap& _map);
 
 	//アイテムとプレイヤーの当たり判定
 	static void CheckHitItemToPlayer(CItemManager& _item,
-		CItemInventory& _itemInventory, CPlayer& _player);
+		CItemInventory& _itemInventory, CPlayerManager& _player);
 
 	//攻撃と箱の当たり判定
 	static void CheckHitAttackToBox(CAttackManager& _attack, CBoxManager& _box);
 
 	//プレイヤーと箱の当たり判定
-	static void CheckHitPlayerToBox(CPlayer& _player, CBoxManager& _box);
+	static void CheckHitPlayerToBox(CPlayerManager& _player, CBoxManager& _box);
 
 	//箱とマップの当たり判定
 	static void CheckHitBoxToMap(CBoxManager& _box, CMap& _map);

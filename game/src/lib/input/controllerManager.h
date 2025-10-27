@@ -26,19 +26,19 @@ public:
 	//コントローラー入力情報更新
 	static void Update();
 	//ボタン入力判定（通常判定）
-	static bool IsRep(tagControllerButton _button,tagControllerId _id = CONTROLLER_ID_NONE);
+	static bool IsRep(tagControllerButton _button,int _id = CONTROLLER_ID_NONE);
 	//ボタン入力判定（トリガー判定）
-	static bool IsTrg(tagControllerButton _button, tagControllerId _id = CONTROLLER_ID_NONE);
+	static bool IsTrg(tagControllerButton _button, int _id = CONTROLLER_ID_NONE);
 
 	//レバーの値は1～0～(-1)の間で出力する
 	//左レバーの左右の入力情報を取得
-	static float GetLX(tagControllerId _id = CONTROLLER_ID_NONE);
+	static float GetLX(int _id = CONTROLLER_ID_NONE);
 	//左レバーの上下の入力情報を取得							 
-	static float GetLY(tagControllerId _id = CONTROLLER_ID_NONE);
+	static float GetLY(int _id = CONTROLLER_ID_NONE);
 	//右レバーの左右の入力情報を取得							 
-	static float GetRX(tagControllerId _id = CONTROLLER_ID_NONE);
+	static float GetRX(int _id = CONTROLLER_ID_NONE);
 	//右レバーの上下の入力情報を取得							 
-	static float GetRY(tagControllerId _id = CONTROLLER_ID_NONE);
+	static float GetRY(int _id = CONTROLLER_ID_NONE);
 
 	//コントローラーのIDを設定
 	//成功したらIDを設定しtrueを返す

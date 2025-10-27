@@ -30,14 +30,16 @@ private:
 	bool m_isItemUse;				//アイテム使用フラグ
 	int m_attackId;					//攻撃のID
 	int m_skillId;					//スキルのID
-	
+	int m_controllerId;				//コントローラーのID
+	int m_id;						//id
+
 public:
 	//コンストラクタ・デストラクタ
 	CPlayer();
 	~CPlayer();
 
 	//初期化
-	void Init(CAttackManager* _attackManager = nullptr);
+	void Init(CAttackManager* _attackManager = nullptr,int _id = -1);
 
 	//モデルロード
 	void Load(int _modelHndl);
@@ -62,6 +64,12 @@ public:
 
 	//スキルのID設定
 	void SetSkillId(tagSkillId _id) { m_skillId = _id; }
+
+	//コントローラーのIDを設定
+	void SetControllerId(int _id) { m_controllerId = _id; }
+
+	//Idを取得
+	void GetId() { return m_id; }
 
 	//体力を増やす
 	void AddHp(int _addNum) { m_hp += _addNum; }

@@ -9,26 +9,32 @@
 //		敵の視界とプレイヤーの当たり判定
 //----------------------------------------------
 void CCollisionManager::CheckHitEnemyFOVToPlayer(CEnemyManager& _enemyManager,
-	CPlayer& _player)
+	CPlayerManager& _player)
 {
-	//プレイヤーが死んでいたら処理をしない
-	if (_player.GetActive() == false)return;
-
-	for (int i = 0; i < _enemyManager.GetEnemyNum(); i++)
+	for (int i = 0; i < _player.GetPlayerNum(); i++)
 	{
-		//敵のクラスを取得
-		CEnemyBase* enemy = _enemyManager.GetEnemy(i);
-		
-		//敵が死んでいたら処理をしない
-		if (enemy->GetActive() == false)continue;
+		//プレイヤーのクラスを取得
+		CPlayer* player = _player.GetPlayer(i);
 
-		//敵の視界範囲クラスを取得
-		CFOV* enemyFOV = enemy->GetFOV();
+		//プレイヤーが死んでいたら処理をしない
+		if (player->GetActive() == false)continue;
 
-		//プレイヤーが敵の視界範囲に入っているかを確認
-		if (CCollision::CheckHitSphereToSphere(_player.GetCenter(), _player.GetRad(), enemyFOV->GetPos(), enemyFOV->GetRad()) == true)
+		for (int j = 0; j < _enemyManager.GetEnemyNum(); j++)
 		{
-			enemyFOV->HitCalc();
+			//敵のクラスを取得
+			CEnemyBase* enemy = _enemyManager.GetEnemy(j);
+
+			//敵が死んでいたら処理をしない
+			if (enemy->GetActive() == false)continue;
+
+			//敵の視界範囲クラスを取得
+			CFOV* enemyFOV = enemy->GetFOV();
+
+			//プレイヤーが敵の視界範囲に入っているかを確認
+			if (CCollision::CheckHitSphereToSphere(player->GetCenter(), player->GetRad(), enemyFOV->GetPos(), enemyFOV->GetRad()) == true)
+			{
+				enemyFOV->HitCalc();
+			}
 		}
 	}
 }
@@ -37,70 +43,78 @@ void CCollisionManager::CheckHitEnemyFOVToPlayer(CEnemyManager& _enemyManager,
 //	  敵の攻撃範囲とプレイヤーの当たり判定
 //----------------------------------------------
 void CCollisionManager::CheckHitEnemyAttackToPlayer(CEnemyManager& _enemyManager,
-	CPlayer& _player)
+	CPlayerManager& _player)
 {
-	//プレイヤーが死んでいたら処理をしない
-	if (_player.GetActive() == false)return;
-
-	for (int i = 0; i < _enemyManager.GetEnemyNum(); i++)
+	for (int i = 0; i < _player.GetPlayerNum(); i++)
 	{
-		//敵のクラスを取得
-		CEnemyBase* enemy = _enemyManager.GetEnemy(i);
 
-		//敵が死んでいたら処理をしない
-		if (enemy->GetActive() == false)continue;
+		//プレイヤーのクラスを取得
+		CPlayer* player = _player.GetPlayer(i);
 
-		//敵の攻撃クラスを取得
-		CAttack* attack = enemy->GetAttack();
+		//プレイヤーが死んでいたら処理をしない
+		if (player->GetActive() == false)continue;
 
-		//敵の攻撃可能範囲にプレイヤーが入っているか
-		if (CCollision::CheckHitSphereToSphere(_player.GetCenter(), _player.GetRad(), enemy->GetCenter(), attack->GetAttackableRad()) == true)
+		for (int j = 0; j < _enemyManager.GetEnemyNum(); j++)
 		{
-			attack->SetIsAttackable(true);
-		}
-		else
-		{
-			attack->SetIsAttackable(false);
-		}
+			//敵のクラスを取得
+			CEnemyBase* enemy = _enemyManager.GetEnemy(j);
 
-		//敵の攻撃がプレイヤーに当たっているか
-		if (CCollision::CheckHitSphereToSphere(_player.GetCenter(), _player.GetRad(),
-			attack->GetCenter(), attack->GetRad()) == true &&
-			attack->GetActive() == true)
-		{
+			//敵が死んでいたら処理をしない
+			if (enemy->GetActive() == false)continue;
 
-			//呼び出すエフェクトのID
-			int effectId = CEffectData::GetId(EFFECT_ATTACK);
+			//敵の攻撃クラスを取得
+			CAttack* attack = enemy->GetAttack();
 
-			//エフェクトを呼び出す
-			CEffekseerCtrl::Request(effectId, _player.GetCenter(), false);
+			//敵の攻撃可能範囲にプレイヤーが入っているか
+			if (CCollision::CheckHitSphereToSphere(player->GetCenter(), player->GetRad(), enemy->GetCenter(), attack->GetAttackableRad()) == true)
+			{
+				attack->SetIsAttackable(true);
+			}
+			else
+			{
+				attack->SetIsAttackable(false);
+			}
 
-			//プレイヤーに敵の攻撃力分ダメージ
-			_player.HitAttack(enemy->GetAtk());
-		}
+			//敵の攻撃がプレイヤーに当たっているか
+			if (CCollision::CheckHitSphereToSphere(player->GetCenter(), player->GetRad(),
+				attack->GetCenter(), attack->GetRad()) == true &&
+				attack->GetActive() == true)
+			{
 
-		//プレイヤーの攻撃クラスを取得
-		attack = _player.GetAttack();
+				//呼び出すエフェクトのID
+				int effectId = CEffectData::GetId(EFFECT_ATTACK);
 
-		//プレイヤーの攻撃が敵に当たっているか
-		if (CCollision::CheckHitSphereToSphere(enemy->GetCenter(), enemy->GetRad(),
-			attack->GetCenter(), attack->GetRad()) == true &&
-			attack->GetActive() == true)
-		{
-			//呼び出すエフェクトのID
-			int effectId = CEffectData::GetId(EFFECT_ATTACK);
+				//エフェクトを呼び出す
+				CEffekseerCtrl::Request(effectId, player->GetCenter(), false);
 
-			//エフェクトを呼び出す
-			CEffekseerCtrl::Request(effectId,enemy->GetCenter(),false);
+				//プレイヤーに敵の攻撃力分ダメージ
+				player->HitAttack(enemy->GetAtk());
+			}
 
-			//ノックバックの方向
-			float rot = atan2f(_player.GetCenter().x - enemy->GetCenter().x,
-				_player.GetCenter().z - enemy->GetCenter().z);
+			//プレイヤーの攻撃クラスを取得
+			attack = player->GetAttack();
 
-			//敵にプレイヤーの攻撃力分ダメージ
-			enemy->HitAttack(_player.GetAtk(),rot);
+			//プレイヤーの攻撃が敵に当たっているか
+			if (CCollision::CheckHitSphereToSphere(enemy->GetCenter(), enemy->GetRad(),
+				attack->GetCenter(), attack->GetRad()) == true &&
+				attack->GetActive() == true)
+			{
+				//呼び出すエフェクトのID
+				int effectId = CEffectData::GetId(EFFECT_ATTACK);
+
+				//エフェクトを呼び出す
+				CEffekseerCtrl::Request(effectId, enemy->GetCenter(), false);
+
+				//ノックバックの方向
+				float rot = atan2f(player->GetCenter().x - enemy->GetCenter().x,
+					player->GetCenter().z - enemy->GetCenter().z);
+
+				//敵にプレイヤーの攻撃力分ダメージ
+				enemy->HitAttack(player->GetAtk(), rot);
+			}
 		}
 	}
+
 }
 
 //----------------------------------------------
@@ -152,64 +166,71 @@ void CCollisionManager::CheckHitPlayerAttackToEnemy(CAttackManager& _attackManag
 //			敵とプレイヤーの当たり判定
 //----------------------------------------------
 void CCollisionManager::CheckHitEnemyToPlayer(CEnemyManager& _enemyManager,
-	CPlayer& _player)
+	CPlayerManager& _player)
 {
-	//プレイヤーが死んでいたら処理をしない
-	if (_player.GetActive() == false)return;
 
-	for (int i = 0; i < _enemyManager.GetEnemyNum(); i++)
+	for (int i = 0; i < _player.GetPlayerNum(); i++)
 	{
-		//敵のクラスを取得
-		CEnemyBase* enemy = _enemyManager.GetEnemy(i);
+		//プレイヤーのクラスを取得
+		CPlayer* player = _player.GetPlayer(i);
 
-		//敵が死んでいたら処理をしない
-		if (enemy->GetActive() == false)continue;
+		//プレイヤーが死んでいたら処理をしない
+		if (player->GetActive() == false)continue;
 
-		//押し戻し処理-------------------------------------------------
-
-		//本来離れてほしい距離を求める
-		float len1 = enemy->GetRad() + _player.GetRad();
-
-		//実際に離れている距離を求める
-		VECTOR playerPos = _player.GetPos();
-		playerPos.y = 0.0f;
-		VECTOR enemyPos = enemy->GetPos();
-		enemyPos.y = 0.0f;
-
-		VECTOR dir = VSub(enemyPos, playerPos);
-		float len2 = VSize(dir);
-
-		//めり込んでいたら
-		if (len1 > len2)
+		for (int j = 0; j < _enemyManager.GetEnemyNum(); j++)
 		{
-			//めり込み量を求める
-			float len3 = len1 - len2;
+			//敵のクラスを取得
+			CEnemyBase* enemy = _enemyManager.GetEnemy(j);
 
-			//len3 = len3 * 0.5f;
+			//敵が死んでいたら処理をしない
+			if (enemy->GetActive() == false)continue;
 
-			//移動させるベクトルを求める
-			
-			//方向ベクトルなので正規化する
-			dir = VNorm(dir);
+			//押し戻し処理-------------------------------------------------
 
-			dir = VScale(dir,len3);
+			//本来離れてほしい距離を求める
+			float len1 = enemy->GetRad() + player->GetRad();
 
-			enemyPos = VAdd(enemy->GetPos(), dir);
+			//実際に離れている距離を求める
+			VECTOR playerPos = player->GetPos();
+			playerPos.y = 0.0f;
+			VECTOR enemyPos = enemy->GetPos();
+			enemyPos.y = 0.0f;
 
-			enemy->SetPos(VAdd(enemy->GetPos(), dir));
+			VECTOR dir = VSub(enemyPos, playerPos);
+			float len2 = VSize(dir);
+
+			//めり込んでいたら
+			if (len1 > len2)
+			{
+				//めり込み量を求める
+				float len3 = len1 - len2;
+
+				//len3 = len3 * 0.5f;
+
+				//移動させるベクトルを求める
+
+				//方向ベクトルなので正規化する
+				dir = VNorm(dir);
+
+				dir = VScale(dir, len3);
+
+				enemyPos = VAdd(enemy->GetPos(), dir);
+
+				enemy->SetPos(VAdd(enemy->GetPos(), dir));
 
 
-			VECTOR dir2 = VSub(playerPos, enemyPos);
-			dir2 = VNorm(dir2);
-			dir2 = VScale(dir2, len3);
+				VECTOR dir2 = VSub(playerPos, enemyPos);
+				dir2 = VNorm(dir2);
+				dir2 = VScale(dir2, len3);
 
-			//playerPos = VAdd(playerPos, dir2);
+				//playerPos = VAdd(playerPos, dir2);
 
-			//_player.SetPos(VAdd(playerPos, dir2));
+				//_player.SetPos(VAdd(playerPos, dir2));
+			}
+
+			//-------------------------------------------------------------
+
 		}
-
-		//-------------------------------------------------------------
-
 	}
 }
 
@@ -330,65 +351,53 @@ void CCollisionManager::CheckHitShotToEnemy(CShotManager& _shotManager,
 }
 
 //----------------------------------------------
-//		  プレイヤーとゴールの当たり判定
-//----------------------------------------------
-void CCollisionManager::CheckHitPlayerToGoal(CPlayer& _player, CGoal& _goal, bool _isFlg)
-{
-	if (_isFlg == false)return;
-
-	//プレイヤーかゴールが無ければ処理をしない
-	if (_player.GetActive() == false ||
-		_goal.GetActive() == false)return;
-
-	//プレイヤーがゴールに触れているか
-	if (CCollision::CheckHitSphereToSphere(_player.GetCenter(),_player.GetRad(),
-		_goal.GetCenter(),_goal.GetRad()) == true)
-	{
-		//ゴールフラグをtrueに
-		_goal.HitCalc();
-	}
-}
-
-//----------------------------------------------
 //		  プレイヤーとマップの当たり判定
 //----------------------------------------------
-void CCollisionManager::CheckHitPlayerToMap(CPlayer& _player,CMap& _map)
+void CCollisionManager::CheckHitPlayerToMap(CPlayerManager& _player,CMap& _map)
 {
-
-	//当たり判定情報が格納される構造体
-	MV1_COLL_RESULT_POLY_DIM col;
-
-	col = MV1CollCheck_Sphere(_map.GetHitHndl(), -1,
-		_player.GetCenter(), _player.GetRad());
-
-	//ポリゴンと当たっていたか
-	if (col.HitNum != 0)
+	for (int i = 0; i < _player.GetPlayerNum(); i++)
 	{
-		//押し戻しの計算-----------------------
-		
-		for (int i = 0; i < col.HitNum; i++)
+		//プレイヤーのクラスを取得
+		CPlayer* player = _player.GetPlayer(i);
+
+		//プレイヤーが死んでいたらスキップ
+		if (player->GetActive() == false)continue;
+
+		//当たり判定情報が格納される構造体
+		MV1_COLL_RESULT_POLY_DIM col;
+
+		col = MV1CollCheck_Sphere(_map.GetHitHndl(), -1,
+			player->GetCenter(), player->GetRad());
+
+		//ポリゴンと当たっていたか
+		if (col.HitNum != 0)
 		{
+			//押し戻しの計算-----------------------
 
-			//中心点から最近点を引き算
-			VECTOR vLen = VSub(_player.GetCenter(), col.Dim[i].HitPosition);
-			//取得した距離を三平方の定理の長さに変換
-			float fLen = VSize(vLen);
-			//実際にめり込んだ距離を計算
-			fLen = _player.GetRad() - fLen;
-			//法線をめり込んだ距離分掛け算する
-			vLen = VScale(col.Dim[i].Normal, fLen);
+			for (int j = 0; j < col.HitNum; j++)
+			{
 
-			//プレイヤーの座標を計算した分だけ移動させる
-			_player.SetPos(VAdd(_player.GetPos(), vLen));
+				//中心点から最近点を引き算
+				VECTOR vLen = VSub(player->GetCenter(), col.Dim[j].HitPosition);
+				//取得した距離を三平方の定理の長さに変換
+				float fLen = VSize(vLen);
+				//実際にめり込んだ距離を計算
+				fLen = player->GetRad() - fLen;
+				//法線をめり込んだ距離分掛け算する
+				vLen = VScale(col.Dim[j].Normal, fLen);
 
-			//重力をリセット
-			_player.GravityReset();
+				//プレイヤーの座標を計算した分だけ移動させる
+				player->SetPos(VAdd(player->GetPos(), vLen));
 
+				//重力をリセット
+				player->GravityReset();
+
+			}
+			//-------------------------------------
+
+			//毎回データを削除
+			MV1CollResultPolyDimTerminate(col);
 		}
-		//-------------------------------------
-
-		//毎回データを削除
-		MV1CollResultPolyDimTerminate(col);
 	}
 }
 
@@ -447,34 +456,40 @@ void CCollisionManager::CheckHitEnemyToMap(CEnemyManager& _enemy, CMap& _map)
 //		アイテムとプレイヤーの当たり判定
 //----------------------------------------------
 void CCollisionManager::CheckHitItemToPlayer(CItemManager& _item,
-	CItemInventory& _itemInventory, CPlayer& _player)
+	CItemInventory& _itemInventory, CPlayerManager& _player)
 {
-	//プレイヤーが死んでいたら処理をしない
-	if (_player.GetActive() == false)return;
-
-	for (int i = 0; i < _item.GetNum(); i++)
+	for (int i = 0; i < _player.GetPlayerNum(); i++)
 	{
-		//アイテムのクラスを取得
-		CItemBase* item = _item.GetItem(i);
-		
-		//アイテムにプレイヤーが当たっているか
-		if (CCollision::CheckHitSphereToSphere(item->GetCenter(), item->GetRad(),
-			_player.GetCenter(), _player.GetRad()) == true)
+		//プレイヤーのクラスを取得
+		CPlayer* player = _player.GetPlayer(i);
+
+		//プレイヤーが死んでいたら処理をしない
+		if (player->GetActive() == false)return;
+
+		for (int j = 0; j < _item.GetNum(); j++)
 		{
-			//アイテムを取っていたらプレイヤーがアイテムを取得する
-			if (_player.GetIsPickUp() == true)
+			//アイテムのクラスを取得
+			CItemBase* item = _item.GetItem(j);
+
+			//アイテムにプレイヤーが当たっているか
+			if (CCollision::CheckHitSphereToSphere(item->GetCenter(), item->GetRad(),
+				player->GetCenter(), player->GetRad()) == true)
 			{
-				//インベントリのアイテム保存用
-				CItemBase* inventoryItem = nullptr;
-				//アイテムをインベントリに入れる
-				inventoryItem = _itemInventory.SetItem(item);
-				//インベントリからアイテムに入れる
-				_item.SetItem(i,inventoryItem);
+				//アイテムを取っていたらプレイヤーがアイテムを取得する
+				if (player->GetIsPickUp() == true)
+				{
+					//インベントリのアイテム保存用
+					CItemBase* inventoryItem = nullptr;
+					//アイテムをインベントリに入れる
+					inventoryItem = _itemInventory.SetItem(item);
+					//インベントリからアイテムに入れる
+					_item.SetItem(i, inventoryItem);
 
-				return;
+					return;
+				}
 			}
-		}
 
+		}
 	}
 }
 
@@ -513,58 +528,65 @@ void CCollisionManager::CheckHitAttackToBox(CAttackManager& _attack, CBoxManager
 //----------------------------------------------
 //			プレイヤーと箱の当たり判定
 //----------------------------------------------
-void CCollisionManager::CheckHitPlayerToBox(CPlayer& _player, CBoxManager& _box)
+void CCollisionManager::CheckHitPlayerToBox(CPlayerManager& _player, CBoxManager& _box)
 {
-	//プレイヤーが死んでいたら処理をしない
-	if (_player.GetActive() == false)return;
 
-	for (int i = 0; i < _box.GetNum(); i++)
+	for (int i = 0; i < _player.GetPlayerNum(); i++)
 	{
-		//ボックス保存用
-		CBox* box = _box.GetBox(i);
+		//プレイヤーのクラスを取得
+		CPlayer* player = _player.GetPlayer(i);
 
-		//ボックスがなかったらスキップ
-		if (box->GetActive() == false)continue;
+		//プレイヤーが死んでいたら処理をしない
+		if (player->GetActive() == false)return;
 
-		
-		//押し戻し処理-------------------------------------------------
-
-		//本来離れてほしい距離を求める
-		float len1 = box->GetRad() + _player.GetRad();
-
-		//実際に離れている距離を求める
-		VECTOR playerPos = _player.GetPos();
-		playerPos.y = 0.0f;
-		VECTOR boxPos = box->GetPos();
-		boxPos.y = 0.0f;
-
-		VECTOR dir = VSub(playerPos, boxPos);
-		float len2 = VSize(dir);
-
-		//めり込んでいたら
-		if (len1 > len2)
+		for (int j = 0; j < _box.GetNum(); j++)
 		{
-			//めり込み量を求める
-			float len3 = len1 - len2;
+			//ボックス保存用
+			CBox* box = _box.GetBox(j);
 
-			//len3 = len3 * 0.5f;
+			//ボックスがなかったらスキップ
+			if (box->GetActive() == false)continue;
 
-			//移動させるベクトルを求める
 
-			//方向ベクトルなので正規化する
-			dir = VNorm(dir);
+			//押し戻し処理-------------------------------------------------
 
-			dir = VScale(dir, len3);
+			//本来離れてほしい距離を求める
+			float len1 = box->GetRad() + player->GetRad();
 
-			playerPos = VAdd(_player.GetPos(), dir);
+			//実際に離れている距離を求める
+			VECTOR playerPos = player->GetPos();
+			playerPos.y = 0.0f;
+			VECTOR boxPos = box->GetPos();
+			boxPos.y = 0.0f;
 
-			_player.SetPos(VAdd(_player.GetPos(), dir));
+			VECTOR dir = VSub(playerPos, boxPos);
+			float len2 = VSize(dir);
 
+			//めり込んでいたら
+			if (len1 > len2)
+			{
+				//めり込み量を求める
+				float len3 = len1 - len2;
+
+				//len3 = len3 * 0.5f;
+
+				//移動させるベクトルを求める
+
+				//方向ベクトルなので正規化する
+				dir = VNorm(dir);
+
+				dir = VScale(dir, len3);
+
+				playerPos = VAdd(player->GetPos(), dir);
+
+				player->SetPos(VAdd(player->GetPos(), dir));
+
+
+			}
+
+			//-------------------------------------------------------------
 
 		}
-
-		//-------------------------------------------------------------
-
 	}
 }
 

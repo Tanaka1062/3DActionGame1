@@ -5,10 +5,10 @@
 
 enum tagModelId
 {
-	PLAYER_MODEL_ID_A,		//モデルIDA
-	PLAYER_MODEL_ID_B,		//モデルIDB
+	PLAYER_ID_A,		//モデルIDA
+	PLAYER_ID_B,		//モデルIDB
 
-	PLAYER_MODEL_ID_NUM,	//モデルIDの数
+	PLAYER_ID_NUM,	//モデルIDの数
 };
 
 using namespace std;
@@ -17,8 +17,8 @@ using namespace std;
 class CPlayerManager
 {
 private:
-	vector<CPlayer*> m_player;				//敵のクラス
-	int m_modelHndl[PLAYER_MODEL_ID_NUM];	//モデルのハンドル
+	vector<CPlayer*> m_player;				//プレイヤーのクラス
+	int m_modelHndl[PLAYER_ID_NUM];			//モデルのハンドル
 
 public:
 	//コンストラクタ・デストラクタ
@@ -38,27 +38,10 @@ public:
 	//終了処理
 	void Exit();
 
-	//敵の数を取得
-	int GetEnemyNum() { return static_cast<int>(m_player.size()); }
+	//プレイヤーの数を取得
+	int GetPlayerNum() { return static_cast<int>(m_player.size()); }
 
-	//敵が全部死んだかを取得
-	bool GetIsAllDie() {
-		int num = 0;
-		for (int i = 0; i < m_player.size(); i++)
-		{
-			if (m_player[i]->GetActive() == false)
-			{
-				num++;
-			}
-		}
-		if (num == m_player.size())
-		{
-			return true;
-		}
-		return false;
-	};
-
-	//敵を取得
+	//プレイヤーを取得
 	CPlayer* GetPlayer(int _num) { return m_player[_num]; }
 };
 

@@ -3,7 +3,7 @@
 #include "../../lib/myMath/myMath.h"
 #include <math.h>
 #include "../common.h"
-#include "../../lib/input/controllerInput.h"
+#include "../../lib/input/controllerManager.h"
 #include"../../lib/input/keyInput.h"
 
 //定義関連---------------------------
@@ -79,7 +79,7 @@ CPlayer::~CPlayer()
 //-----------------------
 //		初期化
 //-----------------------
-void CPlayer::Init(CAttackManager* _attackManager)
+void CPlayer::Init(CAttackManager* _attackManager,int _id)
 {
 	CCharacterBase::Init(_attackManager);
 	m_attack.Init(ATTACK_SIZE,ATTACK_LENGTH);
@@ -97,6 +97,8 @@ void CPlayer::Init(CAttackManager* _attackManager)
 	m_isPickUpItem = false;
 	m_attackId = -1;
 	m_skillId = -1;
+	m_controllerId = -1;
+	m_id = _id;
 }
 
 //-----------------------
@@ -565,8 +567,8 @@ void CPlayer::Move(float _rotY)
 	//コントローラーを使っているか
 	bool isController = false;
 
-	if (CControllerInput::GetLY() != 0 ||
-		CControllerInput::GetLX() != 0)
+	if (CControllerManager::GetLY(m_controllerId) != 0 ||
+		CControllerManager::GetLX(m_controllerId) != 0)
 	{
 		isController = true;
 	}
@@ -577,7 +579,7 @@ void CPlayer::Move(float _rotY)
 	//コントローラー用前進後退
 	if (isController == true)
 	{
-		speed.z = MOVE_SPEED * CControllerInput::GetLY();
+		speed.z = MOVE_SPEED * CControllerManager::GetLY(m_controllerId);
 	}
 	//キーボード用前進
 	else if (CheckHitKey(KEY_INPUT_W) != 0)
@@ -595,7 +597,7 @@ void CPlayer::Move(float _rotY)
 	//コントローラー用左右移動
 	if (isController == true)
 	{
-		speed.x = -MOVE_SPEED * CControllerInput::GetLX();
+		speed.x = -MOVE_SPEED * CControllerManager::GetLX(m_controllerId);
 	}
 	//キーボード用左移動
 	else if (CheckHitKey(KEY_INPUT_A) != 0)
@@ -646,7 +648,7 @@ void CPlayer::RequestAttack()
 
 	//攻撃ボタンを押したか
 	if (CheckHitKey(KEY_INPUT_J) != 0 ||
-		CControllerInput::IsTrg(BUTTON_X))
+		CControllerManager::IsTrg(BUTTON_X))
 	{
 
 		//攻撃してない時に攻撃前に移行する
@@ -659,7 +661,7 @@ void CPlayer::RequestAttack()
 
 	//攻撃ボタンを押したか
 	if (CheckHitKey(KEY_INPUT_U) != 0 ||
-		CControllerInput::IsTrg(BUTTON_Y))
+		CControllerManager::IsTrg(BUTTON_Y))
 	{
 
 		//攻撃してない時に攻撃前に移行する
@@ -692,7 +694,7 @@ void CPlayer::Item()
 
 	//ボタンを押されたらアイテム使用前状態に移行
 	if (CheckHitKey(KEY_INPUT_K) != 0 ||
-		CControllerInput::IsTrg(BUTTON_A) == true)
+		CControllerManager::IsTrg(BUTTON_A) == true)
 	{
 		m_state = ITEM_USE_IN;
 	}
@@ -705,7 +707,7 @@ void CPlayer::Item()
 void CPlayer::PickUpItem()
 {
 	if (CheckHitKey(KEY_INPUT_I) != 0 ||
-		CControllerInput::IsTrg(BUTTON_B) == true)
+		CControllerManager::IsTrg(BUTTON_B) == true)
 	{
 		m_isPickUpItem = true;
 	}

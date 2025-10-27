@@ -8,7 +8,11 @@
 CItemManager::CItemManager()
 {
 	m_shot = nullptr;
-	m_player = nullptr;
+
+	for (int i = 0; i < PLAYER_ID_NUM; i++)
+	{
+		m_player[i] = nullptr;
+	}
 
 	for (int i = 0; i < ITEM_NUM; i++)
 	{
@@ -28,10 +32,13 @@ CItemManager::~CItemManager()
 //-----------------------
 //		初期化
 //-----------------------
-void CItemManager::Init(CPlayer* _player, CShotManager* _shot)
+void CItemManager::Init(CPlayerManager& _player, CShotManager* _shot)
 {
 	//アドレスを保存
-	m_player = _player;
+	for (int i = 0; i < PLAYER_ID_NUM; i++)
+	{
+		m_player[i] = _player.GetPlayer(i);
+	}
 	m_shot = _shot;
 
 	//モデルハンドルを初期化
@@ -52,12 +59,12 @@ void CItemManager::Init(CPlayer* _player, CShotManager* _shot)
 		{
 		case 0:
 			item = new CFireRing;
-			item->Init(m_player);
+			item->Init();
 			m_item.push_back(item);
 			break;
 		case 1:
 			item = new CHarbAmulent;
-			item->Init(m_player);
+			item->Init();
 			m_item.push_back(item);
 			break;
 		}
@@ -195,7 +202,7 @@ CItemBase* CItemManager::GetItem(int _num)
 //-----------------------
 //	   アイテムを設定
 //-----------------------
-void CItemManager::SetItem(int _num,CItemBase* _item)
+void CItemManager::SetItem(int _num,CItemBase* _item,CPlayer* _player)
 {
 	//アイテムの数をカウントする変数
 	int count = 0;
@@ -213,7 +220,7 @@ void CItemManager::SetItem(int _num,CItemBase* _item)
 			{
 				*ite = _item;
 				//プレイヤーの位置に座標を設定
-				(*ite)->SetPos(m_player->GetPos());
+				(*ite)->SetPos(_player->GetPos());
 			}
 			return;
 		}
@@ -252,7 +259,7 @@ void CItemManager::SpawnItem(VECTOR _pos, tagItemName _name)
 		break;
 	}
 
-	item->Init(m_player);
+	item->Init();
 	item->DuplicateModel(m_hndl[item->GetName()]);
 	item->SetPos(_pos);
 	m_item.push_back(item);

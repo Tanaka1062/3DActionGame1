@@ -6,7 +6,7 @@
 //-------------------------------
 CControllerManager::CControllerManager()
 {
-
+	Init();
 }
 
 //-------------------------------
@@ -34,7 +34,7 @@ void CControllerManager::Update()
 //-------------------------------
 //	 ボタン入力判定（通常判定）
 //-------------------------------
-bool CControllerManager::IsRep(tagControllerButton _button, tagControllerId _id = CONTROLLER_ID_NONE)
+bool CControllerManager::IsRep(tagControllerButton _button, int _id = CONTROLLER_ID_NONE)
 {
 	//コントローラーなしの場合プレイヤー１の情報を取得する
 	if (_id == CONTROLLER_ID_NONE)
@@ -48,7 +48,7 @@ bool CControllerManager::IsRep(tagControllerButton _button, tagControllerId _id 
 //-------------------------------
 //	ボタン入力判定（トリガー判定）
 //-------------------------------
-bool CControllerManager::IsTrg(tagControllerButton _button, tagControllerId _id = CONTROLLER_ID_NONE)
+bool CControllerManager::IsTrg(tagControllerButton _button, int _id = CONTROLLER_ID_NONE)
 {
 	//コントローラーなしの場合プレイヤー１の情報を取得する
 	if (_id == CONTROLLER_ID_NONE)
@@ -62,7 +62,7 @@ bool CControllerManager::IsTrg(tagControllerButton _button, tagControllerId _id 
 //-------------------------------
 //左レバーの左右の入力情報を取得
 //-------------------------------
-float CControllerManager::GetLX(tagControllerId _id = CONTROLLER_ID_NONE)
+float CControllerManager::GetLX(int _id = CONTROLLER_ID_NONE)
 {
 	//コントローラーなしの場合プレイヤー１の情報を取得する
 	if (_id == CONTROLLER_ID_NONE)
@@ -76,7 +76,7 @@ float CControllerManager::GetLX(tagControllerId _id = CONTROLLER_ID_NONE)
 //-------------------------------
 //左レバーの上下の入力情報を取得
 //-------------------------------							 
-float CControllerManager::GetLY(tagControllerId _id = CONTROLLER_ID_NONE)
+float CControllerManager::GetLY(int _id = CONTROLLER_ID_NONE)
 {
 	//コントローラーなしの場合プレイヤー１の情報を取得する
 	if (_id == CONTROLLER_ID_NONE)
@@ -90,7 +90,7 @@ float CControllerManager::GetLY(tagControllerId _id = CONTROLLER_ID_NONE)
 //-------------------------------
 //右レバーの左右の入力情報を取得
 //-------------------------------
-float CControllerManager::GetRX(tagControllerId _id = CONTROLLER_ID_NONE)
+float CControllerManager::GetRX(int _id = CONTROLLER_ID_NONE)
 {
 	//コントローラーなしの場合プレイヤー１の情報を取得する
 	if (_id == CONTROLLER_ID_NONE)
@@ -104,7 +104,7 @@ float CControllerManager::GetRX(tagControllerId _id = CONTROLLER_ID_NONE)
 //-------------------------------
 //右レバーの上下の入力情報を取得
 //-------------------------------
-float CControllerManager::GetRY(tagControllerId _id = CONTROLLER_ID_NONE)
+float CControllerManager::GetRY(int _id = CONTROLLER_ID_NONE)
 {
 	//コントローラーなしの場合プレイヤー１の情報を取得する
 	if (_id == CONTROLLER_ID_NONE)
@@ -132,8 +132,14 @@ bool CControllerManager::SetId(tagControllerId _id)
 	//Bを押したコントローラーを調べ、IDに設定する、
 	for (int i = 0; i < 4; i++)
 	{
+		//すでにIDが設定されている場合スキップする
+		if (m_controller[i].GetId() != -1)continue;
+		//同じIDが設定されている場合スキップする
+		if (m_controller[0].GetId() == m_controller[1].GetId())continue;
+
 		if (PAD_INPUT_2 == GetJoypadInputState(controllerNum[i]))
 		{
+			
 			m_controller[_id].SetId(controllerNum[i]);
 			return true;
 		}

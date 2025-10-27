@@ -3,7 +3,7 @@
 #include <list>
 #include "itemBase.h"
 #include "../data.h"
-#include "../player/player.h"
+#include "../player/playerManager.h"
 #include "../shot/shotManager.h"
 #include "itemShotBase.h"
 
@@ -14,17 +14,17 @@ using namespace std;
 class CItemManager
 {
 private:
-	list<CItemBase*> m_item;	//アイテムのクラス
-	int m_hndl[ITEM_NUM];		//アイテムのモデルハンドル
-	CPlayer* m_player;			//プレイヤーのアドレス保存用
-	CShotManager* m_shot;		//弾のマネージャーのアドレス保存用
+	list<CItemBase*> m_item;			//アイテムのクラス
+	int m_hndl[ITEM_NUM];				//アイテムのモデルハンドル
+	CPlayer* m_player[PLAYER_ID_NUM];	//プレイヤーのアドレス保存用
+	CShotManager* m_shot;				//弾のマネージャーのアドレス保存用
 public:
 	//コンストラクタ・デストラクタ
 	CItemManager();
 	~CItemManager();
 
 	//初期化
-	void Init(CPlayer* _player,CShotManager* _shot);
+	void Init(CPlayerManager& _player,CShotManager* _shot);
 	//モデルロード
 	void Load();
 	//毎フレームする処理
@@ -43,7 +43,7 @@ public:
 	CItemBase* GetItem(int _num);
 
 	//アイテムを設定
-	void SetItem(int _num, CItemBase* _item);
+	void SetItem(int _num, CItemBase* _item,CPlayer* _player);
 
 	//アイテムを出現させる
 	// _pos		:出現させるアイテムの位置

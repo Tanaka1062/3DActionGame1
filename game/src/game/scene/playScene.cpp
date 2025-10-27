@@ -110,7 +110,6 @@ void CPlayScene::Step()
 	CCollisionManager::CheckHitEnemyToPlayer(m_enemy, m_player);
 	CCollisionManager::CheckHitEnemyToEnemy(m_enemy);
 	CCollisionManager::CheckHitShotToEnemy(m_shot, m_enemy);
-	CCollisionManager::CheckHitPlayerToGoal(m_player, m_goal, m_enemy.GetIsAllDie());
 	CCollisionManager::CheckHitPlayerToMap(m_player, m_ground);
 	CCollisionManager::CheckHitEnemyToMap(m_enemy, m_ground);
 	CCollisionManager::CheckHitItemToPlayer(m_item,m_itemInventory, m_player);

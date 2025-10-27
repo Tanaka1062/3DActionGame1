@@ -18,7 +18,7 @@ public:
 	CItemBase();
 
 	//‰Šú‰»
-	virtual void Init(CPlayer* _player);
+	virtual void Init(CPlayer* _player = nullptr);
 
 	//–ˆƒtƒŒ[ƒ€‚·‚éˆ—
 	virtual void Step();
