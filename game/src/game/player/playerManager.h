@@ -2,14 +2,8 @@
 #include <iostream>
 #include <vector>
 #include "player.h"
+#include "../../lib/input/controllerManager.h"
 
-enum tagModelId
-{
-	PLAYER_ID_A,		//モデルIDA
-	PLAYER_ID_B,		//モデルIDB
-
-	PLAYER_ID_NUM,	//モデルIDの数
-};
 
 using namespace std;
 
@@ -17,8 +11,8 @@ using namespace std;
 class CPlayerManager
 {
 private:
-	vector<CPlayer*> m_player;				//プレイヤーのクラス
-	int m_modelHndl[PLAYER_ID_NUM];			//モデルのハンドル
+	vector<CPlayer*> m_player;			//プレイヤーのクラス
+	int m_modelHndl[PAD_NUM];			//モデルのハンドル
 
 public:
 	//コンストラクタ・デストラクタ

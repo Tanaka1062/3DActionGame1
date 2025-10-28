@@ -9,11 +9,6 @@ CItemManager::CItemManager()
 {
 	m_shot = nullptr;
 
-	for (int i = 0; i < PLAYER_ID_NUM; i++)
-	{
-		m_player[i] = nullptr;
-	}
-
 	for (int i = 0; i < ITEM_NUM; i++)
 	{
 		m_hndl[i] = -1;
@@ -32,13 +27,8 @@ CItemManager::~CItemManager()
 //-----------------------
 //		初期化
 //-----------------------
-void CItemManager::Init(CPlayerManager& _player, CShotManager* _shot)
+void CItemManager::Init( CShotManager* _shot)
 {
-	//アドレスを保存
-	for (int i = 0; i < PLAYER_ID_NUM; i++)
-	{
-		m_player[i] = _player.GetPlayer(i);
-	}
 	m_shot = _shot;
 
 	//モデルハンドルを初期化

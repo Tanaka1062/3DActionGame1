@@ -12,15 +12,15 @@ CItemInventory::CItemInventory()
 //------------------
 //	  初期化
 //------------------
-void CItemInventory::Init(CPlayerManager& _player)
+void CItemInventory::Init(CPlayerManager* _playerManager)
 {
 
-	for (int i = 0; i < PLAYER_ID_NUM; i++)
+	for (int i = 0; i < PAD_NUM; i++)
 	{
 		m_useItem[i] = nullptr;
 		m_skillItem[i] = nullptr;
 
-		m_player[i] = _player.GetPlayer(i);
+		m_player[i] = _playerManager->GetPlayer(i);
 	}
 }
 
@@ -29,7 +29,7 @@ void CItemInventory::Init(CPlayerManager& _player)
 //------------------
 void CItemInventory::Step(CShotManager* _shot)
 {
-	for (int i = 0; i < PLAYER_ID_NUM; i++)
+	for (int i = 0; i < PAD_NUM; i++)
 	{
 
 
@@ -117,38 +117,47 @@ void CItemInventory::Draw()
 }
 
 //アイテムを設定
-CItemBase* CItemInventory::SetItem(CItemBase* _item,CPlayer& _player)
+CItemBase* CItemInventory::SetItem(CItemBase* _item,CPlayer* _player)
 {
 
 	//アドレス保存用
 	CItemBase* item = nullptr;
 
+	//プレイヤーのコントローラーの名前を取得
+	tagPadName padName = _player->GetPadName();
+
 	//スキルアイテムの交換
 	if (_item->GetType() == ITEM_TYPE_SKILL)
 	{
 		//すでにアイテムが入っている場合交換する
-		if (m_skillItem != nullptr)
+		if (m_skillItem[padName] != nullptr)
 		{
 			//今のアイテムのアドレスを保存
-			item = m_skillItem;
+			item = m_skillItem[padName];
 		}
 
 		//インベントリにアイテムのアドレスを取得
-		m_skillItem = _item;
+		m_skillItem[padName] = _item;
+
+		//プレイヤーのアドレスを設定
+		m_skillItem[padName]->SetPlayerClass(_player);
 
 	}
 	//使用するアイテムの交換
 	else
 	{
 		//すでにアイテムが入っている場合交換する
-		if (m_useItem != nullptr)
+		if (m_useItem[padName] != nullptr)
 		{
 			//今のアイテムのアドレスを保存
-			item = m_useItem;
+			item = m_useItem[padName];
 		}
 
 		//インベントリにアイテムのアドレスを取得
-		m_useItem = _item;
+		m_useItem[padName] = _item;
+
+		//プレイヤーのアドレスを設定
+		m_useItem[padName]->SetPlayerClass(_player);
 	}
 
 	//アドレスを渡す

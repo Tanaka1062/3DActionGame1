@@ -16,7 +16,6 @@ class CItemManager
 private:
 	list<CItemBase*> m_item;			//アイテムのクラス
 	int m_hndl[ITEM_NUM];				//アイテムのモデルハンドル
-	CPlayer* m_player[PLAYER_ID_NUM];	//プレイヤーのアドレス保存用
 	CShotManager* m_shot;				//弾のマネージャーのアドレス保存用
 public:
 	//コンストラクタ・デストラクタ
@@ -24,7 +23,7 @@ public:
 	~CItemManager();
 
 	//初期化
-	void Init(CPlayerManager& _player,CShotManager* _shot);
+	void Init(CShotManager* _shot);
 	//モデルロード
 	void Load();
 	//毎フレームする処理

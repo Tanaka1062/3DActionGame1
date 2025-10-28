@@ -1,7 +1,7 @@
 #include "PlayCamera.h"
 #include <math.h>
 #include"../../lib/input/keyInput.h"
-#include"../../lib/input/controllerInput.h"
+#include"../../lib/input/controllerManager.h"
 
 //定義関連====================================
 static const VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
@@ -66,10 +66,10 @@ void CPlayCamera::Update(VECTOR _pos)
 void CPlayCamera::Rotate(VECTOR _focus)
 {
 	//コントローラー用カメラ回転
-	if (CControllerInput::GetRX() != 0)
+	if (CControllerManager::GetRX() != 0)
 	{
 		//スティックを入力した力分だけ回転速度を取得する
-		float rotSpeed = CAMERA_ROT_SPEED * CControllerInput::GetRX();
+		float rotSpeed = CAMERA_ROT_SPEED * CControllerManager::GetRX();
 
 		//外積を計算するための１つめのベクトル
 		VECTOR v1 = { 0.0f,1.0f,0.0f };

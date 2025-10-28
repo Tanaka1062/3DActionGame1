@@ -33,6 +33,9 @@ public:
 	//アイテムのタイプを取得
 	tagItemType GetType() { return m_type; }
 
+	//プレイヤーのクラスを設定
+	void SetPlayerClass(CPlayer* _player) { m_player = _player; }
+
 	//アイテムの使用回数を取得
 	int GetUseCount() { return m_useCount; }
 

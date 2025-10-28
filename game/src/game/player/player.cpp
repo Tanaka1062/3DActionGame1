@@ -79,7 +79,7 @@ CPlayer::~CPlayer()
 //-----------------------
 //		初期化
 //-----------------------
-void CPlayer::Init(CAttackManager* _attackManager,int _id)
+void CPlayer::Init(CAttackManager* _attackManager, tagPadName _padName)
 {
 	CCharacterBase::Init(_attackManager);
 	m_attack.Init(ATTACK_SIZE,ATTACK_LENGTH);
@@ -97,8 +97,7 @@ void CPlayer::Init(CAttackManager* _attackManager,int _id)
 	m_isPickUpItem = false;
 	m_attackId = -1;
 	m_skillId = -1;
-	m_controllerId = -1;
-	m_id = _id;
+	m_padName = _padName;
 }
 
 //-----------------------
@@ -567,8 +566,8 @@ void CPlayer::Move(float _rotY)
 	//コントローラーを使っているか
 	bool isController = false;
 
-	if (CControllerManager::GetLY(m_controllerId) != 0 ||
-		CControllerManager::GetLX(m_controllerId) != 0)
+	if (CControllerManager::GetLY(m_padName) != 0 ||
+		CControllerManager::GetLX(m_padName) != 0)
 	{
 		isController = true;
 	}
@@ -579,7 +578,7 @@ void CPlayer::Move(float _rotY)
 	//コントローラー用前進後退
 	if (isController == true)
 	{
-		speed.z = MOVE_SPEED * CControllerManager::GetLY(m_controllerId);
+		speed.z = MOVE_SPEED * CControllerManager::GetLY(m_padName);
 	}
 	//キーボード用前進
 	else if (CheckHitKey(KEY_INPUT_W) != 0)
@@ -597,7 +596,7 @@ void CPlayer::Move(float _rotY)
 	//コントローラー用左右移動
 	if (isController == true)
 	{
-		speed.x = -MOVE_SPEED * CControllerManager::GetLX(m_controllerId);
+		speed.x = -MOVE_SPEED * CControllerManager::GetLX(m_padName);
 	}
 	//キーボード用左移動
 	else if (CheckHitKey(KEY_INPUT_A) != 0)

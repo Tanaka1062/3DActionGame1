@@ -1,7 +1,7 @@
 #pragma once
 #include "../character/characterBase.h"
 #include "../shot/shotManager.h"
-
+#include"../../lib/input/controllerManager.h"
 
 static const int PLAYER_NUM = 1;			//プレイヤーの数
 static const int ITEM_INVENTORY_MAX = 1;	//アイテムインベントリの最大数
@@ -30,8 +30,7 @@ private:
 	bool m_isItemUse;				//アイテム使用フラグ
 	int m_attackId;					//攻撃のID
 	int m_skillId;					//スキルのID
-	int m_controllerId;				//コントローラーのID
-	int m_id;						//id
+	tagPadName m_padName;			//コントローラーの名前
 
 public:
 	//コンストラクタ・デストラクタ
@@ -39,7 +38,7 @@ public:
 	~CPlayer();
 
 	//初期化
-	void Init(CAttackManager* _attackManager = nullptr,int _id = -1);
+	void Init(CAttackManager* _attackManager = nullptr, tagPadName _padName = PAD_NONE);
 
 	//モデルロード
 	void Load(int _modelHndl);
@@ -65,11 +64,8 @@ public:
 	//スキルのID設定
 	void SetSkillId(tagSkillId _id) { m_skillId = _id; }
 
-	//コントローラーのIDを設定
-	void SetControllerId(int _id) { m_controllerId = _id; }
-
-	//Idを取得
-	void GetId() { return m_id; }
+	//コントローラーの名前を取得
+	tagPadName GetPadName() { return m_padName; }
 
 	//体力を増やす
 	void AddHp(int _addNum) { m_hp += _addNum; }

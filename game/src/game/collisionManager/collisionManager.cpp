@@ -481,9 +481,9 @@ void CCollisionManager::CheckHitItemToPlayer(CItemManager& _item,
 					//インベントリのアイテム保存用
 					CItemBase* inventoryItem = nullptr;
 					//アイテムをインベントリに入れる
-					inventoryItem = _itemInventory.SetItem(item);
+					inventoryItem = _itemInventory.SetItem(item,player);
 					//インベントリからアイテムに入れる
-					_item.SetItem(i, inventoryItem);
+					_item.SetItem(i, inventoryItem,player);
 
 					return;
 				}

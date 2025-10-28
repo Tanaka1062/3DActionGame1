@@ -1,21 +1,21 @@
 #pragma once
 #include "controllerInput.h"
 
-//コントローラーのID一覧
-enum tagControllerId
+//コントローラーの名前一覧
+enum tagPadName
 {
-	CONTROLLER_ID_NONE = -1,	//コントローラーなし		
-	CONTROLLER_ID_PLAYER_1,		//プレイヤー１			
-	CONTROLLER_ID_PLAYER_2,		//プレイヤー２
+	PAD_NONE = -1,		//名前なし(初期化用)
+	PAD_PLAYER_1,		//プレイヤー１			
+	PAD_PLAYER_2,		//プレイヤー２
 
-	CONTROLLER_ID_NUM,			//コントローラーのIDの数
+	PAD_NUM,			//コントローラーのIDの数
 };
 
 //コントローラーのマネージャー
 class CControllerManager
 {
 private:
-	static CControllerInput m_controller[CONTROLLER_ID_NUM];		//コントローラークラス
+	static CControllerInput m_controller[PAD_NUM];		//コントローラークラス
 	
 public:
 	//コンストラクタ
@@ -26,23 +26,27 @@ public:
 	//コントローラー入力情報更新
 	static void Update();
 	//ボタン入力判定（通常判定）
-	static bool IsRep(tagControllerButton _button,int _id = CONTROLLER_ID_NONE);
+	static bool IsRep(tagControllerButton _button, tagPadName _padName = PAD_NONE);
 	//ボタン入力判定（トリガー判定）
-	static bool IsTrg(tagControllerButton _button, int _id = CONTROLLER_ID_NONE);
+	static bool IsTrg(tagControllerButton _button, tagPadName _padName = PAD_NONE);
 
 	//レバーの値は1～0～(-1)の間で出力する
 	//左レバーの左右の入力情報を取得
-	static float GetLX(int _id = CONTROLLER_ID_NONE);
+	static float GetLX(tagPadName _padName = PAD_NONE);
 	//左レバーの上下の入力情報を取得							 
-	static float GetLY(int _id = CONTROLLER_ID_NONE);
+	static float GetLY(tagPadName _padName = PAD_NONE);
 	//右レバーの左右の入力情報を取得							 
-	static float GetRX(int _id = CONTROLLER_ID_NONE);
+	static float GetRX(tagPadName _padName = PAD_NONE);
 	//右レバーの上下の入力情報を取得							 
-	static float GetRY(int _id = CONTROLLER_ID_NONE);
+	static float GetRY(tagPadName _padName = PAD_NONE);
 
 	//コントローラーのIDを設定
 	//成功したらIDを設定しtrueを返す
 	//失敗したらIDを設定せずにfalseを返す
-	static bool SetId(tagControllerId _id);
+	static bool SetId(tagPadName _padName);
+
+	//コントローラーの名前を取得
+	static tagPadName GetName(int _num);
+
 };
 
