@@ -270,6 +270,9 @@
     <ClCompile Include="src\lib\input\controllerManager.cpp">
       <Filter>ソース ファイル\lib\input</Filter>
     </ClCompile>
+    <ClCompile Include="src\game\weapon\weaponManager.cpp">
+      <Filter>ソース ファイル\game\weapon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\lib\number.h">
@@ -433,6 +436,9 @@
     </ClInclude>
     <ClInclude Include="src\lib\input\controllerManager.h">
       <Filter>ソース ファイル\lib\input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\weapon\weaponManager.h">
+      <Filter>ソース ファイル\game\weapon</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -13,7 +13,7 @@ public:
 	void Init();
 
 	//モデルロード
-	void Load();
+	void Load(int _hndl);
 
 	//更新処理
 	void Update(int _hndl);

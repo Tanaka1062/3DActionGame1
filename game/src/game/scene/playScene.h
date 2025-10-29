@@ -10,7 +10,7 @@
 #include "../goal/goal.h"
 #include "../item/itemManager.h"
 #include "../item/itemInventory/itemInventory.h"
-#include "../weapon/weapon.h"
+#include "../weapon/weaponManager.h"
 #include "../attack/attackManager.h"
 #include "../box/boxManager.h"
 #include "../player/playerManager.h"
@@ -31,7 +31,7 @@ private:
 	CGoal m_goal;						//ゴール
 	CItemManager m_item;				//アイテム
 	CItemInventory m_itemInventory;		//アイテムインベントリ
-	CWeapon m_weapon;					//武器
+	CWeaponManager m_weaponManager;		//武器のマネージャークラス
 	CAttackManager m_attackManager;		//攻撃のマネージャークラス
 	CBoxManager m_box;					//箱
 

@@ -8,14 +8,12 @@ static const char* MODEL_PATH[PAD_NUM] =
 static const char FRAME_PATH[] =
 { "data/model/map/TestMap4FramePos.mv1" };			//ロードするファイル名
 
-static const int PLAYER_NUM = 1;					//プレイヤーの数
-
 //------------------------
 //	  コンストラクタ
 //------------------------
 CPlayerManager::CPlayerManager()
 {
-	Init();
+	//Init();
 
 }
 
@@ -24,11 +22,7 @@ CPlayerManager::CPlayerManager()
 //------------------------
 CPlayerManager::~CPlayerManager()
 {
-	for (int i = 0; i < PLAYER_NUM; i++)
-	{
-		delete m_player[i];
-	}
-
+	Exit();
 }
 
 //------------------------
@@ -133,7 +127,10 @@ void CPlayerManager::Exit()
 	{
 		m_player[i]->Exit();
 
+		delete m_player[i];
+
 	}
+	m_player.clear();
 
 }
 

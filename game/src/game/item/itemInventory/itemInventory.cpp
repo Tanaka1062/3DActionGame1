@@ -1,5 +1,6 @@
 #include "itemInventory.h"
 #include "../itemShotBase.h"
+#include "../../data.h"
 
 //------------------
 //	コンストラクタ
@@ -20,7 +21,15 @@ void CItemInventory::Init(CPlayerManager* _playerManager)
 		m_useItem[i] = nullptr;
 		m_skillItem[i] = nullptr;
 
-		m_player[i] = _playerManager->GetPlayer(i);
+
+		if (_playerManager == nullptr)
+		{
+			m_player[i] = nullptr;
+		}
+		else
+		{
+			m_player[i] = _playerManager->GetPlayer(i);
+		}
 	}
 }
 
@@ -35,7 +44,7 @@ void CItemInventory::Step(CShotManager* _shot)
 
 		//アイテムを使用していたらアイテムを使用する
 		if (m_player[i]->GetIsItemUse() == true &&
-			m_useItem != nullptr)
+			m_useItem[i] != nullptr)
 		{
 			switch (m_useItem[i]->GetType())
 			{
@@ -53,14 +62,14 @@ void CItemInventory::Step(CShotManager* _shot)
 			{
 				m_useItem[i]->Exit();
 
-				delete m_useItem;
+				delete m_useItem[i];
 
 				m_useItem[i] = nullptr;
 			}
 		}
 
 		//スキルを使用していたらスキルを使用する
-		if (m_skillItem != nullptr)
+		if (m_skillItem[i] != nullptr)
 		{
 			m_skillItem[i]->Use();
 		}
@@ -84,34 +93,37 @@ void CItemInventory::Draw()
 	if (m_useItem[0] == nullptr)
 	{
 		DrawFormatString(32, 128, GetColor(255, 0, 0), "何もない");
-		return;
+	}
+	else
+	{
+		switch (m_useItem[0]->GetName())
+		{
+		case ITEM_FIRE_RING:
+			DrawFormatString(32, 128, GetColor(255, 0, 0), "ファイアリング\n%d回使える", m_useItem[0]->GetUseCount());
+			break;
+		case ITEM_HARB_AMULENT:
+			DrawFormatString(32, 128, GetColor(255, 0, 0), "薬草のお守り\n%d回使える", m_useItem[0]->GetUseCount());
+			break;
+		}
+
 	}
 
 	if (m_useItem[1] == nullptr)
 	{
-		DrawFormatString(32, 228, GetColor(255, 0, 0), "何もない");
-		return;
+		DrawFormatString(WINDOW_SIZE_X - 128, 128, GetColor(255, 0, 0), "何もない");
 	}
-
-
-	switch (m_useItem[0]->GetName())
+	else
 	{
-	case ITEM_FIRE_RING:
-		DrawFormatString(32, 128, GetColor(255, 0, 0), "ファイアリング\n%d回使える", m_useItem[0]->GetUseCount());
-		break;
-	case ITEM_HARB_AMULENT:
-		DrawFormatString(32, 128, GetColor(255, 0, 0), "薬草のお守り\n%d回使える", m_useItem[0]->GetUseCount());
-		break;
-	}
+		switch (m_useItem[1]->GetName())
+		{
+		case ITEM_FIRE_RING:
+			DrawFormatString(WINDOW_SIZE_X - 128, 128, GetColor(255, 0, 0), "ファイアリング\n%d回使える", m_useItem[1]->GetUseCount());
+			break;
+		case ITEM_HARB_AMULENT:
+			DrawFormatString(WINDOW_SIZE_X - 128, 128, GetColor(255, 0, 0), "薬草のお守り\n%d回使える", m_useItem[1]->GetUseCount());
+			break;
+		}
 
-	switch (m_useItem[1]->GetName())
-	{
-	case ITEM_FIRE_RING:
-		DrawFormatString(32, 228, GetColor(255, 0, 0), "ファイアリング\n%d回使える", m_useItem[1]->GetUseCount());
-		break;
-	case ITEM_HARB_AMULENT:
-		DrawFormatString(32, 228, GetColor(255, 0, 0), "薬草のお守り\n%d回使える", m_useItem[1]->GetUseCount());
-		break;
 	}
 
 }

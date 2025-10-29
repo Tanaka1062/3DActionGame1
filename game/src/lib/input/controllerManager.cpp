@@ -1,6 +1,9 @@
 #include "controllerManager.h"
 #include <DxLib.h>
 
+CControllerInput CControllerManager::m_controller[PAD_NUM];		//コントローラークラス
+
+
 //-------------------------------
 //		  コンストラクタ
 //-------------------------------

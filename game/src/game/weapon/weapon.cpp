@@ -1,7 +1,5 @@
 #include "weapon.h"
 
-static const char MODEL_PATH[] =
-{ "data/model/weapon/weapon.mv1" };				//ロードするファイル名
 
 //--------------
 //コンストラクタ
@@ -31,9 +29,9 @@ void CWeapon::Init()
 //--------------
 // モデルロード
 //--------------
-void CWeapon::Load()
+void CWeapon::Load(int _hndl)
 {
-	CObject::LoadModel(MODEL_PATH);
+	CObject::DuplicateModel(_hndl);
 }
 
 //--------------

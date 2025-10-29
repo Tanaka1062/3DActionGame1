@@ -1,7 +1,7 @@
 #include "resultScene.h"
 #include "../data.h"
 #include "../../lib/input/keyInput.h"
-#include"../../lib/input/controllerInput.h"
+#include"../../lib/input/controllerManager.h"
 #include "../system/soundManager.h"
 
 //’è‹`ŠÖ˜A====================================
@@ -64,7 +64,7 @@ void CResultScene::Load()
 void CResultScene::Step()
 {
 	if (CKeyInput::IsTrg(KEY_SELECT) ||
-		CControllerInput::IsTrg(BUTTON_A))
+		CControllerManager::IsTrg(BUTTON_A))
 	{
 		m_state = END;
 	}

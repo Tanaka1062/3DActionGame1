@@ -27,7 +27,7 @@ CEnemyManager::~CEnemyManager()
 	{
 		delete m_enemy[i];
 	}
-
+	m_enemy.clear();
 }
 
 //------------------------

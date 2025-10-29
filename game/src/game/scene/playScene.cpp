@@ -37,7 +37,7 @@ void CPlayScene::Draw()
 	m_attackManager.Draw();
 	m_item.Draw();
 	m_itemInventory.Draw();
-	m_weapon.Draw();
+	m_weaponManager.Draw();
 	m_box.Draw();
 
 	m_camera.Draw();
@@ -55,11 +55,11 @@ void CPlayScene::Init()
 	m_playerManager.Init(&m_attackManager);
 	m_enemy.Init();
 	m_shot.Init();
-	m_item.Init(&m_player,&m_shot);
-	m_itemInventory.Init(&m_player);
-	m_weapon.Init();
+	m_item.Init(&m_shot);
+	m_itemInventory.Init(&m_playerManager);
+	m_weaponManager.Init();
 	m_box.Init();
-	m_camera.Init(m_player.GetCenter());
+	m_camera.Init(ZERO);
 
 }
 
@@ -75,7 +75,7 @@ void CPlayScene::Load()
 	m_enemy.Load();
 	m_shot.Load();
 	m_item.Load();
-	m_weapon.Load();
+	m_weaponManager.Load();
 	m_box.Load();
 }
 
@@ -89,7 +89,7 @@ void CPlayScene::Step()
 
 	m_playerManager.Step(m_camera.GetRot().y);
 
-	m_enemy.Step(m_player.GetCenter());
+	m_enemy.Step(ZERO);
 
 	m_shot.Step();
 
@@ -99,22 +99,22 @@ void CPlayScene::Step()
 
 	m_box.Step(&m_item);
 
-	m_camera.Step(m_player.GetCenter(),m_player.GetRad());
+	m_camera.Step(ZERO,0.0f);
 
 
 	//当たり判定----------------------------------
 	//敵の視界範囲とプレイヤーの当たり判定
-	CCollisionManager::CheckHitEnemyFOVToPlayer(m_enemy, m_player);
-	CCollisionManager::CheckHitEnemyAttackToPlayer(m_enemy, m_player);
+	CCollisionManager::CheckHitEnemyFOVToPlayer(m_enemy, m_playerManager);
+	CCollisionManager::CheckHitEnemyAttackToPlayer(m_enemy, m_playerManager);
 	CCollisionManager::CheckHitPlayerAttackToEnemy(m_attackManager, m_enemy);
-	CCollisionManager::CheckHitEnemyToPlayer(m_enemy, m_player);
+	CCollisionManager::CheckHitEnemyToPlayer(m_enemy, m_playerManager);
 	CCollisionManager::CheckHitEnemyToEnemy(m_enemy);
 	CCollisionManager::CheckHitShotToEnemy(m_shot, m_enemy);
-	CCollisionManager::CheckHitPlayerToMap(m_player, m_ground);
+	CCollisionManager::CheckHitPlayerToMap(m_playerManager, m_ground);
 	CCollisionManager::CheckHitEnemyToMap(m_enemy, m_ground);
-	CCollisionManager::CheckHitItemToPlayer(m_item,m_itemInventory, m_player);
+	CCollisionManager::CheckHitItemToPlayer(m_item,m_itemInventory, m_playerManager);
 	CCollisionManager::CheckHitAttackToBox(m_attackManager, m_box);
-	CCollisionManager::CheckHitPlayerToBox(m_player, m_box);
+	CCollisionManager::CheckHitPlayerToBox(m_playerManager, m_box);
 	CCollisionManager::CheckHitBoxToMap(m_box, m_ground);
 	//--------------------------------------------
 
@@ -128,12 +128,13 @@ void CPlayScene::Step()
 	m_attackManager.Update();
 	m_item.Update();
 	m_itemInventory.Update();
-	m_weapon.Update(m_player.GetHndl());
+	m_weaponManager.Update(m_playerManager);
 	m_box.Update();
-	m_camera.Update(m_player.GetCenter());
+	m_camera.Update(ZERO);
 
 	if (CKeyInput::IsTrg(KEY_SELECT) == true ||
-		m_player.GetActive() == false )
+		m_playerManager.GetPlayer(0)->GetActive() == false ||
+		m_playerManager.GetPlayer(1)->GetActive() == false)
 	{
 		m_state = END;
 	}
@@ -158,7 +159,7 @@ void CPlayScene::Exit()
 	m_attackManager.Exit();
 	m_shot.Exit();
 	m_item.Exit();
-	m_weapon.Exit();
+	m_weaponManager.Exit();
 	m_box.Exit();
 
 	//エフェクトを全て消す
