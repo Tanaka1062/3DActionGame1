@@ -8,9 +8,9 @@
 class CItemInventory
 {
 private:
-	CItemBase* m_useItem[PAD_NUM];		//使用するアイテム
-	CItemBase* m_skillItem[PAD_NUM];	//スキルアイテム
-	CPlayer* m_player[PAD_NUM];			//プレイヤーのアドレス保存用
+	CItemBase* m_useItem[PLAYER_NUM];		//使用するアイテム
+	CItemBase* m_skillItem[PLAYER_NUM];	//スキルアイテム
+	CPlayer* m_player[PLAYER_NUM];			//プレイヤーのアドレス保存用
 
 public:
 	CItemInventory();

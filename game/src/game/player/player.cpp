@@ -647,7 +647,7 @@ void CPlayer::RequestAttack()
 
 	//攻撃ボタンを押したか
 	if (CheckHitKey(KEY_INPUT_J) != 0 ||
-		CControllerManager::IsTrg(BUTTON_X))
+		CControllerManager::IsTrg(BUTTON_X,m_padName))
 	{
 
 		//攻撃してない時に攻撃前に移行する
@@ -660,7 +660,7 @@ void CPlayer::RequestAttack()
 
 	//攻撃ボタンを押したか
 	if (CheckHitKey(KEY_INPUT_U) != 0 ||
-		CControllerManager::IsTrg(BUTTON_Y))
+		CControllerManager::IsTrg(BUTTON_Y),m_padName)
 	{
 
 		//攻撃してない時に攻撃前に移行する
@@ -693,7 +693,7 @@ void CPlayer::Item()
 
 	//ボタンを押されたらアイテム使用前状態に移行
 	if (CheckHitKey(KEY_INPUT_K) != 0 ||
-		CControllerManager::IsTrg(BUTTON_A) == true)
+		CControllerManager::IsTrg(BUTTON_A,m_padName) == true)
 	{
 		m_state = ITEM_USE_IN;
 	}
@@ -706,7 +706,7 @@ void CPlayer::Item()
 void CPlayer::PickUpItem()
 {
 	if (CheckHitKey(KEY_INPUT_I) != 0 ||
-		CControllerManager::IsTrg(BUTTON_B) == true)
+		CControllerManager::IsTrg(BUTTON_B,m_padName) == true)
 	{
 		m_isPickUpItem = true;
 	}

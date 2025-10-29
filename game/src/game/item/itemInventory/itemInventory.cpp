@@ -16,7 +16,7 @@ CItemInventory::CItemInventory()
 void CItemInventory::Init(CPlayerManager* _playerManager)
 {
 
-	for (int i = 0; i < PAD_NUM; i++)
+	for (int i = 0; i < PLAYER_NUM; i++)
 	{
 		m_useItem[i] = nullptr;
 		m_skillItem[i] = nullptr;
@@ -38,9 +38,8 @@ void CItemInventory::Init(CPlayerManager* _playerManager)
 //------------------
 void CItemInventory::Step(CShotManager* _shot)
 {
-	for (int i = 0; i < PAD_NUM; i++)
+	for (int i = 0; i < PLAYER_NUM; i++)
 	{
-
 
 		//アイテムを使用していたらアイテムを使用する
 		if (m_player[i]->GetIsItemUse() == true &&
@@ -108,6 +107,20 @@ void CItemInventory::Draw()
 
 	}
 
+	if (m_skillItem[0] == nullptr)
+	{
+		DrawFormatString(32, 228, GetColor(255, 0, 0), "何もない");
+	}
+	else
+	{
+		switch (m_skillItem[0]->GetName())
+		{
+		case ITEM_HARB_AMULENT:
+			DrawFormatString(32, 228, GetColor(255, 0, 0), "回転切りができる", m_skillItem[0]->GetUseCount());
+			break;
+		}
+	}
+
 	if (m_useItem[1] == nullptr)
 	{
 		DrawFormatString(WINDOW_SIZE_X - 128, 128, GetColor(255, 0, 0), "何もない");
@@ -125,6 +138,21 @@ void CItemInventory::Draw()
 		}
 
 	}
+
+	if (m_skillItem[1] == nullptr)
+	{
+		DrawFormatString(WINDOW_SIZE_X - 128, 228, GetColor(255, 0, 0), "何もない");
+	}
+	else
+	{
+		switch (m_skillItem[1]->GetName())
+		{
+		case ITEM_HARB_AMULENT:
+			DrawFormatString(WINDOW_SIZE_X - 128, 228, GetColor(255, 0, 0), "回転切りができる", m_useItem[1]->GetUseCount());
+			break;
+		}
+	}
+
 
 }
 
@@ -175,3 +203,4 @@ CItemBase* CItemInventory::SetItem(CItemBase* _item,CPlayer* _player)
 	//アドレスを渡す
 	return item;
 }
+

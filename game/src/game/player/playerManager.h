@@ -4,6 +4,8 @@
 #include "player.h"
 
 
+static const int PLAYER_NUM = 2;	//プレイヤーの数
+
 using namespace std;
 
 //エネミーマネージャーのクラス

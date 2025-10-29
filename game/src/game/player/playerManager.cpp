@@ -1,7 +1,6 @@
 #include "playerManager.h"
 #include "../../lib/input/controllerManager.h"
 
-static const int PLAYER_NUM = 2;	//プレイヤーの数
 
 enum tagModelName					//モデル一覧
 {
@@ -47,17 +46,18 @@ void CPlayerManager::Init(CAttackManager* _attackManager)
 		}
 	}
 
-	if (m_player.size() < PLAYER_NUM)
+	for (int i = 0; i < PLAYER_NUM; i++)
 	{
-		for (int i = 0; i < PLAYER_NUM; i++)
+		//コントローラーの名前を取得
+		tagPadName padName = CControllerManager::GetName(i);
+
+		//プレイヤーがいなかったら増やす
+		if (m_player.size() < PLAYER_NUM)
 		{
-			//コントローラーの名前を取得
-			tagPadName padName = CControllerManager::GetName(i);
-
 			m_player.push_back(new CPlayer);
-
-			m_player[i]->Init(_attackManager, padName);
 		}
+
+		m_player[i]->Init(_attackManager, padName);
 	}
 	
 }

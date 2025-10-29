@@ -64,7 +64,7 @@ void CBoxManager::Step(CItemManager* _itemManager)
 		//箱が壊れていたら消してそこにアイテムを出す
 		if ((*ite)->GetActive() == false)
 		{
-			_itemManager->SpawnItem((*ite)->GetPos());
+			_itemManager->SpawnItem((*ite)->GetPos(),ITEM_HARB_AMULENT);
 
 			//終了処理
 			(*ite)->Exit();
