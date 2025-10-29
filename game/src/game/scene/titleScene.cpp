@@ -70,7 +70,7 @@ void CTitleScene::Step()
 {
 	//スペースで終わる
 	if (CKeyInput::IsTrg(KEY_SELECT) ||
-		CControllerManager::SetId(PAD_PLAYER_1) == true)
+		CControllerManager::SetId(PAD_1) == true)
 	{
 		m_state = END;
 	}

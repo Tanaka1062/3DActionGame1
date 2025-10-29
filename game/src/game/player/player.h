@@ -3,7 +3,6 @@
 #include "../shot/shotManager.h"
 #include"../../lib/input/controllerManager.h"
 
-static const int PLAYER_NUM = 1;			//プレイヤーの数
 static const int ITEM_INVENTORY_MAX = 1;	//アイテムインベントリの最大数
 
 enum tagAttackId							//攻撃のID

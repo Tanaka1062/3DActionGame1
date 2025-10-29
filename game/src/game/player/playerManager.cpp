@@ -1,5 +1,15 @@
 #include "playerManager.h"
+#include "../../lib/input/controllerManager.h"
 
+static const int PLAYER_NUM = 2;	//プレイヤーの数
+
+enum tagModelName					//モデル一覧
+{
+	MODEL_PLAYER1,					//プレイヤー１のモデル
+	MODEL_PLAYER2,					//プレイヤー２のモデル
+
+	MODEL_NUM,						//モデルの数
+};
 
 static const char* MODEL_PATH[PAD_NUM] =
 { "data/model/player/playerTest4-1.mv1" ,
@@ -13,8 +23,7 @@ static const char FRAME_PATH[] =
 //------------------------
 CPlayerManager::CPlayerManager()
 {
-	//Init();
-
+	Init();
 }
 
 //------------------------
@@ -30,19 +39,26 @@ CPlayerManager::~CPlayerManager()
 //------------------------
 void CPlayerManager::Init(CAttackManager* _attackManager)
 {
-
-	for (int i = 0; i < PAD_NUM; i++)
+	if (m_modelHndl.size() < MODEL_NUM)
 	{
-		m_modelHndl[i] = -1;
-
-		m_player.push_back(new CPlayer);
-
-		//コントローラーの名前を取得
-		tagPadName padName = CControllerManager::GetName(i);
-
-		m_player[i]->Init(_attackManager,padName);
+		for (int i = 0; i < MODEL_NUM; i++)
+		{
+			m_modelHndl.push_back(-1);
+		}
 	}
 
+	if (m_player.size() < PLAYER_NUM)
+	{
+		for (int i = 0; i < PLAYER_NUM; i++)
+		{
+			//コントローラーの名前を取得
+			tagPadName padName = CControllerManager::GetName(i);
+
+			m_player.push_back(new CPlayer);
+
+			m_player[i]->Init(_attackManager, padName);
+		}
+	}
 	
 }
 
@@ -53,7 +69,7 @@ void CPlayerManager::Load()
 {
 
 	//モデルのロード
-	for (int i = 0; i < PAD_NUM; i++)
+	for (int i = 0; i < MODEL_NUM; i++)
 	{
 		if (m_modelHndl[i] == -1)
 		{
@@ -123,7 +139,7 @@ void CPlayerManager::Draw()
 //------------------------
 void CPlayerManager::Exit()
 {
-	for (int i = 0; i < PLAYER_NUM; i++)
+	for (int i = 0; i < m_player.size(); i++)
 	{
 		m_player[i]->Exit();
 
@@ -132,5 +148,11 @@ void CPlayerManager::Exit()
 	}
 	m_player.clear();
 
+	for (int i = 0; i < m_modelHndl.size(); i++)
+	{
+		m_modelHndl[i] = -1;
+	}
+
+	m_modelHndl.clear();
 }
 

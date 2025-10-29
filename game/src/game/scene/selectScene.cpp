@@ -73,7 +73,7 @@ void CSelectScene::Step()
 {
 	//スペースで終わる
 	if (CKeyInput::IsTrg(KEY_SELECT) ||
-		CControllerManager::SetId(PAD_PLAYER_2) == true)
+		CControllerManager::SetId(PAD_2) == true)
 	{
 		m_state = END;
 	}
@@ -90,3 +90,4 @@ void CSelectScene::Exit()
 
 	CSoundManager::StopAll();
 }
+

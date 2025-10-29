@@ -2,7 +2,6 @@
 #include <iostream>
 #include <vector>
 #include "player.h"
-#include "../../lib/input/controllerManager.h"
 
 
 using namespace std;
@@ -12,7 +11,7 @@ class CPlayerManager
 {
 private:
 	vector<CPlayer*> m_player;			//プレイヤーのクラス
-	int m_modelHndl[PAD_NUM];			//モデルのハンドル
+	vector <int> m_modelHndl;			//モデルのハンドル
 
 public:
 	//コンストラクタ・デストラクタ

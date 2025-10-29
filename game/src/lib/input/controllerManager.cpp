@@ -21,6 +21,8 @@ void CControllerManager::Init()
 	{
 		m_controller[i].Init();
 	}
+	//m_controller[PAD_1].SetId(DX_INPUT_PAD1);
+	//m_controller[PAD_2].SetId(DX_INPUT_PAD2);
 }
 
 //-------------------------------
@@ -39,12 +41,6 @@ void CControllerManager::Update()
 //-------------------------------
 bool CControllerManager::IsRep(tagControllerButton _button, tagPadName _padName)
 {
-	//コントローラーなしの場合プレイヤー１の情報を取得する
-	if (_padName == PAD_NONE)
-	{
-		return m_controller[PAD_PLAYER_1].IsRep(_button);
-	}
-
 	return m_controller[_padName].IsRep(_button);
 }
 
@@ -53,12 +49,6 @@ bool CControllerManager::IsRep(tagControllerButton _button, tagPadName _padName)
 //-------------------------------
 bool CControllerManager::IsTrg(tagControllerButton _button, tagPadName _padName)
 {
-	//コントローラーなしの場合プレイヤー１の情報を取得する
-	if (_padName == PAD_NONE)
-	{
-		return m_controller[PAD_PLAYER_1].IsTrg(_button);
-	}
-
 	return m_controller[_padName].IsTrg(_button);
 }
 
@@ -67,12 +57,6 @@ bool CControllerManager::IsTrg(tagControllerButton _button, tagPadName _padName)
 //-------------------------------
 float CControllerManager::GetLX(tagPadName _padName)
 {
-	//コントローラーなしの場合プレイヤー１の情報を取得する
-	if (_padName == PAD_NONE)
-	{
-		return m_controller[PAD_PLAYER_1].GetLX();
-	}
-
 	return m_controller[_padName].GetLX();
 }
 
@@ -81,12 +65,6 @@ float CControllerManager::GetLX(tagPadName _padName)
 //-------------------------------							 
 float CControllerManager::GetLY(tagPadName _padName)
 {
-	//コントローラーなしの場合プレイヤー１の情報を取得する
-	if (_padName == PAD_NONE)
-	{
-		return m_controller[PAD_PLAYER_1].GetLY();
-	}
-
 	return m_controller[_padName].GetLY();
 }
 
@@ -95,12 +73,6 @@ float CControllerManager::GetLY(tagPadName _padName)
 //-------------------------------
 float CControllerManager::GetRX(tagPadName _padName)
 {
-	//コントローラーなしの場合プレイヤー１の情報を取得する
-	if (_padName == PAD_NONE)
-	{
-		return m_controller[PAD_PLAYER_1].GetRX();
-	}
-
 	return m_controller[_padName].GetRX();
 }
 
@@ -109,12 +81,6 @@ float CControllerManager::GetRX(tagPadName _padName)
 //-------------------------------
 float CControllerManager::GetRY(tagPadName _padName)
 {
-	//コントローラーなしの場合プレイヤー１の情報を取得する
-	if (_padName == PAD_NONE)
-	{
-		return m_controller[PAD_PLAYER_1].GetRX();
-	}
-
 	return m_controller[_padName].GetRY();
 }
 
@@ -126,10 +92,10 @@ bool CControllerManager::SetId(tagPadName _padName)
 	//コントローラーのID一覧
 	int controllerNum[4] =
 	{
-		PAD_INPUT_1,
-		PAD_INPUT_2,
-		PAD_INPUT_3,
-		PAD_INPUT_4,
+		DX_INPUT_PAD1,
+		DX_INPUT_PAD2,
+		DX_INPUT_PAD3,
+		DX_INPUT_PAD4,
 	};
 
 	//Bを押したコントローラーを調べ、IDに設定する、
@@ -137,12 +103,10 @@ bool CControllerManager::SetId(tagPadName _padName)
 	{
 		//すでにIDが設定されている場合スキップする
 		if (m_controller[i].GetId() != -1)continue;
-		//同じIDが設定されている場合スキップする
-		if (m_controller[0].GetId() == m_controller[1].GetId())continue;
 
 		if (PAD_INPUT_2 == GetJoypadInputState(controllerNum[i]))
 		{
-			
+
 			m_controller[_padName].SetId(controllerNum[i]);
 			return true;
 		}
@@ -159,12 +123,13 @@ tagPadName CControllerManager::GetName(int _num)
 	switch (_num)
 	{
 	case 0:
-		return PAD_PLAYER_1;
+		return PAD_1;
 		break;
 	case 1:
-		return PAD_PLAYER_2;
+		return PAD_2;
 		break;
 	}
 
 	return PAD_NONE;
 }
+
