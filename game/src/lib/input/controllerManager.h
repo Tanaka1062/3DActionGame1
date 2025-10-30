@@ -43,7 +43,7 @@ public:
 	//コントローラーのIDを設定
 	//成功したらIDを設定しtrueを返す
 	//失敗したらIDを設定せずにfalseを返す
-	static bool SetId(tagPadName _padName);
+	static bool SetId();
 
 	//コントローラーの名前を取得
 	static tagPadName GetName(int _num);

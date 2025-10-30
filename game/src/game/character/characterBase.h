@@ -22,6 +22,7 @@ protected:
 		WAIT,							//待機
 		WALK,							//歩く
 		JUMP,							//ジャンプ
+		DODGEROLL,						//回避
 		ATTACK_IN,						//攻撃前
 		ATTACK,							//攻撃中
 		ATTACK_OUT,						//攻撃後
@@ -91,6 +92,9 @@ protected:
 
 	//ジャンプ
 	virtual void Jump();
+
+	//回避
+	virtual void Dodgeroll();
 
 	//攻撃前
 	virtual void AttackIn();

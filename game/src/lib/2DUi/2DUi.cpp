@@ -59,6 +59,7 @@ void C2DUi::Draw(float _size)
 
 	DrawRotaGraph((int)m_pos.x, (int)m_pos.y, _size, m_rot, m_hndl,TRUE);
 
+
 }
 
 //---------------------------

@@ -112,6 +112,12 @@
     <Filter Include="ソース ファイル\game\camera\mapCamera">
       <UniqueIdentifier>{e2ce5c7e-279e-45c6-a776-b43ae1df1890}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\game\ui">
+      <UniqueIdentifier>{54b55332-1df3-4934-99f5-e80fd7a1de6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\game\ui\hpber">
+      <UniqueIdentifier>{8a8f2346-eab0-4879-9c01-96af7be7ad06}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\number.cpp">
@@ -272,6 +278,12 @@
     </ClCompile>
     <ClCompile Include="src\game\weapon\weaponManager.cpp">
       <Filter>ソース ファイル\game\weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\ui\uiManager.cpp">
+      <Filter>ソース ファイル\game\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\ui\hpber\hpber.cpp">
+      <Filter>ソース ファイル\game\ui\hpber</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -439,6 +451,12 @@
     </ClInclude>
     <ClInclude Include="src\game\weapon\weaponManager.h">
       <Filter>ソース ファイル\game\weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\ui\uiManager.h">
+      <Filter>ソース ファイル\game\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\ui\hpber\hpber.h">
+      <Filter>ソース ファイル\game\ui\hpber</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

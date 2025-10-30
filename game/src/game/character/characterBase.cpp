@@ -54,6 +54,11 @@ void CCharacterBase::Step()
 		Jump();
 		break;
 
+		//‰ñ”ğ
+	case DODGEROLL:
+		Dodgeroll();
+		break;
+
 		//UŒ‚‘O
 	case ATTACK_IN:
 		AttackIn();
@@ -215,6 +220,14 @@ void CCharacterBase::Walk()
 //			ƒWƒƒƒ“ƒv
 //------------------------------
 void CCharacterBase::Jump()
+{
+
+}
+
+//------------------------------
+//			  ‰ñ”ğ
+//------------------------------
+void CCharacterBase::Dodgeroll()
 {
 
 }

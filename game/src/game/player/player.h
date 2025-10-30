@@ -28,6 +28,7 @@ private:
 	bool m_isPickUpItem;			//アイテムを取ろうとしているかフラグ		
 	bool m_isItemUse;				//アイテム使用フラグ
 	bool m_isItem;					//アイテムを持っているフラグ
+	bool m_isDodgeroll;				//回避しているかフラグ
 	int m_attackId;					//攻撃のID
 	int m_skillId;					//スキルのID
 	tagPadName m_padName;			//コントローラーの名前
@@ -62,6 +63,9 @@ public:
 	//アイテムを持っているかを設定
 	void SetIsItem(bool _isItem) { m_isItem = _isItem; }
 
+	//回避しているかを取得
+	bool GetIsDodgeroll() { return m_isDodgeroll; }
+
 	//攻撃のID設定
 	void SetAttackId(tagAttackId _id) { m_attackId = _id; }
 
@@ -79,6 +83,9 @@ public:
 	//体力を増やす
 	void AddHp(int _addNum) { m_hp += _addNum; }
 
+	//体力の最大値を取得
+	int GetHpMax() { return m_maxHp; }
+
 private:
 	//待機状態処理
 	void Wait();
@@ -88,6 +95,9 @@ private:
 
 	//ジャンプ状態処理
 	void Jump();
+
+	//回避
+	void Dodgeroll();
 
 	//攻撃前処理
 	void AttackIn();
@@ -133,6 +143,9 @@ private:
 
 	//攻撃を呼び出す処理
 	void RequestAttack();
+
+	//回避に移行する処理
+	void RequestDodgeroll();
 
 	//アイテム処理
 	void Item();

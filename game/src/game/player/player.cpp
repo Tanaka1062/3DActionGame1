@@ -16,6 +16,7 @@ static const int MAX_HP = 100;						//体力
 static const int ATK = 20;							//攻撃力
 static const float MOVE_SPEED = 1.0f;				//移動スピード
 static const float RADIUS = 10.0f;					//半径
+static const float DODGEROLL_SPEED = 1.5f;			//回避スピード
 //----------------------------------------------
 
 //攻撃関連---------------------------
@@ -89,6 +90,7 @@ void CPlayer::Init(CAttackManager* _attackManager, tagPadName _padName)
 	m_isItemUse = false;
 	m_isPickUpItem = false;
 	m_isItem = false;
+	m_isDodgeroll = false;
 	m_attackId = -1;
 	m_skillId = -1;
 	m_padName = _padName;
@@ -113,6 +115,9 @@ void CPlayer::Step(float _rotY)
 
 	//移動処理
 	Move(_rotY);
+
+	//回避移行処理
+	RequestDodgeroll();
 
 	//アイテム使用処理
 	Item();
@@ -224,6 +229,39 @@ void CPlayer::Walk()
 void CPlayer::Jump()
 {
 
+}
+
+//-----------------------
+//		  回避
+//-----------------------
+void CPlayer::Dodgeroll()
+{
+	//アイテム使用前のアニメーション
+	if (m_animData.m_id != ANIMID_DODGEROLL)
+	{
+		Request(ANIMID_DODGEROLL, 1.0f);
+	}
+
+	//カメラの角度がオールゼロの時に進む速度
+	VECTOR defaultDir = { 0.0f,0.0f,-DODGEROLL_SPEED };
+	//上記を行列に変換
+	MATRIX dir = CMyMath::GetTranslateMatrix(defaultDir);
+	//Y軸回転行列
+	MATRIX mRotY = CMyMath::GetYawMatrix(m_rot.y);
+	//行列の合成
+	MATRIX res = CMyMath::MatMult(mRotY, dir);
+
+	//移動をスピードに代入
+	m_speed.x = res.m[0][3];
+	m_speed.y = res.m[1][3];
+	m_speed.z = res.m[2][3];
+
+	//アニメーションが終わったらアイテム使用中に移行
+	if (GetAnimEnd() == true)
+	{
+		m_isDodgeroll = false;
+		m_state = WAIT;
+	}
 }
 
 //-----------------------
@@ -665,6 +703,31 @@ void CPlayer::RequestAttack()
 
 			m_state = ATTACK_CHARGE_IN;
 		}
+	}
+
+}
+
+//-----------------------
+//	回避に移行する処理
+//-----------------------
+void CPlayer::RequestDodgeroll()
+{
+	//待機状態と歩いてる状態以外は処理をしない
+	switch (m_state)
+	{
+	case WAIT:
+	case WALK:
+		break;
+	default:
+		return;
+	}
+
+	//攻撃ボタンを押したか
+	if (CheckHitKey(KEY_INPUT_L) != 0 ||
+		CControllerManager::IsTrg(BUTTON_RB, m_padName))
+	{
+		m_isDodgeroll = true;
+		m_state = DODGEROLL;
 	}
 
 }

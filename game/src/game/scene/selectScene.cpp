@@ -73,7 +73,7 @@ void CSelectScene::Step()
 {
 	//スペースで終わる
 	if (CKeyInput::IsTrg(KEY_SELECT) ||
-		CControllerManager::SetId(PAD_2) == true)
+		CControllerManager::SetId() == true)
 	{
 		m_state = END;
 	}

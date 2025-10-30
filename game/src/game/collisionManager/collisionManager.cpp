@@ -147,6 +147,9 @@ void CCollisionManager::CheckHitPlayerAttackToPlayer(CAttackManager& _attackMana
 			//プレイヤーが死んでいたらスキップ
 			if (player->GetActive() == false)continue;
 
+			//プレイヤーが回避中ならスキップ
+			if (player->GetIsDodgeroll() == true)continue;
+
 			//プレイヤーと攻撃のタイプが同じ場合スキップ
 			if (player->GetAttackType() == attack->GetAttackType())continue;
 

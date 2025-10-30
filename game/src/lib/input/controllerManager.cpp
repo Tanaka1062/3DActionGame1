@@ -87,10 +87,10 @@ float CControllerManager::GetRY(tagPadName _padName)
 //-------------------------------
 //	  コントローラーのIDを設定
 //-------------------------------
-bool CControllerManager::SetId(tagPadName _padName)
+bool CControllerManager::SetId()
 {
 	//コントローラーのID一覧
-	int controllerNum[4] =
+	int controllerId[4] =
 	{
 		DX_INPUT_PAD1,
 		DX_INPUT_PAD2,
@@ -99,16 +99,20 @@ bool CControllerManager::SetId(tagPadName _padName)
 	};
 
 	//Bを押したコントローラーを調べ、IDに設定する、
-	for (int i = 0; i < 4; i++)
+	for (int controllerId_i = 0; controllerId_i < 4; controllerId_i++)
 	{
-		//すでにIDが設定されている場合スキップする
-		if (m_controller[i].GetId() != -1)continue;
-
-		if (PAD_INPUT_2 == GetJoypadInputState(controllerNum[i]))
+		for (int controller_j = 0; controller_j < PAD_NUM; controller_j++)
 		{
 
-			m_controller[_padName].SetId(controllerNum[i]);
-			return true;
+			//すでにIDが設定されている場合スキップする
+			if (m_controller[controllerId_i].GetId() != -1)continue;
+	
+			if (PAD_INPUT_2 == GetJoypadInputState(controllerId[controllerId_i]))
+			{
+	
+				m_controller[controllerId_i].SetId(controllerId[controllerId_i]);
+				return true;
+			}
 		}
 	}
 
