@@ -20,7 +20,7 @@ void CAttackBase::Init()
 	m_numCount = 0;
 	m_nextTime = 0;
 	m_timeCount = 0;
-	m_attackType = ATTACK_TYPE_PLAYER;
+	m_attackType = ATTACK_TYPE_NONE;
 }
 
 //----------------------

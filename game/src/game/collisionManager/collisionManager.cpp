@@ -9,12 +9,12 @@
 //		敵の視界とプレイヤーの当たり判定
 //----------------------------------------------
 void CCollisionManager::CheckHitEnemyFOVToPlayer(CEnemyManager& _enemyManager,
-	CPlayerManager& _player)
+	CPlayerManager& _playerManager)
 {
-	for (int i = 0; i < _player.GetPlayerNum(); i++)
+	for (int i = 0; i < _playerManager.GetPlayerNum(); i++)
 	{
 		//プレイヤーのクラスを取得
-		CPlayer* player = _player.GetPlayer(i);
+		CPlayer* player = _playerManager.GetPlayer(i);
 
 		//プレイヤーが死んでいたら処理をしない
 		if (player->GetActive() == false)continue;
@@ -43,13 +43,13 @@ void CCollisionManager::CheckHitEnemyFOVToPlayer(CEnemyManager& _enemyManager,
 //	  敵の攻撃範囲とプレイヤーの当たり判定
 //----------------------------------------------
 void CCollisionManager::CheckHitEnemyAttackToPlayer(CEnemyManager& _enemyManager,
-	CPlayerManager& _player)
+	CPlayerManager& _playerManager)
 {
-	for (int i = 0; i < _player.GetPlayerNum(); i++)
+	for (int i = 0; i < _playerManager.GetPlayerNum(); i++)
 	{
 
 		//プレイヤーのクラスを取得
-		CPlayer* player = _player.GetPlayer(i);
+		CPlayer* player = _playerManager.GetPlayer(i);
 
 		//プレイヤーが死んでいたら処理をしない
 		if (player->GetActive() == false)continue;
@@ -118,6 +118,63 @@ void CCollisionManager::CheckHitEnemyAttackToPlayer(CEnemyManager& _enemyManager
 }
 
 //----------------------------------------------
+//	プレイヤーの攻撃とプレイヤーの当たり判定
+//----------------------------------------------
+void CCollisionManager::CheckHitPlayerAttackToPlayer(CAttackManager& _attackManager,
+	CPlayerManager& _playerManager)
+{
+	for (int attack_i = 0; attack_i < _attackManager.GetNum(); attack_i++)
+	{
+		//攻撃のクラスを取得
+		CAttackBase* attack = _attackManager.GetAttack(attack_i);
+
+		//プレイヤー以外の攻撃はスキップ
+		switch (attack->GetAttackType())
+		{
+		case ATTACK_TYPE_PLAYER1:
+		case ATTACK_TYPE_PLAYER2:
+			break;
+		default:
+			continue;
+			break;
+		}
+
+		for (int player_j = 0; player_j < _playerManager.GetPlayerNum(); player_j++)
+		{
+			//プレイヤーのクラスを取得
+			CPlayer* player = _playerManager.GetPlayer(player_j);
+
+			//プレイヤーが死んでいたらスキップ
+			if (player->GetActive() == false)continue;
+
+			//プレイヤーと攻撃のタイプが同じ場合スキップ
+			if (player->GetAttackType() == attack->GetAttackType())continue;
+
+			//プレイヤーの攻撃がプレイヤーに当たっているか
+			if (CCollision::CheckHitSphereToSphere(attack->GetPos(), attack->GetRad(),
+				player->GetCenter(), player->GetRad()) == true &&
+				attack->GetIsAttack() == true)
+			{
+				//呼び出すエフェクトのID
+				int effectId = CEffectData::GetId(EFFECT_ATTACK);
+
+				//エフェクトを呼び出す
+				CEffekseerCtrl::Request(effectId, player->GetCenter(), false);
+
+				//ノックバックの方向
+				float rot = atan2f(attack->GetPos().x - player->GetCenter().x,
+					attack->GetPos().z - player->GetCenter().z);
+
+				//敵にプレイヤーの攻撃力分ダメージ
+				player->HitAttack(attack->GetAtk(), rot);
+			}
+
+		}
+	}
+
+}
+
+//----------------------------------------------
 //		プレイヤーの攻撃と敵の当たり判定
 //----------------------------------------------
 void CCollisionManager::CheckHitPlayerAttackToEnemy(CAttackManager& _attackManager,
@@ -129,7 +186,7 @@ void CCollisionManager::CheckHitPlayerAttackToEnemy(CAttackManager& _attackManag
 		CAttackBase* attack = _attackManager.GetAttack(i);
 		
 		//プレイヤー以外の攻撃はスキップ
-		if (attack->GetAttackType() != ATTACK_TYPE_PLAYER)continue;
+		if (attack->GetAttackType() != ATTACK_TYPE_PLAYER1)continue;
 
 		for (int j = 0; j < _enemyManager.GetEnemyNum(); j++)
 		{
@@ -166,13 +223,13 @@ void CCollisionManager::CheckHitPlayerAttackToEnemy(CAttackManager& _attackManag
 //			敵とプレイヤーの当たり判定
 //----------------------------------------------
 void CCollisionManager::CheckHitEnemyToPlayer(CEnemyManager& _enemyManager,
-	CPlayerManager& _player)
+	CPlayerManager& _playerManager)
 {
 
-	for (int i = 0; i < _player.GetPlayerNum(); i++)
+	for (int i = 0; i < _playerManager.GetPlayerNum(); i++)
 	{
 		//プレイヤーのクラスを取得
-		CPlayer* player = _player.GetPlayer(i);
+		CPlayer* player = _playerManager.GetPlayer(i);
 
 		//プレイヤーが死んでいたら処理をしない
 		if (player->GetActive() == false)continue;
@@ -305,6 +362,80 @@ void CCollisionManager::CheckHitEnemyToEnemy(CEnemyManager& _enemyManager)
 }
 
 //----------------------------------------------
+//		プレイヤーとプレイヤーの当たり判定
+//----------------------------------------------
+void CCollisionManager::CheckHitPlayerToPlayer(CPlayerManager& _playerManager)
+{
+	for (int player1_i = 0; player1_i < _playerManager.GetPlayerNum(); player1_i++)
+	{
+		//プレイヤー1のクラスを取得
+		CPlayer* player1 = _playerManager.GetPlayer(player1_i);
+
+		//プレイヤー1が死んでいたら処理をしない
+		if (player1->GetActive() == false)continue;
+
+		for (int player2_j = 0; player2_j < _playerManager.GetPlayerNum(); player2_j++)
+		{
+			//同じプレイヤー同士では処理をしない
+			if (player1_i == player2_j)continue;
+
+			//敵のクラスを取得
+			CPlayer* player2 = _playerManager.GetPlayer(player2_j);
+
+			//敵が死んでいたら処理をしない
+			if (player2->GetActive() == false)continue;
+			
+			//押し戻し処理-------------------------------------------------
+
+			//本来離れてほしい距離を求める
+			float len1 = player1->GetRad() + player2->GetRad();
+
+			//実際に離れている距離を求める
+			VECTOR player1Pos = player1->GetPos();
+			player1Pos.y = 0.0f;
+			VECTOR player2Pos = player2->GetPos();
+			player2Pos.y = 0.0f;
+
+			VECTOR dir = VSub(player2Pos, player1Pos);
+			float len2 = VSize(dir);
+
+			//めり込んでいたら
+			if (len1 > len2)
+			{
+				//めり込み量を求める
+				float len3 = len1 - len2;
+
+				len3 = len3 * 0.5f;
+
+				//移動させるベクトルを求める
+
+				//方向ベクトルなので正規化する
+				dir = VNorm(dir);
+
+				dir = VScale(dir, len3);
+
+				player2Pos = VAdd(player2->GetPos(), dir);
+
+				player2->SetPos(VAdd(player2->GetPos(), dir));
+
+
+				VECTOR dir2 = VSub(player1Pos, player2Pos);
+				dir2 = VNorm(dir2);
+				dir2 = VScale(dir2, len3);
+
+				player1Pos = VAdd(player1->GetPos(), dir2);
+
+				player1->SetPos(VAdd(player1->GetPos(), dir2));
+			}
+
+			//-------------------------------------------------------------
+
+		}
+	}
+
+}
+
+//----------------------------------------------
 //				弾と敵の当たり判定
 //----------------------------------------------
 void CCollisionManager::CheckHitShotToEnemy(CShotManager& _shotManager,
@@ -353,12 +484,12 @@ void CCollisionManager::CheckHitShotToEnemy(CShotManager& _shotManager,
 //----------------------------------------------
 //		  プレイヤーとマップの当たり判定
 //----------------------------------------------
-void CCollisionManager::CheckHitPlayerToMap(CPlayerManager& _player,CMap& _map)
+void CCollisionManager::CheckHitPlayerToMap(CPlayerManager& _playerManager,CMap& _map)
 {
-	for (int i = 0; i < _player.GetPlayerNum(); i++)
+	for (int i = 0; i < _playerManager.GetPlayerNum(); i++)
 	{
 		//プレイヤーのクラスを取得
-		CPlayer* player = _player.GetPlayer(i);
+		CPlayer* player = _playerManager.GetPlayer(i);
 
 		//プレイヤーが死んでいたらスキップ
 		if (player->GetActive() == false)continue;
@@ -456,12 +587,12 @@ void CCollisionManager::CheckHitEnemyToMap(CEnemyManager& _enemy, CMap& _map)
 //		アイテムとプレイヤーの当たり判定
 //----------------------------------------------
 void CCollisionManager::CheckHitItemToPlayer(CItemManager& _item,
-	CItemInventory& _itemInventory, CPlayerManager& _player)
+	CItemInventory& _itemInventory, CPlayerManager& _playerManager)
 {
-	for (int i = 0; i < _player.GetPlayerNum(); i++)
+	for (int i = 0; i < _playerManager.GetPlayerNum(); i++)
 	{
 		//プレイヤーのクラスを取得
-		CPlayer* player = _player.GetPlayer(i);
+		CPlayer* player = _playerManager.GetPlayer(i);
 
 		//プレイヤーが死んでいたら処理をしない
 		if (player->GetActive() == false)return;
@@ -528,13 +659,13 @@ void CCollisionManager::CheckHitAttackToBox(CAttackManager& _attack, CBoxManager
 //----------------------------------------------
 //			プレイヤーと箱の当たり判定
 //----------------------------------------------
-void CCollisionManager::CheckHitPlayerToBox(CPlayerManager& _player, CBoxManager& _box)
+void CCollisionManager::CheckHitPlayerToBox(CPlayerManager& _playerManager, CBoxManager& _box)
 {
 
-	for (int i = 0; i < _player.GetPlayerNum(); i++)
+	for (int i = 0; i < _playerManager.GetPlayerNum(); i++)
 	{
 		//プレイヤーのクラスを取得
-		CPlayer* player = _player.GetPlayer(i);
+		CPlayer* player = _playerManager.GetPlayer(i);
 
 		//プレイヤーが死んでいたら処理をしない
 		if (player->GetActive() == false)return;

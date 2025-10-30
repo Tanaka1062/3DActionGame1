@@ -3,10 +3,13 @@
 #pragma once
 #include "../../lib/model/3DObject.h"
 
+//攻撃のタイプ
 enum tagAttackType
 {
-	ATTACK_TYPE_PLAYER,
-	ATTACK_TYPE_ENEMY,
+	ATTACK_TYPE_NONE = -1,	//攻撃タイプ無し			
+	ATTACK_TYPE_PLAYER1,	//攻撃タイプ、プレイヤー１
+	ATTACK_TYPE_PLAYER2,	//攻撃タイプ、プレイヤー２
+	ATTACK_TYPE_ENEMY,		//攻撃タイプ、敵
 
 };
 

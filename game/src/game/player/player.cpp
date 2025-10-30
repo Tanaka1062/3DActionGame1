@@ -53,9 +53,6 @@ enum tagAnim {
 //---------------------------------------------
 
 
-static const char POS_PATH[] =
-{ "data/model/map/TestMap4FramePos.mv1" };			//ロードするファイル名
-
 //---------------------------------------------------------
 
 //-----------------------
@@ -84,20 +81,18 @@ void CPlayer::Init(CAttackManager* _attackManager, tagPadName _padName)
 	CCharacterBase::Init(_attackManager);
 	m_attack.Init(ATTACK_SIZE,ATTACK_LENGTH);
 
-	//フレームのハンドルをロード
-	int frameHndl = MV1LoadModel(POS_PATH);
-
-	m_pos = MV1GetFramePosition(frameHndl, 4);
-
+	m_pos = ZERO;
 	m_rad = RADIUS;
 	m_maxHp = MAX_HP;
 	m_hp = m_maxHp;
 	m_atk = ATK;
 	m_isItemUse = false;
 	m_isPickUpItem = false;
+	m_isItem = false;
 	m_attackId = -1;
 	m_skillId = -1;
 	m_padName = _padName;
+	m_attackType = ATTACK_TYPE_NONE;
 }
 
 //-----------------------
@@ -282,7 +277,7 @@ void CPlayer::Attack()
 
 			attackPos = VAdd(attackPos, m_pos);
 
-			m_attackManager->Request(attackPos,ATTACK_SIZE,m_atk,ATTACK_TYPE_PLAYER);
+			m_attackManager->Request(attackPos,ATTACK_SIZE,m_atk, m_attackType);
 		}
 		break;
 	case ATTACK_ID_B:
@@ -292,7 +287,7 @@ void CPlayer::Attack()
 			Request(ANIMID_ATTACKB, 1.0f);
 
 			//攻撃の呼び出し
-			m_attackManager->Request(GetCenter(), ATTACKB_SIZE, ATTACKB_ATK, ATTACK_TYPE_PLAYER);
+			m_attackManager->Request(GetCenter(), ATTACKB_SIZE, ATTACKB_ATK, m_attackType);
 		}
 		break;
 	}
@@ -415,7 +410,7 @@ void CPlayer::Skill()
 			Request(ANIMID_ATTACKB, 1.0f);
 
 			//攻撃の呼び出し
-			m_attackManager->Request(GetCenter(), ATTACKB_SIZE, ATTACKB_ATK, ATTACK_TYPE_PLAYER);
+			m_attackManager->Request(GetCenter(), ATTACKB_SIZE, ATTACKB_ATK, m_attackType);
 		}
 		break;
 	}
@@ -660,7 +655,7 @@ void CPlayer::RequestAttack()
 
 	//攻撃ボタンを押したか
 	if (CheckHitKey(KEY_INPUT_U) != 0 ||
-		CControllerManager::IsTrg(BUTTON_Y),m_padName)
+		CControllerManager::IsTrg(BUTTON_Y,m_padName))
 	{
 
 		//攻撃してない時に攻撃前に移行する
@@ -668,7 +663,6 @@ void CPlayer::RequestAttack()
 			m_skillId != -1)
 		{
 
-			//m_attackId = ATTACK_ID_B;
 			m_state = ATTACK_CHARGE_IN;
 		}
 	}
@@ -680,6 +674,8 @@ void CPlayer::RequestAttack()
 //-----------------------
 void CPlayer::Item()
 {
+	//アイテムを持っていなかったら処理をしない
+	if (m_isItem == false)return;
 
 	//待機状態と歩いてる状態以外は処理をしない
 	switch (m_state)

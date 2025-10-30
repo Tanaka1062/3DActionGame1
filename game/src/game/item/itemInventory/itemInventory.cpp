@@ -80,6 +80,17 @@ void CItemInventory::Step(CShotManager* _shot)
 //------------------
 void CItemInventory::Update()
 {
+	for (int i = 0; i < PLAYER_NUM; i++)
+	{
+		if (m_useItem[i] != nullptr)
+		{
+			m_player[i]->SetIsItem(true);
+		}
+		else
+		{
+			m_player[i]->SetIsItem(false);
+		}
+	}
 
 }
 
@@ -148,7 +159,7 @@ void CItemInventory::Draw()
 		switch (m_skillItem[1]->GetName())
 		{
 		case ITEM_HARB_AMULENT:
-			DrawFormatString(WINDOW_SIZE_X - 128, 228, GetColor(255, 0, 0), "回転切りができる", m_useItem[1]->GetUseCount());
+			DrawFormatString(WINDOW_SIZE_X - 128, 228, GetColor(255, 0, 0), "回転切りができる", m_skillItem[1]->GetUseCount());
 			break;
 		}
 	}
@@ -176,7 +187,7 @@ CItemBase* CItemInventory::SetItem(CItemBase* _item,CPlayer* _player)
 			item = m_skillItem[padName];
 		}
 
-		//インベントリにアイテムのアドレスを取得
+		//インベントリにスキルのアドレスを取得
 		m_skillItem[padName] = _item;
 
 		//プレイヤーのアドレスを設定

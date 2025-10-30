@@ -27,9 +27,11 @@ class CPlayer:public CCharacterBase
 private:
 	bool m_isPickUpItem;			//アイテムを取ろうとしているかフラグ		
 	bool m_isItemUse;				//アイテム使用フラグ
+	bool m_isItem;					//アイテムを持っているフラグ
 	int m_attackId;					//攻撃のID
 	int m_skillId;					//スキルのID
 	tagPadName m_padName;			//コントローラーの名前
+	tagAttackType m_attackType;		//攻撃のタイプ
 
 public:
 	//コンストラクタ・デストラクタ
@@ -57,6 +59,9 @@ public:
 	//アイテム使用しているかを取得
 	bool GetIsItemUse() { return m_isItemUse; }
 	
+	//アイテムを持っているかを設定
+	void SetIsItem(bool _isItem) { m_isItem = _isItem; }
+
 	//攻撃のID設定
 	void SetAttackId(tagAttackId _id) { m_attackId = _id; }
 
@@ -65,6 +70,11 @@ public:
 
 	//コントローラーの名前を取得
 	tagPadName GetPadName() { return m_padName; }
+
+	//攻撃のタイプを取得
+	tagAttackType GetAttackType() { return m_attackType; }
+	//攻撃のタイプを設定
+	void SetAttackType(tagAttackType _attackType) { m_attackType = _attackType; }
 
 	//体力を増やす
 	void AddHp(int _addNum) { m_hp += _addNum; }

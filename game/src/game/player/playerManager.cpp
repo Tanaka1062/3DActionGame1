@@ -58,6 +58,17 @@ void CPlayerManager::Init(CAttackManager* _attackManager)
 		}
 
 		m_player[i]->Init(_attackManager, padName);
+
+		//UŒ‚‚Ìƒ^ƒCƒv‚ðÝ’è
+		switch (i)
+		{
+		case 0:
+			m_player[i]->SetAttackType(ATTACK_TYPE_PLAYER1);
+			break;
+		case 1:
+			m_player[i]->SetAttackType(ATTACK_TYPE_PLAYER2);
+			break;
+		}
 	}
 	
 }

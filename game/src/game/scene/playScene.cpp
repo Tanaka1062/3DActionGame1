@@ -107,8 +107,10 @@ void CPlayScene::Step()
 	CCollisionManager::CheckHitEnemyFOVToPlayer(m_enemy, m_playerManager);
 	CCollisionManager::CheckHitEnemyAttackToPlayer(m_enemy, m_playerManager);
 	CCollisionManager::CheckHitPlayerAttackToEnemy(m_attackManager, m_enemy);
+	CCollisionManager::CheckHitPlayerAttackToPlayer(m_attackManager, m_playerManager);
 	CCollisionManager::CheckHitEnemyToPlayer(m_enemy, m_playerManager);
 	CCollisionManager::CheckHitEnemyToEnemy(m_enemy);
+	CCollisionManager::CheckHitPlayerToPlayer(m_playerManager);
 	CCollisionManager::CheckHitShotToEnemy(m_shot, m_enemy);
 	CCollisionManager::CheckHitPlayerToMap(m_playerManager, m_ground);
 	CCollisionManager::CheckHitEnemyToMap(m_enemy, m_ground);
