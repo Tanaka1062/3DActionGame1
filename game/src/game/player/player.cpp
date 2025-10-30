@@ -12,7 +12,7 @@
 static const char MODEL_PATH[] =
 { "data/model/player/playerTest4-2.mv1" };			//ロードするファイル名
 static const VECTOR INIT_POS = { 0.0f,1.0f,0.0f };	//初期座標
-static const int MAX_HP = 100;						//体力
+static const int MAX_HP = 300;						//体力
 static const int ATK = 20;							//攻撃力
 static const float MOVE_SPEED = 1.0f;				//移動スピード
 static const float RADIUS = 10.0f;					//半径
@@ -23,7 +23,7 @@ static const float DODGEROLL_SPEED = 1.5f;			//回避スピード
 static const float ATTACK_SIZE = 12.0f;				//攻撃範囲
 static const float ATTACK_LENGTH = 15.0f;			//攻撃の長さ
 static const float ATTACKB_SIZE = 25.0f;			//攻撃B範囲
-static const int ATTACKB_ATK = 50;					//攻撃Bの攻撃力
+static const int ATTACKB_ATK = 100;					//攻撃Bの攻撃力
 
 //-----------------------------------
 

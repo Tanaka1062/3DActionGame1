@@ -94,7 +94,6 @@ int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		//Fps‚Ì•\¦
 		CFps::Print();
 
-
 		ScreenFlip();		// •`‰æØ‚è‘Ö‚¦
 
 	}

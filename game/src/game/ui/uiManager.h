@@ -1,5 +1,7 @@
 #pragma once
 #include "../../lib/2DUi/2DUi.h"
+#include "hpber/hpbarManager.h"
+#include "../player/playerManager.h"
 #include <iostream>
 #include <vector>
 
@@ -8,13 +10,14 @@ using namespace std;
 class CUiManager
 {
 private:
-	vector<C2DUi*> m_ui;		//UI
+	vector<C2DUi*> m_ui;				//UI
+	CHpbarManager m_hpbarManager;		//HPバーのマネージャー
 public:
 	//コンストラクタ・デストラクタ
 	CUiManager();
 	~CUiManager();
 
-	void Init();
+	void Init(CPlayerManager* _playerManager = nullptr);
 	//ロード
 	void Load();
 	//毎フレームする処理

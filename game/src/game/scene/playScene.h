@@ -14,6 +14,7 @@
 #include "../attack/attackManager.h"
 #include "../box/boxManager.h"
 #include "../player/playerManager.h"
+#include "../ui/uiManager.h"
 
 using namespace std;
 
@@ -34,6 +35,7 @@ private:
 	CWeaponManager m_weaponManager;		//武器のマネージャークラス
 	CAttackManager m_attackManager;		//攻撃のマネージャークラス
 	CBoxManager m_box;					//箱
+	CUiManager m_uiManager;				//uiのマネージャークラス
 
 public:
 
