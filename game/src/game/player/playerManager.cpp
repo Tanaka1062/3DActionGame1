@@ -11,8 +11,8 @@ enum tagModelName					//モデル一覧
 };
 
 static const char* MODEL_PATH[PAD_NUM] =
-{ "data/model/player/playerTest4-1.mv1" ,
-  "data/model/player/playerTest4-2.mv1" ,};			//ロードするファイル名
+{ "data/model/player/playerTest5-1.mv1" ,
+  "data/model/player/playerTest5-2.mv1" ,};			//ロードするファイル名
 
 static const char FRAME_PATH[] =
 { "data/model/map/TestMap4FramePos.mv1" };			//ロードするファイル名

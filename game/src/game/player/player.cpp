@@ -29,26 +29,44 @@ static const int ATTACKB_ATK = 100;					//攻撃Bの攻撃力
 
 //アニメーション一覧---------------------------
 enum tagAnim {
-	ANIMID_ATTACK,				//攻撃中アニメーション
-	ANIMID_ATTACKB,				//攻撃2中アニメーション
-	ANIMID_ATTACKB_IN,			//攻撃2前アニメーション
-	ANIMID_ATTACKB_OUT,			//攻撃2後アニメーション
-	ANIMID_ATTACK_IN,			//攻撃前のアニメーション
-	ANIMID_ATTACK_OUT,			//攻撃後のアニメーション
-	ANIMID_ATTACKB_CHARGE,		//攻撃2のチャージ中アニメーション
-	ANIMID_ATTACKB_CHARGE_IN,	//攻撃2のチャージ前アニメーション
-	ANIMID_DEFAULT,				//デフォルトのアニメーション
-	ANIMID_DIE,					//死亡時のアニメーション
-	ANIMID_DODGEROLL,			//回避のアニメーション
-	ANIMID_GUARD,				//ガード中アニメーション
-	ANIMID_GUARD_IN,			//ガード前アニメーション
-	ANIMID_GUARD_OUT,			//ガード後アニメーション
-	ANIMID_HIT,					//被弾のアニメーション
-	ANIMID_ITEM_USE,			//アイテムを使用中のアニメーション
-	ANIMID_ITEM_USE_IN,			//アイテムを使用する前のアニメーション
-	ANIMID_ITEM_USE_OUT,		//アイテムを使用した後のアニメーション
-	ANIMID_WAIT,				//待機状態のアニメーション
-	ANIMID_WALK,				//歩きのアニメーション
+	ANIMID_ATTACKA1,				//攻撃A1中アニメーション
+	ANIMID_ATTACKA1_IN,				//攻撃A1前アニメーション
+	ANIMID_ATTACKA1_OUT,			//攻撃A1後アニメーション
+	ANIMID_ATTACKA2,				//攻撃A2中アニメーション
+	ANIMID_ATTACKA2_IN,				//攻撃A2前アニメーション
+	ANIMID_ATTACKA2_OUT,			//攻撃A2後アニメーション
+	ANIMID_ATTACKA3,				//攻撃A3中アニメーション
+	ANIMID_ATTACKA3_IN,				//攻撃A3前アニメーション
+	ANIMID_ATTACKA3_OUT,			//攻撃A3後アニメーション
+	ANIMID_ATTACKB1,				//攻撃B1中アニメーション
+	ANIMID_ATTACKB1_IN,				//攻撃B1前アニメーション
+	ANIMID_ATTACKB1_OUT,			//攻撃B1後アニメーション
+	ANIMID_ATTACKB2,				//攻撃B2中アニメーション
+	ANIMID_ATTACKB2_IN,				//攻撃B2前アニメーション
+	ANIMID_ATTACKB2_OUT,			//攻撃B2後アニメーション
+	ANIMID_ATTACKB3,				//攻撃B3中アニメーション
+	ANIMID_ATTACKB3_IN,				//攻撃B3前アニメーション
+	ANIMID_ATTACKB3_OUT,			//攻撃B3後アニメーション
+	ANIMID_CHARGE,					//チャージ中のアニメーション
+	ANIMID_CHARGE_IN,				//チャージ前のアニメーション
+	ANIMID_DEFAULT,					//デフォルトのアニメーション
+	ANIMID_DIE,						//死亡時のアニメーション
+	ANIMID_DODGEROLL,				//回避のアニメーション
+	ANIMID_GUARD,					//ガード中アニメーション
+	ANIMID_GUARD_IN,				//ガード前アニメーション
+	ANIMID_GUARD_OUT,				//ガード後アニメーション
+	ANIMID_HIT,						//被弾のアニメーション
+	ANIMID_ITEM_USE,				//アイテムを使用中のアニメーション
+	ANIMID_ITEM_USE_IN,				//アイテムを使用する前のアニメーション
+	ANIMID_ITEM_USE_OUT,			//アイテムを使用した後のアニメーション
+	ANIMID_SKILLA,					//スキルA使用中のアニメーション
+	ANIMID_SKILLA_IN,				//スキルA使用前のアニメーション
+	ANIMID_SKILLA_OUT,				//スキルA使用後のアニメーション
+	ANIMID_SKILLB,					//スキルB使用中のアニメーション
+	ANIMID_SKILLB_IN,				//スキルB使用前のアニメーション
+	ANIMID_SKILLB_OUT,				//スキルB使用後のアニメーション
+	ANIMID_WAIT,					//待機状態のアニメーション
+	ANIMID_WALK,					//歩きのアニメーション
 
 };
 //---------------------------------------------
