@@ -71,12 +71,6 @@ enum tagAnim {
 
 };
 
-//攻撃の名前
-enum tagAttackName
-{
-	ATTACK_A
-};
-
 //---------------------------------------------
 
 
@@ -117,10 +111,12 @@ void CPlayer::Init(CAttackManager* _attackManager, tagPadName _padName)
 	m_isPickUpItem = false;
 	m_isItem = false;
 	m_isDodgeroll = false;
-	m_attackId = -1;
-	m_skillId = -1;
+	m_attackId = ATTACK_ID_A;
+	m_attackNum = 0;
+	m_skillId = SKILL_ID_A;
 	m_padName = _padName;
 	m_attackType = ATTACK_TYPE_NONE;
+	m_weaponId = WEAPON_ID_HAND;
 }
 
 //-----------------------
@@ -295,21 +291,61 @@ void CPlayer::Dodgeroll()
 //-----------------------
 void CPlayer::AttackIn()
 {
-	switch (m_attackId)
+	switch (m_weaponId)
 	{
-	case ATTACK_ID_A:
-		//攻撃前のアニメーション
-		if (m_animData.m_id != ANIMID_ATTACK_IN)
+	case WEAPON_ID_HAND:
+		switch (m_attackNum)
 		{
-			Request(ANIMID_ATTACK_IN, 0.8f);
+		case 0:
+			//攻撃前のアニメーション
+			if (m_animData.m_id != ANIMID_ATTACKA1_IN)
+			{
+				Request(ANIMID_ATTACKA1_IN, 0.5f);
+			}
+			break;
+		case 1:
+			//攻撃前のアニメーション
+			if (m_animData.m_id != ANIMID_ATTACKA2_IN)
+			{
+				Request(ANIMID_ATTACKA2_IN, 0.3f);
+			}
+			break;
+		case 2:
+			//攻撃前のアニメーション
+			if (m_animData.m_id != ANIMID_ATTACKA3_IN)
+			{
+				Request(ANIMID_ATTACKA3_IN, 0.5f);
+			}
+			break;
 		}
+
 		break;
-	case ATTACK_ID_B:
-		//攻撃前のアニメーション
-		if (m_animData.m_id != ANIMID_ATTACKB_IN)
+	case WEAPON_ID_SWORD:
+		switch (m_attackNum)
 		{
-			Request(ANIMID_ATTACKB_IN, 1.2f);
+		case 0:
+			//攻撃前のアニメーション
+			if (m_animData.m_id != ANIMID_ATTACKB1_IN)
+			{
+				Request(ANIMID_ATTACKB1_IN, 0.5f);
+			}
+			break;
+		case 1:
+			//攻撃前のアニメーション
+			if (m_animData.m_id != ANIMID_ATTACKB2_IN)
+			{
+				Request(ANIMID_ATTACKB2_IN, 0.5f);
+			}
+			break;
+		case 2:
+			//攻撃前のアニメーション
+			if (m_animData.m_id != ANIMID_ATTACKB3_IN)
+			{
+				Request(ANIMID_ATTACKB3_IN, 0.5f);
+			}
+			break;
 		}
+
 		break;
 	}
 
@@ -326,36 +362,120 @@ void CPlayer::AttackIn()
 //-----------------------
 void CPlayer::Attack()
 {
-	switch (m_attackId)
+	switch (m_weaponId)
 	{
-	case ATTACK_ID_A:
-		//攻撃中のアニメーション
-		if (m_animData.m_id != ANIMID_ATTACK)
+	case WEAPON_ID_HAND:
+
+		switch (m_attackNum)
 		{
-			Request(ANIMID_ATTACK, 1.0f);
+		case 0:
+			//攻撃中のアニメーション
+			if (m_animData.m_id != ANIMID_ATTACKA1)
+			{
+				Request(ANIMID_ATTACKA1, 1.0f);
 
-			VECTOR attackPos;
-			attackPos.x = -sinf(m_rot.y) * ATTACK_LENGTH;
-			attackPos.y = GetCenter().y;
-			attackPos.z = -cosf(m_rot.y) * ATTACK_LENGTH;
+				VECTOR attackPos;
+				attackPos.x = -sinf(m_rot.y) * ATTACK_LENGTH;
+				attackPos.y = GetCenter().y;
+				attackPos.z = -cosf(m_rot.y) * ATTACK_LENGTH;
 
-			attackPos = VAdd(attackPos, m_pos);
+				attackPos = VAdd(attackPos, m_pos);
 
-			m_attackManager->Request(attackPos,ATTACK_SIZE,m_atk, m_attackType);
+				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_attackType);
+			}
+			break;
+		case 1:
+			//攻撃中のアニメーション
+			if (m_animData.m_id != ANIMID_ATTACKA2)
+			{
+				Request(ANIMID_ATTACKA2, 1.0f);
+
+				VECTOR attackPos;
+				attackPos.x = -sinf(m_rot.y) * ATTACK_LENGTH;
+				attackPos.y = GetCenter().y;
+				attackPos.z = -cosf(m_rot.y) * ATTACK_LENGTH;
+
+				attackPos = VAdd(attackPos, m_pos);
+
+				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_attackType);
+			}
+			break;
+		case 2:
+			//攻撃中のアニメーション
+			if (m_animData.m_id != ANIMID_ATTACKA3)
+			{
+				Request(ANIMID_ATTACKA3, 1.0f);
+
+				VECTOR attackPos;
+				attackPos.x = -sinf(m_rot.y) * ATTACK_LENGTH;
+				attackPos.y = GetCenter().y;
+				attackPos.z = -cosf(m_rot.y) * ATTACK_LENGTH;
+
+				attackPos = VAdd(attackPos, m_pos);
+
+				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_attackType);
+			}
+			break;
 		}
-		break;
-	case ATTACK_ID_B:
-		//攻撃中のアニメーション
-		if (m_animData.m_id != ANIMID_ATTACKB)
-		{
-			Request(ANIMID_ATTACKB, 1.0f);
 
-			//攻撃の呼び出し
-			m_attackManager->Request(GetCenter(), ATTACKB_SIZE, ATTACKB_ATK, m_attackType);
+		break;
+	case WEAPON_ID_SWORD:
+		switch (m_attackNum)
+		{
+		case 0:
+			//攻撃中のアニメーション
+			if (m_animData.m_id != ANIMID_ATTACKB1)
+			{
+				Request(ANIMID_ATTACKB1, 1.0f);
+
+				VECTOR attackPos;
+				attackPos.x = -sinf(m_rot.y) * ATTACK_LENGTH;
+				attackPos.y = GetCenter().y;
+				attackPos.z = -cosf(m_rot.y) * ATTACK_LENGTH;
+
+				attackPos = VAdd(attackPos, m_pos);
+
+				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_attackType);
+			}
+			break;
+		case 1:
+			//攻撃中のアニメーション
+			if (m_animData.m_id != ANIMID_ATTACKB2)
+			{
+				Request(ANIMID_ATTACKB2, 1.0f);
+
+				VECTOR attackPos;
+				attackPos.x = -sinf(m_rot.y) * ATTACK_LENGTH;
+				attackPos.y = GetCenter().y;
+				attackPos.z = -cosf(m_rot.y) * ATTACK_LENGTH;
+
+				attackPos = VAdd(attackPos, m_pos);
+
+				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_attackType);
+			}
+			break;
+		case 2:
+			//攻撃中のアニメーション
+			if (m_animData.m_id != ANIMID_ATTACKB3)
+			{
+				Request(ANIMID_ATTACKB3, 1.0f);
+
+				VECTOR attackPos;
+				attackPos.x = -sinf(m_rot.y) * ATTACK_LENGTH;
+				attackPos.y = GetCenter().y;
+				attackPos.z = -cosf(m_rot.y) * ATTACK_LENGTH;
+
+				attackPos = VAdd(attackPos, m_pos);
+
+				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_attackType);
+			}
+			break;
 		}
 		break;
 	}
 
+	//攻撃の呼び出し
+	RequestAttack();
 
 	//アニメーションが終わったら待機状態に戻す
 	if (GetAnimEnd() == true)
@@ -371,28 +491,71 @@ void CPlayer::Attack()
 void CPlayer::AttackOut()
 {
 
-	switch (m_attackId)
+	switch (m_weaponId)
 	{
-	case ATTACK_ID_A:
-		//攻撃後のアニメーション
-		if (m_animData.m_id != ANIMID_ATTACK_OUT)
+	case WEAPON_ID_HAND:
+		switch (m_attackNum)
 		{
-			Request(ANIMID_ATTACK_OUT, 1.0f);
+		case 0:
+			//攻撃後のアニメーション
+			if (m_animData.m_id != ANIMID_ATTACKA1_OUT)
+			{
+				Request(ANIMID_ATTACKA1_OUT, 0.5f);
+			}
+			break;
+		case 1:
+			//攻撃後のアニメーション
+			if (m_animData.m_id != ANIMID_ATTACKA2_OUT)
+			{
+				Request(ANIMID_ATTACKA2_OUT, 0.5f);
+			}
+			break;
+		case 2:
+			//攻撃後のアニメーション
+			if (m_animData.m_id != ANIMID_ATTACKA3_OUT)
+			{
+				Request(ANIMID_ATTACKA3_OUT, 0.5f);
+			}
+			break;
 		}
+
 		break;
-	case ATTACK_ID_B:
-		//攻撃後のアニメーション
-		if (m_animData.m_id != ANIMID_ATTACKB_OUT)
+	case WEAPON_ID_SWORD:
+		switch (m_attackNum)
 		{
-			Request(ANIMID_ATTACKB_OUT, 0.3f);
+		case 0:
+			//攻撃後のアニメーション
+			if (m_animData.m_id != ANIMID_ATTACKB1_OUT)
+			{
+				Request(ANIMID_ATTACKB1_OUT, 1.0f);
+			}
+			break;
+		case 1:
+			//攻撃後のアニメーション
+			if (m_animData.m_id != ANIMID_ATTACKB2_OUT)
+			{
+				Request(ANIMID_ATTACKB2_OUT, 1.0f);
+			}
+			break;
+		case 2:
+			//攻撃後のアニメーション
+			if (m_animData.m_id != ANIMID_ATTACKB3_OUT)
+			{
+				Request(ANIMID_ATTACKB3_OUT, 1.0f);
+			}
+			break;
 		}
+
 		break;
 	}
 
+	//攻撃の呼び出し
+	RequestAttack();
 
 	//アニメーションが終わったら待機状態に戻す
 	if (GetAnimEnd() == true)
 	{
+		m_attackNum = 0;
 		m_state = WAIT;
 	}
 
@@ -404,9 +567,9 @@ void CPlayer::AttackOut()
 void CPlayer::AttackChargeIn()
 {
 	//アイテム使用前のアニメーション
-	if (m_animData.m_id != ANIMID_ATTACKB_CHARGE_IN)
+	if (m_animData.m_id != ANIMID_CHARGE_IN)
 	{
-		Request(ANIMID_ATTACKB_CHARGE_IN, 0.3f);
+		Request(ANIMID_CHARGE_IN, 0.3f);
 	}
 
 	//アニメーションが終わったらアイテム使用中に移行
@@ -423,9 +586,9 @@ void CPlayer::AttackChargeIn()
 void CPlayer::AttackCharge()
 {
 	//アイテム使用前のアニメーション
-	if (m_animData.m_id != ANIMID_ATTACKB_CHARGE)
+	if (m_animData.m_id != ANIMID_CHARGE)
 	{
-		Request(ANIMID_ATTACKB_CHARGE, 0.3f);
+		Request(ANIMID_CHARGE, 0.3f);
 	}
 
 	//アニメーションが終わったらアイテム使用中に移行
@@ -441,14 +604,35 @@ void CPlayer::AttackCharge()
 //-----------------------
 void CPlayer::SkillIn()
 {
-	switch (m_skillId)
+	switch (m_weaponId)
 	{
-	case SKILL_ID_A:
+	case WEAPON_ID_HAND:
 		//攻撃前のアニメーション
-		if (m_animData.m_id != ANIMID_ATTACKB_IN)
+		if (m_animData.m_id != ANIMID_SKILLA_IN)
 		{
-			Request(ANIMID_ATTACKB_IN, 1.2f);
+			Request(ANIMID_SKILLA_IN, 1.2f);
 		}
+		break;
+	case WEAPON_ID_SWORD:
+		//攻撃前のアニメーション
+		if (m_animData.m_id != ANIMID_SKILLB_IN)
+		{
+			Request(ANIMID_SKILLB_IN, 1.2f);
+		}
+		//カメラの角度がオールゼロの時に進む速度
+		VECTOR defaultDir = { 0.0f,0.0f,-4.0f };
+		//上記を行列に変換
+		MATRIX dir = CMyMath::GetTranslateMatrix(defaultDir);
+		//Y軸回転行列
+		MATRIX mRotY = CMyMath::GetYawMatrix(m_rot.y);
+		//行列の合成
+		MATRIX res = CMyMath::MatMult(mRotY, dir);
+
+		//移動をスピードに代入
+		m_speed.x = res.m[0][3];
+		m_speed.y = res.m[1][3];
+		m_speed.z = res.m[2][3];
+
 		break;
 	}
 
@@ -465,17 +649,28 @@ void CPlayer::SkillIn()
 //-----------------------
 void CPlayer::Skill()
 {
-	switch (m_skillId)
+	switch (m_weaponId)
 	{
-	case SKILL_ID_A:
+	case WEAPON_ID_HAND:
 		//攻撃中のアニメーション
-		if (m_animData.m_id != ANIMID_ATTACKB)
+		if (m_animData.m_id != ANIMID_SKILLA)
 		{
-			Request(ANIMID_ATTACKB, 1.0f);
+			Request(ANIMID_SKILLA, 1.0f);
 
 			//攻撃の呼び出し
 			m_attackManager->Request(GetCenter(), ATTACKB_SIZE, ATTACKB_ATK, m_attackType);
 		}
+		break;
+	case WEAPON_ID_SWORD:
+		//攻撃中のアニメーション
+		if (m_animData.m_id != ANIMID_SKILLB)
+		{
+			Request(ANIMID_SKILLB, 1.0f);
+
+			//攻撃の呼び出し
+			m_attackManager->Request(GetCenter(), ATTACKB_SIZE, ATTACKB_ATK, m_attackType);
+		}
+
 		break;
 	}
 
@@ -492,13 +687,20 @@ void CPlayer::Skill()
 //-----------------------
 void CPlayer::SkillOut()
 {
-	switch (m_skillId)
+	switch (m_weaponId)
 	{
-	case SKILL_ID_A:
+	case WEAPON_ID_HAND:
 		//攻撃後のアニメーション
-		if (m_animData.m_id != ANIMID_ATTACKB_OUT)
+		if (m_animData.m_id != ANIMID_SKILLA_OUT)
 		{
-			Request(ANIMID_ATTACKB_OUT, 0.3f);
+			Request(ANIMID_SKILLA_OUT, 0.3f);
+		}
+		break;
+	case WEAPON_ID_SWORD:
+		//攻撃後のアニメーション
+		if (m_animData.m_id != ANIMID_SKILLB_OUT)
+		{
+			Request(ANIMID_SKILLB_OUT, 0.5f);
 		}
 		break;
 	}
@@ -694,23 +896,21 @@ void CPlayer::Move(float _rotY)
 void CPlayer::RequestAttack()
 {
 
-	//待機状態と歩いてる状態以外は処理をしない
-	switch (m_state)
-	{
-	case WAIT:
-	case WALK:
-		break;
-	default:
-		return;
-	}
-
 	//攻撃ボタンを押したか
 	if (CheckHitKey(KEY_INPUT_J) != 0 ||
 		CControllerManager::IsTrg(BUTTON_X,m_padName))
 	{
 
+		//攻撃中なら次に移行する
+		if ((m_state == ATTACK ||
+			m_state == ATTACK_OUT) &&
+			m_attackNum<3)
+		{
+			m_attackNum++;
+			m_state = ATTACK_IN;
+		}
 		//攻撃してない時に攻撃前に移行する
-		if (m_attack.GetIsCoolDown() == true)
+		else if (m_attack.GetIsCoolDown() == true)
 		{
 			m_attackId = ATTACK_ID_A;
 			m_state = ATTACK_IN;

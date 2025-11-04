@@ -15,10 +15,18 @@ enum tagAttackId							//攻撃のID
 
 enum tagSkillId
 {
-	SKILL_ID_NONE = -1,						//スキルが無い
-	SKILL_ID_A,								//スキルA
+	SKILL_ID_A,								//スキルが無い
+	SKILL_ID_B,								//スキルA
 
 	SKILL_NUM,								//スキルの数
+};
+
+enum tagWeaponId
+{
+	WEAPON_ID_HAND,
+	WEAPON_ID_SWORD,
+
+	WEAPON_ID_NUM,
 };
 
 //プレイヤークラス
@@ -30,9 +38,11 @@ private:
 	bool m_isItem;					//アイテムを持っているフラグ
 	bool m_isDodgeroll;				//回避しているかフラグ
 	int m_attackId;					//攻撃のID
+	int m_attackNum;				//攻撃の番号
 	int m_skillId;					//スキルのID
 	tagPadName m_padName;			//コントローラーの名前
 	tagAttackType m_attackType;		//攻撃のタイプ
+	tagWeaponId m_weaponId;			//武器のID
 
 public:
 	//コンストラクタ・デストラクタ
@@ -79,6 +89,9 @@ public:
 	tagAttackType GetAttackType() { return m_attackType; }
 	//攻撃のタイプを設定
 	void SetAttackType(tagAttackType _attackType) { m_attackType = _attackType; }
+
+	//武器のIDを設定
+	void SetWeaponId(tagWeaponId _weaponId) { m_weaponId = _weaponId; }
 
 	//体力を増やす
 	void AddHp(int _addNum) { m_hp += _addNum; }
