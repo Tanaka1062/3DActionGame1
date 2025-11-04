@@ -28,6 +28,7 @@ static const int ATTACKB_ATK = 100;					//攻撃Bの攻撃力
 //-----------------------------------
 
 //アニメーション一覧---------------------------
+
 enum tagAnim {
 	ANIMID_ATTACKA1,				//攻撃A1中アニメーション
 	ANIMID_ATTACKA1_IN,				//攻撃A1前アニメーション
@@ -69,6 +70,13 @@ enum tagAnim {
 	ANIMID_WALK,					//歩きのアニメーション
 
 };
+
+//攻撃の名前
+enum tagAttackName
+{
+	ATTACK_A
+};
+
 //---------------------------------------------
 
 
