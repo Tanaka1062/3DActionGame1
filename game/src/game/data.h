@@ -25,7 +25,7 @@ enum tagItemType
 	ITEM_TYPE_NONE = -1,	//何もないタイプ
 	ITEM_TYPE_SHOT,			//弾発射タイプ
 	ITEM_TYPE_USE,			//使用タイプ
-	ITEM_TYPE_SKILL,			//スキルタイプ
+	ITEM_TYPE_SKILL,		//スキルタイプ
 };
 
 

@@ -253,7 +253,7 @@ void CPlayer::Dodgeroll()
 	//アイテム使用前のアニメーション
 	RequestAnim(ANIMID_DODGEROLL, 1.0f);
 
-	//カメラの角度がオールゼロの時に進む速度
+	//進む速度
 	VECTOR defaultDir = { 0.0f,0.0f,-DODGEROLL_SPEED };
 	//上記を行列に変換
 	MATRIX dir = CMyMath::GetTranslateMatrix(defaultDir);
@@ -333,6 +333,15 @@ void CPlayer::AttackIn()
 //-----------------------
 void CPlayer::Attack()
 {
+
+	//攻撃の座標
+	VECTOR attackPos;
+	attackPos.x = -sinf(m_rot.y) * ATTACK_LENGTH;
+	attackPos.y = GetCenter().y;
+	attackPos.z = -cosf(m_rot.y) * ATTACK_LENGTH;
+
+	attackPos = VAdd(attackPos, m_pos);
+
 	switch (m_weaponId)
 	{
 	case WEAPON_ID_HAND:
@@ -343,13 +352,6 @@ void CPlayer::Attack()
 			//攻撃中のアニメーション
 			if (RequestAnim(ANIMID_ATTACKA1, 1.0f))
 			{
-				VECTOR attackPos;
-				attackPos.x = -sinf(m_rot.y) * ATTACK_LENGTH;
-				attackPos.y = GetCenter().y;
-				attackPos.z = -cosf(m_rot.y) * ATTACK_LENGTH;
-
-				attackPos = VAdd(attackPos, m_pos);
-
 				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_attackType);
 			}
 			break;
@@ -357,13 +359,6 @@ void CPlayer::Attack()
 			//攻撃中のアニメーション
 			if (RequestAnim(ANIMID_ATTACKA2, 1.0f))
 			{
-				VECTOR attackPos;
-				attackPos.x = -sinf(m_rot.y) * ATTACK_LENGTH;
-				attackPos.y = GetCenter().y;
-				attackPos.z = -cosf(m_rot.y) * ATTACK_LENGTH;
-
-				attackPos = VAdd(attackPos, m_pos);
-
 				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_attackType);
 			}
 			break;
@@ -371,13 +366,6 @@ void CPlayer::Attack()
 			//攻撃中のアニメーション
 			if(RequestAnim(ANIMID_ATTACKA3, 1.0f));
 			{
-				VECTOR attackPos;
-				attackPos.x = -sinf(m_rot.y) * ATTACK_LENGTH;
-				attackPos.y = GetCenter().y;
-				attackPos.z = -cosf(m_rot.y) * ATTACK_LENGTH;
-
-				attackPos = VAdd(attackPos, m_pos);
-
 				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_attackType);
 			}
 			break;
@@ -391,13 +379,6 @@ void CPlayer::Attack()
 			//攻撃中のアニメーション
 			if (RequestAnim(ANIMID_ATTACKB1, 1.0f))
 			{
-				VECTOR attackPos;
-				attackPos.x = -sinf(m_rot.y) * ATTACK_LENGTH;
-				attackPos.y = GetCenter().y;
-				attackPos.z = -cosf(m_rot.y) * ATTACK_LENGTH;
-
-				attackPos = VAdd(attackPos, m_pos);
-
 				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_attackType);
 			}
 			break;
@@ -405,13 +386,6 @@ void CPlayer::Attack()
 			//攻撃中のアニメーション
 			if (RequestAnim(ANIMID_ATTACKB2, 1.0f))
 			{
-				VECTOR attackPos;
-				attackPos.x = -sinf(m_rot.y) * ATTACK_LENGTH;
-				attackPos.y = GetCenter().y;
-				attackPos.z = -cosf(m_rot.y) * ATTACK_LENGTH;
-
-				attackPos = VAdd(attackPos, m_pos);
-
 				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_attackType);
 			}
 			break;
@@ -419,13 +393,6 @@ void CPlayer::Attack()
 			//攻撃中のアニメーション
 			if (RequestAnim(ANIMID_ATTACKB3, 1.0f))
 			{
-				VECTOR attackPos;
-				attackPos.x = -sinf(m_rot.y) * ATTACK_LENGTH;
-				attackPos.y = GetCenter().y;
-				attackPos.z = -cosf(m_rot.y) * ATTACK_LENGTH;
-
-				attackPos = VAdd(attackPos, m_pos);
-
 				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_attackType);
 			}
 			break;

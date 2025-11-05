@@ -19,7 +19,7 @@ void CItemInventory::Init(CPlayerManager* _playerManager)
 	for (int i = 0; i < PLAYER_NUM; i++)
 	{
 		m_useItem[i] = nullptr;
-		m_skillItem[i] = nullptr;
+		m_weaponItem[i] = nullptr;
 
 
 		if (_playerManager == nullptr)
@@ -68,9 +68,9 @@ void CItemInventory::Step(CShotManager* _shot)
 		}
 
 		//スキルを使用していたらスキルを使用する
-		if (m_skillItem[i] != nullptr)
+		if (m_weaponItem[i] != nullptr)
 		{
-			m_skillItem[i]->Use();
+			m_weaponItem[i]->Use();
 		}
 	}
 }
@@ -118,16 +118,16 @@ void CItemInventory::Draw()
 
 	}
 
-	if (m_skillItem[0] == nullptr)
+	if (m_weaponItem[0] == nullptr)
 	{
 		DrawFormatString(32, 228, GetColor(255, 0, 0), "何もない");
 	}
 	else
 	{
-		switch (m_skillItem[0]->GetName())
+		switch (m_weaponItem[0]->GetName())
 		{
 		case ITEM_HARB_AMULENT:
-			DrawFormatString(32, 228, GetColor(255, 0, 0), "回転切りができる", m_skillItem[0]->GetUseCount());
+			DrawFormatString(32, 228, GetColor(255, 0, 0), "回転切りができる", m_weaponItem[0]->GetUseCount());
 			break;
 		}
 	}
@@ -150,16 +150,16 @@ void CItemInventory::Draw()
 
 	}
 
-	if (m_skillItem[1] == nullptr)
+	if (m_weaponItem[1] == nullptr)
 	{
 		DrawFormatString(WINDOW_SIZE_X - 128, 228, GetColor(255, 0, 0), "何もない");
 	}
 	else
 	{
-		switch (m_skillItem[1]->GetName())
+		switch (m_weaponItem[1]->GetName())
 		{
 		case ITEM_HARB_AMULENT:
-			DrawFormatString(WINDOW_SIZE_X - 128, 228, GetColor(255, 0, 0), "回転切りができる", m_skillItem[1]->GetUseCount());
+			DrawFormatString(WINDOW_SIZE_X - 128, 228, GetColor(255, 0, 0), "回転切りができる", m_weaponItem[1]->GetUseCount());
 			break;
 		}
 	}
@@ -181,17 +181,17 @@ CItemBase* CItemInventory::SetItem(CItemBase* _item,CPlayer* _player)
 	if (_item->GetType() == ITEM_TYPE_SKILL)
 	{
 		//すでにアイテムが入っている場合交換する
-		if (m_skillItem[padName] != nullptr)
+		if (m_weaponItem[padName] != nullptr)
 		{
 			//今のアイテムのアドレスを保存
-			item = m_skillItem[padName];
+			item = m_weaponItem[padName];
 		}
 
 		//インベントリにスキルのアドレスを取得
-		m_skillItem[padName] = _item;
+		m_weaponItem[padName] = _item;
 
 		//プレイヤーのアドレスを設定
-		m_skillItem[padName]->SetPlayerClass(_player);
+		m_weaponItem[padName]->SetPlayerClass(_player);
 
 	}
 	//使用するアイテムの交換

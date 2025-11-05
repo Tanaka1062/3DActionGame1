@@ -15,6 +15,9 @@ public:
 	//モデルロード
 	void Load(int _hndl);
 
+	//毎フレームする処理
+	void Step(bool _isWeapon);
+
 	//更新処理
 	void Update(int _hndl);
 

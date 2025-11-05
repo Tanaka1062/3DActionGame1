@@ -102,6 +102,8 @@ void CPlayScene::Step()
 
 	m_box.Step(&m_item);
 
+	m_weaponManager.Step(m_playerManager);
+
 	m_uiManager.Step();
 
 	m_camera.Step(ZERO,0.0f);

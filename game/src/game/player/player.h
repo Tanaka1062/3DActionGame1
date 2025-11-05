@@ -5,22 +5,6 @@
 
 static const int ITEM_INVENTORY_MAX = 1;	//アイテムインベントリの最大数
 
-enum tagAttackId							//攻撃のID
-{
-	ATTACK_ID_A,							//攻撃A
-	ATTACK_ID_B,							//攻撃B
-
-	ATTACK_NUM,								//攻撃の数						
-};
-
-enum tagSkillId
-{
-	SKILL_ID_A,								//スキルが無い
-	SKILL_ID_B,								//スキルA
-
-	SKILL_NUM,								//スキルの数
-};
-
 enum tagWeaponId
 {
 	WEAPON_ID_HAND,

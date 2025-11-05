@@ -45,6 +45,28 @@ void CWeaponManager::Load()
 }
 
 //---------------------------
+//	  毎フレームする処理
+//---------------------------
+void CWeaponManager::Step(CPlayerManager& _playerManager)
+{
+	for (int i = 0; i < PAD_NUM; i++)
+	{
+		//武器を持っているかを保存
+		bool isWeapon = false;
+		//プレイヤーの武器のIDを取得
+		tagWeaponId weaponId = _playerManager.GetPlayer(i)->GetWeaponId();
+
+		//武器が素手以外の場合武器を持っているフラグをtrue
+		if (weaponId != WEAPON_ID_HAND)
+		{
+			isWeapon = true;
+		}
+
+		m_weapon[i].Step(isWeapon);
+	}
+}
+
+//---------------------------
 //		  更新処理
 //---------------------------
 void CWeaponManager::Update(CPlayerManager& _playerManager)

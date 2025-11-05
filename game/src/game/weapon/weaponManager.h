@@ -16,6 +16,8 @@ public:
 	void Init();
 	//モデルロード
 	void Load();
+	//毎フレームする処理
+	void Step(CPlayerManager& _playerManager);
 	//更新処理
 	void Update(CPlayerManager& _playerManager);
 	//描写処理

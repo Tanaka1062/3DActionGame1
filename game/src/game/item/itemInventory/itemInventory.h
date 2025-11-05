@@ -9,7 +9,7 @@ class CItemInventory
 {
 private:
 	CItemBase* m_useItem[PLAYER_NUM];		//使用するアイテム
-	CItemBase* m_skillItem[PLAYER_NUM];		//スキルアイテム
+	CItemBase* m_weaponItem[PLAYER_NUM];	//武器アイテム
 	CPlayer* m_player[PLAYER_NUM];			//プレイヤーのアドレス保存用
 
 public:
