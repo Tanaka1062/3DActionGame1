@@ -170,7 +170,7 @@ void CEnemyBase::Wait()
 	//待機アニメーションを再生
 	if (m_animData.m_id != ANIMID_WAIT)
 	{
-		Request(ANIMID_WAIT, 1.0f, true);
+		RequestAnim(ANIMID_WAIT, 1.0f, true);
 	}
 
 	//動いていたら歩き状態に移行
@@ -200,7 +200,7 @@ void CEnemyBase::Walk()
 	//歩くアニメーション
 	if (m_animData.m_id != ANIMID_WALK)
 	{
-		Request(ANIMID_WALK, 1.0f, true);
+		RequestAnim(ANIMID_WALK, 1.0f, true);
 	}
 
 	//止まっていたら待機状態に移行
@@ -260,7 +260,7 @@ void CEnemyBase::Stagger()
 	//被弾のアニメーション
 	if (m_animData.m_id != ANIMID_HIT)
 	{
-		Request(ANIMID_HIT, 1.0f);
+		RequestAnim(ANIMID_HIT, 1.0f);
 	}
 
 	//ノックバック
@@ -276,7 +276,7 @@ void CEnemyBase::Die()
 	//死亡のアニメーション
 	if (m_animData.m_id != ANIMID_DIE)
 	{
-		Request(ANIMID_DIE, 0.5f);
+		RequestAnim(ANIMID_DIE, 0.5f);
 	}
 
 	//死亡アニメーションが終わったら消える

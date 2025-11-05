@@ -31,7 +31,8 @@ public:
 	//_id		:どのアニメーションを再生するか
 	//_speed	:アニメーションの再生速度
 	//_isLoop	:アニメーションをループ再生するかどうか
-	void Request(int _id, float _speed ,bool _isLoop = false);
+	//再生に成功したらtrue失敗したらfalse
+	bool RequestAnim(int _id, float _speed ,bool _isLoop = false);
 
 	//現在再生されているアニメーションが終了したかを取得
 	bool GetAnimEnd();

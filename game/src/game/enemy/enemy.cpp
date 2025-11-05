@@ -82,7 +82,7 @@ void CEnemy::Wait()
 	//待機アニメーションを再生
 	if (m_animData.m_id != ANIMID_WAIT)
 	{
-		Request(ANIMID_WAIT, 1.0f, true);
+		RequestAnim(ANIMID_WAIT, 1.0f, true);
 	}
 
 	//動いていたら歩き状態に移行
@@ -112,7 +112,7 @@ void CEnemy::Walk()
 	//歩くアニメーション
 	if (m_animData.m_id != ANIMID_WALK)
 	{
-		Request(ANIMID_WALK, 1.0f, true);
+		RequestAnim(ANIMID_WALK, 1.0f, true);
 	}
 
 	//止まっていたら待機状態に移行
@@ -151,7 +151,7 @@ void CEnemy::AttackIn()
 	//攻撃前のアニメーション
 	if (m_animData.m_id != ANIMID_ATTACK_IN)
 	{
-		Request(ANIMID_ATTACK_IN, 0.40f);
+		RequestAnim(ANIMID_ATTACK_IN, 0.40f);
 	}
 
 	//アニメーションが終わったら攻撃中に移行
@@ -170,7 +170,7 @@ void CEnemy::Attack()
 	//攻撃中のアニメーション
 	if (m_animData.m_id != ANIMID_ATTACK)
 	{
-		Request(ANIMID_ATTACK, 1.0f, true);
+		RequestAnim(ANIMID_ATTACK, 1.0f, true);
 
 		//攻撃の呼び出し
 		m_attack.Request(GetCenter(), m_rot,
@@ -194,7 +194,7 @@ void CEnemy::AttackOut()
 	//攻撃後のアニメーション
 	if (m_animData.m_id != ANIMID_ATTACK_OUT)
 	{
-		Request(ANIMID_ATTACK_OUT, 1.0f);
+		RequestAnim(ANIMID_ATTACK_OUT, 1.0f);
 	}
 
 	//アニメーションが終わったら待機状態に戻す
@@ -213,7 +213,7 @@ void CEnemy::Stagger()
 	//被弾のアニメーション
 	if (m_animData.m_id != ANIMID_HIT)
 	{
-		Request(ANIMID_HIT, 1.0f);
+		RequestAnim(ANIMID_HIT, 1.0f);
 	}
 
 	//ノックバック
@@ -229,7 +229,7 @@ void CEnemy::Die()
 	//死亡のアニメーション
 	if (m_animData.m_id != ANIMID_DIE)
 	{
-		Request(ANIMID_DIE, 0.5f);
+		RequestAnim(ANIMID_DIE, 0.5f);
 	}
 
 	//死亡アニメーションが終わったら消える

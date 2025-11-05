@@ -76,8 +76,11 @@ void CActor::Update()
 //--------------------------
 //	アニメーション再生
 //--------------------------
-void CActor::Request(int _id, float _speed,bool _isLoop)
+bool CActor::RequestAnim(int _id, float _speed,bool _isLoop)
 {
+	//すでに流れていたら処理をしない
+	if (m_animData.m_id == _id)return false;
+
 	//アニメーションをデタッチ
 	DetachAnim();
 
@@ -98,6 +101,8 @@ void CActor::Request(int _id, float _speed,bool _isLoop)
 		m_animData.m_state = ANIM_LOOP;
 	else
 		m_animData.m_state = ANIM_ENDLOOP;
+
+	return true;
 }
 
 //--------------------------

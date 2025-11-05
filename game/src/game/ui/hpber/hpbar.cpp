@@ -26,7 +26,7 @@ void CHpbar::Init(VECTOR _pos, float _rot)
 //–ˆƒtƒŒ[ƒ€‚·‚éˆ—
 void CHpbar::Step()
 {
-	m_hpbar = m_player->GetHp() * HP_BAR_LEN;
+	m_hpbar = static_cast<float>(m_player->GetHp() * HP_BAR_LEN);
 	m_hp = m_hpbar / m_player->GetHpMax();
 }
 
@@ -35,8 +35,8 @@ void CHpbar::Draw(float _size)
 {
 	C2DUi::Draw(_size);
 
-	DrawBox(m_pos.x - 100.0f, m_pos.y + 26,
-		(m_pos.x - 100.0f) + m_hp, m_pos.y - 14, GetColor(0, 255, 0), TRUE);
+	DrawBox(m_pos.x - 100.0f, m_pos.y + 26.0f,
+		(m_pos.x - 100.0f) + m_hp, m_pos.y - 14.0f, GetColor(0, 255, 0), TRUE);
 }
 
 

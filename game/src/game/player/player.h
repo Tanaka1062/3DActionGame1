@@ -37,9 +37,7 @@ private:
 	bool m_isItemUse;				//アイテム使用フラグ
 	bool m_isItem;					//アイテムを持っているフラグ
 	bool m_isDodgeroll;				//回避しているかフラグ
-	int m_attackId;					//攻撃のID
 	int m_attackNum;				//攻撃の番号
-	int m_skillId;					//スキルのID
 	tagPadName m_padName;			//コントローラーの名前
 	tagAttackType m_attackType;		//攻撃のタイプ
 	tagWeaponId m_weaponId;			//武器のID
@@ -76,12 +74,6 @@ public:
 	//回避しているかを取得
 	bool GetIsDodgeroll() { return m_isDodgeroll; }
 
-	//攻撃のID設定
-	void SetAttackId(tagAttackId _id) { m_attackId = _id; }
-
-	//スキルのID設定
-	void SetSkillId(tagSkillId _id) { m_skillId = _id; }
-
 	//コントローラーの名前を取得
 	tagPadName GetPadName() { return m_padName; }
 
@@ -90,6 +82,8 @@ public:
 	//攻撃のタイプを設定
 	void SetAttackType(tagAttackType _attackType) { m_attackType = _attackType; }
 
+	//武器のIDを取得
+	tagWeaponId GetWeaponId() { return m_weaponId; }
 	//武器のIDを設定
 	void SetWeaponId(tagWeaponId _weaponId) { m_weaponId = _weaponId; }
 

@@ -111,9 +111,7 @@ void CPlayer::Init(CAttackManager* _attackManager, tagPadName _padName)
 	m_isPickUpItem = false;
 	m_isItem = false;
 	m_isDodgeroll = false;
-	m_attackId = ATTACK_ID_A;
 	m_attackNum = 0;
-	m_skillId = SKILL_ID_A;
 	m_padName = _padName;
 	m_attackType = ATTACK_TYPE_NONE;
 	m_weaponId = WEAPON_ID_HAND;
@@ -206,10 +204,7 @@ void CPlayer::Update()
 void CPlayer::Wait()
 {
 	//待機アニメーションを再生
-	if (m_animData.m_id != ANIMID_WAIT)
-	{
-		Request(ANIMID_WAIT, 0.5f, true);
-	}
+	RequestAnim(ANIMID_WAIT, 0.5f, true);
 
 	//動いていたら歩き状態に移行
 	if (m_speed.x != 0.0f ||
@@ -228,10 +223,7 @@ void CPlayer::Wait()
 void CPlayer::Walk()
 {
 	//歩くアニメーション
-	if (m_animData.m_id != ANIMID_WALK)
-	{
-		Request(ANIMID_WALK, 1.0f, true);
-	}
+	RequestAnim(ANIMID_WALK, 1.0f, true);
 
 	//止まっていたら待機状態に移行
 	if (m_speed.x == 0.0f &&
@@ -259,10 +251,7 @@ void CPlayer::Jump()
 void CPlayer::Dodgeroll()
 {
 	//アイテム使用前のアニメーション
-	if (m_animData.m_id != ANIMID_DODGEROLL)
-	{
-		Request(ANIMID_DODGEROLL, 1.0f);
-	}
+	RequestAnim(ANIMID_DODGEROLL, 1.0f);
 
 	//カメラの角度がオールゼロの時に進む速度
 	VECTOR defaultDir = { 0.0f,0.0f,-DODGEROLL_SPEED };
@@ -298,24 +287,15 @@ void CPlayer::AttackIn()
 		{
 		case 0:
 			//攻撃前のアニメーション
-			if (m_animData.m_id != ANIMID_ATTACKA1_IN)
-			{
-				Request(ANIMID_ATTACKA1_IN, 0.5f);
-			}
+			RequestAnim(ANIMID_ATTACKA1_IN, 0.5f);
 			break;
 		case 1:
 			//攻撃前のアニメーション
-			if (m_animData.m_id != ANIMID_ATTACKA2_IN)
-			{
-				Request(ANIMID_ATTACKA2_IN, 0.3f);
-			}
+			RequestAnim(ANIMID_ATTACKA2_IN, 0.3f);
 			break;
 		case 2:
 			//攻撃前のアニメーション
-			if (m_animData.m_id != ANIMID_ATTACKA3_IN)
-			{
-				Request(ANIMID_ATTACKA3_IN, 0.5f);
-			}
+			RequestAnim(ANIMID_ATTACKA3_IN, 0.5f);
 			break;
 		}
 
@@ -325,24 +305,15 @@ void CPlayer::AttackIn()
 		{
 		case 0:
 			//攻撃前のアニメーション
-			if (m_animData.m_id != ANIMID_ATTACKB1_IN)
-			{
-				Request(ANIMID_ATTACKB1_IN, 0.5f);
-			}
+			RequestAnim(ANIMID_ATTACKB1_IN, 0.5f);
 			break;
 		case 1:
 			//攻撃前のアニメーション
-			if (m_animData.m_id != ANIMID_ATTACKB2_IN)
-			{
-				Request(ANIMID_ATTACKB2_IN, 0.5f);
-			}
+			RequestAnim(ANIMID_ATTACKB2_IN, 0.5f);
 			break;
 		case 2:
 			//攻撃前のアニメーション
-			if (m_animData.m_id != ANIMID_ATTACKB3_IN)
-			{
-				Request(ANIMID_ATTACKB3_IN, 0.5f);
-			}
+			RequestAnim(ANIMID_ATTACKB3_IN, 0.5f);
 			break;
 		}
 
@@ -370,10 +341,8 @@ void CPlayer::Attack()
 		{
 		case 0:
 			//攻撃中のアニメーション
-			if (m_animData.m_id != ANIMID_ATTACKA1)
+			if (RequestAnim(ANIMID_ATTACKA1, 1.0f))
 			{
-				Request(ANIMID_ATTACKA1, 1.0f);
-
 				VECTOR attackPos;
 				attackPos.x = -sinf(m_rot.y) * ATTACK_LENGTH;
 				attackPos.y = GetCenter().y;
@@ -386,10 +355,8 @@ void CPlayer::Attack()
 			break;
 		case 1:
 			//攻撃中のアニメーション
-			if (m_animData.m_id != ANIMID_ATTACKA2)
+			if (RequestAnim(ANIMID_ATTACKA2, 1.0f))
 			{
-				Request(ANIMID_ATTACKA2, 1.0f);
-
 				VECTOR attackPos;
 				attackPos.x = -sinf(m_rot.y) * ATTACK_LENGTH;
 				attackPos.y = GetCenter().y;
@@ -402,10 +369,8 @@ void CPlayer::Attack()
 			break;
 		case 2:
 			//攻撃中のアニメーション
-			if (m_animData.m_id != ANIMID_ATTACKA3)
+			if(RequestAnim(ANIMID_ATTACKA3, 1.0f));
 			{
-				Request(ANIMID_ATTACKA3, 1.0f);
-
 				VECTOR attackPos;
 				attackPos.x = -sinf(m_rot.y) * ATTACK_LENGTH;
 				attackPos.y = GetCenter().y;
@@ -424,10 +389,8 @@ void CPlayer::Attack()
 		{
 		case 0:
 			//攻撃中のアニメーション
-			if (m_animData.m_id != ANIMID_ATTACKB1)
+			if (RequestAnim(ANIMID_ATTACKB1, 1.0f))
 			{
-				Request(ANIMID_ATTACKB1, 1.0f);
-
 				VECTOR attackPos;
 				attackPos.x = -sinf(m_rot.y) * ATTACK_LENGTH;
 				attackPos.y = GetCenter().y;
@@ -440,10 +403,8 @@ void CPlayer::Attack()
 			break;
 		case 1:
 			//攻撃中のアニメーション
-			if (m_animData.m_id != ANIMID_ATTACKB2)
+			if (RequestAnim(ANIMID_ATTACKB2, 1.0f))
 			{
-				Request(ANIMID_ATTACKB2, 1.0f);
-
 				VECTOR attackPos;
 				attackPos.x = -sinf(m_rot.y) * ATTACK_LENGTH;
 				attackPos.y = GetCenter().y;
@@ -456,10 +417,8 @@ void CPlayer::Attack()
 			break;
 		case 2:
 			//攻撃中のアニメーション
-			if (m_animData.m_id != ANIMID_ATTACKB3)
+			if (RequestAnim(ANIMID_ATTACKB3, 1.0f))
 			{
-				Request(ANIMID_ATTACKB3, 1.0f);
-
 				VECTOR attackPos;
 				attackPos.x = -sinf(m_rot.y) * ATTACK_LENGTH;
 				attackPos.y = GetCenter().y;
@@ -498,24 +457,15 @@ void CPlayer::AttackOut()
 		{
 		case 0:
 			//攻撃後のアニメーション
-			if (m_animData.m_id != ANIMID_ATTACKA1_OUT)
-			{
-				Request(ANIMID_ATTACKA1_OUT, 0.5f);
-			}
+			RequestAnim(ANIMID_ATTACKA1_OUT, 0.5f);
 			break;
 		case 1:
 			//攻撃後のアニメーション
-			if (m_animData.m_id != ANIMID_ATTACKA2_OUT)
-			{
-				Request(ANIMID_ATTACKA2_OUT, 0.5f);
-			}
+			RequestAnim(ANIMID_ATTACKA2_OUT, 0.5f);
 			break;
 		case 2:
 			//攻撃後のアニメーション
-			if (m_animData.m_id != ANIMID_ATTACKA3_OUT)
-			{
-				Request(ANIMID_ATTACKA3_OUT, 0.5f);
-			}
+			RequestAnim(ANIMID_ATTACKA3_OUT, 0.5f);
 			break;
 		}
 
@@ -525,24 +475,15 @@ void CPlayer::AttackOut()
 		{
 		case 0:
 			//攻撃後のアニメーション
-			if (m_animData.m_id != ANIMID_ATTACKB1_OUT)
-			{
-				Request(ANIMID_ATTACKB1_OUT, 1.0f);
-			}
+			RequestAnim(ANIMID_ATTACKB1_OUT, 1.0f);
 			break;
 		case 1:
 			//攻撃後のアニメーション
-			if (m_animData.m_id != ANIMID_ATTACKB2_OUT)
-			{
-				Request(ANIMID_ATTACKB2_OUT, 1.0f);
-			}
+			RequestAnim(ANIMID_ATTACKB2_OUT, 1.0f);
 			break;
 		case 2:
 			//攻撃後のアニメーション
-			if (m_animData.m_id != ANIMID_ATTACKB3_OUT)
-			{
-				Request(ANIMID_ATTACKB3_OUT, 1.0f);
-			}
+			RequestAnim(ANIMID_ATTACKB3_OUT, 1.0f);
 			break;
 		}
 
@@ -567,10 +508,7 @@ void CPlayer::AttackOut()
 void CPlayer::AttackChargeIn()
 {
 	//アイテム使用前のアニメーション
-	if (m_animData.m_id != ANIMID_CHARGE_IN)
-	{
-		Request(ANIMID_CHARGE_IN, 0.3f);
-	}
+	RequestAnim(ANIMID_CHARGE_IN, 0.3f);
 
 	//アニメーションが終わったらアイテム使用中に移行
 	if (GetAnimEnd() == true)
@@ -586,10 +524,7 @@ void CPlayer::AttackChargeIn()
 void CPlayer::AttackCharge()
 {
 	//アイテム使用前のアニメーション
-	if (m_animData.m_id != ANIMID_CHARGE)
-	{
-		Request(ANIMID_CHARGE, 0.3f);
-	}
+	RequestAnim(ANIMID_CHARGE, 0.3f);
 
 	//アニメーションが終わったらアイテム使用中に移行
 	if (GetAnimEnd() == true)
@@ -608,17 +543,12 @@ void CPlayer::SkillIn()
 	{
 	case WEAPON_ID_HAND:
 		//攻撃前のアニメーション
-		if (m_animData.m_id != ANIMID_SKILLA_IN)
-		{
-			Request(ANIMID_SKILLA_IN, 1.2f);
-		}
+		RequestAnim(ANIMID_SKILLA_IN, 1.2f);
 		break;
 	case WEAPON_ID_SWORD:
 		//攻撃前のアニメーション
-		if (m_animData.m_id != ANIMID_SKILLB_IN)
-		{
-			Request(ANIMID_SKILLB_IN, 1.2f);
-		}
+		RequestAnim(ANIMID_SKILLB_IN, 1.2f);
+
 		//カメラの角度がオールゼロの時に進む速度
 		VECTOR defaultDir = { 0.0f,0.0f,-4.0f };
 		//上記を行列に変換
@@ -632,7 +562,6 @@ void CPlayer::SkillIn()
 		m_speed.x = res.m[0][3];
 		m_speed.y = res.m[1][3];
 		m_speed.z = res.m[2][3];
-
 		break;
 	}
 
@@ -653,24 +582,19 @@ void CPlayer::Skill()
 	{
 	case WEAPON_ID_HAND:
 		//攻撃中のアニメーション
-		if (m_animData.m_id != ANIMID_SKILLA)
+		if (RequestAnim(ANIMID_SKILLA, 1.0f))
 		{
-			Request(ANIMID_SKILLA, 1.0f);
-
 			//攻撃の呼び出し
 			m_attackManager->Request(GetCenter(), ATTACKB_SIZE, ATTACKB_ATK, m_attackType);
 		}
 		break;
 	case WEAPON_ID_SWORD:
 		//攻撃中のアニメーション
-		if (m_animData.m_id != ANIMID_SKILLB)
+		if (RequestAnim(ANIMID_SKILLB, 1.0f))
 		{
-			Request(ANIMID_SKILLB, 1.0f);
-
 			//攻撃の呼び出し
 			m_attackManager->Request(GetCenter(), ATTACKB_SIZE, ATTACKB_ATK, m_attackType);
 		}
-
 		break;
 	}
 
@@ -691,17 +615,11 @@ void CPlayer::SkillOut()
 	{
 	case WEAPON_ID_HAND:
 		//攻撃後のアニメーション
-		if (m_animData.m_id != ANIMID_SKILLA_OUT)
-		{
-			Request(ANIMID_SKILLA_OUT, 0.3f);
-		}
+		RequestAnim(ANIMID_SKILLA_OUT, 0.3f);
 		break;
 	case WEAPON_ID_SWORD:
 		//攻撃後のアニメーション
-		if (m_animData.m_id != ANIMID_SKILLB_OUT)
-		{
-			Request(ANIMID_SKILLB_OUT, 0.5f);
-		}
+		RequestAnim(ANIMID_SKILLB_OUT, 0.5f);
 		break;
 	}
 
@@ -719,10 +637,7 @@ void CPlayer::SkillOut()
 void CPlayer::ItemUseIn()
 {
 	//アイテム使用前のアニメーション
-	if (m_animData.m_id != ANIMID_ITEM_USE_IN)
-	{
-		Request(ANIMID_ITEM_USE_IN, 1.0f);
-	}
+	RequestAnim(ANIMID_ITEM_USE_IN, 1.0f);
 
 	//アニメーションが終わったらアイテム使用中に移行
 	if (GetAnimEnd() == true)
@@ -738,10 +653,8 @@ void CPlayer::ItemUseIn()
 void CPlayer::ItemUse()
 {
 	//アイテム使用中のアニメーション
-	if (m_animData.m_id != ANIMID_ITEM_USE)
+	if (RequestAnim(ANIMID_ITEM_USE, 1.0f))
 	{
-		Request(ANIMID_ITEM_USE, 1.0f);
-
 		//アイテム使用フラグをtrueに
 		m_isItemUse = true;
 	}
@@ -760,10 +673,7 @@ void CPlayer::ItemUse()
 void CPlayer::ItemUseOut()
 {
 	//アイテム使用後のアニメーション
-	if (m_animData.m_id != ANIMID_ITEM_USE_OUT)
-	{
-		Request(ANIMID_ITEM_USE_OUT, 1.0f);
-	}
+	RequestAnim(ANIMID_ITEM_USE_OUT, 1.0f);
 
 	//アニメーションが終わったら待機状態に戻す
 	if (GetAnimEnd() == true)
@@ -779,10 +689,7 @@ void CPlayer::ItemUseOut()
 void CPlayer::Stagger()
 {
 	//被弾のアニメーション
-	if (m_animData.m_id != ANIMID_HIT)
-	{
-		Request(ANIMID_HIT, 1.0f);
-	}
+	RequestAnim(ANIMID_HIT, 1.0f);
 
 	//被弾のアニメーションが終わったら戻す
 	if (GetAnimEnd() == true)
@@ -797,10 +704,7 @@ void CPlayer::Stagger()
 void CPlayer::Die()
 {
 	//死亡のアニメーション
-	if (m_animData.m_id != ANIMID_DIE)
-	{
-		Request(ANIMID_DIE, 0.5f);
-	}
+	RequestAnim(ANIMID_DIE, 0.5f);
 
 	//死亡アニメーションが終わったら消える
 	if (GetAnimEnd() == true)
@@ -912,7 +816,6 @@ void CPlayer::RequestAttack()
 		//攻撃してない時に攻撃前に移行する
 		else if (m_attack.GetIsCoolDown() == true)
 		{
-			m_attackId = ATTACK_ID_A;
 			m_state = ATTACK_IN;
 		}
 	}
@@ -923,8 +826,7 @@ void CPlayer::RequestAttack()
 	{
 
 		//攻撃してない時に攻撃前に移行する
-		if (m_attack.GetIsCoolDown() == true &&
-			m_skillId != -1)
+		if (m_attack.GetIsCoolDown() == true)
 		{
 
 			m_state = ATTACK_CHARGE_IN;

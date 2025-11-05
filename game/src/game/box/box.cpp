@@ -83,7 +83,7 @@ void CBox::SubHp(int _subHp)
 {
 	m_hp -= _subHp;
 
-	Request(ANIMID_HIT, 1.0f);
+	RequestAnim(ANIMID_HIT, 1.0f);
 }
 
 //---------------------------
