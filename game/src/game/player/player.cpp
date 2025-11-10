@@ -12,11 +12,13 @@
 static const char MODEL_PATH[] =
 { "data/model/player/playerTest4-2.mv1" };			//ロードするファイル名
 static const VECTOR INIT_POS = { 0.0f,1.0f,0.0f };	//初期座標
+static const float SHADOW_SIZE = 0.5f;				//丸影の大きさ
 static const int MAX_HP = 300;						//体力
 static const int ATK = 20;							//攻撃力
-static const float MOVE_SPEED = 1.0f;				//移動スピード
+static const float MOVE_SPEED = 1.5f;				//移動スピード
 static const float RADIUS = 10.0f;					//半径
 static const float DODGEROLL_SPEED = 1.5f;			//回避スピード
+static const float JUMP_SPEED = 30.0f;				//ジャンプスピード
 //----------------------------------------------
 
 //攻撃関連---------------------------
@@ -115,6 +117,7 @@ void CPlayer::Init(CAttackManager* _attackManager, tagPadName _padName)
 	m_padName = _padName;
 	m_attackType = ATTACK_TYPE_NONE;
 	m_weaponId = WEAPON_ID_HAND;
+	m_shadow.Init(m_pos, SHADOW_SIZE);
 }
 
 //-----------------------
@@ -123,6 +126,7 @@ void CPlayer::Init(CAttackManager* _attackManager, tagPadName _padName)
 void CPlayer::Load(int _modelHndl)
 {
 	CObject::DuplicateModel(_modelHndl);
+	m_shadow.Load();
 }
 
 //-----------------------
@@ -135,6 +139,15 @@ void CPlayer::Step(float _rotY)
 
 	//移動処理
 	Move(_rotY);
+
+	//ジャンプ処理
+	if (CControllerManager::IsTrg(BUTTON_A, m_padName) &&
+		m_state != JUMP)
+	{
+		m_state = JUMP;
+		m_speed.y = JUMP_SPEED;
+	}
+
 
 	//回避移行処理
 	RequestDodgeroll();
@@ -242,7 +255,10 @@ void CPlayer::Walk()
 //-----------------------
 void CPlayer::Jump()
 {
-
+	if (m_speed.y <= 0.0f)
+	{
+		m_state = WAIT;
+	}
 }
 
 //-----------------------
@@ -706,11 +722,10 @@ void CPlayer::Move(float _rotY)
 
 	//移動ベクトル
 	VECTOR speed = { 0.0f,0.0f,0.0f };
-	speed.z = 0.0f;
 	//コントローラー用前進後退
 	if (isController == true)
 	{
-		speed.z = MOVE_SPEED * CControllerManager::GetLY(m_padName);
+		speed.z = CControllerManager::GetLY(m_padName);
 	}
 	//キーボード用前進
 	else if (CheckHitKey(KEY_INPUT_W) != 0)
@@ -724,11 +739,10 @@ void CPlayer::Move(float _rotY)
 	}
 
 	//左右にどれだけ移動するか
-	speed.x = 0.0f;
 	//コントローラー用左右移動
 	if (isController == true)
 	{
-		speed.x = -MOVE_SPEED * CControllerManager::GetLX(m_padName);
+		speed.x = -CControllerManager::GetLX(m_padName);
 	}
 	//キーボード用左移動
 	else if (CheckHitKey(KEY_INPUT_A) != 0)
@@ -741,7 +755,14 @@ void CPlayer::Move(float _rotY)
 		speed.x = -MOVE_SPEED;
 	}
 
-	//カメラの角度がオールゼロの時に進む速度
+	if (isController == true)
+	{
+		//速度の正規化しスピードを掛ける
+		speed = VNorm(speed);
+		speed = VScale(speed, MOVE_SPEED);
+	}
+
+	////カメラの角度がオールゼロの時に進む速度
 	VECTOR defaultDir = { speed.x,0.0f,speed.z };
 	//上記を行列に変換
 	MATRIX dir = CMyMath::GetTranslateMatrix(defaultDir);

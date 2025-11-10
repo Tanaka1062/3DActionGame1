@@ -10,6 +10,7 @@ void CShadow::Init(VECTOR _pos, float _scale)
 	CObject::Init();
 
 	m_pos = _pos;
+	m_pos.y += 1.0f;
 	m_scale = { _scale,_scale,_scale };
 }
 
@@ -26,5 +27,6 @@ void CShadow::Load()
 void CShadow::Step(VECTOR _pos)
 {
 	m_pos = _pos;
+	m_pos.y += 1.0f;
 }
 
