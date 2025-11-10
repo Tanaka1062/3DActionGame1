@@ -173,6 +173,7 @@
     <ClCompile Include="src\game\scene\sceneManager.cpp" />
     <ClCompile Include="src\game\scene\selectScene.cpp" />
     <ClCompile Include="src\game\scene\titleScene.cpp" />
+    <ClCompile Include="src\game\shadow\shadow.cpp" />
     <ClCompile Include="src\game\shot\shotBase.cpp" />
     <ClCompile Include="src\game\shot\shotManager.cpp" />
     <ClCompile Include="src\game\sky\sky.cpp" />
@@ -233,6 +234,7 @@
     <ClInclude Include="src\game\scene\sceneManager.h" />
     <ClInclude Include="src\game\scene\selectScene.h" />
     <ClInclude Include="src\game\scene\titleScene.h" />
+    <ClInclude Include="src\game\shadow\shadow.h" />
     <ClInclude Include="src\game\shot\shotBase.h" />
     <ClInclude Include="src\game\shot\shotManager.h" />
     <ClInclude Include="src\game\sky\sky.h" />

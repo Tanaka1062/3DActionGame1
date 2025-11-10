@@ -30,7 +30,13 @@ CPlayerManager::CPlayerManager()
 //------------------------
 CPlayerManager::~CPlayerManager()
 {
-	Exit();
+	for (int i = 0; i < m_player.size(); i++)
+	{
+		delete m_player[i];
+
+		m_player[i]->Exit();
+
+	}
 }
 
 //------------------------
@@ -152,9 +158,6 @@ void CPlayerManager::Exit()
 {
 	for (int i = 0; i < m_player.size(); i++)
 	{
-		m_player[i]->Exit();
-
-		delete m_player[i];
 
 	}
 	m_player.clear();

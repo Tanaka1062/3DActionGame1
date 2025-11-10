@@ -23,9 +23,14 @@ public:
 
 	//初期化
 	virtual void Init();
-
-	//更新処理
+	//終了処理
+	virtual void Exit();
+	//数値の更新
 	virtual void Update();
+	//オブジェクトの描写
+	virtual void Draw();
+	//オブジェクトのロード
+	virtual void Load();
 
 	//アニメーション再生
 	//_id		:どのアニメーションを再生するか

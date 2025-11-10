@@ -118,6 +118,9 @@
     <Filter Include="ソース ファイル\game\ui\hpber">
       <UniqueIdentifier>{8a8f2346-eab0-4879-9c01-96af7be7ad06}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\game\shadow">
+      <UniqueIdentifier>{8f9b0397-0895-49dc-a379-015a6b7b24ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\number.cpp">
@@ -287,6 +290,9 @@
     </ClCompile>
     <ClCompile Include="src\game\ui\hpber\hpbarManager.cpp">
       <Filter>ソース ファイル\game\ui\hpber</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\shadow\shadow.cpp">
+      <Filter>ソース ファイル\game\shadow</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -463,6 +469,9 @@
     </ClInclude>
     <ClInclude Include="src\game\ui\hpber\hpbarManager.h">
       <Filter>ソース ファイル\game\ui\hpber</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\shadow\shadow.h">
+      <Filter>ソース ファイル\game\shadow</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -2,6 +2,7 @@
 #include "../../lib/model/actor.h"
 #include "../attack/attack.h"
 #include "../attack/attackManager.h"
+#include "../shadow/shadow.h"
 
 enum tagCharacterType	//キャラクターの種類
 {
@@ -41,6 +42,7 @@ protected:
 	tagCharacterType m_type;			//種類
 	CAttack m_attack;					//攻撃クラス
 	CAttackManager* m_attackManager;	//攻撃マネージャークラス
+	CShadow m_shadow;					//丸影のクラス
 
 public:
 	//コンストラクタ
@@ -49,20 +51,29 @@ public:
 	//初期化
 	virtual void Init(CAttackManager* _attackManager = nullptr);
 
+	//モデルのロード
+	virtual void Load();
+
 	//毎フレームする処理
 	virtual void Step();
 
 	//毎フレームする処理(座標取得用)
 	virtual void Step(VECTOR _pos);
+	
+	//数値の更新
+	void Update();
+
+	//モデルの描写
+	virtual void Draw();
+
+	//終了処理
+	virtual void Exit();
 
 	//攻撃を食らった時にする処理
 	virtual void HitAttack(int _atk,float _rotY = 0.0f);
 
 	//弾を食らった時にする処理
 	virtual void ShotAttack(int _atk, float _rotY = 0.0f);
-
-	//数値の更新
-	void Update();
 
 	//体力を取得
 	int GetHp() { return m_hp; }

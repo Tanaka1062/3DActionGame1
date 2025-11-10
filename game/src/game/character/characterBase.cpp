@@ -26,6 +26,14 @@ void CCharacterBase::Init(CAttackManager* _attackManager)
 	m_rad = 0;
 	m_state = WAIT;
 	m_attackManager = _attackManager;
+	m_shadow.Init(m_pos,1.0f);
+}
+
+//モデルのロード
+void CCharacterBase::Load()
+{
+	CActor::Load();
+	m_shadow.Load();
 }
 
 //------------------------------
@@ -35,6 +43,8 @@ void CCharacterBase::Step()
 {
 	//重力処理
 	Gravity();
+
+	m_shadow.Step(m_pos);
 
 	//状態によって行動を変える
 	switch (m_state)
@@ -144,6 +154,8 @@ void CCharacterBase::Update()
 
 	CActor::Update();
 
+	m_shadow.Update();
+
 	//Hpが０以下になるとActiveをfalseに
 	if (m_hp <= 0 && m_state != DIE)
 	{
@@ -151,6 +163,21 @@ void CCharacterBase::Update()
 		m_state = DIE;
 	}
 
+}
+
+//モデルの描写
+void CCharacterBase::Draw()
+{
+	CActor::Draw();
+	m_shadow.Draw();
+}
+
+//終了処理
+void CCharacterBase::Exit()
+{
+	CActor::Exit();
+	delete m_attackManager;
+	m_shadow.Exit();
 }
 
 //------------------------------
