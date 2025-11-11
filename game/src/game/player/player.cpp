@@ -15,7 +15,7 @@ static const VECTOR INIT_POS = { 0.0f,1.0f,0.0f };	//初期座標
 static const float SHADOW_SIZE = 0.5f;				//丸影の大きさ
 static const int MAX_HP = 300;						//体力
 static const int ATK = 20;							//攻撃力
-static const float MOVE_SPEED = 1.5f;				//移動スピード
+static const float MOVE_SPEED = 1.2f;				//移動スピード
 static const float RADIUS = 10.0f;					//半径
 static const float DODGEROLL_SPEED = 1.5f;			//回避スピード
 static const float JUMP_SPEED = 30.0f;				//ジャンプスピード
@@ -141,13 +141,7 @@ void CPlayer::Step(float _rotY)
 	Move(_rotY);
 
 	//ジャンプ処理
-	if (CControllerManager::IsTrg(BUTTON_A, m_padName) &&
-		m_state != JUMP)
-	{
-		m_state = JUMP;
-		m_speed.y = JUMP_SPEED;
-	}
-
+	//RequestJump();
 
 	//回避移行処理
 	RequestDodgeroll();
@@ -181,8 +175,6 @@ void CPlayer::Draw()
 
 	DrawSphere3D(GetCenter(), ATTACKB_SIZE, 16, GetColor(0, 255, 0), GetColor(0, 255, 0), FALSE);
 #endif // DEBUG
-	//体力を表示
-	DrawFormatString(32, 32, GetColor(255, 0, 0), "hp:%d", m_hp);
 
 }
 
@@ -201,7 +193,6 @@ void CPlayer::Update()
 	{
 		m_hp = m_maxHp;
 	}
-
 	//攻撃の更新
 	m_attack.Update(GetCenter(), m_rot);
 
@@ -303,15 +294,15 @@ void CPlayer::AttackIn()
 		{
 		case 0:
 			//攻撃前のアニメーション
-			RequestAnim(ANIMID_ATTACKA1_IN, 0.5f);
+			RequestAnim(ANIMID_ATTACKA1_IN, 0.8f);
 			break;
 		case 1:
 			//攻撃前のアニメーション
-			RequestAnim(ANIMID_ATTACKA2_IN, 0.3f);
+			RequestAnim(ANIMID_ATTACKA2_IN, 0.8f);
 			break;
 		case 2:
 			//攻撃前のアニメーション
-			RequestAnim(ANIMID_ATTACKA3_IN, 0.5f);
+			RequestAnim(ANIMID_ATTACKA3_IN, 0.8f);
 			break;
 		}
 
@@ -321,15 +312,15 @@ void CPlayer::AttackIn()
 		{
 		case 0:
 			//攻撃前のアニメーション
-			RequestAnim(ANIMID_ATTACKB1_IN, 0.5f);
+			RequestAnim(ANIMID_ATTACKB1_IN, 1.0f);
 			break;
 		case 1:
 			//攻撃前のアニメーション
-			RequestAnim(ANIMID_ATTACKB2_IN, 0.5f);
+			RequestAnim(ANIMID_ATTACKB2_IN, 1.0f);
 			break;
 		case 2:
 			//攻撃前のアニメーション
-			RequestAnim(ANIMID_ATTACKB3_IN, 0.5f);
+			RequestAnim(ANIMID_ATTACKB3_IN, 1.0f);
 			break;
 		}
 
@@ -416,9 +407,6 @@ void CPlayer::Attack()
 		break;
 	}
 
-	//攻撃の呼び出し
-	RequestAttack();
-
 	//アニメーションが終わったら待機状態に戻す
 	if (GetAnimEnd() == true)
 	{
@@ -440,15 +428,15 @@ void CPlayer::AttackOut()
 		{
 		case 0:
 			//攻撃後のアニメーション
-			RequestAnim(ANIMID_ATTACKA1_OUT, 0.5f);
+			RequestAnim(ANIMID_ATTACKA1_OUT, 1.0f);
 			break;
 		case 1:
 			//攻撃後のアニメーション
-			RequestAnim(ANIMID_ATTACKA2_OUT, 0.5f);
+			RequestAnim(ANIMID_ATTACKA2_OUT, 0.8f);
 			break;
 		case 2:
 			//攻撃後のアニメーション
-			RequestAnim(ANIMID_ATTACKA3_OUT, 0.5f);
+			RequestAnim(ANIMID_ATTACKA3_OUT, 1.0f);
 			break;
 		}
 
@@ -458,7 +446,7 @@ void CPlayer::AttackOut()
 		{
 		case 0:
 			//攻撃後のアニメーション
-			RequestAnim(ANIMID_ATTACKB1_OUT, 1.0f);
+			RequestAnim(ANIMID_ATTACKB1_OUT, 0.8f);
 			break;
 		case 1:
 			//攻撃後のアニメーション
@@ -672,7 +660,7 @@ void CPlayer::ItemUseOut()
 void CPlayer::Stagger()
 {
 	//被弾のアニメーション
-	RequestAnim(ANIMID_HIT, 1.0f);
+	RequestAnim(ANIMID_HIT, 1.8f);
 
 	//被弾のアニメーションが終わったら戻す
 	if (GetAnimEnd() == true)
@@ -762,6 +750,13 @@ void CPlayer::Move(float _rotY)
 		speed = VScale(speed, MOVE_SPEED);
 	}
 
+	//移動していたら歩きモーションに以降
+	if (speed.x != 0.0f ||
+		speed.z != 0.0f)
+	{
+		m_state = WALK;
+	}
+
 	////カメラの角度がオールゼロの時に進む速度
 	VECTOR defaultDir = { speed.x,0.0f,speed.z };
 	//上記を行列に変換
@@ -819,6 +814,28 @@ void CPlayer::RequestAttack()
 
 			m_state = ATTACK_CHARGE_IN;
 		}
+	}
+
+}
+
+//-----------------------
+//ジャンプの呼び出し処理
+//-----------------------
+void CPlayer::RequestJump()
+{
+	switch (m_state)
+	{
+	case WAIT:
+	case WALK:
+		break;
+	default:
+		break;
+	}
+
+	if (CControllerManager::IsTrg(BUTTON_A, m_padName))
+	{
+		m_state = JUMP;
+		m_speed.y += JUMP_SPEED;
 	}
 
 }

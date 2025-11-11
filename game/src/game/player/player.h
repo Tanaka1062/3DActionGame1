@@ -135,6 +135,9 @@ private:
 	//攻撃を呼び出す処理
 	void RequestAttack();
 
+	//ジャンプの呼び出し処理
+	void RequestJump();
+
 	//回避に移行する処理
 	void RequestDodgeroll();
 
