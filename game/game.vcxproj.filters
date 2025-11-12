@@ -300,6 +300,9 @@
     <ClCompile Include="src\game\item\powerCoin\powerCoin.cpp">
       <Filter>ソース ファイル\game\item\powerCoin</Filter>
     </ClCompile>
+    <ClCompile Include="src\game\item\powerCoin\powerCoinManager.cpp">
+      <Filter>ソース ファイル\game\item\powerCoin</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\lib\number.h">
@@ -480,6 +483,9 @@
       <Filter>ソース ファイル\game\shadow</Filter>
     </ClInclude>
     <ClInclude Include="src\game\item\powerCoin\powerCoin.h">
+      <Filter>ソース ファイル\game\item\powerCoin</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\item\powerCoin\powerCoinManager.h">
       <Filter>ソース ファイル\game\item\powerCoin</Filter>
     </ClInclude>
   </ItemGroup>

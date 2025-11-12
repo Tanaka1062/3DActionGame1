@@ -6,6 +6,7 @@
 #include "../player/playerManager.h"
 #include "../shot/shotManager.h"
 #include "itemShotBase.h"
+#include "powerCoin/powerCoinManager.h"
 
 using namespace std;
 
@@ -14,9 +15,10 @@ using namespace std;
 class CItemManager
 {
 private:
-	list<CItemBase*> m_item;			//アイテムのクラス
-	int m_hndl[ITEM_NUM];				//アイテムのモデルハンドル
-	CShotManager* m_shot;				//弾のマネージャーのアドレス保存用
+	list<CItemBase*> m_item;				//アイテムのクラス
+	int m_hndl[ITEM_NUM];					//アイテムのモデルハンドル
+	CShotManager* m_shot;					//弾のマネージャーのアドレス保存用
+	CPowerCoinManager m_powerCoinManager;	//パワーコインのマネージャークラス
 public:
 	//コンストラクタ・デストラクタ
 	CItemManager();

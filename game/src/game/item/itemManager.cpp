@@ -29,6 +29,9 @@ CItemManager::~CItemManager()
 //-----------------------
 void CItemManager::Init( CShotManager* _shot)
 {
+
+	m_powerCoinManager.Init();
+
 	m_shot = _shot;
 
 	//モデルハンドルを初期化
@@ -90,6 +93,8 @@ void CItemManager::Init( CShotManager* _shot)
 //-----------------------
 void CItemManager::Load()
 {
+	m_powerCoinManager.Load();
+
 	//アイテムのモデルのパスを管理======
 	const char* MODEL_PATH[ITEM_NUM] =
 	{
@@ -117,6 +122,8 @@ void CItemManager::Load()
 //-----------------------
 void CItemManager::Step()
 {
+	m_powerCoinManager.Step();
+
 	//アイテムの処理
 	for (auto ite = m_item.begin(); ite != m_item.end(); ++ite)
 	{
@@ -129,6 +136,8 @@ void CItemManager::Step()
 //-----------------------
 void CItemManager::Update()
 {
+	m_powerCoinManager.Update();
+
 	//アイテムの更新
 	for (auto ite = m_item.begin(); ite != m_item.end(); ++ite)
 	{
@@ -141,6 +150,8 @@ void CItemManager::Update()
 //-----------------------
 void CItemManager::Draw()
 {
+	m_powerCoinManager.Draw();
+
 	//アイテムの描写
 	for (auto ite = m_item.begin(); ite != m_item.end(); ++ite)
 	{
@@ -153,6 +164,8 @@ void CItemManager::Draw()
 //-----------------------
 void CItemManager::Exit()
 {
+	m_powerCoinManager.Exit();
+
 	//アイテムの終了処理
 	for (auto ite = m_item.begin(); ite != m_item.end();)
 	{
