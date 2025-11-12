@@ -29,21 +29,3 @@ enum tagItemType
 };
 
 
-class CData
-{
-
-private:
-	static int m_score;		//ゲームのスコア
-
-public:
-	CData() { m_score = 0; }
-	~CData(){}
-
-	//スコアを取得
-	static int GetScore() { return m_score; }
-	//スコアを設定
-	static void SetScore(int _score) { m_score = _score; }
-	//スコア加算
-	static void AddScore(int _addScore) { m_score += _addScore; }
-};
-

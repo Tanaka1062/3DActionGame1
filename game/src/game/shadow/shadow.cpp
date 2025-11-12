@@ -26,7 +26,11 @@ void CShadow::Load()
 //–ˆƒtƒŒ[ƒ€‚·‚éˆ—
 void CShadow::Step(VECTOR _pos)
 {
-	m_pos = _pos;
-	m_pos.y += 1.0f;
+	//m_pos = _pos;
+	//m_pos.y += 1.0f;
+
+	//‰e‚ª°‚ÉŒÅ’è‚³‚ê‚Ä‚¢‚é‚¾‚¯:TODO
+	m_pos.x = _pos.x;
+	m_pos.z = _pos.z;
 }
 

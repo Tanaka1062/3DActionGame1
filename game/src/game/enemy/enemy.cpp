@@ -217,7 +217,7 @@ void CEnemy::Stagger()
 	}
 
 	//ノックバック
-	MoveBack();
+	KnockBack();
 
 }
 

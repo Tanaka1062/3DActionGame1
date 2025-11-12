@@ -2,7 +2,8 @@
 #include "../../lib/myMath/myMath.h"
 
 static const VECTOR BACK_SPEED = { 0.0f,0.5f,-1.0f };
-static const float BACK_DOWN_SPEED = 0.9f;
+static const float BACK_DOWN_SPEED = 0.9f;				//速度の減速
+static const float GRAVITIY = 0.3f;						//重力
 
 //------------------------------
 //		コンストラクタ
@@ -23,7 +24,8 @@ void CCharacterBase::Init(CAttackManager* _attackManager)
 	m_hp = 0;
 	m_maxHp = 0;
 	m_atk = 0;
-	m_rad = 0;
+	m_rad = 0.0f;
+	m_isFlying = false;
 	m_state = WAIT;
 	m_attackManager = _attackManager;
 	m_shadow.Init(m_pos,1.0f);
@@ -224,7 +226,10 @@ void CCharacterBase::ShotAttack(int _atk, float _rotY)
 //------------------------------
 void CCharacterBase::GravityReset()
 {
+	//ジャンプ中はやらない
+	if (m_state == JUMP)return;
 	m_gravity = 0.0f;
+	m_isFlying = false;
 }
 
 //------------------------------
@@ -368,14 +373,14 @@ void CCharacterBase::Die()
 //-----------------------
 void CCharacterBase::Gravity()
 {
-	m_gravity += 0.09f;
+	m_gravity += GRAVITIY;
 
 }
 
 //-----------------------
 //	 ノックバック処理
 //-----------------------
-void CCharacterBase::MoveBack()
+void CCharacterBase::KnockBack()
 {
 	//速度を徐々に下げていく
 	m_speed.x *= BACK_DOWN_SPEED;

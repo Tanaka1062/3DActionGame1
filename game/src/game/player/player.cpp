@@ -18,7 +18,7 @@ static const int ATK = 20;							//攻撃力
 static const float MOVE_SPEED = 1.2f;				//移動スピード
 static const float RADIUS = 10.0f;					//半径
 static const float DODGEROLL_SPEED = 1.5f;			//回避スピード
-static const float JUMP_SPEED = 30.0f;				//ジャンプスピード
+static const float JUMP_SPEED = -5.0f;				//ジャンプスピード
 //----------------------------------------------
 
 //攻撃関連---------------------------
@@ -141,7 +141,7 @@ void CPlayer::Step(float _rotY)
 	Move(_rotY);
 
 	//ジャンプ処理
-	//RequestJump();
+	RequestJump();
 
 	//回避移行処理
 	RequestDodgeroll();
@@ -153,6 +153,25 @@ void CPlayer::Step(float _rotY)
 	PickUpItem();
 
 	CCharacterBase::Step();
+
+	//仮のジャンプ処理----------------------
+	switch (m_state)
+	{
+	case WAIT:
+	case WALK:
+		break;
+	default:
+		return;
+	}
+
+	if (CControllerManager::IsTrg(BUTTON_A, m_padName))
+	{
+		m_state = JUMP;
+		m_gravity = JUMP_SPEED;
+		m_isFlying = true;
+	}
+	//--------------------------------------
+
 }
 
 //-----------------------
@@ -782,6 +801,9 @@ void CPlayer::Move(float _rotY)
 //-----------------------
 void CPlayer::RequestAttack()
 {
+	//空中いるときは攻撃を出せない
+	if (m_isFlying == true)return;
+
 
 	//攻撃ボタンを押したか
 	if (CheckHitKey(KEY_INPUT_J) != 0 ||
@@ -823,19 +845,22 @@ void CPlayer::RequestAttack()
 //-----------------------
 void CPlayer::RequestJump()
 {
+	//ジャンプ処理がよばれない:FIXME
+
 	switch (m_state)
 	{
 	case WAIT:
 	case WALK:
 		break;
 	default:
-		break;
+		return;
 	}
 
 	if (CControllerManager::IsTrg(BUTTON_A, m_padName))
 	{
 		m_state = JUMP;
-		m_speed.y += JUMP_SPEED;
+		m_gravity = JUMP_SPEED;
+		m_isFlying = true;
 	}
 
 }

@@ -18,6 +18,7 @@ protected:
 	int m_maxHp;						//体力の最大値
 	int m_hp;							//体力
 	int m_atk;							//攻撃力
+	bool m_isFlying;					//空中にいるかどうかフラグ
 	enum tagState						//キャラクターの状態
 	{
 		WAIT,							//待機
@@ -150,7 +151,7 @@ protected:
 	void Gravity();
 
 	//ノックバック処理
-	void MoveBack();
+	void KnockBack();
 
 };
 

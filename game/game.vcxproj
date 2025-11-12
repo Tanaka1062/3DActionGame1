@@ -163,6 +163,7 @@
     <ClCompile Include="src\game\item\itemInventory\itemInventory.cpp" />
     <ClCompile Include="src\game\item\itemManager.cpp" />
     <ClCompile Include="src\game\item\itemShotBase.cpp" />
+    <ClCompile Include="src\game\item\powerCoin\powerCoin.cpp" />
     <ClCompile Include="src\game\main.cpp" />
     <ClCompile Include="src\game\map\map.cpp" />
     <ClCompile Include="src\game\player\player.cpp" />
@@ -225,6 +226,7 @@
     <ClInclude Include="src\game\item\itemInventory\itemInventory.h" />
     <ClInclude Include="src\game\item\itemManager.h" />
     <ClInclude Include="src\game\item\itemShotBase.h" />
+    <ClInclude Include="src\game\item\powerCoin\powerCoin.h" />
     <ClInclude Include="src\game\map\map.h" />
     <ClInclude Include="src\game\player\player.h" />
     <ClInclude Include="src\game\player\playerManager.h" />

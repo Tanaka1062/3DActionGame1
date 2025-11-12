@@ -264,7 +264,7 @@ void CEnemyBase::Stagger()
 	}
 
 	//ノックバック
-	MoveBack();
+	KnockBack();
 
 }
 

@@ -42,22 +42,22 @@ void CItemManager::Init( CShotManager* _shot)
 	//アイテムクラスを生成し初期化
 	for (int i = 0; i < ITEM_NUM; i++)
 	{
-		CItemBase* item = nullptr;
-
-		//アイテムの名前を設定
-		switch (i)
-		{
-		case 0:
-			item = new CFireRing;
-			item->Init();
-			m_item.push_back(item);
-			break;
-		case 1:
-			item = new CHarbAmulent;
-			item->Init();
-			m_item.push_back(item);
-			break;
-		}
+		//アイテムを出現させる(デバック用)
+		//CItemBase* item = nullptr;
+		////アイテムの名前を設定
+		//switch (i)
+		//{
+		//case 0:
+		//	item = new CFireRing;
+		//	item->Init();
+		//	m_item.push_back(item);
+		//	break;
+		//case 1:
+		//	item = new CHarbAmulent;
+		//	item->Init();
+		//	m_item.push_back(item);
+		//	break;
+		//}
 
 	}
 
