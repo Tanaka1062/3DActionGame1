@@ -8,6 +8,7 @@
 #include "../item/itemInventory/itemInventory.h"
 #include "../attack/attackManager.h"
 #include "../box/boxManager.h"
+#include "../item/powerCoin/powerCoinManager.h"
 
 class CCollisionManager
 {
@@ -61,5 +62,9 @@ public:
 
 	//箱とマップの当たり判定
 	static void CheckHitBoxToMap(CBoxManager& _box, CMap& _map);
+
+	//プレイヤーとパワーコインの当たり判定
+	static void CheckHitPlayerToPowerCoin(CPlayerManager& _playerManager,
+		CPowerCoinManager& _powerCoinManager);
 };
 

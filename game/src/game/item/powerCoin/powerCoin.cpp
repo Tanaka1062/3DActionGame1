@@ -2,7 +2,7 @@
 
 CPowerCoin::CPowerCoin()
 {
-
+	m_isGet = false;
 }
 
 CPowerCoin::~CPowerCoin()
@@ -18,6 +18,7 @@ void CPowerCoin::Init(CPlayer* _player)
 	CItemBase::Init(_player);
 
 	m_isActive = false;
+	m_isGet = false;
 }
 
 //---------------------
@@ -26,5 +27,14 @@ void CPowerCoin::Init(CPlayer* _player)
 void CPowerCoin::Step()
 {
 	CItemBase::Step();
+}
+
+//---------------------
+//	ìñÇΩÇ¡ÇΩéûÇÃèàóù
+//---------------------
+void CPowerCoin::HitCalc()
+{
+	m_isActive = false;
+	m_isGet = true;
 }
 

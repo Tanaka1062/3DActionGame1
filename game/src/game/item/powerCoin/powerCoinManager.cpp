@@ -10,7 +10,7 @@ static const char* MODEL_PATH[COIN_NUM] = {
 static const char FRAME_PATH[] =
 { "data/model/map/TestMap4FramePos.mv1" };			//ロードするファイル名
 
-static const int SPAWN_TIME = 10 * 60;				//コインスポーン時間(秒)
+static const int SPAWN_TIME = 0.1 * 60;				//コインスポーン時間(秒)
 
 //------------------------
 //	    コンストラクタ
@@ -79,6 +79,7 @@ void CPowerCoinManager::Load()
 	for (int powerCoin_i = 0; powerCoin_i < m_powerCoin.size(); powerCoin_i++)
 	{
 		m_powerCoin[powerCoin_i]->LoadModel(MODEL_PATH[powerCoin_i]);
+		m_powerCoin[powerCoin_i]->Load();
 	}
 
 	//マップのフレームのハンドルをロード
@@ -123,9 +124,10 @@ void CPowerCoinManager::Step()
 		if (m_powerCoin[powerCoin_i]->GetActive())
 		{
 			activeCoinNum++;
+
+			m_powerCoin[powerCoin_i]->Step();
 		}
 
-		m_powerCoin[powerCoin_i]->Step();
 	}
 
 	//出現しているコインが最大数よりも少なかったらスポーンさせる
@@ -183,13 +185,14 @@ void CPowerCoinManager::Exit()
 void CPowerCoinManager::SpawnCoin()
 {
 	//ランダムな変数保存用
-	int rand = GetRand(COIN_SPAWN_POS_NUM);
+	int rand = GetRand(COIN_SPAWN_POS_NUM -1);
 
 	//コインの出現
 	for (int powerCoin_i = 0; powerCoin_i < m_powerCoin.size(); powerCoin_i++)
 	{
 		//生存していないコインを出現させる
-		if (m_powerCoin[powerCoin_i]->GetActive() == false)
+		if (m_powerCoin[powerCoin_i]->GetActive() == false &&
+			m_powerCoin[powerCoin_i]->GetIsGet() == false)
 		{
 			m_powerCoin[powerCoin_i]->SetPos(m_spawnPos[rand]);
 			m_powerCoin[powerCoin_i]->SetActive(true);

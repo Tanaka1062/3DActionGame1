@@ -35,8 +35,8 @@ void CHpbar::Draw(float _size)
 {
 	C2DUi::Draw(_size);
 
-	DrawBox(m_pos.x - 100.0f, m_pos.y + 26.0f,
-		(m_pos.x - 100.0f) + m_hp, m_pos.y - 14.0f, GetColor(0, 255, 0), TRUE);
+	DrawBox(static_cast<int>(m_pos.x - 100), static_cast<int>(m_pos.y + 26),
+		static_cast<int>((m_pos.x - 100.0f) + m_hp), static_cast<int>(m_pos.y - 14), GetColor(0, 255, 0), TRUE);
 }
 
 

@@ -47,6 +47,12 @@ public:
 	//終了処理
 	void Exit();
 
+	//パワーコインを取得
+	CPowerCoin* GetPowerCoin(int _num) { return m_powerCoin[_num]; }
+
+	//パワーコインの数を取得
+	int GetPowerCoinNum() { return m_powerCoin.size(); }
+
 private:
 	//コインを出現させる
 	void SpawnCoin();

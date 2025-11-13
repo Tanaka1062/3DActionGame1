@@ -776,3 +776,32 @@ void CCollisionManager::CheckHitBoxToMap(CBoxManager& _box, CMap& _map)
 
 }
 
+//プレイヤーとパワーコインの当たり判定
+void CCollisionManager::CheckHitPlayerToPowerCoin(CPlayerManager& _playerManager,
+	CPowerCoinManager& _powerCoinManager)
+{
+	for (int player_i = 0; player_i < _playerManager.GetPlayerNum(); player_i++)
+	{
+		//プレイヤーのクラスを取得
+		CPlayer* player = _playerManager.GetPlayer(player_i);
+
+		//プレイヤーが死んでいたらスキップ
+		if (player->GetActive() == false)continue;
+
+		for (int powerCoin_j = 0; powerCoin_j < _powerCoinManager.GetPowerCoinNum(); powerCoin_j++)
+		{
+			//パワーコインのクラスを取得
+			CPowerCoin* powerCoin = _powerCoinManager.GetPowerCoin(powerCoin_j);
+
+			//パワーコインが死んでいたらスキップ
+			if (powerCoin->GetActive() == false)continue;
+
+			if (CCollision::CheckHitSphereToSphere(player->GetCenter(), player->GetRad(),
+				powerCoin->GetCenter(), powerCoin->GetRad()) == true)
+			{
+				powerCoin->HitCalc();
+
+			}
+		}
+	}
+}

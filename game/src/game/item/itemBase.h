@@ -22,14 +22,26 @@ public:
 	//初期化
 	virtual void Init(CPlayer* _player = nullptr);
 
-	//モデルロード
+	//モデルのロード
 	virtual void Load();
 
 	//毎フレームする処理
 	virtual void Step();
 
+	//数値の更新
+	virtual void Update();
+
+	//モデルの描写
+	virtual void Draw();
+
+	//終了処理
+	virtual void Exit();
+
 	//使用した時の処理
 	virtual void Use();
+
+	//当たった時の処理
+	virtual void HitCalc();
 
 	//アイテムの名前を設定
 	void SetName(tagItemName _name) { m_name = _name; }

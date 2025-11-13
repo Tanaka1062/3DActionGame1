@@ -23,7 +23,16 @@ void CItemBase::Init(CPlayer* _player)
 	m_name = ITEM_NONE;
 	m_type = ITEM_TYPE_NONE;
 	m_player = _player;
-	m_shadow.Init(m_pos,1.0f);
+	m_shadow.Init(m_pos,0.5f);
+}
+
+//--------------------------
+//		モデルのロード
+//--------------------------
+void CItemBase::Load()
+{
+	CObject::Load();
+	m_shadow.Load();
 }
 
 //--------------------------
@@ -33,6 +42,37 @@ void CItemBase::Step()
 {
 	//少しずつ回転させる
 	m_rot.y += ROT_SPEED;
+
+	m_shadow.Step(m_pos);
+}
+
+//--------------------------
+//		  数値の更新
+//--------------------------
+void CItemBase::Update()
+{
+	CObject::Update();
+	m_shadow.Update();
+}
+
+//--------------------------
+//		 モデルの描写
+//--------------------------
+void CItemBase::Draw()
+{
+	if (m_isActive == false)return;
+
+	CObject::Draw();
+	m_shadow.Draw();
+}
+
+//--------------------------
+//		   終了処理
+//--------------------------
+void CItemBase::Exit()
+{
+	CObject::Exit();
+	m_shadow.Exit();
 }
 
 //--------------------------
@@ -43,3 +83,10 @@ void CItemBase::Use()
 
 }
 
+//--------------------------
+//	  当たった時の処理
+//--------------------------
+void CItemBase::HitCalc()
+{
+
+}

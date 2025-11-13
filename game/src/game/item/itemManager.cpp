@@ -30,8 +30,6 @@ CItemManager::~CItemManager()
 void CItemManager::Init( CShotManager* _shot)
 {
 
-	m_powerCoinManager.Init();
-
 	m_shot = _shot;
 
 	//モデルハンドルを初期化
@@ -41,28 +39,6 @@ void CItemManager::Init( CShotManager* _shot)
 	}
 
 	if (m_item.size() == ITEM_NUM)return;
-
-	//アイテムクラスを生成し初期化
-	for (int i = 0; i < ITEM_NUM; i++)
-	{
-		//アイテムを出現させる(デバック用)
-		//CItemBase* item = nullptr;
-		////アイテムの名前を設定
-		//switch (i)
-		//{
-		//case 0:
-		//	item = new CFireRing;
-		//	item->Init();
-		//	m_item.push_back(item);
-		//	break;
-		//case 1:
-		//	item = new CHarbAmulent;
-		//	item->Init();
-		//	m_item.push_back(item);
-		//	break;
-		//}
-
-	}
 
 	int num = 0;
 	
@@ -93,7 +69,6 @@ void CItemManager::Init( CShotManager* _shot)
 //-----------------------
 void CItemManager::Load()
 {
-	m_powerCoinManager.Load();
 
 	//アイテムのモデルのパスを管理======
 	const char* MODEL_PATH[ITEM_NUM] =
@@ -122,8 +97,6 @@ void CItemManager::Load()
 //-----------------------
 void CItemManager::Step()
 {
-	m_powerCoinManager.Step();
-
 	//アイテムの処理
 	for (auto ite = m_item.begin(); ite != m_item.end(); ++ite)
 	{
@@ -136,8 +109,6 @@ void CItemManager::Step()
 //-----------------------
 void CItemManager::Update()
 {
-	m_powerCoinManager.Update();
-
 	//アイテムの更新
 	for (auto ite = m_item.begin(); ite != m_item.end(); ++ite)
 	{
@@ -150,8 +121,6 @@ void CItemManager::Update()
 //-----------------------
 void CItemManager::Draw()
 {
-	m_powerCoinManager.Draw();
-
 	//アイテムの描写
 	for (auto ite = m_item.begin(); ite != m_item.end(); ++ite)
 	{
@@ -164,8 +133,6 @@ void CItemManager::Draw()
 //-----------------------
 void CItemManager::Exit()
 {
-	m_powerCoinManager.Exit();
-
 	//アイテムの終了処理
 	for (auto ite = m_item.begin(); ite != m_item.end();)
 	{
@@ -264,6 +231,7 @@ void CItemManager::SpawnItem(VECTOR _pos, tagItemName _name)
 
 	item->Init();
 	item->DuplicateModel(m_hndl[item->GetName()]);
+	item->Load();
 	item->SetPos(_pos);
 	m_item.push_back(item);
 

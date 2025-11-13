@@ -15,6 +15,7 @@
 #include "../box/boxManager.h"
 #include "../player/playerManager.h"
 #include "../ui/uiManager.h"
+#include "../item/powerCoin/powerCoinManager.h"
 
 using namespace std;
 
@@ -23,19 +24,20 @@ class CPlayScene :public CSceneBase
 {
 private:
 
-	CMap m_ground;						//背景
-	CSky m_sky;							//空
-	CCameraManager m_camera;			//カメラ
-	CPlayerManager m_playerManager;		//プレイヤー
-	CEnemyManager m_enemy;				//敵
-	CShotManager m_shot;				//弾
-	CGoal m_goal;						//ゴール
-	CItemManager m_item;				//アイテム
-	CItemInventory m_itemInventory;		//アイテムインベントリ
-	CWeaponManager m_weaponManager;		//武器のマネージャークラス
-	CAttackManager m_attackManager;		//攻撃のマネージャークラス
-	CBoxManager m_box;					//箱
-	CUiManager m_uiManager;				//uiのマネージャークラス
+	CMap m_ground;							//背景
+	CSky m_sky;								//空
+	CCameraManager m_camera;				//カメラ
+	CPlayerManager m_playerManager;			//プレイヤー
+	CEnemyManager m_enemy;					//敵
+	CShotManager m_shot;					//弾
+	CGoal m_goal;							//ゴール
+	CItemManager m_item;					//アイテム
+	CItemInventory m_itemInventory;			//アイテムインベントリ
+	CWeaponManager m_weaponManager;			//武器のマネージャークラス
+	CAttackManager m_attackManager;			//攻撃のマネージャークラス
+	CBoxManager m_box;						//箱
+	CUiManager m_uiManager;					//uiのマネージャークラス
+	CPowerCoinManager m_powerCoinManager;	//パワーコインのマネージャークラス
 
 public:
 

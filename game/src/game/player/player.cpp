@@ -390,7 +390,7 @@ void CPlayer::Attack()
 			break;
 		case 2:
 			//攻撃中のアニメーション
-			if(RequestAnim(ANIMID_ATTACKA3, 1.0f));
+			if(RequestAnim(ANIMID_ATTACKA3, 1.0f))
 			{
 				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_attackType);
 			}
