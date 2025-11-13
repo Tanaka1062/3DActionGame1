@@ -3,6 +3,7 @@
 #include "../../lib/model/3DObject.h"
 #include "../data.h"
 #include "../player/player.h"
+#include "../shadow/shadow.h"
 
 //アイテムのベースクラス
 class CItemBase :public CObject
@@ -12,6 +13,7 @@ protected:
 	tagItemName m_name;		//アイテムの名前
 	tagItemType m_type;		//アイテムのタイプ
 	CPlayer* m_player;		//プレイヤーのアドレス保存用
+	CShadow m_shadow;		//丸影のクラス
 
 public:
 	//コンストラクタ
@@ -19,6 +21,9 @@ public:
 
 	//初期化
 	virtual void Init(CPlayer* _player = nullptr);
+
+	//モデルロード
+	virtual void Load();
 
 	//毎フレームする処理
 	virtual void Step();

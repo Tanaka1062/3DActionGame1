@@ -16,6 +16,8 @@ CPowerCoin::~CPowerCoin()
 void CPowerCoin::Init(CPlayer* _player)
 {
 	CItemBase::Init(_player);
+
+	m_isActive = false;
 }
 
 //---------------------
@@ -23,6 +25,6 @@ void CPowerCoin::Init(CPlayer* _player)
 //---------------------
 void CPowerCoin::Step()
 {
-
+	CItemBase::Step();
 }
 

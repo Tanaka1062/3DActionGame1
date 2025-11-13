@@ -14,10 +14,22 @@ enum tagPowerCoinName
 	COIN_NUM,			//コインの数
 };
 
+enum tagPowerCoinPos
+{
+	COIN_SPAWN_POS_1,			//コインの出現座標１
+	COIN_SPAWN_POS_2,			//コインの出現座標２
+	COIN_SPAWN_POS_3,			//コインの出現座標３
+	COIN_SPAWN_POS_4,			//コインの出現座標４
+
+	COIN_SPAWN_POS_NUM,			//コインの出現座標の数
+};
+
 class CPowerCoinManager
 {
 private:
-	vector<CPowerCoin*>m_powerCoin;		//パワーコイン
+	vector<CPowerCoin*>m_powerCoin;			//パワーコイン
+	int m_timeCount;						//時間カウント
+	VECTOR m_spawnPos[COIN_SPAWN_POS_NUM];	//コインの出現座標
 public:
 	CPowerCoinManager();
 	~CPowerCoinManager();
@@ -35,5 +47,8 @@ public:
 	//終了処理
 	void Exit();
 
+private:
+	//コインを出現させる
+	void SpawnCoin();
 };
 

@@ -23,6 +23,7 @@ void CItemBase::Init(CPlayer* _player)
 	m_name = ITEM_NONE;
 	m_type = ITEM_TYPE_NONE;
 	m_player = _player;
+	m_shadow.Init(m_pos,1.0f);
 }
 
 //--------------------------
