@@ -22,6 +22,7 @@ private:
 	bool m_isItem;					//アイテムを持っているフラグ
 	bool m_isDodgeroll;				//回避しているかフラグ
 	int m_attackNum;				//攻撃の番号
+	int m_powerUp;					//パワーアップ
 	tagPadName m_padName;			//コントローラーの名前
 	tagAttackType m_attackType;		//攻撃のタイプ
 	tagWeaponId m_weaponId;			//武器のID
@@ -76,6 +77,9 @@ public:
 
 	//体力の最大値を取得
 	int GetHpMax() { return m_maxHp; }
+
+	//パワーアップを増やす
+	void AddPowerUp() { m_powerUp++; }
 
 private:
 	//待機状態処理

@@ -801,6 +801,7 @@ void CCollisionManager::CheckHitPlayerToPowerCoin(CPlayerManager& _playerManager
 			{
 				powerCoin->HitCalc();
 
+				player->AddPowerUp();
 			}
 		}
 	}

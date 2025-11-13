@@ -1,11 +1,20 @@
 #pragma once
 #include "../itemBase.h"
 
+enum tagPowerCoinState
+{
+	POWER_COIN_FLYING,		//飛んでいる状態
+	POWER_COIN_WAIT,		//待機状態
+
+};
+
 //プレイヤーのアドレスが必要ないのに継承のせいで持っている(HACK)
 class CPowerCoin : public CItemBase
 {
 private:
-	bool m_isGet;			//プレイヤーが持っているかどうか
+	bool m_isGet;				//プレイヤーが持っているかどうか
+	tagPowerCoinState m_state;	//状態
+
 public:
 	CPowerCoin();
 	~CPowerCoin();

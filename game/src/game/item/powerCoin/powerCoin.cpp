@@ -3,6 +3,7 @@
 CPowerCoin::CPowerCoin()
 {
 	m_isGet = false;
+	m_state = POWER_COIN_WAIT;
 }
 
 CPowerCoin::~CPowerCoin()
@@ -19,6 +20,7 @@ void CPowerCoin::Init(CPlayer* _player)
 
 	m_isActive = false;
 	m_isGet = false;
+
 }
 
 //---------------------

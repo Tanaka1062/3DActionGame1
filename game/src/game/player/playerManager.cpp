@@ -10,7 +10,7 @@ enum tagModelName					//モデル一覧
 	MODEL_NUM,						//モデルの数
 };
 
-static const char* MODEL_PATH[PAD_NUM] =
+static const char* MODEL_PATH[PLAYER_NUM] =
 { "data/model/player/playerTest5-1.mv1" ,
   "data/model/player/playerTest5-2.mv1" ,};			//ロードするファイル名
 

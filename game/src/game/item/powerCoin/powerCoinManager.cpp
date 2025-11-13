@@ -10,10 +10,10 @@ static const char* MODEL_PATH[COIN_NUM] = {
 static const char FRAME_PATH[] =
 { "data/model/map/TestMap4FramePos.mv1" };			//ロードするファイル名
 
-static const int SPAWN_TIME = 0.1 * 60;				//コインスポーン時間(秒)
+static const int SPAWN_TIME = 10 * 60;				//コインスポーン時間(秒)
 
 //------------------------
-//	    コンストラクタ
+//	   コンストラクタ
 //------------------------
 CPowerCoinManager::CPowerCoinManager()
 {

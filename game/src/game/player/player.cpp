@@ -5,6 +5,7 @@
 #include "../common.h"
 #include "../../lib/input/controllerManager.h"
 #include"../../lib/input/keyInput.h"
+#include "playerManager.h"
 
 //定義関連---------------------------
 
@@ -19,6 +20,8 @@ static const float MOVE_SPEED = 1.2f;				//移動スピード
 static const float RADIUS = 10.0f;					//半径
 static const float DODGEROLL_SPEED = 1.5f;			//回避スピード
 static const float JUMP_SPEED = -5.0f;				//ジャンプスピード
+static const int TRANSFORM_COIN_NUM = 3;			//変身に必要なコインの数
+static const int POWER_UP_ATK = 2;					//増加する攻撃力のような
 //----------------------------------------------
 
 //攻撃関連---------------------------
@@ -114,6 +117,7 @@ void CPlayer::Init(CAttackManager* _attackManager, tagPadName _padName)
 	m_isItem = false;
 	m_isDodgeroll = false;
 	m_attackNum = 0;
+	m_powerUp = 0;
 	m_padName = _padName;
 	m_attackType = ATTACK_TYPE_NONE;
 	m_weaponId = WEAPON_ID_HAND;
@@ -134,6 +138,9 @@ void CPlayer::Load(int _modelHndl)
 //-----------------------
 void CPlayer::Step(float _rotY)
 {
+	//攻撃力の上昇
+	m_atk = ATK + (m_powerUp * POWER_UP_ATK);
+
 	//攻撃の毎フレームする処理
 	m_attack.Step();
 
@@ -313,7 +320,7 @@ void CPlayer::AttackIn()
 		{
 		case 0:
 			//攻撃前のアニメーション
-			RequestAnim(ANIMID_ATTACKA1_IN, 0.8f);
+			RequestAnim(ANIMID_ATTACKA1_IN, 1.0f);
 			break;
 		case 1:
 			//攻撃前のアニメーション
@@ -732,7 +739,7 @@ void CPlayer::Move(float _rotY)
 	//コントローラー用前進後退
 	if (isController == true)
 	{
-		speed.z = CControllerManager::GetLY(m_padName);
+		speed.z = CControllerManager::GetLY(m_padName) * MOVE_SPEED;
 	}
 	//キーボード用前進
 	else if (CheckHitKey(KEY_INPUT_W) != 0)
@@ -749,7 +756,7 @@ void CPlayer::Move(float _rotY)
 	//コントローラー用左右移動
 	if (isController == true)
 	{
-		speed.x = -CControllerManager::GetLX(m_padName);
+		speed.x = -CControllerManager::GetLX(m_padName) * MOVE_SPEED;
 	}
 	//キーボード用左移動
 	else if (CheckHitKey(KEY_INPUT_A) != 0)
@@ -762,12 +769,6 @@ void CPlayer::Move(float _rotY)
 		speed.x = -MOVE_SPEED;
 	}
 
-	if (isController == true)
-	{
-		//速度の正規化しスピードを掛ける
-		speed = VNorm(speed);
-		speed = VScale(speed, MOVE_SPEED);
-	}
 
 	//移動していたら歩きモーションに以降
 	if (speed.x != 0.0f ||
@@ -875,6 +876,10 @@ void CPlayer::RequestDodgeroll()
 	{
 	case WAIT:
 	case WALK:
+	case ATTACK_IN:
+	case ATTACK:
+	case ATTACK_OUT:
+
 		break;
 	default:
 		return;
