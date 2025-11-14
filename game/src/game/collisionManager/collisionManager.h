@@ -14,41 +14,15 @@ class CCollisionManager
 {
 public:
 
-	//敵の視界とプレイヤーの当たり判定
-	static void CheckHitEnemyFOVToPlayer(CEnemyManager& _enemyManager,
-		CPlayerManager& _playerManager);
-
-	//敵の攻撃範囲とプレイヤーの当たり判定
-	static void CheckHitEnemyAttackToPlayer(CEnemyManager& _enemyManager,
-		CPlayerManager& _playerManager);
-
-	//プレイヤーの攻撃と敵の当たり判定
-	static void CheckHitPlayerAttackToEnemy(CAttackManager& _attackManager,
-		CEnemyManager& _enemyManager);
-
-	//プレイヤーの攻撃とプレイヤーの当たり判定
-	static void CheckHitPlayerAttackToPlayer(CAttackManager& _attackManager,
-		CPlayerManager& _playerManager);
-
-	//敵とプレイヤーの当たり判定
-	static void CheckHitEnemyToPlayer(CEnemyManager& _enemyManager,
-		CPlayerManager& _playerManager);
-
-	//敵と敵の当たり判定
-	static void CheckHitEnemyToEnemy(CEnemyManager& _enemyManager);
+	//プレイヤーと攻撃判定の当たり判定
+	static void CheckHitPlayerToPlayerAttack(CPlayerManager& _playerManager,
+		CAttackManager& _attackManager);
 
 	//プレイヤーとプレイヤーの当たり判定
 	static void CheckHitPlayerToPlayer(CPlayerManager& _playerManager);
 
-	//弾と敵の当たり判定
-	static void CheckHitShotToEnemy(CShotManager& _shotManager,
-		CEnemyManager& _enemyManager);
-
 	//プレイヤーとマップの当たり判定
 	static void CheckHitPlayerToMap(CPlayerManager& _playerManager,CMap& _map);
-
-	//敵とマップの当たり判定
-	static void CheckHitEnemyToMap(CEnemyManager& _enemy, CMap& _map);
 
 	//アイテムとプレイヤーの当たり判定
 	static void CheckHitItemToPlayer(CItemManager& _item,

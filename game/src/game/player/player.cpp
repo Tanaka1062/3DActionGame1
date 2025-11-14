@@ -86,9 +86,24 @@ enum tagAnim {
 //-----------------------
 CPlayer::CPlayer()
 {
-	Init();
-
 	m_isPickUpItem = false;
+	m_name = PLAYER_NONE;
+	CCharacterBase::Init(nullptr);
+
+	m_pos = ZERO;
+	m_rad = 0.0f;
+	m_maxHp = 0;
+	m_hp = 0;
+	m_atk = 0;
+	m_isItemUse = false;
+	m_isPickUpItem = false;
+	m_isItem = false;
+	m_isDodgeroll = false;
+	m_attackNum = 0;
+	m_powerUp = 0;
+	m_padName = PAD_NONE;
+	m_weaponId = WEAPON_ID_HAND;
+
 }
 
 //-----------------------
@@ -102,10 +117,9 @@ CPlayer::~CPlayer()
 //-----------------------
 //		初期化
 //-----------------------
-void CPlayer::Init(CAttackManager* _attackManager, tagPadName _padName)
+void CPlayer::Init(CAttackManager* _attackManager, tagPlayerName _name, tagPadName _padName)
 {
 	CCharacterBase::Init(_attackManager);
-	m_attack.Init(ATTACK_SIZE,ATTACK_LENGTH);
 
 	m_pos = ZERO;
 	m_rad = RADIUS;
@@ -119,8 +133,8 @@ void CPlayer::Init(CAttackManager* _attackManager, tagPadName _padName)
 	m_attackNum = 0;
 	m_powerUp = 0;
 	m_padName = _padName;
-	m_attackType = ATTACK_TYPE_NONE;
 	m_weaponId = WEAPON_ID_HAND;
+	m_name = _name;
 	m_shadow.Init(m_pos, SHADOW_SIZE);
 }
 
@@ -140,9 +154,6 @@ void CPlayer::Step(float _rotY)
 {
 	//攻撃力の上昇
 	m_atk = ATK + (m_powerUp * POWER_UP_ATK);
-
-	//攻撃の毎フレームする処理
-	m_attack.Step();
 
 	//移動処理
 	Move(_rotY);
@@ -219,8 +230,6 @@ void CPlayer::Update()
 	{
 		m_hp = m_maxHp;
 	}
-	//攻撃の更新
-	m_attack.Update(GetCenter(), m_rot);
 
 	//アイテムを取ろうとしているかを初期化
 	m_isPickUpItem = false;
@@ -385,21 +394,21 @@ void CPlayer::Attack()
 			//攻撃中のアニメーション
 			if (RequestAnim(ANIMID_ATTACKA1, 1.0f))
 			{
-				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_attackType);
+				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_name);
 			}
 			break;
 		case 1:
 			//攻撃中のアニメーション
 			if (RequestAnim(ANIMID_ATTACKA2, 1.0f))
 			{
-				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_attackType);
+				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_name);
 			}
 			break;
 		case 2:
 			//攻撃中のアニメーション
 			if(RequestAnim(ANIMID_ATTACKA3, 1.0f))
 			{
-				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_attackType);
+				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_name);
 			}
 			break;
 		}
@@ -412,21 +421,21 @@ void CPlayer::Attack()
 			//攻撃中のアニメーション
 			if (RequestAnim(ANIMID_ATTACKB1, 1.0f))
 			{
-				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_attackType);
+				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_name);
 			}
 			break;
 		case 1:
 			//攻撃中のアニメーション
 			if (RequestAnim(ANIMID_ATTACKB2, 1.0f))
 			{
-				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_attackType);
+				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_name);
 			}
 			break;
 		case 2:
 			//攻撃中のアニメーション
 			if (RequestAnim(ANIMID_ATTACKB3, 1.0f))
 			{
-				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_attackType);
+				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_name);
 			}
 			break;
 		}
@@ -582,7 +591,7 @@ void CPlayer::Skill()
 		if (RequestAnim(ANIMID_SKILLA, 1.0f))
 		{
 			//攻撃の呼び出し
-			m_attackManager->Request(GetCenter(), ATTACKB_SIZE, ATTACKB_ATK, m_attackType);
+			m_attackManager->Request(GetCenter(), ATTACKB_SIZE, ATTACKB_ATK, m_name);
 		}
 		break;
 	case WEAPON_ID_SWORD:
@@ -590,7 +599,7 @@ void CPlayer::Skill()
 		if (RequestAnim(ANIMID_SKILLB, 1.0f))
 		{
 			//攻撃の呼び出し
-			m_attackManager->Request(GetCenter(), ATTACKB_SIZE, ATTACKB_ATK, m_attackType);
+			m_attackManager->Request(GetCenter(), ATTACKB_SIZE, ATTACKB_ATK, m_name);
 		}
 		break;
 	}
@@ -820,7 +829,7 @@ void CPlayer::RequestAttack()
 			m_state = ATTACK_IN;
 		}
 		//攻撃してない時に攻撃前に移行する
-		else if (m_attack.GetIsCoolDown() == true)
+		else
 		{
 			m_state = ATTACK_IN;
 		}
@@ -830,13 +839,7 @@ void CPlayer::RequestAttack()
 	if (CheckHitKey(KEY_INPUT_U) != 0 ||
 		CControllerManager::IsTrg(BUTTON_Y,m_padName))
 	{
-
-		//攻撃してない時に攻撃前に移行する
-		if (m_attack.GetIsCoolDown() == true)
-		{
-
-			m_state = ATTACK_CHARGE_IN;
-		}
+		m_state = ATTACK_CHARGE_IN;
 	}
 
 }

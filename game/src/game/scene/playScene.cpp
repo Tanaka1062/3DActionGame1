@@ -30,9 +30,7 @@ void CPlayScene::Draw()
 {
 	m_ground.Draw();
 	m_sky.Draw();
-	m_goal.Draw();
 	m_playerManager.Draw();
-	m_enemy.Draw();
 	m_shot.Draw();
 	m_attackManager.Draw();
 	m_item.Draw();
@@ -53,9 +51,7 @@ void CPlayScene::Init()
 {
 	m_ground.Init();
 	m_sky.Init();
-	m_goal.Init();
 	m_playerManager.Init(&m_attackManager);
-	m_enemy.Init();
 	m_shot.Init();
 	m_item.Init(&m_shot);
 	m_itemInventory.Init(&m_playerManager);
@@ -74,9 +70,7 @@ void CPlayScene::Load()
 {
 	m_ground.Load();
 	m_sky.Load();
-	m_goal.Load();
 	m_playerManager.Load();
-	m_enemy.Load();
 	m_shot.Load();
 	m_item.Load();
 	m_weaponManager.Load();
@@ -94,8 +88,6 @@ void CPlayScene::Step()
 	m_sky.Step();
 
 	m_playerManager.Step(m_camera.GetRot().y);
-
-	m_enemy.Step(ZERO);
 
 	m_shot.Step();
 
@@ -116,16 +108,9 @@ void CPlayScene::Step()
 
 	//“–‚½‚è”»’è----------------------------------
 	//“G‚Ì‹ŠE”ÍˆÍ‚ÆƒvƒŒƒCƒ„[‚Ì“–‚½‚è”»’è
-	CCollisionManager::CheckHitEnemyFOVToPlayer(m_enemy, m_playerManager);
-	CCollisionManager::CheckHitEnemyAttackToPlayer(m_enemy, m_playerManager);
-	CCollisionManager::CheckHitPlayerAttackToEnemy(m_attackManager, m_enemy);
-	CCollisionManager::CheckHitPlayerAttackToPlayer(m_attackManager, m_playerManager);
-	CCollisionManager::CheckHitEnemyToPlayer(m_enemy, m_playerManager);
-	CCollisionManager::CheckHitEnemyToEnemy(m_enemy);
+	CCollisionManager::CheckHitPlayerToPlayerAttack(m_playerManager, m_attackManager);
 	CCollisionManager::CheckHitPlayerToPlayer(m_playerManager);
-	CCollisionManager::CheckHitShotToEnemy(m_shot, m_enemy);
 	CCollisionManager::CheckHitPlayerToMap(m_playerManager, m_ground);
-	CCollisionManager::CheckHitEnemyToMap(m_enemy, m_ground);
 	CCollisionManager::CheckHitItemToPlayer(m_item,m_itemInventory, m_playerManager);
 	CCollisionManager::CheckHitAttackToBox(m_attackManager, m_box);
 	CCollisionManager::CheckHitPlayerToBox(m_playerManager, m_box);
@@ -136,9 +121,7 @@ void CPlayScene::Step()
 	//‚·‚×‚Ä‚ÌŒ‹‰Ê‚ğ”½‰f‚³‚¹‚é
 	m_ground.Update();
 	m_sky.Update();
-	m_goal.Update();
 	m_playerManager.Update();
-	m_enemy.Update();
 	m_shot.Update();
 	m_attackManager.Update();
 	m_item.Update();
@@ -155,10 +138,6 @@ void CPlayScene::Step()
 		m_state = END;
 	}
 
-	if (m_goal.GetIsGoal() == true)
-	{
-		m_state = END;
-	}
 
 }
 
@@ -169,9 +148,7 @@ void CPlayScene::Exit()
 {
 	m_ground.Exit();
 	m_sky.Exit();
-	m_goal.Exit();
 	m_playerManager.Exit();
-	m_enemy.Exit();
 	m_attackManager.Exit();
 	m_shot.Exit();
 	m_item.Exit();

@@ -1,5 +1,7 @@
 #pragma once
 #include "../itemBase.h"
+#include "../../player/player.h"
+#include "../../player/playerData.h"
 
 enum tagPowerCoinState
 {
@@ -12,8 +14,8 @@ enum tagPowerCoinState
 class CPowerCoin : public CItemBase
 {
 private:
-	bool m_isGet;				//プレイヤーが持っているかどうか
 	tagPowerCoinState m_state;	//状態
+	tagPlayerName m_playerName;	//誰が持っているか
 
 public:
 	CPowerCoin();
@@ -26,10 +28,14 @@ public:
 	void Step();
 
 	//当たった時の処理
-	void HitCalc();
+	//_name		:どのプレイヤーが触れたかを取得
+	void HitCalc(tagPlayerName _name);
 
-	//当たったかどうかを取得
-	bool GetIsGet() { return m_isGet; }
+	//状態を取得
+	tagPowerCoinState GetState() { return m_state; }
+
+	//持っているプレイヤーの名前
+	tagPlayerName GetPlayerName() { return m_playerName; }
 
 };
 

@@ -1,6 +1,5 @@
 #pragma once
 #include "../../lib/model/actor.h"
-#include "../attack/attack.h"
 #include "../attack/attackManager.h"
 #include "../shadow/shadow.h"
 
@@ -41,7 +40,6 @@ protected:
 	};
 	tagState m_state;					//状態
 	tagCharacterType m_type;			//種類
-	CAttack m_attack;					//攻撃クラス
 	CAttackManager* m_attackManager;	//攻撃マネージャークラス
 	CShadow m_shadow;					//丸影のクラス
 
@@ -87,9 +85,6 @@ public:
 	
 	//種類を設定
 	void SetType(tagCharacterType _type) { m_type = _type; }
-
-	//攻撃を取得
-	CAttack* GetAttack() { return &m_attack; }
 
 	//重力リセット
 	void GravityReset();

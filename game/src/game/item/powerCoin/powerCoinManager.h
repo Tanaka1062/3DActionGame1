@@ -51,7 +51,7 @@ public:
 	CPowerCoin* GetPowerCoin(int _num) { return m_powerCoin[_num]; }
 
 	//パワーコインの数を取得
-	int GetPowerCoinNum() { return m_powerCoin.size(); }
+	int GetPowerCoinNum() { return static_cast<int>(m_powerCoin.size()); }
 
 private:
 	//コインを出現させる

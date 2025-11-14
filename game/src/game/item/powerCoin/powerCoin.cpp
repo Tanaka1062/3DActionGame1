@@ -2,13 +2,13 @@
 
 CPowerCoin::CPowerCoin()
 {
-	m_isGet = false;
 	m_state = POWER_COIN_WAIT;
+	m_playerName = PLAYER_NONE;
 }
 
 CPowerCoin::~CPowerCoin()
 {
-
+	
 }
 
 //---------------------
@@ -18,8 +18,10 @@ void CPowerCoin::Init(CPlayer* _player)
 {
 	CItemBase::Init(_player);
 
+	m_state = POWER_COIN_WAIT;
+	m_playerName = PLAYER_NONE;
+
 	m_isActive = false;
-	m_isGet = false;
 
 }
 
@@ -34,9 +36,9 @@ void CPowerCoin::Step()
 //---------------------
 //	ìñÇΩÇ¡ÇΩéûÇÃèàóù
 //---------------------
-void CPowerCoin::HitCalc()
+void CPowerCoin::HitCalc(tagPlayerName _name)
 {
 	m_isActive = false;
-	m_isGet = true;
+	m_playerName = _name;
 }
 

@@ -20,7 +20,7 @@ void CAttackBase::Init()
 	m_numCount = 0;
 	m_nextTime = 0;
 	m_timeCount = 0;
-	m_attackType = ATTACK_TYPE_NONE;
+	m_attackName = PLAYER_NONE;
 }
 
 //----------------------
@@ -66,12 +66,12 @@ void CAttackBase::Update()
 //----------------------
 //	  çUåÇÇÃåƒÇ—èoÇµ
 //----------------------
-void CAttackBase::Request(VECTOR _pos, float _rad, int _atk, tagAttackType _attackType, int _num, int _nextTime)
+void CAttackBase::Request(VECTOR _pos, float _rad, int _atk, tagPlayerName _name, int _num, int _nextTime)
 {
 	m_pos = _pos;
 	m_rad = _rad;
 	m_atk = _atk;
-	m_attackType = _attackType;
+	m_attackName = _name;
 	m_num = _num;
 	m_nextTime = _nextTime;
 	m_isActive = true;

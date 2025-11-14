@@ -61,20 +61,11 @@
     <Filter Include="ソース ファイル\game\attack">
       <UniqueIdentifier>{e20188aa-02ca-463b-8487-1d9485533a9e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\game\enemy">
-      <UniqueIdentifier>{311b7cbb-a292-449b-bf39-05638ecd2d43}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\game\FOV">
-      <UniqueIdentifier>{a48d1bf0-35fe-49f7-a1c0-e5097585396c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\game\collisionManager">
       <UniqueIdentifier>{87ef989f-fff0-49d3-827e-d45086156d04}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\game\shot">
       <UniqueIdentifier>{865b34c6-7fde-43a3-b510-81d189e164ed}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\game\goal">
-      <UniqueIdentifier>{e7bbbaea-5814-4c25-aae9-3defa60c22a4}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\game\item">
       <UniqueIdentifier>{055b67e1-9aaa-445a-848b-92d59ba63e9a}</UniqueIdentifier>
@@ -103,9 +94,6 @@
     <Filter Include="ソース ファイル\game\weapon">
       <UniqueIdentifier>{f7909f27-5431-4ff4-93aa-f4c37b51a76b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\game\enemy\flyEnemy">
-      <UniqueIdentifier>{5383299c-94bb-424b-b57a-912edd1ce6c8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\game\box">
       <UniqueIdentifier>{90fd580d-8741-458a-b196-b951d36cdcf0}</UniqueIdentifier>
     </Filter>
@@ -123,6 +111,9 @@
     </Filter>
     <Filter Include="ソース ファイル\game\item\powerCoin">
       <UniqueIdentifier>{f33fd6dd-0e9b-4b2f-b3c8-c5d7246b9087}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\game\ui\GetCoin">
+      <UniqueIdentifier>{62056f05-cb4f-4e0f-a4c8-9b6e16b40271}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -192,18 +183,6 @@
     <ClCompile Include="src\lib\collision\collision.cpp">
       <Filter>ソース ファイル\lib\collision</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\attack\attack.cpp">
-      <Filter>ソース ファイル\game\attack</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\enemy\enemy.cpp">
-      <Filter>ソース ファイル\game\enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\enemy\enemyManager.cpp">
-      <Filter>ソース ファイル\game\enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\FOV\FOV.cpp">
-      <Filter>ソース ファイル\game\FOV</Filter>
-    </ClCompile>
     <ClCompile Include="src\game\collisionManager\collisionManager.cpp">
       <Filter>ソース ファイル\game\collisionManager</Filter>
     </ClCompile>
@@ -212,9 +191,6 @@
     </ClCompile>
     <ClCompile Include="src\game\shot\shotManager.cpp">
       <Filter>ソース ファイル\game\shot</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\goal\goal.cpp">
-      <Filter>ソース ファイル\game\goal</Filter>
     </ClCompile>
     <ClCompile Include="src\game\item\itemBase.cpp">
       <Filter>ソース ファイル\game\item</Filter>
@@ -251,12 +227,6 @@
     </ClCompile>
     <ClCompile Include="src\game\weapon\weapon.cpp">
       <Filter>ソース ファイル\game\weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\enemy\flyEnemy\flyEnemy.cpp">
-      <Filter>ソース ファイル\game\enemy\flyEnemy</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\enemy\enemyBase.cpp">
-      <Filter>ソース ファイル\game\enemy</Filter>
     </ClCompile>
     <ClCompile Include="src\game\attack\attackManager.cpp">
       <Filter>ソース ファイル\game\attack</Filter>
@@ -302,6 +272,9 @@
     </ClCompile>
     <ClCompile Include="src\game\item\powerCoin\powerCoinManager.cpp">
       <Filter>ソース ファイル\game\item\powerCoin</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\ui\GetCoin\GetCoinUi.cpp">
+      <Filter>ソース ファイル\game\ui\GetCoin</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -374,18 +347,6 @@
     <ClInclude Include="src\lib\collision\collision.h">
       <Filter>ソース ファイル\lib\collision</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\attack\attack.h">
-      <Filter>ソース ファイル\game\attack</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\enemy\enemy.h">
-      <Filter>ソース ファイル\game\enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\enemy\enemyManager.h">
-      <Filter>ソース ファイル\game\enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\FOV\FOV.h">
-      <Filter>ソース ファイル\game\FOV</Filter>
-    </ClInclude>
     <ClInclude Include="src\game\collisionManager\collisionManager.h">
       <Filter>ソース ファイル\game\collisionManager</Filter>
     </ClInclude>
@@ -394,9 +355,6 @@
     </ClInclude>
     <ClInclude Include="src\game\shot\shotManager.h">
       <Filter>ソース ファイル\game\shot</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\goal\goal.h">
-      <Filter>ソース ファイル\game\goal</Filter>
     </ClInclude>
     <ClInclude Include="src\game\item\itemBase.h">
       <Filter>ソース ファイル\game\item</Filter>
@@ -431,17 +389,8 @@
     <ClInclude Include="src\game\system\effectData\effectData.h">
       <Filter>ソース ファイル\game\system\effectData</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\enemy\enemyRootData.h">
-      <Filter>ソース ファイル\game\enemy</Filter>
-    </ClInclude>
     <ClInclude Include="src\game\weapon\weapon.h">
       <Filter>ソース ファイル\game\weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\enemy\flyEnemy\flyEnemy.h">
-      <Filter>ソース ファイル\game\enemy\flyEnemy</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\enemy\enemyBase.h">
-      <Filter>ソース ファイル\game\enemy</Filter>
     </ClInclude>
     <ClInclude Include="src\game\attack\attackManager.h">
       <Filter>ソース ファイル\game\attack</Filter>
@@ -487,6 +436,12 @@
     </ClInclude>
     <ClInclude Include="src\game\item\powerCoin\powerCoinManager.h">
       <Filter>ソース ファイル\game\item\powerCoin</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\player\playerData.h">
+      <Filter>ソース ファイル\game\player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\ui\GetCoin\GetCoinUi.h">
+      <Filter>ソース ファイル\game\ui\GetCoin</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -5,9 +5,7 @@
 #include "../sky/sky.h"
 #include"../data.h"
 #include"../character/characterBase.h"
-#include "../enemy/enemyManager.h"
 #include "../shot/shotManager.h"
-#include "../goal/goal.h"
 #include "../item/itemManager.h"
 #include "../item/itemInventory/itemInventory.h"
 #include "../weapon/weaponManager.h"
@@ -28,9 +26,7 @@ private:
 	CSky m_sky;								//空
 	CCameraManager m_camera;				//カメラ
 	CPlayerManager m_playerManager;			//プレイヤー
-	CEnemyManager m_enemy;					//敵
 	CShotManager m_shot;					//弾
-	CGoal m_goal;							//ゴール
 	CItemManager m_item;					//アイテム
 	CItemInventory m_itemInventory;			//アイテムインベントリ
 	CWeaponManager m_weaponManager;			//武器のマネージャークラス

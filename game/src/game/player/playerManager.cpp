@@ -30,11 +30,11 @@ CPlayerManager::CPlayerManager()
 //------------------------
 CPlayerManager::~CPlayerManager()
 {
-	for (int i = 0; i < m_player.size(); i++)
+	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
-		delete m_player[i];
+		delete m_player[player_i];
 
-		m_player[i]->Exit();
+		m_player[player_i]->Exit();
 
 	}
 }
@@ -46,16 +46,16 @@ void CPlayerManager::Init(CAttackManager* _attackManager)
 {
 	if (m_modelHndl.size() < MODEL_NUM)
 	{
-		for (int i = 0; i < MODEL_NUM; i++)
+		for (int modelHndl_i = 0; modelHndl_i < MODEL_NUM; modelHndl_i++)
 		{
 			m_modelHndl.push_back(-1);
 		}
 	}
 
-	for (int i = 0; i < PLAYER_NUM; i++)
+	for (int player_i = 0; player_i < PLAYER_NUM; player_i++)
 	{
 		//コントローラーの名前を取得
-		tagPadName padName = CControllerManager::GetName(i);
+		tagPadName padName = CControllerManager::GetName(player_i);
 
 		//プレイヤーがいなかったら増やす
 		if (m_player.size() < PLAYER_NUM)
@@ -63,18 +63,20 @@ void CPlayerManager::Init(CAttackManager* _attackManager)
 			m_player.push_back(new CPlayer);
 		}
 
-		m_player[i]->Init(_attackManager, padName);
+		tagPlayerName name = PLAYER_NONE;
 
-		//攻撃のタイプを設定
-		switch (i)
+		switch (player_i)
 		{
-		case 0:
-			m_player[i]->SetAttackType(ATTACK_TYPE_PLAYER1);
+		case PLAYER_1:
+			name = PLAYER_1;
 			break;
-		case 1:
-			m_player[i]->SetAttackType(ATTACK_TYPE_PLAYER2);
+		case PLAYER_2:
+			name = PLAYER_2;
 			break;
 		}
+
+		m_player[player_i]->Init(_attackManager,name, padName);
+
 	}
 	
 }

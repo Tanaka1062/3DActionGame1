@@ -4,6 +4,7 @@
 #include <iostream>
 #include <list>
 #include"attackBase.h"
+#include "../player/playerData.h"
 
 using namespace std;
 
@@ -32,10 +33,10 @@ public:
 	// _pos			:ŒÄ‚Ño‚·À•W
 	// _rad			:”¼Œa
 	// _atk			:UŒ‚—Í
-	// _attackType	:UŒ‚‚Ìƒ^ƒCƒv
+	// _name		:UŒ‚‚·‚éƒLƒƒƒ‰‚Ì–¼‘O
 	// _num			:˜A‘±UŒ‚‚Ì‰ñ”
 	// _nextTime	:˜A‘±UŒ‚‚ÌŸ‚ÌUŒ‚‚ª”­¶‚·‚é‚Ü‚Å‚ÌŠÔ
-	void Request(VECTOR _pos, float _rad, int _atk, tagAttackType _attackType, int _num = 1,int _nextTime = 0);
+	void Request(VECTOR _pos, float _rad, int _atk,tagPlayerName _name, int _num = 1,int _nextTime = 0);
 
 	//UŒ‚‚Ì“–‚½‚è”»’è‚Ì”‚ğæ“¾
 	int GetNum() { return static_cast<int>(m_attack.size()); }

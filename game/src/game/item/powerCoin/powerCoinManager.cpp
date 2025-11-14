@@ -192,7 +192,7 @@ void CPowerCoinManager::SpawnCoin()
 	{
 		//¶‘¶‚µ‚Ä‚¢‚È‚¢ƒRƒCƒ“‚ðoŒ»‚³‚¹‚é
 		if (m_powerCoin[powerCoin_i]->GetActive() == false &&
-			m_powerCoin[powerCoin_i]->GetIsGet() == false)
+			m_powerCoin[powerCoin_i]->GetPlayerName() == PLAYER_NONE)
 		{
 			m_powerCoin[powerCoin_i]->SetPos(m_spawnPos[rand]);
 			m_powerCoin[powerCoin_i]->SetActive(true);

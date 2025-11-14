@@ -2,8 +2,7 @@
 #include "../character/characterBase.h"
 #include "../shot/shotManager.h"
 #include"../../lib/input/controllerManager.h"
-
-static const int ITEM_INVENTORY_MAX = 1;	//アイテムインベントリの最大数
+#include "playerData.h"
 
 enum tagWeaponId
 {
@@ -24,8 +23,8 @@ private:
 	int m_attackNum;				//攻撃の番号
 	int m_powerUp;					//パワーアップ
 	tagPadName m_padName;			//コントローラーの名前
-	tagAttackType m_attackType;		//攻撃のタイプ
 	tagWeaponId m_weaponId;			//武器のID
+	tagPlayerName m_name;			//プレイヤーの名前
 
 public:
 	//コンストラクタ・デストラクタ
@@ -33,7 +32,7 @@ public:
 	~CPlayer();
 
 	//初期化
-	void Init(CAttackManager* _attackManager = nullptr, tagPadName _padName = PAD_NONE);
+	void Init(CAttackManager* _attackManager,tagPlayerName _name, tagPadName _padName);
 
 	//モデルロード
 	void Load(int _modelHndl);
@@ -62,15 +61,13 @@ public:
 	//コントローラーの名前を取得
 	tagPadName GetPadName() { return m_padName; }
 
-	//攻撃のタイプを取得
-	tagAttackType GetAttackType() { return m_attackType; }
-	//攻撃のタイプを設定
-	void SetAttackType(tagAttackType _attackType) { m_attackType = _attackType; }
-
 	//武器のIDを取得
 	tagWeaponId GetWeaponId() { return m_weaponId; }
 	//武器のIDを設定
 	void SetWeaponId(tagWeaponId _weaponId) { m_weaponId = _weaponId; }
+
+	//名前を取得
+	tagPlayerName GetPlayerName() { return m_name; }
 
 	//体力を増やす
 	void AddHp(int _addNum) { m_hp += _addNum; }
