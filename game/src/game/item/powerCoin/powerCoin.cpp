@@ -42,3 +42,14 @@ void CPowerCoin::HitCalc(tagPlayerName _name)
 	m_playerName = _name;
 }
 
+//---------------------
+//	コインのドロップ
+//---------------------
+void CPowerCoin::Drop(VECTOR _pos, float _rotY)
+{
+	m_pos = _pos;
+	m_state = POWER_COIN_FLYING;
+	m_isActive = true;
+	m_playerName = PLAYER_NONE;
+
+}

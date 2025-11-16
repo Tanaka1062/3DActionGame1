@@ -51,7 +51,7 @@ CPowerCoinManager::~CPowerCoinManager()
 //------------------------
 //		  初期化
 //------------------------
-void CPowerCoinManager::Init()
+void CPowerCoinManager::Init(CPlayerManager* _playerManager)
 {
 	//コインの初期化
 	for (int powerCoin_i = 0; powerCoin_i < m_powerCoin.size(); powerCoin_i++)
@@ -68,6 +68,7 @@ void CPowerCoinManager::Init()
 		m_spawnPos[spawnPos_i] = { 0.0f,0.0f,0.0f };
 	}
 
+	m_playerManager = _playerManager;
 }
 
 //------------------------
@@ -144,6 +145,26 @@ void CPowerCoinManager::Step()
 		}
 	}
 
+	//コインをドロップしていたら落とす
+	for (int player_i = 0; player_i < m_playerManager->GetPlayerNum(); player_i++)
+	{
+		CPlayer* player = m_playerManager->GetPlayer(player_i);
+
+		if (player->GetIsDropCoin() == true)
+		{
+			for (int powerCoin_i = 0; powerCoin_i < m_powerCoin.size(); powerCoin_i++)
+			{
+				//プレイヤーの持っているコインがある場合落とす
+				if (m_powerCoin[powerCoin_i]->GetPlayerName() == player->GetPlayerName())
+				{
+					m_powerCoin[powerCoin_i]->Drop(player->GetCenter(),0.0f);
+					player->SubPowerUp();
+					break;
+				}
+			}
+			player->SetIsDropCoin(false);
+		}
+	}
 }
 
 //------------------------
@@ -153,6 +174,8 @@ void CPowerCoinManager::Update()
 {
 	for (int powerCoin_i = 0; powerCoin_i < m_powerCoin.size(); powerCoin_i++)
 	{
+		if (m_powerCoin[powerCoin_i]->GetActive() == false)continue;
+
 		m_powerCoin[powerCoin_i]->Update();
 	}
 }

@@ -40,5 +40,9 @@ public:
 	//プレイヤーとパワーコインの当たり判定
 	static void CheckHitPlayerToPowerCoin(CPlayerManager& _playerManager,
 		CPowerCoinManager& _powerCoinManager);
+
+	//パワーコインとマップの当たり判定
+	static void CheckHitPowerCoinToMap(CPowerCoinManager& _powerCoinManager, CMap& _map);
+
 };
 

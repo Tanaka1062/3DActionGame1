@@ -115,6 +115,7 @@ void CPlayerManager::Load()
 			break;
 		}
 
+		start.y += 50;
 		m_player[i]->Load(m_modelHndl[i]);
 		m_player[i]->SetPos(start);
 	}

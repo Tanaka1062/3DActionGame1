@@ -36,6 +36,9 @@ public:
 
 	//持っているプレイヤーの名前
 	tagPlayerName GetPlayerName() { return m_playerName; }
+	
+	//コインのドロップ
+	void Drop(VECTOR _pos,float _rotY);
 
 };
 

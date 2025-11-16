@@ -2,6 +2,7 @@
 #include "powerCoin.h"
 #include <iterator>
 #include<vector>
+#include "../../player/playerManager.h"
 
 using namespace std;
 
@@ -30,12 +31,13 @@ private:
 	vector<CPowerCoin*>m_powerCoin;			//パワーコイン
 	int m_timeCount;						//時間カウント
 	VECTOR m_spawnPos[COIN_SPAWN_POS_NUM];	//コインの出現座標
+	CPlayerManager* m_playerManager;		//プレイヤーのマネージャークラス
 public:
 	CPowerCoinManager();
 	~CPowerCoinManager();
 
 	//初期化
-	void Init();
+	void Init(CPlayerManager* _playerManager);
 	//モデルロード
 	void Load();
 	//毎フレームする処理

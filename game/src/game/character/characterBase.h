@@ -13,11 +13,9 @@ enum tagCharacterType	//キャラクターの種類
 class CCharacterBase:public CActor
 {
 protected:
-	float m_gravity;					//重力
 	int m_maxHp;						//体力の最大値
 	int m_hp;							//体力
 	int m_atk;							//攻撃力
-	bool m_isFlying;					//空中にいるかどうかフラグ
 	enum tagState						//キャラクターの状態
 	{
 		WAIT,							//待機
@@ -86,9 +84,6 @@ public:
 	//種類を設定
 	void SetType(tagCharacterType _type) { m_type = _type; }
 
-	//重力リセット
-	void GravityReset();
-
 protected:
 
 	//待機処理
@@ -141,9 +136,6 @@ protected:
 
 	//死亡
 	virtual void Die();
-
-	//重力処理
-	void Gravity();
 
 	//ノックバック処理
 	void KnockBack();

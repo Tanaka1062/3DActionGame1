@@ -99,6 +99,7 @@ CPlayer::CPlayer()
 	m_isPickUpItem = false;
 	m_isItem = false;
 	m_isDodgeroll = false;
+	m_isDropCoin = false;
 	m_attackNum = 0;
 	m_powerUp = 0;
 	m_padName = PAD_NONE;
@@ -130,6 +131,7 @@ void CPlayer::Init(CAttackManager* _attackManager, tagPlayerName _name, tagPadNa
 	m_isPickUpItem = false;
 	m_isItem = false;
 	m_isDodgeroll = false;
+	m_isDropCoin = false;
 	m_attackNum = 0;
 	m_powerUp = 0;
 	m_padName = _padName;
@@ -231,10 +233,26 @@ void CPlayer::Update()
 		m_hp = m_maxHp;
 	}
 
+	//パワーアップが増えすぎないように
+	if (m_powerUp >= TRANSFORM_COIN_NUM)
+	{
+		m_powerUp = TRANSFORM_COIN_NUM;
+	}
+
 	//アイテムを取ろうとしているかを初期化
 	m_isPickUpItem = false;
 	//アイテムを使用したかを初期化
 	m_isItemUse = false;
+}
+
+//-----------------------
+//攻撃を食らった時にする処理
+//-----------------------
+void CPlayer::HitAttack(int _atk, float _rotY)
+{
+	CCharacterBase::HitAttack(_atk,_rotY);
+
+	m_isDropCoin = true;
 }
 
 //-----------------------
@@ -882,16 +900,18 @@ void CPlayer::RequestDodgeroll()
 	case ATTACK_IN:
 	case ATTACK:
 	case ATTACK_OUT:
+	case ATTACK_CHARGE_IN:
 
 		break;
 	default:
 		return;
 	}
 
-	//攻撃ボタンを押したか
+	//回避ボタンを押したか
 	if (CheckHitKey(KEY_INPUT_L) != 0 ||
 		CControllerManager::IsTrg(BUTTON_RB, m_padName))
 	{
+		m_attackNum = 0;
 		m_isDodgeroll = true;
 		m_state = DODGEROLL;
 	}

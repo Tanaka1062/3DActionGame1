@@ -1,6 +1,8 @@
 #include"3DObject.h"
 #include "../../game/common.h"
 
+static const float GRAVITIY = 0.3f;						//重力
+
 //---------------------
 //	コンストラクタ
 //---------------------
@@ -27,7 +29,10 @@ void CObject::Init()
 	m_rot = { 0.0f,0.0f,0.0f };
 	m_scale = { 1.0f,1.0f,1.0f };
 	m_hndl = -1;
+	m_rad = 0.0f;
+	m_gravity = 0.0f;
 	m_isActive = true;
+	m_isGravity = false;
 }
 
 //---------------------
@@ -39,10 +44,25 @@ void CObject::Exit()
 }
 
 //---------------------
+//	毎フレームする処理
+//---------------------
+void CObject::Step()
+{
+	if (m_isGravity == true)
+	{
+		//重力処理
+		Gravity();
+	}
+}
+
+//---------------------
 //		数値の更新
 //---------------------
 void CObject::Update()
 {
+	//重力を速度に加算
+	m_speed.y -= m_gravity;
+
 	//現在の座標にスピードを加算
 	m_pos = VAdd(m_pos, m_speed);
 
@@ -135,6 +155,15 @@ void CObject::ObjPush(VECTOR _push)
 }
 
 //------------------------------
+//			重力リセット
+//------------------------------
+void CObject::GravityReset()
+{
+	m_gravity = 0.0f;
+	m_isFlying = false;
+}
+
+//------------------------------
 //		中心座標を取得
 //------------------------------
 VECTOR CObject::GetCenter()
@@ -154,3 +183,10 @@ void CObject::ResetSpeed()
 	m_speed = { 0.0f,0.0f,0.0f };
 }
 
+//-----------------------------
+//			重力処理
+//-----------------------------
+void CObject::Gravity()
+{
+	m_gravity += GRAVITIY;
+}

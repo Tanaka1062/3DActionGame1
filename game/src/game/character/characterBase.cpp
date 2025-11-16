@@ -3,7 +3,6 @@
 
 static const VECTOR BACK_SPEED = { 0.0f,0.5f,-1.0f };
 static const float BACK_DOWN_SPEED = 0.9f;				//速度の減速
-static const float GRAVITIY = 0.3f;						//重力
 
 //------------------------------
 //		コンストラクタ
@@ -26,6 +25,7 @@ void CCharacterBase::Init(CAttackManager* _attackManager)
 	m_atk = 0;
 	m_rad = 0.0f;
 	m_isFlying = false;
+	m_isGravity = true;
 	m_state = WAIT;
 	m_attackManager = _attackManager;
 	m_shadow.Init(m_pos,1.0f);
@@ -43,8 +43,7 @@ void CCharacterBase::Load()
 //------------------------------
 void CCharacterBase::Step()
 {
-	//重力処理
-	Gravity();
+	CActor::Step();
 
 	m_shadow.Step(m_pos);
 
@@ -151,9 +150,6 @@ void CCharacterBase::Step(VECTOR _pos)
 //------------------------------
 void CCharacterBase::Update()
 {
-	//重力を速度に加算
-	m_speed.y -= m_gravity;
-
 	CActor::Update();
 
 	m_shadow.Update();
@@ -219,17 +215,6 @@ void CCharacterBase::HitAttack(int _atk, float _rotY)
 void CCharacterBase::ShotAttack(int _atk, float _rotY)
 {
 	HitAttack(_atk, _rotY);
-}
-
-//------------------------------
-//		重力リセット
-//------------------------------
-void CCharacterBase::GravityReset()
-{
-	//ジャンプ中はやらない
-	if (m_state == JUMP)return;
-	m_gravity = 0.0f;
-	m_isFlying = false;
 }
 
 //------------------------------
@@ -368,14 +353,6 @@ void CCharacterBase::Die()
 
 }
 
-//-----------------------
-//		重力処理
-//-----------------------
-void CCharacterBase::Gravity()
-{
-	m_gravity += GRAVITIY;
-
-}
 
 //-----------------------
 //	 ノックバック処理

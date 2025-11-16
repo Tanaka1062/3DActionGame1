@@ -58,7 +58,7 @@ void CPlayScene::Init()
 	m_weaponManager.Init();
 	m_box.Init();
 	m_uiManager.Init(&m_playerManager);
-	m_powerCoinManager.Init();
+	m_powerCoinManager.Init(&m_playerManager);
 	m_camera.Init(ZERO);
 
 }
@@ -116,6 +116,7 @@ void CPlayScene::Step()
 	CCollisionManager::CheckHitPlayerToBox(m_playerManager, m_box);
 	CCollisionManager::CheckHitBoxToMap(m_box, m_ground);
 	CCollisionManager::CheckHitPlayerToPowerCoin(m_playerManager, m_powerCoinManager);
+	CCollisionManager::CheckHitPowerCoinToMap(m_powerCoinManager, m_ground);
 	//--------------------------------------------
 
 	//‚·‚×‚Ä‚ÌŒ‹‰Ê‚ð”½‰f‚³‚¹‚é

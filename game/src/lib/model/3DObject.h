@@ -10,7 +10,10 @@ protected:
 	VECTOR m_scale;			//拡大縮小率
 	int m_hndl;				//オブジェクトのハンドル
 	float m_rad;			//半径
+	float m_gravity;		//重力
 	bool m_isActive;		//生存フラグ
+	bool m_isGravity;		//重力処理をするかどうかフラグ
+	bool m_isFlying;		//空中にいるかどうかフラグ
 
 public:
 	//コンストラクタ・デストラクタ
@@ -21,6 +24,8 @@ public:
 	virtual void Init();
 	//終了処理
 	virtual void Exit();
+	//毎フレームする処理
+	virtual void Step();
 	//数値の更新
 	virtual void Update();
 	//オブジェクトの描写
@@ -47,6 +52,9 @@ public:
 	//オブジェクトを押し出す
 	// _push	:押し出す力		
 	void ObjPush(VECTOR _push);
+
+	//重力リセット
+	void GravityReset();
 
 	//取得・設定---------------------
 	//座標を取得
@@ -103,6 +111,9 @@ protected:
 	
 	//速度のリセット
 	void ResetSpeed();
+
+	//重力処理
+	void Gravity();
 
 };
 

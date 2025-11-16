@@ -24,6 +24,7 @@ void CItemBase::Init(CPlayer* _player)
 	m_type = ITEM_TYPE_NONE;
 	m_player = _player;
 	m_shadow.Init(m_pos,0.5f);
+	m_isGravity = true;
 }
 
 //--------------------------
@@ -40,6 +41,7 @@ void CItemBase::Load()
 //--------------------------
 void CItemBase::Step()
 {
+	CObject::Step();
 	//è≠ÇµÇ∏Ç¬âÒì]Ç≥ÇπÇÈ
 	m_rot.y += ROT_SPEED;
 

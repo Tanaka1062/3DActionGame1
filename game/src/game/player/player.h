@@ -20,6 +20,7 @@ private:
 	bool m_isItemUse;				//アイテム使用フラグ
 	bool m_isItem;					//アイテムを持っているフラグ
 	bool m_isDodgeroll;				//回避しているかフラグ
+	bool m_isDropCoin;				//コインを落としているかどうかフラグ
 	int m_attackNum;				//攻撃の番号
 	int m_powerUp;					//パワーアップ
 	tagPadName m_padName;			//コントローラーの名前
@@ -46,6 +47,9 @@ public:
 	//更新処理
 	void Update();
 
+	//攻撃を食らった時にする処理
+	void HitAttack(int _atk, float _rotY = 0.0f);
+
 	//アイテムを取るかを取得
 	bool GetIsPickUp() { return m_isPickUpItem; }
 
@@ -57,6 +61,11 @@ public:
 
 	//回避しているかを取得
 	bool GetIsDodgeroll() { return m_isDodgeroll; }
+
+	//コインを落としているかを取得
+	bool GetIsDropCoin() { return m_isDropCoin; }
+	//コインを落としているかを設定
+	void SetIsDropCoin(bool _isDropCoin) { m_isDropCoin = _isDropCoin; }
 
 	//コントローラーの名前を取得
 	tagPadName GetPadName() { return m_padName; }
@@ -77,6 +86,9 @@ public:
 
 	//パワーアップを増やす
 	void AddPowerUp() { m_powerUp++; }
+	//パワーアップを減らす
+	void SubPowerUp() { m_powerUp--; }
+
 
 private:
 	//待機状態処理
