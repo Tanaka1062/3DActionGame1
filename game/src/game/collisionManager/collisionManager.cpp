@@ -86,9 +86,7 @@ void CCollisionManager::CheckHitPlayerToPlayer(CPlayerManager& _playerManager)
 
 			//ŽÀÛ‚É—£‚ê‚Ä‚¢‚é‹——£‚ð‹‚ß‚é
 			VECTOR player1Pos = player1->GetPos();
-			player1Pos.y = 0.0f;
 			VECTOR player2Pos = player2->GetPos();
-			player2Pos.y = 0.0f;
 
 			VECTOR dir = VSub(player2Pos, player1Pos);
 			float len2 = VSize(dir);
@@ -283,9 +281,7 @@ void CCollisionManager::CheckHitPlayerToBox(CPlayerManager& _playerManager, CBox
 
 			//ŽÀÛ‚É—£‚ê‚Ä‚¢‚é‹——£‚ð‹‚ß‚é
 			VECTOR playerPos = player->GetPos();
-			playerPos.y = 0.0f;
 			VECTOR boxPos = box->GetPos();
-			boxPos.y = 0.0f;
 
 			VECTOR dir = VSub(playerPos, boxPos);
 			float len2 = VSize(dir);

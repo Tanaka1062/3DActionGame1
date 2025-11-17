@@ -1,7 +1,7 @@
 #include"3DObject.h"
 #include "../../game/common.h"
 
-static const float GRAVITIY = 0.3f;						//重力
+static const float GRAVITIY = 0.1f;						//重力
 static const float GRAVITIY_MAX = 5.0f;					//最大重力
 
 //---------------------
@@ -54,16 +54,9 @@ void CObject::Step()
 		//重力処理
 		Gravity();
 	}
-}
-
-//---------------------
-//		数値の更新
-//---------------------
-void CObject::Update()
-{
 
 	//重力を速度に加算
-	m_speed.y -= m_gravity;
+	m_speed.y += m_gravity;
 
 	//速度を制限
 	if (m_speed.y <= -GRAVITIY_MAX)
@@ -74,6 +67,13 @@ void CObject::Update()
 	//現在の座標にスピードを加算
 	m_pos = VAdd(m_pos, m_speed);
 
+}
+
+//---------------------
+//		数値の更新
+//---------------------
+void CObject::Update()
+{
 
 	MV1SetPosition(m_hndl, m_pos);
 	MV1SetRotationXYZ(m_hndl, m_rot);
@@ -187,8 +187,8 @@ VECTOR CObject::GetCenter()
 //------------------------------
 void CObject::ResetSpeed()
 {
-	//スピードをリセット
-	m_speed = { 0.0f,0.0f,0.0f };
+	m_speed.x *= 0.9f;
+	m_speed.z *= 0.9f;
 }
 
 //-----------------------------
@@ -196,5 +196,5 @@ void CObject::ResetSpeed()
 //-----------------------------
 void CObject::Gravity()
 {
-	m_gravity += GRAVITIY;
+	m_gravity -= GRAVITIY;
 }

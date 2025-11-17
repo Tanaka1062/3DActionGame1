@@ -19,7 +19,7 @@ static const int ATK = 20;							//攻撃力
 static const float MOVE_SPEED = 1.2f;				//移動スピード
 static const float RADIUS = 10.0f;					//半径
 static const float DODGEROLL_SPEED = 1.5f;			//回避スピード
-static const float JUMP_SPEED = -5.0f;				//ジャンプスピード
+static const float JUMP_SPEED = 3.0f;				//ジャンプスピード
 static const int TRANSFORM_COIN_NUM = 3;			//変身に必要なコインの数
 static const int POWER_UP_ATK = 2;					//増加する攻撃力のような
 static const int TRANSFORM_TIME = 10 * 60;			//変身している時間
@@ -217,24 +217,6 @@ void CPlayer::Step(float _rotY)
 	PickUpItem();
 
 	CCharacterBase::Step();
-
-	//仮のジャンプ処理----------------------
-	switch (m_state)
-	{
-	case WAIT:
-	case WALK:
-		break;
-	default:
-		return;
-	}
-
-	if (CControllerManager::IsTrg(BUTTON_A, m_padName))
-	{
-		m_state = JUMP;
-		m_gravity = JUMP_SPEED;
-		m_isFlying = true;
-	}
-	//--------------------------------------
 
 }
 
@@ -472,21 +454,21 @@ void CPlayer::Attack()
 			//攻撃中のアニメーション
 			if (RequestAnim(ANIMID_ATTACKA1, 1.0f))
 			{
-				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_name);
+				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_name,2,100);
 			}
 			break;
 		case 1:
 			//攻撃中のアニメーション
 			if (RequestAnim(ANIMID_ATTACKA2, 1.0f))
 			{
-				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_name);
+				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_name, 2, 100);
 			}
 			break;
 		case 2:
 			//攻撃中のアニメーション
 			if(RequestAnim(ANIMID_ATTACKA3, 1.0f))
 			{
-				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_name);
+				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_name, 2, 100);
 			}
 			break;
 		}
@@ -807,6 +789,7 @@ void CPlayer::Move(float _rotY)
 	{
 	case WAIT:
 	case WALK:
+	case JUMP:
 		break;
 	default:
 		return;
@@ -938,7 +921,7 @@ void CPlayer::RequestJump()
 		return;
 	}
 
-	if (CControllerManager::IsTrg(BUTTON_A, m_padName))
+	if (CControllerManager::IsTrg(BUTTON_A, m_padName) && !m_isFlying)
 	{
 		m_state = JUMP;
 		m_gravity = JUMP_SPEED;
