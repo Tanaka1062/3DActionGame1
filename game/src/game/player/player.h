@@ -12,15 +12,26 @@ enum tagWeaponId
 	WEAPON_ID_NUM,
 };
 
+enum tagHndlName
+{
+	NORMAL_HNDL,		//ノーマルハンドル
+	TRANSFORM_HNDL,		//変身後のハンドル
+
+	HNDL_NUM,			//ハンドルの数
+};
+
 //プレイヤークラス
 class CPlayer:public CCharacterBase
 {
 private:
+	int m_transformTimeCount;		//変身時間カウント
+	int m_keepHndl[HNDL_NUM];		//モデルハンドル保存用
+	int m_dropCoin;					//コインを落とす数
 	bool m_isPickUpItem;			//アイテムを取ろうとしているかフラグ		
 	bool m_isItemUse;				//アイテム使用フラグ
 	bool m_isItem;					//アイテムを持っているフラグ
 	bool m_isDodgeroll;				//回避しているかフラグ
-	bool m_isDropCoin;				//コインを落としているかどうかフラグ
+	bool m_isTransform;				//変身しているかフラグ
 	int m_attackNum;				//攻撃の番号
 	int m_powerUp;					//パワーアップ
 	tagPadName m_padName;			//コントローラーの名前
@@ -47,6 +58,9 @@ public:
 	//更新処理
 	void Update();
 
+	//終了処理
+	void Exit();
+
 	//攻撃を食らった時にする処理
 	void HitAttack(int _atk, float _rotY = 0.0f);
 
@@ -63,9 +77,9 @@ public:
 	bool GetIsDodgeroll() { return m_isDodgeroll; }
 
 	//コインを落としているかを取得
-	bool GetIsDropCoin() { return m_isDropCoin; }
+	int GetDropCoin() { return m_dropCoin; }
 	//コインを落としているかを設定
-	void SetIsDropCoin(bool _isDropCoin) { m_isDropCoin = _isDropCoin; }
+	void SetDropCoin(int _dropCoin) { m_dropCoin = _dropCoin; }
 
 	//コントローラーの名前を取得
 	tagPadName GetPadName() { return m_padName; }

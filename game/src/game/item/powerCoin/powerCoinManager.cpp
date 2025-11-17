@@ -150,22 +150,27 @@ void CPowerCoinManager::Step()
 	{
 		CPlayer* player = m_playerManager->GetPlayer(player_i);
 
-		if (player->GetIsDropCoin() == true)
+		if (player->GetDropCoin() >= 1)
 		{
 			for (int powerCoin_i = 0; powerCoin_i < m_powerCoin.size(); powerCoin_i++)
 			{
 				//プレイヤーの持っているコインがある場合落とす
 				if (m_powerCoin[powerCoin_i]->GetPlayerName() == player->GetPlayerName())
 				{
+					float radian = static_cast<float>((GetRand(60) - 30) * (DX_PI_F/180.0f));
+
 					//とりあえず中心に飛ばす
 					float rotY = atan2f(-player->GetPos().x, -player->GetPos().z);
+
+					rotY += radian;
 
 					m_powerCoin[powerCoin_i]->Drop(player->GetCenter(),rotY);
 					player->SubPowerUp();
 					break;
 				}
 			}
-			player->SetIsDropCoin(false);
+			//一ずつ減らす
+			player->SetDropCoin(player->GetDropCoin() - 1);
 		}
 	}
 }

@@ -57,7 +57,7 @@ void CPlayScene::Init()
 	m_itemInventory.Init(&m_playerManager);
 	m_weaponManager.Init();
 	m_box.Init();
-	m_uiManager.Init(&m_playerManager);
+	m_uiManager.Init(&m_playerManager,&m_powerCoinManager);
 	m_powerCoinManager.Init(&m_playerManager);
 	m_camera.Init(ZERO);
 

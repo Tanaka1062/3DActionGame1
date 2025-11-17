@@ -11,7 +11,7 @@
 
 //プレイヤー関連--------------------------------
 static const char MODEL_PATH[] =
-{ "data/model/player/playerTest4-2.mv1" };			//ロードするファイル名
+{ "data/model/player/playerTransformTest.mv1" };	//ロードするファイル名
 static const VECTOR INIT_POS = { 0.0f,1.0f,0.0f };	//初期座標
 static const float SHADOW_SIZE = 0.5f;				//丸影の大きさ
 static const int MAX_HP = 300;						//体力
@@ -22,6 +22,7 @@ static const float DODGEROLL_SPEED = 1.5f;			//回避スピード
 static const float JUMP_SPEED = -5.0f;				//ジャンプスピード
 static const int TRANSFORM_COIN_NUM = 3;			//変身に必要なコインの数
 static const int POWER_UP_ATK = 2;					//増加する攻撃力のような
+static const int TRANSFORM_TIME = 10 * 60;			//変身している時間
 //----------------------------------------------
 
 //攻撃関連---------------------------
@@ -86,10 +87,15 @@ enum tagAnim {
 //-----------------------
 CPlayer::CPlayer()
 {
+	m_transformTimeCount = 0;
 	m_isPickUpItem = false;
 	m_name = PLAYER_NONE;
 	CCharacterBase::Init(nullptr);
-
+	for (int keepHndl_i = 0; keepHndl_i < HNDL_NUM; keepHndl_i++)
+	{
+		m_keepHndl[keepHndl_i] = -1;
+	}
+	m_dropCoin = 0;
 	m_pos = ZERO;
 	m_rad = 0.0f;
 	m_maxHp = 0;
@@ -99,7 +105,7 @@ CPlayer::CPlayer()
 	m_isPickUpItem = false;
 	m_isItem = false;
 	m_isDodgeroll = false;
-	m_isDropCoin = false;
+	m_isTransform = false;
 	m_attackNum = 0;
 	m_powerUp = 0;
 	m_padName = PAD_NONE;
@@ -122,6 +128,12 @@ void CPlayer::Init(CAttackManager* _attackManager, tagPlayerName _name, tagPadNa
 {
 	CCharacterBase::Init(_attackManager);
 
+	m_transformTimeCount = 0;
+	for (int keepHndl_i = 0; keepHndl_i < HNDL_NUM; keepHndl_i++)
+	{
+		m_keepHndl[keepHndl_i] = -1;
+	}
+	m_dropCoin = 0;
 	m_pos = ZERO;
 	m_rad = RADIUS;
 	m_maxHp = MAX_HP;
@@ -131,7 +143,7 @@ void CPlayer::Init(CAttackManager* _attackManager, tagPlayerName _name, tagPadNa
 	m_isPickUpItem = false;
 	m_isItem = false;
 	m_isDodgeroll = false;
-	m_isDropCoin = false;
+	m_isTransform = false;
 	m_attackNum = 0;
 	m_powerUp = 0;
 	m_padName = _padName;
@@ -146,6 +158,8 @@ void CPlayer::Init(CAttackManager* _attackManager, tagPlayerName _name, tagPadNa
 void CPlayer::Load(int _modelHndl)
 {
 	CObject::DuplicateModel(_modelHndl);
+	m_keepHndl[NORMAL_HNDL] = m_hndl;
+	m_keepHndl[TRANSFORM_HNDL] = MV1LoadModel(MODEL_PATH);
 	m_shadow.Load();
 }
 
@@ -156,6 +170,36 @@ void CPlayer::Step(float _rotY)
 {
 	//攻撃力の上昇
 	m_atk = ATK + (m_powerUp * POWER_UP_ATK);
+
+	//パワーアップが増えすぎないように
+	if (m_powerUp >= TRANSFORM_COIN_NUM)
+	{
+		m_powerUp = TRANSFORM_COIN_NUM;
+		m_isTransform = true;
+	}
+	else
+	{
+		m_isTransform = false;
+	}
+
+	//変身中は見た目を変える
+	if (m_isTransform == true)
+	{
+		m_hndl = m_keepHndl[TRANSFORM_HNDL];
+		
+		//変身の時間がすぎたら解除
+		m_transformTimeCount++;
+		if (m_transformTimeCount >= TRANSFORM_TIME)
+		{
+			m_dropCoin = TRANSFORM_COIN_NUM;
+			m_transformTimeCount = 0;
+			m_isTransform = false;
+		}
+	}
+	else
+	{
+		m_hndl = m_keepHndl[NORMAL_HNDL];
+	}
 
 	//移動処理
 	Move(_rotY);
@@ -233,16 +277,25 @@ void CPlayer::Update()
 		m_hp = m_maxHp;
 	}
 
-	//パワーアップが増えすぎないように
-	if (m_powerUp >= TRANSFORM_COIN_NUM)
-	{
-		m_powerUp = TRANSFORM_COIN_NUM;
-	}
-
 	//アイテムを取ろうとしているかを初期化
 	m_isPickUpItem = false;
 	//アイテムを使用したかを初期化
 	m_isItemUse = false;
+}
+
+//終了処理
+void CPlayer::Exit()
+{
+	CCharacterBase::Exit();
+
+	for (int keepHndl_i = 0; keepHndl_i < HNDL_NUM; keepHndl_i++)
+	{
+		if (m_keepHndl[keepHndl_i] != -1)
+		{
+			DeleteGraph(m_keepHndl[keepHndl_i]);
+			m_keepHndl[keepHndl_i] = -1;
+		}
+	}
 }
 
 //-----------------------
@@ -252,7 +305,14 @@ void CPlayer::HitAttack(int _atk, float _rotY)
 {
 	CCharacterBase::HitAttack(_atk,_rotY);
 
-	m_isDropCoin = true;
+	if (m_isTransform == true)
+	{
+		m_transformTimeCount += _atk;
+	}
+	else
+	{
+		m_dropCoin++;
+	}
 }
 
 //-----------------------

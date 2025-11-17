@@ -3,9 +3,9 @@
 
 static const char* GRAPHIC_PATH[COIN_NUM] =		//ロードするファイル名
 { 
-	"data/graphic/ui/PowerCoinRedUi.mv1",
-	"data/graphic/ui/PowerCoinGreenUi.mv1",
-	"data/graphic/ui/PowerCoinBlueUi.mv1",
+	"data/graphic/ui/PowerCoinRedUi.png",
+	"data/graphic/ui/PowerCoinGreenUi.png",
+	"data/graphic/ui/PowerCoinBlueUi.png",
 
  };			
 
@@ -85,12 +85,12 @@ void CGetCoinUi::Step(tagPlayerName _playerName)
 //描写
 void CGetCoinUi::Draw() 
 {
-	DrawRotaGraph(static_cast<int>(m_pos.x - 128.0f), static_cast<int>(m_pos.y),
-		1.0f, 0.0f, m_hndl[0][m_IsGetCoin[0]], TRUE);
+	DrawRotaGraph(static_cast<int>(m_pos.x - 64.0f), static_cast<int>(m_pos.y),
+		0.5f, 0.0f, m_hndl[0][m_IsGetCoin[0]], TRUE);
 	DrawRotaGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y),
-		1.0f, 0.0f, m_hndl[1][m_IsGetCoin[1]], TRUE);
-	DrawRotaGraph(static_cast<int>(m_pos.x + 128.0f), static_cast<int>(m_pos.y),
-		1.0f, 0.0f, m_hndl[2][m_IsGetCoin[2]], TRUE);
+		0.5f, 0.0f, m_hndl[1][m_IsGetCoin[1]], TRUE);
+	DrawRotaGraph(static_cast<int>(m_pos.x + 64.0f), static_cast<int>(m_pos.y),
+		0.5f, 0.0f, m_hndl[2][m_IsGetCoin[2]], TRUE);
 
 }
 
