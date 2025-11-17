@@ -2,6 +2,10 @@
 #include "hpber/hpbar.h"
 #include "../data.h"
 
+static const VECTOR GET_COIN_POS[PLAYER_NUM] =
+{
+	{}
+};
 
 //UI‚Ì–¼‘O
 enum tagUiName
@@ -23,9 +27,15 @@ CUiManager::~CUiManager()
 	Exit();
 }
 
-void CUiManager::Init(CPlayerManager* _playerManager)
+void CUiManager::Init(CPlayerManager* _playerManager, 
+	CPowerCoinManager* _powerCoinManager)
 {
 	m_hpbarManager.Init(_playerManager);
+
+	for (int getCoinUi_i = 0; getCoinUi_i < PLAYER_NUM; getCoinUi_i++)
+	{
+		m_getCoinUi[getCoinUi_i].Init();
+	}
 }
 
 //ƒ[ƒh

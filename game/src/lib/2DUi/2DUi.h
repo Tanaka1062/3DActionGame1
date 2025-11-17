@@ -29,7 +29,6 @@ public:
 	//当たり判定後の処理
 	virtual void HitCalc();
 
-protected:
 	//画像をロードする関数
 	//_hndl		:画像ハンドル
 	//_hndlPath	:画像のパス
@@ -38,7 +37,7 @@ protected:
 	//_numY		:分割した画像の数縦
 	//_sizeX	:分割した画像の大きさ横
 	//_sizeY	:分割した画像の大きさ縦
-	void LoadGraphic(int& _hndl, const char* _hndlPath, int _allNum = 1,
+	void LoadGraphic(const char* _hndlPath, int _allNum = 1,
 		int _numX = 1, int _numY = 1, int _sizeX = 1, int _sizeY = 1);
 
 public:

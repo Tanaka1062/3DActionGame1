@@ -27,6 +27,9 @@ public:
 	//毎フレームする処理
 	void Step();
 
+	//数値の更新
+	void Update();
+
 	//当たった時の処理
 	//_name		:どのプレイヤーが触れたかを取得
 	void HitCalc(tagPlayerName _name);

@@ -2,6 +2,7 @@
 #include "../../game/common.h"
 
 static const float GRAVITIY = 0.3f;						//重力
+static const float GRAVITIY_MAX = 5.0f;					//最大重力
 
 //---------------------
 //	コンストラクタ
@@ -60,8 +61,15 @@ void CObject::Step()
 //---------------------
 void CObject::Update()
 {
+
 	//重力を速度に加算
 	m_speed.y -= m_gravity;
+
+	//速度を制限
+	if (m_speed.y <= -GRAVITIY_MAX)
+	{
+		m_speed.y = -GRAVITIY_MAX;
+	}
 
 	//現在の座標にスピードを加算
 	m_pos = VAdd(m_pos, m_speed);

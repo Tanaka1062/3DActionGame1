@@ -157,7 +157,10 @@ void CPowerCoinManager::Step()
 				//プレイヤーの持っているコインがある場合落とす
 				if (m_powerCoin[powerCoin_i]->GetPlayerName() == player->GetPlayerName())
 				{
-					m_powerCoin[powerCoin_i]->Drop(player->GetCenter(),0.0f);
+					//とりあえず中心に飛ばす
+					float rotY = atan2f(-player->GetPos().x, -player->GetPos().z);
+
+					m_powerCoin[powerCoin_i]->Drop(player->GetCenter(),rotY);
 					player->SubPowerUp();
 					break;
 				}

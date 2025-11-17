@@ -85,18 +85,18 @@ void C2DUi::HitCalc()
 //---------------------------
 //	画像をロードする関数
 //---------------------------
-void C2DUi::LoadGraphic(int& _hndl, const char* _hndlPath, int _allNum,
+void C2DUi::LoadGraphic(const char* _hndlPath, int _allNum,
 	int _numX, int _numY, int _sizeX, int _sizeY)
 {
 	//ハンドルが空じゃなかったら処理をしない
-	if (_hndl != -1)return;
+	if (m_hndl != -1)return;
 
 	if (_allNum != 1)
 	{
-		LoadDivGraph(_hndlPath, _allNum, _numX, _numY, _sizeX, _sizeY,&_hndl);
+		LoadDivGraph(_hndlPath, _allNum, _numX, _numY, _sizeX, _sizeY,&m_hndl);
 	}
 	else
 	{
-		_hndl = LoadGraph(_hndlPath);
+		m_hndl = LoadGraph(_hndlPath);
 	}
 }
