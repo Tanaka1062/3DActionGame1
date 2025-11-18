@@ -98,3 +98,13 @@ void CPowerCoin::Drop(VECTOR _pos, float _rotY)
 	m_isActive = true;
 	m_playerName = PLAYER_NONE;
 }
+
+//---------------------
+//	   ÉRÉCÉìÇÃè¡é∏
+//---------------------
+void CPowerCoin::Delete()
+{
+	m_state = POWER_COIN_WAIT;
+	m_playerName = PLAYER_NONE;
+}
+

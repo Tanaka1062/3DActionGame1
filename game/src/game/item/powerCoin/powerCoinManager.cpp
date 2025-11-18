@@ -8,7 +8,7 @@ static const char* MODEL_PATH[COIN_NUM] = {
 };
 
 static const char FRAME_PATH[] =
-{ "data/model/map/TestMap4FramePos.mv1" };			//ロードするファイル名
+{ "data/model/map/TestMap6Frame.mv1" };			//ロードするファイル名
 
 static const int SPAWN_TIME = 10 * 60;				//コインスポーン時間(秒)
 
@@ -150,13 +150,23 @@ void CPowerCoinManager::Step()
 	{
 		CPlayer* player = m_playerManager->GetPlayer(player_i);
 
+
 		if (player->GetDropCoin() >= 1)
 		{
 			for (int powerCoin_i = 0; powerCoin_i < m_powerCoin.size(); powerCoin_i++)
 			{
+				//コインが全てドロップ状態になったら一つ消す
+				if (player->GetDropCoin() == COIN_NUM)
+				{
+					m_powerCoin[powerCoin_i]->Delete();
+					player->SubPowerUp();
+					break;
+				}
+
 				//プレイヤーの持っているコインがある場合落とす
 				if (m_powerCoin[powerCoin_i]->GetPlayerName() == player->GetPlayerName())
 				{
+
 					float radian = static_cast<float>((GetRand(60) - 30) * (DX_PI_F/180.0f));
 
 					//とりあえず中心に飛ばす

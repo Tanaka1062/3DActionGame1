@@ -56,6 +56,9 @@ public:
 	//アイテムの使用回数を取得
 	int GetUseCount() { return m_useCount; }
 
+	//丸影の座標を設定
+	void SetShadowPos(VECTOR _pos) { m_shadow.SetPos(_pos); }
+
 };
 
 

@@ -172,9 +172,34 @@ void CCollisionManager::CheckHitPlayerToMap(CPlayerManager& _playerManager,CMap&
 			}
 			//-------------------------------------
 
+
+
 			//毎回データを削除
 			MV1CollResultPolyDimTerminate(col);
 		}
+
+		VECTOR shadowPos = player->GetPos();
+
+		//少しずつ座標を落として当たった場所に丸影の座標を設定する
+		for (int shadowPosY_i = 0; shadowPosY_i < 1000; shadowPosY_i++)
+		{
+			shadowPos.y -= 0.01f * shadowPosY_i;
+
+			col = MV1CollCheck_Sphere(_map.GetHitHndl(), -1,
+				shadowPos, 1.0f);
+
+			if (col.HitNum != 0)
+			{
+				shadowPos.y += 1.5f;
+
+				player->SetShadowPos(shadowPos);
+				break;
+			}
+		}
+		//毎回データを削除
+		MV1CollResultPolyDimTerminate(col);
+
+
 	}
 }
 
@@ -449,6 +474,29 @@ void CCollisionManager::CheckHitPowerCoinToMap(CPowerCoinManager& _powerCoinMana
 			//毎回データを削除
 			MV1CollResultPolyDimTerminate(col);
 		}
+
+		VECTOR shadowPos = powerCoin->GetPos();
+
+		//少しずつ座標を落として当たった場所に丸影の座標を設定する
+		for (int shadowPosY_i = 0; shadowPosY_i < 1000; shadowPosY_i++)
+		{
+			shadowPos.y -= 0.01f * shadowPosY_i;
+
+			col = MV1CollCheck_Sphere(_map.GetHitHndl(), -1,
+				shadowPos, 1.0f);
+
+			if (col.HitNum != 0)
+			{
+				shadowPos.y += 1.5f;
+
+				powerCoin->SetShadowPos(shadowPos);
+				break;
+			}
+		}
+		//毎回データを削除
+		MV1CollResultPolyDimTerminate(col);
+
+
 	}
 
 

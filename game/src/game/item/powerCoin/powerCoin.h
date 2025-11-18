@@ -43,5 +43,8 @@ public:
 	//コインのドロップ
 	void Drop(VECTOR _pos,float _rotY);
 
+	//コインの消失
+	void Delete();
+
 };
 

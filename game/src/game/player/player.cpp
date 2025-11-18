@@ -23,6 +23,7 @@ static const float JUMP_SPEED = 3.0f;				//ジャンプスピード
 static const int TRANSFORM_COIN_NUM = 3;			//変身に必要なコインの数
 static const int POWER_UP_ATK = 2;					//増加する攻撃力のような
 static const int TRANSFORM_TIME = 10 * 60;			//変身している時間
+static const float TRANSFORM_UP_SPEED = 0.3f;		//変身後のスピードアップ
 //----------------------------------------------
 
 //攻撃関連---------------------------
@@ -439,10 +440,11 @@ void CPlayer::Attack()
 	//攻撃の座標
 	VECTOR attackPos;
 	attackPos.x = -sinf(m_rot.y) * ATTACK_LENGTH;
-	attackPos.y = GetCenter().y;
 	attackPos.z = -cosf(m_rot.y) * ATTACK_LENGTH;
 
 	attackPos = VAdd(attackPos, m_pos);
+
+	attackPos.y = GetCenter().y;
 
 	switch (m_weaponId)
 	{
@@ -454,21 +456,21 @@ void CPlayer::Attack()
 			//攻撃中のアニメーション
 			if (RequestAnim(ANIMID_ATTACKA1, 1.0f))
 			{
-				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_name,2,100);
+				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_name);
 			}
 			break;
 		case 1:
 			//攻撃中のアニメーション
 			if (RequestAnim(ANIMID_ATTACKA2, 1.0f))
 			{
-				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_name, 2, 100);
+				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_name);
 			}
 			break;
 		case 2:
 			//攻撃中のアニメーション
 			if(RequestAnim(ANIMID_ATTACKA3, 1.0f))
 			{
-				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_name, 2, 100);
+				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_name);
 			}
 			break;
 		}
@@ -804,39 +806,47 @@ void CPlayer::Move(float _rotY)
 		isController = true;
 	}
 
+	float moveSpeed = MOVE_SPEED;
+
+	//変身していたら速度を上げる
+	if (m_isTransform)
+	{
+		moveSpeed += TRANSFORM_UP_SPEED;
+	}
+
 	//移動ベクトル
 	VECTOR speed = { 0.0f,0.0f,0.0f };
 	//コントローラー用前進後退
 	if (isController == true)
 	{
-		speed.z = CControllerManager::GetLY(m_padName) * MOVE_SPEED;
+		speed.z = CControllerManager::GetLY(m_padName) * moveSpeed;
 	}
 	//キーボード用前進
 	else if (CheckHitKey(KEY_INPUT_W) != 0)
 	{
-		speed.z = -MOVE_SPEED;
+		speed.z = -moveSpeed;
 	}
 	//キーボード用後退
 	else if (CheckHitKey(KEY_INPUT_S) != 0)
 	{
-		speed.z = MOVE_SPEED;
+		speed.z = moveSpeed;
 	}
 
 	//左右にどれだけ移動するか
 	//コントローラー用左右移動
 	if (isController == true)
 	{
-		speed.x = -CControllerManager::GetLX(m_padName) * MOVE_SPEED;
+		speed.x = -CControllerManager::GetLX(m_padName) * moveSpeed;
 	}
 	//キーボード用左移動
 	else if (CheckHitKey(KEY_INPUT_A) != 0)
 	{
-		speed.x = MOVE_SPEED;
+		speed.x = moveSpeed;
 	}
 	//キーボード用右移動
 	else if (CheckHitKey(KEY_INPUT_D) != 0)
 	{
-		speed.x = -MOVE_SPEED;
+		speed.x = -moveSpeed;
 	}
 
 

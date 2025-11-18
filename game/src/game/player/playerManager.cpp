@@ -15,7 +15,9 @@ static const char* MODEL_PATH[PLAYER_NUM] =
   "data/model/player/playerTest5-2.mv1" ,};			//ロードするファイル名
 
 static const char FRAME_PATH[] =
-{ "data/model/map/TestMap4FramePos.mv1" };			//ロードするファイル名
+{ "data/model/map/TestMap6Frame.mv1" };			//ロードするファイル名
+
+static const float FIGHT_LEN = 40.0f;		//戦う距離
 
 //------------------------
 //	  コンストラクタ
@@ -129,6 +131,25 @@ void CPlayerManager::Step(float _rot)
 	for (int i = 0; i < m_player.size(); i++)
 	{
 		m_player[i]->Step(_rot);
+
+	}
+
+	//計算用のプレイヤーの座標
+	VECTOR player1Pos = m_player[PLAYER_1]->GetPos();
+	VECTOR player2Pos = m_player[PLAYER_2]->GetPos();
+
+	//プレイヤー同士の距離
+	VECTOR vLen = VSub(player1Pos, player2Pos);
+	float fLen = VSize(vLen);
+
+	//戦いの距離になったら互いの方向を向く
+	if (fLen <= FIGHT_LEN)
+	{
+		float rotY1 = atan2f(player1Pos.x - player2Pos.x,player1Pos.z - player2Pos.z);
+		float rotY2 = atan2f(player2Pos.x - player1Pos.x, player2Pos.z - player1Pos.z);
+
+		m_player[PLAYER_1]->SetRot(0.0f,rotY1);
+		m_player[PLAYER_2]->SetRot(0.0f,rotY2);
 	}
 }
 
