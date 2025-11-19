@@ -29,10 +29,10 @@ void CBoxManager::Init()
 
 	CBox* box = new CBox;
 
-	box->Init();
-	box->SetPos(VGet(40.0f,10.0f,0.0f));
+	//box->Init();
+	//box->SetPos(VGet(40.0f,10.0f,0.0f));
 
-	m_box.push_back(box);
+	//m_box.push_back(box);
 }
 
 //---------------------------
@@ -58,25 +58,7 @@ void CBoxManager::Step(CItemManager* _itemManager)
 {
 	for (auto ite = m_box.begin(); ite != m_box.end();)
 	{
-		//毎フレームする処理
-		(*ite)->Step();
 
-		//箱が壊れていたら消してそこにアイテムを出す
-		if ((*ite)->GetActive() == false)
-		{
-			_itemManager->SpawnItem((*ite)->GetPos(),ITEM_HARB_AMULENT);
-
-			//終了処理
-			(*ite)->Exit();
-
-			delete (*ite);
-
-			ite = m_box.erase(ite);
-		}
-		else
-		{
-			++ite;
-		}
 	}
 }
 

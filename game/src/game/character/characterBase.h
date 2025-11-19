@@ -78,6 +78,9 @@ public:
 	//UŒ‚—Í‚ğæ“¾
 	int GetAtk() { return m_atk; }
 
+	//ó‘Ô‚ğæ“¾
+	tagState GetState() { return m_state; }
+
 	//í—Ş‚ğæ“¾
 	tagCharacterType GetType() { return m_type; }
 	

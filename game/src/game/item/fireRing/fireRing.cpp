@@ -25,7 +25,6 @@ CFireRing::CFireRing()
 void CFireRing::Init(CPlayer* _player)
 {
 	CItemShotBase::Init(_player);
-	m_name = ITEM_FIRE_RING;
 	m_useCount = USE_MAX;
 }
 

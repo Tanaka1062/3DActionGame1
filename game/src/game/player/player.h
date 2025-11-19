@@ -34,6 +34,7 @@ private:
 	bool m_isTransform;				//変身しているかフラグ
 	int m_attackNum;				//攻撃の番号
 	int m_powerUp;					//パワーアップ
+	float m_dodgerollRotY;			//回避時の角度
 	tagPadName m_padName;			//コントローラーの名前
 	tagWeaponId m_weaponId;			//武器のID
 	tagPlayerName m_name;			//プレイヤーの名前
@@ -166,7 +167,7 @@ private:
 	void RequestJump();
 
 	//回避に移行する処理
-	void RequestDodgeroll();
+	void RequestDodgeroll(float _rotY);
 
 	//アイテム処理
 	void Item();

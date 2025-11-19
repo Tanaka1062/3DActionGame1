@@ -31,7 +31,7 @@ static const float ATTACK_SIZE = 12.0f;				//攻撃範囲
 static const float ATTACK_LENGTH = 15.0f;			//攻撃の長さ
 static const float ATTACKB_SIZE = 25.0f;			//攻撃B範囲
 static const int ATTACKB_ATK = 100;					//攻撃Bの攻撃力
-
+static const float ATTACK_MOVE_SPEED = 0.5f;		//攻撃時に前進する力
 //-----------------------------------
 
 //アニメーション一覧---------------------------
@@ -209,7 +209,7 @@ void CPlayer::Step(float _rotY)
 	RequestJump();
 
 	//回避移行処理
-	RequestDodgeroll();
+	RequestDodgeroll(_rotY);
 
 	//アイテム使用処理
 	Item();
@@ -353,7 +353,7 @@ void CPlayer::Jump()
 //-----------------------
 void CPlayer::Dodgeroll()
 {
-	//アイテム使用前のアニメーション
+	//回避のアニメーション
 	RequestAnim(ANIMID_DODGEROLL, 1.0f);
 
 	//進む速度
@@ -361,7 +361,7 @@ void CPlayer::Dodgeroll()
 	//上記を行列に変換
 	MATRIX dir = CMyMath::GetTranslateMatrix(defaultDir);
 	//Y軸回転行列
-	MATRIX mRotY = CMyMath::GetYawMatrix(m_rot.y);
+	MATRIX mRotY = CMyMath::GetYawMatrix(m_dodgerollRotY);
 	//行列の合成
 	MATRIX res = CMyMath::MatMult(mRotY, dir);
 
@@ -370,7 +370,10 @@ void CPlayer::Dodgeroll()
 	m_speed.y = res.m[1][3];
 	m_speed.z = res.m[2][3];
 
-	//アニメーションが終わったらアイテム使用中に移行
+	//回避の方向に向ける
+	m_rot.y = m_dodgerollRotY;
+
+	//アニメーションが終わったら待機状態に移行
 	if (GetAnimEnd() == true)
 	{
 		m_isDodgeroll = false;
@@ -383,6 +386,20 @@ void CPlayer::Dodgeroll()
 //-----------------------
 void CPlayer::AttackIn()
 {
+	//進む速度
+	VECTOR defaultDir = { 0.0f,0.0f,-ATTACK_MOVE_SPEED };
+	//上記を行列に変換
+	MATRIX dir = CMyMath::GetTranslateMatrix(defaultDir);
+	//Y軸回転行列
+	MATRIX mRotY = CMyMath::GetYawMatrix(m_rot.y);
+	//行列の合成
+	MATRIX res = CMyMath::MatMult(mRotY, dir);
+
+	//移動をスピードに代入
+	m_speed.x = res.m[0][3];
+	m_speed.y = res.m[1][3];
+	m_speed.z = res.m[2][3];
+
 	switch (m_weaponId)
 	{
 	case WEAPON_ID_HAND:
@@ -943,7 +960,7 @@ void CPlayer::RequestJump()
 //-----------------------
 //	回避に移行する処理
 //-----------------------
-void CPlayer::RequestDodgeroll()
+void CPlayer::RequestDodgeroll(float _rotY)
 {
 	//待機状態と歩いてる状態以外は処理をしない
 	switch (m_state)
@@ -958,6 +975,54 @@ void CPlayer::RequestDodgeroll()
 		break;
 	default:
 		return;
+	}
+
+	//コントローラーを使っているか
+	bool isController = false;
+
+	if (CControllerManager::GetLY(m_padName) != 0 ||
+		CControllerManager::GetLX(m_padName) != 0)
+	{
+		isController = true;
+	}
+
+	//入力方向ベクトル
+	VECTOR vec = { 0.0f,0.0f,0.0f };
+	//コントローラー用前進後退
+	if (isController == true)
+	{
+		vec.z = CControllerManager::GetLY(m_padName);
+	}
+
+	//左右にどれだけ移動するか
+	//コントローラー用左右移動
+	if (isController == true)
+	{
+		vec.x = -CControllerManager::GetLX(m_padName);
+	}
+
+	//入力されていない場合前方向に移動する
+	if (VSize(vec) == 0.0f)
+	{
+		m_dodgerollRotY = m_rot.y;
+	}
+	else
+	{
+		////カメラの角度がオールゼロの時に進む速度
+		VECTOR defaultDir = { vec.x,0.0f,vec.z };
+		//上記を行列に変換
+		MATRIX dir = CMyMath::GetTranslateMatrix(defaultDir);
+		//Y軸回転行列
+		MATRIX mRotY = CMyMath::GetYawMatrix(_rotY);
+		//行列の合成
+		MATRIX res = CMyMath::MatMult(mRotY, dir);
+
+		//移動をスピードに代入
+		vec.x = res.m[0][3];
+		vec.y = res.m[1][3];
+		vec.z = res.m[2][3];
+
+		m_dodgerollRotY = atan2f(-vec.x, -vec.z);
 	}
 
 	//回避ボタンを押したか

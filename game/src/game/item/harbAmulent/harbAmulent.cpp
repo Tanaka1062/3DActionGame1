@@ -19,8 +19,6 @@ CHarbAmulent::CHarbAmulent()
 void CHarbAmulent::Init(CPlayer* _player)
 {
 	CItemBase::Init(_player);
-	m_type = ITEM_TYPE_SKILL;
-	m_name = ITEM_HARB_AMULENT;
 	m_useCount = USE_MAX;
 }
 

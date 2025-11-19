@@ -33,7 +33,6 @@ void CPlayScene::Draw()
 	m_playerManager.Draw();
 	m_shot.Draw();
 	m_attackManager.Draw();
-	m_item.Draw();
 	m_itemInventory.Draw();
 	m_weaponManager.Draw();
 	m_box.Draw();
@@ -53,7 +52,6 @@ void CPlayScene::Init()
 	m_sky.Init();
 	m_playerManager.Init(&m_attackManager);
 	m_shot.Init();
-	m_item.Init(&m_shot);
 	m_itemInventory.Init(&m_playerManager);
 	m_weaponManager.Init();
 	m_box.Init();
@@ -72,7 +70,6 @@ void CPlayScene::Load()
 	m_sky.Load();
 	m_playerManager.Load();
 	m_shot.Load();
-	m_item.Load();
 	m_weaponManager.Load();
 	m_uiManager.Load();
 	m_powerCoinManager.Load();
@@ -91,11 +88,9 @@ void CPlayScene::Step()
 
 	m_shot.Step();
 
-	m_item.Step();
-
 	m_itemInventory.Step(&m_shot);
 
-	m_box.Step(&m_item);
+	//m_box.Step(&m_item);
 
 	m_weaponManager.Step(m_playerManager);
 
@@ -111,7 +106,7 @@ void CPlayScene::Step()
 	CCollisionManager::CheckHitPlayerToPlayerAttack(m_playerManager, m_attackManager);
 	CCollisionManager::CheckHitPlayerToPlayer(m_playerManager);
 	CCollisionManager::CheckHitPlayerToMap(m_playerManager, m_ground);
-	CCollisionManager::CheckHitItemToPlayer(m_item,m_itemInventory, m_playerManager);
+	//CCollisionManager::CheckHitItemToPlayer(m_item,m_itemInventory, m_playerManager);
 	CCollisionManager::CheckHitAttackToBox(m_attackManager, m_box);
 	CCollisionManager::CheckHitPlayerToBox(m_playerManager, m_box);
 	CCollisionManager::CheckHitBoxToMap(m_box, m_ground);
@@ -125,7 +120,6 @@ void CPlayScene::Step()
 	m_playerManager.Update();
 	m_shot.Update();
 	m_attackManager.Update();
-	m_item.Update();
 	m_itemInventory.Update();
 	m_weaponManager.Update(m_playerManager);
 	m_box.Update();
@@ -152,7 +146,6 @@ void CPlayScene::Exit()
 	m_playerManager.Exit();
 	m_attackManager.Exit();
 	m_shot.Exit();
-	m_item.Exit();
 	m_weaponManager.Exit();
 	m_box.Exit();
 	m_uiManager.Exit();

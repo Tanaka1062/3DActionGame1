@@ -45,16 +45,6 @@ void CItemInventory::Step(CShotManager* _shot)
 		if (m_player[i]->GetIsItemUse() == true &&
 			m_useItem[i] != nullptr)
 		{
-			switch (m_useItem[i]->GetType())
-			{
-			case ITEM_TYPE_USE:
-				m_useItem[i]->Use();
-				break;
-			case ITEM_TYPE_SHOT:
-				CItemShotBase* shotItem = dynamic_cast<CItemShotBase*>(m_useItem[i]);
-				shotItem->Use(_shot);
-				break;
-			}
 
 			//アイテムの使用回数がなくなっていたら消す
 			if (m_useItem[i]->GetUseCount() <= 0)
@@ -106,15 +96,6 @@ void CItemInventory::Draw()
 	}
 	else
 	{
-		switch (m_useItem[0]->GetName())
-		{
-		case ITEM_FIRE_RING:
-			DrawFormatString(32, 128, GetColor(255, 0, 0), "ファイアリング\n%d回使える", m_useItem[0]->GetUseCount());
-			break;
-		case ITEM_HARB_AMULENT:
-			DrawFormatString(32, 128, GetColor(255, 0, 0), "薬草のお守り\n%d回使える", m_useItem[0]->GetUseCount());
-			break;
-		}
 
 	}
 
@@ -124,12 +105,6 @@ void CItemInventory::Draw()
 	}
 	else
 	{
-		switch (m_weaponItem[0]->GetName())
-		{
-		case ITEM_HARB_AMULENT:
-			DrawFormatString(32, 228, GetColor(255, 0, 0), "回転切りができる", m_weaponItem[0]->GetUseCount());
-			break;
-		}
 	}
 
 	if (m_useItem[1] == nullptr)
@@ -138,15 +113,6 @@ void CItemInventory::Draw()
 	}
 	else
 	{
-		switch (m_useItem[1]->GetName())
-		{
-		case ITEM_FIRE_RING:
-			DrawFormatString(WINDOW_SIZE_X - 128, 128, GetColor(255, 0, 0), "ファイアリング\n%d回使える", m_useItem[1]->GetUseCount());
-			break;
-		case ITEM_HARB_AMULENT:
-			DrawFormatString(WINDOW_SIZE_X - 128, 128, GetColor(255, 0, 0), "薬草のお守り\n%d回使える", m_useItem[1]->GetUseCount());
-			break;
-		}
 
 	}
 
@@ -156,12 +122,6 @@ void CItemInventory::Draw()
 	}
 	else
 	{
-		switch (m_weaponItem[1]->GetName())
-		{
-		case ITEM_HARB_AMULENT:
-			DrawFormatString(WINDOW_SIZE_X - 128, 228, GetColor(255, 0, 0), "回転切りができる", m_weaponItem[1]->GetUseCount());
-			break;
-		}
 	}
 
 
@@ -176,40 +136,6 @@ CItemBase* CItemInventory::SetItem(CItemBase* _item,CPlayer* _player)
 
 	//プレイヤーのコントローラーの名前を取得
 	tagPadName padName = _player->GetPadName();
-
-	//スキルアイテムの交換
-	if (_item->GetType() == ITEM_TYPE_SKILL)
-	{
-		//すでにアイテムが入っている場合交換する
-		if (m_weaponItem[padName] != nullptr)
-		{
-			//今のアイテムのアドレスを保存
-			item = m_weaponItem[padName];
-		}
-
-		//インベントリにスキルのアドレスを取得
-		m_weaponItem[padName] = _item;
-
-		//プレイヤーのアドレスを設定
-		m_weaponItem[padName]->SetPlayerClass(_player);
-
-	}
-	//使用するアイテムの交換
-	else
-	{
-		//すでにアイテムが入っている場合交換する
-		if (m_useItem[padName] != nullptr)
-		{
-			//今のアイテムのアドレスを保存
-			item = m_useItem[padName];
-		}
-
-		//インベントリにアイテムのアドレスを取得
-		m_useItem[padName] = _item;
-
-		//プレイヤーのアドレスを設定
-		m_useItem[padName]->SetPlayerClass(_player);
-	}
 
 	//アドレスを渡す
 	return item;

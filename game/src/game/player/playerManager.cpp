@@ -145,11 +145,19 @@ void CPlayerManager::Step(float _rot)
 	//í‚¢‚Ì‹——£‚É‚È‚Á‚½‚çŒİ‚¢‚Ì•ûŒü‚ğŒü‚­
 	if (fLen <= FIGHT_LEN)
 	{
-		float rotY1 = atan2f(player1Pos.x - player2Pos.x,player1Pos.z - player2Pos.z);
-		float rotY2 = atan2f(player2Pos.x - player1Pos.x, player2Pos.z - player1Pos.z);
+		if (!m_player[PLAYER_1]->GetIsDodgeroll())
+		{
+			float rotY1 = atan2f(player1Pos.x - player2Pos.x, player1Pos.z - player2Pos.z);
 
-		m_player[PLAYER_1]->SetRot(0.0f,rotY1);
-		m_player[PLAYER_2]->SetRot(0.0f,rotY2);
+			m_player[PLAYER_1]->SetRot(0.0f, rotY1);
+		}
+
+		if (!m_player[PLAYER_2]->GetIsDodgeroll())
+		{
+			float rotY2 = atan2f(player2Pos.x - player1Pos.x, player2Pos.z - player1Pos.z);
+
+			m_player[PLAYER_2]->SetRot(0.0f, rotY2);
+		}
 	}
 }
 

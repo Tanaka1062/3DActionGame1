@@ -27,7 +27,6 @@ private:
 	CCameraManager m_camera;				//カメラ
 	CPlayerManager m_playerManager;			//プレイヤー
 	CShotManager m_shot;					//弾
-	CItemManager m_item;					//アイテム
 	CItemInventory m_itemInventory;			//アイテムインベントリ
 	CWeaponManager m_weaponManager;			//武器のマネージャークラス
 	CAttackManager m_attackManager;			//攻撃のマネージャークラス
