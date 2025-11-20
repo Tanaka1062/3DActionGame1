@@ -33,8 +33,9 @@ class CItemManager
 {
 private:
 	list<CItemBase*> m_item;				//アイテムのクラス
-
 	int m_hndl[ITEM_NUM];					//アイテムのモデルハンドル
+	int m_spawnTime;						//時間カウント
+
 public:
 	//コンストラクタ・デストラクタ
 	CItemManager();
@@ -63,9 +64,6 @@ public:
 	void SetItem(int _num, CItemBase* _item,CPlayer* _player);
 
 	//アイテムを出現させる
-	// _pos		:出現させるアイテムの位置
-	// _name	:出現させるアイテムの名前
-	//			:名前を入力しない場合ランダムなアイテムが出現する
-	void SpawnItem(VECTOR _pos);
+	void SpawnItem();
 };
 

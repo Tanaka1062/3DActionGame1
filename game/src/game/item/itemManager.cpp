@@ -1,11 +1,14 @@
 #include "itemManager.h"
 #include "fireRing/fireRing.h"
 #include "harbAmulent/harbAmulent.h"
+#include "itemObject/bomb/bomb.h"
 
 static const char* MODEL_PATH[ITEM_NUM] =				//モデルのパス
 {
 	"data/model/item/bomb/bomb.mv1",
 };
+
+static const int SPAWN_TIME = 5 * 60;		//スポーンするまで時間
 
 //-----------------------
 //	  コンストラクタ
@@ -17,6 +20,7 @@ CItemManager::CItemManager()
 		m_hndl[hndl_i] = -1;
 	}
 
+	m_spawnTime = 0;
 }
 
 //-----------------------
@@ -36,6 +40,8 @@ void CItemManager::Init()
 	{
 		m_hndl[hndl_i] = -1;
 	}
+
+	m_spawnTime = 0;
 }
 
 //-----------------------
@@ -63,6 +69,13 @@ void CItemManager::Step()
 	{
 		(*item_i)->Step();
 	}
+
+	m_spawnTime++;
+	if (m_spawnTime >= SPAWN_TIME)
+	{
+		m_spawnTime = 0;
+	}
+
 }
 
 //-----------------------
@@ -166,24 +179,25 @@ void CItemManager::SetItem(int _num,CItemBase* _item,CPlayer* _player)
 
 }
 
-//-----------------------
-// アイテムを出現させる
-//-----------------------
-void CItemManager::SpawnItem(VECTOR _pos)
+//アイテムを出現させる
+void CItemManager::SpawnItem()
 {
-	////名前の保存用
+	//ランダムな変数保存用
+	int rand = GetRand(ITEM_NUM - 1);
 
-	////アイテムの保存用
-	//CItemBase* item = nullptr;
+	//アイテムの出現
+	CItemBase* item = nullptr;
 
-	////アイテムが何もない場合ランダムなアイテムが選ばれる
+	switch (rand)
+	{
+	case ITEM_BOMB:
+		item = new CBomb;
+		break;
+	default:
+		return;
+		break;
+	}
 
-	////アイテム事に設定をする
-
-	//item->Init();
-	//item->Load();
-	//item->SetPos(_pos);
-	//m_item.push_back(item);
-
+	
 }
 
