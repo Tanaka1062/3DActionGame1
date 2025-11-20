@@ -79,8 +79,7 @@ void CPowerCoinManager::Load()
 	//コインのモデルロード
 	for (int powerCoin_i = 0; powerCoin_i < m_powerCoin.size(); powerCoin_i++)
 	{
-		m_powerCoin[powerCoin_i]->LoadModel(MODEL_PATH[powerCoin_i]);
-		m_powerCoin[powerCoin_i]->Load();
+		m_powerCoin[powerCoin_i]->Load(MODEL_PATH[powerCoin_i]);
 	}
 
 	//マップのフレームのハンドルをロード

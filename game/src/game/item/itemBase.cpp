@@ -25,11 +25,20 @@ void CItemBase::Init(CPlayer* _player)
 }
 
 //--------------------------
-//		モデルのロード
+//モデルのロード(一つのモデルしか使わない)
 //--------------------------
-void CItemBase::Load()
+void CItemBase::Load(char* _modelPath)
 {
-	CObject::Load();
+	CObject::LoadModel(_modelPath);
+	m_shadow.Load();
+}
+
+//--------------------------
+//モデルのロード(同じモデルを複数使う場合)
+//--------------------------
+void CItemBase::Load(int _hndl)
+{
+	CObject::DuplicateModel(_hndl);
 	m_shadow.Load();
 }
 

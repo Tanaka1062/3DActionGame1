@@ -2,12 +2,20 @@
 #include "fireRing/fireRing.h"
 #include "harbAmulent/harbAmulent.h"
 
+static const char* MODEL_PATH[ITEM_NUM] =				//モデルのパス
+{
+	"data/model/item/bomb/bomb.mv1",
+};
+
 //-----------------------
 //	  コンストラクタ
 //-----------------------
 CItemManager::CItemManager()
 {
-	m_shot = nullptr;
+	for (int hndl_i = 0; hndl_i < ITEM_NUM; hndl_i++)
+	{
+		m_hndl[hndl_i] = -1;
+	}
 
 }
 
@@ -22,34 +30,12 @@ CItemManager::~CItemManager()
 //-----------------------
 //		初期化
 //-----------------------
-void CItemManager::Init( CShotManager* _shot)
+void CItemManager::Init()
 {
-
-	//m_shot = _shot;
-
-
-	//int num = 0;
-	//
-	//int rootHndl = MV1LoadModel("data/model/map/map1FramePos.mv1");
-
-	//for (auto ite = m_item.begin(); ite != m_item.end(); ++ite)
-	//{
-	//	VECTOR start = VGet(0.0f, 0.0f, 0.0f);
-
-	//	switch (num)
-	//	{
-	//	case 0:
-	//		start = MV1GetFramePosition(rootHndl,18);
-	//		break;
-	//	case 1:
-	//		start = MV1GetFramePosition(rootHndl,20);
-	//		break;
-	//	}
-
-	//	(*ite)->SetPos(start);
-
-	//	num++;
-	//}
+	for (int hndl_i = 0; hndl_i < ITEM_NUM; hndl_i++)
+	{
+		m_hndl[hndl_i] = -1;
+	}
 }
 
 //-----------------------
@@ -58,24 +44,13 @@ void CItemManager::Init( CShotManager* _shot)
 void CItemManager::Load()
 {
 
-	////アイテムのモデルのパスを管理======
-	//const char* MODEL_PATH[ITEM_NUM] =
-	//{
-	//	"data/model/item/fireRing.mv1",
-	//	"data/model/item/harbAmulent.mv1",
-	//};
-	////==================================
-
-	////モデルのハンドルを設定
-	//for (int i = 0; i < ITEM_NUM; i++)
-	//{
-	//	m_hndl[i] = MV1LoadModel(MODEL_PATH[i]);
-	//}
-
-	////モデルをロード
-	//for (auto ite = m_item.begin(); ite != m_item.end();++ite)
-	//{
-	//}
+	for (int hndl_i = 0; hndl_i < ITEM_NUM; hndl_i++)
+	{
+		if (m_hndl[hndl_i] == -1)
+		{
+			m_hndl[hndl_i] = MV1LoadModel(MODEL_PATH[hndl_i]);
+		}
+	}
 
 }
 
@@ -84,11 +59,10 @@ void CItemManager::Load()
 //-----------------------
 void CItemManager::Step()
 {
-	////アイテムの処理
-	//for (auto ite = m_item.begin(); ite != m_item.end(); ++ite)
-	//{
-	//	(*ite)->Step();
-	//}
+	for (auto item_i = m_item.begin(); item_i != m_item.end(); ++item_i)
+	{
+		(*item_i)->Step();
+	}
 }
 
 //-----------------------
@@ -96,11 +70,10 @@ void CItemManager::Step()
 //-----------------------
 void CItemManager::Update()
 {
-	////アイテムの更新
-	//for (auto ite = m_item.begin(); ite != m_item.end(); ++ite)
-	//{
-	//	(*ite)->Update();
-	//}
+	for (auto item_i = m_item.begin(); item_i != m_item.end(); ++item_i)
+	{
+		(*item_i)->Update();
+	}
 }
 
 //-----------------------
@@ -108,11 +81,10 @@ void CItemManager::Update()
 //-----------------------
 void CItemManager::Draw()
 {
-	////アイテムの描写
-	//for (auto ite = m_item.begin(); ite != m_item.end(); ++ite)
-	//{
-	//	(*ite)->Draw();
-	//}
+	for (auto item_i = m_item.begin(); item_i != m_item.end(); ++item_i)
+	{
+		(*item_i)->Draw();
+	}
 }
 
 //-----------------------
@@ -120,17 +92,24 @@ void CItemManager::Draw()
 //-----------------------
 void CItemManager::Exit()
 {
-	////アイテムの終了処理
-	//for (auto ite = m_item.begin(); ite != m_item.end();)
-	//{
-	//	(*ite)->Exit();
+	for (int hndl_i = 0; hndl_i < ITEM_NUM; hndl_i++)
+	{
+		if (m_hndl[hndl_i] != -1)
+		{
+			MV1DeleteModel(m_hndl[hndl_i]);
+			m_hndl[hndl_i] = -1;
+		}
+	}
 
-	//	delete (*ite);
+	for (auto item_i = m_item.begin(); item_i != m_item.end();)
+	{
+		(*item_i)->Exit();
 
-	//	//終了処理が終わったアイテムを消す
-	//	ite = m_item.erase(ite);
+		delete (*item_i);
 
-	//}
+		item_i = m_item.erase(item_i);
+	}
+
 }
 
 //-----------------------
@@ -138,20 +117,20 @@ void CItemManager::Exit()
 //-----------------------
 CItemBase* CItemManager::GetItem(int _num)
 {
-	////引数よりアイテムの数がすくなければnullを返す
-	//if (_num > m_item.size())return nullptr;
-	////アイテムの数をカウントする変数
-	//int count = 0;
-	//for (auto ite = m_item.begin(); ite != m_item.end(); ++ite)
-	//{
-	//	//引数の数字と同じならアドレスを返す
-	//	if (count == _num)
-	//	{
-	//		return *ite;
-	//	}
-	//	count++;
+	//引数よりアイテムの数がすくなければnullを返す
+	if (_num > m_item.size())return nullptr;
+	//アイテムの数をカウントする変数
+	int count = 0;
+	for (auto ite = m_item.begin(); ite != m_item.end(); ++ite)
+	{
+		//引数の数字と同じならアドレスを返す
+		if (count == _num)
+		{
+			return *ite;
+		}
+		count++;
 
-	//}
+	}
 	return nullptr;
 
 }

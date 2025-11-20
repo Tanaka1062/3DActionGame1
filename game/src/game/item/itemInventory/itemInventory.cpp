@@ -46,15 +46,6 @@ void CItemInventory::Step(CShotManager* _shot)
 			m_useItem[i] != nullptr)
 		{
 
-			//アイテムの使用回数がなくなっていたら消す
-			if (m_useItem[i]->GetUseCount() <= 0)
-			{
-				m_useItem[i]->Exit();
-
-				delete m_useItem[i];
-
-				m_useItem[i] = nullptr;
-			}
 		}
 
 		//スキルを使用していたらスキルを使用する

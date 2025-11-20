@@ -25,7 +25,6 @@ CFireRing::CFireRing()
 void CFireRing::Init(CPlayer* _player)
 {
 	CItemShotBase::Init(_player);
-	m_useCount = USE_MAX;
 }
 
 //-------------------
@@ -33,8 +32,6 @@ void CFireRing::Init(CPlayer* _player)
 //-------------------
 void CFireRing::Use(CShotManager* _shot)
 {
-	if (m_useCount <= 0)return;
-	m_useCount--;
 
 	for (int i = 0; i < SHOT_NUM; i++)
 	{

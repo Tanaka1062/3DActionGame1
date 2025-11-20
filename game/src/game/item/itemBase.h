@@ -18,8 +18,11 @@ public:
 	//初期化
 	virtual void Init(CPlayer* _player = nullptr);
 
-	//モデルのロード
-	virtual void Load();
+	//モデルのロード(一つのモデルしか使わない)
+	virtual void Load(const char* _modelPath);
+
+	//モデルのロード(同じモデルを複数使う場合)
+	virtual void Load(int _hndl);
 
 	//毎フレームする処理
 	virtual void Step();

@@ -19,7 +19,6 @@ CHarbAmulent::CHarbAmulent()
 void CHarbAmulent::Init(CPlayer* _player)
 {
 	CItemBase::Init(_player);
-	m_useCount = USE_MAX;
 }
 
 //-------------
