@@ -8,7 +8,6 @@
 class CItemBase :public CObject
 {
 protected:
-	int m_useCount;			//アイテムの使用回数
 	CPlayer* m_player;		//プレイヤーのアドレス保存用
 	CShadow m_shadow;		//丸影のクラス
 
@@ -42,9 +41,6 @@ public:
 
 	//プレイヤーのクラスを設定
 	void SetPlayerClass(CPlayer* _player) { m_player = _player; }
-
-	//アイテムの使用回数を取得
-	int GetUseCount() { return m_useCount; }
 
 	//丸影の座標を設定
 	void SetShadowPos(VECTOR _pos) { m_shadow.SetPos(_pos); }

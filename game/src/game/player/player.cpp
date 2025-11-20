@@ -67,14 +67,21 @@ enum tagAnim {
 	ANIMID_ITEM_USE,				//アイテムを使用中のアニメーション
 	ANIMID_ITEM_USE_IN,				//アイテムを使用する前のアニメーション
 	ANIMID_ITEM_USE_OUT,			//アイテムを使用した後のアニメーション
+	ANIMID_LIFT_UP,					//物を持ち上げるアニメーション
+	ANIMID_PUT_DOWN,				//物を下ろすアニメーション
 	ANIMID_SKILLA,					//スキルA使用中のアニメーション
 	ANIMID_SKILLA_IN,				//スキルA使用前のアニメーション
 	ANIMID_SKILLA_OUT,				//スキルA使用後のアニメーション
 	ANIMID_SKILLB,					//スキルB使用中のアニメーション
 	ANIMID_SKILLB_IN,				//スキルB使用前のアニメーション
 	ANIMID_SKILLB_OUT,				//スキルB使用後のアニメーション
+	ANIMID_THROW,					//物を投げる中のアニメーション
+	ANIMID_THROW_IN,				//物を投げる前のアニメーション
+	ANIMID_THROW_OUT,				//物を投げる後のアニメーション
 	ANIMID_WAIT,					//待機状態のアニメーション
+	ANIMID_WAIT_LIFTING_UP,			//物を持ち上げている待機状態のアニメーション
 	ANIMID_WALK,					//歩きのアニメーション
+	ANIMID_WALK_LIFTING_UP,			//物を持ち上げている歩きのアニメーション
 
 };
 
@@ -109,6 +116,7 @@ CPlayer::CPlayer()
 	m_isTransform = false;
 	m_attackNum = 0;
 	m_powerUp = 0;
+	m_dodgerollRotY = 0.0f;
 	m_padName = PAD_NONE;
 	m_weaponId = WEAPON_ID_HAND;
 
@@ -148,6 +156,7 @@ void CPlayer::Init(CAttackManager* _attackManager, tagPlayerName _name, tagPadNa
 	m_attackNum = 0;
 	m_powerUp = 0;
 	m_padName = _padName;
+	m_dodgerollRotY = 0.0f;
 	m_weaponId = WEAPON_ID_HAND;
 	m_name = _name;
 	m_shadow.Init(m_pos, SHADOW_SIZE);

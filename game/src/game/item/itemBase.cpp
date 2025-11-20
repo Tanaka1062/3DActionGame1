@@ -19,7 +19,6 @@ void CItemBase::Init(CPlayer* _player)
 	CObject::Init();
 
 	m_rad = RADIUS;
-	m_useCount = 0;
 	m_player = _player;
 	m_shadow.Init(m_pos,0.5f);
 	m_isGravity = true;
