@@ -27,6 +27,15 @@ enum tagItemType
 	ITEM_TYPE_NUM,			//アイテムのタイプの数
 };
 
+enum tagItemSpawnPos
+{
+	ITEM_SPAWN_POS_1,		//アイテムの出現座標1
+	ITEM_SPAWN_POS_2,		//アイテムの出現座標2
+	ITEM_SPAWN_POS_3,		//アイテムの出現座標3
+	ITEM_SPAWN_POS_4,		//アイテムの出現座標4
+
+	ITEM_SPAWN_POS_NUM,		//アイテムの出現座標の数
+};
 
 //アイテムマネージャークラス
 class CItemManager
@@ -35,6 +44,7 @@ private:
 	list<CItemBase*> m_item;				//アイテムのクラス
 	int m_hndl[ITEM_NUM];					//アイテムのモデルハンドル
 	int m_spawnTime;						//時間カウント
+	VECTOR m_spawnPos[ITEM_SPAWN_POS_NUM];	//アイテムの出現座標
 
 public:
 	//コンストラクタ・デストラクタ

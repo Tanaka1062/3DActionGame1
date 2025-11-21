@@ -8,6 +8,10 @@ static const char* MODEL_PATH[ITEM_NUM] =				//モデルのパス
 	"data/model/item/bomb/bomb.mv1",
 };
 
+static const char FRAME_PATH[] =
+{ "data/model/map/TestMap6Frame.mv1" };			//ロードするファイル名
+
+
 static const int SPAWN_TIME = 5 * 60;		//スポーンするまで時間
 
 //-----------------------
@@ -21,6 +25,11 @@ CItemManager::CItemManager()
 	}
 
 	m_spawnTime = 0;
+
+	for (int spawnPos_i = 0; spawnPos_i < ITEM_SPAWN_POS_NUM; spawnPos_i++)
+	{
+		m_spawnPos[spawnPos_i] = ZERO;
+	}
 }
 
 //-----------------------
@@ -42,6 +51,11 @@ void CItemManager::Init()
 	}
 
 	m_spawnTime = 0;
+
+	for (int spawnPos_i = 0; spawnPos_i < ITEM_SPAWN_POS_NUM; spawnPos_i++)
+	{
+		m_spawnPos[spawnPos_i] = ZERO;
+	}
 }
 
 //-----------------------
@@ -56,6 +70,24 @@ void CItemManager::Load()
 		{
 			m_hndl[hndl_i] = MV1LoadModel(MODEL_PATH[hndl_i]);
 		}
+	}
+
+	//マップのフレームハンドルをロード
+	int mapFrameHndl = MV1LoadModel(FRAME_PATH);
+
+	for (int spawnPos_i = 0; spawnPos_i < ITEM_SPAWN_POS_NUM; spawnPos_i++)
+	{
+		//アイテムの出現座標を保存
+		VECTOR spawnPos = ZERO;
+
+		switch (spawnPos_i)
+		{
+		case ITEM_SPAWN_POS_1:
+		default:
+			break;
+		}
+
+		m_spawnPos[spawnPos_i] = ZERO;
 	}
 
 }
@@ -193,11 +225,14 @@ void CItemManager::SpawnItem()
 	case ITEM_BOMB:
 		item = new CBomb;
 		break;
-	default:
-		return;
-		break;
 	}
 
-	
+	if (item == nullptr)return;
+
+	item->Init();
+
+	item->Load(MODEL_PATH[rand]);
+
+	m_item.push_back(item);
 }
 
