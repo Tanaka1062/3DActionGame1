@@ -28,6 +28,7 @@ private:
 	CPlayerManager m_playerManager;			//プレイヤー
 	CShotManager m_shot;					//弾
 	CItemInventory m_itemInventory;			//アイテムインベントリ
+	CItemManager m_itemManager;				//アイテムマネージャークラス
 	CWeaponManager m_weaponManager;			//武器のマネージャークラス
 	CAttackManager m_attackManager;			//攻撃のマネージャークラス
 	CBoxManager m_box;						//箱

@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include <list>
+#include <vector>
 #include "itemBase.h"
 #include "../data.h"
 #include "../player/playerManager.h"
@@ -13,6 +13,9 @@ using namespace std;
 enum tagItemName
 {
 	ITEM_NONE = -1,			//何もない	
+	ITEM_COIN_RED,			//赤コイン
+	ITEM_COIN_GREEN,		//緑コイン
+	ITEM_COIN_BLUE,			//青コイン
 	ITEM_BOMB,				//アイテム爆弾
 
 	ITEM_NUM,				//アイテムの数
@@ -41,7 +44,7 @@ enum tagItemSpawnPos
 class CItemManager
 {
 private:
-	list<CItemBase*> m_item;				//アイテムのクラス
+	vector<CItemBase*> m_item;				//アイテムのクラス
 	int m_hndl[ITEM_NUM];					//アイテムのモデルハンドル
 	int m_spawnTime;						//時間カウント
 	VECTOR m_spawnPos[ITEM_SPAWN_POS_NUM];	//アイテムの出現座標
@@ -65,7 +68,7 @@ public:
 	void Exit();
 
 	//アイテムの数を取得
-	int GetNum() { return static_cast<int>(m_item.size()); }
+	int GetItemNum() { return static_cast<int>(m_item.size()); }
 
 	//アイテムのアドレスを取得
 	CItemBase* GetItem(int _num);

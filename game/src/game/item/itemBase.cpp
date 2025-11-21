@@ -19,15 +19,16 @@ void CItemBase::Init(CPlayer* _player)
 	CObject::Init();
 
 	m_rad = RADIUS;
+	m_isActive = false;
 	m_player = _player;
-	m_shadow.Init(m_pos,0.5f);
+	m_shadow.Init(m_pos,0.5f);	
 	m_isGravity = true;
 }
 
 //--------------------------
 //モデルのロード(一つのモデルしか使わない)
 //--------------------------
-void CItemBase::Load(char* _modelPath)
+void CItemBase::Load(const char* _modelPath)
 {
 	CObject::LoadModel(_modelPath);
 	m_shadow.Load();

@@ -204,47 +204,6 @@ void CCollisionManager::CheckHitPlayerToMap(CPlayerManager& _playerManager,CMap&
 }
 
 //----------------------------------------------
-//		アイテムとプレイヤーの当たり判定
-//----------------------------------------------
-void CCollisionManager::CheckHitItemToPlayer(CItemManager& _item,
-	CItemInventory& _itemInventory, CPlayerManager& _playerManager)
-{
-	for (int i = 0; i < _playerManager.GetPlayerNum(); i++)
-	{
-		//プレイヤーのクラスを取得
-		CPlayer* player = _playerManager.GetPlayer(i);
-
-		//プレイヤーが死んでいたら処理をしない
-		if (player->GetActive() == false)return;
-
-		for (int j = 0; j < _item.GetNum(); j++)
-		{
-			//アイテムのクラスを取得
-			CItemBase* item = _item.GetItem(j);
-
-			//アイテムにプレイヤーが当たっているか
-			if (CCollision::CheckHitSphereToSphere(item->GetCenter(), item->GetRad(),
-				player->GetCenter(), player->GetRad()) == true)
-			{
-				//アイテムを取っていたらプレイヤーがアイテムを取得する
-				if (player->GetIsPickUp() == true)
-				{
-					//インベントリのアイテム保存用
-					CItemBase* inventoryItem = nullptr;
-					//アイテムをインベントリに入れる
-					inventoryItem = _itemInventory.SetItem(item,player);
-					//インベントリからアイテムに入れる
-					_item.SetItem(j, inventoryItem,player);
-
-					return;
-				}
-			}
-
-		}
-	}
-}
-
-//----------------------------------------------
 //			  攻撃と箱の当たり判定
 //----------------------------------------------
 void CCollisionManager::CheckHitAttackToBox(CAttackManager& _attack, CBoxManager& _box)
@@ -502,3 +461,75 @@ void CCollisionManager::CheckHitPowerCoinToMap(CPowerCoinManager& _powerCoinMana
 
 }
 
+//アイテムとマップの当たり判定
+void CCollisionManager::CheckHitItemToMap(CItemManager& _itemManager, CMap& _map)
+{
+
+	//当たり判定情報が格納される構造体
+	MV1_COLL_RESULT_POLY_DIM col;
+
+	for (int item_i = 0; item_i < _itemManager.GetItemNum(); item_i++)
+	{
+		CItemBase* item = _itemManager.GetItem(item_i);
+
+		//中身がnullならスキップする
+		if (item == nullptr)continue;
+
+		//生きていなかったら当たり判定をしない
+		if (item->GetActive() == false)continue;
+
+		col = MV1CollCheck_Sphere(_map.GetHitHndl(), -1,
+			item->GetCenter(), item->GetRad());
+
+		//ポリゴンと当たっていたか
+		if (col.HitNum != 0)
+		{
+			//押し戻しの計算-----------------------
+
+			for (int j = 0; j < col.HitNum; j++)
+			{
+
+				//中心点から最近点を引き算
+				VECTOR vLen = VSub(item->GetCenter(), col.Dim[j].HitPosition);
+				//取得した距離を三平方の定理の長さに変換
+				float fLen = VSize(vLen);
+				//実際にめり込んだ距離を計算
+				fLen = item->GetRad() - fLen;
+				//法線をめり込んだ距離分掛け算する
+				vLen = VScale(col.Dim[j].Normal, fLen);
+
+				//プレイヤーの座標を計算した分だけ移動させる
+				item->SetPos(VAdd(item->GetPos(), vLen));
+
+				//重力をリセット
+				item->GravityReset();
+
+			}
+			//-------------------------------------
+
+			//毎回データを削除
+			MV1CollResultPolyDimTerminate(col);
+		}
+
+		VECTOR shadowPos = item->GetPos();
+
+		//少しずつ座標を落として当たった場所に丸影の座標を設定する
+		for (int shadowPosY_i = 0; shadowPosY_i < 1000; shadowPosY_i++)
+		{
+			shadowPos.y -= 0.01f * shadowPosY_i;
+
+			col = MV1CollCheck_Sphere(_map.GetHitHndl(), -1,
+				shadowPos, 1.0f);
+
+			if (col.HitNum != 0)
+			{
+				shadowPos.y += 1.5f;
+
+				item->SetShadowPos(shadowPos);
+				break;
+			}
+		}
+		//毎回データを削除
+		MV1CollResultPolyDimTerminate(col);
+	}
+}

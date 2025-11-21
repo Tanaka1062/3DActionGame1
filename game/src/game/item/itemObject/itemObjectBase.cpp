@@ -6,7 +6,7 @@ CItemObjectBase::CItemObjectBase()
 }
 
 //‰Šú‰»
-void CItemObjectBase::Init(CPlayer* _player = nullptr)
+void CItemObjectBase::Init(CPlayer* _player)
 {
 	CItemBase::Init(_player);
 
@@ -16,6 +16,6 @@ void CItemObjectBase::Init(CPlayer* _player = nullptr)
 //–ˆƒtƒŒ[ƒ€‚·‚éˆ—
 void CItemObjectBase::Step()
 {
-
+	CItemBase::Step();
 }
 

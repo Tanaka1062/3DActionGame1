@@ -24,10 +24,6 @@ public:
 	//プレイヤーとマップの当たり判定
 	static void CheckHitPlayerToMap(CPlayerManager& _playerManager,CMap& _map);
 
-	//アイテムとプレイヤーの当たり判定
-	static void CheckHitItemToPlayer(CItemManager& _item,
-		CItemInventory& _itemInventory, CPlayerManager& _playerManager);
-
 	//攻撃と箱の当たり判定
 	static void CheckHitAttackToBox(CAttackManager& _attack, CBoxManager& _box);
 
@@ -43,6 +39,9 @@ public:
 
 	//パワーコインとマップの当たり判定
 	static void CheckHitPowerCoinToMap(CPowerCoinManager& _powerCoinManager, CMap& _map);
+
+	//アイテムとマップの当たり判定
+	static void CheckHitItemToMap(CItemManager& _itemManager,CMap& _map);
 
 };
 

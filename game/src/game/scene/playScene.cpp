@@ -34,10 +34,11 @@ void CPlayScene::Draw()
 	m_shot.Draw();
 	m_attackManager.Draw();
 	m_itemInventory.Draw();
+	m_itemManager.Draw();
 	m_weaponManager.Draw();
 	m_box.Draw();
 	m_uiManager.Draw();
-	m_powerCoinManager.Draw();
+	//m_powerCoinManager.Draw();
 
 	m_camera.Draw();
 
@@ -53,10 +54,11 @@ void CPlayScene::Init()
 	m_playerManager.Init(&m_attackManager);
 	m_shot.Init();
 	m_itemInventory.Init(&m_playerManager);
+	m_itemManager.Init();
 	m_weaponManager.Init();
 	m_box.Init();
 	m_uiManager.Init(&m_playerManager,&m_powerCoinManager);
-	m_powerCoinManager.Init(&m_playerManager);
+	//m_powerCoinManager.Init(&m_playerManager);
 	m_camera.Init(ZERO);
 
 }
@@ -70,9 +72,10 @@ void CPlayScene::Load()
 	m_sky.Load();
 	m_playerManager.Load();
 	m_shot.Load();
+	m_itemManager.Load();
 	m_weaponManager.Load();
 	m_uiManager.Load();
-	m_powerCoinManager.Load();
+	//m_powerCoinManager.Load();
 	m_box.Load();
 }
 
@@ -90,13 +93,15 @@ void CPlayScene::Step()
 
 	m_itemInventory.Step(&m_shot);
 
+	m_itemManager.Step();
+
 	//m_box.Step(&m_item);
 
 	m_weaponManager.Step(m_playerManager);
 
 	m_uiManager.Step();
 
-	m_powerCoinManager.Step();
+	//m_powerCoinManager.Step();
 
 	m_camera.Step(ZERO,0.0f);
 
@@ -106,12 +111,12 @@ void CPlayScene::Step()
 	CCollisionManager::CheckHitPlayerToPlayerAttack(m_playerManager, m_attackManager);
 	CCollisionManager::CheckHitPlayerToPlayer(m_playerManager);
 	CCollisionManager::CheckHitPlayerToMap(m_playerManager, m_ground);
-	//CCollisionManager::CheckHitItemToPlayer(m_item,m_itemInventory, m_playerManager);
 	CCollisionManager::CheckHitAttackToBox(m_attackManager, m_box);
 	CCollisionManager::CheckHitPlayerToBox(m_playerManager, m_box);
 	CCollisionManager::CheckHitBoxToMap(m_box, m_ground);
-	CCollisionManager::CheckHitPlayerToPowerCoin(m_playerManager, m_powerCoinManager);
-	CCollisionManager::CheckHitPowerCoinToMap(m_powerCoinManager, m_ground);
+	//CCollisionManager::CheckHitPlayerToPowerCoin(m_playerManager, m_powerCoinManager);
+	//CCollisionManager::CheckHitPowerCoinToMap(m_powerCoinManager, m_ground);
+	CCollisionManager::CheckHitItemToMap(m_itemManager, m_ground);
 	//--------------------------------------------
 
 	//すべての結果を反映させる
@@ -121,9 +126,10 @@ void CPlayScene::Step()
 	m_shot.Update();
 	m_attackManager.Update();
 	m_itemInventory.Update();
+	m_itemManager.Update();
 	m_weaponManager.Update(m_playerManager);
 	m_box.Update();
-	m_powerCoinManager.Update();
+	//m_powerCoinManager.Update();
 	m_camera.Update(ZERO);
 
 	if (CKeyInput::IsTrg(KEY_SELECT) == true ||
@@ -146,10 +152,11 @@ void CPlayScene::Exit()
 	m_playerManager.Exit();
 	m_attackManager.Exit();
 	m_shot.Exit();
+	m_itemManager.Exit();
 	m_weaponManager.Exit();
 	m_box.Exit();
 	m_uiManager.Exit();
-	m_powerCoinManager.Exit();
+	//m_powerCoinManager.Exit();
 
 	//エフェクトを全て消す
 	CEffekseerCtrl::StopAll();

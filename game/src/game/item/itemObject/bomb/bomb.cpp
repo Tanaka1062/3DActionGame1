@@ -8,14 +8,18 @@ CBomb::CBomb()
 }
 
 //‰Šú‰»
-void CBomb::Init(CPlayer* _player = nullptr)
+void CBomb::Init(CPlayer* _player)
 {
+	CItemObjectBase::Init();
+
 	m_timeCount = 0;
 }
 
 //–ˆƒtƒŒ[ƒ€‚·‚éˆ—
 void CBomb::Step()
 {
+	CItemObjectBase::Step();
+
 	m_timeCount++;
 	//”š”­ŽžŠÔ‚ð‰ß‚¬‚½‚ç”šŽž‚³‚¹‚é
 	if (m_timeCount >= EXPLOSION_TIME)
