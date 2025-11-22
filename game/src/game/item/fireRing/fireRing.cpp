@@ -33,21 +33,21 @@ void CFireRing::Init(CPlayer* _player)
 void CFireRing::Use(CShotManager* _shot)
 {
 
-	for (int i = 0; i < SHOT_NUM; i++)
-	{
-		VECTOR shotPos = m_player->GetCenter();
-		shotPos.y += static_cast<float>(i * 5);
-		
-		//呼び出すエフェクトのID
-		int effectId = CEffectData::GetId(EFFECT2);
+	//for (int i = 0; i < SHOT_NUM; i++)
+	//{
+	//	VECTOR shotPos = m_player->GetCenter();
+	//	shotPos.y += static_cast<float>(i * 5);
+	//	
+	//	//呼び出すエフェクトのID
+	//	int effectId = CEffectData::GetId(EFFECT2);
 
-		//エフェクトのハンドル
-		int effectHndl = CEffekseerCtrl::Request(effectId, GetCenter(), false);
+	//	//エフェクトのハンドル
+	//	int effectHndl = CEffekseerCtrl::Request(effectId, GetCenter(), false);
 
-		_shot->Request(shotPos, m_player->GetRot(),
-			SHOT_RADIUS,SHOT_SPEED, SHOT_ATK, SHOT_LOST_TIME, effectHndl);
+	//	_shot->Request(shotPos, m_player->GetRot(),
+	//		SHOT_RADIUS,SHOT_SPEED, SHOT_ATK, SHOT_LOST_TIME, effectHndl);
 
-	}
+	//}
 
 
 }

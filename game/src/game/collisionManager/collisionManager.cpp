@@ -5,7 +5,26 @@
 #include "../system/effectData/effectData.h"
 
 //----------------------------------------------
-//	プレイヤーと攻撃判定の当たり判定
+//			オブジェクト同士の当たり判定
+//----------------------------------------------
+void CCollisionManager::CheckHitObjectToObject(CObject* _objectA, CObject* _objectB)
+{
+	//二つのオブジェクトが消えていたら処理をしない
+	if (_objectA->GetActive() == false || _objectB->GetActive() == false)return;
+
+	//オブジェクト同士が当たっているか
+	if (CCollision::CheckHitSphereToSphere(_objectA->GetCenter(), _objectA->GetRad(),
+		_objectB->GetCenter(), _objectB->GetRad()) == true)
+	{
+		//それぞれ当たり判定の処理をする
+		_objectA->HitCalc(_objectB);
+		_objectB->HitCalc(_objectA);
+	}
+}
+
+
+//----------------------------------------------
+//	 	 プレイヤーと攻撃判定の当たり判定
 //----------------------------------------------
 void CCollisionManager::CheckHitPlayerToPlayerAttack(CPlayerManager& _playerManager,
 	CAttackManager& _attackManager)
@@ -15,41 +34,13 @@ void CCollisionManager::CheckHitPlayerToPlayerAttack(CPlayerManager& _playerMana
 		//プレイヤーのクラスを取得
 		CPlayer* player = _playerManager.GetPlayer(player_j);
 
-		//プレイヤーが死んでいたらスキップ
-		if (player->GetActive() == false)continue;
-
-		//プレイヤーが回避中ならスキップ
-		if (player->GetIsDodgeroll() == true)continue;
-
 		for (int attack_i = 0; attack_i < _attackManager.GetNum(); attack_i++)
 		{
 			//攻撃のクラスを取得
 			CAttackBase* attack = _attackManager.GetAttack(attack_i);
 
-			//攻撃判定がないやつはスキップ
-			if (attack->GetIsAttack() == false)continue;
-
-			//自分が出した攻撃はスキップ
-			if (player->GetPlayerName() == attack->GetAttackName())continue;
-
-			//プレイヤーの攻撃がプレイヤーに当たっているか
-			if (CCollision::CheckHitSphereToSphere(attack->GetPos(), attack->GetRad(),
-				player->GetCenter(), player->GetRad()) == true)
-			{
-				//呼び出すエフェクトのID
-				int effectId = CEffectData::GetId(EFFECT_ATTACK);
-
-				//エフェクトを呼び出す
-				CEffekseerCtrl::Request(effectId, player->GetCenter(), false);
-
-				//ノックバックの方向
-				float rot = atan2f(attack->GetPos().x - player->GetCenter().x,
-					attack->GetPos().z - player->GetCenter().z);
-
-				//敵にプレイヤーの攻撃力分ダメージ
-				player->HitAttack(attack->GetAtk(), rot);
-			}
-
+			//当たり判定
+			CheckHitObjectToObject(player, attack);
 		}
 	}
 
@@ -361,27 +352,13 @@ void CCollisionManager::CheckHitPlayerToPowerCoin(CPlayerManager& _playerManager
 		//プレイヤーのクラスを取得
 		CPlayer* player = _playerManager.GetPlayer(player_i);
 
-		//プレイヤーが死んでいたらスキップ
-		if (player->GetActive() == false)continue;
-
 		for (int powerCoin_j = 0; powerCoin_j < _powerCoinManager.GetPowerCoinNum(); powerCoin_j++)
 		{
 			//パワーコインのクラスを取得
 			CPowerCoin* powerCoin = _powerCoinManager.GetPowerCoin(powerCoin_j);
 
-			//パワーコインが出ていなかったらスキップ
-			if (powerCoin->GetActive() == false)continue;
+			CheckHitObjectToObject(player, powerCoin);
 
-			//パワーコインが飛んでいたらスキップ
-			if (powerCoin->GetState() == POWER_COIN_FLYING)continue;
-
-			if (CCollision::CheckHitSphereToSphere(player->GetCenter(), player->GetRad(),
-				powerCoin->GetCenter(), powerCoin->GetRad()) == true)
-			{
-				powerCoin->HitCalc(player->GetPlayerName());
-
-				player->AddPowerUp();
-			}
 		}
 	}
 }
@@ -461,7 +438,9 @@ void CCollisionManager::CheckHitPowerCoinToMap(CPowerCoinManager& _powerCoinMana
 
 }
 
-//アイテムとマップの当たり判定
+//----------------------------------------------
+//		アイテムとマップの当たり判定
+//----------------------------------------------
 void CCollisionManager::CheckHitItemToMap(CItemManager& _itemManager, CMap& _map)
 {
 
@@ -531,5 +510,24 @@ void CCollisionManager::CheckHitItemToMap(CItemManager& _itemManager, CMap& _map
 		}
 		//毎回データを削除
 		MV1CollResultPolyDimTerminate(col);
+	}
+}
+
+//----------------------------------------------
+//		アイテムとプレイヤーの当たり判定
+//----------------------------------------------
+void CCollisionManager::CheckHitPlayerToItem(CPlayerManager& _playerManager, CItemManager& _itemManager)
+{
+	for (int player_i = 0; player_i < _playerManager.GetPlayerNum(); player_i++)
+	{
+		CPlayer* player = _playerManager.GetPlayer(player_i);
+
+		for (int item_i = 0; item_i < _itemManager.GetItemNum(); item_i++)
+		{
+			CItemBase* item = _itemManager.GetItem(item_i);
+
+			//当たり判定
+			CheckHitObjectToObject(player, item);
+		}
 	}
 }

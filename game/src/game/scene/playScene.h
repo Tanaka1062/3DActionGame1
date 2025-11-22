@@ -13,7 +13,6 @@
 #include "../box/boxManager.h"
 #include "../player/playerManager.h"
 #include "../ui/uiManager.h"
-#include "../item/powerCoin/powerCoinManager.h"
 
 using namespace std;
 
@@ -33,7 +32,6 @@ private:
 	CAttackManager m_attackManager;			//攻撃のマネージャークラス
 	CBoxManager m_box;						//箱
 	CUiManager m_uiManager;					//uiのマネージャークラス
-	CPowerCoinManager m_powerCoinManager;	//パワーコインのマネージャークラス
 
 public:
 

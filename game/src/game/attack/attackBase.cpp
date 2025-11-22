@@ -21,6 +21,7 @@ void CAttackBase::Init()
 	m_nextTime = 0;
 	m_timeCount = 0;
 	m_attackName = PLAYER_NONE;
+	m_objectTypy = OBJECT_ATTACK;
 }
 
 //----------------------

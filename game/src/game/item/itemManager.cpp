@@ -2,7 +2,6 @@
 #include "fireRing/fireRing.h"
 #include "harbAmulent/harbAmulent.h"
 #include "itemObject/bomb/bomb.h"
-#include "powerCoin/powerCoin.h"
 
 
 static const char* MODEL_PATH[ITEM_NUM] =				//モデルのパス
@@ -68,7 +67,7 @@ CItemManager::~CItemManager()
 //-----------------------
 //		初期化
 //-----------------------
-void CItemManager::Init()
+void CItemManager::Init(CPlayerManager* _playerManager)
 {
 	for (int item_i = 0; item_i < m_item.size(); item_i++)
 	{
@@ -86,6 +85,8 @@ void CItemManager::Init()
 	{
 		m_spawnPos[spawnPos_i] = ZERO;
 	}
+
+	m_playerManager = _playerManager;
 }
 
 //-----------------------
@@ -157,6 +158,55 @@ void CItemManager::Step()
 		m_spawnTime = 0;
 		//アイテムを出現させる
 		SpawnItem();
+	}
+
+	//コインをドロップしていたら落とす
+	for (int player_i = 0; player_i < m_playerManager->GetPlayerNum(); player_i++)
+	{
+		CPlayer* player = m_playerManager->GetPlayer(player_i);
+
+		if (player->GetDropCoin() >= 1)
+		{
+			for (int powerCoin_i = 0; powerCoin_i < COIN_MAX_NUM; powerCoin_i++)
+			{
+				CPowerCoin* coin = nullptr;
+
+				switch (powerCoin_i)
+				{
+				case ITEM_COIN_RED:
+				case ITEM_COIN_GREEN:
+				case ITEM_COIN_BLUE:
+					coin = dynamic_cast<CPowerCoin*>(m_item[powerCoin_i]);
+					break;
+				}
+
+				//コインが全てドロップ状態になったら一つ消す
+				if (player->GetDropCoin() == COIN_MAX_NUM)
+				{
+					coin->Delete();
+					player->SubPowerUp();
+					break;
+				}
+
+				//プレイヤーの持っているコインがある場合落とす
+				if (coin->GetPlayerName() == player->GetPlayerName())
+				{
+
+					float radian = static_cast<float>((GetRand(60) - 30) * (DX_PI_F / 180.0f));
+
+					//とりあえず中心に飛ばす
+					float rotY = atan2f(-player->GetPos().x, -player->GetPos().z);
+
+					rotY += radian;
+
+					coin->Drop(player->GetCenter(), rotY);
+					player->SubPowerUp();
+					break;
+				}
+			}
+			//一ずつ減らす
+			player->SetDropCoin(player->GetDropCoin() - 1);
+		}
 	}
 
 }
@@ -231,6 +281,25 @@ CItemBase* CItemManager::GetItem(int _num)
 	//}
 	//return nullptr;
 
+}
+
+//-----------------------
+//コインのアドレスを取得
+//-----------------------
+CPowerCoin* CItemManager::GetCoin(int _num)
+{
+	CPowerCoin* coin = nullptr;
+
+	switch (_num)
+	{
+	case ITEM_COIN_RED:
+	case ITEM_COIN_GREEN:
+	case ITEM_COIN_BLUE:
+		coin = dynamic_cast<CPowerCoin*>(m_item[_num]);
+		break;
+	}
+
+	return coin;
 }
 
 //-----------------------

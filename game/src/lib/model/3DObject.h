@@ -1,19 +1,31 @@
 #pragma once
 #include<DxLib.h>
 
+//オブジェクトのタイプ
+enum tagObjectType
+{
+	OBJECT_PLAYER,			//プレイヤー
+	OBJECT_ITEM,			//アイテム
+	OBJECT_ATTACK,			//攻撃の当たり判定
+	
+	OBJECT_TYPE_NUM,		//タイプの数
+};
+
 //3Dオブジェクトの基底クラス
 class CObject{
 protected:
-	VECTOR m_pos;			//座標
-	VECTOR m_speed;			//速度
-	VECTOR m_rot;			//回転角度
-	VECTOR m_scale;			//拡大縮小率
-	int m_hndl;				//オブジェクトのハンドル
-	float m_rad;			//半径
-	float m_gravity;		//重力
-	bool m_isActive;		//生存フラグ
-	bool m_isGravity;		//重力処理をするかどうかフラグ
-	bool m_isFlying;		//空中にいるかどうかフラグ
+	VECTOR m_pos;					//座標
+	VECTOR m_speed;					//速度
+	VECTOR m_rot;					//回転角度
+	VECTOR m_scale;					//拡大縮小率
+	int m_hndl;						//オブジェクトのハンドル
+	float m_rad;					//半径
+	float m_gravity;				//重力
+	bool m_isActive;				//生存フラグ
+	bool m_isGravity;				//重力処理をするかどうかフラグ
+	bool m_isFlying;				//空中にいるかどうかフラグ
+	tagObjectType m_objectTypy;		//オブジェクトのタイプ
+	CObject* m_owner;				//オーナーオブジェクト
 
 public:
 	//コンストラクタ・デストラクタ
@@ -47,7 +59,7 @@ public:
 	void DeleteModel();
 
 	//当たり判定後の処理
-	virtual void HitCalc();
+	virtual void HitCalc(CObject* _hitObject);
 
 	//オブジェクトを押し出す
 	// _push	:押し出す力		
@@ -105,6 +117,8 @@ public:
 	//ハンドルを取得
 	int GetHndl() { return m_hndl; }
 
+	//オブジェクトのタイプを取得
+	tagObjectType GetObjectType() { return m_objectTypy; }
 	//-------------------------------
 
 protected:

@@ -4,12 +4,21 @@
 #include "../player/player.h"
 #include "../shadow/shadow.h"
 
+//アイテムのタイプ
+enum tagItemType
+{
+	ITEM_TYPE_COIN,			//コインタイプ
+	ITEM_TYPE_BOMB,		//オブジェクトタイプ
+
+	ITEM_TYPE_NUM,			//アイテムのタイプの数
+};
+
 //アイテムのベースクラス
 class CItemBase :public CObject
 {
 protected:
-	CPlayer* m_player;		//プレイヤーのアドレス保存用
 	CShadow m_shadow;		//丸影のクラス
+	tagItemType m_itemType;	//アイテムのタイプ
 
 public:
 	//コンストラクタ
@@ -40,13 +49,13 @@ public:
 	virtual void Use();
 
 	//当たった時の処理
-	virtual void HitCalc();
-
-	//プレイヤーのクラスを設定
-	void SetPlayerClass(CPlayer* _player) { m_player = _player; }
+	virtual void HitCalc(CObject* _hitObject);
 
 	//丸影の座標を設定
 	void SetShadowPos(VECTOR _pos) { m_shadow.SetPos(_pos); }
+
+	//アイテムのタイプを取得
+	tagItemType GetItemType() { return m_itemType; }
 
 };
 

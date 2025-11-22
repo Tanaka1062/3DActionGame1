@@ -6,6 +6,8 @@
 #include "../../lib/input/controllerManager.h"
 #include"../../lib/input/keyInput.h"
 #include "playerManager.h"
+#include "../../lib/effekseer/effekseer.h"
+#include "../system/effectData/effectData.h"
 
 //定義関連---------------------------
 
@@ -160,6 +162,7 @@ void CPlayer::Init(CAttackManager* _attackManager, tagPlayerName _name, tagPadNa
 	m_weaponId = WEAPON_ID_HAND;
 	m_name = _name;
 	m_shadow.Init(m_pos, SHADOW_SIZE);
+	m_objectTypy = OBJECT_PLAYER;
 }
 
 //-----------------------
@@ -290,21 +293,55 @@ void CPlayer::Exit()
 	}
 }
 
-//-----------------------
-//攻撃を食らった時にする処理
-//-----------------------
-void CPlayer::HitAttack(int _atk, float _rotY)
+//当たり判定後の処理
+void CPlayer::HitCalc(CObject* _hitObject)
 {
-	CCharacterBase::HitAttack(_atk,_rotY);
+	//_hitObjectがnullだったら処理をしない
+	if (_hitObject == nullptr)return;
 
-	if (m_isTransform == true)
+	//攻撃の当たり判定の場合の処理-----------------------------------------
+	if (_hitObject->GetObjectType() == OBJECT_ATTACK)
 	{
-		m_transformTimeCount += _atk;
+		//プレイヤーが回避中なら処理をしない
+		if (m_isDodgeroll == true)return;
+
+		//当たり判定保存用
+		CAttackBase* attack = nullptr;
+
+		attack = dynamic_cast<CAttackBase*>(_hitObject);
+
+		//攻撃判定が消えている場合処理をしない
+		if (attack->GetIsAttack() == false)return;
+
+		//自分が出した攻撃の場合処理をしない
+		if (attack->GetAttackName() == m_name)return;
+
+		//ノックバックの方向
+		float rot = atan2f(attack->GetPos().x - GetCenter().x,
+			attack->GetPos().z - GetCenter().z);
+
+		CCharacterBase::HitAttack(attack->GetAtk(), rot);
+
+		//変身中の場合変身時間を減らす
+		if (m_isTransform == true)
+		{
+			m_transformTimeCount += attack->GetAtk();
+		}
+		//変身していない場合コインを落とす
+		else
+		{
+			m_dropCoin++;
+		}
+
+		//呼び出すエフェクトのID
+		int effectId = CEffectData::GetId(EFFECT_ATTACK);
+
+		//エフェクトを呼び出す
+		CEffekseerCtrl::Request(effectId, GetCenter(), false);
+
 	}
-	else
-	{
-		m_dropCoin++;
-	}
+	//---------------------------------------------------------------------
+
 }
 
 //-----------------------

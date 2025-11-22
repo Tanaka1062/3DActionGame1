@@ -32,7 +32,7 @@ public:
 
 	//“–‚½‚Á‚½‚Ìˆ—
 	//_name		:‚Ç‚ÌƒvƒŒƒCƒ„[‚ªG‚ê‚½‚©‚ğæ“¾
-	void HitCalc(tagPlayerName _name);
+	void HitCalc(CObject* _hitObject);
 
 	//ó‘Ô‚ğæ“¾
 	tagPowerCoinState GetState() { return m_state; }

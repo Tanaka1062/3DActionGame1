@@ -5,7 +5,7 @@
 #include <iostream>
 #include <vector>
 #include "GetCoin/GetCoinUi.h"
-#include "../item/powerCoin/powerCoinManager.h"
+#include "../item/itemManager.h"
 
 using namespace std;
 
@@ -21,7 +21,7 @@ public:
 	~CUiManager();
 
 	void Init(CPlayerManager* _playerManager = nullptr,
-		CPowerCoinManager* _powerCoinManager = nullptr);
+		CItemManager* _itemManager = nullptr);
 	//ロード
 	void Load();
 	//毎フレームする処理

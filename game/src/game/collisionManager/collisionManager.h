@@ -9,9 +9,15 @@
 #include "../attack/attackManager.h"
 #include "../box/boxManager.h"
 #include "../item/powerCoin/powerCoinManager.h"
+#include "../../lib/model/3DObject.h"
 
 class CCollisionManager
 {
+private:
+
+	//オブジェクト同士の当たり判定
+	static void CheckHitObjectToObject(CObject* _objectA,CObject* _objectB);
+
 public:
 
 	//プレイヤーと攻撃判定の当たり判定
@@ -42,6 +48,9 @@ public:
 
 	//アイテムとマップの当たり判定
 	static void CheckHitItemToMap(CItemManager& _itemManager,CMap& _map);
+
+	//アイテムとプレイヤーの当たり判定
+	static void CheckHitPlayerToItem(CPlayerManager& _playerManager, CItemManager& _itemManager);
 
 };
 

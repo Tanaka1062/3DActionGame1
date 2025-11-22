@@ -26,7 +26,7 @@ void CPowerCoin::Init(CPlayer* _player)
 	m_playerName = PLAYER_NONE;
 
 	m_isActive = false;
-
+	m_itemType = ITEM_TYPE_COIN;
 }
 
 //---------------------
@@ -68,10 +68,32 @@ void CPowerCoin::Update()
 //---------------------
 //	当たった時の処理
 //---------------------
-void CPowerCoin::HitCalc(tagPlayerName _name)
+void CPowerCoin::HitCalc(CObject* _hitObject)
 {
-	m_isActive = false;
-	m_playerName = _name;
+	//_hitObjectがnullだったら処理をしない
+	if (_hitObject == nullptr)return;
+
+	//プレイヤーの場合の処理----------------------------------
+	if (_hitObject->GetObjectType() == OBJECT_PLAYER)
+	{
+		//飛んでいる場合は処理をしない
+		if (m_state == POWER_COIN_FLYING)return;
+
+		//プレイヤーデータ保存用
+		CPlayer* player = nullptr;
+
+		//プレイヤークラスにダウンキャストする
+		player = dynamic_cast<CPlayer*>(_hitObject);
+
+		//プレイヤーをパワーアップさせる
+		player->AddPowerUp();
+
+		m_isActive = false;
+		m_playerName = player->GetPlayerName();
+		m_owner = player;
+	}
+	//--------------------------------------------------------
+
 }
 
 //---------------------

@@ -34,6 +34,7 @@ void CObject::Init()
 	m_gravity = 0.0f;
 	m_isActive = true;
 	m_isGravity = false;
+	m_owner = nullptr;
 }
 
 //---------------------
@@ -145,9 +146,9 @@ void CObject::DeleteModel()
 //------------------------------
 //		ìñÇΩÇËîªíËå„ÇÃèàóù
 //------------------------------
-void CObject::HitCalc()
+void CObject::HitCalc(CObject* _hitObject)
 {
-
+	
 }
 
 //------------------------------

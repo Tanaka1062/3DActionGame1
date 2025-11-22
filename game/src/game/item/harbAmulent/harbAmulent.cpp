@@ -37,5 +37,5 @@ void CHarbAmulent::Use()
 
 	//m_player->AddHp(ADD_HP);
 
-	m_player->SetWeaponId(WEAPON_ID_SWORD);
+	//m_player->SetWeaponId(WEAPON_ID_SWORD);
 }

@@ -1,7 +1,7 @@
 #include "GetCoinUi.h"
 #include "../../data.h"
 
-static const char* GRAPHIC_PATH[COIN_NUM] =		//ロードするファイル名
+static const char* GRAPHIC_PATH[COIN_MAX_NUM] =		//ロードするファイル名
 { 
 	"data/graphic/ui/PowerCoinRedUi.png",
 	"data/graphic/ui/PowerCoinGreenUi.png",
@@ -17,7 +17,7 @@ CGetCoinUi::CGetCoinUi()
 {
 	m_pos = ZERO;
 
-	for (int coinUi_i = 0; coinUi_i < COIN_NUM; coinUi_i++)
+	for (int coinUi_i = 0; coinUi_i < COIN_MAX_NUM; coinUi_i++)
 	{
 		for (int graphic_i = 0; graphic_i < GRAPHIC_ALL_NUM; graphic_i++)
 		{
@@ -27,7 +27,7 @@ CGetCoinUi::CGetCoinUi()
 		m_IsGetCoin[coinUi_i] = false;
 	}
 
-	m_powerCoinManager = nullptr;
+	m_itemManager = nullptr;
 }
 
 CGetCoinUi::~CGetCoinUi()
@@ -36,13 +36,13 @@ CGetCoinUi::~CGetCoinUi()
 }
 
 //初期化
-void CGetCoinUi::Init(VECTOR _pos, CPowerCoinManager* _powerCoinManager)
+void CGetCoinUi::Init(VECTOR _pos, CItemManager* _itemManager)
 {
 	m_pos = _pos;
 
-	m_powerCoinManager = _powerCoinManager;
+	m_itemManager = _itemManager;
 
-	for (int coinUi_i = 0; coinUi_i < COIN_NUM; coinUi_i++)
+	for (int coinUi_i = 0; coinUi_i < COIN_MAX_NUM; coinUi_i++)
 	{
 		for (int graphic_i = 0; graphic_i < GRAPHIC_ALL_NUM; graphic_i++)
 		{
@@ -55,7 +55,7 @@ void CGetCoinUi::Init(VECTOR _pos, CPowerCoinManager* _powerCoinManager)
 //ロード
 void CGetCoinUi::Load()
 {
-	for (int coinUi_i = 0; coinUi_i < COIN_NUM; coinUi_i++)
+	for (int coinUi_i = 0; coinUi_i < COIN_MAX_NUM; coinUi_i++)
 	{
 		LoadDivGraph(GRAPHIC_PATH[coinUi_i], GRAPHIC_ALL_NUM, GRAPHIC_NUM_X,
 			GRAPHIC_NUM_Y, GRAPHIC_SIZE, GRAPHIC_SIZE, m_hndl[coinUi_i]);
@@ -65,12 +65,12 @@ void CGetCoinUi::Load()
 //毎フレームする処理
 void CGetCoinUi::Step(tagPlayerName _playerName)
 {
-	for (int coin_i = 0; coin_i < m_powerCoinManager->GetPowerCoinNum(); coin_i++)
+	for (int coin_i = 0; coin_i < COIN_MAX_NUM; coin_i++)
 	{
-		CPowerCoin* powerCoin = m_powerCoinManager->GetPowerCoin(coin_i);
+		CPowerCoin* coin = m_itemManager->GetCoin(coin_i);
 
 		//プレイヤーの名前が引数と同じ場合フラグをtrueにする
-		if (powerCoin->GetPlayerName() == _playerName)
+		if (coin->GetPlayerName() == _playerName)
 		{
 			m_IsGetCoin[coin_i] = true;
 		}
@@ -97,7 +97,7 @@ void CGetCoinUi::Draw()
 //破棄
 void CGetCoinUi::Exit()
 {
-	for (int coinUi_i = 0; coinUi_i < COIN_NUM; coinUi_i++)
+	for (int coinUi_i = 0; coinUi_i < COIN_MAX_NUM; coinUi_i++)
 	{
 		for (int graphic_i = 0; graphic_i < GRAPHIC_ALL_NUM; graphic_i++)
 		{

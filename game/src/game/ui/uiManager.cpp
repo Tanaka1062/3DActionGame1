@@ -29,13 +29,13 @@ CUiManager::~CUiManager()
 }
 
 void CUiManager::Init(CPlayerManager* _playerManager, 
-	CPowerCoinManager* _powerCoinManager)
+	CItemManager* _itemManager)
 {
 	m_hpbarManager.Init(_playerManager);
 
 	for (int getCoinUi_i = 0; getCoinUi_i < PLAYER_NUM; getCoinUi_i++)
 	{
-		m_getCoinUi[getCoinUi_i].Init(GET_COIN_POS[getCoinUi_i],_powerCoinManager);
+		m_getCoinUi[getCoinUi_i].Init(GET_COIN_POS[getCoinUi_i], _itemManager);
 	}
 }
 

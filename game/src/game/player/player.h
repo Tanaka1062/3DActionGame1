@@ -62,8 +62,8 @@ public:
 	//終了処理
 	void Exit();
 
-	//攻撃を食らった時にする処理
-	void HitAttack(int _atk, float _rotY = 0.0f);
+	//当たり判定後の処理
+	void HitCalc(CObject* _hitObject);
 
 	//アイテムを取るかを取得
 	bool GetIsPickUp() { return m_isPickUpItem; }

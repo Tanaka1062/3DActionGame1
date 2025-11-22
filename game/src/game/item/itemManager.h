@@ -6,6 +6,7 @@
 #include "../player/playerManager.h"
 #include "../shot/shotManager.h"
 #include "itemShotBase.h"
+#include "powerCoin/powerCoin.h"
 
 using namespace std;
 
@@ -21,15 +22,6 @@ enum tagItemName
 	ITEM_NUM,				//アイテムの数
 };
 
-//アイテムのタイプ
-enum tagItemType
-{
-	ITEM_TYPE_NONE = -1,	//何もないタイプ
-	ITEM_OBJECT_TYPE,		//オブジェクトタイプ
-
-	ITEM_TYPE_NUM,			//アイテムのタイプの数
-};
-
 enum tagItemSpawnPos
 {
 	ITEM_SPAWN_POS_1,		//アイテムの出現座標1
@@ -40,6 +32,8 @@ enum tagItemSpawnPos
 	ITEM_SPAWN_POS_NUM,		//アイテムの出現座標の数
 };
 
+static const int COIN_MAX_NUM = 3;		//コインの最大数
+
 //アイテムマネージャークラス
 class CItemManager
 {
@@ -48,6 +42,7 @@ private:
 	int m_hndl[ITEM_NUM];					//アイテムのモデルハンドル
 	int m_spawnTime;						//時間カウント
 	VECTOR m_spawnPos[ITEM_SPAWN_POS_NUM];	//アイテムの出現座標
+	CPlayerManager* m_playerManager;		//プレイヤーのマネージャークラス
 
 public:
 	//コンストラクタ・デストラクタ
@@ -55,7 +50,7 @@ public:
 	~CItemManager();
 
 	//初期化
-	void Init();
+	void Init(CPlayerManager* _playerManager);
 	//モデルロード
 	void Load();
 	//毎フレームする処理
@@ -72,6 +67,9 @@ public:
 
 	//アイテムのアドレスを取得
 	CItemBase* GetItem(int _num);
+
+	//コインのアドレスを取得
+	CPowerCoin* GetCoin(int _num);
 
 	//アイテムを設定
 	void SetItem(int _num, CItemBase* _item,CPlayer* _player);
