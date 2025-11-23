@@ -13,7 +13,6 @@ void CBomb::Init(CPlayer* _player)
 	CItemObjectBase::Init();
 
 	m_timeCount = 0;
-	m_itemType = ITEM_TYPE_BOMB;
 }
 
 //–ˆƒtƒŒ[ƒ€‚·‚éˆ—
@@ -21,11 +20,14 @@ void CBomb::Step()
 {
 	CItemObjectBase::Step();
 
+	if (m_isActive == false)return;
+
 	m_timeCount++;
 	//”š”­ŽžŠÔ‚ð‰ß‚¬‚½‚ç”šŽž‚³‚¹‚é
 	if (m_timeCount >= EXPLOSION_TIME)
 	{
-		m_isActive = false;
+		//m_isActive = false;
+		m_timeCount = 0;
 	}
 }
 

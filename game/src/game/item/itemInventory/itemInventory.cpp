@@ -41,12 +41,6 @@ void CItemInventory::Step(CShotManager* _shot)
 	for (int i = 0; i < PLAYER_NUM; i++)
 	{
 
-		//アイテムを使用していたらアイテムを使用する
-		if (m_player[i]->GetIsItemUse() == true &&
-			m_useItem[i] != nullptr)
-		{
-
-		}
 
 		//スキルを使用していたらスキルを使用する
 		if (m_weaponItem[i] != nullptr)
@@ -63,14 +57,6 @@ void CItemInventory::Update()
 {
 	for (int i = 0; i < PLAYER_NUM; i++)
 	{
-		if (m_useItem[i] != nullptr)
-		{
-			m_player[i]->SetIsItem(true);
-		}
-		else
-		{
-			m_player[i]->SetIsItem(false);
-		}
 	}
 
 }

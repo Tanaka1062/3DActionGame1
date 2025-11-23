@@ -10,7 +10,6 @@ enum tagPowerCoinState
 
 };
 
-//プレイヤーのアドレスが必要ないのに継承のせいで持っている(HACK)
 class CPowerCoin : public CItemBase
 {
 private:

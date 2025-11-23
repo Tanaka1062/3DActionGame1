@@ -34,6 +34,11 @@ void CPowerCoin::Init(CPlayer* _player)
 //---------------------
 void CPowerCoin::Step()
 {
+	if (m_isActive == true)
+	{
+		m_isSpawn = false;
+	}
+
 	CItemBase::Step();
 }
 
@@ -91,6 +96,7 @@ void CPowerCoin::HitCalc(CObject* _hitObject)
 		m_isActive = false;
 		m_playerName = player->GetPlayerName();
 		m_owner = player;
+		m_isSpawn = false;
 	}
 	//--------------------------------------------------------
 
@@ -128,5 +134,6 @@ void CPowerCoin::Delete()
 {
 	m_state = POWER_COIN_WAIT;
 	m_playerName = PLAYER_NONE;
+	m_isSpawn = true;
 }
 

@@ -22,6 +22,7 @@ void CItemBase::Init(CPlayer* _player)
 	m_isActive = false;
 	m_shadow.Init(m_pos,0.5f);	
 	m_isGravity = true;
+	m_isSpawn = true;
 	m_objectTypy = OBJECT_ITEM;
 }
 
@@ -92,10 +93,3 @@ void CItemBase::Use()
 
 }
 
-//--------------------------
-//	  ìñÇΩÇ¡ÇΩéûÇÃèàóù
-//--------------------------
-void CItemBase::HitCalc(CObject* _hitObject)
-{
-
-}

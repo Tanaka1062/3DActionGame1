@@ -8,7 +8,7 @@
 enum tagItemType
 {
 	ITEM_TYPE_COIN,			//コインタイプ
-	ITEM_TYPE_BOMB,		//オブジェクトタイプ
+	ITEM_TYPE_OBJECT,		//オブジェクトタイプ
 
 	ITEM_TYPE_NUM,			//アイテムのタイプの数
 };
@@ -17,6 +17,7 @@ enum tagItemType
 class CItemBase :public CObject
 {
 protected:
+	bool m_isSpawn;			//スポーン可能かフラグ
 	CShadow m_shadow;		//丸影のクラス
 	tagItemType m_itemType;	//アイテムのタイプ
 
@@ -48,11 +49,11 @@ public:
 	//使用した時の処理
 	virtual void Use();
 
-	//当たった時の処理
-	virtual void HitCalc(CObject* _hitObject);
-
 	//丸影の座標を設定
 	void SetShadowPos(VECTOR _pos) { m_shadow.SetPos(_pos); }
+
+	//スポーン可能かを取得
+	bool GetIsSpawn() { return m_isSpawn; }
 
 	//アイテムのタイプを取得
 	tagItemType GetItemType() { return m_itemType; }

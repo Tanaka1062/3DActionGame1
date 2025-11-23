@@ -4,20 +4,32 @@
 #include"../../lib/input/controllerManager.h"
 #include "playerData.h"
 
+//武器のID
 enum tagWeaponId
 {
-	WEAPON_ID_HAND,
-	WEAPON_ID_SWORD,
+	WEAPON_ID_HAND,		//素手
+	WEAPON_ID_SWORD,	//剣
 
-	WEAPON_ID_NUM,
+	WEAPON_ID_NUM,		//武器の種類
 };
 
+//モデルハンドル名
 enum tagHndlName
 {
 	NORMAL_HNDL,		//ノーマルハンドル
 	TRANSFORM_HNDL,		//変身後のハンドル
 
 	HNDL_NUM,			//ハンドルの数
+};
+
+//アイテムの状態
+enum tagItemState
+{
+	ITEM_STATE_NONE = -1,		//アイテムを持っていない
+	ITEM_STATE_PICK_UP,			//アイテムを取ろうとしている
+	ITEM_STATE_GET,				//アイテムを手に入れる
+	ITEM_STATE_HAVE,			//アイテムを持っている
+
 };
 
 //プレイヤークラス
@@ -27,9 +39,6 @@ private:
 	int m_transformTimeCount;		//変身時間カウント
 	int m_keepHndl[HNDL_NUM];		//モデルハンドル保存用
 	int m_dropCoin;					//コインを落とす数
-	bool m_isPickUpItem;			//アイテムを取ろうとしているかフラグ		
-	bool m_isItemUse;				//アイテム使用フラグ
-	bool m_isItem;					//アイテムを持っているフラグ
 	bool m_isDodgeroll;				//回避しているかフラグ
 	bool m_isTransform;				//変身しているかフラグ
 	int m_attackNum;				//攻撃の番号
@@ -38,6 +47,7 @@ private:
 	tagPadName m_padName;			//コントローラーの名前
 	tagWeaponId m_weaponId;			//武器のID
 	tagPlayerName m_name;			//プレイヤーの名前
+	tagItemState m_itemState;		//アイテムの状態
 
 public:
 	//コンストラクタ・デストラクタ
@@ -65,15 +75,6 @@ public:
 	//当たり判定後の処理
 	void HitCalc(CObject* _hitObject);
 
-	//アイテムを取るかを取得
-	bool GetIsPickUp() { return m_isPickUpItem; }
-
-	//アイテム使用しているかを取得
-	bool GetIsItemUse() { return m_isItemUse; }
-	
-	//アイテムを持っているかを設定
-	void SetIsItem(bool _isItem) { m_isItem = _isItem; }
-
 	//回避しているかを取得
 	bool GetIsDodgeroll() { return m_isDodgeroll; }
 
@@ -93,6 +94,12 @@ public:
 	//名前を取得
 	tagPlayerName GetPlayerName() { return m_name; }
 
+	//アイテムの状態を取得
+	tagItemState GetItemState() { return m_itemState; }
+
+	//アイテムの状態を設定
+	void SetItemState(tagItemState _itemState) { m_itemState = _itemState; }
+
 	//体力を増やす
 	void AddHp(int _addNum) { m_hp += _addNum; }
 
@@ -104,6 +111,8 @@ public:
 	//パワーアップを減らす
 	void SubPowerUp() { m_powerUp--; }
 
+	//持っているアイテムの座標を取得
+	VECTOR GetItemHavePos();
 
 private:
 	//待機状態処理
@@ -150,6 +159,21 @@ private:
 
 	//アイテム使用後
 	void ItemUseOut();
+
+	//アイテムを持ち上げる
+	void ItemLiftUp();
+
+	//アイテムを下ろす
+	void ItemPutDown();
+
+	//アイテムを投げる前
+	void ItemThrowIn();
+
+	//アイテムを投げる
+	void ItemThrow();
+
+	//アイテムを投げた後
+	void ItemThrowOut();
 
 	//怯み状態処理
 	void Stagger();

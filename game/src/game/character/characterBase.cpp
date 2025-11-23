@@ -125,11 +125,37 @@ void CCharacterBase::Step()
 		ItemUseOut();
 		break;
 
+		//アイテムを持ち上げる
+	case ITEM_LIFT_UP:
+		ItemLiftUp();
+		break;
+
+		//アイテムを下ろす
+	case ITEM_PUT_DOWN:
+		ItemPutDown();
+		break;
+
+		//アイテムを投げる前
+	case ITEM_THROW_IN:
+		ItemThrowIn();
+		break;
+
+		//アイテムを投げる
+	case ITEM_THROW:
+		ItemThrow();
+		break;
+
+		//アイテムを投げた後
+	case ITEM_THROW_OUT:
+		ItemThrowOut();
+		break;
+
 		//怯み
 	case STAGGER:
 		Stagger();
 		break;
 
+		//死亡
 	case DIE:
 		Die();
 		break;
@@ -333,6 +359,46 @@ void CCharacterBase::ItemUse()
 //		アイテム使用後
 //------------------------------
 void CCharacterBase::ItemUseOut()
+{
+
+}
+
+//------------------------------
+//	   アイテムを持ち上げる
+//------------------------------
+void CCharacterBase::ItemLiftUp()
+{
+
+}
+
+//------------------------------
+//		アイテムを下ろす
+//------------------------------
+void CCharacterBase::ItemPutDown()
+{
+
+}
+
+//------------------------------
+//		アイテムを投げる前
+//------------------------------
+void CCharacterBase::ItemThrowIn()
+{
+
+}
+
+//------------------------------
+//		アイテムを投げる
+//------------------------------
+void CCharacterBase::ItemThrow()
+{
+
+}
+
+//------------------------------
+//		アイテムを投げた後
+//------------------------------
+void CCharacterBase::ItemThrowOut()
 {
 
 }

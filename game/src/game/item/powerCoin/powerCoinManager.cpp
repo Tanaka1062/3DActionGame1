@@ -32,6 +32,8 @@ CPowerCoinManager::CPowerCoinManager()
 	{
 		m_spawnPos[spawnPos_i] = { 0.0f,0.0f,0.0f };
 	}
+
+	m_playerManager = nullptr;
 }
 
 //------------------------

@@ -33,6 +33,11 @@ protected:
 		ITEM_USE_IN,					//アイテム使用前
 		ITEM_USE,						//アイテム使用中
 		ITEM_USE_OUT,					//アイテム使用後
+		ITEM_LIFT_UP,					//アイテムを持ち上げる
+		ITEM_PUT_DOWN,					//アイテムを下ろす
+		ITEM_THROW_IN,					//アイテムを投げる前
+		ITEM_THROW,						//アイテムを投げる
+		ITEM_THROW_OUT,					//アイテムを投げた後
 		STAGGER,						//怯み
 		DIE,							//死亡
 	};
@@ -136,6 +141,21 @@ protected:
 
 	//アイテム使用後
 	virtual void ItemUseOut();
+
+	//アイテムを持ち上げる
+	virtual void ItemLiftUp();
+
+	//アイテムを下ろす
+	virtual void ItemPutDown();
+
+	//アイテムを投げる前
+	virtual void ItemThrowIn();
+
+	//アイテムを投げる
+	virtual void ItemThrow();
+
+	//アイテムを投げた後
+	virtual void ItemThrowOut();
 
 	//怯み
 	virtual void Stagger();

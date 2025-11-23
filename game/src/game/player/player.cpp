@@ -8,6 +8,7 @@
 #include "playerManager.h"
 #include "../../lib/effekseer/effekseer.h"
 #include "../system/effectData/effectData.h"
+#include "../item/itemBase.h"
 
 //定義関連---------------------------
 
@@ -98,7 +99,6 @@ enum tagAnim {
 CPlayer::CPlayer()
 {
 	m_transformTimeCount = 0;
-	m_isPickUpItem = false;
 	m_name = PLAYER_NONE;
 	CCharacterBase::Init(nullptr);
 	for (int keepHndl_i = 0; keepHndl_i < HNDL_NUM; keepHndl_i++)
@@ -111,9 +111,6 @@ CPlayer::CPlayer()
 	m_maxHp = 0;
 	m_hp = 0;
 	m_atk = 0;
-	m_isItemUse = false;
-	m_isPickUpItem = false;
-	m_isItem = false;
 	m_isDodgeroll = false;
 	m_isTransform = false;
 	m_attackNum = 0;
@@ -121,7 +118,7 @@ CPlayer::CPlayer()
 	m_dodgerollRotY = 0.0f;
 	m_padName = PAD_NONE;
 	m_weaponId = WEAPON_ID_HAND;
-
+	m_itemState = ITEM_STATE_NONE;
 }
 
 //-----------------------
@@ -150,9 +147,6 @@ void CPlayer::Init(CAttackManager* _attackManager, tagPlayerName _name, tagPadNa
 	m_maxHp = MAX_HP;
 	m_hp = m_maxHp;
 	m_atk = ATK;
-	m_isItemUse = false;
-	m_isPickUpItem = false;
-	m_isItem = false;
 	m_isDodgeroll = false;
 	m_isTransform = false;
 	m_attackNum = 0;
@@ -271,11 +265,6 @@ void CPlayer::Update()
 	{
 		m_hp = m_maxHp;
 	}
-
-	//アイテムを取ろうとしているかを初期化
-	m_isPickUpItem = false;
-	//アイテムを使用したかを初期化
-	m_isItemUse = false;
 }
 
 //終了処理
@@ -339,9 +328,26 @@ void CPlayer::HitCalc(CObject* _hitObject)
 		//エフェクトを呼び出す
 		CEffekseerCtrl::Request(effectId, GetCenter(), false);
 
+		//アイテムを落とす
+		m_itemState = ITEM_STATE_NONE;
+
 	}
 	//---------------------------------------------------------------------
 
+	//アイテムの場合の処理-------------------------------------------------
+	if (_hitObject->GetObjectType() == OBJECT_ITEM)
+	{
+		//アイテム保存用
+		CItemBase* item = nullptr;
+
+		item = dynamic_cast<CItemBase*>(_hitObject);
+
+		//アイテムがオブジェクトタイプ以外の場合処理をしない
+		if (item->GetItemType() != ITEM_TYPE_OBJECT)return;
+
+
+	}
+	//---------------------------------------------------------------------
 }
 
 //-----------------------
@@ -349,8 +355,17 @@ void CPlayer::HitCalc(CObject* _hitObject)
 //-----------------------
 void CPlayer::Wait()
 {
-	//待機アニメーションを再生
-	RequestAnim(ANIMID_WAIT, 0.5f, true);
+	//アイテムを持っている場合待機のモーションが変わる
+	if (m_itemState == ITEM_STATE_HAVE)
+	{
+		//物を持ち上げた状態の待機アニメーションを再生
+		RequestAnim(ANIMID_WAIT_LIFTING_UP, 0.5f, true);
+	}
+	else
+	{
+		//待機アニメーションを再生
+		RequestAnim(ANIMID_WAIT, 0.5f, true);
+	}
 
 	//動いていたら歩き状態に移行
 	if (m_speed.x != 0.0f ||
@@ -368,8 +383,18 @@ void CPlayer::Wait()
 //-----------------------
 void CPlayer::Walk()
 {
-	//歩くアニメーション
-	RequestAnim(ANIMID_WALK, 1.0f, true);
+	//アイテムを持っている場合歩きのモーションが変わる
+	if (m_itemState == ITEM_STATE_HAVE)
+	{
+		//物を持ち上げた状態の歩くアニメーション
+		RequestAnim(ANIMID_WALK_LIFTING_UP, 1.0f, true);
+	}
+	else
+	{
+		//歩くアニメーション
+		RequestAnim(ANIMID_WALK, 1.0f, true);
+	}
+
 
 	//止まっていたら待機状態に移行
 	if (m_speed.x == 0.0f &&
@@ -786,8 +811,7 @@ void CPlayer::ItemUse()
 	//アイテム使用中のアニメーション
 	if (RequestAnim(ANIMID_ITEM_USE, 1.0f))
 	{
-		//アイテム使用フラグをtrueに
-		m_isItemUse = true;
+
 	}
 
 	//アニメーションが終わったら待機状態に戻す
@@ -805,6 +829,86 @@ void CPlayer::ItemUseOut()
 {
 	//アイテム使用後のアニメーション
 	RequestAnim(ANIMID_ITEM_USE_OUT, 1.0f);
+
+	//アニメーションが終わったら待機状態に戻す
+	if (GetAnimEnd() == true)
+	{
+		m_state = WAIT;
+	}
+
+}
+
+//-----------------------
+//	アイテムを持ち上げる
+//-----------------------
+void CPlayer::ItemLiftUp()
+{
+	//アイテムを持ち上げるアニメーション
+	RequestAnim(ANIMID_LIFT_UP, 1.0f);
+
+	//アニメーションが終わったら待機状態に戻す
+	if (GetAnimEnd() == true)
+	{
+		m_state = WAIT;
+	}
+}
+
+//-----------------------
+//	 アイテムを下ろす
+//-----------------------
+void CPlayer::ItemPutDown()
+{
+	//アイテムを下ろすアニメーション
+	RequestAnim(ANIMID_PUT_DOWN, 1.0f);
+
+	//アニメーションが終わったら待機状態に戻す
+	if (GetAnimEnd() == true)
+	{
+		m_itemState = ITEM_STATE_NONE;
+		m_state = WAIT;
+	}
+
+}
+
+//-----------------------
+//  アイテムを投げる前
+//-----------------------
+void CPlayer::ItemThrowIn()
+{
+	//アイテムを投げる前のアニメーション
+	RequestAnim(ANIMID_THROW_IN, 1.0f);
+
+	//アニメーションが終わったらアイテムを投げている状態にする
+	if (GetAnimEnd() == true)
+	{
+		m_state = ITEM_THROW;
+	}
+
+}
+
+//-----------------------
+//    アイテムを投げる
+//-----------------------
+void CPlayer::ItemThrow()
+{
+	//アイテムを投げるアニメーション
+	RequestAnim(ANIMID_THROW, 1.0f);
+
+	//アニメーションが終わったらアイテムを投げた後状態にする
+	if (GetAnimEnd() == true)
+	{
+		m_state = ITEM_THROW_OUT;
+	}
+
+}
+
+//-----------------------
+//  アイテムを投げた後
+//-----------------------
+void CPlayer::ItemThrowOut()
+{
+	//アイテムを投げた後のアニメーション
+	RequestAnim(ANIMID_THROW_OUT, 1.0f);
 
 	//アニメーションが終わったら待機状態に戻す
 	if (GetAnimEnd() == true)
@@ -945,6 +1049,9 @@ void CPlayer::Move(float _rotY)
 //-----------------------
 void CPlayer::RequestAttack()
 {
+	//アイテムを持ち上げている状態は処理をしない
+	if (m_itemState == ITEM_STATE_HAVE)return;
+
 	//空中いるときは攻撃を出せない
 	if (m_isFlying == true)return;
 
@@ -983,8 +1090,6 @@ void CPlayer::RequestAttack()
 //-----------------------
 void CPlayer::RequestJump()
 {
-	//ジャンプ処理がよばれない:FIXME
-
 	switch (m_state)
 	{
 	case WAIT:
@@ -994,7 +1099,8 @@ void CPlayer::RequestJump()
 		return;
 	}
 
-	if (CControllerManager::IsTrg(BUTTON_A, m_padName) && !m_isFlying)
+	if ((CControllerManager::IsTrg(BUTTON_A, m_padName) && !m_isFlying) ||
+		(CheckHitKey(KEY_INPUT_SPACE) && !m_isFlying))
 	{
 		m_state = JUMP;
 		m_gravity = JUMP_SPEED;
@@ -1008,6 +1114,9 @@ void CPlayer::RequestJump()
 //-----------------------
 void CPlayer::RequestDodgeroll(float _rotY)
 {
+	//アイテムを持ち上げている状態は処理をしない
+	if (m_itemState == ITEM_STATE_HAVE)return;
+
 	//待機状態と歩いてる状態以外は処理をしない
 	switch (m_state)
 	{
@@ -1088,7 +1197,7 @@ void CPlayer::RequestDodgeroll(float _rotY)
 void CPlayer::Item()
 {
 	//アイテムを持っていなかったら処理をしない
-	if (m_isItem == false)return;
+	if (m_itemState != ITEM_STATE_HAVE)return;
 
 	//待機状態と歩いてる状態以外は処理をしない
 	switch (m_state)
@@ -1110,14 +1219,49 @@ void CPlayer::Item()
 }
 
 //-----------------------
-//	   アイテムを拾う
+//	  アイテムを拾う
 //-----------------------
 void CPlayer::PickUpItem()
 {
+	//アイテムを手に入れていたら持ち上げる
+	if (m_itemState == ITEM_STATE_GET)
+	{
+		m_itemState = ITEM_STATE_HAVE;
+		m_state = ITEM_LIFT_UP;
+	}
+
+	//アイテムを取ろうとしていたら持っていない状態にする
+	if (m_itemState == ITEM_STATE_PICK_UP)
+	{
+		m_itemState = ITEM_STATE_NONE;
+	}
+
+	//アイテムを取得・下ろす
 	if (CheckHitKey(KEY_INPUT_I) != 0 ||
 		CControllerManager::IsTrg(BUTTON_B,m_padName) == true)
 	{
-		m_isPickUpItem = true;
+
+		//アイテムをすでに持っている場合はアイテムを下ろす
+		if (m_itemState == ITEM_STATE_HAVE)
+		{
+			m_state = ITEM_PUT_DOWN;
+		}
+		//アイテムを持っていない場合アイテムを取得する
+		else
+		{
+			m_itemState = ITEM_STATE_PICK_UP;
+		}
+
 	}
+}
+
+//-----------------------
+//持っているアイテムの座標を取得
+//-----------------------
+VECTOR CPlayer::GetItemHavePos()
+{
+	VECTOR itemPos = MV1GetFramePosition(m_hndl, 18);
+
+	return itemPos;
 }
 

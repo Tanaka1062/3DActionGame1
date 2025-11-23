@@ -16,7 +16,7 @@ static const char FRAME_PATH[] =
 { "data/model/map/TestMap6Frame.mv1" };			//ロードするファイル名
 
 
-static const int SPAWN_TIME = 10 * 60;		//スポーンするまで時間
+static const int SPAWN_TIME = 7 * 60;		//スポーンするまで時間
 
 //-----------------------
 //	  コンストラクタ
@@ -145,8 +145,6 @@ void CItemManager::Step()
 {
 	for (auto item_i = m_item.begin(); item_i != m_item.end(); ++item_i)
 	{
-
-		if ((*item_i)->GetActive() == false)continue;
 
 		(*item_i)->Step();
 
@@ -341,7 +339,7 @@ void CItemManager::SpawnItem()
 
 	for (int item_i = 0; item_i < m_item.size(); item_i++)
 	{
-		if (m_item[item_i]->GetActive() == false)
+		if (m_item[item_i]->GetIsSpawn() == true)
 		{
 			itemNum++;
 		}
@@ -353,9 +351,9 @@ void CItemManager::SpawnItem()
 
 	for (int item_i = 0; item_i < m_item.size(); item_i++)
 	{
-		if (m_item[item_i]->GetActive() == false)
+		if (m_item[item_i]->GetIsSpawn() == true)
 		{
-			if (item_i == itemNameId)
+			if (itemNum == itemNameId)
 			{
 				//スポーン位置を設定
 				int spawnPosId = GetRand(ITEM_SPAWN_POS_NUM - 1);
