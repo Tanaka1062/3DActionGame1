@@ -3,14 +3,14 @@
 
 class CItemObjectBase : public CItemBase
 {
-private:
+protected:
 	bool m_isLift;			//‚¿ã‚°‚ç‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©
 
 public:
 	CItemObjectBase();
 
 	//‰Šú‰»
-	virtual void Init(CPlayer* _player = nullptr);
+	virtual void Init();
 
 	//–ˆƒtƒŒ[ƒ€‚·‚éˆ—
 	virtual void Step();
@@ -20,6 +20,11 @@ public:
 
 	//‚¿ã‚°‚ç‚ê‚Ä‚¢‚é‚©‚ğæ“¾
 	bool GetIsLift() { return m_isLift; }
+
+protected:
+
+	//‰ó‚ê‚é
+	virtual void Break();
 
 };
 

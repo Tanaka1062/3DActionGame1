@@ -13,6 +13,13 @@ enum tagItemType
 	ITEM_TYPE_NUM,			//アイテムのタイプの数
 };
 
+enum tagItemState
+{
+	ITEM_FLYING,	//飛んでいる状態
+	ITEM_WAIT,		//待機状態
+
+};
+
 //アイテムのベースクラス
 class CItemBase :public CObject
 {
@@ -20,13 +27,14 @@ protected:
 	bool m_isSpawn;			//スポーン可能かフラグ
 	CShadow m_shadow;		//丸影のクラス
 	tagItemType m_itemType;	//アイテムのタイプ
+	tagItemState m_state;	//状態
 
 public:
 	//コンストラクタ
 	CItemBase();
 
 	//初期化
-	virtual void Init(CPlayer* _player = nullptr);
+	virtual void Init();
 
 	//モデルのロード(一つのモデルしか使わない)
 	virtual void Load(const char* _modelPath);
@@ -58,6 +66,8 @@ public:
 	//アイテムのタイプを取得
 	tagItemType GetItemType() { return m_itemType; }
 
+	//状態を取得
+	tagItemState GetState() { return m_state; }
 };
 
 

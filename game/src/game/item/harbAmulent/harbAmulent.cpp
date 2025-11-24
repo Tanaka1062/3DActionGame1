@@ -10,15 +10,15 @@ static const int USE_MAX = 3;		//g—p‰ñ”
 //-------------
 CHarbAmulent::CHarbAmulent()
 {
-	Init(nullptr);
+	Init();
 }
 
 //-------------
 //	 ‰Šú‰»
 //-------------
-void CHarbAmulent::Init(CPlayer* _player)
+void CHarbAmulent::Init()
 {
-	CItemBase::Init(_player);
+	CItemBase::Init();
 }
 
 //-------------

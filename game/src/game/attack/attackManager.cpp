@@ -3,6 +3,8 @@
 static const char MODEL_PATH[] =
 { "data/model/shot/shotTest.mv1" };				//ロードするファイル名
 
+list<CAttackBase*> CAttackManager::m_attack;
+
 //------------------------
 //	  コンストラクタ
 //------------------------
@@ -78,7 +80,7 @@ void CAttackManager::Exit()
 
 		delete (*ite);
 
-		//終了処理が終わった弾を消す
+		//終了処理が終わった攻撃判定を消す
 		ite = m_attack.erase(ite);
 	}
 }

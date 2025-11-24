@@ -16,15 +16,15 @@ static const int USE_MAX = 10;		//g—p‰ñ”
 //-------------------
 CFireRing::CFireRing()
 {
-	Init(nullptr);
+	Init();
 }
 
 //-------------------
 //		‰Šú‰»
 //-------------------
-void CFireRing::Init(CPlayer* _player)
+void CFireRing::Init()
 {
-	CItemShotBase::Init(_player);
+	CItemShotBase::Init();
 }
 
 //-------------------

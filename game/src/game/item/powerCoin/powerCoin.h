@@ -3,17 +3,9 @@
 #include "../../player/player.h"
 #include "../../player/playerData.h"
 
-enum tagPowerCoinState
-{
-	POWER_COIN_FLYING,		//飛んでいる状態
-	POWER_COIN_WAIT,		//待機状態
-
-};
-
 class CPowerCoin : public CItemBase
 {
 private:
-	tagPowerCoinState m_state;	//状態
 	tagPlayerName m_playerName;	//誰が持っているか
 
 public:
@@ -21,7 +13,7 @@ public:
 	~CPowerCoin();
 
 	//初期化
-	void Init(CPlayer* _player = nullptr);
+	void Init();
 
 	//毎フレームする処理
 	void Step();
@@ -32,9 +24,6 @@ public:
 	//当たった時の処理
 	//_name		:どのプレイヤーが触れたかを取得
 	void HitCalc(CObject* _hitObject);
-
-	//状態を取得
-	tagPowerCoinState GetState() { return m_state; }
 
 	//持っているプレイヤーの名前
 	tagPlayerName GetPlayerName() { return m_playerName; }

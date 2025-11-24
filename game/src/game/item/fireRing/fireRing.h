@@ -10,7 +10,7 @@ public:
 	CFireRing();
 
 	//‰Šú‰»
-	void Init(CPlayer* _player);
+	void Init();
 
 	//g—p‚µ‚½‚Ìˆ—
 	void Use(CShotManager* _shot);

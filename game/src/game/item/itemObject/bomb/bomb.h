@@ -9,10 +9,16 @@ public:
 	CBomb();
 
 	//‰Šú‰»
-	void Init(CPlayer* _player = nullptr);
+	void Init();
 
 	//–ˆƒtƒŒ[ƒ€‚·‚éˆ—
 	void Step();
 
+private:
+	//‰ó‚ê‚é
+	void Break();
+
+	//”š”­
+	void Explosion();
 };
 

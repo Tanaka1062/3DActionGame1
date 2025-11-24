@@ -12,22 +12,22 @@ using namespace std;
 class CAttackManager
 {
 private:
-	list<CAttackBase*> m_attack;			//攻撃の当たり判定のクラス
+	static list<CAttackBase*> m_attack;			//攻撃の当たり判定のクラス
 public:
 	//コンストラクタ・デストラクタ
 	CAttackManager();
 	~CAttackManager();
 
 	//初期化
-	void Init();
+	static void Init();
 	//モデルロード
-	void Load();
+	static void Load();
 	//更新処理
-	void Update();
+	static void Update();
 	//オブジェクトの描写
-	void Draw();
+	static void Draw();
 	//終了処理
-	void Exit();
+	static void Exit();
 
 	//攻撃の呼び出し
 	// _pos			:呼び出す座標
@@ -36,13 +36,13 @@ public:
 	// _name		:攻撃するキャラの名前
 	// _num			:連続攻撃の回数
 	// _nextTime	:連続攻撃の次の攻撃が発生するまでの時間
-	void Request(VECTOR _pos, float _rad, int _atk,tagPlayerName _name, int _num = 1,int _nextTime = 0);
+	static void Request(VECTOR _pos, float _rad, int _atk,tagPlayerName _name, int _num = 1,int _nextTime = 0);
 
 	//攻撃の当たり判定の数を取得
-	int GetNum() { return static_cast<int>(m_attack.size()); }
+	static int GetNum() { return static_cast<int>(m_attack.size()); }
 
 	//攻撃の当たり判定のアドレスを取得
-	CAttackBase* GetAttack(int _num);
+	static CAttackBase* GetAttack(int _num);
 
 };
 

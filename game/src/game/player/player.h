@@ -23,13 +23,13 @@ enum tagHndlName
 };
 
 //アイテムの状態
-enum tagItemState
+enum tagHaveItemState
 {
 	ITEM_STATE_NONE = -1,		//アイテムを持っていない
 	ITEM_STATE_PICK_UP,			//アイテムを取ろうとしている
 	ITEM_STATE_GET,				//アイテムを手に入れる
 	ITEM_STATE_HAVE,			//アイテムを持っている
-
+	ITEM_STATE_THROW,			//アイテムを投げる
 };
 
 //プレイヤークラス
@@ -47,7 +47,7 @@ private:
 	tagPadName m_padName;			//コントローラーの名前
 	tagWeaponId m_weaponId;			//武器のID
 	tagPlayerName m_name;			//プレイヤーの名前
-	tagItemState m_itemState;		//アイテムの状態
+	tagHaveItemState m_itemState;		//アイテムの状態
 
 public:
 	//コンストラクタ・デストラクタ
@@ -95,10 +95,10 @@ public:
 	tagPlayerName GetPlayerName() { return m_name; }
 
 	//アイテムの状態を取得
-	tagItemState GetItemState() { return m_itemState; }
+	tagHaveItemState GetItemState() { return m_itemState; }
 
 	//アイテムの状態を設定
-	void SetItemState(tagItemState _itemState) { m_itemState = _itemState; }
+	void SetItemState(tagHaveItemState _itemState) { m_itemState = _itemState; }
 
 	//体力を増やす
 	void AddHp(int _addNum) { m_hp += _addNum; }

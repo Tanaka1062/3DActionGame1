@@ -5,15 +5,15 @@
 //-------------------
 CItemShotBase::CItemShotBase()
 {
-	Init(nullptr);
+	Init();
 }
 
 //-------------------
 //		èâä˙âª
 //-------------------
-void CItemShotBase::Init(CPlayer* _player)
+void CItemShotBase::Init()
 {
-	CItemBase::Init(_player);
+	CItemBase::Init();
 
 }
 

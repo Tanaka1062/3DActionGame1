@@ -94,9 +94,6 @@
     <Filter Include="ソース ファイル\game\weapon">
       <UniqueIdentifier>{f7909f27-5431-4ff4-93aa-f4c37b51a76b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\game\box">
-      <UniqueIdentifier>{90fd580d-8741-458a-b196-b951d36cdcf0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\game\camera\mapCamera">
       <UniqueIdentifier>{e2ce5c7e-279e-45c6-a776-b43ae1df1890}</UniqueIdentifier>
     </Filter>
@@ -120,6 +117,9 @@
     </Filter>
     <Filter Include="ソース ファイル\game\item\itemObject\bomb">
       <UniqueIdentifier>{033b869a-9106-4f3b-9718-a0c6e6a5096b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\game\item\itemObject\box">
+      <UniqueIdentifier>{d6a5b4ac-a84d-4d35-a128-f43ccc23ba50}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -240,12 +240,6 @@
     <ClCompile Include="src\game\attack\attackBase.cpp">
       <Filter>ソース ファイル\game\attack</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\box\box.cpp">
-      <Filter>ソース ファイル\game\box</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\box\boxManager.cpp">
-      <Filter>ソース ファイル\game\box</Filter>
-    </ClCompile>
     <ClCompile Include="src\game\camera\mapCamera\mapCamera.cpp">
       <Filter>ソース ファイル\game\camera\mapCamera</Filter>
     </ClCompile>
@@ -287,6 +281,9 @@
     </ClCompile>
     <ClCompile Include="src\game\item\itemObject\bomb\bomb.cpp">
       <Filter>ソース ファイル\game\item\itemObject\bomb</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\item\itemObject\box\box.cpp">
+      <Filter>ソース ファイル\game\item\itemObject\box</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -410,12 +407,6 @@
     <ClInclude Include="src\game\attack\attackBase.h">
       <Filter>ソース ファイル\game\attack</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\box\box.h">
-      <Filter>ソース ファイル\game\box</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\box\boxManager.h">
-      <Filter>ソース ファイル\game\box</Filter>
-    </ClInclude>
     <ClInclude Include="src\game\camera\mapCamera\mapCamera.h">
       <Filter>ソース ファイル\game\camera\mapCamera</Filter>
     </ClInclude>
@@ -460,6 +451,9 @@
     </ClInclude>
     <ClInclude Include="src\game\item\itemObject\bomb\bomb.h">
       <Filter>ソース ファイル\game\item\itemObject\bomb</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\item\itemObject\box\box.h">
+      <Filter>ソース ファイル\game\item\itemObject\box</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

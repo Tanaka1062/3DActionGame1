@@ -345,7 +345,6 @@ void CPlayer::HitCalc(CObject* _hitObject)
 		//アイテムがオブジェクトタイプ以外の場合処理をしない
 		if (item->GetItemType() != ITEM_TYPE_OBJECT)return;
 
-
 	}
 	//---------------------------------------------------------------------
 }
@@ -897,6 +896,7 @@ void CPlayer::ItemThrow()
 	//アニメーションが終わったらアイテムを投げた後状態にする
 	if (GetAnimEnd() == true)
 	{
+		m_itemState = ITEM_STATE_THROW;
 		m_state = ITEM_THROW_OUT;
 	}
 
@@ -913,6 +913,7 @@ void CPlayer::ItemThrowOut()
 	//アニメーションが終わったら待機状態に戻す
 	if (GetAnimEnd() == true)
 	{
+		m_itemState = ITEM_STATE_NONE;
 		m_state = WAIT;
 	}
 
@@ -1049,8 +1050,19 @@ void CPlayer::Move(float _rotY)
 //-----------------------
 void CPlayer::RequestAttack()
 {
-	//アイテムを持ち上げている状態は処理をしない
-	if (m_itemState == ITEM_STATE_HAVE)return;
+	//アイテムを持ち上げている状態ではアイテムを投げる
+	if (m_itemState == ITEM_STATE_HAVE)
+	{
+		//攻撃ボタンを押したら投げる
+		if (CheckHitKey(KEY_INPUT_J) != 0 ||
+			CControllerManager::IsTrg(BUTTON_X, m_padName))
+		{
+			m_state = ITEM_THROW_IN;
+		}
+
+
+		return;
+	}
 
 	//空中いるときは攻撃を出せない
 	if (m_isFlying == true)return;
@@ -1234,6 +1246,15 @@ void CPlayer::PickUpItem()
 	if (m_itemState == ITEM_STATE_PICK_UP)
 	{
 		m_itemState = ITEM_STATE_NONE;
+	}
+
+	switch (m_state)
+	{
+	case WAIT:
+	case WALK:
+		break;
+	default:
+		return;
 	}
 
 	//アイテムを取得・下ろす

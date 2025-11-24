@@ -3,10 +3,11 @@
 
 static const float DROP_SPEED = 14.0f;			//飛ぶスピード
 static const float DROP_JUMP = 7.0f;			//上に飛ぶ力
+static const float ROT_SPEED = 0.05f;			//回転速度
 
 CPowerCoin::CPowerCoin()
 {
-	m_state = POWER_COIN_WAIT;
+	m_state = ITEM_WAIT;
 	m_playerName = PLAYER_NONE;
 }
 
@@ -18,11 +19,10 @@ CPowerCoin::~CPowerCoin()
 //---------------------
 //		 初期化
 //---------------------
-void CPowerCoin::Init(CPlayer* _player)
+void CPowerCoin::Init()
 {
-	CItemBase::Init(_player);
+	CItemBase::Init();
 
-	m_state = POWER_COIN_WAIT;
 	m_playerName = PLAYER_NONE;
 
 	m_isActive = false;
@@ -38,19 +38,11 @@ void CPowerCoin::Step()
 	{
 		m_isSpawn = false;
 	}
-
-	CItemBase::Step();
-}
-
-//---------------------
-//		数値の更新
-//---------------------
-void CPowerCoin::Update()
-{
-	CItemBase::Update();
+	//少しずつ回転させる
+	m_rot.y += ROT_SPEED;
 
 	//コインを飛ばす
-	if (m_state == POWER_COIN_FLYING)
+	if (m_state == ITEM_FLYING)
 	{
 		m_speed.x *= 0.9f;
 		m_speed.z *= 0.9f;
@@ -65,9 +57,20 @@ void CPowerCoin::Update()
 		{
 			m_speed.x = 0.0f;
 			m_speed.z = 0.0f;
-			m_state = POWER_COIN_WAIT;
+			m_state = ITEM_WAIT;
 		}
 	}
+
+	CItemBase::Step();
+}
+
+//---------------------
+//		数値の更新
+//---------------------
+void CPowerCoin::Update()
+{
+	CItemBase::Update();
+
 }
 
 //---------------------
@@ -82,7 +85,7 @@ void CPowerCoin::HitCalc(CObject* _hitObject)
 	if (_hitObject->GetObjectType() == OBJECT_PLAYER)
 	{
 		//飛んでいる場合は処理をしない
-		if (m_state == POWER_COIN_FLYING)return;
+		if (m_state == ITEM_FLYING)return;
 
 		//プレイヤーデータ保存用
 		CPlayer* player = nullptr;
@@ -122,7 +125,7 @@ void CPowerCoin::Drop(VECTOR _pos, float _rotY)
 	m_speed.z = res.m[2][3];
 
 	m_pos = _pos;
-	m_state = POWER_COIN_FLYING;
+	m_state = ITEM_FLYING;
 	m_isActive = true;
 	m_playerName = PLAYER_NONE;
 }
@@ -132,7 +135,7 @@ void CPowerCoin::Drop(VECTOR _pos, float _rotY)
 //---------------------
 void CPowerCoin::Delete()
 {
-	m_state = POWER_COIN_WAIT;
+	m_state = ITEM_WAIT;
 	m_playerName = PLAYER_NONE;
 	m_isSpawn = true;
 }

@@ -1,20 +1,19 @@
 #include "itemBase.h"
 
 static const float RADIUS = 7.5f;		//半径
-static const float ROT_SPEED = 0.05f;	//回転速度
 
 //--------------------------
 //	   コンストラクタ
 //--------------------------
 CItemBase::CItemBase()
 {
-	Init(nullptr);
+	Init();
 }
 
 //--------------------------
 //		  初期化
 //--------------------------
-void CItemBase::Init(CPlayer* _player)
+void CItemBase::Init()
 {
 	CObject::Init();
 
@@ -24,6 +23,7 @@ void CItemBase::Init(CPlayer* _player)
 	m_isGravity = true;
 	m_isSpawn = true;
 	m_objectTypy = OBJECT_ITEM;
+	m_state = ITEM_WAIT;
 }
 
 //--------------------------
@@ -50,8 +50,6 @@ void CItemBase::Load(int _hndl)
 void CItemBase::Step()
 {
 	CObject::Step();
-	//少しずつ回転させる
-	m_rot.y += ROT_SPEED;
 
 	m_shadow.Step(m_pos);
 }

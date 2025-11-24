@@ -2,6 +2,7 @@
 #include "fireRing/fireRing.h"
 #include "harbAmulent/harbAmulent.h"
 #include "itemObject/bomb/bomb.h"
+#include "itemObject/box/box.h"
 
 
 static const char* MODEL_PATH[ITEM_NUM] =				//モデルのパス
@@ -10,6 +11,7 @@ static const char* MODEL_PATH[ITEM_NUM] =				//モデルのパス
 	"data/model/item/powerCoin/powerCoinGreen.mv1",
 	"data/model/item/powerCoin/powerCoinBlue.mv1" ,
 	"data/model/item/bomb/bomb.mv1",
+	"data/model/item/box/box.mv1",
 };
 
 static const char FRAME_PATH[] =
@@ -23,25 +25,25 @@ static const int SPAWN_TIME = 7 * 60;		//スポーンするまで時間
 //-----------------------
 CItemManager::CItemManager()
 {
-	//アイテムの生成
-	for (int item_i = 0; item_i < ITEM_NUM; item_i++)
-	{
-		CItemBase* item = nullptr;
+	////アイテムの生成
+	//for (int item_i = 0; item_i < ITEM_NUM; item_i++)
+	//{
+	//	CItemBase* item = nullptr;
 
-		switch (item_i)
-		{
-		case ITEM_COIN_RED:
-		case ITEM_COIN_GREEN:
-		case ITEM_COIN_BLUE:
-			item = new CPowerCoin;
-			break;
-		case ITEM_BOMB:
-			item = new CBomb;
-			break;
-		}
+	//	switch (item_i)
+	//	{
+	//	case ITEM_COIN_RED:
+	//	case ITEM_COIN_GREEN:
+	//	case ITEM_COIN_BLUE:
+	//		item = new CPowerCoin;
+	//		break;
+	//	case ITEM_BOMB:
+	//		item = new CBomb;
+	//		break;
+	//	}
 
-		m_item.push_back(item);
-	}
+	//	m_item.push_back(item);
+	//}
 
 	for (int hndl_i = 0; hndl_i < ITEM_NUM; hndl_i++)
 	{
@@ -62,6 +64,7 @@ CItemManager::CItemManager()
 CItemManager::~CItemManager()
 {
 	Exit();
+
 }
 
 //-----------------------
@@ -69,6 +72,28 @@ CItemManager::~CItemManager()
 //-----------------------
 void CItemManager::Init(CPlayerManager* _playerManager)
 {
+	//アイテムの生成
+	for (int item_i = 0; item_i < ITEM_NUM; item_i++)
+	{
+		CItemBase* item = nullptr;
+
+		switch (item_i)
+		{
+		case ITEM_COIN_RED:
+		case ITEM_COIN_GREEN:
+		case ITEM_COIN_BLUE:
+			item = new CPowerCoin;
+			break;
+		case ITEM_BOMB:
+			item = new CBomb;
+			break;
+		case ITEM_BOX:
+			item = new CBox;
+		}
+
+		m_item.push_back(item);
+	}
+
 	for (int item_i = 0; item_i < m_item.size(); item_i++)
 	{
 		m_item[item_i]->Init();
@@ -252,6 +277,7 @@ void CItemManager::Exit()
 		delete (*item_i);
 
 		item_i = m_item.erase(item_i);
+
 	}
 
 }

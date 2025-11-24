@@ -12,7 +12,7 @@ public:
 	CItemShotBase();
 
 	//‰Šú‰»
-	virtual void Init(CPlayer* _player);
+	virtual void Init();
 
 	//g—p‚µ‚½‚Ìˆ—
 	virtual void Use(CShotManager* _shot);

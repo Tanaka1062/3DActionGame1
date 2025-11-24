@@ -17,7 +17,8 @@ enum tagItemName
 	ITEM_COIN_RED,			//赤コイン
 	ITEM_COIN_GREEN,		//緑コイン
 	ITEM_COIN_BLUE,			//青コイン
-	ITEM_BOMB,				//アイテム爆弾
+	ITEM_BOMB,				//爆弾
+	ITEM_BOX,				//箱
 
 	ITEM_NUM,				//アイテムの数
 };
