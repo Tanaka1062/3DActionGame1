@@ -119,6 +119,7 @@ public:
 
 	//オブジェクトのタイプを取得
 	tagObjectType GetObjectType() { return m_objectTypy; }
+
 	//-------------------------------
 
 protected:

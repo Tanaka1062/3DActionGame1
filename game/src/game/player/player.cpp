@@ -157,6 +157,7 @@ void CPlayer::Init(CAttackManager* _attackManager, tagPlayerName _name, tagPadNa
 	m_name = _name;
 	m_shadow.Init(m_pos, SHADOW_SIZE);
 	m_objectTypy = OBJECT_PLAYER;
+
 }
 
 //-----------------------
@@ -225,6 +226,12 @@ void CPlayer::Step(float _rotY)
 
 	CCharacterBase::Step();
 
+	//体力が増えすぎないように
+	if (m_hp >= m_maxHp)
+	{
+		m_hp = m_maxHp;
+	}
+
 }
 
 //-----------------------
@@ -260,11 +267,6 @@ void CPlayer::Update()
 	//速度のリセット
 	ResetSpeed();
 
-	//体力が増えすぎないように
-	if (m_hp >= m_maxHp)
-	{
-		m_hp = m_maxHp;
-	}
 }
 
 //終了処理
@@ -412,10 +414,7 @@ void CPlayer::Walk()
 //-----------------------
 void CPlayer::Jump()
 {
-	if (m_speed.y <= 0.0f)
-	{
-		m_state = WAIT;
-	}
+	m_state = WAIT;
 }
 
 //-----------------------
@@ -1050,6 +1049,8 @@ void CPlayer::Move(float _rotY)
 //-----------------------
 void CPlayer::RequestAttack()
 {
+
+
 	//アイテムを持ち上げている状態ではアイテムを投げる
 	if (m_itemState == ITEM_STATE_HAVE)
 	{
@@ -1066,7 +1067,6 @@ void CPlayer::RequestAttack()
 
 	//空中いるときは攻撃を出せない
 	if (m_isFlying == true)return;
-
 
 	//攻撃ボタンを押したか
 	if (CheckHitKey(KEY_INPUT_J) != 0 ||
@@ -1117,6 +1117,7 @@ void CPlayer::RequestJump()
 		m_state = JUMP;
 		m_gravity = JUMP_SPEED;
 		m_isFlying = true;
+
 	}
 
 }
@@ -1208,6 +1209,7 @@ void CPlayer::RequestDodgeroll(float _rotY)
 //-----------------------
 void CPlayer::Item()
 {
+
 	//アイテムを持っていなかったら処理をしない
 	if (m_itemState != ITEM_STATE_HAVE)return;
 
@@ -1235,6 +1237,9 @@ void CPlayer::Item()
 //-----------------------
 void CPlayer::PickUpItem()
 {
+	//空中いるときは攻撃を出せない
+	if (m_isFlying == true)return;
+
 	//アイテムを手に入れていたら持ち上げる
 	if (m_itemState == ITEM_STATE_GET)
 	{

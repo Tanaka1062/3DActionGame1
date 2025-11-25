@@ -27,6 +27,7 @@ void CPowerCoin::Init()
 
 	m_isActive = false;
 	m_itemType = ITEM_TYPE_COIN;
+
 }
 
 //---------------------

@@ -144,19 +144,33 @@ void CItemManager::Load()
 		switch (spawnPos_i)
 		{
 		case ITEM_SPAWN_POS_1:
-			spawnPos = MV1GetFramePosition(mapFrameHndl, 11);
+			spawnPos = MV1GetFramePosition(mapFrameHndl, 7);
 			break;
 		case ITEM_SPAWN_POS_2:
-			spawnPos = MV1GetFramePosition(mapFrameHndl, 13);
+			spawnPos = MV1GetFramePosition(mapFrameHndl, 9);
 			break;
 		case ITEM_SPAWN_POS_3:
-			spawnPos = MV1GetFramePosition(mapFrameHndl, 15);
+			spawnPos = MV1GetFramePosition(mapFrameHndl, 11);
 			break;
 		case ITEM_SPAWN_POS_4:
+			spawnPos = MV1GetFramePosition(mapFrameHndl, 13);
+			break;
+		case ITEM_SPAWN_POS_5:
+			spawnPos = MV1GetFramePosition(mapFrameHndl, 15);
+			break;
+		case ITEM_SPAWN_POS_6:
 			spawnPos = MV1GetFramePosition(mapFrameHndl, 17);
+			break;
+		case ITEM_SPAWN_POS_7:
+			spawnPos = MV1GetFramePosition(mapFrameHndl, 19);
+			break;
+		case ITEM_SPAWN_POS_8:
+			spawnPos = MV1GetFramePosition(mapFrameHndl, 21);
 			break;
 
 		}
+
+		spawnPos.y += 10.0f;
 
 		m_spawnPos[spawnPos_i] = spawnPos;
 	}

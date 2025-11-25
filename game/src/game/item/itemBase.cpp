@@ -24,6 +24,7 @@ void CItemBase::Init()
 	m_isSpawn = true;
 	m_objectTypy = OBJECT_ITEM;
 	m_state = ITEM_WAIT;
+
 }
 
 //--------------------------
@@ -52,6 +53,11 @@ void CItemBase::Step()
 	CObject::Step();
 
 	m_shadow.Step(m_pos);
+
+	if (m_pos.y <= -100.0f)
+	{
+		m_isActive = false;
+	}
 }
 
 //--------------------------

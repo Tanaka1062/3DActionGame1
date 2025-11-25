@@ -68,6 +68,8 @@ void CObject::Step()
 	//現在の座標にスピードを加算
 	m_pos = VAdd(m_pos, m_speed);
 
+	//ｙの速度を初期化
+	m_speed.y = 0.0f;
 }
 
 //---------------------

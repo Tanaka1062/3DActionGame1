@@ -37,6 +37,7 @@ void CHpbar::Draw(float _size)
 
 	DrawBox(static_cast<int>(m_pos.x - 100), static_cast<int>(m_pos.y + 26),
 		static_cast<int>((m_pos.x - 100.0f) + m_hp), static_cast<int>(m_pos.y - 14), GetColor(0, 255, 0), TRUE);
+
 }
 
 

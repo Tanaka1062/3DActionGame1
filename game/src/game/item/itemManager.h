@@ -29,6 +29,10 @@ enum tagItemSpawnPos
 	ITEM_SPAWN_POS_2,		//アイテムの出現座標2
 	ITEM_SPAWN_POS_3,		//アイテムの出現座標3
 	ITEM_SPAWN_POS_4,		//アイテムの出現座標4
+	ITEM_SPAWN_POS_5,		//アイテムの出現座標5
+	ITEM_SPAWN_POS_6,		//アイテムの出現座標6
+	ITEM_SPAWN_POS_7,		//アイテムの出現座標7
+	ITEM_SPAWN_POS_8,		//アイテムの出現座標8
 
 	ITEM_SPAWN_POS_NUM,		//アイテムの出現座標の数
 };
