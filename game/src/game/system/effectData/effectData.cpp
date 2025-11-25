@@ -27,6 +27,7 @@ void CEffectData::Load()
 		"data/effect/heal_effect.efk",
 		"data/effect/eff_loop.efk",
 		"data/effect/effect.efk",
+		"data/effect/fire.efk"
 
 	};
 	// -------------------------------------

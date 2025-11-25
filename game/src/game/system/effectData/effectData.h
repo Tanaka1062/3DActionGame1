@@ -7,8 +7,9 @@ enum tagEffectKind	//エフェクトの種類
 	EFFECT_HEAL,			//回復エフェクト
 	EFFECT2,				//エフェクト２
 	EFFECT3,				//エフェクト３
+	EFFECT_EXPLOSION,		//爆発エフェクト
 
-	EFFECT_NUM				//エフェクトの数
+	EFFECT_NUM,				//エフェクトの数
 };
 
 class CEffectData

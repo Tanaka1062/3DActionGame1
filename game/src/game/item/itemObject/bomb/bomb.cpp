@@ -1,5 +1,7 @@
 #include "bomb.h"
 #include "../../../attack/attackManager.h"
+#include "../../../../lib/effekseer/effekseer.h"
+#include "../../../system/effectData/effectData.h"
 
 static const int EXPLOSION_TIME = 5 * 60;		//爆発する時間
 static const float EXPLOSION_RADIUS = 40.0f;	//爆発の半径
@@ -60,6 +62,12 @@ void CBomb::Explosion()
 	VECTOR explosionPos = m_pos;
 
 	explosionPos.y -= EXPLOSION_RADIUS;
+
+	//呼び出すエフェクトのID
+	int effectId = CEffectData::GetId(EFFECT_EXPLOSION);
+
+	//エフェクトを呼び出す
+	CEffekseerCtrl::Request(effectId, explosionPos, false);
 
 	CAttackManager::Request(explosionPos, EXPLOSION_RADIUS, EXPLOSION_ATK, PLAYER_NONE);
 
