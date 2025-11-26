@@ -70,15 +70,6 @@
     <Filter Include="ソース ファイル\game\item">
       <UniqueIdentifier>{055b67e1-9aaa-445a-848b-92d59ba63e9a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\game\item\fireRing">
-      <UniqueIdentifier>{a06ca225-e74d-4abc-9e83-5f8889888b45}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\game\item\itemInventory">
-      <UniqueIdentifier>{17650638-a1bc-4bf9-a5f1-b8bfebcbb656}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\game\item\harbAmulent">
-      <UniqueIdentifier>{5d3e3841-9c5e-4242-984f-29f53be8534b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\lib\effekseer">
       <UniqueIdentifier>{f8cc2464-89a2-42d1-809b-271ec42468ae}</UniqueIdentifier>
     </Filter>
@@ -201,20 +192,8 @@
     <ClCompile Include="src\game\item\itemBase.cpp">
       <Filter>ソース ファイル\game\item</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\item\fireRing\fireRing.cpp">
-      <Filter>ソース ファイル\game\item\fireRing</Filter>
-    </ClCompile>
     <ClCompile Include="src\game\item\itemManager.cpp">
       <Filter>ソース ファイル\game\item</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\item\itemInventory\itemInventory.cpp">
-      <Filter>ソース ファイル\game\item\itemInventory</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\item\itemShotBase.cpp">
-      <Filter>ソース ファイル\game\item</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\item\harbAmulent\harbAmulent.cpp">
-      <Filter>ソース ファイル\game\item\harbAmulent</Filter>
     </ClCompile>
     <ClCompile Include="src\lib\effekseer\effekseer.cpp">
       <Filter>ソース ファイル\lib\effekseer</Filter>
@@ -284,6 +263,12 @@
     </ClCompile>
     <ClCompile Include="src\game\item\itemObject\box\box.cpp">
       <Filter>ソース ファイル\game\item\itemObject\box</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\item\mapItemManager.cpp">
+      <Filter>ソース ファイル\game\item</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\item\spawnItemManager.cpp">
+      <Filter>ソース ファイル\game\item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -368,20 +353,8 @@
     <ClInclude Include="src\game\item\itemBase.h">
       <Filter>ソース ファイル\game\item</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\item\fireRing\fireRing.h">
-      <Filter>ソース ファイル\game\item\fireRing</Filter>
-    </ClInclude>
     <ClInclude Include="src\game\item\itemManager.h">
       <Filter>ソース ファイル\game\item</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\item\itemInventory\itemInventory.h">
-      <Filter>ソース ファイル\game\item\itemInventory</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\item\itemShotBase.h">
-      <Filter>ソース ファイル\game\item</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\item\harbAmulent\harbAmulent.h">
-      <Filter>ソース ファイル\game\item\harbAmulent</Filter>
     </ClInclude>
     <ClInclude Include="src\lib\effekseer\effekseer.h">
       <Filter>ソース ファイル\lib\effekseer</Filter>
@@ -454,6 +427,12 @@
     </ClInclude>
     <ClInclude Include="src\game\item\itemObject\box\box.h">
       <Filter>ソース ファイル\game\item\itemObject\box</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\item\mapItemManager.h">
+      <Filter>ソース ファイル\game\item</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\item\spawnItemManager.h">
+      <Filter>ソース ファイル\game\item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

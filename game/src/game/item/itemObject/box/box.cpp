@@ -1,4 +1,7 @@
 #include "box.h"
+#include "../../../data.h"
+
+static const int SPAWN_TIME = 5 * 60;		//スポーンするまでの時間
 
 CBox::CBox()
 {
@@ -11,6 +14,9 @@ CBox::CBox()
 void CBox::Init()
 {
 	CItemObjectBase::Init();
+
+	m_spawnTime = 0;
+	m_spawnPos = ZERO;
 }
 
 //-------------------------
@@ -27,4 +33,24 @@ void CBox::Step()
 
 		m_rot.y = player->GetRot().y;
 	}
+
+	if (m_isActive == false)
+	{
+		m_spawnTime++;
+		if (m_spawnTime >= SPAWN_TIME)
+		{
+			Spawn();
+			m_spawnTime = 0;
+		}
+	}
 }
+
+//-------------------------
+//		スポーン処理
+//-------------------------
+void CBox::Spawn()
+{
+	m_isActive = true;
+	m_pos = m_spawnPos;
+}
+

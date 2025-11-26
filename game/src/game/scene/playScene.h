@@ -7,7 +7,6 @@
 #include"../character/characterBase.h"
 #include "../shot/shotManager.h"
 #include "../item/itemManager.h"
-#include "../item/itemInventory/itemInventory.h"
 #include "../weapon/weaponManager.h"
 #include "../attack/attackManager.h"
 #include "../player/playerManager.h"
@@ -25,7 +24,6 @@ private:
 	CCameraManager m_camera;				//カメラ
 	CPlayerManager m_playerManager;			//プレイヤー
 	CShotManager m_shot;					//弾
-	CItemInventory m_itemInventory;			//アイテムインベントリ
 	CItemManager m_itemManager;				//アイテムマネージャークラス
 	CWeaponManager m_weaponManager;			//武器のマネージャークラス
 	CAttackManager m_attackManager;			//攻撃のマネージャークラス

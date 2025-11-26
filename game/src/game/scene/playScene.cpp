@@ -33,7 +33,6 @@ void CPlayScene::Draw()
 	m_playerManager.Draw();
 	m_shot.Draw();
 	m_attackManager.Draw();
-	m_itemInventory.Draw();
 	m_itemManager.Draw();
 	m_weaponManager.Draw();
 	m_uiManager.Draw();
@@ -51,7 +50,6 @@ void CPlayScene::Init()
 	m_sky.Init();
 	m_playerManager.Init(&m_attackManager);
 	m_shot.Init();
-	m_itemInventory.Init(&m_playerManager);
 	m_itemManager.Init(&m_playerManager);
 	m_weaponManager.Init();
 	m_uiManager.Init(&m_playerManager,&m_itemManager);
@@ -85,8 +83,6 @@ void CPlayScene::Step()
 
 	m_shot.Step();
 
-	m_itemInventory.Step(&m_shot);
-
 	m_itemManager.Step();
 
 
@@ -112,7 +108,6 @@ void CPlayScene::Step()
 	m_playerManager.Update();
 	m_shot.Update();
 	m_attackManager.Update();
-	m_itemInventory.Update();
 	m_itemManager.Update();
 	m_weaponManager.Update(m_playerManager);
 	m_camera.Update(ZERO);
