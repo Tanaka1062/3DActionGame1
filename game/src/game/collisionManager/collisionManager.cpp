@@ -19,7 +19,52 @@ void CCollisionManager::CheckHitObjectToObject(CObject* _objectA, CObject* _obje
 		//それぞれ当たり判定の処理をする
 		_objectA->HitCalc(_objectB);
 		_objectB->HitCalc(_objectA);
+
 	}
+
+	//押し戻し処理-------------------------------------------------
+
+	//本来離れてほしい距離を求める
+	float len1 = _objectA->GetRad() + _objectB->GetRad();
+
+	//実際に離れている距離を求める
+	VECTOR objectAPos = _objectA->GetPos();
+	VECTOR objectBPos = _objectB->GetPos();
+
+	VECTOR dir = VSub(objectBPos, objectAPos);
+	float len2 = VSize(dir);
+
+	//めり込んでいたら
+	if (len1 > len2)
+	{
+		//めり込み量を求める
+		float len3 = len1 - len2;
+
+		len3 = len3 * 0.5f;
+
+		//移動させるベクトルを求める
+
+		//方向ベクトルなので正規化する
+		dir = VNorm(dir);
+
+		dir = VScale(dir, len3);
+
+		objectBPos = VAdd(_objectB->GetPos(), dir);
+
+		_objectB->SetPos(VAdd(_objectB->GetPos(), dir));
+
+
+		VECTOR dir2 = VSub(objectAPos, objectBPos);
+		dir2 = VNorm(dir2);
+		dir2 = VScale(dir2, len3);
+
+		objectAPos = VAdd(_objectA->GetPos(), dir2);
+
+		_objectA->SetPos(VAdd(_objectA->GetPos(), dir2));
+	}
+
+	//-------------------------------------------------------------
+
 }
 
 
@@ -69,50 +114,9 @@ void CCollisionManager::CheckHitPlayerToPlayer(CPlayerManager& _playerManager)
 
 			//敵が死んでいたら処理をしない
 			if (player2->GetActive() == false)continue;
+
+			CheckHitObjectToObject(player1, player2);
 			
-			//押し戻し処理-------------------------------------------------
-
-			//本来離れてほしい距離を求める
-			float len1 = player1->GetRad() + player2->GetRad();
-
-			//実際に離れている距離を求める
-			VECTOR player1Pos = player1->GetPos();
-			VECTOR player2Pos = player2->GetPos();
-
-			VECTOR dir = VSub(player2Pos, player1Pos);
-			float len2 = VSize(dir);
-
-			//めり込んでいたら
-			if (len1 > len2)
-			{
-				//めり込み量を求める
-				float len3 = len1 - len2;
-
-				len3 = len3 * 0.5f;
-
-				//移動させるベクトルを求める
-
-				//方向ベクトルなので正規化する
-				dir = VNorm(dir);
-
-				dir = VScale(dir, len3);
-
-				player2Pos = VAdd(player2->GetPos(), dir);
-
-				player2->SetPos(VAdd(player2->GetPos(), dir));
-
-
-				VECTOR dir2 = VSub(player1Pos, player2Pos);
-				dir2 = VNorm(dir2);
-				dir2 = VScale(dir2, len3);
-
-				player1Pos = VAdd(player1->GetPos(), dir2);
-
-				player1->SetPos(VAdd(player1->GetPos(), dir2));
-			}
-
-			//-------------------------------------------------------------
-
 		}
 	}
 
@@ -381,6 +385,27 @@ void CCollisionManager::CheckHitPlayerToItem(CPlayerManager& _playerManager, CIt
 
 			//当たり判定
 			CheckHitObjectToObject(player, item);
+		}
+	}
+}
+
+//----------------------------------------------
+//		 アイテムとアイテムの当たり判定
+//----------------------------------------------
+void CCollisionManager::CheckHitItemToItem(CItemManager& _itemManager)
+{
+	for (int itemA_i = 0; itemA_i < _itemManager.GetItemNum(); itemA_i++)
+	{
+		CItemBase* itemA = _itemManager.GetItem(itemA_i);
+
+		for (int itemB_i = 0; itemB_i < _itemManager.GetItemNum(); itemB_i++)
+		{
+			//同じアイテムは処理をしない
+			if (itemA_i == itemB_i)continue;
+
+			CItemBase* itemB = _itemManager.GetItem(itemB_i);
+
+			CheckHitObjectToObject(itemA, itemB);
 		}
 	}
 }

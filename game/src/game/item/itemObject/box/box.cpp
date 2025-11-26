@@ -1,7 +1,8 @@
 #include "box.h"
 #include "../../../data.h"
 
-static const int SPAWN_TIME = 5 * 60;		//スポーンするまでの時間
+static const int SPAWN_TIME = 12 * 60;		//スポーンするまでの時間
+static const float ATK = 10.0f;				//攻撃力
 
 CBox::CBox()
 {
@@ -15,7 +16,7 @@ void CBox::Init()
 {
 	CItemObjectBase::Init();
 
-	m_spawnTime = 0;
+	m_spawnTime = SPAWN_TIME;
 	m_spawnPos = ZERO;
 }
 
@@ -32,6 +33,7 @@ void CBox::Step()
 		player = dynamic_cast<CPlayer*>(m_owner);
 
 		m_rot.y = player->GetRot().y;
+
 	}
 
 	if (m_isActive == false)
@@ -46,11 +48,29 @@ void CBox::Step()
 }
 
 //-------------------------
+//	 マップに触れたとき
+//-------------------------
+void CBox::HitMapCalc()
+{
+	m_isActive = false;
+}
+
+//-------------------------
 //		スポーン処理
 //-------------------------
 void CBox::Spawn()
 {
 	m_isActive = true;
 	m_pos = m_spawnPos;
+	m_rot = ZERO;
+}
+
+//-------------------------
+//		   壊れる
+//-------------------------
+void CBox::Break()
+{
+	m_isActive = false;
+	CAttackManager::Request(m_pos, m_rad, ATK, PLAYER_NONE);
 }
 

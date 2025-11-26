@@ -61,9 +61,8 @@ public:
 	//当たり判定後の処理
 	virtual void HitCalc(CObject* _hitObject);
 
-	//オブジェクトを押し出す
-	// _push	:押し出す力		
-	void ObjPush(VECTOR _push);
+	//マップに触れたとき
+	virtual void HitMapCalc();
 
 	//重力リセット
 	void GravityReset();

@@ -34,6 +34,11 @@ void CItemObjectBase::Step()
 	//持ち上げられていたらプレイヤーについていく
 	if (m_isLift == true)
 	{
+		m_isGravity = false;
+
+		//当たり判定を小さくする
+		m_rad = 1.0f;
+
 		CPlayer* player = nullptr;
 		player = dynamic_cast<CPlayer*>(m_owner);
 		
@@ -66,17 +71,22 @@ void CItemObjectBase::Step()
 			m_speed.z = res.m[2][3];
 
 			m_state = ITEM_FLYING;
-			m_isGravity = false;
 			m_owner = nullptr;
+			m_isGravity = true;
 		}
 
+	}
+	else
+	{
+		m_isGravity = true;
+		m_rad = RADIUS;
 	}
 
 	//飛んでいる状態ならだんだん速度を落とす
 	if (m_state == ITEM_FLYING)
 	{
-		m_speed.x *= 0.9f;
-		m_speed.z *= 0.9f;
+		m_speed.x *= 0.91f;
+		m_speed.z *= 0.91f;
 
 		VECTOR speed = m_speed;
 
@@ -95,6 +105,7 @@ void CItemObjectBase::Step()
 	}
 
 	CItemBase::Step();
+
 }
 
 //--------------------------
@@ -138,6 +149,7 @@ void CItemObjectBase::HitCalc(CObject* _hitObject)
 //--------------------------
 void CItemObjectBase::Break()
 {
+	m_isActive = false;
 
 }
 

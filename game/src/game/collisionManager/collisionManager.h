@@ -41,5 +41,8 @@ public:
 	//アイテムとプレイヤーの当たり判定
 	static void CheckHitPlayerToItem(CPlayerManager& _playerManager, CItemManager& _itemManager);
 
+	//アイテムとアイテムの当たり判定
+	static void CheckHitItemToItem(CItemManager& _itemManager);
+
 };
 

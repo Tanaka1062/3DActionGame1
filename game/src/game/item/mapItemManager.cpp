@@ -33,6 +33,15 @@ CMapItemManager::CMapItemManager()
 CMapItemManager::~CMapItemManager()
 {
 	Exit();
+
+	for (int item_i = 0; item_i < MAP_ITEM_SPAWN_POS_NUM; item_i++)
+	{
+		delete m_item[item_i];
+
+		m_item[item_i] = nullptr;
+
+	}
+
 }
 
 //-----------------------
@@ -116,13 +125,11 @@ void CMapItemManager::Exit()
 		m_hndl = -1;
 	}
 
-	for (int item_i = 0; item_i < MAP_ITEM_SPAWN_POS_NUM; item_i++)
+	for (int item_i = 0; item_i < MAP_ITEM_SPAWN_POS_NUM;item_i++)
 	{
+		if (m_item == nullptr)continue;
+
 		m_item[item_i]->Exit();
-
-		delete m_item[item_i];
-
-		m_item[item_i] = nullptr;
 
 	}
 

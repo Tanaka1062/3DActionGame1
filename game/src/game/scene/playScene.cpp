@@ -100,6 +100,7 @@ void CPlayScene::Step()
 	CCollisionManager::CheckHitItemToMap(m_itemManager, m_ground);
 	CCollisionManager::CheckHitPlayerToItem(m_playerManager, m_itemManager);
 	CCollisionManager::CheckHitPlayerToPlayerAttack(m_playerManager, m_attackManager);
+	CCollisionManager::CheckHitItemToItem(m_itemManager);
 	//--------------------------------------------
 
 	//‚·‚×‚Ä‚ÌŒ‹‰Ê‚ð”½‰f‚³‚¹‚é

@@ -154,14 +154,10 @@ void CObject::HitCalc(CObject* _hitObject)
 }
 
 //------------------------------
-//	オブジェクトを押し出す
+//	    マップに触れたとき
 //------------------------------
-void CObject::ObjPush(VECTOR _push)
+void CObject::HitMapCalc()
 {
-	//押し出す量をスピードに加算
-	m_speed.x += _push.x;
-	m_speed.y += _push.y;
-	m_speed.z += _push.z;
 
 }
 

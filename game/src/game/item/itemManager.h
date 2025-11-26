@@ -46,10 +46,5 @@ public:
 	//コインのアドレスを取得
 	CPowerCoin* GetCoin(int _num);
 
-	//アイテムを設定
-	void SetItem(int _num, CItemBase* _item,CPlayer* _player);
-
-	//アイテムを出現させる
-	void SpawnItem();
 };
 

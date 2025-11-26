@@ -161,13 +161,6 @@ void CSpawnItemManager::Load()
 //-----------------------
 void CSpawnItemManager::Step()
 {
-	for (auto item_i = m_item.begin(); item_i != m_item.end(); ++item_i)
-	{
-
-		(*item_i)->Step();
-
-	}
-
 	m_spawnTime++;
 	if (m_spawnTime >= SPAWN_TIME)
 	{

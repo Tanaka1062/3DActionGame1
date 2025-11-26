@@ -16,6 +16,9 @@ public:
 	//毎フレームする処理
 	void Step();
 
+	//マップに触れたとき
+	void HitMapCalc();
+
 	//出現座標をセット
 	void SetSpawnPos(VECTOR _pos) { m_spawnPos = _pos; }
 
@@ -23,6 +26,9 @@ private:
 
 	//スポーン処理
 	void Spawn();
+
+	//壊れる
+	void Break();
 
 };
 
