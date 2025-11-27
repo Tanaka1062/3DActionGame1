@@ -75,6 +75,6 @@ void CBox::Spawn()
 void CBox::Break()
 {
 	m_isActive = false;
-	CAttackManager::Request(m_pos, m_rad, ATK, PLAYER_NONE);
+	CAttackManager::Request(m_pos, m_rad, ATK,0, PLAYER_NONE);
 }
 

@@ -10,6 +10,7 @@ class CAttackBase :public CObject
 private:
 	bool m_isAttack;			//UŒ‚‚µ‚Ä‚¢‚é‚©ƒtƒ‰ƒO
 	int m_atk;					//UŒ‚—Í
+	int m_blown;				//‚Á”ò‚Ñ’~Ï—Ê
 	int m_num;					//UŒ‚‚Ì‰ñ”
 	int m_numCount;				//UŒ‚‚Ì‰ñ”ƒJƒEƒ“ƒg
 	int m_nextTime;				//UŒ‚‚Ì”­¶‚·‚é‚Ü‚Å‚ÌŠÔ
@@ -33,13 +34,17 @@ public:
 	// _pos			:ŒÄ‚Ño‚·À•W
 	// _rad			:”¼Œa
 	// _atk			:UŒ‚—Í
+	// _blown		:‚«”ò‚Ñ—Ê
 	// _name		:UŒ‚‚µ‚Ä‚¢‚éƒLƒƒƒ‰‚Ì–¼‘O
 	// _num			:˜A‘±UŒ‚‚Ì‰ñ”
 	// _nextTime	:˜A‘±UŒ‚‚ÌŸ‚ÌUŒ‚‚ª”­¶‚·‚é‚Ü‚Å‚ÌŠÔ
-	void Request(VECTOR _pos, float _rad, int _atk, tagPlayerName _name,int _num = 1, int _nextTime = 0);
+	void Request(VECTOR _pos, float _rad, int _atk,int _blown, tagPlayerName _name,int _num = 1, int _nextTime = 0);
 
 	//UŒ‚—Í‚ğæ“¾
 	int GetAtk() { return m_atk; }
+
+	//‚«”ò‚Ñ—Ê‚ğæ“¾
+	int GetBlown() { return m_blown; }
 
 	//UŒ‚‰Â”\‚©‚ğæ“¾
 	bool GetIsAttack() { return m_isAttack; }

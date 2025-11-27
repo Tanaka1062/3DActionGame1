@@ -41,6 +41,7 @@ class CCharacterBase:public CActor
 protected:
 	int m_maxHp;						//‘Ì—Í‚ÌÅ‘å’l
 	int m_hp;							//‘Ì—Í
+	int m_blown;						//‚Á”ò‚Ñ’~Ï—Ê
 	int m_atk;							//UŒ‚—Í
 	tagState m_state;					//ó‘Ô
 	tagCharacterType m_type;			//í—Ş
@@ -73,7 +74,7 @@ public:
 	virtual void Exit();
 
 	//UŒ‚‚ğH‚ç‚Á‚½‚É‚·‚éˆ—
-	virtual void HitAttack(int _atk,float _rotY = 0.0f);
+	virtual void HitAttack(int _atk,int _blown,float _rotY = 0.0f);
 
 	//’e‚ğH‚ç‚Á‚½‚É‚·‚éˆ—
 	virtual void ShotAttack(int _atk, float _rotY = 0.0f);

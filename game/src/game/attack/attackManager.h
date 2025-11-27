@@ -33,10 +33,11 @@ public:
 	// _pos			:ŒÄ‚Ño‚·À•W
 	// _rad			:”¼Œa
 	// _atk			:UŒ‚—Í
+	// _blown		:‚«”ò‚Ñ—Ê
 	// _name		:UŒ‚‚·‚éƒLƒƒƒ‰‚Ì–¼‘O
 	// _num			:˜A‘±UŒ‚‚Ì‰ñ”
 	// _nextTime	:˜A‘±UŒ‚‚ÌŸ‚ÌUŒ‚‚ª”­¶‚·‚é‚Ü‚Å‚ÌŠÔ
-	static void Request(VECTOR _pos, float _rad, int _atk,tagPlayerName _name, int _num = 1,int _nextTime = 0);
+	static void Request(VECTOR _pos, float _rad, int _atk, int _blown,tagPlayerName _name, int _num = 1,int _nextTime = 0);
 
 	//UŒ‚‚Ì“–‚½‚è”»’è‚Ì”‚ğæ“¾
 	static int GetNum() { return static_cast<int>(m_attack.size()); }

@@ -14,27 +14,27 @@
 
 //プレイヤー関連--------------------------------
 static const char MODEL_PATH[] =
-{ "data/model/player/playerTransformTest.mv1" };	//ロードするファイル名
-static const VECTOR INIT_POS = { 0.0f,1.0f,0.0f };	//初期座標
-static const float SHADOW_SIZE = 0.5f;				//丸影の大きさ
-static const int MAX_HP = 300;						//体力
-static const int ATK = 20;							//攻撃力
-static const float MOVE_SPEED = 1.2f;				//移動スピード
-static const float RADIUS = 10.0f;					//半径
-static const float DODGEROLL_SPEED = 1.5f;			//回避スピード
-static const float JUMP_SPEED = 3.0f;				//ジャンプスピード
-static const int TRANSFORM_COIN_NUM = 3;			//変身に必要なコインの数
-static const int POWER_UP_ATK = 2;					//増加する攻撃力のような
-static const int TRANSFORM_TIME = 10 * 60;			//変身している時間
-static const float TRANSFORM_UP_SPEED = 0.3f;		//変身後のスピードアップ
+{ "data/model/player/playerTransformTest.mv1" };		//ロードするファイル名
+static const VECTOR INIT_POS = { 0.0f,1.0f,0.0f };		//初期座標
+static const float SHADOW_SIZE = 0.5f;					//丸影の大きさ
+static const int MAX_HP = 300;							//体力
+static const int ATK = 20;								//攻撃力
+static const float MOVE_SPEED = 1.2f;					//移動スピード
+static const float RADIUS = 10.0f;						//半径
+static const float DODGEROLL_SPEED = 1.5f;				//回避スピード
+static const float JUMP_SPEED = 3.0f;					//ジャンプスピード
+static const int TRANSFORM_COIN_NUM = 3;				//変身に必要なコインの数
+static const int POWER_UP_ATK = 2;						//増加する攻撃力のような
+static const int TRANSFORM_TIME = 10 * 60;				//変身している時間
+static const float TRANSFORM_UP_SPEED = 0.3f;			//変身後のスピードアップ
 //----------------------------------------------
 
 //攻撃関連---------------------------
-static const float ATTACK_SIZE = 12.0f;				//攻撃範囲
-static const float ATTACK_LENGTH = 15.0f;			//攻撃の長さ
-static const float ATTACKB_SIZE = 25.0f;			//攻撃B範囲
-static const int ATTACKB_ATK = 100;					//攻撃Bの攻撃力
-static const float ATTACK_MOVE_SPEED = 0.5f;		//攻撃時に前進する力
+static const float ATTACK_SIZE = 12.0f;					//攻撃範囲
+static const float ATTACK_LENGTH = 15.0f;				//攻撃の長さ
+static const float ATTACKB_SIZE = 25.0f;				//攻撃B範囲
+static const int ATTACKB_ATK = 100;						//攻撃Bの攻撃力
+static const float ATTACK_MOVE_SPEED = 0.5f;			//攻撃時に前進する力
 //-----------------------------------
 
 //アニメーション一覧---------------------------
@@ -96,6 +96,22 @@ enum tagAttackNum
 	ATTACK_1,			//一段階目の攻撃
 	ATTACK_2,			//二段階目の攻撃
 	ATTACK_3,			//三段階目の攻撃
+
+	ATTACK_NUM,			//攻撃の数
+};
+
+static const float ATTACK_MAGNIFICATION[ATTACK_NUM] =	//攻撃の倍率
+{
+	0.5f,
+	0.8f,
+	1.0f,
+};
+
+static const int ATTACK_BLOWN[ATTACK_NUM] =				//攻撃の吹き飛び度
+{
+	40,
+	40,
+	80,
 };
 
 //---------------------------------------------------------
@@ -183,6 +199,7 @@ void CPlayer::Load(int _modelHndl)
 //-----------------------
 void CPlayer::Step(float _rotY)
 {
+
 	//攻撃力の上昇
 	m_atk = ATK + (m_powerUp * POWER_UP_ATK);
 
@@ -318,7 +335,7 @@ void CPlayer::HitCalc(CObject* _hitObject)
 		float rot = atan2f(attack->GetPos().x - GetCenter().x,
 			attack->GetPos().z - GetCenter().z);
 
-		CCharacterBase::HitAttack(attack->GetAtk(), rot);
+		CCharacterBase::HitAttack(attack->GetAtk(),attack->GetBlown(), rot);
 
 		//変身中の場合変身時間を減らす
 		if (m_isTransform == true)
@@ -539,6 +556,11 @@ void CPlayer::Attack()
 
 	attackPos.y = GetCenter().y;
 
+	//攻撃力を計算
+	int atk = static_cast<float>(m_atk * ATTACK_MAGNIFICATION[m_attackNum]);
+
+	int blown = ATTACK_BLOWN[m_attackNum];
+
 	switch (m_weaponId)
 	{
 	case WEAPON_ID_HAND:
@@ -549,21 +571,21 @@ void CPlayer::Attack()
 			//攻撃中のアニメーション
 			if (RequestAnim(ANIMID_ATTACKA1, 1.0f))
 			{
-				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_name);
+				m_attackManager->Request(attackPos, ATTACK_SIZE, atk, blown, m_name);
 			}
 			break;
 		case 1:
 			//攻撃中のアニメーション
 			if (RequestAnim(ANIMID_ATTACKA2, 1.0f))
 			{
-				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_name);
+				m_attackManager->Request(attackPos, ATTACK_SIZE, atk, blown, m_name);
 			}
 			break;
 		case 2:
 			//攻撃中のアニメーション
 			if(RequestAnim(ANIMID_ATTACKA3, 1.0f))
 			{
-				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_name);
+				m_attackManager->Request(attackPos, ATTACK_SIZE, atk, blown, m_name);
 			}
 			break;
 		}
@@ -576,21 +598,21 @@ void CPlayer::Attack()
 			//攻撃中のアニメーション
 			if (RequestAnim(ANIMID_ATTACKB1, 1.0f))
 			{
-				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_name);
+				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, blown, m_name);
 			}
 			break;
 		case 1:
 			//攻撃中のアニメーション
 			if (RequestAnim(ANIMID_ATTACKB2, 1.0f))
 			{
-				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_name);
+				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, blown, m_name);
 			}
 			break;
 		case 2:
 			//攻撃中のアニメーション
 			if (RequestAnim(ANIMID_ATTACKB3, 1.0f))
 			{
-				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, m_name);
+				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, blown, m_name);
 			}
 			break;
 		}
@@ -746,7 +768,7 @@ void CPlayer::Skill()
 		if (RequestAnim(ANIMID_SKILLA, 1.0f))
 		{
 			//攻撃の呼び出し
-			m_attackManager->Request(GetCenter(), ATTACKB_SIZE, ATTACKB_ATK, m_name);
+			m_attackManager->Request(GetCenter(), ATTACKB_SIZE, ATTACKB_ATK,0, m_name);
 		}
 		break;
 	case WEAPON_ID_SWORD:
@@ -754,7 +776,7 @@ void CPlayer::Skill()
 		if (RequestAnim(ANIMID_SKILLB, 1.0f))
 		{
 			//攻撃の呼び出し
-			m_attackManager->Request(GetCenter(), ATTACKB_SIZE, ATTACKB_ATK, m_name);
+			m_attackManager->Request(GetCenter(), ATTACKB_SIZE, ATTACKB_ATK,0, m_name);
 		}
 		break;
 	}

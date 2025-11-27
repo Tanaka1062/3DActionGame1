@@ -164,8 +164,18 @@ void CCollisionManager::CheckHitPlayerToMap(CPlayerManager& _playerManager,CMap&
 				//プレイヤーの座標を計算した分だけ移動させる
 				player->SetPos(VAdd(player->GetPos(), vLen));
 
-				//重力をリセット
-				player->GravityReset();
+				//法線を取得
+				VECTOR normal = col.Dim[j].Normal;
+
+				//法線の角度を取得
+				float angle = atan2f(normal.y, normal.x);
+
+				//角度が90度の場合重力のリセットをする
+				if (angle == 90.0f * (DX_PI_F / 180.0f))
+				{
+					//重力をリセット
+					player->GravityReset();
+				}
 
 			}
 			//-------------------------------------

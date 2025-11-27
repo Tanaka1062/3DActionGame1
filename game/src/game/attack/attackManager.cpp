@@ -88,12 +88,12 @@ void CAttackManager::Exit()
 //------------------------
 //	    攻撃の呼び出し
 //------------------------
-void CAttackManager::Request(VECTOR _pos, float _rad, int _atk, tagPlayerName _name, int _num, int _nextTime)
+void CAttackManager::Request(VECTOR _pos, float _rad, int _atk, int _blown, tagPlayerName _name, int _num, int _nextTime)
 {
 	//攻撃の当たり判定のベースクラスにデータを入力
 	CAttackBase* attack = new CAttackBase;
 	attack->Init();
-	attack->Request(_pos, _rad, _atk, _name, _num, _nextTime);
+	attack->Request(_pos, _rad, _atk, _blown, _name, _num, _nextTime);
 
 	//攻撃の当たり判定を追加
 	m_attack.push_back(attack);

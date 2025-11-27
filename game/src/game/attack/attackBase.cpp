@@ -16,6 +16,7 @@ void CAttackBase::Init()
 	CObject::Init();
 	m_isAttack = false;
 	m_atk = 0;
+	m_blown = 0;
 	m_num = 0;
 	m_numCount = 0;
 	m_nextTime = 0;
@@ -67,11 +68,12 @@ void CAttackBase::Update()
 //----------------------
 //	  çUåÇÇÃåƒÇ—èoÇµ
 //----------------------
-void CAttackBase::Request(VECTOR _pos, float _rad, int _atk, tagPlayerName _name, int _num, int _nextTime)
+void CAttackBase::Request(VECTOR _pos, float _rad, int _atk, int _blown, tagPlayerName _name, int _num, int _nextTime)
 {
 	m_pos = _pos;
 	m_rad = _rad;
 	m_atk = _atk;
+	m_blown = _blown;
 	m_attackName = _name;
 	m_num = _num;
 	m_nextTime = _nextTime;

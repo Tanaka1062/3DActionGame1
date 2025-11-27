@@ -1,8 +1,9 @@
 #include "characterBase.h"
 #include "../../lib/myMath/myMath.h"
 
-static const VECTOR BACK_SPEED = { 0.0f,0.5f,-1.0f };
-static const float BACK_DOWN_SPEED = 0.9f;				//速度の減速
+static const VECTOR KNOCK_BACK_SPEED = { 0.0f,3.0f,-0.8f };
+static const float BACK_DOWN_SPEED = 0.9f;					//速度の減速
+static const int BLOWN_MAX = 100;							//吹き飛び最大値
 
 //------------------------------
 //		コンストラクタ
@@ -22,6 +23,7 @@ void CCharacterBase::Init(CAttackManager* _attackManager)
 	m_gravity = 0.0f;
 	m_hp = 0;
 	m_maxHp = 0;
+	m_blown = 0;
 	m_atk = 0;
 	m_rad = 0.0f;
 	m_isFlying = false;
@@ -44,6 +46,18 @@ void CCharacterBase::Load()
 void CCharacterBase::Step()
 {
 	CActor::Step();
+
+	//被弾中は減らさない
+	if (m_state != STAGGER)
+	{
+		//吹っ飛び蓄積量を少しずつ減らす
+		m_blown--;
+	}
+	//吹っ飛び蓄積量がマイナスにならないようにする
+	if (m_blown <= 0)
+	{
+		m_blown = 0;
+	}
 
 	m_shadow.Step(m_pos);
 
@@ -207,15 +221,25 @@ void CCharacterBase::Exit()
 //------------------------------
 //	攻撃を食らった時にする処理
 //------------------------------
-void CCharacterBase::HitAttack(int _atk, float _rotY)
+void CCharacterBase::HitAttack(int _atk, int _blown, float _rotY)
 {
+	m_blown += _blown;
+
+	VECTOR knockBack = KNOCK_BACK_SPEED;
+
+	if (m_blown >= BLOWN_MAX)
+	{
+		knockBack = VScale(knockBack, 10.0f);
+		m_blown = 0;
+	}
+
 	//既に怯み状態なら処理をしない
 	if (m_state == STAGGER)return;
 
 	//ノックバックの速度を設定------------
 	
 	//プレイヤーが目の前にいる時に進む速度
-	VECTOR defaultDir = BACK_SPEED;
+	VECTOR defaultDir = knockBack;
 	//上記を行列に変換
 	MATRIX dir = CMyMath::GetTranslateMatrix(defaultDir);
 	//Y軸回転行列
@@ -425,6 +449,7 @@ void CCharacterBase::Die()
 //-----------------------
 void CCharacterBase::KnockBack()
 {
+
 	//速度を徐々に下げていく
 	m_speed.x *= BACK_DOWN_SPEED;
 	m_speed.z *= BACK_DOWN_SPEED;
