@@ -90,6 +90,13 @@ enum tagAnim {
 
 //---------------------------------------------
 
+enum tagAttackNum
+{
+	ATTACK_NONE = -1,	//攻撃をしていない
+	ATTACK_1,			//一段階目の攻撃
+	ATTACK_2,			//二段階目の攻撃
+	ATTACK_3,			//三段階目の攻撃
+};
 
 //---------------------------------------------------------
 
@@ -113,7 +120,7 @@ CPlayer::CPlayer()
 	m_atk = 0;
 	m_isDodgeroll = false;
 	m_isTransform = false;
-	m_attackNum = 0;
+	m_attackNum = ATTACK_NONE;
 	m_powerUp = 0;
 	m_dodgerollRotY = 0.0f;
 	m_padName = PAD_NONE;
@@ -149,7 +156,7 @@ void CPlayer::Init(CAttackManager* _attackManager, tagPlayerName _name, tagPadNa
 	m_atk = ATK;
 	m_isDodgeroll = false;
 	m_isTransform = false;
-	m_attackNum = 0;
+	m_attackNum = ATTACK_NONE;
 	m_powerUp = 0;
 	m_padName = _padName;
 	m_dodgerollRotY = 0.0f;
@@ -331,7 +338,7 @@ void CPlayer::HitCalc(CObject* _hitObject)
 		CEffekseerCtrl::Request(effectId, GetCenter(), false);
 
 		//アイテムを落とす
-		m_itemState = ITEM_STATE_NONE;
+		m_itemState = ITEM_STATE_DROP;
 
 	}
 	//---------------------------------------------------------------------
@@ -619,7 +626,7 @@ void CPlayer::AttackOut()
 			break;
 		case 2:
 			//攻撃後のアニメーション
-			RequestAnim(ANIMID_ATTACKA3_OUT, 1.0f);
+			RequestAnim(ANIMID_ATTACKA3_OUT, 0.3f);
 			break;
 		}
 
@@ -650,7 +657,7 @@ void CPlayer::AttackOut()
 	//アニメーションが終わったら待機状態に戻す
 	if (GetAnimEnd() == true)
 	{
-		m_attackNum = 0;
+		m_attackNum = ATTACK_NONE;
 		m_state = WAIT;
 	}
 
@@ -1049,7 +1056,19 @@ void CPlayer::Move(float _rotY)
 //-----------------------
 void CPlayer::RequestAttack()
 {
-
+	switch (m_state)
+	{
+	case CCharacterBase::ATTACK_IN:
+	case CCharacterBase::ATTACK:
+	case CCharacterBase::ATTACK_OUT:
+		break;
+	default:
+		if (m_attackNum != ATTACK_NONE)
+		{
+			m_attackNum = ATTACK_NONE;
+		}
+		break;
+	}
 
 	//アイテムを持ち上げている状態ではアイテムを投げる
 	if (m_itemState == ITEM_STATE_HAVE)
@@ -1076,24 +1095,30 @@ void CPlayer::RequestAttack()
 		//攻撃中なら次に移行する
 		if ((m_state == ATTACK ||
 			m_state == ATTACK_OUT) &&
-			m_attackNum<3)
+			m_attackNum >= ATTACK_1)
 		{
-			m_attackNum++;
-			m_state = ATTACK_IN;
+			//最後の攻撃以外は攻撃を進める
+			if (m_attackNum < ATTACK_3)
+			{
+				m_attackNum++;
+				m_state = ATTACK_IN;
+			}
+
 		}
 		//攻撃してない時に攻撃前に移行する
-		else
+		else if(m_attackNum == ATTACK_NONE)
 		{
+			m_attackNum++;
 			m_state = ATTACK_IN;
 		}
 	}
 
 	//攻撃ボタンを押したか
-	if (CheckHitKey(KEY_INPUT_U) != 0 ||
-		CControllerManager::IsTrg(BUTTON_Y,m_padName))
-	{
-		m_state = ATTACK_CHARGE_IN;
-	}
+	//if (CheckHitKey(KEY_INPUT_U) != 0 ||
+	//	CControllerManager::IsTrg(BUTTON_Y,m_padName))
+	//{
+	//	m_state = ATTACK_CHARGE_IN;
+	//}
 
 }
 
@@ -1247,7 +1272,7 @@ void CPlayer::PickUpItem()
 		m_state = ITEM_LIFT_UP;
 	}
 
-	//アイテムを取ろうとしていたら持っていない状態にする
+	//アイテムを取ろうとしていたら持っていない状態に戻す
 	if (m_itemState == ITEM_STATE_PICK_UP)
 	{
 		m_itemState = ITEM_STATE_NONE;
@@ -1271,6 +1296,7 @@ void CPlayer::PickUpItem()
 		if (m_itemState == ITEM_STATE_HAVE)
 		{
 			m_state = ITEM_PUT_DOWN;
+			m_itemState = ITEM_STATE_PUT_DOWN;
 		}
 		//アイテムを持っていない場合アイテムを取得する
 		else

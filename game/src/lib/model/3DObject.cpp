@@ -35,6 +35,7 @@ void CObject::Init()
 	m_isActive = true;
 	m_isGravity = false;
 	m_owner = nullptr;
+	m_isPushed = true;
 }
 
 //---------------------

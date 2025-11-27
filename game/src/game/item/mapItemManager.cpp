@@ -127,7 +127,7 @@ void CMapItemManager::Exit()
 
 	for (int item_i = 0; item_i < MAP_ITEM_SPAWN_POS_NUM;item_i++)
 	{
-		if (m_item == nullptr)continue;
+		if (m_item[item_i] == nullptr)continue;
 
 		m_item[item_i]->Exit();
 

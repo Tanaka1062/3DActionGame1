@@ -22,6 +22,9 @@ void CCollisionManager::CheckHitObjectToObject(CObject* _objectA, CObject* _obje
 
 	}
 
+	//どちらかのオブジェクトが押し出し処理をしない場合は押し出し処理をしない
+	if (_objectA->GetIsPushed() == false || _objectB->GetIsPushed() == false)return;
+
 	//押し戻し処理-------------------------------------------------
 
 	//本来離れてほしい距離を求める
@@ -342,6 +345,8 @@ void CCollisionManager::CheckHitItemToMap(CItemManager& _itemManager, CMap& _map
 
 			}
 			//-------------------------------------
+
+			item->HitMapCalc();
 
 			//毎回データを削除
 			MV1CollResultPolyDimTerminate(col);

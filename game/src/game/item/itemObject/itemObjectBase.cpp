@@ -16,6 +16,7 @@ void CItemObjectBase::Init()
 
 	m_rad = RADIUS;
 	m_isLift = false;
+	m_isDrop = false;
 	m_itemType = ITEM_TYPE_OBJECT;
 }
 
@@ -29,6 +30,7 @@ void CItemObjectBase::Step()
 	else
 	{
 		m_isSpawn = true;
+		m_isDrop = false;
 	}
 
 	//持ち上げられていたらプレイヤーについていく
@@ -49,6 +51,12 @@ void CItemObjectBase::Step()
 		{
 			m_owner = nullptr;
 			m_isLift = false;
+		}
+
+		//アイテムを落としていたら
+		if (player->GetItemState() == ITEM_STATE_DROP)
+		{
+			m_isDrop = true;
 		}
 
 		//投げられたいたら投げる処理にする
@@ -150,6 +158,5 @@ void CItemObjectBase::HitCalc(CObject* _hitObject)
 void CItemObjectBase::Break()
 {
 	m_isActive = false;
-
 }
 

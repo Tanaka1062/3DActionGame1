@@ -52,7 +52,11 @@ void CBox::Step()
 //-------------------------
 void CBox::HitMapCalc()
 {
-	m_isActive = false;
+	//アイテムがドロップした状態だとアイテムを消す
+	if (m_isDrop == true)
+	{
+		m_isActive = false;
+	}
 }
 
 //-------------------------

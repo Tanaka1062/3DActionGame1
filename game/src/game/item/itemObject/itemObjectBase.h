@@ -5,6 +5,7 @@ class CItemObjectBase : public CItemBase
 {
 protected:
 	bool m_isLift;			//‚¿ã‚°‚ç‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©
+	bool m_isDrop;			//ƒAƒCƒeƒ€‚ª—‚Æ‚³‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©
 
 public:
 	CItemObjectBase();

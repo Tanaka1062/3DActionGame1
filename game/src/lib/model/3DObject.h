@@ -24,6 +24,7 @@ protected:
 	bool m_isActive;				//生存フラグ
 	bool m_isGravity;				//重力処理をするかどうかフラグ
 	bool m_isFlying;				//空中にいるかどうかフラグ
+	bool m_isPushed;				//押し出し処理をするかどうかフラグ
 	tagObjectType m_objectTypy;		//オブジェクトのタイプ
 	CObject* m_owner;				//オーナーオブジェクト
 
@@ -112,6 +113,9 @@ public:
 	bool GetActive() { return m_isActive; }
 	//生存フラグを設定
 	void SetActive(bool _isActive) { m_isActive = _isActive; }
+
+	//押し出し処理をするかどうかを取得
+	bool GetIsPushed() { return m_isPushed; }
 
 	//ハンドルを取得
 	int GetHndl() { return m_hndl; }

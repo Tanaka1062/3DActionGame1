@@ -27,9 +27,11 @@ enum tagHaveItemState
 {
 	ITEM_STATE_NONE = -1,		//アイテムを持っていない
 	ITEM_STATE_PICK_UP,			//アイテムを取ろうとしている
+	ITEM_STATE_PUT_DOWN,		//アイテムを下ろす
 	ITEM_STATE_GET,				//アイテムを手に入れる
 	ITEM_STATE_HAVE,			//アイテムを持っている
 	ITEM_STATE_THROW,			//アイテムを投げる
+	ITEM_STATE_DROP,			//アイテムを落とした
 };
 
 //プレイヤークラス
