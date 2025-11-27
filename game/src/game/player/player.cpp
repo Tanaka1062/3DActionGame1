@@ -1058,9 +1058,9 @@ void CPlayer::RequestAttack()
 {
 	switch (m_state)
 	{
-	case CCharacterBase::ATTACK_IN:
-	case CCharacterBase::ATTACK:
-	case CCharacterBase::ATTACK_OUT:
+	case ATTACK_IN:
+	case ATTACK:
+	case ATTACK_OUT:
 		break;
 	default:
 		if (m_attackNum != ATTACK_NONE)

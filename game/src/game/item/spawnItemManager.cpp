@@ -88,6 +88,8 @@ void CSpawnItemManager::Init(CPlayerManager* _playerManager)
 	for (int spawnPos_i = 0; spawnPos_i < ITEM_SPAWN_POS_NUM; spawnPos_i++)
 	{
 		m_spawnPos[spawnPos_i] = ZERO;
+
+		m_isSpawnPos[spawnPos_i] = false;
 	}
 
 	m_playerManager = _playerManager;
@@ -152,6 +154,8 @@ void CSpawnItemManager::Load()
 		spawnPos.y += 10.0f;
 
 		m_spawnPos[spawnPos_i] = spawnPos;
+
+		m_isSpawnPos[spawnPos_i] = false;
 	}
 
 }
@@ -167,6 +171,23 @@ void CSpawnItemManager::Step()
 		m_spawnTime = 0;
 		//アイテムを出現させる
 		SpawnItem();
+	}
+
+	int spawnPosNum = 0;
+
+	//全てのスポーン座標がtrueになったらリセットする
+	for (int spawnPos_i = 0; spawnPos_i < ITEM_SPAWN_POS_NUM; spawnPos_i++)
+	{
+		if (m_isSpawnPos[spawnPos_i] == true)
+			spawnPosNum++;
+	}
+
+	if (spawnPosNum == ITEM_SPAWN_POS_NUM)
+	{
+		for (int spawnPos_i = 0; spawnPos_i < ITEM_SPAWN_POS_NUM; spawnPos_i++)
+		{
+			m_isSpawnPos[spawnPos_i] = false;
+		}
 	}
 
 	//コインをドロップしていたら落とす
@@ -300,11 +321,21 @@ void CSpawnItemManager::SpawnItem()
 		{
 			if (itemNum == itemNameId)
 			{
-				//スポーン位置を設定
-				int spawnPosId = GetRand(ITEM_SPAWN_POS_NUM - 1);
+				int spawnPosId = 0;
+
+				while (true)
+				{
+					spawnPosId = GetRand(ITEM_SPAWN_POS_NUM - 1);
+
+					if (m_isSpawnPos[spawnPosId] == false)
+					{
+						break;
+					}
+				}
 
 				m_item[item_i]->SetPos(m_spawnPos[spawnPosId]);
 				m_item[item_i]->SetActive(true);
+				m_isSpawnPos[spawnPosId] = true;
 				return;
 			}
 

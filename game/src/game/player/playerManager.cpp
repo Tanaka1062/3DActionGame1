@@ -159,6 +159,22 @@ void CPlayerManager::Step(float _rot)
 			m_player[PLAYER_2]->SetRot(0.0f, rotY2);
 		}
 	}
+
+	//“Š‚°‚éó‘Ô‚Ì‚Æ‚«‚É‘ŠŽè‚Ì•ûŒü‚ðŒü‚­
+	if (m_player[PLAYER_1]->GetState() == ITEM_THROW_IN)
+	{
+		float rotY1 = atan2f(player1Pos.x - player2Pos.x, player1Pos.z - player2Pos.z);
+
+		m_player[PLAYER_1]->SetRot(0.0f, rotY1);
+	}
+
+	if (m_player[PLAYER_2]->GetState() == ITEM_THROW_IN)
+	{
+		float rotY2 = atan2f(player2Pos.x - player1Pos.x, player2Pos.z - player1Pos.z);
+
+		m_player[PLAYER_2]->SetRot(0.0f, rotY2);
+	}
+
 }
 
 //------------------------

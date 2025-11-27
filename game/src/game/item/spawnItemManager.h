@@ -44,6 +44,7 @@ private:
 	vector<CItemBase*> m_item;							//アイテムのクラス
 	int m_hndl[ITEM_NUM];								//アイテムのモデルハンドル
 	int m_spawnTime;									//時間カウント
+	bool m_isSpawnPos[ITEM_SPAWN_POS_NUM];				//その座標でアイテムが出現したかどうか
 	VECTOR m_spawnPos[ITEM_SPAWN_POS_NUM];				//アイテムの出現座標
 	CPlayerManager* m_playerManager;					//プレイヤーのマネージャークラス
 
@@ -69,9 +70,6 @@ public:
 
 	//コインのアドレスを取得
 	CPowerCoin* GetCoin(int _num);
-
-	//アイテムを設定
-	void SetItem(int _num, CItemBase* _item, CPlayer* _player);
 
 	//アイテムを出現させる
 	void SpawnItem();

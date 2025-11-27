@@ -49,7 +49,7 @@ private:
 	tagPadName m_padName;			//コントローラーの名前
 	tagWeaponId m_weaponId;			//武器のID
 	tagPlayerName m_name;			//プレイヤーの名前
-	tagHaveItemState m_itemState;		//アイテムの状態
+	tagHaveItemState m_itemState;	//アイテムの状態
 
 public:
 	//コンストラクタ・デストラクタ

@@ -1,7 +1,7 @@
 #include "itemObjectBase.h"
 #include "../../../lib/myMath/myMath.h"
 	
-static const float THROW_SPEED = 10.0f;				//投げられるスピード
+static const float THROW_SPEED = 12.0f;				//投げられるスピード
 static const float RADIUS = 10.0f;					//半径
 
 CItemObjectBase::CItemObjectBase()
@@ -57,12 +57,15 @@ void CItemObjectBase::Step()
 		if (player->GetItemState() == ITEM_STATE_DROP)
 		{
 			m_isDrop = true;
+			m_owner = nullptr;
+			m_isLift = false;
 		}
 
 		//投げられたいたら投げる処理にする
 		if (player->GetItemState() == ITEM_STATE_THROW)
 		{
 			m_isLift = false;
+			m_isDrop = true;
 
 			//角度ゼロで進む速度
 			VECTOR defaultDir = { 0.0f,0.0f,-THROW_SPEED };

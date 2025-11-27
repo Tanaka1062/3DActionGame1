@@ -10,37 +10,38 @@ enum tagCharacterType	//キャラクターの種類
 
 };
 
+enum tagState						//キャラクターの状態
+{
+	WAIT,							//待機
+	WALK,							//歩く
+	JUMP,							//ジャンプ
+	DODGEROLL,						//回避
+	ATTACK_IN,						//攻撃前
+	ATTACK,							//攻撃中
+	ATTACK_OUT,						//攻撃後
+	ATTACK_CHARGE_IN,				//攻撃チャージ前
+	ATTACK_CHARGE,					//攻撃チャージ
+	SKILL_IN,						//スキル使用前
+	SKILL,							//スキル
+	SKILL_OUT,						//スキル使用後
+	ITEM_USE_IN,					//アイテム使用前
+	ITEM_USE,						//アイテム使用中
+	ITEM_USE_OUT,					//アイテム使用後
+	ITEM_LIFT_UP,					//アイテムを持ち上げる
+	ITEM_PUT_DOWN,					//アイテムを下ろす
+	ITEM_THROW_IN,					//アイテムを投げる前
+	ITEM_THROW,						//アイテムを投げる
+	ITEM_THROW_OUT,					//アイテムを投げた後
+	STAGGER,						//怯み
+	DIE,							//死亡
+};
+
 class CCharacterBase:public CActor
 {
 protected:
 	int m_maxHp;						//体力の最大値
 	int m_hp;							//体力
 	int m_atk;							//攻撃力
-	enum tagState						//キャラクターの状態
-	{
-		WAIT,							//待機
-		WALK,							//歩く
-		JUMP,							//ジャンプ
-		DODGEROLL,						//回避
-		ATTACK_IN,						//攻撃前
-		ATTACK,							//攻撃中
-		ATTACK_OUT,						//攻撃後
-		ATTACK_CHARGE_IN,				//攻撃チャージ前
-		ATTACK_CHARGE,					//攻撃チャージ
-		SKILL_IN,						//スキル使用前
-		SKILL,							//スキル
-		SKILL_OUT,						//スキル使用後
-		ITEM_USE_IN,					//アイテム使用前
-		ITEM_USE,						//アイテム使用中
-		ITEM_USE_OUT,					//アイテム使用後
-		ITEM_LIFT_UP,					//アイテムを持ち上げる
-		ITEM_PUT_DOWN,					//アイテムを下ろす
-		ITEM_THROW_IN,					//アイテムを投げる前
-		ITEM_THROW,						//アイテムを投げる
-		ITEM_THROW_OUT,					//アイテムを投げた後
-		STAGGER,						//怯み
-		DIE,							//死亡
-	};
 	tagState m_state;					//状態
 	tagCharacterType m_type;			//種類
 	CAttackManager* m_attackManager;	//攻撃マネージャークラス
