@@ -1174,6 +1174,8 @@ void CPlayer::RequestJump()
 //-----------------------
 void CPlayer::RequestDodgeroll(float _rotY)
 {
+	return;
+
 	//ƒAƒCƒeƒ€‚ğ‚¿ã‚°‚Ä‚¢‚éó‘Ô‚Íˆ—‚ğ‚µ‚È‚¢
 	if (m_itemState == ITEM_STATE_HAVE)return;
 

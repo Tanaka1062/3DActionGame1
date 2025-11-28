@@ -4,7 +4,7 @@
 #include "../../../system/effectData/effectData.h"
 
 static const int EXPLOSION_TIME = 5 * 60;		//”š”­‚·‚éŽžŠÔ
-static const int EXPLOSION_IN_TIME = 3 * 60;	//”š”­‚·‚é‘O‚ÌŽžŠÔ
+static const int EXPLOSION_IN_TIME = 1 * 60;	//”š”­‚·‚é‘O‚ÌŽžŠÔ
 static const float EXPLOSION_RADIUS = 40.0f;	//”š”­‚Ì”¼Œa
 static const int EXPLOSION_ATK = 30;			//”š”­‚ÌUŒ‚—Í
 
@@ -42,7 +42,7 @@ void CBomb::Step()
 
 	m_timeCount++;
 
-	if (m_timeCount >= EXPLOSION_IN_TIME ||
+	if (EXPLOSION_TIME - m_timeCount <= EXPLOSION_IN_TIME &&
 		m_animData.m_id != ANIMID_EXPLOSION_IN)
 	{
 		RequestAnim(ANIMID_EXPLOSION_IN, 1.0f, true);
