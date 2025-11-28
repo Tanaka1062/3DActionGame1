@@ -15,7 +15,7 @@ CItemBase::CItemBase()
 //--------------------------
 void CItemBase::Init()
 {
-	CObject::Init();
+	CActor::Init();
 
 	m_rad = RADIUS;
 	m_isActive = false;
@@ -32,7 +32,7 @@ void CItemBase::Init()
 //--------------------------
 void CItemBase::Load(const char* _modelPath)
 {
-	CObject::LoadModel(_modelPath);
+	CActor::LoadModel(_modelPath);
 	m_shadow.Load();
 }
 
@@ -41,7 +41,7 @@ void CItemBase::Load(const char* _modelPath)
 //--------------------------
 void CItemBase::Load(int _hndl)
 {
-	CObject::DuplicateModel(_hndl);
+	CActor::DuplicateModel(_hndl);
 	m_shadow.Load();
 }
 
@@ -50,7 +50,7 @@ void CItemBase::Load(int _hndl)
 //--------------------------
 void CItemBase::Step()
 {
-	CObject::Step();
+	CActor::Step();
 
 	m_shadow.Step(m_pos);
 
@@ -65,7 +65,7 @@ void CItemBase::Step()
 //--------------------------
 void CItemBase::Update()
 {
-	CObject::Update();
+	CActor::Update();
 	m_shadow.Update();
 }
 
@@ -76,7 +76,7 @@ void CItemBase::Draw()
 {
 	if (m_isActive == false)return;
 
-	CObject::Draw();
+	CActor::Draw();
 	m_shadow.Draw();
 }
 
@@ -85,7 +85,7 @@ void CItemBase::Draw()
 //--------------------------
 void CItemBase::Exit()
 {
-	CObject::Exit();
+	CActor::Exit();
 	m_shadow.Exit();
 }
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../lib/model/3DObject.h"
+#include "../../lib/model/actor.h"
 #include "../player/player.h"
 #include "../shadow/shadow.h"
 
@@ -21,7 +21,7 @@ enum tagItemState
 };
 
 //アイテムのベースクラス
-class CItemBase :public CObject
+class CItemBase :public CActor
 {
 protected:
 	bool m_isSpawn;			//スポーン可能かフラグ

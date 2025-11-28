@@ -68,7 +68,7 @@ void CItemObjectBase::Step()
 			m_isDrop = true;
 
 			//角度ゼロで進む速度
-			VECTOR defaultDir = { 0.0f,0.0f,-THROW_SPEED };
+			VECTOR defaultDir = { 0.0f,-0.5f,-THROW_SPEED };
 			//上記を行列に変換する
 			MATRIX dir = CMyMath::GetTranslateMatrix(defaultDir);
 			//Y軸回転行列

@@ -4,9 +4,17 @@
 #include "../../../system/effectData/effectData.h"
 
 static const int EXPLOSION_TIME = 5 * 60;		//爆発する時間
+static const int EXPLOSION_IN_TIME = 3 * 60;	//爆発する前の時間
 static const float EXPLOSION_RADIUS = 40.0f;	//爆発の半径
 static const int EXPLOSION_ATK = 30;			//爆発の攻撃力
 
+//アニメーション一覧----------------------------------
+enum tagAnim
+{
+	ANIMID_DEFAULT,			//デフォルト
+	ANIMID_EXPLOSION_IN,	//爆発前
+};
+//----------------------------------------------------
 
 CBomb::CBomb()
 {
@@ -33,6 +41,13 @@ void CBomb::Step()
 	if (m_isActive == false)return;
 
 	m_timeCount++;
+
+	if (m_timeCount >= EXPLOSION_IN_TIME ||
+		m_animData.m_id != ANIMID_EXPLOSION_IN)
+	{
+		RequestAnim(ANIMID_EXPLOSION_IN, 1.0f, true);
+	}
+
 	//爆発時間を過ぎたら爆時させる
 	if (m_timeCount >= EXPLOSION_TIME)
 	{
@@ -71,5 +86,6 @@ void CBomb::Explosion()
 
 	CAttackManager::Request(explosionPos, EXPLOSION_RADIUS, EXPLOSION_ATK,0, PLAYER_NONE);
 
+	RequestAnim(ANIMID_DEFAULT, 1.0f, true);
 }
 
