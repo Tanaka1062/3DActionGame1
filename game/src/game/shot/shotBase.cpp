@@ -32,13 +32,14 @@ CShotBase::~CShotBase()
 //-----------------------
 void CShotBase::Init()
 {
-	CActor::Init();
+	CObject::Init();
 	m_lostTime = 0;
 	m_timeCount = 0;
 	m_atk = 0;
 	m_rad = 0.0f;
 	m_moveSpeed = 0.0f;
 	m_effectHndl = -1;
+	m_objectTypy = OBJECT_SHOT;
 }
 
 //-----------------------
@@ -46,7 +47,7 @@ void CShotBase::Init()
 //-----------------------
 void CShotBase::Load(int _modelHndl)
 {
-	CActor::DuplicateModel(_modelHndl);
+	CObject::DuplicateModel(_modelHndl);
 }
 
 //-----------------------
@@ -54,6 +55,8 @@ void CShotBase::Load(int _modelHndl)
 //-----------------------
 void CShotBase::Step()
 {
+
+	CObject::Step();
 
 	//Activeがfalseなら処理をしない
 	if (m_isActive == false)return;
@@ -69,6 +72,7 @@ void CShotBase::Step()
 	}
 
 
+
 }
 
 //-----------------------
@@ -76,7 +80,7 @@ void CShotBase::Step()
 //-----------------------
 void CShotBase::Draw()
 {
-	CActor::Draw();
+	CObject::Draw();
 
 
 #ifdef DEBUG
@@ -95,7 +99,7 @@ void CShotBase::Draw()
 //-----------------------
 void CShotBase::Update()
 {
-	CActor::Update();
+	CObject::Update();
 
 	//エフェクトハンドルがある時だけ
 	if (m_effectHndl != -1)
@@ -111,7 +115,7 @@ void CShotBase::Update()
 //-----------------------
 void CShotBase::Exit()
 {
-	CActor::Exit();
+	CObject::Exit();
 	if (m_effectHndl != -1)
 	{
 		CEffekseerCtrl::Stop(m_effectHndl);
@@ -123,7 +127,7 @@ void CShotBase::Exit()
 //		呼び出し
 //-----------------------
 void CShotBase::Request(VECTOR _pos, VECTOR _rot, float _rad, float _speed, int _atk, int _lostTime,
-	int _effectHndl)
+	tagPlayerName _name,int _effectHndl)
 {
 	//弾の設定
 	m_pos = _pos;
@@ -133,6 +137,7 @@ void CShotBase::Request(VECTOR _pos, VECTOR _rot, float _rad, float _speed, int 
 	m_atk = _atk;
 	m_lostTime = _lostTime;
 	m_effectHndl = _effectHndl;
+	m_shotName = _name;
 
 	m_scale = { _rad/2.2f ,_rad/2.2f,_rad/2.2f };
 

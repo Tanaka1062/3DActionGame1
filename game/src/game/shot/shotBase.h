@@ -1,15 +1,18 @@
 #pragma once
-#include "../../lib/model/actor.h"
+#include "../../lib/model/3DObject.h"
+#include "../player/playerData.h"
 
 //敵のクラス
-class CShotBase:public CActor
+class CShotBase:public CObject
 {
 private:
-	int m_lostTime;			//消える時間
-	int m_timeCount;		//時間カウント
-	int m_atk;				//攻撃力
-	float m_moveSpeed;		//移動スピード
-	int m_effectHndl;		//エフェクトのハンドル
+	int m_lostTime;				//消える時間
+	int m_timeCount;			//時間カウント
+	int m_atk;					//攻撃力
+	float m_moveSpeed;			//移動スピード
+	int m_effectHndl;			//エフェクトのハンドル
+	tagPlayerName m_shotName;	//誰が弾を出したか
+
 public:
 	//コンストラクタ・デストラクタ
 	CShotBase();
@@ -42,10 +45,13 @@ public:
 	// _lostTime	:消えるまでの時間
 	// _effectHndl	:弾のエフェクト
 	void Request(VECTOR _pos,VECTOR _rot,float _rad,float _speed,int _atk,int _lostTime,
-				int _effectHndl = -1);
+		tagPlayerName _name,int _effectHndl = -1);
 
 	//攻撃力を取得
 	int GetAtk() { return m_atk; }
+
+	//弾を出しているキャラの名前を取得
+	tagPlayerName GetShotName() { return m_shotName; }
 
 private:
 

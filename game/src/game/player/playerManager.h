@@ -2,7 +2,6 @@
 #include <iostream>
 #include <vector>
 #include "player.h"
-#include "../shot/shotManager.h"
 
 using namespace std;
 

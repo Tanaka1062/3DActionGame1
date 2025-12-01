@@ -48,7 +48,7 @@ void CPlayScene::Init()
 {
 	m_ground.Init();
 	m_sky.Init();
-	m_playerManager.Init(&m_attackManager);
+	m_playerManager.Init(&m_attackManager,&m_shot);
 	m_shot.Init();
 	m_itemManager.Init(&m_playerManager);
 	m_weaponManager.Init();
@@ -101,6 +101,7 @@ void CPlayScene::Step()
 	CCollisionManager::CheckHitPlayerToItem(m_playerManager, m_itemManager);
 	CCollisionManager::CheckHitPlayerToPlayerAttack(m_playerManager, m_attackManager);
 	CCollisionManager::CheckHitItemToItem(m_itemManager);
+	CCollisionManager::CheckHitPlayerToShot(m_playerManager, m_shot);
 	//--------------------------------------------
 
 	//‚·‚×‚Ä‚ÌŒ‹‰Ê‚ð”½‰f‚³‚¹‚é

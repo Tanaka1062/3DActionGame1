@@ -35,6 +35,10 @@ static const float ATTACK_LENGTH = 15.0f;				//攻撃の長さ
 static const float ATTACKB_SIZE = 25.0f;				//攻撃B範囲
 static const int ATTACKB_ATK = 100;						//攻撃Bの攻撃力
 static const float ATTACK_MOVE_SPEED = 0.5f;			//攻撃時に前進する力
+static const float FIGHT_LEN = 40.0f;					//戦う距離
+static const float SHOT_SIZE = 10.0f;					//弾の大きさ
+static const float SHOT_SPEED = 3.0f;					//弾の速度
+static const int SHOT_LOST_TIME = 5 * 60;					//弾が消えるまでの時間
 //-----------------------------------
 
 //アニメーション一覧---------------------------
@@ -182,7 +186,6 @@ void CPlayer::Init(CAttackManager* _attackManager, tagPlayerName _name, tagPadNa
 	m_name = _name;
 	m_shadow.Init(m_pos, SHADOW_SIZE);
 	m_objectTypy = OBJECT_PLAYER;
-
 }
 
 //-----------------------
@@ -199,10 +202,49 @@ void CPlayer::Load(int _modelHndl)
 //-----------------------
 //毎フレームする処理
 //-----------------------
-void CPlayer::Step(float _rotY)
+void CPlayer::Step(float _rotY, VECTOR _targetPos, CShotManager* _shotManage)
 {
-	//弾フラグリセット
-	m_isShot = false;
+	if (m_isShot == true)
+	{
+		_shotManage->Request(GetCenter(),m_rot, SHOT_SIZE, SHOT_SPEED,m_atk, SHOT_LOST_TIME,m_name);
+		m_isShot = false;
+	}
+
+	//プレイヤー同士の距離
+	VECTOR vLen = VSub(m_pos, _targetPos);
+	float fLen = VSize(vLen);
+
+	//戦いの距離になったら互いの方向を向く
+	if (fLen <= FIGHT_LEN)
+	{
+		if (!m_isDodgeroll)
+		{
+			float rotY1 = atan2f(m_pos.x - _targetPos.x, m_pos.z - _targetPos.z);
+
+			m_rot.y = rotY1;
+		}
+	}
+
+	//プレイヤーの向きを変える
+	if (m_state == ITEM_THROW_IN)
+	{
+		float rotY = atan2f(m_pos.x - _targetPos.x, m_pos.z - _targetPos.z);
+
+		m_rot.y = rotY;
+	}
+
+	if (m_isTransform == true)
+	{
+		switch (m_state)
+		{
+		case ATTACK_IN:
+		case ATTACK:
+			float rotY = atan2f(m_pos.x - _targetPos.x, m_pos.z - _targetPos.z);
+
+			m_rot.y = rotY;
+			break;
+		}
+	}
 
 	//攻撃力の上昇
 	m_atk = ATK + (m_powerUp * POWER_UP_ATK);
@@ -377,6 +419,53 @@ void CPlayer::HitCalc(CObject* _hitObject)
 
 	}
 	//---------------------------------------------------------------------
+
+	//弾の場合の処理-------------------------------------------------------
+	if (_hitObject->GetObjectType() == OBJECT_SHOT)
+	{
+
+		//プレイヤーが回避中なら処理をしない
+		if (m_isDodgeroll == true)return;
+
+		CShotBase* shot = nullptr;
+
+		shot = dynamic_cast<CShotBase*>(_hitObject);
+
+		//自分が出した攻撃の場合処理をしない
+		if (shot->GetShotName() == m_name)return;
+
+		//ノックバックの方向
+		float rot = atan2f(shot->GetPos().x - GetCenter().x,
+			shot->GetPos().z - GetCenter().z);
+
+		CCharacterBase::HitAttack(shot->GetAtk(), 50, rot);
+
+		//変身中の場合変身時間を減らす
+		if (m_isTransform == true)
+		{
+			m_transformTimeCount += shot->GetAtk();
+		}
+		//変身していない場合コインを落とす
+		else
+		{
+			m_dropCoin++;
+		}
+
+		shot->SetActive(false);
+
+		//呼び出すエフェクトのID
+		int effectId = CEffectData::GetId(EFFECT_ATTACK);
+
+		//エフェクトを呼び出す
+		CEffekseerCtrl::Request(effectId, GetCenter(), false);
+
+		//アイテムを落とす
+		m_itemState = ITEM_STATE_DROP;
+
+	}
+
+	//---------------------------------------------------------------------
+
 }
 
 //-----------------------
@@ -483,19 +572,23 @@ void CPlayer::Dodgeroll()
 //-----------------------
 void CPlayer::AttackIn()
 {
-	//進む速度
-	VECTOR defaultDir = { 0.0f,0.0f,-ATTACK_MOVE_SPEED };
-	//上記を行列に変換
-	MATRIX dir = CMyMath::GetTranslateMatrix(defaultDir);
-	//Y軸回転行列
-	MATRIX mRotY = CMyMath::GetYawMatrix(m_rot.y);
-	//行列の合成
-	MATRIX res = CMyMath::MatMult(mRotY, dir);
+	if (m_isTransform == false)
+	{
 
-	//移動をスピードに代入
-	m_speed.x = res.m[0][3];
-	m_speed.y = res.m[1][3];
-	m_speed.z = res.m[2][3];
+		//進む速度
+		VECTOR defaultDir = { 0.0f,0.0f,-ATTACK_MOVE_SPEED };
+		//上記を行列に変換
+		MATRIX dir = CMyMath::GetTranslateMatrix(defaultDir);
+		//Y軸回転行列
+		MATRIX mRotY = CMyMath::GetYawMatrix(m_rot.y);
+		//行列の合成
+		MATRIX res = CMyMath::MatMult(mRotY, dir);
+
+		//移動をスピードに代入
+		m_speed.x = res.m[0][3];
+		m_speed.y = res.m[1][3];
+		m_speed.z = res.m[2][3];
+	}
 
 	switch (m_weaponId)
 	{
@@ -503,15 +596,8 @@ void CPlayer::AttackIn()
 		switch (m_attackNum)
 		{
 		case 0:
-			if (m_isTransform == true)
-			{
-				m_isShot = true;
-			}
-			else
-			{
-				//攻撃前のアニメーション
-				RequestAnim(ANIMID_ATTACKA1_IN, 1.0f);
-			}
+			//攻撃前のアニメーション
+			RequestAnim(ANIMID_ATTACKA1_IN, 1.0f);
 
 			break;
 		case 1:
@@ -569,7 +655,7 @@ void CPlayer::Attack()
 	attackPos.y = GetCenter().y;
 
 	//攻撃力を計算
-	int atk = static_cast<float>(m_atk * ATTACK_MAGNIFICATION[m_attackNum]);
+	int atk = static_cast<int>(m_atk * ATTACK_MAGNIFICATION[m_attackNum]);
 
 	int blown = ATTACK_BLOWN[m_attackNum];
 
@@ -583,7 +669,14 @@ void CPlayer::Attack()
 			//攻撃中のアニメーション
 			if (RequestAnim(ANIMID_ATTACKA1, 1.0f))
 			{
-				m_attackManager->Request(attackPos, ATTACK_SIZE, atk, blown, m_name);
+				if (m_isTransform == true)
+				{
+					m_isShot = true;
+				}
+				else
+				{
+					m_attackManager->Request(attackPos, ATTACK_SIZE, atk, blown, m_name);
+				}
 			}
 			break;
 		case 1:
@@ -1017,10 +1110,10 @@ void CPlayer::Move(float _rotY)
 	float moveSpeed = MOVE_SPEED;
 
 	//変身していたら速度を上げる
-	if (m_isTransform)
-	{
-		moveSpeed += TRANSFORM_UP_SPEED;
-	}
+	//if (m_isTransform)
+	//{
+	//	moveSpeed += TRANSFORM_UP_SPEED;
+	//}
 
 	//移動ベクトル
 	VECTOR speed = { 0.0f,0.0f,0.0f };
@@ -1127,9 +1220,11 @@ void CPlayer::RequestAttack()
 	{
 
 		//変身中の攻撃モーション(仮)TODO
-		if (m_isTransform = true)
+		if (m_isTransform == true)
 		{
 			m_attackNum = 0;
+			m_state = ATTACK_IN;
+			return;
 		}
 
 		//攻撃中なら次に移行する

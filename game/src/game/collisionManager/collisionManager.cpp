@@ -424,3 +424,19 @@ void CCollisionManager::CheckHitItemToItem(CItemManager& _itemManager)
 		}
 	}
 }
+
+//ƒvƒŒƒCƒ„[‚Æ’e‚Ì“–‚½‚è”»’è
+void CCollisionManager::CheckHitPlayerToShot(CPlayerManager& _playerManager, CShotManager& _shotManager)
+{
+	for (int player_i = 0; player_i < _playerManager.GetPlayerNum(); player_i++)
+	{
+		CPlayer* player = _playerManager.GetPlayer(player_i);
+
+		for (int shot_i = 0; shot_i < _shotManager.GetNum(); shot_i++)
+		{
+			CShotBase* shot = _shotManager.GetShot(shot_i);
+
+			CheckHitObjectToObject(player, shot);
+		}
+	}
+}

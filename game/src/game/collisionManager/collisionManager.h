@@ -44,5 +44,8 @@ public:
 	//アイテムとアイテムの当たり判定
 	static void CheckHitItemToItem(CItemManager& _itemManager);
 
+	//プレイヤーと弾の当たり判定
+	static void CheckHitPlayerToShot(CPlayerManager& _playerManager, CShotManager& _shotManager);
+
 };
 

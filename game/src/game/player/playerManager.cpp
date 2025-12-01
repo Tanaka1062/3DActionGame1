@@ -1,6 +1,6 @@
 #include "playerManager.h"
 #include "../../lib/input/controllerManager.h"
-
+#include "../data.h"
 
 enum tagModelName					//モデル一覧
 {
@@ -17,7 +17,6 @@ static const char* MODEL_PATH[PLAYER_NUM] =
 static const char FRAME_PATH[] =
 { "data/model/map/TestMap6Frame.mv1" };			//ロードするファイル名
 
-static const float FIGHT_LEN = 40.0f;		//戦う距離
 
 //------------------------
 //	  コンストラクタ
@@ -132,52 +131,23 @@ void CPlayerManager::Load()
 //------------------------
 void CPlayerManager::Step(float _rot)
 {
-	for (int i = 0; i < m_player.size(); i++)
+	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
-		m_player[i]->Step(_rot);
+		VECTOR targetPos = ZERO;
 
-	}
-
-	//計算用のプレイヤーの座標
-	VECTOR player1Pos = m_player[PLAYER_1]->GetPos();
-	VECTOR player2Pos = m_player[PLAYER_2]->GetPos();
-
-	//プレイヤー同士の距離
-	VECTOR vLen = VSub(player1Pos, player2Pos);
-	float fLen = VSize(vLen);
-
-	//戦いの距離になったら互いの方向を向く
-	if (fLen <= FIGHT_LEN)
-	{
-		if (!m_player[PLAYER_1]->GetIsDodgeroll())
+		switch (player_i)
 		{
-			float rotY1 = atan2f(player1Pos.x - player2Pos.x, player1Pos.z - player2Pos.z);
-
-			m_player[PLAYER_1]->SetRot(0.0f, rotY1);
+		case PLAYER_1:
+			targetPos = m_player[PLAYER_2]->GetPos();
+			break;
+		case PLAYER_2:
+			targetPos = m_player[PLAYER_1]->GetPos();
+			break;
 		}
 
-		if (!m_player[PLAYER_2]->GetIsDodgeroll())
-		{
-			float rotY2 = atan2f(player2Pos.x - player1Pos.x, player2Pos.z - player1Pos.z);
-
-			m_player[PLAYER_2]->SetRot(0.0f, rotY2);
-		}
+		m_player[player_i]->Step(_rot,targetPos,m_shotManager);
 	}
 
-	//投げる状態のときに相手の方向を向く
-	if (m_player[PLAYER_1]->GetState() == ITEM_THROW_IN)
-	{
-		float rotY1 = atan2f(player1Pos.x - player2Pos.x, player1Pos.z - player2Pos.z);
-
-		m_player[PLAYER_1]->SetRot(0.0f, rotY1);
-	}
-
-	if (m_player[PLAYER_2]->GetState() == ITEM_THROW_IN)
-	{
-		float rotY2 = atan2f(player2Pos.x - player1Pos.x, player2Pos.z - player1Pos.z);
-
-		m_player[PLAYER_2]->SetRot(0.0f, rotY2);
-	}
 
 }
 

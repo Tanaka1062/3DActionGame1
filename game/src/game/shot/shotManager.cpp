@@ -112,13 +112,13 @@ void CShotManager::Exit()
 //	ショットの呼び出し
 //------------------------
 void CShotManager::Request(VECTOR _pos, VECTOR _rot, float _rad, float _speed, int _atk, int _lostTime,
-	int _effectHndl)
+	tagPlayerName _name,int _effectHndl)
 {
 	//弾のベースクラスにデータを入力
 	CShotBase* shot = new CShotBase;
 	shot->Init();
 	shot->Load(m_hndl);
-	shot->Request(_pos,_rot,_rad,_speed,_atk,_lostTime,_effectHndl);
+	shot->Request(_pos,_rot,_rad,_speed,_atk,_lostTime,_name,_effectHndl);
 	
 	//弾を追加
 	m_shot.push_back(shot);

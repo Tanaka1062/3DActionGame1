@@ -7,6 +7,7 @@ enum tagObjectType
 	OBJECT_PLAYER,			//プレイヤー
 	OBJECT_ITEM,			//アイテム
 	OBJECT_ATTACK,			//攻撃の当たり判定
+	OBJECT_SHOT,			//弾
 	
 	OBJECT_TYPE_NUM,		//タイプの数
 };

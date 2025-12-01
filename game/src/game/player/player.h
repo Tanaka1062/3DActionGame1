@@ -3,6 +3,7 @@
 #include "../shot/shotManager.h"
 #include"../../lib/input/controllerManager.h"
 #include "playerData.h"
+#include "../shot/shotManager.h"
 
 //武器のID
 enum tagWeaponId
@@ -51,7 +52,6 @@ private:
 	tagWeaponId m_weaponId;			//武器のID
 	tagPlayerName m_name;			//プレイヤーの名前
 	tagHaveItemState m_itemState;	//アイテムの状態
-	VECTOR* m_targetPos;			//対戦相手の座標
 
 public:
 	//コンストラクタ・デストラクタ
@@ -59,13 +59,13 @@ public:
 	~CPlayer();
 
 	//初期化
-	void Init(CAttackManager* _attackManager,tagPlayerName _name, tagPadName _padName,VECTOR* _targetPos);
+	void Init(CAttackManager* _attackManager,tagPlayerName _name, tagPadName _padName);
 
 	//モデルロード
 	void Load(int _modelHndl);
 
 	//毎フレームする処理
-	void Step(float _rotY);
+	void Step(float _rotY,VECTOR _targetPos, CShotManager* _shotManage);
 
 	//描写処理
 	void Draw();
@@ -117,9 +117,6 @@ public:
 	void AddPowerUp() { m_powerUp++; }
 	//パワーアップを減らす
 	void SubPowerUp() { m_powerUp--; }
-
-	//座標のポインタを取得
-	VECTOR* GetPointerPos() { return &m_pos; }
 
 	//持っているアイテムの座標を取得
 	VECTOR GetItemHavePos();
