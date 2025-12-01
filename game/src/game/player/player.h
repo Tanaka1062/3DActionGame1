@@ -43,6 +43,7 @@ private:
 	int m_dropCoin;					//コインを落とす数
 	bool m_isDodgeroll;				//回避しているかフラグ
 	bool m_isTransform;				//変身しているかフラグ
+	bool m_isShot;					//弾を撃っているかフラグ
 	int m_attackNum;				//攻撃の番号
 	int m_powerUp;					//パワーアップ
 	float m_dodgerollRotY;			//回避時の角度
@@ -50,6 +51,7 @@ private:
 	tagWeaponId m_weaponId;			//武器のID
 	tagPlayerName m_name;			//プレイヤーの名前
 	tagHaveItemState m_itemState;	//アイテムの状態
+	VECTOR* m_targetPos;			//対戦相手の座標
 
 public:
 	//コンストラクタ・デストラクタ
@@ -57,7 +59,7 @@ public:
 	~CPlayer();
 
 	//初期化
-	void Init(CAttackManager* _attackManager,tagPlayerName _name, tagPadName _padName);
+	void Init(CAttackManager* _attackManager,tagPlayerName _name, tagPadName _padName,VECTOR* _targetPos);
 
 	//モデルロード
 	void Load(int _modelHndl);
@@ -79,6 +81,9 @@ public:
 
 	//回避しているかを取得
 	bool GetIsDodgeroll() { return m_isDodgeroll; }
+
+	//弾を出しているかを取得
+	bool GetIsShot() { return m_isShot; }
 
 	//コインを落としているかを取得
 	int GetDropCoin() { return m_dropCoin; }
@@ -112,6 +117,9 @@ public:
 	void AddPowerUp() { m_powerUp++; }
 	//パワーアップを減らす
 	void SubPowerUp() { m_powerUp--; }
+
+	//座標のポインタを取得
+	VECTOR* GetPointerPos() { return &m_pos; }
 
 	//持っているアイテムの座標を取得
 	VECTOR GetItemHavePos();

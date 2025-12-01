@@ -44,7 +44,8 @@ CPlayerManager::~CPlayerManager()
 //------------------------
 //		  ‰Šú‰»
 //------------------------
-void CPlayerManager::Init(CAttackManager* _attackManager)
+void CPlayerManager::Init(CAttackManager* _attackManager,
+	CShotManager* _shotManager)
 {
 	if (m_modelHndl.size() < MODEL_NUM)
 	{
@@ -67,6 +68,8 @@ void CPlayerManager::Init(CAttackManager* _attackManager)
 
 		tagPlayerName name = PLAYER_NONE;
 
+		VECTOR* pointerPos = nullptr;
+
 		switch (player_i)
 		{
 		case PLAYER_1:
@@ -81,6 +84,7 @@ void CPlayerManager::Init(CAttackManager* _attackManager)
 
 	}
 	
+	m_shotManager = _shotManager;
 }
 
 //------------------------

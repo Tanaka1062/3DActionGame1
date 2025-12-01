@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include "player.h"
+#include "../shot/shotManager.h"
 
 using namespace std;
 
@@ -11,6 +12,7 @@ class CPlayerManager
 private:
 	vector<CPlayer*> m_player;			//プレイヤーのクラス
 	vector <int> m_modelHndl;			//モデルのハンドル
+	CShotManager* m_shotManager;		//弾のマネージャー
 
 public:
 	//コンストラクタ・デストラクタ
@@ -18,7 +20,8 @@ public:
 	~CPlayerManager();
 
 	//初期化
-	void Init(CAttackManager* _attackManager = nullptr);
+	void Init(CAttackManager* _attackManager = nullptr,
+		CShotManager* _shotManager = nullptr);
 	//オブジェクトのロード
 	void Load();
 	//毎フレームする処理

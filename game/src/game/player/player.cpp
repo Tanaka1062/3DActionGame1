@@ -136,6 +136,7 @@ CPlayer::CPlayer()
 	m_atk = 0;
 	m_isDodgeroll = false;
 	m_isTransform = false;
+	m_isShot = false;
 	m_attackNum = ATTACK_NONE;
 	m_powerUp = 0;
 	m_dodgerollRotY = 0.0f;
@@ -172,6 +173,7 @@ void CPlayer::Init(CAttackManager* _attackManager, tagPlayerName _name, tagPadNa
 	m_atk = ATK;
 	m_isDodgeroll = false;
 	m_isTransform = false;
+	m_isShot = false;
 	m_attackNum = ATTACK_NONE;
 	m_powerUp = 0;
 	m_padName = _padName;
@@ -199,6 +201,8 @@ void CPlayer::Load(int _modelHndl)
 //-----------------------
 void CPlayer::Step(float _rotY)
 {
+	//弾フラグリセット
+	m_isShot = false;
 
 	//攻撃力の上昇
 	m_atk = ATK + (m_powerUp * POWER_UP_ATK);
@@ -499,8 +503,16 @@ void CPlayer::AttackIn()
 		switch (m_attackNum)
 		{
 		case 0:
-			//攻撃前のアニメーション
-			RequestAnim(ANIMID_ATTACKA1_IN, 1.0f);
+			if (m_isTransform == true)
+			{
+				m_isShot = true;
+			}
+			else
+			{
+				//攻撃前のアニメーション
+				RequestAnim(ANIMID_ATTACKA1_IN, 1.0f);
+			}
+
 			break;
 		case 1:
 			//攻撃前のアニメーション
@@ -1113,6 +1125,12 @@ void CPlayer::RequestAttack()
 	if (CheckHitKey(KEY_INPUT_J) != 0 ||
 		CControllerManager::IsTrg(BUTTON_X,m_padName))
 	{
+
+		//変身中の攻撃モーション(仮)TODO
+		if (m_isTransform = true)
+		{
+			m_attackNum = 0;
+		}
 
 		//攻撃中なら次に移行する
 		if ((m_state == ATTACK ||
