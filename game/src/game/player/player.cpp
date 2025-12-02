@@ -14,19 +14,22 @@
 
 //プレイヤー関連--------------------------------
 static const char MODEL_PATH[] =
-{ "data/model/player/playerTransformTest.mv1" };		//ロードするファイル名
-static const VECTOR INIT_POS = { 0.0f,1.0f,0.0f };		//初期座標
-static const float SHADOW_SIZE = 0.5f;					//丸影の大きさ
-static const int MAX_HP = 300;							//体力
-static const int ATK = 20;								//攻撃力
-static const float MOVE_SPEED = 1.2f;					//移動スピード
-static const float RADIUS = 10.0f;						//半径
-static const float DODGEROLL_SPEED = 1.5f;				//回避スピード
-static const float JUMP_SPEED = 3.0f;					//ジャンプスピード
-static const int TRANSFORM_COIN_NUM = 3;				//変身に必要なコインの数
-static const int POWER_UP_ATK = 2;						//増加する攻撃力のような
-static const int TRANSFORM_TIME = 10 * 60;				//変身している時間
-static const float TRANSFORM_UP_SPEED = 0.3f;			//変身後のスピードアップ
+{ "data/model/player/playerTransformTest.mv1" };			//ロードするファイル名
+static const VECTOR INIT_POS = { 0.0f,1.0f,0.0f };			//初期座標
+static const float SHADOW_SIZE = 0.5f;						//丸影の大きさ
+static const int MAX_HP = 300;								//体力
+static const int ATK = 20;									//攻撃力
+static const float MOVE_SPEED = 1.2f;						//移動スピード
+static const float RADIUS = 10.0f;							//半径
+static const float DODGEROLL_SPEED = 1.5f;					//回避スピード
+static const float JUMP_SPEED = 3.0f;						//ジャンプスピード
+static const int TRANSFORM_COIN_NUM = 3;					//変身に必要なコインの数
+static const int POWER_UP_ATK = 2;							//増加する攻撃力のような
+static const int TRANSFORM_TIME = 10 * 60;					//変身している時間
+static const float TRANSFORM_UP_SPEED = 0.3f;				//変身後のスピードアップ
+static const int BLOWN_MAX = 100;							//吹き飛び最大値
+static const VECTOR KNOCK_BACK_SPEED = { 0.0f,3.0f,-0.8f };	//吹き飛ぶスピード
+
 //----------------------------------------------
 
 //攻撃関連---------------------------
@@ -381,17 +384,12 @@ void CPlayer::HitCalc(CObject* _hitObject)
 		float rot = atan2f(attack->GetPos().x - GetCenter().x,
 			attack->GetPos().z - GetCenter().z);
 
-		CCharacterBase::HitAttack(attack->GetAtk(),attack->GetBlown(), rot);
+		HitAttack(attack->GetAtk(),attack->GetBlown(), rot);
 
 		//変身中の場合変身時間を減らす
 		if (m_isTransform == true)
 		{
 			m_transformTimeCount += attack->GetAtk();
-		}
-		//変身していない場合コインを落とす
-		else
-		{
-			m_dropCoin++;
 		}
 
 		//呼び出すエフェクトのID
@@ -466,6 +464,55 @@ void CPlayer::HitCalc(CObject* _hitObject)
 
 	//---------------------------------------------------------------------
 
+}
+
+//------------------------------
+//	攻撃を食らった時にする処理
+//------------------------------
+void CPlayer::HitAttack(int _atk, int _blown, float _rotY)
+{
+	m_blown += _blown;
+
+	VECTOR knockBack = KNOCK_BACK_SPEED;
+
+	if (m_blown >= BLOWN_MAX)
+	{
+		knockBack = VScale(knockBack, 10.0f);
+		m_blown = 0;
+
+		if (m_isTransform == false)
+		{
+			m_dropCoin++;
+		}
+
+	}
+
+	//既に怯み状態なら処理をしない
+	if (m_state == STAGGER)return;
+
+	//ノックバックの速度を設定------------
+
+	//プレイヤーが目の前にいる時に進む速度
+	VECTOR defaultDir = knockBack;
+	//上記を行列に変換
+	MATRIX dir = CMyMath::GetTranslateMatrix(defaultDir);
+	//Y軸回転行列
+	MATRIX mRotY = CMyMath::GetYawMatrix(_rotY);
+	//行列の合成
+	MATRIX res = CMyMath::MatMult(mRotY, dir);
+
+	//移動をスピードに代入
+	m_speed.x = res.m[0][3];
+	m_speed.y = res.m[1][3];
+	m_speed.z = res.m[2][3];
+
+	//------------------------------------
+
+
+	//怯み状態にする
+	m_state = STAGGER;
+	//Hpを攻撃力分減らす
+	m_hp -= _atk;
 }
 
 //-----------------------
@@ -596,8 +643,17 @@ void CPlayer::AttackIn()
 		switch (m_attackNum)
 		{
 		case 0:
-			//攻撃前のアニメーション
-			RequestAnim(ANIMID_ATTACKA1_IN, 1.0f);
+
+			if (m_isTransform == true)
+			{
+				//攻撃前のアニメーション
+				RequestAnim(ANIMID_ATTACKA1_IN, 0.5f);
+			}
+			else
+			{
+				//攻撃前のアニメーション
+				RequestAnim(ANIMID_ATTACKA1_IN, 1.0f);
+			}
 
 			break;
 		case 1:

@@ -79,6 +79,9 @@ public:
 	//“–‚½‚è”»’èŒã‚Ìˆ—
 	void HitCalc(CObject* _hitObject);
 
+	//UŒ‚‚ğH‚ç‚Á‚½‚É‚·‚éˆ—
+	void HitAttack(int _atk, int _blown, float _rotY = 0.0f);
+
 	//‰ñ”ğ‚µ‚Ä‚¢‚é‚©‚ğæ“¾
 	bool GetIsDodgeroll() { return m_isDodgeroll; }
 
