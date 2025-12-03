@@ -26,7 +26,7 @@ CHpbarManager::~CHpbarManager()
 void CHpbarManager::Init(CPlayerManager* _playerManager)
 {
 	VECTOR pos[PLAYER_NUM] = {
-		{100.0f,100.0f,0.0f},
+		{315.0f,100.0f,0.0f},
 		{static_cast<float>(WINDOW_SIZE_X - 100),100.0f,0.0f},
 	};
 

@@ -24,7 +24,7 @@ static const float RADIUS = 10.0f;							//半径
 static const float DODGEROLL_SPEED = 1.5f;					//回避スピード
 static const float JUMP_SPEED = 3.0f;						//ジャンプスピード
 static const int TRANSFORM_COIN_NUM = 3;					//変身に必要なコインの数
-static const int POWER_UP_ATK = 2;							//増加する攻撃力のような
+static const int POWER_UP_ATK = 1;							//増加する攻撃力
 static const int TRANSFORM_TIME = 10 * 60;					//変身している時間
 static const float TRANSFORM_UP_SPEED = 0.3f;				//変身後のスピードアップ
 static const int BLOWN_MAX = 100;							//吹き飛び最大値
@@ -41,7 +41,7 @@ static const float ATTACK_MOVE_SPEED = 0.5f;			//攻撃時に前進する力
 static const float FIGHT_LEN = 40.0f;					//戦う距離
 static const float SHOT_SIZE = 10.0f;					//弾の大きさ
 static const float SHOT_SPEED = 3.0f;					//弾の速度
-static const int SHOT_LOST_TIME = 5 * 60;					//弾が消えるまでの時間
+static const int SHOT_LOST_TIME = 5 * 60;				//弾が消えるまでの時間
 //-----------------------------------
 
 //アニメーション一覧---------------------------
@@ -436,7 +436,7 @@ void CPlayer::HitCalc(CObject* _hitObject)
 		float rot = atan2f(shot->GetPos().x - GetCenter().x,
 			shot->GetPos().z - GetCenter().z);
 
-		CCharacterBase::HitAttack(shot->GetAtk(), 50, rot);
+		CCharacterBase::HitAttack(shot->GetAtk(), 90, rot);
 
 		//変身中の場合変身時間を減らす
 		if (m_isTransform == true)
@@ -508,9 +508,12 @@ void CPlayer::HitAttack(int _atk, int _blown, float _rotY)
 
 	//------------------------------------
 
+	if (m_isTransform == false)
+	{
+		//怯み状態にする
+		m_state = STAGGER;
+	}
 
-	//怯み状態にする
-	m_state = STAGGER;
 	//Hpを攻撃力分減らす
 	m_hp -= _atk;
 }
@@ -1164,12 +1167,6 @@ void CPlayer::Move(float _rotY)
 	}
 
 	float moveSpeed = MOVE_SPEED;
-
-	//変身していたら速度を上げる
-	//if (m_isTransform)
-	//{
-	//	moveSpeed += TRANSFORM_UP_SPEED;
-	//}
 
 	//移動ベクトル
 	VECTOR speed = { 0.0f,0.0f,0.0f };
