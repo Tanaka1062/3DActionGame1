@@ -84,7 +84,7 @@ void CBomb::Explosion()
 	//エフェクトを呼び出す
 	CEffekseerCtrl::Request(effectId, m_pos, false);
 
-	CAttackManager::Request(explosionPos, EXPLOSION_RADIUS, EXPLOSION_ATK,0, PLAYER_NONE);
+	CAttackManager::Request(explosionPos, EXPLOSION_RADIUS, EXPLOSION_ATK,100, PLAYER_NONE);
 
 	RequestAnim(ANIMID_DEFAULT, 1.0f, true);
 }

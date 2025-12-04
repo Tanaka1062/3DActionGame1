@@ -39,7 +39,7 @@ public:
 	// _lostTime	:消えるまでの時間
 	// _effectHndl	:弾のエフェクト
 	void Request(VECTOR _pos, VECTOR _rot,float _rad, float _speed, int _atk, int _lostTime,
-				tagPlayerName _name,int _effectHndl = -1);
+				tagPlayerName _name,int _effectHndl = -1,VECTOR* _targetPos = nullptr);
 
 	//弾の数を取得
 	int GetNum() { return static_cast<int>(m_shot.size());}

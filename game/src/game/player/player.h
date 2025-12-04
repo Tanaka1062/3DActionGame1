@@ -52,6 +52,7 @@ private:
 	tagWeaponId m_weaponId;			//武器のID
 	tagPlayerName m_name;			//プレイヤーの名前
 	tagHaveItemState m_itemState;	//アイテムの状態
+	VECTOR* m_targetPos;			//相手の座標ポインタ
 
 public:
 	//コンストラクタ・デストラクタ
@@ -65,7 +66,7 @@ public:
 	void Load(int _modelHndl);
 
 	//毎フレームする処理
-	void Step(float _rotY,VECTOR _targetPos, CShotManager* _shotManage);
+	void Step(float _rotY,VECTOR* _targetPos, CShotManager* _shotManage);
 
 	//描写処理
 	void Draw();
@@ -123,6 +124,9 @@ public:
 
 	//持っているアイテムの座標を取得
 	VECTOR GetItemHavePos();
+
+	//座標をアドレスを取得
+	VECTOR* GetPosPoint() { return &m_pos; }
 
 private:
 	//待機状態処理

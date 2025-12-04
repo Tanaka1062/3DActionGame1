@@ -133,15 +133,15 @@ void CPlayerManager::Step(float _rot)
 {
 	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
-		VECTOR targetPos = ZERO;
+		VECTOR* targetPos = nullptr;
 
 		switch (player_i)
 		{
 		case PLAYER_1:
-			targetPos = m_player[PLAYER_2]->GetPos();
+			targetPos = m_player[PLAYER_2]->GetPosPoint();
 			break;
 		case PLAYER_2:
-			targetPos = m_player[PLAYER_1]->GetPos();
+			targetPos = m_player[PLAYER_1]->GetPosPoint();
 			break;
 		}
 

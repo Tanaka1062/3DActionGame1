@@ -12,6 +12,8 @@ private:
 	float m_moveSpeed;			//移動スピード
 	int m_effectHndl;			//エフェクトのハンドル
 	tagPlayerName m_shotName;	//誰が弾を出したか
+	VECTOR* m_targetPos;		//ターゲットの座標ポインタ
+	bool m_isHoming;			//ホーミングしているかフラグ
 
 public:
 	//コンストラクタ・デストラクタ
@@ -44,8 +46,9 @@ public:
 	// _atk			:攻撃力
 	// _lostTime	:消えるまでの時間
 	// _effectHndl	:弾のエフェクト
+	// _targetPos	:ターゲットの座標ポインタ
 	void Request(VECTOR _pos,VECTOR _rot,float _rad,float _speed,int _atk,int _lostTime,
-		tagPlayerName _name,int _effectHndl = -1);
+		tagPlayerName _name,int _effectHndl = -1,VECTOR* _targetPos = nullptr);
 
 	//攻撃力を取得
 	int GetAtk() { return m_atk; }

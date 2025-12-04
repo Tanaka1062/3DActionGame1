@@ -40,8 +40,8 @@ static const int ATTACKB_ATK = 100;						//UŒ‚B‚ÌUŒ‚—Í
 static const float ATTACK_MOVE_SPEED = 0.5f;			//UŒ‚Žž‚É‘Oi‚·‚é—Í
 static const float FIGHT_LEN = 40.0f;					//í‚¤‹——£
 static const float SHOT_SIZE = 10.0f;					//’e‚Ì‘å‚«‚³
-static const float SHOT_SPEED = 3.0f;					//’e‚Ì‘¬“x
-static const int SHOT_LOST_TIME = 5 * 60;				//’e‚ªÁ‚¦‚é‚Ü‚Å‚ÌŽžŠÔ
+static const float SHOT_SPEED = 2.5f;					//’e‚Ì‘¬“x
+static const int SHOT_LOST_TIME = 2 * 60;				//’e‚ªÁ‚¦‚é‚Ü‚Å‚ÌŽžŠÔ
 //-----------------------------------
 
 //ƒAƒjƒ[ƒVƒ‡ƒ“ˆê——---------------------------
@@ -205,16 +205,18 @@ void CPlayer::Load(int _modelHndl)
 //-----------------------
 //–ˆƒtƒŒ[ƒ€‚·‚éˆ—
 //-----------------------
-void CPlayer::Step(float _rotY, VECTOR _targetPos, CShotManager* _shotManage)
+void CPlayer::Step(float _rotY, VECTOR* _targetPos, CShotManager* _shotManage)
 {
 	if (m_isShot == true)
 	{
-		_shotManage->Request(GetCenter(),m_rot, SHOT_SIZE, SHOT_SPEED,m_atk, SHOT_LOST_TIME,m_name);
+		_shotManage->Request(GetCenter(),m_rot, SHOT_SIZE, SHOT_SPEED,m_atk, SHOT_LOST_TIME,m_name,-1,m_targetPos);
 		m_isShot = false;
 	}
 
+	m_targetPos = _targetPos;
+
 	//ƒvƒŒƒCƒ„[“¯Žm‚Ì‹——£
-	VECTOR vLen = VSub(m_pos, _targetPos);
+	VECTOR vLen = VSub(m_pos, *m_targetPos);
 	float fLen = VSize(vLen);
 
 	//í‚¢‚Ì‹——£‚É‚È‚Á‚½‚çŒÝ‚¢‚Ì•ûŒü‚ðŒü‚­
@@ -222,7 +224,7 @@ void CPlayer::Step(float _rotY, VECTOR _targetPos, CShotManager* _shotManage)
 	{
 		if (!m_isDodgeroll)
 		{
-			float rotY1 = atan2f(m_pos.x - _targetPos.x, m_pos.z - _targetPos.z);
+			float rotY1 = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
 
 			m_rot.y = rotY1;
 		}
@@ -231,7 +233,7 @@ void CPlayer::Step(float _rotY, VECTOR _targetPos, CShotManager* _shotManage)
 	//ƒvƒŒƒCƒ„[‚ÌŒü‚«‚ð•Ï‚¦‚é
 	if (m_state == ITEM_THROW_IN)
 	{
-		float rotY = atan2f(m_pos.x - _targetPos.x, m_pos.z - _targetPos.z);
+		float rotY = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
 
 		m_rot.y = rotY;
 	}
@@ -242,7 +244,7 @@ void CPlayer::Step(float _rotY, VECTOR _targetPos, CShotManager* _shotManage)
 		{
 		case ATTACK_IN:
 		case ATTACK:
-			float rotY = atan2f(m_pos.x - _targetPos.x, m_pos.z - _targetPos.z);
+			float rotY = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
 
 			m_rot.y = rotY;
 			break;
