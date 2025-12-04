@@ -5,6 +5,8 @@
 #include "playerData.h"
 #include "../shot/shotManager.h"
 
+static const int TRANSFORM_TIME = 10 * 60;					//変身している時間
+
 //武器のID
 enum tagWeaponId
 {
@@ -127,6 +129,12 @@ public:
 
 	//座標をアドレスを取得
 	VECTOR* GetPosPoint() { return &m_pos; }
+
+	//変身時間を取得する
+	int GetTransformTimeCount() { return m_transformTimeCount; }
+
+	//変身しているかを取得する
+	bool GetIsTransform() { return m_isTransform; }
 
 private:
 	//待機状態処理

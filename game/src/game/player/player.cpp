@@ -17,7 +17,7 @@ static const char MODEL_PATH[] =
 { "data/model/player/playerTransformTest.mv1" };			//ロードするファイル名
 static const VECTOR INIT_POS = { 0.0f,1.0f,0.0f };			//初期座標
 static const float SHADOW_SIZE = 0.5f;						//丸影の大きさ
-static const int MAX_HP = 300;								//体力
+static const int MAX_HP = 400;								//体力
 static const int ATK = 20;									//攻撃力
 static const float MOVE_SPEED = 1.2f;						//移動スピード
 static const float RADIUS = 10.0f;							//半径
@@ -25,7 +25,6 @@ static const float DODGEROLL_SPEED = 1.5f;					//回避スピード
 static const float JUMP_SPEED = 3.0f;						//ジャンプスピード
 static const int TRANSFORM_COIN_NUM = 3;					//変身に必要なコインの数
 static const int POWER_UP_ATK = 1;							//増加する攻撃力
-static const int TRANSFORM_TIME = 10 * 60;					//変身している時間
 static const float TRANSFORM_UP_SPEED = 0.3f;				//変身後のスピードアップ
 static const int BLOWN_MAX = 100;							//吹き飛び最大値
 static const VECTOR KNOCK_BACK_SPEED = { 0.0f,3.0f,-0.8f };	//吹き飛ぶスピード
@@ -150,6 +149,7 @@ CPlayer::CPlayer()
 	m_padName = PAD_NONE;
 	m_weaponId = WEAPON_ID_HAND;
 	m_itemState = ITEM_STATE_NONE;
+	m_targetPos = nullptr;
 }
 
 //-----------------------
@@ -167,7 +167,7 @@ void CPlayer::Init(CAttackManager* _attackManager, tagPlayerName _name, tagPadNa
 {
 	CCharacterBase::Init(_attackManager);
 
-	m_transformTimeCount = 0;
+	m_transformTimeCount = TRANSFORM_TIME;
 	for (int keepHndl_i = 0; keepHndl_i < HNDL_NUM; keepHndl_i++)
 	{
 		m_keepHndl[keepHndl_i] = -1;
@@ -271,11 +271,11 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CShotManager* _shotManage)
 		m_hndl = m_keepHndl[TRANSFORM_HNDL];
 		
 		//変身の時間がすぎたら解除
-		m_transformTimeCount++;
-		if (m_transformTimeCount >= TRANSFORM_TIME)
+		m_transformTimeCount--;
+		if (m_transformTimeCount <= 0)
 		{
 			m_dropCoin = TRANSFORM_COIN_NUM;
-			m_transformTimeCount = 0;
+			m_transformTimeCount = TRANSFORM_TIME;
 			m_isTransform = false;
 		}
 	}
@@ -391,7 +391,7 @@ void CPlayer::HitCalc(CObject* _hitObject)
 		//変身中の場合変身時間を減らす
 		if (m_isTransform == true)
 		{
-			m_transformTimeCount += attack->GetAtk();
+			m_transformTimeCount -= attack->GetAtk();
 		}
 
 		//呼び出すエフェクトのID
@@ -1119,7 +1119,7 @@ void CPlayer::ItemThrowOut()
 void CPlayer::Stagger()
 {
 	//被弾のアニメーション
-	RequestAnim(ANIMID_HIT, 1.8f);
+	RequestAnim(ANIMID_HIT, 1.4f);
 
 	//被弾のアニメーションが終わったら戻す
 	if (GetAnimEnd() == true)

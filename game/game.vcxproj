@@ -176,6 +176,7 @@
     <ClCompile Include="src\game\ui\GetCoin\GetCoinUi.cpp" />
     <ClCompile Include="src\game\ui\hpber\hpbar.cpp" />
     <ClCompile Include="src\game\ui\hpber\hpbarManager.cpp" />
+    <ClCompile Include="src\game\ui\powerUpGauge\powerUpGouge.cpp" />
     <ClCompile Include="src\game\ui\uiManager.cpp" />
     <ClCompile Include="src\game\weapon\weapon.cpp" />
     <ClCompile Include="src\game\weapon\weaponManager.cpp" />
@@ -232,6 +233,7 @@
     <ClInclude Include="src\game\ui\GetCoin\GetCoinUi.h" />
     <ClInclude Include="src\game\ui\hpber\hpbar.h" />
     <ClInclude Include="src\game\ui\hpber\hpbarManager.h" />
+    <ClInclude Include="src\game\ui\powerUpGauge\powerUpGouge.h" />
     <ClInclude Include="src\game\ui\uiManager.h" />
     <ClInclude Include="src\game\weapon\weapon.h" />
     <ClInclude Include="src\game\weapon\weaponManager.h" />

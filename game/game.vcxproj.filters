@@ -112,6 +112,9 @@
     <Filter Include="ソース ファイル\game\item\itemObject\box">
       <UniqueIdentifier>{d6a5b4ac-a84d-4d35-a128-f43ccc23ba50}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\game\ui\powerUpGauge">
+      <UniqueIdentifier>{7524a5cd-6f67-4dad-afd1-2ec07d2be65f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\number.cpp">
@@ -269,6 +272,9 @@
     </ClCompile>
     <ClCompile Include="src\game\item\spawnItemManager.cpp">
       <Filter>ソース ファイル\game\item</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\ui\powerUpGauge\powerUpGouge.cpp">
+      <Filter>ソース ファイル\game\ui\powerUpGauge</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -433,6 +439,9 @@
     </ClInclude>
     <ClInclude Include="src\game\item\spawnItemManager.h">
       <Filter>ソース ファイル\game\item</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\ui\powerUpGauge\powerUpGouge.h">
+      <Filter>ソース ファイル\game\ui\powerUpGauge</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

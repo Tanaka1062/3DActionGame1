@@ -85,6 +85,17 @@ void CGetCoinUi::Step(tagPlayerName _playerName)
 //•`ŽÊ
 void CGetCoinUi::Draw() 
 {
+	int coinNum = 0;
+	for (int coin_i = 0; coin_i < COIN_MAX_NUM; coin_i++)
+	{
+		if (m_IsGetCoin[coin_i] == true)
+		{
+			coinNum++;
+		}
+	}
+
+	if (coinNum >= COIN_MAX_NUM)return;
+
 	DrawRotaGraph(static_cast<int>(m_pos.x - 64.0f), static_cast<int>(m_pos.y),
 		0.5f, 0.0f, m_hndl[0][m_IsGetCoin[0]], TRUE);
 	DrawRotaGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y),

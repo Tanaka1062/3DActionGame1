@@ -6,15 +6,17 @@
 #include <vector>
 #include "GetCoin/GetCoinUi.h"
 #include "../item/itemManager.h"
+#include "powerUpGauge/powerUpGouge.h"
 
 using namespace std;
 
 class CUiManager
 {
 private:
-	vector<C2DUi*> m_ui;				//UI
-	CHpbarManager m_hpbarManager;		//HPバーのマネージャー
-	CGetCoinUi m_getCoinUi[PLAYER_NUM];	//コインの取得Ui
+	vector<C2DUi*> m_ui;						//UI
+	CHpbarManager m_hpbarManager;				//HPバーのマネージャー
+	CGetCoinUi m_getCoinUi[PLAYER_NUM];			//コインの取得Ui
+	CPowerUpGouge m_powerUpGouge[PLAYER_NUM];	//パワーゲージUi
 public:
 	//コンストラクタ・デストラクタ
 	CUiManager();

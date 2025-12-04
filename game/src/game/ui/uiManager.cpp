@@ -2,10 +2,19 @@
 #include "hpber/hpbar.h"
 #include "../data.h"
 
+static const char MODEL_PATH[] =
+{ "data/graphic/ui/powerUpGauge.png" };			//ロードするファイル名
+
 static const VECTOR GET_COIN_POS[PLAYER_NUM] =
 {
-	{100.0f,200.0f,0.0f},
-	{static_cast<float>(WINDOW_SIZE_X - 100),200.0f,0.0f}
+	{115.0f,120.0f,0.0f},
+	{static_cast<float>(WINDOW_SIZE_X - 115),120.0f,0.0f}
+};
+
+static const VECTOR GET_POWER_GOUGE_POS[PLAYER_NUM] =
+{
+	{360.0f,100.0f,0.0f},
+	{static_cast<float>(WINDOW_SIZE_X - 360),100.0f,0.0f}
 };
 
 //UIの名前
@@ -37,6 +46,20 @@ void CUiManager::Init(CPlayerManager* _playerManager,
 	{
 		m_getCoinUi[getCoinUi_i].Init(GET_COIN_POS[getCoinUi_i], _itemManager);
 	}
+
+	for (int powerUpGuge_i = 0; powerUpGuge_i < PLAYER_NUM; powerUpGuge_i++)
+	{
+		VECTOR pos = ZERO;
+
+		pos = GET_POWER_GOUGE_POS[powerUpGuge_i];
+
+		m_powerUpGouge[powerUpGuge_i].Init(pos);
+
+		if (_playerManager != nullptr)
+		{
+			m_powerUpGouge[powerUpGuge_i].SetPlayer(_playerManager->GetPlayer(powerUpGuge_i));
+		}
+	}
 }
 
 //ロード
@@ -53,6 +76,12 @@ void CUiManager::Load()
 	{
 		
 	}
+
+	for (int powerUpGuge_i = 0; powerUpGuge_i < PLAYER_NUM; powerUpGuge_i++)
+	{
+		m_powerUpGouge[powerUpGuge_i].Load(MODEL_PATH);
+	}
+
 }
 
 //毎フレームする処理
@@ -76,6 +105,11 @@ void CUiManager::Step()
 	{
 		m_ui[i]->Step();
 	}
+
+	for (int powerUpGuge_i = 0; powerUpGuge_i < PLAYER_NUM; powerUpGuge_i++)
+	{
+		m_powerUpGouge[powerUpGuge_i].Step();
+	}
 }
 
 //描写
@@ -92,6 +126,12 @@ void CUiManager::Draw()
 	{
 		m_ui[i]->Draw();
 	}
+
+	for (int powerUpGuge_i = 0; powerUpGuge_i < PLAYER_NUM; powerUpGuge_i++)
+	{
+		m_powerUpGouge[powerUpGuge_i].Draw();
+	}
+
 }
 
 //破棄
@@ -111,5 +151,10 @@ void CUiManager::Exit()
 		delete m_ui[i];
 	}
 	m_ui.clear();
+
+	for (int powerUpGuge_i = 0; powerUpGuge_i < PLAYER_NUM; powerUpGuge_i++)
+	{
+		m_powerUpGouge[powerUpGuge_i].Exit();
+	}
 }
 
