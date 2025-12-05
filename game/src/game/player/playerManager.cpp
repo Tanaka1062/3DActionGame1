@@ -77,6 +77,13 @@ void CPlayerManager::Init(CAttackManager* _attackManager,
 		case PLAYER_2:
 			name = PLAYER_2;
 			break;
+		case PLAYER_3:
+			name = PLAYER_3;
+			break;
+		case PLAYER_4:
+			name = PLAYER_4;
+			break;
+
 		}
 
 		m_player[player_i]->Init(_attackManager,name, padName);
@@ -143,6 +150,13 @@ void CPlayerManager::Step(float _rot)
 		case PLAYER_2:
 			targetPos = m_player[PLAYER_1]->GetPosPoint();
 			break;
+		case PLAYER_3:
+			targetPos = m_player[PLAYER_1]->GetPosPoint();
+			break;
+		case PLAYER_4:
+			targetPos = m_player[PLAYER_2]->GetPosPoint();
+			break;
+
 		}
 
 		m_player[player_i]->Step(_rot,targetPos,m_shotManager);

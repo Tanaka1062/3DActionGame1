@@ -132,6 +132,13 @@ tagPadName CControllerManager::GetName(int _num)
 	case 1:
 		return PAD_2;
 		break;
+	case 2:
+		return PAD_3;
+		break;
+	case 3:
+		return PAD_4;
+		break;
+
 	}
 
 	return PAD_NONE;

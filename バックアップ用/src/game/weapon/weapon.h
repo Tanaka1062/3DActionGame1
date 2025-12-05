@@ -1,0 +1,25 @@
+#pragma once
+#include"../../lib/model/3DObject.h"
+
+//武器のクラス
+class CWeapon : public CObject
+{
+public:
+	//コンストラクタ・デストラクタ
+	CWeapon();
+	~CWeapon();
+
+	//初期化
+	void Init();
+
+	//モデルロード
+	void Load(int _hndl);
+
+	//毎フレームする処理
+	void Step(bool _isWeapon);
+
+	//更新処理
+	void Update(int _hndl);
+
+};
+

@@ -277,7 +277,7 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 19,
+          "DockedWidth": 24,
           "SelectedChildIndex": 1,
           "Children": [
             {
@@ -290,8 +290,7 @@
               "RelativeToolTip": "src\\game\\ui\\powerUpGauge\\powerUpGouge.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-12-04T07:55:39.951Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-04T07:55:39.951Z"
             },
             {
               "$type": "Document",
@@ -299,9 +298,9 @@
               "Title": "player.cpp",
               "DocumentMoniker": "D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\player\\player.cpp",
               "RelativeDocumentMoniker": "src\\game\\player\\player.cpp",
-              "ToolTip": "D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\player\\player.cpp*",
-              "RelativeToolTip": "src\\game\\player\\player.cpp*",
-              "ViewState": "AgIAAFEEAAAAAAAAAAAAAGEEAAAcAAAAAAAAAA==",
+              "ToolTip": "D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\player\\player.cpp",
+              "RelativeToolTip": "src\\game\\player\\player.cpp",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAAGEEAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-11-22T14:00:58.031Z",
               "EditorCaption": ""
@@ -316,8 +315,7 @@
               "RelativeToolTip": "src\\game\\player\\player.h",
               "ViewState": "AgIAACgAAAAAAAAAAAAawDgAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-11-23T14:36:09.459Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-23T14:36:09.459Z"
             },
             {
               "$type": "Document",
@@ -329,8 +327,7 @@
               "RelativeToolTip": "src\\game\\ui\\GetCoin\\GetCoinUi.cpp",
               "ViewState": "AgIAAE4AAAAAAAAAAAAAAGAAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-11-14T08:42:09.679Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-14T08:42:09.679Z"
             },
             {
               "$type": "Document",
@@ -342,8 +339,7 @@
               "RelativeToolTip": "src\\game\\ui\\powerUpGauge\\powerUpGouge.cpp",
               "ViewState": "AgIAACQAAAAAAAAAAAAAADAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-12-04T07:55:33.255Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-04T07:55:33.255Z"
             },
             {
               "$type": "Document",
@@ -355,8 +351,7 @@
               "RelativeToolTip": "src\\game\\player\\playerManager.cpp",
               "ViewState": "AgIAALQAAAAAAAAAAAAAAJAAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-11-18T08:12:38.019Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-18T08:12:38.019Z"
             },
             {
               "$type": "Document",
@@ -366,8 +361,7 @@
               "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.43.34808\\include\\vector",
               "ViewState": "AgIAAGkHAAAAAAAAAAApwHoHAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-12-04T08:49:53.985Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-04T08:49:53.985Z"
             },
             {
               "$type": "Document",
@@ -379,8 +373,7 @@
               "RelativeToolTip": "src\\game\\ui\\hpber\\hpbarManager.h",
               "ViewState": "AgIAAAkAAAAAAAAAAAAAABQAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-10-30T06:44:55.287Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-30T06:44:55.287Z"
             },
             {
               "$type": "Document",
@@ -392,8 +385,7 @@
               "RelativeToolTip": "src\\game\\ui\\GetCoin\\GetCoinUi.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-11-14T08:41:59.612Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-14T08:41:59.612Z"
             },
             {
               "$type": "Document",
@@ -405,8 +397,7 @@
               "RelativeToolTip": "src\\game\\player\\playerManager.h",
               "ViewState": "AgIAABUAAAAAAAAAAAApwCYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-11-14T07:18:09.152Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-14T07:18:09.152Z"
             },
             {
               "$type": "Document",
@@ -418,8 +409,7 @@
               "RelativeToolTip": "src\\game\\ui\\hpber\\hpbar.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-10-30T05:15:53.26Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-30T05:15:53.26Z"
             },
             {
               "$type": "Document",
@@ -710,7 +700,7 @@
           ]
         },
         {
-          "DockedWidth": 23,
+          "DockedWidth": 18,
           "SelectedChildIndex": 2,
           "Children": [
             {
@@ -762,8 +752,7 @@
               "RelativeToolTip": "src\\game\\ui\\uiManager.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-11-22T14:24:51.324Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-22T14:24:51.324Z"
             },
             {
               "$type": "Document",
@@ -775,8 +764,7 @@
               "RelativeToolTip": "src\\game\\ui\\uiManager.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-11-17T02:12:35.493Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-17T02:12:35.493Z"
             },
             {
               "$type": "Document",
@@ -788,8 +776,7 @@
               "RelativeToolTip": "src\\game\\ui\\hpber\\hpbarManager.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-11-21T10:37:20.079Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-21T10:37:20.079Z"
             },
             {
               "$type": "Document",
@@ -801,8 +788,7 @@
               "RelativeToolTip": "src\\game\\ui\\hpber\\hpbar.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAD8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-10-30T05:15:33.652Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-30T05:15:33.652Z"
             },
             {
               "$type": "Document",
