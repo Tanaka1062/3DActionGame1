@@ -4,14 +4,18 @@
 
 enum tagModelName					//モデル一覧
 {
-	MODEL_PLAYER1,					//プレイヤー１のモデル
-	MODEL_PLAYER2,					//プレイヤー２のモデル
+	MODEL_PLAYER1,					//プレイヤー1のモデル
+	MODEL_PLAYER2,					//プレイヤー2のモデル
+	MODEL_PLAYER3,					//プレイヤー3のモデル
+	MODEL_PLAYER4,					//プレイヤー4のモデル
 
 	MODEL_NUM,						//モデルの数
 };
 
 static const char* MODEL_PATH[PLAYER_NUM] =
 { "data/model/player/playerTest6-1.mv1" ,
+  "data/model/player/playerTest6-2.mv1" ,
+  "data/model/player/playerTest6-1.mv1" ,
   "data/model/player/playerTest6-2.mv1" ,};			//ロードするファイル名
 
 static const char FRAME_PATH[] =
@@ -142,21 +146,41 @@ void CPlayerManager::Step(float _rot)
 	{
 		VECTOR* targetPos = nullptr;
 
-		switch (player_i)
-		{
-		case PLAYER_1:
-			targetPos = m_player[PLAYER_2]->GetPosPoint();
-			break;
-		case PLAYER_2:
-			targetPos = m_player[PLAYER_1]->GetPosPoint();
-			break;
-		case PLAYER_3:
-			targetPos = m_player[PLAYER_1]->GetPosPoint();
-			break;
-		case PLAYER_4:
-			targetPos = m_player[PLAYER_2]->GetPosPoint();
-			break;
+		//switch (player_i)
+		//{
+		//case PLAYER_1:
+		//	targetPos = m_player[PLAYER_2]->GetPosPoint();
+		//	break;
+		//case PLAYER_2:
+		//	targetPos = m_player[PLAYER_1]->GetPosPoint();
+		//	break;
+		//case PLAYER_3:
+		//	targetPos = m_player[PLAYER_1]->GetPosPoint();
+		//	break;
+		//case PLAYER_4:
+		//	targetPos = m_player[PLAYER_2]->GetPosPoint();
+		//	break;
 
+		//}
+
+		//一番近いプレイヤー同士の距離
+		float playerLen = 0.0f;
+		//一番近いプレイヤーの座標を求める
+		for (int target_i = 0; target_i < m_player.size(); target_i++)
+		{
+			//同じプレイヤーはスキップする
+			if (player_i == target_i)continue;
+
+			//プレイヤー同士の距離保存用
+			float len = VSize(VSub(m_player[player_i]->GetPos(), m_player[target_i]->GetPos()));
+
+			//今の距離より近かったらターゲットの座標を変更
+			if (playerLen >= len || playerLen == 0.0f)
+			{
+				playerLen = len;
+
+				targetPos = m_player[target_i]->GetPosPoint();
+			}
 		}
 
 		m_player[player_i]->Step(_rot,targetPos,m_shotManager);
@@ -206,3 +230,27 @@ void CPlayerManager::Exit()
 	m_modelHndl.clear();
 }
 
+//------------------------
+//ゲームが終わったかを取得
+//------------------------
+bool CPlayerManager::GetIsEnd()
+{
+	//死んだプレイヤーの数
+	int playerDieNum = 0;
+	for (int player_i = 0; player_i < m_player.size(); player_i++)
+	{
+		//死んでいるプレイヤーを確認
+		if (m_player[player_i]->GetState() == DIE)
+		{
+			playerDieNum++;
+		}
+	}
+
+	//一人以外死んでいたらゲームを終わる
+	if (playerDieNum == PLAYER_NUM - 1)
+	{
+		return true;
+	}
+
+	return false;
+}

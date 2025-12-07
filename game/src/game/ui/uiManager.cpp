@@ -7,8 +7,11 @@ static const char MODEL_PATH[] =
 
 static const VECTOR GET_COIN_POS[PLAYER_NUM] =
 {
+	{115.0f,60.0f,0.0f},
+	{static_cast<float>(WINDOW_SIZE_X - 115),60.0f,0.0f},
 	{115.0f,120.0f,0.0f},
-	{static_cast<float>(WINDOW_SIZE_X - 115),120.0f,0.0f}
+	{static_cast<float>(WINDOW_SIZE_X - 115),120.0f,0.0f},
+
 };
 
 static const VECTOR GET_POWER_GOUGE_POS[PLAYER_NUM] =
@@ -97,6 +100,12 @@ void CUiManager::Step()
 			break;
 		case 1:
 			m_getCoinUi[getCoinUi_i].Step(PLAYER_2);
+			break;
+		case 2:
+			m_getCoinUi[getCoinUi_i].Step(PLAYER_3);
+			break;
+		case 3:
+			m_getCoinUi[getCoinUi_i].Step(PLAYER_4);
 			break;
 		}
 	}

@@ -47,13 +47,16 @@ void CHpbar::Draw(float _size)
 	switch (m_player->GetPlayerName())
 	{
 	case PLAYER_1:
-		DrawBox(static_cast<int>(m_pos.x + (HP_BAR_LEN * 0.5f)), static_cast<int>(m_pos.y + 22),
-			static_cast<int>((m_pos.x + (HP_BAR_LEN * 0.5f)) - m_hp), static_cast<int>(m_pos.y - 22), GetColor(0, 255, 0), TRUE);
+	case PLAYER_3:
+		DrawBox(static_cast<int>(m_pos.x + (HP_BAR_LEN * 0.5f)), static_cast<int>(m_pos.y + 10),
+			static_cast<int>((m_pos.x + (HP_BAR_LEN * 0.5f)) - m_hp), static_cast<int>(m_pos.y - 10), GetColor(0, 255, 0), TRUE);
 		break;
 	case PLAYER_2:
-		DrawBox(static_cast<int>(m_pos.x - (HP_BAR_LEN * 0.5f)), static_cast<int>(m_pos.y + 22),
-			static_cast<int>((m_pos.x - (HP_BAR_LEN * 0.5f)) + m_hp), static_cast<int>(m_pos.y - 22), GetColor(0, 255, 0), TRUE);
+	case PLAYER_4:
+		DrawBox(static_cast<int>(m_pos.x - (HP_BAR_LEN * 0.5f)), static_cast<int>(m_pos.y + 10),
+			static_cast<int>((m_pos.x - (HP_BAR_LEN * 0.5f)) + m_hp), static_cast<int>(m_pos.y - 10), GetColor(0, 255, 0), TRUE);
 		break;
+
 	}
 	
 

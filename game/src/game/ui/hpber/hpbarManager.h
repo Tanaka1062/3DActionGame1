@@ -13,6 +13,8 @@ private:
 	{
 		PLAYER1_NAME_UI,
 		PLAYER2_NAME_UI,
+		PLAYER3_NAME_UI,
+		PLAYER4_NAME_UI,
 		VS_UI,
 
 		UI_NUM,

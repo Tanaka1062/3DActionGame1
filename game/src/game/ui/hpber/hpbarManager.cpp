@@ -26,8 +26,11 @@ CHpbarManager::~CHpbarManager()
 void CHpbarManager::Init(CPlayerManager* _playerManager)
 {
 	VECTOR pos[PLAYER_NUM] = {
-		{315.0f,60.0f,0.0f},
-		{static_cast<float>(WINDOW_SIZE_X - 315),60.0f,0.0f},
+		{315.0f,30.0f,0.0f},
+		{static_cast<float>(WINDOW_SIZE_X - 315),30.0f,0.0f},
+		{315.0f,90.0f,0.0f},
+		{static_cast<float>(WINDOW_SIZE_X - 315),90.0f,0.0f},
+
 	};
 
 	for (int i = 0; i < PLAYER_NUM; i++)
@@ -50,6 +53,12 @@ void CHpbarManager::Init(CPlayerManager* _playerManager)
 			break;
 		case PLAYER2_NAME_UI:
 			uiPos = pos[1];
+			break;
+		case PLAYER3_NAME_UI:
+			uiPos = pos[2];
+			break;
+		case PLAYER4_NAME_UI:
+			uiPos = pos[3];
 			break;
 		case VS_UI:
 			uiPos.x = WINDOW_SIZE_X * 0.5f;
@@ -75,6 +84,9 @@ void CHpbarManager::Load()
 	{
 		"data/graphic/ui/player1Name.png",
 		"data/graphic/ui/player2Name.png",
+		"data/graphic/ui/player3Name.png",
+		"data/graphic/ui/player4Name.png",
+
 		"data/graphic/ui/vs.png",
 
 	};			

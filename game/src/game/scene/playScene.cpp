@@ -115,8 +115,7 @@ void CPlayScene::Step()
 	m_camera.Update(ZERO);
 
 	if (CKeyInput::IsTrg(KEY_SELECT) == true ||
-		m_playerManager.GetPlayer(0)->GetActive() == false ||
-		m_playerManager.GetPlayer(1)->GetActive() == false)
+		m_playerManager.GetIsEnd() == true)
 	{
 		m_state = END;
 	}

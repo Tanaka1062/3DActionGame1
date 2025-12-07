@@ -71,9 +71,12 @@ void CSelectScene::Load()
 //---------------------------
 void CSelectScene::Step()
 {
+	//コントローラーをセット
+	CControllerManager::SetId();
+
 	//スペースで終わる
 	if (CKeyInput::IsTrg(KEY_SELECT) ||
-		CControllerManager::SetId() == true)
+		CControllerManager::IsAllSetId() == true)
 	{
 		m_state = END;
 	}

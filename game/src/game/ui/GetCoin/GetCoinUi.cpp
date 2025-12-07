@@ -11,7 +11,7 @@ static const char* GRAPHIC_PATH[COIN_MAX_NUM] =		//ロードするファイル名
 
 static const int GRAPHIC_NUM_X = 2;
 static const int GRAPHIC_NUM_Y = 1;
-static const int GRAPHIC_SIZE = 128;
+static const int GRAPHIC_SIZE = 32;
 
 CGetCoinUi::CGetCoinUi()
 {
@@ -96,11 +96,11 @@ void CGetCoinUi::Draw()
 
 	if (coinNum >= COIN_MAX_NUM)return;
 
-	DrawRotaGraph(static_cast<int>(m_pos.x - 64.0f), static_cast<int>(m_pos.y),
+	DrawRotaGraph(static_cast<int>(m_pos.x - GRAPHIC_SIZE), static_cast<int>(m_pos.y),
 		0.5f, 0.0f, m_hndl[0][m_IsGetCoin[0]], TRUE);
 	DrawRotaGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y),
 		0.5f, 0.0f, m_hndl[1][m_IsGetCoin[1]], TRUE);
-	DrawRotaGraph(static_cast<int>(m_pos.x + 64.0f), static_cast<int>(m_pos.y),
+	DrawRotaGraph(static_cast<int>(m_pos.x + GRAPHIC_SIZE), static_cast<int>(m_pos.y),
 		0.5f, 0.0f, m_hndl[2][m_IsGetCoin[2]], TRUE);
 
 }

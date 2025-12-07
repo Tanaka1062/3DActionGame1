@@ -47,6 +47,9 @@ public:
 	//失敗したらIDを設定せずにfalseを返す
 	static bool SetId();
 
+	//コントローラーが全部接続されているかどうか
+	static bool IsAllSetId();
+
 	//コントローラーの名前を取得
 	static tagPadName GetName(int _num);
 

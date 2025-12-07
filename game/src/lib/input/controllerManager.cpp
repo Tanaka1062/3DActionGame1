@@ -120,6 +120,30 @@ bool CControllerManager::SetId()
 }
 
 //-------------------------------
+//コントローラーが全部接続されているかどうか
+//-------------------------------
+bool CControllerManager::IsAllSetId()
+{
+	//idをセットされているコントローラーの数
+	int setIdPadNum = 0;
+	for (int controller_i = 0; controller_i < PAD_NUM; controller_i++)
+	{
+		if (m_controller[controller_i].GetId() != -1)
+		{
+			setIdPadNum++;
+		}
+
+	}
+
+	if (setIdPadNum == PAD_NUM)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+//-------------------------------
 //	コントローラーの名前を取得
 //-------------------------------
 tagPadName CControllerManager::GetName(int _num)
