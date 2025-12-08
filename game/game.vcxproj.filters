@@ -100,9 +100,6 @@
     <Filter Include="ソース ファイル\game\item\powerCoin">
       <UniqueIdentifier>{f33fd6dd-0e9b-4b2f-b3c8-c5d7246b9087}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\game\ui\GetCoin">
-      <UniqueIdentifier>{62056f05-cb4f-4e0f-a4c8-9b6e16b40271}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\game\item\itemObject">
       <UniqueIdentifier>{ac5ab69d-ed6f-4446-8baa-da38515068cb}</UniqueIdentifier>
     </Filter>
@@ -254,9 +251,6 @@
     </ClCompile>
     <ClCompile Include="src\game\item\powerCoin\powerCoinManager.cpp">
       <Filter>ソース ファイル\game\item\powerCoin</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\ui\GetCoin\GetCoinUi.cpp">
-      <Filter>ソース ファイル\game\ui\GetCoin</Filter>
     </ClCompile>
     <ClCompile Include="src\game\item\itemObject\itemObjectBase.cpp">
       <Filter>ソース ファイル\game\item\itemObject</Filter>
@@ -421,9 +415,6 @@
     </ClInclude>
     <ClInclude Include="src\game\player\playerData.h">
       <Filter>ソース ファイル\game\player</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\ui\GetCoin\GetCoinUi.h">
-      <Filter>ソース ファイル\game\ui\GetCoin</Filter>
     </ClInclude>
     <ClInclude Include="src\game\item\itemObject\itemObjectBase.h">
       <Filter>ソース ファイル\game\item\itemObject</Filter>

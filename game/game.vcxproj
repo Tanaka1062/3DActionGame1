@@ -173,7 +173,6 @@
     <ClCompile Include="src\game\sky\sky.cpp" />
     <ClCompile Include="src\game\system\effectData\effectData.cpp" />
     <ClCompile Include="src\game\system\soundManager.cpp" />
-    <ClCompile Include="src\game\ui\GetCoin\GetCoinUi.cpp" />
     <ClCompile Include="src\game\ui\hpber\hpbar.cpp" />
     <ClCompile Include="src\game\ui\hpber\hpbarManager.cpp" />
     <ClCompile Include="src\game\ui\powerUpGauge\powerUpGouge.cpp" />
@@ -230,7 +229,6 @@
     <ClInclude Include="src\game\sky\sky.h" />
     <ClInclude Include="src\game\system\effectData\effectData.h" />
     <ClInclude Include="src\game\system\soundManager.h" />
-    <ClInclude Include="src\game\ui\GetCoin\GetCoinUi.h" />
     <ClInclude Include="src\game\ui\hpber\hpbar.h" />
     <ClInclude Include="src\game\ui\hpber\hpbarManager.h" />
     <ClInclude Include="src\game\ui\powerUpGauge\powerUpGouge.h" />

@@ -43,24 +43,8 @@ void CPowerUpGouge::Draw(float _size)
 
 	if (m_player == nullptr)return;
 
-	if (m_player->GetIsTransform() == false)return;
 
-	C2DUi::Draw(_size);
-
-	switch (m_player->GetPlayerName())
-	{
-	case PLAYER_1:
-	case PLAYER_3:
-		DrawBox(static_cast<int>(m_pos.x + (POWER_GOUGE_LEN * 0.5f)), static_cast<int>(m_pos.y + 10),
-			static_cast<int>((m_pos.x + (POWER_GOUGE_LEN * 0.5f)) - m_powerUp), static_cast<int>(m_pos.y - 10), GetColor(255, 165, 0), TRUE);
-		break;
-	case PLAYER_2:
-	case PLAYER_4:
-		DrawBox(static_cast<int>(m_pos.x - (POWER_GOUGE_LEN * 0.5f)), static_cast<int>(m_pos.y + 10),
-			static_cast<int>((m_pos.x - (POWER_GOUGE_LEN * 0.5f)) + m_powerUp), static_cast<int>(m_pos.y - 10), GetColor(255, 165, 0), TRUE);
-		break;
-	}
-
+	DrawFormatString(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y), GetColor(255, 0, 0), "‚¨‹à%d", m_player->GetMoney());
 
 
 }

@@ -4,7 +4,6 @@
 #include "../player/playerManager.h"
 #include <iostream>
 #include <vector>
-#include "GetCoin/GetCoinUi.h"
 #include "../item/itemManager.h"
 #include "powerUpGauge/powerUpGouge.h"
 
@@ -15,7 +14,6 @@ class CUiManager
 private:
 	vector<C2DUi*> m_ui;						//UI
 	CHpbarManager m_hpbarManager;				//HPバーのマネージャー
-	CGetCoinUi m_getCoinUi[PLAYER_NUM];			//コインの取得Ui
 	CPowerUpGouge m_powerUpGouge[PLAYER_NUM];	//パワーゲージUi
 public:
 	//コンストラクタ・デストラクタ

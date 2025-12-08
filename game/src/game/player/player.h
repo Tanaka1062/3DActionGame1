@@ -48,8 +48,8 @@ private:
 	bool m_isTransform;				//変身しているかフラグ
 	bool m_isShot;					//弾を撃っているかフラグ
 	int m_attackNum;				//攻撃の番号
-	int m_powerUp;					//パワーアップ
 	float m_dodgerollRotY;			//回避時の角度
+	int m_money;					//お金
 	tagPadName m_padName;			//コントローラーの名前
 	tagWeaponId m_weaponId;			//武器のID
 	tagPlayerName m_name;			//プレイヤーの名前
@@ -85,6 +85,9 @@ public:
 	//攻撃を食らった時にする処理
 	void HitAttack(int _atk, int _blown, float _rotY = 0.0f);
 
+	//お金を減らす
+	bool ItemBuy(int _subMoney);
+
 	//回避しているかを取得
 	bool GetIsDodgeroll() { return m_isDodgeroll; }
 
@@ -119,10 +122,11 @@ public:
 	//体力の最大値を取得
 	int GetHpMax() { return m_maxHp; }
 
-	//パワーアップを増やす
-	void AddPowerUp() { m_powerUp++; }
-	//パワーアップを減らす
-	void SubPowerUp() { m_powerUp--; }
+	//お金を取得
+	int GetMoney() { return m_money; }
+
+	//お金を増やす
+	void AddMoney(int _addMoney) { m_money += _addMoney; }
 
 	//持っているアイテムの座標を取得
 	VECTOR GetItemHavePos();

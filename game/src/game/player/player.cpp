@@ -28,7 +28,7 @@ static const int POWER_UP_ATK = 1;							//増加する攻撃力
 static const float TRANSFORM_UP_SPEED = 0.3f;				//変身後のスピードアップ
 static const int BLOWN_MAX = 100;							//吹き飛び最大値
 static const VECTOR KNOCK_BACK_SPEED = { 0.0f,3.0f,-0.8f };	//吹き飛ぶスピード
-
+static const int INIT_MONEY = 3;							//最初の所持金
 //----------------------------------------------
 
 //攻撃関連---------------------------
@@ -144,7 +144,7 @@ CPlayer::CPlayer()
 	m_isTransform = false;
 	m_isShot = false;
 	m_attackNum = ATTACK_NONE;
-	m_powerUp = 0;
+	m_money = INIT_MONEY;
 	m_dodgerollRotY = 0.0f;
 	m_padName = PAD_NONE;
 	m_weaponId = WEAPON_ID_HAND;
@@ -182,7 +182,7 @@ void CPlayer::Init(CAttackManager* _attackManager, tagPlayerName _name, tagPadNa
 	m_isTransform = false;
 	m_isShot = false;
 	m_attackNum = ATTACK_NONE;
-	m_powerUp = 0;
+	m_money = INIT_MONEY;
 	m_padName = _padName;
 	m_dodgerollRotY = 0.0f;
 	m_weaponId = WEAPON_ID_HAND;
@@ -249,20 +249,6 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CShotManager* _shotManage)
 			m_rot.y = rotY;
 			break;
 		}
-	}
-
-	//攻撃力の上昇
-	m_atk = ATK + (m_powerUp * POWER_UP_ATK);
-
-	//パワーアップが増えすぎないように
-	if (m_powerUp >= TRANSFORM_COIN_NUM)
-	{
-		m_powerUp = TRANSFORM_COIN_NUM;
-		m_isTransform = true;
-	}
-	else
-	{
-		m_isTransform = false;
 	}
 
 	//変身中は見た目を変える
@@ -518,6 +504,20 @@ void CPlayer::HitAttack(int _atk, int _blown, float _rotY)
 
 	//Hpを攻撃力分減らす
 	m_hp -= _atk;
+}
+
+//お金を減らす
+bool CPlayer::ItemBuy(int _subMoney)
+{
+	//消費量が今のお金より少なかったら購入しない
+	if (m_money < _subMoney)
+	{
+		return false;
+	}
+
+	m_money -= _subMoney;
+
+	return true;
 }
 
 //-----------------------

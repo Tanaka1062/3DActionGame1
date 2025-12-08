@@ -214,7 +214,6 @@ void CSpawnItemManager::Step()
 				if (player->GetDropCoin() == COIN_MAX_NUM)
 				{
 					coin->Delete();
-					player->SubPowerUp();
 					break;
 				}
 
@@ -230,7 +229,6 @@ void CSpawnItemManager::Step()
 					rotY += radian;
 
 					coin->Drop(player->GetCenter(), rotY);
-					player->SubPowerUp();
 					break;
 				}
 			}

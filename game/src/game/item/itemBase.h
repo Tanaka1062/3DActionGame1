@@ -25,6 +25,8 @@ class CItemBase :public CActor
 {
 protected:
 	bool m_isSpawn;			//スポーン可能かフラグ
+	bool m_isBuy;			//購入されているか
+	int m_cost;				//価格
 	CShadow m_shadow;		//丸影のクラス
 	tagItemType m_itemType;	//アイテムのタイプ
 	tagItemState m_state;	//状態
@@ -68,6 +70,9 @@ public:
 
 	//状態を取得
 	tagItemState GetState() { return m_state; }
+
+	//購入されているかどうかを設定
+	void SetIsBuy(bool _isBuy) { m_isBuy = _isBuy; }
 };
 
 

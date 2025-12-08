@@ -4,6 +4,7 @@
 static const float DROP_SPEED = 14.0f;			//飛ぶスピード
 static const float DROP_JUMP = 7.0f;			//上に飛ぶ力
 static const float ROT_SPEED = 0.05f;			//回転速度
+static const int ADD_MONEY = 1;					//増えるお金の量
 
 CPowerCoin::CPowerCoin()
 {
@@ -96,7 +97,7 @@ void CPowerCoin::HitCalc(CObject* _hitObject)
 		player = dynamic_cast<CPlayer*>(_hitObject);
 
 		//プレイヤーをパワーアップさせる
-		player->AddPowerUp();
+		player->AddMoney(ADD_MONEY);
 
 		m_isActive = false;
 		m_playerName = player->GetPlayerName();

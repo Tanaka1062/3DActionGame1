@@ -160,8 +160,6 @@ void CPowerCoinManager::Step()
 				if (player->GetDropCoin() == COIN_NUM)
 				{
 					m_powerCoin[powerCoin_i]->Delete();
-					player->SubPowerUp();
-					break;
 				}
 
 				//プレイヤーの持っているコインがある場合落とす
@@ -176,7 +174,6 @@ void CPowerCoinManager::Step()
 					rotY += radian;
 
 					m_powerCoin[powerCoin_i]->Drop(player->GetCenter(),rotY);
-					player->SubPowerUp();
 					break;
 				}
 			}

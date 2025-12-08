@@ -16,8 +16,10 @@ static const VECTOR GET_COIN_POS[PLAYER_NUM] =
 
 static const VECTOR GET_POWER_GOUGE_POS[PLAYER_NUM] =
 {
-	{360.0f,100.0f,0.0f},
-	{static_cast<float>(WINDOW_SIZE_X - 360),100.0f,0.0f}
+	{360.0f,60.0f,0.0f},
+	{static_cast<float>(WINDOW_SIZE_X - 360),60.0f,0.0f},
+	{360.0f,120.0f,0.0f},
+	{static_cast<float>(WINDOW_SIZE_X - 360),120.0f,0.0f}
 };
 
 //UI‚Ì–¼‘O
@@ -45,10 +47,6 @@ void CUiManager::Init(CPlayerManager* _playerManager,
 {
 	m_hpbarManager.Init(_playerManager);
 
-	for (int getCoinUi_i = 0; getCoinUi_i < PLAYER_NUM; getCoinUi_i++)
-	{
-		m_getCoinUi[getCoinUi_i].Init(GET_COIN_POS[getCoinUi_i], _itemManager);
-	}
 
 	for (int powerUpGuge_i = 0; powerUpGuge_i < PLAYER_NUM; powerUpGuge_i++)
 	{
@@ -70,11 +68,6 @@ void CUiManager::Load()
 {
 	m_hpbarManager.Load();
 
-	for (int getCoinUi_i = 0; getCoinUi_i < PLAYER_NUM; getCoinUi_i++)
-	{
-		m_getCoinUi[getCoinUi_i].Load();
-	}
-
 	for (int i = 0; i < m_ui.size(); i++)
 	{
 		
@@ -91,24 +84,6 @@ void CUiManager::Load()
 void CUiManager::Step()
 {
 	m_hpbarManager.Step();
-	for (int getCoinUi_i = 0; getCoinUi_i < PLAYER_NUM; getCoinUi_i++)
-	{
-		switch (getCoinUi_i)
-		{
-		case 0:
-			m_getCoinUi[getCoinUi_i].Step(PLAYER_1);
-			break;
-		case 1:
-			m_getCoinUi[getCoinUi_i].Step(PLAYER_2);
-			break;
-		case 2:
-			m_getCoinUi[getCoinUi_i].Step(PLAYER_3);
-			break;
-		case 3:
-			m_getCoinUi[getCoinUi_i].Step(PLAYER_4);
-			break;
-		}
-	}
 
 	for (int i = 0; i < m_ui.size(); i++)
 	{
@@ -126,11 +101,6 @@ void CUiManager::Draw()
 {
 	m_hpbarManager.Draw();
 
-	for (int getCoinUi_i = 0; getCoinUi_i < PLAYER_NUM; getCoinUi_i++)
-	{
-		m_getCoinUi[getCoinUi_i].Draw();
-	}
-
 	for (int i = 0; i < m_ui.size(); i++)
 	{
 		m_ui[i]->Draw();
@@ -147,11 +117,6 @@ void CUiManager::Draw()
 void CUiManager::Exit()
 {
 	m_hpbarManager.Exit();
-
-	for (int getCoinUi_i = 0; getCoinUi_i < PLAYER_NUM; getCoinUi_i++)
-	{
-		m_getCoinUi[getCoinUi_i].Exit();
-	}
 
 	for (int i = 0; i < m_ui.size(); i++)
 	{

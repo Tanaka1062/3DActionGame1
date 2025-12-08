@@ -136,12 +136,33 @@ void CItemObjectBase::HitCalc(CObject* _hitObject)
 		//プレイヤーがアイテムを取ろうとしていたらする処理
 		if (player->GetItemState() == ITEM_STATE_PICK_UP)
 		{
-			//誰にも持たれていなかったら持ち上げられる
+			//誰にも持たれていなかったら購入できる
 			if (m_owner == nullptr)
 			{
-				m_isLift = true;
-				m_owner = player;
-				player->SetItemState(ITEM_STATE_GET);
+				bool isPickUp = false;
+
+				if (m_isBuy == false)
+				{
+					//お金が足りたら持ち上げれる
+					if (player->ItemBuy(m_cost) == true)
+					{
+						isPickUp = true;
+					}
+				}
+				else
+				{
+					isPickUp = true;
+
+				}
+
+				if (isPickUp == true)
+				{
+					m_isBuy = true;
+					m_isLift = true;
+					m_owner = player;
+					player->SetItemState(ITEM_STATE_GET);
+				}
+
 			}
 		}
 

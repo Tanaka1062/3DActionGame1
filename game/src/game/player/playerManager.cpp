@@ -15,8 +15,8 @@ enum tagModelName					//モデル一覧
 static const char* MODEL_PATH[PLAYER_NUM] =
 { "data/model/player/playerTest6-1.mv1" ,
   "data/model/player/playerTest6-2.mv1" ,
-  "data/model/player/playerTest6-1.mv1" ,
-  "data/model/player/playerTest6-2.mv1" ,};			//ロードするファイル名
+  "data/model/player/playerTest6-3.mv1" ,
+  "data/model/player/playerTest6-4.mv1" ,};			//ロードするファイル名
 
 static const char FRAME_PATH[] =
 { "data/model/map/TestMap6Frame.mv1" };			//ロードするファイル名
@@ -123,11 +123,17 @@ void CPlayerManager::Load()
 		//スポーン位置をセット
 		switch (i)
 		{
-		case 0:
+		case PLAYER_1:
 			start = MV1GetFramePosition(frameHndl, 1);
 			break;
-		case 1:
+		case PLAYER_2:
 			start = MV1GetFramePosition(frameHndl, 3);
+			break;
+		case PLAYER_3:
+			start = MV1GetFramePosition(frameHndl, 31);
+			break;
+		case PLAYER_4:
+			start = MV1GetFramePosition(frameHndl, 33);
 			break;
 		}
 
@@ -145,23 +151,6 @@ void CPlayerManager::Step(float _rot)
 	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
 		VECTOR* targetPos = nullptr;
-
-		//switch (player_i)
-		//{
-		//case PLAYER_1:
-		//	targetPos = m_player[PLAYER_2]->GetPosPoint();
-		//	break;
-		//case PLAYER_2:
-		//	targetPos = m_player[PLAYER_1]->GetPosPoint();
-		//	break;
-		//case PLAYER_3:
-		//	targetPos = m_player[PLAYER_1]->GetPosPoint();
-		//	break;
-		//case PLAYER_4:
-		//	targetPos = m_player[PLAYER_2]->GetPosPoint();
-		//	break;
-
-		//}
 
 		//一番近いプレイヤー同士の距離
 		float playerLen = 0.0f;
