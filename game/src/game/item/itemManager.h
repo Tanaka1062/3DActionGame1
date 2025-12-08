@@ -4,7 +4,7 @@
 #include "itemBase.h"
 #include "../data.h"
 #include "../player/playerManager.h"
-#include "powerCoin/powerCoin.h"
+#include "coin/coin.h"
 #include "itemObject/box/box.h"
 #include "mapItemManager.h"
 #include "spawnItemManager.h"
@@ -44,7 +44,7 @@ public:
 	CItemBase* GetItem(int _num);
 
 	//コインのアドレスを取得
-	CPowerCoin* GetCoin(int _num);
+	CCoin* GetCoin(int _num);
 
 };
 

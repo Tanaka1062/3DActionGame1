@@ -97,9 +97,6 @@
     <Filter Include="ソース ファイル\game\shadow">
       <UniqueIdentifier>{8f9b0397-0895-49dc-a379-015a6b7b24ae}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\game\item\powerCoin">
-      <UniqueIdentifier>{f33fd6dd-0e9b-4b2f-b3c8-c5d7246b9087}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\game\item\itemObject">
       <UniqueIdentifier>{ac5ab69d-ed6f-4446-8baa-da38515068cb}</UniqueIdentifier>
     </Filter>
@@ -111,6 +108,15 @@
     </Filter>
     <Filter Include="ソース ファイル\game\ui\powerUpGauge">
       <UniqueIdentifier>{7524a5cd-6f67-4dad-afd1-2ec07d2be65f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\game\gameTime">
+      <UniqueIdentifier>{7b7bae07-2f0a-4cb1-a7d0-4ced597b9732}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\game\ui\time">
+      <UniqueIdentifier>{f2f40382-45e1-4bba-bb1f-7aa400de783d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\game\item\coin">
+      <UniqueIdentifier>{f33fd6dd-0e9b-4b2f-b3c8-c5d7246b9087}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -246,12 +252,6 @@
     <ClCompile Include="src\game\shadow\shadow.cpp">
       <Filter>ソース ファイル\game\shadow</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\item\powerCoin\powerCoin.cpp">
-      <Filter>ソース ファイル\game\item\powerCoin</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\item\powerCoin\powerCoinManager.cpp">
-      <Filter>ソース ファイル\game\item\powerCoin</Filter>
-    </ClCompile>
     <ClCompile Include="src\game\item\itemObject\itemObjectBase.cpp">
       <Filter>ソース ファイル\game\item\itemObject</Filter>
     </ClCompile>
@@ -269,6 +269,18 @@
     </ClCompile>
     <ClCompile Include="src\game\ui\powerUpGauge\powerUpGouge.cpp">
       <Filter>ソース ファイル\game\ui\powerUpGauge</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\gameTime\gameTime.cpp">
+      <Filter>ソース ファイル\game\gameTime</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\ui\time\timeUi.cpp">
+      <Filter>ソース ファイル\game\ui\time</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\item\coin\coin.cpp">
+      <Filter>ソース ファイル\game\item\coin</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\item\coin\coinManager.cpp">
+      <Filter>ソース ファイル\game\item\coin</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -322,9 +334,6 @@
     </ClInclude>
     <ClInclude Include="src\game\sky\sky.h">
       <Filter>ソース ファイル\game\sky</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\map\map.h">
-      <Filter>ソース ファイル\game\map</Filter>
     </ClInclude>
     <ClInclude Include="src\game\character\characterBase.h">
       <Filter>ソース ファイル\game\character</Filter>
@@ -407,12 +416,6 @@
     <ClInclude Include="src\game\shadow\shadow.h">
       <Filter>ソース ファイル\game\shadow</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\item\powerCoin\powerCoin.h">
-      <Filter>ソース ファイル\game\item\powerCoin</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\item\powerCoin\powerCoinManager.h">
-      <Filter>ソース ファイル\game\item\powerCoin</Filter>
-    </ClInclude>
     <ClInclude Include="src\game\player\playerData.h">
       <Filter>ソース ファイル\game\player</Filter>
     </ClInclude>
@@ -433,6 +436,18 @@
     </ClInclude>
     <ClInclude Include="src\game\ui\powerUpGauge\powerUpGouge.h">
       <Filter>ソース ファイル\game\ui\powerUpGauge</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\gameTime\gameTime.h">
+      <Filter>ソース ファイル\game\gameTime</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\ui\time\timeUi.h">
+      <Filter>ソース ファイル\game\ui\time</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\item\coin\coin.h">
+      <Filter>ソース ファイル\game\item\coin</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\item\coin\coinManager.h">
+      <Filter>ソース ファイル\game\item\coin</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

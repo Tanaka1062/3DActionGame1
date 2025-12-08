@@ -1,13 +1,12 @@
 #include "number.h"
 
 //定義関連----------------------
-static int NUM_SIZE = 64;	//数字のサイズ
 //------------------------------
 
-int Number::m_hndl[10];		//画像ハンドル
+int CNumber::m_hndl[10];		//画像ハンドル
 
 // データを初期化
-void Number::Init()
+void CNumber::Init()
 {
 	for (int i = 0;i < 10; i++)
 	{
@@ -16,7 +15,7 @@ void Number::Init()
 }
 
 // 画像データをロード
-void Number::Load()
+void CNumber::Load()
 {
 	int success;
 	//もうすでに画像がロードされていたら-1でなくなっている
@@ -24,14 +23,14 @@ void Number::Load()
 	{
 		//画像データ読み込み
 		//失敗していたら-1が変数に入る
-		success = LoadDivGraph("data/graphics/game/number.png",
+		success = LoadDivGraph("data/graphic/ui/number.png",
 			10, 10, 1, NUM_SIZE, NUM_SIZE, m_hndl);
 	}
 
 }
 
 // 終了前に行う
-void Number::Exit()
+void CNumber::Exit()
 {
 	for (int i = 0;i < 10; i++)
 	{
@@ -48,7 +47,7 @@ void Number::Exit()
 }
 
 //数字を表示する
-void Number::RequestNumber(int x, int y, int number, float size)
+void CNumber::RequestNumber(int x, int y, int number, float size)
 {
 	DrawRotaGraph(x, y, size, 0.0, m_hndl[number], TRUE);
 

@@ -4,7 +4,7 @@
 #include "itemBase.h"
 #include "../data.h"
 #include "../player/playerManager.h"
-#include "powerCoin/powerCoin.h"
+#include "coin/coin.h"
 #include "itemObject/box/box.h"
 
 using namespace std;

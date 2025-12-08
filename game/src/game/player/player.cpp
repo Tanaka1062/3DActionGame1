@@ -467,12 +467,7 @@ void CPlayer::HitAttack(int _atk, int _blown, float _rotY)
 	{
 		knockBack = VScale(knockBack, 10.0f);
 		m_blown = 0;
-
-		if (m_isTransform == false)
-		{
-			m_dropCoin++;
-		}
-
+		
 	}
 
 	//Šù‚É‹¯‚İó‘Ô‚È‚çˆ—‚ğ‚µ‚È‚¢
@@ -507,7 +502,7 @@ void CPlayer::HitAttack(int _atk, int _blown, float _rotY)
 }
 
 //‚¨‹à‚ğŒ¸‚ç‚·
-bool CPlayer::ItemBuy(int _subMoney)
+bool CPlayer::SubMoney(int _subMoney)
 {
 	//Á”ï—Ê‚ª¡‚Ì‚¨‹à‚æ‚è­‚È‚©‚Á‚½‚çw“ü‚µ‚È‚¢
 	if (m_money < _subMoney)

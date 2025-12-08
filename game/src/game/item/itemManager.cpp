@@ -115,20 +115,6 @@ CItemBase* CItemManager::GetItem(int _num)
 
 	return m_item[_num];
 
-	//アイテムの数をカウントする変数
-	//int count = 0;
-	//for (auto ite = m_item.begin(); ite != m_item.end(); ++ite)
-	//{
-	//	//引数の数字と同じならアドレスを返す
-	//	if (count == _num)
-	//	{
-	//		return *ite;
-	//	}
-	//	count++;
-
-	//}
-	//return nullptr;
-
 }
 
 //-----------------------

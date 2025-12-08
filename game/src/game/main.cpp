@@ -10,6 +10,7 @@
 #include"../lib/input/controllerManager.h"
 #include"../lib/effekseer/effekseer.h"
 #include"system/effectData/effectData.h"
+#include "../lib/number.h"
 
 static const int EFFECT_MAX_NUM = 10;			//一度に表示できるエフェクトの最大数
 static const int PARTICLE_MAX_NUM = 2000;		//一度に表示できるパーティクルの最大数
@@ -61,6 +62,12 @@ int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	//FPSの初期化
 	CFps::Init();
 
+	//数字の初期化
+	CNumber::Init();
+
+	//数字の画像ロード
+	CNumber::Load();
+
 	//ゲームメインループ
 	while (ProcessMessage() != -1)
 	{
@@ -100,6 +107,9 @@ int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 	//エフェクシアの終了処理
 	CEffekseerCtrl::Exit();
+
+	//数字の終了処理
+	CNumber::Exit();
 
 	DxLib_End();			// ＤＸライブラリ使用の終了処理
 

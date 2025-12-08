@@ -6,6 +6,7 @@
 #include <vector>
 #include "../item/itemManager.h"
 #include "powerUpGauge/powerUpGouge.h"
+#include "time/timeUi.h"
 
 using namespace std;
 
@@ -15,6 +16,7 @@ private:
 	vector<C2DUi*> m_ui;						//UI
 	CHpbarManager m_hpbarManager;				//HPバーのマネージャー
 	CPowerUpGouge m_powerUpGouge[PLAYER_NUM];	//パワーゲージUi
+	CTimeUi m_time;								//時間
 public:
 	//コンストラクタ・デストラクタ
 	CUiManager();

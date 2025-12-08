@@ -11,6 +11,7 @@
 #include "../attack/attackManager.h"
 #include "../player/playerManager.h"
 #include "../ui/uiManager.h"
+#include "../gameTime/gameTime.h"
 
 using namespace std;
 
@@ -28,6 +29,7 @@ private:
 	CWeaponManager m_weaponManager;			//武器のマネージャークラス
 	CAttackManager m_attackManager;			//攻撃のマネージャークラス
 	CUiManager m_uiManager;					//uiのマネージャークラス
+	CGameTime* m_gameTime;					//ゲームの制限時間
 
 public:
 

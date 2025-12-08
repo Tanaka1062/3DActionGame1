@@ -1,6 +1,7 @@
 #include "uiManager.h"
 #include "hpber/hpbar.h"
 #include "../data.h"
+#include "../gameTime/gameTime.h"
 
 static const char MODEL_PATH[] =
 { "data/graphic/ui/powerUpGauge.png" };			//ロードするファイル名
@@ -61,6 +62,8 @@ void CUiManager::Init(CPlayerManager* _playerManager,
 			m_powerUpGouge[powerUpGuge_i].SetPlayer(_playerManager->GetPlayer(powerUpGuge_i));
 		}
 	}
+
+	m_time.Init();
 }
 
 //ロード
@@ -78,6 +81,7 @@ void CUiManager::Load()
 		m_powerUpGouge[powerUpGuge_i].Load(MODEL_PATH);
 	}
 
+	m_time.Load();
 }
 
 //毎フレームする処理
@@ -94,6 +98,10 @@ void CUiManager::Step()
 	{
 		m_powerUpGouge[powerUpGuge_i].Step();
 	}
+
+	CGameTime* gameTime = CGameTime::GetInstance();
+
+	m_time.Step(gameTime->GetTime());
 }
 
 //描写
@@ -110,7 +118,7 @@ void CUiManager::Draw()
 	{
 		m_powerUpGouge[powerUpGuge_i].Draw();
 	}
-
+	m_time.Draw();
 }
 
 //破棄
@@ -130,5 +138,7 @@ void CUiManager::Exit()
 	{
 		m_powerUpGouge[powerUpGuge_i].Exit();
 	}
+
+	m_time.Exit();
 }
 

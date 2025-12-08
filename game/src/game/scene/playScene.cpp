@@ -5,7 +5,6 @@
 #include"../collisionManager/collisionManager.h"
 #include "../../lib/effekseer/effekseer.h"
 
-
 //---------------------------
 //		コンストラクタ
 //---------------------------
@@ -54,7 +53,8 @@ void CPlayScene::Init()
 	m_weaponManager.Init();
 	m_uiManager.Init(&m_playerManager,&m_itemManager);
 	m_camera.Init(ZERO);
-
+	m_gameTime = CGameTime::GetInstance();
+	m_gameTime->Init();
 }
 
 //---------------------------
@@ -92,6 +92,7 @@ void CPlayScene::Step()
 
 	m_camera.Step(ZERO,0.0f);
 
+	m_gameTime->Step();
 
 	//当たり判定----------------------------------
 	//敵の視界範囲とプレイヤーの当たり判定
@@ -115,7 +116,7 @@ void CPlayScene::Step()
 	m_camera.Update(ZERO);
 
 	if (CKeyInput::IsTrg(KEY_SELECT) == true ||
-		m_playerManager.GetIsEnd() == true)
+		m_gameTime->GetTimeEnd() == true)
 	{
 		m_state = END;
 	}

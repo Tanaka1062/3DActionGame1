@@ -6,7 +6,7 @@
 #include "../map/map.h"
 #include "../item/itemManager.h"
 #include "../attack/attackManager.h"
-#include "../item/powerCoin/powerCoinManager.h"
+#include "../item/coin/coinManager.h"
 #include "../../lib/model/3DObject.h"
 
 class CCollisionManager

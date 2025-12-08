@@ -144,7 +144,7 @@ void CItemObjectBase::HitCalc(CObject* _hitObject)
 				if (m_isBuy == false)
 				{
 					//‚¨‹à‚ª‘«‚è‚½‚çŽ‚¿ã‚°‚ê‚é
-					if (player->ItemBuy(m_cost) == true)
+					if (player->SubMoney(m_cost) == true)
 					{
 						isPickUp = true;
 					}

@@ -2,7 +2,9 @@
 
 #include <DxLib.h>
 
-class Number
+static const int NUM_SIZE = 64;	//数字のサイズ
+
+class CNumber
 {
 private:
 	static int m_hndl[10];		//画像ハンドル

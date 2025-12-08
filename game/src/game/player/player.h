@@ -85,9 +85,6 @@ public:
 	//攻撃を食らった時にする処理
 	void HitAttack(int _atk, int _blown, float _rotY = 0.0f);
 
-	//お金を減らす
-	bool ItemBuy(int _subMoney);
-
 	//回避しているかを取得
 	bool GetIsDodgeroll() { return m_isDodgeroll; }
 
@@ -127,6 +124,9 @@ public:
 
 	//お金を増やす
 	void AddMoney(int _addMoney) { m_money += _addMoney; }
+
+	//お金を減らす
+	bool SubMoney(int _subMoney);
 
 	//持っているアイテムの座標を取得
 	VECTOR GetItemHavePos();
