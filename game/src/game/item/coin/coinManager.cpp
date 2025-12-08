@@ -15,13 +15,13 @@ static const int SPAWN_TIME = 10 * 60;				//コインスポーン時間(秒)
 //------------------------
 //	   コンストラクタ
 //------------------------
-CPowerCoinManager::CPowerCoinManager()
+CCoinManager::CCoinManager()
 {
 	//コインを生成
 	for (int powerCoin_i = 0; powerCoin_i < COIN_NUM; powerCoin_i++)
 	{
-		CPowerCoin* coin = new CPowerCoin;
-		m_powerCoin.push_back(coin);
+		CCoin* coin = new CCoin;
+		m_coin.push_back(coin);
 	}
 
 	//時間のリセット
@@ -39,13 +39,13 @@ CPowerCoinManager::CPowerCoinManager()
 //------------------------
 //		デストラクタ
 //------------------------
-CPowerCoinManager::~CPowerCoinManager()
+CCoinManager::~CCoinManager()
 {
-	for (auto powerCoin_ite = m_powerCoin.begin(); powerCoin_ite != m_powerCoin.end();)
+	for (auto powerCoin_ite = m_coin.begin(); powerCoin_ite != m_coin.end();)
 	{
 		delete (*powerCoin_ite);
 
-		powerCoin_ite = m_powerCoin.erase(powerCoin_ite);
+		powerCoin_ite = m_coin.erase(powerCoin_ite);
 	}
 
 }
@@ -53,12 +53,12 @@ CPowerCoinManager::~CPowerCoinManager()
 //------------------------
 //		  初期化
 //------------------------
-void CPowerCoinManager::Init(CPlayerManager* _playerManager)
+void CCoinManager::Init(CPlayerManager* _playerManager)
 {
 	//コインの初期化
-	for (int powerCoin_i = 0; powerCoin_i < m_powerCoin.size(); powerCoin_i++)
+	for (int powerCoin_i = 0; powerCoin_i < m_coin.size(); powerCoin_i++)
 	{
-		m_powerCoin[powerCoin_i]->Init();
+		m_coin[powerCoin_i]->Init();
 	}
 
 	//時間のリセット
@@ -76,12 +76,12 @@ void CPowerCoinManager::Init(CPlayerManager* _playerManager)
 //------------------------
 //		モデルロード
 //------------------------
-void CPowerCoinManager::Load()
+void CCoinManager::Load()
 {
 	//コインのモデルロード
-	for (int powerCoin_i = 0; powerCoin_i < m_powerCoin.size(); powerCoin_i++)
+	for (int powerCoin_i = 0; powerCoin_i < m_coin.size(); powerCoin_i++)
 	{
-		m_powerCoin[powerCoin_i]->Load(MODEL_PATH[powerCoin_i]);
+		m_coin[powerCoin_i]->Load(MODEL_PATH[powerCoin_i]);
 	}
 
 	//マップのフレームのハンドルをロード
@@ -115,19 +115,19 @@ void CPowerCoinManager::Load()
 //------------------------
 //	毎フレームする処理
 //------------------------
-void CPowerCoinManager::Step()
+void CCoinManager::Step()
 {
 	//出現しているコインを数える
 	int activeCoinNum = 0;
 
-	for (int powerCoin_i = 0; powerCoin_i < m_powerCoin.size(); powerCoin_i++)
+	for (int powerCoin_i = 0; powerCoin_i < m_coin.size(); powerCoin_i++)
 	{
 		//生存していたらカウントする
-		if (m_powerCoin[powerCoin_i]->GetActive())
+		if (m_coin[powerCoin_i]->GetActive())
 		{
 			activeCoinNum++;
 
-			m_powerCoin[powerCoin_i]->Step();
+			m_coin[powerCoin_i]->Step();
 		}
 
 	}
@@ -154,16 +154,16 @@ void CPowerCoinManager::Step()
 
 		if (player->GetDropCoin() >= 1)
 		{
-			for (int powerCoin_i = 0; powerCoin_i < m_powerCoin.size(); powerCoin_i++)
+			for (int powerCoin_i = 0; powerCoin_i < m_coin.size(); powerCoin_i++)
 			{
 				//コインが全てドロップ状態になったら一つ消す
 				if (player->GetDropCoin() == COIN_NUM)
 				{
-					m_powerCoin[powerCoin_i]->Delete();
+					m_coin[powerCoin_i]->Delete();
 				}
 
 				//プレイヤーの持っているコインがある場合落とす
-				if (m_powerCoin[powerCoin_i]->GetPlayerName() == player->GetPlayerName())
+				if (m_coin[powerCoin_i]->GetPlayerName() == player->GetPlayerName())
 				{
 
 					float radian = static_cast<float>((GetRand(60) - 30) * (DX_PI_F/180.0f));
@@ -173,7 +173,7 @@ void CPowerCoinManager::Step()
 
 					rotY += radian;
 
-					m_powerCoin[powerCoin_i]->Drop(player->GetCenter(),rotY);
+					m_coin[powerCoin_i]->Drop(player->GetCenter(),rotY);
 					break;
 				}
 			}
@@ -186,55 +186,55 @@ void CPowerCoinManager::Step()
 //------------------------
 //		数値の更新
 //------------------------
-void CPowerCoinManager::Update()
+void CCoinManager::Update()
 {
-	for (int powerCoin_i = 0; powerCoin_i < m_powerCoin.size(); powerCoin_i++)
+	for (int powerCoin_i = 0; powerCoin_i < m_coin.size(); powerCoin_i++)
 	{
-		if (m_powerCoin[powerCoin_i]->GetActive() == false)continue;
+		if (m_coin[powerCoin_i]->GetActive() == false)continue;
 
-		m_powerCoin[powerCoin_i]->Update();
+		m_coin[powerCoin_i]->Update();
 	}
 }
 
 //------------------------
 //		  描写処理
 //------------------------
-void CPowerCoinManager::Draw()
+void CCoinManager::Draw()
 {
-	for (int powerCoin_i = 0; powerCoin_i < m_powerCoin.size(); powerCoin_i++)
+	for (int powerCoin_i = 0; powerCoin_i < m_coin.size(); powerCoin_i++)
 	{
-		m_powerCoin[powerCoin_i]->Draw();
+		m_coin[powerCoin_i]->Draw();
 	}
 }
 
 //------------------------
 //		   終了処理
 //------------------------
-void CPowerCoinManager::Exit()
+void CCoinManager::Exit()
 {
-	for (int powerCoin_i = 0; powerCoin_i < m_powerCoin.size(); powerCoin_i++)
+	for (int powerCoin_i = 0; powerCoin_i < m_coin.size(); powerCoin_i++)
 	{
-		m_powerCoin[powerCoin_i]->Exit();
+		m_coin[powerCoin_i]->Exit();
 	}
 }
 
 //------------------------
 //	 コインを出現させる
 //------------------------
-void CPowerCoinManager::SpawnCoin()
+void CCoinManager::SpawnCoin()
 {
 	//ランダムな変数保存用
 	int rand = GetRand(COIN_SPAWN_POS_NUM -1);
 
 	//コインの出現
-	for (int powerCoin_i = 0; powerCoin_i < m_powerCoin.size(); powerCoin_i++)
+	for (int powerCoin_i = 0; powerCoin_i < m_coin.size(); powerCoin_i++)
 	{
 		//生存していないコインを出現させる
-		if (m_powerCoin[powerCoin_i]->GetActive() == false &&
-			m_powerCoin[powerCoin_i]->GetPlayerName() == PLAYER_NONE)
+		if (m_coin[powerCoin_i]->GetActive() == false &&
+			m_coin[powerCoin_i]->GetPlayerName() == PLAYER_NONE)
 		{
-			m_powerCoin[powerCoin_i]->SetPos(m_spawnPos[rand]);
-			m_powerCoin[powerCoin_i]->SetActive(true);
+			m_coin[powerCoin_i]->SetPos(m_spawnPos[rand]);
+			m_coin[powerCoin_i]->SetActive(true);
 			return;
 		}
 	}

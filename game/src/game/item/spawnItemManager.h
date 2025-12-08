@@ -69,7 +69,7 @@ public:
 	CItemBase* GetItem(int _num);
 
 	//コインのアドレスを取得
-	CPowerCoin* GetCoin(int _num);
+	CCoin* GetCoin(int _num);
 
 	//アイテムを出現させる
 	void SpawnItem();

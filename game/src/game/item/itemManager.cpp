@@ -120,7 +120,7 @@ CItemBase* CItemManager::GetItem(int _num)
 //-----------------------
 //コインのアドレスを取得
 //-----------------------
-CPowerCoin* CItemManager::GetCoin(int _num)
+CCoin* CItemManager::GetCoin(int _num)
 {
 	return m_spawnItemManager.GetCoin(_num);
 }

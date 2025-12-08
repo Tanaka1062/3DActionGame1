@@ -215,7 +215,7 @@ void CCollisionManager::CheckHitPlayerToMap(CPlayerManager& _playerManager,CMap&
 //	   プレイヤーとパワーコインの当たり判定
 //----------------------------------------------
 void CCollisionManager::CheckHitPlayerToPowerCoin(CPlayerManager& _playerManager,
-	CPowerCoinManager& _powerCoinManager)
+	CCoinManager& _powerCoinManager)
 {
 	for (int player_i = 0; player_i < _playerManager.GetPlayerNum(); player_i++)
 	{
@@ -225,7 +225,7 @@ void CCollisionManager::CheckHitPlayerToPowerCoin(CPlayerManager& _playerManager
 		for (int powerCoin_j = 0; powerCoin_j < _powerCoinManager.GetPowerCoinNum(); powerCoin_j++)
 		{
 			//パワーコインのクラスを取得
-			CPowerCoin* powerCoin = _powerCoinManager.GetPowerCoin(powerCoin_j);
+			CCoin* powerCoin = _powerCoinManager.GetPowerCoin(powerCoin_j);
 
 			CheckHitObjectToObject(player, powerCoin);
 
@@ -236,20 +236,20 @@ void CCollisionManager::CheckHitPlayerToPowerCoin(CPlayerManager& _playerManager
 //----------------------------------------------
 //		 パワーコインとマップの当たり判定
 //----------------------------------------------
-void CCollisionManager::CheckHitPowerCoinToMap(CPowerCoinManager& _powerCoinManager, CMap& _map)
+void CCollisionManager::CheckHitPowerCoinToMap(CCoinManager& _powerCoinManager, CMap& _map)
 {
 	//当たり判定情報が格納される構造体
 	MV1_COLL_RESULT_POLY_DIM col;
 
 	for (int powerCoin_i = 0; powerCoin_i < _powerCoinManager.GetPowerCoinNum(); powerCoin_i++)
 	{
-		CPowerCoin* powerCoin = _powerCoinManager.GetPowerCoin(powerCoin_i);
+		CCoin* coin = _powerCoinManager.GetPowerCoin(powerCoin_i);
 
 		//出現していないコインはスキップ
-		if (powerCoin->GetActive() == false)continue;
+		if (coin->GetActive() == false)continue;
 
 		col = MV1CollCheck_Sphere(_map.GetHitHndl(), -1,
-			powerCoin->GetCenter(), powerCoin->GetRad());
+			coin->GetCenter(), coin->GetRad());
 
 		//ポリゴンと当たっていたか
 		if (col.HitNum != 0)
@@ -260,19 +260,19 @@ void CCollisionManager::CheckHitPowerCoinToMap(CPowerCoinManager& _powerCoinMana
 			{
 
 				//中心点から最近点を引き算
-				VECTOR vLen = VSub(powerCoin->GetCenter(), col.Dim[j].HitPosition);
+				VECTOR vLen = VSub(coin->GetCenter(), col.Dim[j].HitPosition);
 				//取得した距離を三平方の定理の長さに変換
 				float fLen = VSize(vLen);
 				//実際にめり込んだ距離を計算
-				fLen = powerCoin->GetRad() - fLen;
+				fLen = coin->GetRad() - fLen;
 				//法線をめり込んだ距離分掛け算する
 				vLen = VScale(col.Dim[j].Normal, fLen);
 
 				//プレイヤーの座標を計算した分だけ移動させる
-				powerCoin->SetPos(VAdd(powerCoin->GetPos(), vLen));
+				coin->SetPos(VAdd(coin->GetPos(), vLen));
 
 				//重力をリセット
-				powerCoin->GravityReset();
+				coin->GravityReset();
 
 			}
 			//-------------------------------------
@@ -281,7 +281,7 @@ void CCollisionManager::CheckHitPowerCoinToMap(CPowerCoinManager& _powerCoinMana
 			MV1CollResultPolyDimTerminate(col);
 		}
 
-		VECTOR shadowPos = powerCoin->GetPos();
+		VECTOR shadowPos = coin->GetPos();
 
 		//少しずつ座標を落として当たった場所に丸影の座標を設定する
 		for (int shadowPosY_i = 0; shadowPosY_i < 1000; shadowPosY_i++)
@@ -295,7 +295,7 @@ void CCollisionManager::CheckHitPowerCoinToMap(CPowerCoinManager& _powerCoinMana
 			{
 				shadowPos.y += 1.5f;
 
-				powerCoin->SetShadowPos(shadowPos);
+				coin->SetShadowPos(shadowPos);
 				break;
 			}
 		}

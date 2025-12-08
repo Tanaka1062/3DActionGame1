@@ -6,13 +6,13 @@ static const float DROP_JUMP = 7.0f;			//上に飛ぶ力
 static const float ROT_SPEED = 0.05f;			//回転速度
 static const int ADD_MONEY = 1;					//増えるお金の量
 
-CPowerCoin::CPowerCoin()
+CCoin::CCoin()
 {
 	m_state = ITEM_WAIT;
 	m_playerName = PLAYER_NONE;
 }
 
-CPowerCoin::~CPowerCoin()
+CCoin::~CCoin()
 {
 	
 }
@@ -20,7 +20,7 @@ CPowerCoin::~CPowerCoin()
 //---------------------
 //		 初期化
 //---------------------
-void CPowerCoin::Init()
+void CCoin::Init()
 {
 	CItemBase::Init();
 
@@ -35,7 +35,7 @@ void CPowerCoin::Init()
 //---------------------
 // 毎フレームする処理
 //---------------------
-void CPowerCoin::Step()
+void CCoin::Step()
 {
 	if (m_isActive == true)
 	{
@@ -70,7 +70,7 @@ void CPowerCoin::Step()
 //---------------------
 //		数値の更新
 //---------------------
-void CPowerCoin::Update()
+void CCoin::Update()
 {
 	CItemBase::Update();
 
@@ -79,7 +79,7 @@ void CPowerCoin::Update()
 //---------------------
 //	当たった時の処理
 //---------------------
-void CPowerCoin::HitCalc(CObject* _hitObject)
+void CCoin::HitCalc(CObject* _hitObject)
 {
 	//_hitObjectがnullだったら処理をしない
 	if (_hitObject == nullptr)return;
@@ -111,7 +111,7 @@ void CPowerCoin::HitCalc(CObject* _hitObject)
 //---------------------
 //	コインのドロップ
 //---------------------
-void CPowerCoin::Drop(VECTOR _pos, float _rotY)
+void CCoin::Drop(VECTOR _pos, float _rotY)
 {
 	//角度ゼロで進む速度
 	VECTOR defaultDir = { 0.0f,DROP_JUMP,DROP_SPEED };
@@ -136,7 +136,7 @@ void CPowerCoin::Drop(VECTOR _pos, float _rotY)
 //---------------------
 //	   コインの消失
 //---------------------
-void CPowerCoin::Delete()
+void CCoin::Delete()
 {
 	m_state = ITEM_WAIT;
 	m_playerName = PLAYER_NONE;

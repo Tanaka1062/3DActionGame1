@@ -61,7 +61,7 @@ void CSpawnItemManager::Init(CPlayerManager* _playerManager)
 		case ITEM_COIN_RED:
 		case ITEM_COIN_GREEN:
 		case ITEM_COIN_BLUE:
-			item = new CPowerCoin;
+			item = new CCoin;
 			break;
 		case ITEM_BOMB:
 			item = new CBomb;
@@ -199,14 +199,14 @@ void CSpawnItemManager::Step()
 		{
 			for (int powerCoin_i = 0; powerCoin_i < COIN_MAX_NUM; powerCoin_i++)
 			{
-				CPowerCoin* coin = nullptr;
+				CCoin* coin = nullptr;
 
 				switch (powerCoin_i)
 				{
 				case ITEM_COIN_RED:
 				case ITEM_COIN_GREEN:
 				case ITEM_COIN_BLUE:
-					coin = dynamic_cast<CPowerCoin*>(m_item[powerCoin_i]);
+					coin = dynamic_cast<CCoin*>(m_item[powerCoin_i]);
 					break;
 				}
 
@@ -279,16 +279,16 @@ CItemBase* CSpawnItemManager::GetItem(int _num)
 //-----------------------
 //コインのアドレスを取得
 //-----------------------
-CPowerCoin* CSpawnItemManager::GetCoin(int _num)
+CCoin* CSpawnItemManager::GetCoin(int _num)
 {
-	CPowerCoin* coin = nullptr;
+	CCoin* coin = nullptr;
 
 	switch (_num)
 	{
 	case ITEM_COIN_RED:
 	case ITEM_COIN_GREEN:
 	case ITEM_COIN_BLUE:
-		coin = dynamic_cast<CPowerCoin*>(m_item[_num]);
+		coin = dynamic_cast<CCoin*>(m_item[_num]);
 		break;
 	}
 

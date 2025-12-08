@@ -25,16 +25,16 @@ enum tagPowerCoinPos
 	COIN_SPAWN_POS_NUM,			//コインの出現座標の数
 };
 
-class CPowerCoinManager
+class CCoinManager
 {
 private:
-	vector<CCoin*>m_powerCoin;			//パワーコイン
+	vector<CCoin*>m_coin;			//パワーコイン
 	int m_timeCount;						//時間カウント
 	VECTOR m_spawnPos[COIN_SPAWN_POS_NUM];	//コインの出現座標
 	CPlayerManager* m_playerManager;		//プレイヤーのマネージャークラス
 public:
-	CPowerCoinManager();
-	~CPowerCoinManager();
+	CCoinManager();
+	~CCoinManager();
 
 	//初期化
 	void Init(CPlayerManager* _playerManager);
@@ -50,10 +50,10 @@ public:
 	void Exit();
 
 	//パワーコインを取得
-	CPowerCoin* GetPowerCoin(int _num) { return m_powerCoin[_num]; }
+	CCoin* GetPowerCoin(int _num) { return m_coin[_num]; }
 
 	//パワーコインの数を取得
-	int GetPowerCoinNum() { return static_cast<int>(m_powerCoin.size()); }
+	int GetPowerCoinNum() { return static_cast<int>(m_coin.size()); }
 
 private:
 	//コインを出現させる
