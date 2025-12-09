@@ -150,7 +150,6 @@
     <ClCompile Include="src\game\collisionManager\collisionManager.cpp" />
     <ClCompile Include="src\game\gameTime\gameTime.cpp" />
     <ClCompile Include="src\game\item\coin\coin.cpp" />
-    <ClCompile Include="src\game\item\coin\coinManager.cpp" />
     <ClCompile Include="src\game\item\itemBase.cpp" />
     <ClCompile Include="src\game\item\itemManager.cpp" />
     <ClCompile Include="src\game\item\itemObject\bomb\bomb.cpp" />
@@ -208,7 +207,6 @@
     <ClInclude Include="src\game\data.h" />
     <ClInclude Include="src\game\gameTime\gameTime.h" />
     <ClInclude Include="src\game\item\coin\coin.h" />
-    <ClInclude Include="src\game\item\coin\coinManager.h" />
     <ClInclude Include="src\game\item\itemBase.h" />
     <ClInclude Include="src\game\item\itemManager.h" />
     <ClInclude Include="src\game\item\itemObject\bomb\bomb.h" />
@@ -216,6 +214,7 @@
     <ClInclude Include="src\game\item\itemObject\itemObjectBase.h" />
     <ClInclude Include="src\game\item\mapItemManager.h" />
     <ClInclude Include="src\game\item\spawnItemManager.h" />
+    <ClInclude Include="src\game\map\map.h" />
     <ClInclude Include="src\game\player\player.h" />
     <ClInclude Include="src\game\player\playerData.h" />
     <ClInclude Include="src\game\player\playerManager.h" />

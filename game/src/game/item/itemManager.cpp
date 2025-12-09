@@ -39,29 +39,57 @@ void CItemManager::Load()
 		CItemBase* item = m_mapItemManager.GetItem(mapItem_i);
 		m_item.push_back(item);
 	}
-
-	//スポーンアイテムを代入
-	for (int spawnItem_i = 0; spawnItem_i < m_spawnItemManager.GetItemNum(); spawnItem_i++)
-	{
-		CItemBase* item = m_spawnItemManager.GetItem(spawnItem_i);
-
-		m_item.push_back(item);
-	}
 }
 
 //-----------------------
 //	毎フレームする処理
 //-----------------------
-void CItemManager::Step()
+void CItemManager::Step(CPlayerManager* _playerManager)
 {
 	m_mapItemManager.Step();
 	m_spawnItemManager.Step();
 
-	for (auto item_i = m_item.begin(); item_i != m_item.end(); ++item_i)
+	//スポーンしたらアイテムを増やす
+	if (m_spawnItemManager.GetIsItemSpawn() == true)
 	{
+		m_item.push_back(m_spawnItemManager.SpawnItem());
+	}
 
-		(*item_i)->Step();
+	for (auto item_i = m_item.begin(); item_i != m_item.end(); )
+	{
+		if ((*item_i)->GetActive() == false &&
+			(*item_i)->GetIsSpawn() == true)
+		{
+			(*item_i)->Exit();
 
+			delete (*item_i);
+
+			item_i = m_item.erase(item_i);
+		}
+		else
+		{
+			(*item_i)->Step();
+
+			++item_i;
+
+		}
+	
+	}
+
+	//プレイヤーのコインを落とす処理
+	for (int player_i = 0; player_i < _playerManager->GetPlayerNum(); player_i++)
+	{
+		CPlayer* player = _playerManager->GetPlayer(player_i);
+
+		int dropCoin = player->GetDropCoin();
+
+		for (int dropCoin_i = 0; dropCoin_i < dropCoin; dropCoin_i++)
+		{
+			//CCoin* coin = new CCoin;
+
+			//coin->Init();
+			//coin->Load();
+		}
 	}
 
 }
@@ -93,8 +121,6 @@ void CItemManager::Draw()
 //-----------------------
 void CItemManager::Exit()
 {
-
-
 	m_mapItemManager.Exit();
 	m_spawnItemManager.Exit();
 
@@ -111,18 +137,18 @@ void CItemManager::Exit()
 //-----------------------
 CItemBase* CItemManager::GetItem(int _num)
 {
-	if (m_item.size() < _num)return nullptr;
 
-	return m_item[_num];
+	int itemNum = 0;
+
+	for (auto item_i = m_item.begin(); item_i != m_item.end(); item_i++)
+	{
+		if (itemNum == _num)
+		{
+			return *item_i;
+		}
+		itemNum++;
+	}
+
+	return nullptr;
 
 }
-
-//-----------------------
-//コインのアドレスを取得
-//-----------------------
-CCoin* CItemManager::GetCoin(int _num)
-{
-	return m_spawnItemManager.GetCoin(_num);
-}
-
-

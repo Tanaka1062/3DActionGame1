@@ -21,7 +21,7 @@ void CItemBase::Init()
 	m_isActive = false;
 	m_shadow.Init(m_pos,0.5f);	
 	m_isGravity = true;
-	m_isSpawn = true;
+	m_isSpawn = false;
 	m_isBuy = false;
 	m_cost = 0;
 	m_objectTypy = OBJECT_ITEM;

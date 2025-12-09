@@ -13,9 +13,7 @@ using namespace std;
 enum tagItemName
 {
 	ITEM_NONE = -1,			//何もない	
-	ITEM_COIN_RED,			//赤コイン
-	ITEM_COIN_GREEN,		//緑コイン
-	ITEM_COIN_BLUE,			//青コイン
+	ITEM_COIN,				//コイン
 	ITEM_BOMB,				//爆弾
 
 	ITEM_NUM,				//アイテムの数
@@ -35,8 +33,6 @@ enum tagItemSpawnPos
 	ITEM_SPAWN_POS_NUM,		//アイテムの出現座標の数
 };
 
-static const int COIN_MAX_NUM = 3;		//コインの最大数
-
 //アイテムマネージャークラス
 class CSpawnItemManager
 {
@@ -44,9 +40,9 @@ private:
 	vector<CItemBase*> m_item;							//アイテムのクラス
 	int m_hndl[ITEM_NUM];								//アイテムのモデルハンドル
 	int m_spawnTime;									//時間カウント
+	bool m_isItemSpawn;									//アイテムがスポーンするかどうか
 	bool m_isSpawnPos[ITEM_SPAWN_POS_NUM];				//その座標でアイテムが出現したかどうか
 	VECTOR m_spawnPos[ITEM_SPAWN_POS_NUM];				//アイテムの出現座標
-	CPlayerManager* m_playerManager;					//プレイヤーのマネージャークラス
 
 public:
 	//コンストラクタ・デストラクタ
@@ -68,10 +64,11 @@ public:
 	//アイテムのアドレスを取得
 	CItemBase* GetItem(int _num);
 
-	//コインのアドレスを取得
-	CCoin* GetCoin(int _num);
-
 	//アイテムを出現させる
-	void SpawnItem();
+	CItemBase* SpawnItem();
+
+	//アイテムがスポーンするかを取得
+	bool GetIsItemSpawn() { return m_isItemSpawn; }
+
 };
 

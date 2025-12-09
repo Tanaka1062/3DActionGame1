@@ -23,13 +23,8 @@ void CItemObjectBase::Init()
 //–ˆƒtƒŒ[ƒ€‚·‚éˆ—
 void CItemObjectBase::Step()
 {
-	if (m_isActive == true)
+	if (m_isActive == false)
 	{
-		m_isSpawn = false;
-	}
-	else
-	{
-		m_isSpawn = true;
 		m_isDrop = false;
 	}
 

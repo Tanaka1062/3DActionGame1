@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include <vector>
+#include <list>
 #include "itemBase.h"
 #include "../data.h"
 #include "../player/playerManager.h"
@@ -15,7 +15,7 @@ using namespace std;
 class CItemManager
 {
 private:
-	vector<CItemBase*> m_item;							//アイテムのクラス
+	list<CItemBase*> m_item;							//アイテムのクラス
 	CMapItemManager m_mapItemManager;					//マップに置いてあるアイテムマネージャー
 	CSpawnItemManager m_spawnItemManager;				//スポーンするアイテムのマネージャー
 
@@ -29,7 +29,7 @@ public:
 	//モデルロード
 	void Load();
 	//毎フレームする処理
-	void Step();
+	void Step(CPlayerManager* _playerManager);
 	//数値の更新
 	void Update();
 	//オブジェクトの描写
@@ -42,9 +42,6 @@ public:
 
 	//アイテムのアドレスを取得
 	CItemBase* GetItem(int _num);
-
-	//コインのアドレスを取得
-	CCoin* GetCoin(int _num);
 
 };
 

@@ -279,9 +279,6 @@
     <ClCompile Include="src\game\item\coin\coin.cpp">
       <Filter>ソース ファイル\game\item\coin</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\item\coin\coinManager.cpp">
-      <Filter>ソース ファイル\game\item\coin</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\lib\number.h">
@@ -446,8 +443,8 @@
     <ClInclude Include="src\game\item\coin\coin.h">
       <Filter>ソース ファイル\game\item\coin</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\item\coin\coinManager.h">
-      <Filter>ソース ファイル\game\item\coin</Filter>
+    <ClInclude Include="src\game\map\map.h">
+      <Filter>ソース ファイル\game\map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

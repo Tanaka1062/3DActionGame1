@@ -6,7 +6,6 @@
 #include "../map/map.h"
 #include "../item/itemManager.h"
 #include "../attack/attackManager.h"
-#include "../item/coin/coinManager.h"
 #include "../../lib/model/3DObject.h"
 
 class CCollisionManager
@@ -27,13 +26,6 @@ public:
 
 	//プレイヤーとマップの当たり判定
 	static void CheckHitPlayerToMap(CPlayerManager& _playerManager,CMap& _map);
-
-	//プレイヤーとパワーコインの当たり判定
-	static void CheckHitPlayerToPowerCoin(CPlayerManager& _playerManager,
-		CCoinManager& _powerCoinManager);
-
-	//パワーコインとマップの当たり判定
-	static void CheckHitPowerCoinToMap(CCoinManager& _powerCoinManager, CMap& _map);
 
 	//アイテムとマップの当たり判定
 	static void CheckHitItemToMap(CItemManager& _itemManager,CMap& _map);

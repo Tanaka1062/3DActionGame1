@@ -65,6 +65,9 @@ public:
 	//スポーン可能かを取得
 	bool GetIsSpawn() { return m_isSpawn; }
 
+	//スポーン可能かを設定
+	void SetIsSpawn(bool _isSpawn) { m_isSpawn = _isSpawn; }
+
 	//アイテムのタイプを取得
 	tagItemType GetItemType() { return m_itemType; }
 

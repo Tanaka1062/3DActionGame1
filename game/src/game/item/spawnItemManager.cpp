@@ -5,9 +5,7 @@
 
 static const char* MODEL_PATH[ITEM_NUM] =				//モデルのパス
 {
-	"data/model/item/powerCoin/powerCoinRed.mv1",
-	"data/model/item/powerCoin/powerCoinGreen.mv1",
-	"data/model/item/powerCoin/powerCoinBlue.mv1" ,
+	"data/model/item/powerCoin/coin.mv1",
 	"data/model/item/bomb/bomb.mv1",
 };
 
@@ -30,6 +28,7 @@ CSpawnItemManager::CSpawnItemManager()
 
 	m_spawnTime = 0;
 
+	m_isItemSpawn = false;
 	for (int spawnPos_i = 0; spawnPos_i < ITEM_SPAWN_POS_NUM; spawnPos_i++)
 	{
 		m_spawnPos[spawnPos_i] = ZERO;
@@ -51,16 +50,14 @@ CSpawnItemManager::~CSpawnItemManager()
 //-----------------------
 void CSpawnItemManager::Init(CPlayerManager* _playerManager)
 {
-	//アイテムの生成
+	//生成用アイテムの生成
 	for (int item_i = 0; item_i < ITEM_NUM; item_i++)
 	{
 		CItemBase* item = nullptr;
 
 		switch (item_i)
 		{
-		case ITEM_COIN_RED:
-		case ITEM_COIN_GREEN:
-		case ITEM_COIN_BLUE:
+		case ITEM_COIN:
 			item = new CCoin;
 			break;
 		case ITEM_BOMB:
@@ -68,14 +65,11 @@ void CSpawnItemManager::Init(CPlayerManager* _playerManager)
 			break;
 		}
 
+		item->Init();
+		item->SetActive(true);
+		item->SetIsSpawn(true);
+
 		m_item.push_back(item);
-	}
-
-	//マップアイテムを
-
-	for (int item_i = 0; item_i < m_item.size(); item_i++)
-	{
-		m_item[item_i]->Init();
 	}
 
 	for (int hndl_i = 0; hndl_i < ITEM_NUM; hndl_i++)
@@ -85,6 +79,8 @@ void CSpawnItemManager::Init(CPlayerManager* _playerManager)
 
 	m_spawnTime = 0;
 
+	m_isItemSpawn = false;
+
 	for (int spawnPos_i = 0; spawnPos_i < ITEM_SPAWN_POS_NUM; spawnPos_i++)
 	{
 		m_spawnPos[spawnPos_i] = ZERO;
@@ -92,7 +88,6 @@ void CSpawnItemManager::Init(CPlayerManager* _playerManager)
 		m_isSpawnPos[spawnPos_i] = false;
 	}
 
-	m_playerManager = _playerManager;
 }
 
 //-----------------------
@@ -111,7 +106,7 @@ void CSpawnItemManager::Load()
 
 	for (int item_i = 0; item_i < m_item.size(); item_i++)
 	{
-		m_item[item_i]->Load(m_hndl[item_i]);
+		//m_item[item_i]->Load(m_hndl[item_i]);
 	}
 
 	//マップのフレームハンドルをロード
@@ -170,7 +165,7 @@ void CSpawnItemManager::Step()
 	{
 		m_spawnTime = 0;
 		//アイテムを出現させる
-		SpawnItem();
+		m_isItemSpawn = true;
 	}
 
 	int spawnPosNum = 0;
@@ -191,51 +186,40 @@ void CSpawnItemManager::Step()
 	}
 
 	//コインをドロップしていたら落とす
-	for (int player_i = 0; player_i < m_playerManager->GetPlayerNum(); player_i++)
-	{
-		CPlayer* player = m_playerManager->GetPlayer(player_i);
+	//for (int player_i = 0; player_i < m_playerManager->GetPlayerNum(); player_i++)
+	//{
+	//	CPlayer* player = m_playerManager->GetPlayer(player_i);
 
-		if (player->GetDropCoin() >= 1)
-		{
-			for (int powerCoin_i = 0; powerCoin_i < COIN_MAX_NUM; powerCoin_i++)
-			{
-				CCoin* coin = nullptr;
+	//	if (player->GetDropCoin() >= 1)
+	//	{
+	//		for (auto coin_i = m_item.begin(); coin_i != m_item.end(); coin_i++)
+	//		{
 
-				switch (powerCoin_i)
-				{
-				case ITEM_COIN_RED:
-				case ITEM_COIN_GREEN:
-				case ITEM_COIN_BLUE:
-					coin = dynamic_cast<CCoin*>(m_item[powerCoin_i]);
-					break;
-				}
+	//			if ((*coin_i)->GetItemType() != ITEM_TYPE_COIN)continue;
 
-				//コインが全てドロップ状態になったら一つ消す
-				if (player->GetDropCoin() == COIN_MAX_NUM)
-				{
-					coin->Delete();
-					break;
-				}
+	//			CCoin* coin = nullptr;
 
-				//プレイヤーの持っているコインがある場合落とす
-				if (coin->GetPlayerName() == player->GetPlayerName())
-				{
+	//			coin = dynamic_cast<CCoin*>((*coin_i));
 
-					float radian = static_cast<float>((GetRand(60) - 30) * (DX_PI_F / 180.0f));
+	//			//プレイヤーの持っているコインがある場合落とす
+	//			if (coin->GetPlayerName() == player->GetPlayerName())
+	//			{
 
-					//とりあえず中心に飛ばす
-					float rotY = atan2f(-player->GetPos().x, -player->GetPos().z);
+	//				float radian = static_cast<float>((GetRand(60) - 30) * (DX_PI_F / 180.0f));
 
-					rotY += radian;
+	//				//とりあえず中心に飛ばす
+	//				float rotY = atan2f(-player->GetPos().x, -player->GetPos().z);
 
-					coin->Drop(player->GetCenter(), rotY);
-					break;
-				}
-			}
-			//一ずつ減らす
-			player->SetDropCoin(player->GetDropCoin() - 1);
-		}
-	}
+	//				rotY += radian;
+
+	//				coin->Drop(player->GetCenter(), rotY);
+	//				break;
+	//			}
+	//		}
+	//		//一ずつ減らす
+	//		player->SetDropCoin(player->GetDropCoin() - 1);
+	//	}
+	//}
 
 }
 
@@ -276,70 +260,56 @@ CItemBase* CSpawnItemManager::GetItem(int _num)
 
 }
 
-//-----------------------
-//コインのアドレスを取得
-//-----------------------
-CCoin* CSpawnItemManager::GetCoin(int _num)
-{
-	CCoin* coin = nullptr;
-
-	switch (_num)
-	{
-	case ITEM_COIN_RED:
-	case ITEM_COIN_GREEN:
-	case ITEM_COIN_BLUE:
-		coin = dynamic_cast<CCoin*>(m_item[_num]);
-		break;
-	}
-
-	return coin;
-}
-
 //アイテムを出現させる
-void CSpawnItemManager::SpawnItem()
+CItemBase* CSpawnItemManager::SpawnItem()
 {
-	//スポーンしていないアイテム
-	int itemNum = 0;
+	//HACK:すでに初期化とロードを済ませたアイテムをコピーできてない
 
-	for (int item_i = 0; item_i < m_item.size(); item_i++)
+	//どのアイテムをスポーンさせるかを決める----------
+	
+	int randNum = GetRand(100);
+
+	tagItemName itemNameId = ITEM_NONE;
+
+	//スポーンするアイテムを作成
+
+	if (randNum < 80)
 	{
-		if (m_item[item_i]->GetIsSpawn() == true)
+		itemNameId = ITEM_COIN;
+	}
+	else if (randNum < 100)
+	{
+		itemNameId = ITEM_BOMB;
+	}
+
+	//------------------------------------------------
+
+	CItemBase* spawnItem = new CItemBase(*m_item[itemNameId]);
+
+	spawnItem->Load(m_hndl[itemNameId]);
+
+
+	//スポーンさせる座標を決める---------------------
+	int spawnPosId = 0;
+
+	while (true)
+	{
+		spawnPosId = GetRand(ITEM_SPAWN_POS_NUM - 1);
+
+		if (m_isSpawnPos[spawnPosId] == false)
 		{
-			itemNum++;
+			spawnItem->SetPos(m_spawnPos[spawnPosId]);
+			m_isItemSpawn = true;
+			break;
 		}
 	}
 
-	int itemNameId = GetRand(itemNum - 1);
+	//-----------------------------------------------
 
-	itemNum = 0;
+	//スポーンしているかをリセット
+	m_isItemSpawn = false;
 
-	for (int item_i = 0; item_i < m_item.size(); item_i++)
-	{
-		if (m_item[item_i]->GetIsSpawn() == true)
-		{
-			if (itemNum == itemNameId)
-			{
-				int spawnPosId = 0;
-
-				while (true)
-				{
-					spawnPosId = GetRand(ITEM_SPAWN_POS_NUM - 1);
-
-					if (m_isSpawnPos[spawnPosId] == false)
-					{
-						break;
-					}
-				}
-
-				m_item[item_i]->SetPos(m_spawnPos[spawnPosId]);
-				m_item[item_i]->SetActive(true);
-				m_isSpawnPos[spawnPosId] = true;
-				return;
-			}
-
-			itemNum++;
-		}
-	}
-
+	//スポーンしたアイテムを返す
+	return spawnItem;
 }
 

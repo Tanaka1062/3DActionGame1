@@ -17,7 +17,7 @@ static const char MODEL_PATH[] =
 { "data/model/player/playerTransformTest.mv1" };			//ロードするファイル名
 static const VECTOR INIT_POS = { 0.0f,1.0f,0.0f };			//初期座標
 static const float SHADOW_SIZE = 0.5f;						//丸影の大きさ
-static const int MAX_HP = 400;								//体力
+static const int MAX_HP = 300;								//体力
 static const int ATK = 20;									//攻撃力
 static const float MOVE_SPEED = 1.2f;						//移動スピード
 static const float RADIUS = 10.0f;							//半径

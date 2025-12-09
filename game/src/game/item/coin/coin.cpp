@@ -37,10 +37,6 @@ void CCoin::Init()
 //---------------------
 void CCoin::Step()
 {
-	if (m_isActive == true)
-	{
-		m_isSpawn = false;
-	}
 	//­‚µ‚¸‚Â‰ñ“]‚³‚¹‚é
 	m_rot.y += ROT_SPEED;
 
@@ -102,7 +98,6 @@ void CCoin::HitCalc(CObject* _hitObject)
 		m_isActive = false;
 		m_playerName = player->GetPlayerName();
 		m_owner = player;
-		m_isSpawn = true;
 	}
 	//--------------------------------------------------------
 

@@ -83,8 +83,7 @@ void CPlayScene::Step()
 
 	m_shot.Step();
 
-	m_itemManager.Step();
-
+	m_itemManager.Step(&m_playerManager);
 
 	m_weaponManager.Step(m_playerManager);
 
