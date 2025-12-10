@@ -270,24 +270,31 @@ CItemBase* CSpawnItemManager::GetItem(int _num)
 }
 
 //アイテムを出現させる
-unique_ptr<CItemBase> CSpawnItemManager::SpawnItem()
+CItemBase* CSpawnItemManager::SpawnItem()
 {
 
 	//どのアイテムをスポーンさせるかを決める----------
 	
-	int randNum = GetRand(100);
-
 	tagItemName itemNameId = ITEM_NONE;
 
-	//スポーンするアイテムを作成
+	while (true)
+	{
+		int randNum = GetRand(100);
 
-	if (randNum < 80)
-	{
-		itemNameId = ITEM_COIN;
-	}
-	else if (randNum < 100)
-	{
-		itemNameId = ITEM_BOMB;
+
+		//スポーンするアイテムを作成
+
+		if (randNum < 80)
+		{
+			itemNameId = ITEM_COIN;
+			break;
+		}
+		else
+		{
+			itemNameId = ITEM_BOMB;
+			break;
+		}
+
 	}
 	
 	//------------------------------------------------
@@ -299,12 +306,32 @@ unique_ptr<CItemBase> CSpawnItemManager::SpawnItem()
 		if (m_item[spawn_i]->GetItemName() == itemNameId &&
 			m_item[spawn_i]->GetActive() == false)
 		{
-			spawnItem = m_item[spawn_i].get();
-			spawnItem->SetActive(true);
-			spawnItem->SetIsSpawn(true);
+			spawnItem = move(m_item[spawn_i]);
 			break;
 		}
 	}
+
+	//もしも用意しているアイテムがなかったら生成する
+	if (spawnItem == nullptr)
+	{
+		switch (itemNameId)
+		{
+		case ITEM_COIN:
+			spawnItem = make_unique<CCoin>();
+			break;
+		case ITEM_BOMB:
+			spawnItem = make_unique<CBomb>();
+			break;
+		}
+
+		spawnItem->Init();
+		spawnItem->Load(m_hndl[itemNameId]);
+
+	}
+
+	//アイテムをの生存フラグをtrueにする
+	spawnItem->SetActive(true);
+	spawnItem->SetIsSpawn(true);
 
 	//スポーンさせる座標を決める---------------------
 	int spawnPosId = 0;
@@ -333,7 +360,7 @@ unique_ptr<CItemBase> CSpawnItemManager::SpawnItem()
 }
 
 //アイテムを元に戻す
-void CSpawnItemManager::ReturnItem(unique_ptr<CItemBase> _returnItme)
+void CSpawnItemManager::ReturnItem(CItemBase* _returnItme)
 {
 	for (int spawn_i = 0; spawn_i < m_item.size(); spawn_i++)
 	{

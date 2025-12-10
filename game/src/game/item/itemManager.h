@@ -15,7 +15,7 @@ using namespace std;
 class CItemManager
 {
 private:
-	list<unique_ptr<CItemBase>> m_item;					//アイテムのクラス
+	list<CItemBase*> m_item;					//アイテムのクラス
 	CMapItemManager m_mapItemManager;					//マップに置いてあるアイテムマネージャー
 	CSpawnItemManager m_spawnItemManager;				//スポーンするアイテムのマネージャー
 
@@ -23,6 +23,15 @@ public:
 	//コンストラクタ・デストラクタ
 	CItemManager();
 	~CItemManager();
+
+
+	//コピーを禁止する
+	CItemManager(const CItemManager&) = delete;
+	CItemManager& operator = (const CItemManager&) = delete;
+
+	//moveは許可する
+	CItemManager(CItemManager&&) = default;
+	CItemManager& operator = (CItemManager&&) = default;
 
 	//初期化
 	void Init(CPlayerManager* _playerManager);

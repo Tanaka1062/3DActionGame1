@@ -41,6 +41,14 @@ public:
 	CSpawnItemManager();
 	~CSpawnItemManager();
 
+	//コピーを禁止する
+	CSpawnItemManager(const CSpawnItemManager&) = delete;
+	CSpawnItemManager& operator=(const CSpawnItemManager&) = delete;
+
+	//moveは許可する
+	CSpawnItemManager(CSpawnItemManager&&) = default;
+	CSpawnItemManager& operator=(CSpawnItemManager&&) = default;
+
 	//初期化
 	void Init(CPlayerManager* _playerManager);
 	//モデルロード
@@ -57,13 +65,13 @@ public:
 	CItemBase* GetItem(int _num);
 
 	//アイテムを出現させる
-	unique_ptr<CItemBase> SpawnItem();
+	CItemBase* SpawnItem();
 
 	//アイテムがスポーンするかを取得
 	bool GetIsItemSpawn() { return m_isItemSpawn; }
 
 	//アイテムを元に戻す
-	void ReturnItem(unique_ptr<CItemBase> _returnItme);
+	void ReturnItem(CItemBase* _returnItme);
 
 };
 
