@@ -13,6 +13,16 @@ enum tagItemType
 	ITEM_TYPE_NUM,			//アイテムのタイプの数
 };
 
+//アイテムの名前
+enum tagItemName
+{
+	ITEM_NONE = -1,			//何もない	
+	ITEM_COIN,				//コイン
+	ITEM_BOMB,				//爆弾
+
+	ITEM_NUM,				//アイテムの数
+};
+
 enum tagItemState
 {
 	ITEM_FLYING,	//飛んでいる状態
@@ -30,6 +40,7 @@ protected:
 	CShadow m_shadow;		//丸影のクラス
 	tagItemType m_itemType;	//アイテムのタイプ
 	tagItemState m_state;	//状態
+	tagItemName m_itemName;	//アイテムの名前
 
 public:
 	//コンストラクタ
@@ -73,6 +84,9 @@ public:
 
 	//状態を取得
 	tagItemState GetState() { return m_state; }
+
+	//アイテムの名前を取得
+	tagItemName GetItemName() { return m_itemName; }
 
 	//購入されているかどうかを設定
 	void SetIsBuy(bool _isBuy) { m_isBuy = _isBuy; }

@@ -15,7 +15,7 @@ using namespace std;
 class CItemManager
 {
 private:
-	list<CItemBase*> m_item;							//アイテムのクラス
+	list<unique_ptr<CItemBase>> m_item;					//アイテムのクラス
 	CMapItemManager m_mapItemManager;					//マップに置いてあるアイテムマネージャー
 	CSpawnItemManager m_spawnItemManager;				//スポーンするアイテムのマネージャー
 

@@ -31,6 +31,7 @@ void CBomb::Init()
 
 	m_timeCount = 0;
 	m_cost = COST;
+	m_itemName = ITEM_BOMB;
 }
 
 //---------------------

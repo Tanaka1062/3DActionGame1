@@ -20,6 +20,7 @@ static const int SPAWN_TIME = 7 * 60;		//スポーンするまで時間
 //-----------------------
 CSpawnItemManager::CSpawnItemManager()
 {
+	
 
 	for (int hndl_i = 0; hndl_i < ITEM_NUM; hndl_i++)
 	{
@@ -51,26 +52,24 @@ CSpawnItemManager::~CSpawnItemManager()
 void CSpawnItemManager::Init(CPlayerManager* _playerManager)
 {
 	//生成用アイテムの生成
-	for (int item_i = 0; item_i < ITEM_NUM; item_i++)
+	for (int spawn_i = 0; spawn_i < SPAWN_ITEM_MAX * ITEM_NUM; spawn_i++)
 	{
-		CItemBase* item = nullptr;
 
-		switch (item_i)
+		if (spawn_i <= SPAWN_ITEM_MAX * (ITEM_COIN + 1))
 		{
-		case ITEM_COIN:
-			item = new CCoin;
-			break;
-		case ITEM_BOMB:
-			item = new CBomb;
-			break;
+			m_item.push_back(make_unique<CCoin>());
 		}
-
-		item->Init();
-		item->SetActive(true);
-		item->SetIsSpawn(true);
-
-		m_item.push_back(item);
+		else if (spawn_i <= SPAWN_ITEM_MAX * (ITEM_BOMB + 1))
+		{
+			m_item.push_back(make_unique<CBomb>());
+		}
 	}
+
+	for (int spawn_i = 0; spawn_i < m_item.size(); spawn_i++)
+	{
+		m_item[spawn_i]->Init();
+	}
+
 
 	for (int hndl_i = 0; hndl_i < ITEM_NUM; hndl_i++)
 	{
@@ -104,9 +103,21 @@ void CSpawnItemManager::Load()
 		}
 	}
 
-	for (int item_i = 0; item_i < m_item.size(); item_i++)
+	for (int spawn_i = 0; spawn_i < m_item.size(); spawn_i++)
 	{
-		//m_item[item_i]->Load(m_hndl[item_i]);
+		int hndl = m_hndl[m_item[spawn_i]->GetItemName()];
+
+		m_item[spawn_i]->Load(hndl);
+	}
+
+	//for (int item_i = 0; item_i < m_item.size(); item_i++)
+	//{
+	//	//m_item[item_i]->Load(m_hndl[item_i]);
+	//}
+
+	for (int item_i = 0; item_i < SPAWN_ITEM_MAX * ITEM_NUM; item_i++)
+	{
+		CItemBase* item =  m_item[item_i].get();
 	}
 
 	//マップのフレームハンドルをロード
@@ -241,8 +252,6 @@ void CSpawnItemManager::Exit()
 	{
 		(*item_i)->Exit();
 
-		delete (*item_i);
-
 		item_i = m_item.erase(item_i);
 
 	}
@@ -256,14 +265,13 @@ CItemBase* CSpawnItemManager::GetItem(int _num)
 {
 	if (m_item.size() < _num)return nullptr;
 
-	return m_item[_num];
+	return m_item[_num].get();
 
 }
 
 //アイテムを出現させる
-CItemBase* CSpawnItemManager::SpawnItem()
+unique_ptr<CItemBase> CSpawnItemManager::SpawnItem()
 {
-	//HACK:すでに初期化とロードを済ませたアイテムをコピーできてない
 
 	//どのアイテムをスポーンさせるかを決める----------
 	
@@ -281,13 +289,22 @@ CItemBase* CSpawnItemManager::SpawnItem()
 	{
 		itemNameId = ITEM_BOMB;
 	}
-
+	
 	//------------------------------------------------
 
-	CItemBase* spawnItem = new CItemBase(*m_item[itemNameId]);
+	unique_ptr<CItemBase> spawnItem = nullptr;
 
-	spawnItem->Load(m_hndl[itemNameId]);
-
+	for (int spawn_i = 0; spawn_i < m_item.size(); spawn_i++)
+	{
+		if (m_item[spawn_i]->GetItemName() == itemNameId &&
+			m_item[spawn_i]->GetActive() == false)
+		{
+			spawnItem = m_item[spawn_i].get();
+			spawnItem->SetActive(true);
+			spawnItem->SetIsSpawn(true);
+			break;
+		}
+	}
 
 	//スポーンさせる座標を決める---------------------
 	int spawnPosId = 0;
@@ -306,6 +323,8 @@ CItemBase* CSpawnItemManager::SpawnItem()
 
 	//-----------------------------------------------
 
+
+
 	//スポーンしているかをリセット
 	m_isItemSpawn = false;
 
@@ -313,3 +332,15 @@ CItemBase* CSpawnItemManager::SpawnItem()
 	return spawnItem;
 }
 
+//アイテムを元に戻す
+void CSpawnItemManager::ReturnItem(unique_ptr<CItemBase> _returnItme)
+{
+	for (int spawn_i = 0; spawn_i < m_item.size(); spawn_i++)
+	{
+		if (m_item[spawn_i] == nullptr)
+		{
+			m_item[spawn_i] = move(_returnItme);
+			return;
+		}
+	}
+}

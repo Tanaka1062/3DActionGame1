@@ -29,7 +29,7 @@ void CCoin::Init()
 	m_isActive = false;
 	m_itemType = ITEM_TYPE_COIN;
 	m_isPushed = false;
-
+	m_itemName = ITEM_COIN;
 }
 
 //---------------------

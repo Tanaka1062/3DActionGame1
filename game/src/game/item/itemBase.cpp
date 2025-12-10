@@ -26,7 +26,7 @@ void CItemBase::Init()
 	m_cost = 0;
 	m_objectTypy = OBJECT_ITEM;
 	m_state = ITEM_WAIT;
-
+	m_itemName = ITEM_NONE;
 }
 
 //--------------------------

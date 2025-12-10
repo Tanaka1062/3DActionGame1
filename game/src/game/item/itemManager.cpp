@@ -36,7 +36,7 @@ void CItemManager::Load()
 	//マップアイテムを代入
 	for (int mapItem_i = 0; mapItem_i < m_mapItemManager.GetItemNum(); mapItem_i++)
 	{
-		CItemBase* item = m_mapItemManager.GetItem(mapItem_i);
+		unique_ptr<CItemBase> item(m_mapItemManager.GetItem(mapItem_i));
 		m_item.push_back(item);
 	}
 }
@@ -60,9 +60,7 @@ void CItemManager::Step(CPlayerManager* _playerManager)
 		if ((*item_i)->GetActive() == false &&
 			(*item_i)->GetIsSpawn() == true)
 		{
-			(*item_i)->Exit();
-
-			delete (*item_i);
+			m_spawnItemManager.ReturnItem(move(*item_i));
 
 			item_i = m_item.erase(item_i);
 		}
@@ -144,7 +142,7 @@ CItemBase* CItemManager::GetItem(int _num)
 	{
 		if (itemNum == _num)
 		{
-			return *item_i;
+			return (*item_i).get();
 		}
 		itemNum++;
 	}
