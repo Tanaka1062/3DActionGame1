@@ -1,7 +1,7 @@
 #include "weaponManager.h"
 
 static const char MODEL_PATH[] =
-{ "data/model/weapon/weapon.mv1" };				//ロードするファイル名
+{ "data/model/item/weapon/sword/sword.mv1" };				//ロードするファイル名
 
 //---------------------------
 //		 コンストラクタ

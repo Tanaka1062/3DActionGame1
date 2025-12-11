@@ -6,9 +6,6 @@ public:
 
 	static CGameTime* m_instance;		//インスタンス
 
-	int m_timeCount;					//タイムカウント
-	bool m_isEnd;						//終わったかフラグ
-	int m_startTime;					//開始時間
 
 	static CGameTime* GetInstance()
 	{
@@ -33,6 +30,10 @@ public:
 private:
 	CGameTime();
 	~CGameTime();
+
+	int m_timeCount;					//タイムカウント
+	bool m_isEnd;						//終わったかフラグ
+	int m_startTime;					//開始時間
 
 public:
 	

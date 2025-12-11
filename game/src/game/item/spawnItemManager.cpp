@@ -1,12 +1,14 @@
 #include "spawnItemManager.h"
 #include "itemObject/bomb/bomb.h"
 #include "itemObject/box/box.h"
+#include "weapon/sword/sword.h"
 
 
 static const char* MODEL_PATH[ITEM_NUM] =				//モデルのパス
 {
 	"data/model/item/powerCoin/coin.mv1",
 	"data/model/item/bomb/bomb.mv1",
+	"data/model/item/weapon/sword/sword.mv1",
 };
 
 static const char FRAME_PATH[] =
@@ -65,6 +67,10 @@ void CSpawnItemManager::Init(CPlayerManager* _playerManager)
 		else if (spawn_i <= SPAWN_ITEM_MAX * (ITEM_BOMB + 1))
 		{
 			m_item.push_back(make_unique<CBomb>());
+		}
+		else if (spawn_i <= SPAWN_ITEM_MAX * (ITEM_SWORD + 1))
+		{
+			m_item.push_back(make_unique<CSword>());
 		}
 	}
 
@@ -288,17 +294,23 @@ unique_ptr<CItemBase> CSpawnItemManager::SpawnItem()
 
 		//スポーンするアイテムを作成
 
-		if (randNum < 80)
-		{
-			itemNameId = ITEM_COIN;
-			break;
-		}
-		else
-		{
-			itemNameId = ITEM_BOMB;
-			break;
-		}
-
+		//if (randNum < 60)
+		//{
+		//	itemNameId = ITEM_COIN;
+		//	break;
+		//}
+		//else if(randNum < 80)
+		//{
+		//	itemNameId = ITEM_BOMB;
+		//	break;
+		//}
+		//else
+		//{
+		//	itemNameId = ITEM_SWORD;
+		//	break;
+		//}
+		itemNameId = ITEM_SWORD;
+		break;
 	}
 	
 	//------------------------------------------------
@@ -328,6 +340,9 @@ unique_ptr<CItemBase> CSpawnItemManager::SpawnItem()
 			break;
 		case ITEM_BOMB:
 			spawnItem = make_unique<CBomb>();
+			break;
+		case ITEM_SWORD:
+			spawnItem = make_unique<CSword>();
 			break;
 		}
 
@@ -369,7 +384,35 @@ unique_ptr<CItemBase> CSpawnItemManager::SpawnItem()
 //コインを出現させる
 unique_ptr<CItemBase> CSpawnItemManager::SpawnCoin()
 {
-	
+	//出現させるコインの保存用
+	unique_ptr<CItemBase> spawnCoin = nullptr;
+
+	//リストの中からコインを探して保存用に入れる
+	for (int spawn_i = 0; spawn_i < m_item.size(); spawn_i++)
+	{
+		if (m_item[spawn_i] == nullptr)continue;
+
+		if (m_item[spawn_i]->GetItemName() == ITEM_COIN)
+		{
+			spawnCoin = move(m_item[spawn_i]);
+		}
+	}
+
+	//コインのクラスがなかったら新しく作る
+	if (spawnCoin == nullptr)
+	{
+		spawnCoin = make_unique<CCoin>();
+
+		spawnCoin->Init();
+		spawnCoin->Load(m_hndl[ITEM_COIN]);
+	}
+
+	//コインの生存フラグをtrueにする
+	spawnCoin->SetActive(true);
+	spawnCoin->SetIsSpawn(true);
+
+	//スポーンしたコインを返す
+	return spawnCoin;
 }
 
 //アイテムを元に戻す

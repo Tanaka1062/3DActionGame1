@@ -94,6 +94,9 @@ void CPlayerManager::Init(CAttackManager* _attackManager,
 
 	}
 	
+	//スポーン座標を全て消す
+	m_spawnPos.clear();
+
 	m_shotManager = _shotManager;
 }
 
@@ -140,6 +143,7 @@ void CPlayerManager::Load()
 		start.y += 50;
 		m_player[i]->Load(m_modelHndl[i]);
 		m_player[i]->SetPos(start);
+		m_spawnPos.push_back(start);
 	}
 }
 
@@ -170,6 +174,12 @@ void CPlayerManager::Step(float _rot)
 
 				targetPos = m_player[target_i]->GetPosPoint();
 			}
+		}
+
+		//プレイヤーが死んでいたら復活させる
+		if (m_player[player_i]->GetActive() == false)
+		{
+			m_player[player_i]->Respawn(m_spawnPos[player_i]);
 		}
 
 		m_player[player_i]->Step(_rot,targetPos,m_shotManager);

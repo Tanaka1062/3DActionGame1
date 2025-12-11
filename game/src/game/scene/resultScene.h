@@ -2,12 +2,14 @@
 #include "sceneBase.h"
 #include <DxLib.h>
 #include "../../lib/2DUi/2DUi.h"
+#include "../winner/winner.h"
 
 //ゲーム本編を管理するクラス
 class CResultScene :public CSceneBase
 {
 private:
 	C2DUi m_backGround;		//背景
+	CWinner* m_winner;		//勝利したプレイヤー
 
 public:
 

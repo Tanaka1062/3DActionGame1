@@ -19,6 +19,7 @@ enum tagItemName
 	ITEM_NONE = -1,			//何もない	
 	ITEM_COIN,				//コイン
 	ITEM_BOMB,				//爆弾
+	ITEM_SWORD,				//剣
 
 	ITEM_NUM,				//アイテムの数
 };
@@ -69,6 +70,9 @@ public:
 
 	//使用した時の処理
 	virtual void Use();
+
+	//アイテムのドロップ
+	virtual void Drop(VECTOR _pos, float _rotY);
 
 	//丸影の座標を設定
 	void SetShadowPos(VECTOR _pos) { m_shadow.SetPos(_pos); }

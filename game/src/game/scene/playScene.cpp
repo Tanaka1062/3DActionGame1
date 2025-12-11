@@ -55,6 +55,8 @@ void CPlayScene::Init()
 	m_camera.Init(ZERO);
 	m_gameTime = CGameTime::GetInstance();
 	m_gameTime->Init();
+	m_winner = CWinner::GetInstance();
+	m_winner->Init();
 }
 
 //---------------------------
@@ -92,6 +94,8 @@ void CPlayScene::Step()
 	m_camera.Step(ZERO,0.0f);
 
 	m_gameTime->Step();
+
+	m_winner->Step(&m_playerManager);
 
 	//“–‚½‚è”»’è----------------------------------
 	//“G‚Ì‹ŠE”ÍˆÍ‚ÆƒvƒŒƒCƒ„[‚Ì“–‚½‚è”»’è

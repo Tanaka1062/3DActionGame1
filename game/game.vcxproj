@@ -157,6 +157,10 @@
     <ClCompile Include="src\game\item\itemObject\itemObjectBase.cpp" />
     <ClCompile Include="src\game\item\mapItemManager.cpp" />
     <ClCompile Include="src\game\item\spawnItemManager.cpp" />
+    <ClCompile Include="src\game\item\weapon\ax\ax.cpp" />
+    <ClCompile Include="src\game\item\weapon\gun\gun.cpp" />
+    <ClCompile Include="src\game\item\weapon\itemWeaponBase.cpp" />
+    <ClCompile Include="src\game\item\weapon\sword\sword.cpp" />
     <ClCompile Include="src\game\main.cpp" />
     <ClCompile Include="src\game\map\map.cpp" />
     <ClCompile Include="src\game\player\player.cpp" />
@@ -180,6 +184,7 @@
     <ClCompile Include="src\game\ui\uiManager.cpp" />
     <ClCompile Include="src\game\weapon\weapon.cpp" />
     <ClCompile Include="src\game\weapon\weaponManager.cpp" />
+    <ClCompile Include="src\game\winner\winner.cpp" />
     <ClCompile Include="src\lib\2DUi\2DUi.cpp" />
     <ClCompile Include="src\lib\collision\collision.cpp" />
     <ClCompile Include="src\lib\effekseer\effekseer.cpp" />
@@ -214,6 +219,10 @@
     <ClInclude Include="src\game\item\itemObject\itemObjectBase.h" />
     <ClInclude Include="src\game\item\mapItemManager.h" />
     <ClInclude Include="src\game\item\spawnItemManager.h" />
+    <ClInclude Include="src\game\item\weapon\ax\ax.h" />
+    <ClInclude Include="src\game\item\weapon\gun\gun.h" />
+    <ClInclude Include="src\game\item\weapon\itemWeaponBase.h" />
+    <ClInclude Include="src\game\item\weapon\sword\sword.h" />
     <ClInclude Include="src\game\map\map.h" />
     <ClInclude Include="src\game\player\player.h" />
     <ClInclude Include="src\game\player\playerData.h" />
@@ -237,6 +246,7 @@
     <ClInclude Include="src\game\ui\uiManager.h" />
     <ClInclude Include="src\game\weapon\weapon.h" />
     <ClInclude Include="src\game\weapon\weaponManager.h" />
+    <ClInclude Include="src\game\winner\winner.h" />
     <ClInclude Include="src\lib\2DUi\2DUi.h" />
     <ClInclude Include="src\lib\collision\collision.h" />
     <ClInclude Include="src\lib\effekseer\effekseer.h" />

@@ -11,6 +11,7 @@ class CPlayerManager
 private:
 	vector<CPlayer*> m_player;			//プレイヤーのクラス
 	vector <int> m_modelHndl;			//モデルのハンドル
+	vector <VECTOR>m_spawnPos;			//プレイヤーの出現座標
 	CShotManager* m_shotManager;		//弾のマネージャー
 
 public:

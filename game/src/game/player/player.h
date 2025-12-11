@@ -12,6 +12,8 @@ enum tagWeaponId
 {
 	WEAPON_ID_HAND,		//素手
 	WEAPON_ID_SWORD,	//剣
+	WEAPON_ID_AX,		//斧
+	WEAPON_ID_GUN,		//銃
 
 	WEAPON_ID_NUM,		//武器の種類
 };
@@ -48,6 +50,7 @@ private:
 	bool m_isTransform;				//変身しているかフラグ
 	bool m_isShot;					//弾を撃っているかフラグ
 	int m_attackNum;				//攻撃の番号
+	int m_weaponDurability;			//武器の耐久度
 	float m_dodgerollRotY;			//回避時の角度
 	int m_money;					//お金
 	tagPadName m_padName;			//コントローラーの名前
@@ -79,6 +82,9 @@ public:
 	//終了処理
 	void Exit();
 
+	//復活処理
+	void Respawn(VECTOR _respawnPos);
+
 	//当たり判定後の処理
 	void HitCalc(CObject* _hitObject);
 
@@ -103,6 +109,9 @@ public:
 	tagWeaponId GetWeaponId() { return m_weaponId; }
 	//武器のIDを設定
 	void SetWeaponId(tagWeaponId _weaponId) { m_weaponId = _weaponId; }
+
+	//武器の耐久度をセットする
+	void SetWeaponDurability(int _durability) { m_weaponDurability = _durability; }
 
 	//名前を取得
 	tagPlayerName GetPlayerName() { return m_name; }
@@ -130,6 +139,9 @@ public:
 
 	//持っているアイテムの座標を取得
 	VECTOR GetItemHavePos();
+
+	//武器の座標を取得
+	VECTOR GetWeaponPos();
 
 	//座標をアドレスを取得
 	VECTOR* GetPosPoint() { return &m_pos; }

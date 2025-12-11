@@ -1,6 +1,9 @@
 #include "itemBase.h"
+#include "../../lib/myMath/myMath.h"
 
-static const float RADIUS = 7.5f;		//半径
+static const float RADIUS = 7.5f;				//半径
+static const float DROP_SPEED = 6.0f;			//飛ぶスピード
+static const float DROP_JUMP = 7.0f;			//上に飛ぶ力
 
 //--------------------------
 //	   コンストラクタ
@@ -97,5 +100,29 @@ void CItemBase::Exit()
 void CItemBase::Use()
 {
 
+}
+
+//---------------------
+//	アイテムのドロップ
+//---------------------
+void CItemBase::Drop(VECTOR _pos, float _rotY)
+{
+	//角度ゼロで進む速度
+	VECTOR defaultDir = { 0.0f,DROP_JUMP,DROP_SPEED };
+	//上記を行列に変換する
+	MATRIX dir = CMyMath::GetTranslateMatrix(defaultDir);
+	//Y軸回転行列
+	MATRIX mRotY = CMyMath::GetYawMatrix(_rotY);
+	//行列の合成
+	MATRIX res = CMyMath::MatMult(mRotY, dir);
+
+	//移動をスピードに代入
+	m_speed.x = res.m[0][3];
+	m_speed.y = res.m[1][3];
+	m_speed.z = res.m[2][3];
+
+	m_pos = _pos;
+	m_state = ITEM_FLYING;
+	m_isActive = true;
 }
 

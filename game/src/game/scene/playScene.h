@@ -12,6 +12,7 @@
 #include "../player/playerManager.h"
 #include "../ui/uiManager.h"
 #include "../gameTime/gameTime.h"
+#include "../winner/winner.h"
 
 using namespace std;
 
@@ -30,6 +31,7 @@ private:
 	CAttackManager m_attackManager;			//攻撃のマネージャークラス
 	CUiManager m_uiManager;					//uiのマネージャークラス
 	CGameTime* m_gameTime;					//ゲームの制限時間
+	CWinner* m_winner;						//勝利したプレイヤー
 
 public:
 

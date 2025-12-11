@@ -1,15 +1,12 @@
 #include "coin.h"
 #include "../../lib/myMath/myMath.h"
 
-static const float DROP_SPEED = 14.0f;			//飛ぶスピード
-static const float DROP_JUMP = 7.0f;			//上に飛ぶ力
 static const float ROT_SPEED = 0.05f;			//回転速度
 static const int ADD_MONEY = 1;					//増えるお金の量
 
 CCoin::CCoin()
 {
 	m_state = ITEM_WAIT;
-	m_playerName = PLAYER_NONE;
 }
 
 CCoin::~CCoin()
@@ -24,7 +21,6 @@ void CCoin::Init()
 {
 	CItemBase::Init();
 
-	m_playerName = PLAYER_NONE;
 
 	m_isActive = false;
 	m_itemType = ITEM_TYPE_COIN;
@@ -96,36 +92,10 @@ void CCoin::HitCalc(CObject* _hitObject)
 		player->AddMoney(ADD_MONEY);
 
 		m_isActive = false;
-		m_playerName = player->GetPlayerName();
 		m_owner = player;
 	}
 	//--------------------------------------------------------
 
-}
-
-//---------------------
-//	コインのドロップ
-//---------------------
-void CCoin::Drop(VECTOR _pos, float _rotY)
-{
-	//角度ゼロで進む速度
-	VECTOR defaultDir = { 0.0f,DROP_JUMP,DROP_SPEED };
-	//上記を行列に変換する
-	MATRIX dir = CMyMath::GetTranslateMatrix(defaultDir);
-	//Y軸回転行列
-	MATRIX mRotY = CMyMath::GetYawMatrix(_rotY);
-	//行列の合成
-	MATRIX res = CMyMath::MatMult(mRotY, dir);
-
-	//移動をスピードに代入
-	m_speed.x = res.m[0][3];
-	m_speed.y = res.m[1][3];
-	m_speed.z = res.m[2][3];
-
-	m_pos = _pos;
-	m_state = ITEM_FLYING;
-	m_isActive = true;
-	m_playerName = PLAYER_NONE;
 }
 
 //---------------------
@@ -134,7 +104,6 @@ void CCoin::Drop(VECTOR _pos, float _rotY)
 void CCoin::Delete()
 {
 	m_state = ITEM_WAIT;
-	m_playerName = PLAYER_NONE;
 	m_isSpawn = true;
 }
 

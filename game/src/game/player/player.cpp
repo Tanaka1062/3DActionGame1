@@ -29,6 +29,8 @@ static const float TRANSFORM_UP_SPEED = 0.3f;				//変身後のスピードアップ
 static const int BLOWN_MAX = 100;							//吹き飛び最大値
 static const VECTOR KNOCK_BACK_SPEED = { 0.0f,3.0f,-0.8f };	//吹き飛ぶスピード
 static const int INIT_MONEY = 3;							//最初の所持金
+static const float MONEY_DROP_RATE = 0.4f;					//落とすお金の割合
+static const float MONEY_RESPAWN_RATE = 0.5f;				//復活するときに消費するお金の割合
 //----------------------------------------------
 
 //攻撃関連---------------------------
@@ -182,6 +184,7 @@ void CPlayer::Init(CAttackManager* _attackManager, tagPlayerName _name, tagPadNa
 	m_isTransform = false;
 	m_isShot = false;
 	m_attackNum = ATTACK_NONE;
+	m_weaponDurability = 0;
 	m_money = INIT_MONEY;
 	m_padName = _padName;
 	m_dodgerollRotY = 0.0f;
@@ -270,6 +273,21 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CShotManager* _shotManage)
 		m_hndl = m_keepHndl[NORMAL_HNDL];
 	}
 
+	//武器の耐久度処理--------------------------------
+	//素手以外の場合耐久度が0以下になったら武器が壊れる
+	if (m_weaponId != WEAPON_ID_HAND)
+	{
+		if (m_weaponDurability <= 0)
+		{
+			m_weaponId = WEAPON_ID_HAND;
+			m_weaponDurability = 0;
+		}
+	}
+
+	//------------------------------------------------
+
+
+
 	//移動処理
 	Move(_rotY);
 
@@ -343,6 +361,18 @@ void CPlayer::Exit()
 			m_keepHndl[keepHndl_i] = -1;
 		}
 	}
+}
+
+//復活処理
+void CPlayer::Respawn(VECTOR _respawnPos)
+{
+	m_pos = _respawnPos;
+	m_isActive = true;
+	m_hp = m_maxHp;
+	m_weaponId = WEAPON_ID_HAND;
+	m_weaponDurability = 0;
+	m_money -= static_cast<int>(m_money * MONEY_RESPAWN_RATE);
+	m_state = WAIT;
 }
 
 //当たり判定後の処理
@@ -468,6 +498,11 @@ void CPlayer::HitAttack(int _atk, int _blown, float _rotY)
 		knockBack = VScale(knockBack, 10.0f);
 		m_blown = 0;
 		
+		//コインを落とす量を求める
+		m_dropCoin = static_cast<int>(m_money * MONEY_DROP_RATE);
+
+		//落としたコイン量だけお金を減らす
+		m_money -= m_dropCoin;
 	}
 
 	//既に怯み状態なら処理をしない
@@ -783,6 +818,12 @@ void CPlayer::Attack()
 	//アニメーションが終わったら待機状態に戻す
 	if (GetAnimEnd() == true)
 	{
+		//武器の耐久度が減る
+		if (m_weaponId != WEAPON_ID_HAND)
+		{
+			m_weaponDurability--;
+		}
+
 		m_state = ATTACK_OUT;
 	}
 
@@ -1504,3 +1545,12 @@ VECTOR CPlayer::GetItemHavePos()
 	return itemPos;
 }
 
+//-----------------------
+//	 武器の座標を取得
+//-----------------------
+VECTOR CPlayer::GetWeaponPos()
+{
+	VECTOR weaponPos = MV1GetFramePosition(m_hndl, 11);
+
+	return weaponPos;
+}

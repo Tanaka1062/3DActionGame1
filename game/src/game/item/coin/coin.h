@@ -6,7 +6,6 @@
 class CCoin : public CItemBase
 {
 private:
-	tagPlayerName m_playerName;	//誰が持っているか
 
 public:
 	CCoin();
@@ -24,13 +23,7 @@ public:
 	//当たった時の処理
 	//_name		:どのプレイヤーが触れたかを取得
 	void HitCalc(CObject* _hitObject);
-
-	//持っているプレイヤーの名前
-	tagPlayerName GetPlayerName() { return m_playerName; }
 	
-	//コインのドロップ
-	void Drop(VECTOR _pos,float _rotY);
-
 	//コインの消失
 	void Delete();
 

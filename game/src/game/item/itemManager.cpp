@@ -62,8 +62,10 @@ void CItemManager::Step(CPlayerManager* _playerManager)
 		if ((*item_i)->GetActive() == false &&
 			(*item_i)->GetIsSpawn() == true)
 		{
+			//消えたアイテムをスポーンアイテムマネージャーに戻す
 			m_spawnItemManager.ReturnItem(move(*item_i));
 
+			//消えたアイテムをリストから消す
 			item_i = m_item.erase(item_i);
 		}
 		else
@@ -85,11 +87,28 @@ void CItemManager::Step(CPlayerManager* _playerManager)
 
 		for (int dropCoin_i = 0; dropCoin_i < dropCoin; dropCoin_i++)
 		{
-			//CCoin* coin = new CCoin;
+			//コインを生成して保存する
+			unique_ptr<CItemBase> dropCoin = m_spawnItemManager.SpawnCoin();
+			
+			//飛ばす方向を求める
+			float radian = static_cast<float>((GetRand(60) - 30) * (DX_PI_F / 180.0f));
 
-			//coin->Init();
-			//coin->Load();
+			//とりあえず中心に飛ばす
+			float rotY = atan2f(-player->GetPos().x, -player->GetPos().z);
+
+			//飛ばす方向にプラスで角度を加える
+			rotY += radian;
+
+			//コインを飛ばす
+			dropCoin->Drop(player->GetCenter(), rotY);
+
+			//飛ばしたコインをアイテムリストに入れる
+			m_item.push_back(move(dropCoin));
+
 		}
+
+		//落とすコインの量をゼロに戻す
+		player->SetDropCoin(0);
 	}
 
 }

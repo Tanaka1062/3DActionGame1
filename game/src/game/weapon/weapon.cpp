@@ -57,8 +57,8 @@ void CWeapon::Update(int _hndl)
 {
 	CObject::Update();
 
-	MATRIX scale = MGetScale(VGet(0.2f, 0.1f, 0.1f));
-	MATRIX rotZ = MGetRotZ(90.0f * DX_PI_F / 180.0f);
+	MATRIX scale = MGetScale(VGet(0.1f, 0.1f, 0.1f));
+	MATRIX rotZ = MGetRotZ(0.0f * DX_PI_F / 180.0f);
 	MATRIX mat = MMult(scale, rotZ);
 	MATRIX world = MV1GetFrameLocalWorldMatrix(_hndl, 11);
 	 mat = MMult(mat, world);

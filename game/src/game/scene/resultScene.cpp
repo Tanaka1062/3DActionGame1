@@ -32,7 +32,30 @@ void CResultScene::Draw()
 {
 	m_backGround.Draw();
 
+	m_winner = CWinner::GetInstance();
+
 	DrawFormatString(32, 32, GetColor(255, 0, 0), "リザルト");
+
+	VECTOR pos;
+	pos.x = static_cast<float>(WINDOW_SIZE_X / 2);
+	pos.y = static_cast<float>(WINDOW_SIZE_Y / 2);
+
+	switch (m_winner->GetWinnerPlayerName())
+	{
+	case PLAYER_1:
+	DrawFormatString(pos.x, pos.y, GetColor(255, 0, 0), "プレイヤー１勝利");
+		break;
+	case PLAYER_2:
+		DrawFormatString(pos.x, pos.y, GetColor(255, 0, 0), "プレイヤー2勝利");
+		break;
+	case PLAYER_3:
+		DrawFormatString(pos.x, pos.y, GetColor(255, 0, 0), "プレイヤー3勝利");
+		break;
+	case PLAYER_4:
+		DrawFormatString(pos.x, pos.y, GetColor(255, 0, 0), "プレイヤー4勝利");
+		break;
+	}
+
 }
 
 //---------------------------

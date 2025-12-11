@@ -118,6 +118,21 @@
     <Filter Include="ソース ファイル\game\item\coin">
       <UniqueIdentifier>{f33fd6dd-0e9b-4b2f-b3c8-c5d7246b9087}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\game\item\weapon">
+      <UniqueIdentifier>{8ed27464-3edc-4eeb-a2b3-38f9f7b0a640}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\game\item\weapon\sword">
+      <UniqueIdentifier>{c4e8e031-7d74-4e7b-a2fc-5219956ab404}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\game\item\weapon\ax">
+      <UniqueIdentifier>{40aa1bd0-f82a-415b-8ba3-ff1bc3149138}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\game\item\weapon\gun">
+      <UniqueIdentifier>{04ea11fb-3c85-4ddc-b258-3c39642df902}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\game\winner">
+      <UniqueIdentifier>{a95fac4b-e1b8-4a2a-af36-9ef736a0f4a5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\number.cpp">
@@ -278,6 +293,21 @@
     </ClCompile>
     <ClCompile Include="src\game\item\coin\coin.cpp">
       <Filter>ソース ファイル\game\item\coin</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\item\weapon\itemWeaponBase.cpp">
+      <Filter>ソース ファイル\game\item\weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\item\weapon\sword\sword.cpp">
+      <Filter>ソース ファイル\game\item\weapon\sword</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\item\weapon\ax\ax.cpp">
+      <Filter>ソース ファイル\game\item\weapon\ax</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\item\weapon\gun\gun.cpp">
+      <Filter>ソース ファイル\game\item\weapon\gun</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\winner\winner.cpp">
+      <Filter>ソース ファイル\game\winner</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -445,6 +475,21 @@
     </ClInclude>
     <ClInclude Include="src\game\map\map.h">
       <Filter>ソース ファイル\game\map</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\item\weapon\itemWeaponBase.h">
+      <Filter>ソース ファイル\game\item\weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\item\weapon\sword\sword.h">
+      <Filter>ソース ファイル\game\item\weapon\sword</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\item\weapon\ax\ax.h">
+      <Filter>ソース ファイル\game\item\weapon\ax</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\item\weapon\gun\gun.h">
+      <Filter>ソース ファイル\game\item\weapon\gun</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\winner\winner.h">
+      <Filter>ソース ファイル\game\winner</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
