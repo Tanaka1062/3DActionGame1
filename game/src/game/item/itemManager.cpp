@@ -36,7 +36,9 @@ void CItemManager::Load()
 	//マップアイテムを代入
 	for (int mapItem_i = 0; mapItem_i < m_mapItemManager.GetItemNum(); mapItem_i++)
 	{
-		m_item.push_back(m_mapItemManager.GetItem(mapItem_i));
+		unique_ptr<CItemBase> mapItem = m_mapItemManager.GetItem(mapItem_i);
+
+		m_item.push_back(move(mapItem));
 	}
 }
 
@@ -51,8 +53,8 @@ void CItemManager::Step(CPlayerManager* _playerManager)
 	//スポーンしたらアイテムを増やす
 	if (m_spawnItemManager.GetIsItemSpawn() == true)
 	{
-		CItemBase* spawnItem = m_spawnItemManager.SpawnItem();
-		m_item.push_back(spawnItem);
+		unique_ptr<CItemBase> spawnItem = m_spawnItemManager.SpawnItem();
+		m_item.push_back(move(spawnItem));
 	}
 
 	for (auto item_i = m_item.begin(); item_i != m_item.end(); )

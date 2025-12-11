@@ -18,11 +18,6 @@ static const char FRAME_PATH[] =
 CMapItemManager::CMapItemManager()
 {
 
-	for (int item_i = 0; item_i < MAP_ITEM_SPAWN_POS_NUM; item_i++)
-	{
-		m_item[item_i] = nullptr;
-	}
-
 	m_hndl = -1;
 
 }
@@ -34,14 +29,6 @@ CMapItemManager::~CMapItemManager()
 {
 	Exit();
 
-	for (int item_i = 0; item_i < MAP_ITEM_SPAWN_POS_NUM; item_i++)
-	{
-		delete m_item[item_i];
-
-		m_item[item_i] = nullptr;
-
-	}
-
 }
 
 //-----------------------
@@ -49,12 +36,18 @@ CMapItemManager::~CMapItemManager()
 //-----------------------
 void CMapItemManager::Init()
 {
+	//アイテムが増えすぎないようにする
+	m_item.clear();
+	m_item.reserve(MAP_ITEM_SPAWN_POS_NUM);
+
 	//アイテムの初期化
 	for (int item_i = 0; item_i < MAP_ITEM_SPAWN_POS_NUM; item_i++)
 	{
-		m_item[item_i] = new CBox;
+		unique_ptr<CItemBase> box = make_unique<CBox>();
 
-		m_item[item_i]->Init();
+		box->Init();
+
+		m_item.push_back(move(box));
 	}
 
 	m_hndl = -1;
@@ -69,7 +62,7 @@ void CMapItemManager::Load()
 
 	m_hndl = MV1LoadModel(MODEL_PATH);
 
-	for (int item_i = 0; item_i < MAP_ITEM_SPAWN_POS_NUM; item_i++)
+	for (int item_i = 0; item_i < m_item.size(); item_i++)
 	{
 		m_item[item_i]->Load(m_hndl);
 	}
@@ -108,10 +101,10 @@ void CMapItemManager::Load()
 //-----------------------
 void CMapItemManager::Step()
 {
-	for (int item_i = 0; item_i < MAP_ITEM_SPAWN_POS_NUM; item_i++)
-	{
-		m_item[item_i]->Step();
-	}
+	//for (int item_i = 0; item_i < m_item.size(); item_i++)
+	//{
+	//	m_item[item_i]->Step();
+	//}
 }
 
 //-----------------------
@@ -125,13 +118,22 @@ void CMapItemManager::Exit()
 		m_hndl = -1;
 	}
 
-	for (int item_i = 0; item_i < MAP_ITEM_SPAWN_POS_NUM;item_i++)
-	{
-		if (m_item[item_i] == nullptr)continue;
+	//for (int item_i = 0; item_i < m_item.size();item_i++)
+	//{
+	//	m_item[item_i]->Exit();
 
-		m_item[item_i]->Exit();
+	//}
 
-	}
-
+	//deleteの代わり
+	m_item.clear();
 }
 
+//アイテムのアドレスを取得
+unique_ptr<CItemBase> CMapItemManager::GetItem(int _num)
+{
+	if (m_item.size() <= _num)return nullptr;
+
+	unique_ptr<CItemBase> item = move(m_item[_num]);
+
+	return item;
+}

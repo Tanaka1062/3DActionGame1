@@ -51,6 +51,9 @@ CSpawnItemManager::~CSpawnItemManager()
 //-----------------------
 void CSpawnItemManager::Init(CPlayerManager* _playerManager)
 {
+	//アイテムが増えすぎないようにする
+	m_item.clear();
+
 	//生成用アイテムの生成
 	for (int spawn_i = 0; spawn_i < SPAWN_ITEM_MAX * ITEM_NUM; spawn_i++)
 	{
@@ -248,14 +251,15 @@ void CSpawnItemManager::Exit()
 		}
 	}
 
-	for (auto item_i = m_item.begin(); item_i != m_item.end();)
+	for (int item_i = 0; item_i < m_item.size();item_i++)
 	{
-		(*item_i)->Exit();
+		if (m_item[item_i] == nullptr)continue;
 
-		item_i = m_item.erase(item_i);
-
+		m_item[item_i]->Exit();
 	}
 
+	//deleteの代わりでアイテムが増えすぎないようにする
+	m_item.clear();
 }
 
 //-----------------------
@@ -270,7 +274,7 @@ CItemBase* CSpawnItemManager::GetItem(int _num)
 }
 
 //アイテムを出現させる
-CItemBase* CSpawnItemManager::SpawnItem()
+unique_ptr<CItemBase> CSpawnItemManager::SpawnItem()
 {
 
 	//どのアイテムをスポーンさせるかを決める----------
@@ -303,6 +307,9 @@ CItemBase* CSpawnItemManager::SpawnItem()
 
 	for (int spawn_i = 0; spawn_i < m_item.size(); spawn_i++)
 	{
+		//中身が無いアイテムはスキップする
+		if (m_item[spawn_i] == nullptr)continue;
+
 		if (m_item[spawn_i]->GetItemName() == itemNameId &&
 			m_item[spawn_i]->GetActive() == false)
 		{
@@ -359,15 +366,29 @@ CItemBase* CSpawnItemManager::SpawnItem()
 	return spawnItem;
 }
 
+//コインを出現させる
+unique_ptr<CItemBase> CSpawnItemManager::SpawnCoin()
+{
+	
+}
+
 //アイテムを元に戻す
-void CSpawnItemManager::ReturnItem(CItemBase* _returnItme)
+void CSpawnItemManager::ReturnItem(unique_ptr<CItemBase> _returnItme)
 {
 	for (int spawn_i = 0; spawn_i < m_item.size(); spawn_i++)
 	{
 		if (m_item[spawn_i] == nullptr)
 		{
 			m_item[spawn_i] = move(_returnItme);
+			m_item[spawn_i]->SetActive(false);
+			m_item[spawn_i]->SetIsSpawn(false);
 			return;
 		}
+
 	}
+	//空きが無かったらvectorに入れる
+	_returnItme->SetActive(false);
+	_returnItme->SetIsSpawn(false);
+	m_item.push_back(move(_returnItme));
+
 }

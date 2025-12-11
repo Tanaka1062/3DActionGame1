@@ -22,7 +22,7 @@ enum tagMapItemSpawnPos
 class CMapItemManager
 {
 private:
-	CBox* m_item[MAP_ITEM_SPAWN_POS_NUM];				//マップに置かれているアイテム
+	vector<unique_ptr<CItemBase>> m_item;
 	int m_hndl;											//アイテムのモデルハンドル
 
 public:
@@ -43,7 +43,7 @@ public:
 	int GetItemNum() { return MAP_ITEM_SPAWN_POS_NUM; }
 
 	//アイテムのアドレスを取得
-	CItemBase* GetItem(int _num) { return m_item[_num]; }
+	unique_ptr<CItemBase> GetItem(int _num);
 
 };
 

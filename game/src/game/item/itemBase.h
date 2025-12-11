@@ -90,6 +90,10 @@ public:
 
 	//購入されているかどうかを設定
 	void SetIsBuy(bool _isBuy) { m_isBuy = _isBuy; }
+
+	//出現座標をセット
+	virtual void SetSpawnPos(VECTOR _pos) {}
+
 };
 
 

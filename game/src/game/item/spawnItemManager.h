@@ -29,7 +29,6 @@ static const int SPAWN_ITEM_MAX = 10;		//アイテムの最大量
 class CSpawnItemManager
 {
 private:
-	//vector<CItemBase*> m_item;							//アイテムのクラス
 	vector<unique_ptr<CItemBase>> m_item;
 	int m_hndl[ITEM_NUM];								//アイテムのモデルハンドル
 	int m_spawnTime;									//時間カウント
@@ -65,13 +64,16 @@ public:
 	CItemBase* GetItem(int _num);
 
 	//アイテムを出現させる
-	CItemBase* SpawnItem();
+	unique_ptr<CItemBase> SpawnItem();
+
+	//コインを出現させる
+	unique_ptr<CItemBase> SpawnCoin();
 
 	//アイテムがスポーンするかを取得
 	bool GetIsItemSpawn() { return m_isItemSpawn; }
 
 	//アイテムを元に戻す
-	void ReturnItem(CItemBase* _returnItme);
+	void ReturnItem(unique_ptr<CItemBase> _returnItme);
 
 };
 
