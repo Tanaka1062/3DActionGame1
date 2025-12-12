@@ -16,10 +16,13 @@ public:
 	void Init();
 
 	//モデルロード
-	void Load(int _hndl,int _weaponId);
+	//void Load(int _hndl,int _weaponId);
+	void Load(int _hndl);
 
 	//毎フレームする処理
-	void Step(tagWeaponId _playerWeaponId);
+	//void Step(tagWeaponId _playerWeaponId);
+	void Step(bool _isWeapon);
+
 
 	//更新処理
 	void Update(int _hndl);

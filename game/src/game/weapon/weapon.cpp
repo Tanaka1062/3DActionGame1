@@ -32,19 +32,36 @@ void CWeapon::Init()
 //--------------
 // モデルロード
 //--------------
-void CWeapon::Load(int _hndl, int _weaponId)
+void CWeapon::Load(int _hndl)
 {
-	m_weaponHndl[_weaponId] = MV1DuplicateModel(_hndl);
+	m_hndl = MV1DuplicateModel(_hndl);
 }
+
+//void CWeapon::Load(int _hndl, int _weaponId)
+//{
+//	m_weaponHndl[_weaponId] = MV1DuplicateModel(_hndl);
+//}
 
 //--------------
 //毎フレームする処理
 //--------------
-void CWeapon::Step(tagWeaponId _playerWeaponId)
+void CWeapon::Step(bool _isWeapon)
 {
-	//武器ごとにモデルのハンドルを変更する
-	m_hndl = m_weaponHndl[_playerWeaponId];
+	if (_isWeapon)
+	{
+		m_isActive = true;
+	}
+	else
+	{
+		m_isActive = false;
+	}
 }
+
+//void CWeapon::Step(tagWeaponId _playerWeaponId)
+//{
+//	//武器ごとにモデルのハンドルを変更する
+//	//m_hndl = m_weaponHndl[_playerWeaponId];
+//}
 
 //--------------
 //   更新処理
