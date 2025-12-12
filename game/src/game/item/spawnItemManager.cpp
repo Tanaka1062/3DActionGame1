@@ -2,6 +2,8 @@
 #include "itemObject/bomb/bomb.h"
 #include "itemObject/box/box.h"
 #include "weapon/sword/sword.h"
+#include "weapon/gun/gun.h"
+#include"weapon/ax/ax.h"
 
 
 static const char* MODEL_PATH[ITEM_NUM] =				//モデルのパス
@@ -9,6 +11,9 @@ static const char* MODEL_PATH[ITEM_NUM] =				//モデルのパス
 	"data/model/item/powerCoin/coin.mv1",
 	"data/model/item/bomb/bomb.mv1",
 	"data/model/item/weapon/sword/sword.mv1",
+	"data/model/item/weapon/gun/gun.mv1",
+	"data/model/item/weapon/ax/ax.mv1",
+
 };
 
 static const char FRAME_PATH[] =
@@ -72,6 +77,14 @@ void CSpawnItemManager::Init(CPlayerManager* _playerManager)
 		{
 			m_item.push_back(make_unique<CSword>());
 		}
+		else if (spawn_i <= SPAWN_ITEM_MAX * (ITEM_GUN)+1)
+		{
+			m_item.push_back(make_unique<CGun>());
+		}
+		else if (spawn_i <= SPAWN_ITEM_MAX * (ITEM_AX)+1)
+		{
+			m_item.push_back(make_unique<CAx>());
+		}
 	}
 
 	for (int spawn_i = 0; spawn_i < m_item.size(); spawn_i++)
@@ -103,7 +116,7 @@ void CSpawnItemManager::Init(CPlayerManager* _playerManager)
 //-----------------------
 void CSpawnItemManager::Load()
 {
-
+	//アイテムのモデル読み込み
 	for (int hndl_i = 0; hndl_i < ITEM_NUM; hndl_i++)
 	{
 		if (m_hndl[hndl_i] == -1)
@@ -112,21 +125,12 @@ void CSpawnItemManager::Load()
 		}
 	}
 
+	//アイテムのモデルロード
 	for (int spawn_i = 0; spawn_i < m_item.size(); spawn_i++)
 	{
 		int hndl = m_hndl[m_item[spawn_i]->GetItemName()];
 
 		m_item[spawn_i]->Load(hndl);
-	}
-
-	//for (int item_i = 0; item_i < m_item.size(); item_i++)
-	//{
-	//	//m_item[item_i]->Load(m_hndl[item_i]);
-	//}
-
-	for (int item_i = 0; item_i < SPAWN_ITEM_MAX * ITEM_NUM; item_i++)
-	{
-		CItemBase* item =  m_item[item_i].get();
 	}
 
 	//マップのフレームハンドルをロード
@@ -197,6 +201,7 @@ void CSpawnItemManager::Step()
 			spawnPosNum++;
 	}
 
+	//すべての座標にアイテムが出現したら全部の出現フラグをfalseにする
 	if (spawnPosNum == ITEM_SPAWN_POS_NUM)
 	{
 		for (int spawnPos_i = 0; spawnPos_i < ITEM_SPAWN_POS_NUM; spawnPos_i++)
@@ -204,42 +209,6 @@ void CSpawnItemManager::Step()
 			m_isSpawnPos[spawnPos_i] = false;
 		}
 	}
-
-	//コインをドロップしていたら落とす
-	//for (int player_i = 0; player_i < m_playerManager->GetPlayerNum(); player_i++)
-	//{
-	//	CPlayer* player = m_playerManager->GetPlayer(player_i);
-
-	//	if (player->GetDropCoin() >= 1)
-	//	{
-	//		for (auto coin_i = m_item.begin(); coin_i != m_item.end(); coin_i++)
-	//		{
-
-	//			if ((*coin_i)->GetItemType() != ITEM_TYPE_COIN)continue;
-
-	//			CCoin* coin = nullptr;
-
-	//			coin = dynamic_cast<CCoin*>((*coin_i));
-
-	//			//プレイヤーの持っているコインがある場合落とす
-	//			if (coin->GetPlayerName() == player->GetPlayerName())
-	//			{
-
-	//				float radian = static_cast<float>((GetRand(60) - 30) * (DX_PI_F / 180.0f));
-
-	//				//とりあえず中心に飛ばす
-	//				float rotY = atan2f(-player->GetPos().x, -player->GetPos().z);
-
-	//				rotY += radian;
-
-	//				coin->Drop(player->GetCenter(), rotY);
-	//				break;
-	//			}
-	//		}
-	//		//一ずつ減らす
-	//		player->SetDropCoin(player->GetDropCoin() - 1);
-	//	}
-	//}
 
 }
 
@@ -309,7 +278,7 @@ unique_ptr<CItemBase> CSpawnItemManager::SpawnItem()
 		//	itemNameId = ITEM_SWORD;
 		//	break;
 		//}
-		itemNameId = ITEM_SWORD;
+		itemNameId = ITEM_GUN;
 		break;
 	}
 	
@@ -343,6 +312,12 @@ unique_ptr<CItemBase> CSpawnItemManager::SpawnItem()
 			break;
 		case ITEM_SWORD:
 			spawnItem = make_unique<CSword>();
+			break;
+		case ITEM_GUN:
+			spawnItem = make_unique<CGun>();
+			break;
+		case ITEM_AX:
+			spawnItem = make_unique<CAx>();
 			break;
 		}
 

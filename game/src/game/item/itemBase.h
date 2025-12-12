@@ -20,6 +20,8 @@ enum tagItemName
 	ITEM_COIN,				//コイン
 	ITEM_BOMB,				//爆弾
 	ITEM_SWORD,				//剣
+	ITEM_GUN,				//銃
+	ITEM_AX,				//斧
 
 	ITEM_NUM,				//アイテムの数
 };

@@ -23,31 +23,27 @@ CWeapon::~CWeapon()
 void CWeapon::Init()
 {
 	CObject::Init();
-
+	for (int weaponHndl_i = 0; weaponHndl_i < WEAPON_ID_NUM; weaponHndl_i++)
+	{
+		m_weaponHndl[weaponHndl_i] = -1;
+	}
 }
 
 //--------------
 // モデルロード
 //--------------
-void CWeapon::Load(int _hndl)
+void CWeapon::Load(int _hndl, int _weaponId)
 {
-	CObject::DuplicateModel(_hndl);
+	m_weaponHndl[_weaponId] = MV1DuplicateModel(_hndl);
 }
 
 //--------------
 //毎フレームする処理
 //--------------
-void CWeapon::Step(bool _isWeapon)
+void CWeapon::Step(tagWeaponId _playerWeaponId)
 {
-	//武器を持っていたら武器を表示する
-	if (_isWeapon)
-	{
-		m_isActive = true;
-	}
-	else
-	{
-		m_isActive = false;
-	}
+	//武器ごとにモデルのハンドルを変更する
+	m_hndl = m_weaponHndl[_playerWeaponId];
 }
 
 //--------------
