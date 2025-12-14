@@ -31,9 +31,6 @@ void CAttackBase::Init()
 void CAttackBase::Draw()
 {
 	CObject::Draw();
-
-	//UŒ‚‰Â”\”ÍˆÍ‚Ì‹Šo‰»
-	DrawSphere3D(m_pos, m_rad, 16, GetColor(0, 0, 255), GetColor(0, 0, 255), FALSE);
 }
 
 //----------------------

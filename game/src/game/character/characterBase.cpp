@@ -16,7 +16,7 @@ CCharacterBase::CCharacterBase()
 //------------------------------
 //			‰Šú‰»
 //------------------------------
-void CCharacterBase::Init(CAttackManager* _attackManager)
+void CCharacterBase::Init()
 {
 	CActor::Init();
 	
@@ -29,7 +29,6 @@ void CCharacterBase::Init(CAttackManager* _attackManager)
 	m_isFlying = false;
 	m_isGravity = true;
 	m_state = WAIT;
-	m_attackManager = _attackManager;
 	m_shadow.Init(m_pos,1.0f);
 }
 
@@ -43,7 +42,7 @@ void CCharacterBase::Load()
 //------------------------------
 //		–ˆƒtƒŒ[ƒ€‚·‚éˆ—
 //------------------------------
-void CCharacterBase::Step()
+void CCharacterBase::Step(CAttackManager* _attackManager, CShotManager* _shotManager)
 {
 	CActor::Step();
 
@@ -91,7 +90,7 @@ void CCharacterBase::Step()
 
 		//UŒ‚
 	case ATTACK:
-		Attack();
+		Attack(_attackManager,_shotManager);
 		break;
 
 		//UŒ‚Œã
@@ -214,7 +213,6 @@ void CCharacterBase::Draw()
 void CCharacterBase::Exit()
 {
 	CActor::Exit();
-	delete m_attackManager;
 	m_shadow.Exit();
 }
 
@@ -310,7 +308,7 @@ void CCharacterBase::AttackIn()
 //------------------------------
 //			UŒ‚’†
 //------------------------------
-void CCharacterBase::Attack()
+void CCharacterBase::Attack(CAttackManager* _attackManager, CShotManager* _shotManager)
 {
 
 }

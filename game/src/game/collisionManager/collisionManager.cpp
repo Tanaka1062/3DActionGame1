@@ -22,8 +22,15 @@ void CCollisionManager::CheckHitObjectToObject(CObject* _objectA, CObject* _obje
 
 	}
 
-	//どちらかのオブジェクトが押し出し処理をしない場合は押し出し処理をしない
-	if (_objectA->GetIsPushed() == false || _objectB->GetIsPushed() == false)return;
+	//攻撃の当たり判定は押し出し処理をしない
+	if (_objectA->GetObjectType() == OBJECT_ATTACK ||
+		_objectB->GetObjectType() == OBJECT_ATTACK)
+		return;
+
+	//弾の当たり判定は押し出し処理をしない
+	if (_objectA->GetObjectType() == OBJECT_SHOT ||
+		_objectB->GetObjectType() == OBJECT_SHOT)
+		return;
 
 	//押し戻し処理-------------------------------------------------
 
@@ -48,22 +55,32 @@ void CCollisionManager::CheckHitObjectToObject(CObject* _objectA, CObject* _obje
 		//移動させるベクトルを求める
 
 		//方向ベクトルなので正規化する
-		dir = VNorm(dir);
 
-		dir = VScale(dir, len3);
+		//オブジェクトBの押し出し----------------
+		if (_objectB->GetIsPushed() == true)
+		{
+			dir = VNorm(dir);
 
-		objectBPos = VAdd(_objectB->GetPos(), dir);
+			dir = VScale(dir, len3);
 
-		_objectB->SetPos(VAdd(_objectB->GetPos(), dir));
+			objectBPos = VAdd(_objectB->GetPos(), dir);
 
+			_objectB->SetPos(VAdd(_objectB->GetPos(), dir));
+		}
+		//---------------------------------------
 
-		VECTOR dir2 = VSub(objectAPos, objectBPos);
-		dir2 = VNorm(dir2);
-		dir2 = VScale(dir2, len3);
+		//オブジェクトAの押し出し----------------
+		if (_objectA->GetIsPushed() == true)
+		{
+			VECTOR dir2 = VSub(objectAPos, objectBPos);
+			dir2 = VNorm(dir2);
+			dir2 = VScale(dir2, len3);
 
-		objectAPos = VAdd(_objectA->GetPos(), dir2);
+			objectAPos = VAdd(_objectA->GetPos(), dir2);
 
-		_objectA->SetPos(VAdd(_objectA->GetPos(), dir2));
+			_objectA->SetPos(VAdd(_objectA->GetPos(), dir2));
+		}
+		//---------------------------------------
 	}
 
 	//-------------------------------------------------------------

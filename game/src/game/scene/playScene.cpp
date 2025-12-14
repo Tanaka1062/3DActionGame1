@@ -47,7 +47,7 @@ void CPlayScene::Init()
 {
 	m_ground.Init();
 	m_sky.Init();
-	m_playerManager.Init(&m_attackManager,&m_shot);
+	m_playerManager.Init();
 	m_shot.Init();
 	m_itemManager.Init(&m_playerManager);
 	m_weaponManager.Init();
@@ -81,7 +81,7 @@ void CPlayScene::Step()
 	//ŠeíŒvZˆ—‚ğÀs
 	m_sky.Step();
 
-	m_playerManager.Step(m_camera.GetRot().y);
+	m_playerManager.Step(&m_attackManager,&m_shot,m_camera.GetRot().y);
 
 	m_shot.Step();
 

@@ -1,6 +1,7 @@
 #pragma once
 #include "../../lib/model/actor.h"
 #include "../attack/attackManager.h"
+#include "../shot/shotManager.h"
 #include "../shadow/shadow.h"
 
 enum tagCharacterType	//キャラクターの種類
@@ -45,7 +46,6 @@ protected:
 	int m_atk;							//攻撃力
 	tagState m_state;					//状態
 	tagCharacterType m_type;			//種類
-	CAttackManager* m_attackManager;	//攻撃マネージャークラス
 	CShadow m_shadow;					//丸影のクラス
 
 public:
@@ -53,13 +53,13 @@ public:
 	CCharacterBase();
 
 	//初期化
-	virtual void Init(CAttackManager* _attackManager = nullptr);
+	virtual void Init();
 
 	//モデルのロード
 	virtual void Load();
 
 	//毎フレームする処理
-	virtual void Step();
+	virtual void Step(CAttackManager* _attackManager, CShotManager* _shotManager);
 
 	//毎フレームする処理(座標取得用)
 	virtual void Step(VECTOR _pos);
@@ -115,7 +115,7 @@ protected:
 	virtual void AttackIn();
 
 	//攻撃中
-	virtual void Attack();
+	virtual void Attack(CAttackManager* _attackManager,CShotManager* _shotManager);
 
 	//攻撃後
 	virtual void AttackOut();

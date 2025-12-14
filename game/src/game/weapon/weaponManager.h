@@ -6,7 +6,7 @@
 class CWeaponManager
 {
 private:
-	CWeapon m_weapon[PAD_NUM];		//武器
+	CWeapon m_weapon[PLAYER_NUM];		//武器
 public:
 	//コンストラクタ・デストラクタ
 	CWeaponManager();

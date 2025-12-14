@@ -3,7 +3,6 @@
 #include "../shot/shotManager.h"
 #include"../../lib/input/controllerManager.h"
 #include "playerData.h"
-#include "../shot/shotManager.h"
 
 static const int TRANSFORM_TIME = 10 * 60;					//変身している時間
 
@@ -48,7 +47,6 @@ private:
 	int m_dropCoin;					//コインを落とす数
 	bool m_isDodgeroll;				//回避しているかフラグ
 	bool m_isTransform;				//変身しているかフラグ
-	bool m_isShot;					//弾を撃っているかフラグ
 	int m_attackNum;				//攻撃の番号
 	int m_weaponDurability;			//武器の耐久度
 	float m_dodgerollRotY;			//回避時の角度
@@ -65,13 +63,13 @@ public:
 	~CPlayer();
 
 	//初期化
-	void Init(CAttackManager* _attackManager,tagPlayerName _name, tagPadName _padName);
+	void Init(tagPlayerName _name, tagPadName _padName);
 
 	//モデルロード
 	void Load(int _modelHndl);
 
 	//毎フレームする処理
-	void Step(float _rotY,VECTOR* _targetPos, CShotManager* _shotManage);
+	void Step(float _rotY,VECTOR* _targetPos, CAttackManager* _attackManager, CShotManager* _shotManager);
 
 	//描写処理
 	void Draw();
@@ -93,9 +91,6 @@ public:
 
 	//回避しているかを取得
 	bool GetIsDodgeroll() { return m_isDodgeroll; }
-
-	//弾を出しているかを取得
-	bool GetIsShot() { return m_isShot; }
 
 	//コインを落としているかを取得
 	int GetDropCoin() { return m_dropCoin; }
@@ -169,7 +164,7 @@ private:
 	void AttackIn();
 
 	//攻撃状態処理
-	void Attack();
+	void Attack(CAttackManager* _attackManager, CShotManager* _shotManager);
 
 	//攻撃後処理
 	void AttackOut();

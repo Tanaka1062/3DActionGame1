@@ -113,18 +113,7 @@ void CShotBase::Step()
 //-----------------------
 void CShotBase::Draw()
 {
-	CObject::Draw();
-
-
-#ifdef DEBUG
-	
-	//Active‚ªfalse‚È‚ç•`ŽÊ‚µ‚È‚¢
-	if (m_isActive == false)return;
-
-	DrawSphere3D(m_pos, m_rad, 16, GetColor(255, 0, 0), GetColor(255, 0, 0), FALSE);
-
-#endif // DEBUG
-	
+	CObject::Draw();	
 }
 
 //-----------------------
@@ -172,6 +161,8 @@ void CShotBase::Request(VECTOR _pos, VECTOR _rot, float _rad, float _speed, int 
 	m_effectHndl = _effectHndl;
 	m_shotName = _name;
 	m_targetPos = _targetPos;
+
+	m_pos.y -= m_rad * 0.5f;
 
 	m_scale = { _rad/2.2f ,_rad/2.2f,_rad/2.2f };
 

@@ -32,36 +32,19 @@ void CWeapon::Init()
 //--------------
 // モデルロード
 //--------------
-void CWeapon::Load(int _hndl)
+void CWeapon::Load(int _hndl, int _weaponId)
 {
-	m_hndl = MV1DuplicateModel(_hndl);
+	m_weaponHndl[_weaponId] = MV1DuplicateModel(_hndl);
 }
-
-//void CWeapon::Load(int _hndl, int _weaponId)
-//{
-//	m_weaponHndl[_weaponId] = MV1DuplicateModel(_hndl);
-//}
 
 //--------------
 //毎フレームする処理
 //--------------
-void CWeapon::Step(bool _isWeapon)
+void CWeapon::Step(tagWeaponId _playerWeaponId)
 {
-	if (_isWeapon)
-	{
-		m_isActive = true;
-	}
-	else
-	{
-		m_isActive = false;
-	}
+	//武器ごとにモデルのハンドルを変更する
+	m_hndl = m_weaponHndl[_playerWeaponId];
 }
-
-//void CWeapon::Step(tagWeaponId _playerWeaponId)
-//{
-//	//武器ごとにモデルのハンドルを変更する
-//	//m_hndl = m_weaponHndl[_playerWeaponId];
-//}
 
 //--------------
 //   更新処理
@@ -71,8 +54,8 @@ void CWeapon::Update(int _hndl)
 	CObject::Update();
 
 	MATRIX scale = MGetScale(VGet(0.1f, 0.1f, 0.1f));
-	MATRIX rotZ = MGetRotZ(0.0f * DX_PI_F / 180.0f);
-	MATRIX mat = MMult(scale, rotZ);
+	MATRIX rotY = MGetRotY(90.0f * DX_PI_F / 180.0f);
+	MATRIX mat = MMult(scale, rotY);
 	MATRIX world = MV1GetFrameLocalWorldMatrix(_hndl, 11);
 	 mat = MMult(mat, world);
 

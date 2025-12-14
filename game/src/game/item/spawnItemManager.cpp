@@ -263,7 +263,7 @@ unique_ptr<CItemBase> CSpawnItemManager::SpawnItem()
 
 		//スポーンするアイテムを作成
 
-		if (randNum < 60)
+		if (randNum < 70)
 		{
 			itemNameId = ITEM_COIN;
 			break;
@@ -273,11 +273,22 @@ unique_ptr<CItemBase> CSpawnItemManager::SpawnItem()
 			itemNameId = ITEM_BOMB;
 			break;
 		}
-		else
+		else if(randNum <= 90)
 		{
 			itemNameId = ITEM_SWORD;
 			break;
 		}
+		else if (randNum <= 95)
+		{
+			itemNameId = ITEM_AX;
+			break;
+		}
+		else
+		{
+			itemNameId = ITEM_GUN;
+			break;
+		}
+
 		break;
 	}
 	

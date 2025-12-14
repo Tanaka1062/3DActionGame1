@@ -1,7 +1,11 @@
 #include "weaponManager.h"
 
-static const char MODEL_PATH[] =
-{ "data/model/item/weapon/sword/sword.mv1" };				//ロードするファイル名
+static const char* MODEL_PATH[WEAPON_ID_NUM] ={		//ロードするファイル名
+	"",
+	"data/model/item/weapon/sword/sword.mv1",
+	"data/model/item/weapon/ax/ax.mv1",
+	"data/model/item/weapon/gun/gun.mv1",
+};				
 
 //---------------------------
 //		 コンストラクタ
@@ -35,12 +39,22 @@ void CWeaponManager::Init()
 //---------------------------
 void CWeaponManager::Load()
 {
-	//武器のモデルハンドルロード
-	int hndl = MV1LoadModel(MODEL_PATH);
+	int hndl[WEAPON_ID_NUM] = { -1 };
 
-	for (int i = 0; i < PAD_NUM; i++)
+	//武器のモデルハンドルロード
+	for (int weaponHnd_i = 0; weaponHnd_i < WEAPON_ID_NUM; weaponHnd_i++)
 	{
-		m_weapon[i].Load(hndl);
+		hndl[weaponHnd_i] = MV1LoadModel(MODEL_PATH[weaponHnd_i]);
+	}
+
+	//武器のクラスにモデルをコピー
+	for (int player_i = 0; player_i < PLAYER_NUM; player_i++)
+	{
+		for (int weaponHnd_i = 0; weaponHnd_i < WEAPON_ID_NUM; weaponHnd_i++)
+		{
+			m_weapon[player_i].Load(hndl[weaponHnd_i],weaponHnd_i);
+		}
+
 	}
 }
 
@@ -49,20 +63,14 @@ void CWeaponManager::Load()
 //---------------------------
 void CWeaponManager::Step(CPlayerManager& _playerManager)
 {
-	for (int i = 0; i < PAD_NUM; i++)
+	for (int player_i = 0; player_i < PLAYER_NUM; player_i++)
 	{
 		//武器を持っているかを保存
 		bool isWeapon = false;
 		//プレイヤーの武器のIDを取得
-		tagWeaponId weaponId = _playerManager.GetPlayer(i)->GetWeaponId();
+		tagWeaponId weaponId = _playerManager.GetPlayer(player_i)->GetWeaponId();
 
-		//武器が素手以外の場合武器を持っているフラグをtrue
-		if (weaponId != WEAPON_ID_HAND)
-		{
-			isWeapon = true;
-		}
-
-		m_weapon[i].Step(isWeapon);
+		m_weapon[player_i].Step(weaponId);
 	}
 }
 
@@ -71,11 +79,11 @@ void CWeaponManager::Step(CPlayerManager& _playerManager)
 //---------------------------
 void CWeaponManager::Update(CPlayerManager& _playerManager)
 {
-	for (int i = 0; i < PAD_NUM; i++)
+	for (int player_i = 0; player_i < PLAYER_NUM; player_i++)
 	{
 		//プレイヤーのハンドルを取得
-		int hndl = _playerManager.GetPlayer(i)->GetHndl();
-		m_weapon[i].Update(hndl);
+		int hndl = _playerManager.GetPlayer(player_i)->GetHndl();
+		m_weapon[player_i].Update(hndl);
 	}
 }
 
@@ -84,9 +92,9 @@ void CWeaponManager::Update(CPlayerManager& _playerManager)
 //---------------------------
 void CWeaponManager::Draw()
 {
-	for (int i = 0; i < PAD_NUM; i++)
+	for (int player_i = 0; player_i < PLAYER_NUM; player_i++)
 	{
-		m_weapon[i].Draw();
+		m_weapon[player_i].Draw();
 	}
 }
 
@@ -95,8 +103,8 @@ void CWeaponManager::Draw()
 //---------------------------
 void CWeaponManager::Exit()
 {
-	for (int i = 0; i < PAD_NUM; i++)
+	for (int player_i = 0; player_i < PLAYER_NUM; player_i++)
 	{
-		m_weapon[i].Exit();
+		m_weapon[player_i].Exit();
 	}
 }

@@ -13,10 +13,10 @@ enum tagModelName					//モデル一覧
 };
 
 static const char* MODEL_PATH[PLAYER_NUM] =
-{ "data/model/player/playerTest6-1.mv1" ,
-  "data/model/player/playerTest6-2.mv1" ,
-  "data/model/player/playerTest6-3.mv1" ,
-  "data/model/player/playerTest6-4.mv1" ,};			//ロードするファイル名
+{ "data/model/player/playerTest7-1.mv1" ,
+  "data/model/player/playerTest7-2.mv1" ,
+  "data/model/player/playerTest7-3.mv1" ,
+  "data/model/player/playerTest7-4.mv1" ,};			//ロードするファイル名
 
 static const char FRAME_PATH[] =
 { "data/model/map/TestMap6Frame.mv1" };			//ロードするファイル名
@@ -47,8 +47,7 @@ CPlayerManager::~CPlayerManager()
 //------------------------
 //		  初期化
 //------------------------
-void CPlayerManager::Init(CAttackManager* _attackManager,
-	CShotManager* _shotManager)
+void CPlayerManager::Init()
 {
 	if (m_modelHndl.size() < MODEL_NUM)
 	{
@@ -90,14 +89,12 @@ void CPlayerManager::Init(CAttackManager* _attackManager,
 
 		}
 
-		m_player[player_i]->Init(_attackManager,name, padName);
+		m_player[player_i]->Init(name, padName);
 
 	}
 	
 	//スポーン座標を全て消す
 	m_spawnPos.clear();
-
-	m_shotManager = _shotManager;
 }
 
 //------------------------
@@ -150,7 +147,7 @@ void CPlayerManager::Load()
 //------------------------
 //	毎フレームする処理
 //------------------------
-void CPlayerManager::Step(float _rot)
+void CPlayerManager::Step(CAttackManager* _attackManager, CShotManager* _shotManager, float _rot)
 {
 	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
@@ -182,7 +179,7 @@ void CPlayerManager::Step(float _rot)
 			m_player[player_i]->Respawn(m_spawnPos[player_i]);
 		}
 
-		m_player[player_i]->Step(_rot,targetPos,m_shotManager);
+		m_player[player_i]->Step(_rot,targetPos,_attackManager,_shotManager);
 	}
 
 

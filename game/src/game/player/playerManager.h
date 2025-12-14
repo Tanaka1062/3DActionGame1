@@ -12,7 +12,6 @@ private:
 	vector<CPlayer*> m_player;			//プレイヤーのクラス
 	vector <int> m_modelHndl;			//モデルのハンドル
 	vector <VECTOR>m_spawnPos;			//プレイヤーの出現座標
-	CShotManager* m_shotManager;		//弾のマネージャー
 
 public:
 	//コンストラクタ・デストラクタ
@@ -20,12 +19,11 @@ public:
 	~CPlayerManager();
 
 	//初期化
-	void Init(CAttackManager* _attackManager = nullptr,
-		CShotManager* _shotManager = nullptr);
+	void Init();
 	//オブジェクトのロード
 	void Load();
 	//毎フレームする処理
-	void Step(float _rot);
+	void Step(CAttackManager* _attackManager,CShotManager* _shotManager,float _rot);
 	//数値の更新
 	void Update();
 	//オブジェクトの描写

@@ -34,9 +34,7 @@ static const float MONEY_RESPAWN_RATE = 0.5f;				//•œŠˆ‚·‚é‚Æ‚«‚ÉÁ”ï‚·‚é‚¨‹à‚ÌŠ
 //----------------------------------------------
 
 //UŒ‚ŠÖ˜A---------------------------
-static const float ATTACK_SIZE = 12.0f;					//UŒ‚”ÍˆÍ
 static const float ATTACK_LENGTH = 15.0f;				//UŒ‚‚Ì’·‚³
-static const float ATTACKB_SIZE = 25.0f;				//UŒ‚B”ÍˆÍ
 static const int ATTACKB_ATK = 100;						//UŒ‚B‚ÌUŒ‚—Í
 static const float ATTACK_MOVE_SPEED = 0.5f;			//UŒ‚‚É‘Oi‚·‚é—Í
 static const float FIGHT_LEN = 40.0f;					//í‚¤‹——£
@@ -48,24 +46,36 @@ static const int SHOT_LOST_TIME = 2 * 60;				//’e‚ªÁ‚¦‚é‚Ü‚Å‚ÌŠÔ
 //ƒAƒjƒ[ƒVƒ‡ƒ“ˆê——---------------------------
 
 enum tagAnim {
-	ANIMID_ATTACKA1,				//UŒ‚A1’†ƒAƒjƒ[ƒVƒ‡ƒ“
-	ANIMID_ATTACKA1_IN,				//UŒ‚A1‘OƒAƒjƒ[ƒVƒ‡ƒ“
-	ANIMID_ATTACKA1_OUT,			//UŒ‚A1ŒãƒAƒjƒ[ƒVƒ‡ƒ“
-	ANIMID_ATTACKA2,				//UŒ‚A2’†ƒAƒjƒ[ƒVƒ‡ƒ“
-	ANIMID_ATTACKA2_IN,				//UŒ‚A2‘OƒAƒjƒ[ƒVƒ‡ƒ“
-	ANIMID_ATTACKA2_OUT,			//UŒ‚A2ŒãƒAƒjƒ[ƒVƒ‡ƒ“
-	ANIMID_ATTACKA3,				//UŒ‚A3’†ƒAƒjƒ[ƒVƒ‡ƒ“
-	ANIMID_ATTACKA3_IN,				//UŒ‚A3‘OƒAƒjƒ[ƒVƒ‡ƒ“
-	ANIMID_ATTACKA3_OUT,			//UŒ‚A3ŒãƒAƒjƒ[ƒVƒ‡ƒ“
-	ANIMID_ATTACKB1,				//UŒ‚B1’†ƒAƒjƒ[ƒVƒ‡ƒ“
-	ANIMID_ATTACKB1_IN,				//UŒ‚B1‘OƒAƒjƒ[ƒVƒ‡ƒ“
-	ANIMID_ATTACKB1_OUT,			//UŒ‚B1ŒãƒAƒjƒ[ƒVƒ‡ƒ“
-	ANIMID_ATTACKB2,				//UŒ‚B2’†ƒAƒjƒ[ƒVƒ‡ƒ“
-	ANIMID_ATTACKB2_IN,				//UŒ‚B2‘OƒAƒjƒ[ƒVƒ‡ƒ“
-	ANIMID_ATTACKB2_OUT,			//UŒ‚B2ŒãƒAƒjƒ[ƒVƒ‡ƒ“
-	ANIMID_ATTACKB3,				//UŒ‚B3’†ƒAƒjƒ[ƒVƒ‡ƒ“
-	ANIMID_ATTACKB3_IN,				//UŒ‚B3‘OƒAƒjƒ[ƒVƒ‡ƒ“
-	ANIMID_ATTACKB3_OUT,			//UŒ‚B3ŒãƒAƒjƒ[ƒVƒ‡ƒ“
+	ANIMID_ATTACK1_AX,				//•€UŒ‚1’†ƒAƒjƒ[ƒVƒ‡ƒ“
+	ANIMID_ATTACK1_AX_IN,			//•€UŒ‚1‘OƒAƒjƒ[ƒVƒ‡ƒ“
+	ANIMID_ATTACK1_AX_OUT,			//•€UŒ‚1ŒãƒAƒjƒ[ƒVƒ‡ƒ“
+	ANIMID_ATTACK2_AX,				//•€UŒ‚2’†ƒAƒjƒ[ƒVƒ‡ƒ“
+	ANIMID_ATTACK2_AX_IN,			//•€UŒ‚2‘OƒAƒjƒ[ƒVƒ‡ƒ“
+	ANIMID_ATTACK2_AX_OUT,			//•€UŒ‚2ŒãƒAƒjƒ[ƒVƒ‡ƒ“
+	ANIMID_ATTACK3_AX,				//•€UŒ‚3’†ƒAƒjƒ[ƒVƒ‡ƒ“
+	ANIMID_ATTACK3_AX_IN,			//•€UŒ‚3‘OƒAƒjƒ[ƒVƒ‡ƒ“
+	ANIMID_ATTACK3_AX_OUT,			//•€UŒ‚3ŒãƒAƒjƒ[ƒVƒ‡ƒ“
+	ANIMID_ATTACK1_GUN,				//eUŒ‚1’†ƒAƒjƒ[ƒVƒ‡ƒ“
+	ANIMID_ATTACK1_GUN_IN,			//eUŒ‚1‘OƒAƒjƒ[ƒVƒ‡ƒ“
+	ANIMID_ATTACK1_GUN_OUT,			//eUŒ‚1ŒãƒAƒjƒ[ƒVƒ‡ƒ“
+	ANIMID_ATTACK1_HAND,			//‘fèUŒ‚1’†ƒAƒjƒ[ƒVƒ‡ƒ“
+	ANIMID_ATTACK1_HAND_IN,			//‘fèUŒ‚1‘OƒAƒjƒ[ƒVƒ‡ƒ“
+	ANIMID_ATTACK1_HAND_OUT,		//‘fèUŒ‚1ŒãƒAƒjƒ[ƒVƒ‡ƒ“
+	ANIMID_ATTACK2_HAND,			//‘fèUŒ‚2’†ƒAƒjƒ[ƒVƒ‡ƒ“
+	ANIMID_ATTACK2_HAND_IN,			//‘fèUŒ‚2‘OƒAƒjƒ[ƒVƒ‡ƒ“
+	ANIMID_ATTACK2_HAND_OUT,		//‘fèUŒ‚2ŒãƒAƒjƒ[ƒVƒ‡ƒ“
+	ANIMID_ATTACK3_HAND,			//‘fèUŒ‚3’†ƒAƒjƒ[ƒVƒ‡ƒ“
+	ANIMID_ATTACK3_HAND_IN,			//‘fèUŒ‚3‘OƒAƒjƒ[ƒVƒ‡ƒ“
+	ANIMID_ATTACK3_HAND_OUT,		//‘fèUŒ‚3ŒãƒAƒjƒ[ƒVƒ‡ƒ“
+	ANIMID_ATTACK1_SWORD,			//Œ•UŒ‚1’†ƒAƒjƒ[ƒVƒ‡ƒ“
+	ANIMID_ATTACK1_SWORD_IN,		//Œ•UŒ‚1‘OƒAƒjƒ[ƒVƒ‡ƒ“
+	ANIMID_ATTACK1_SWORD_OUT,		//Œ•UŒ‚1ŒãƒAƒjƒ[ƒVƒ‡ƒ“
+	ANIMID_ATTACK2_SWORD,			//Œ•UŒ‚2’†ƒAƒjƒ[ƒVƒ‡ƒ“
+	ANIMID_ATTACK2_SWORD_IN,		//Œ•UŒ‚2‘OƒAƒjƒ[ƒVƒ‡ƒ“
+	ANIMID_ATTACK2_SWORD_OUT,		//Œ•UŒ‚2ŒãƒAƒjƒ[ƒVƒ‡ƒ“
+	ANIMID_ATTACK3_SWORD,			//Œ•UŒ‚3’†ƒAƒjƒ[ƒVƒ‡ƒ“
+	ANIMID_ATTACK3_SWORD_IN,		//Œ•UŒ‚3‘OƒAƒjƒ[ƒVƒ‡ƒ“
+	ANIMID_ATTACK3_SWORD_OUT,		//Œ•UŒ‚3ŒãƒAƒjƒ[ƒVƒ‡ƒ“
 	ANIMID_CHARGE,					//ƒ`ƒƒ[ƒW’†‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
 	ANIMID_CHARGE_IN,				//ƒ`ƒƒ[ƒW‘O‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
 	ANIMID_DEFAULT,					//ƒfƒtƒHƒ‹ƒg‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
@@ -108,18 +118,28 @@ enum tagAttackNum
 	ATTACK_NUM,			//UŒ‚‚Ì”
 };
 
-static const float ATTACK_MAGNIFICATION[ATTACK_NUM] =	//UŒ‚‚Ì”{—¦
+static const float ATTACK_MAGNIFICATION[WEAPON_ID_NUM][ATTACK_NUM] =	//UŒ‚‚Ì”{—¦
 {
-	0.5f,
-	0.8f,
-	1.0f,
+	{0.5f,0.8f,1.0f},
+	{0.7f,1.0f,1.2f},
+	{1.0f,1.2f,1.5f},
+	{1.0f,1.0f,1.0f},
 };
 
-static const int ATTACK_BLOWN[ATTACK_NUM] =				//UŒ‚‚Ì‚«”ò‚Ñ“x
+static const int ATTACK_BLOWN[WEAPON_ID_NUM][ATTACK_NUM] =				//UŒ‚‚Ì‚«”ò‚Ñ“x
 {
-	40,
-	40,
-	80,
+	{40,40,80},
+	{40,40,80},
+	{40,50,80},
+	{60,60,80},
+};
+
+static const int ATTACK_SIZE[WEAPON_ID_NUM][ATTACK_NUM] =
+{
+	{10.0f,10.0f,10.0f},
+	{14.0f,14.0f,18.0f},
+	{22.0f,22.0f,24.0f},
+	{14.0f,14.0f,14.0f},
 };
 
 //---------------------------------------------------------
@@ -131,7 +151,7 @@ CPlayer::CPlayer()
 {
 	m_transformTimeCount = 0;
 	m_name = PLAYER_NONE;
-	CCharacterBase::Init(nullptr);
+	CCharacterBase::Init();
 	for (int keepHndl_i = 0; keepHndl_i < HNDL_NUM; keepHndl_i++)
 	{
 		m_keepHndl[keepHndl_i] = -1;
@@ -144,7 +164,6 @@ CPlayer::CPlayer()
 	m_atk = 0;
 	m_isDodgeroll = false;
 	m_isTransform = false;
-	m_isShot = false;
 	m_attackNum = ATTACK_NONE;
 	m_money = INIT_MONEY;
 	m_dodgerollRotY = 0.0f;
@@ -165,9 +184,9 @@ CPlayer::~CPlayer()
 //-----------------------
 //		‰Šú‰»
 //-----------------------
-void CPlayer::Init(CAttackManager* _attackManager, tagPlayerName _name, tagPadName _padName)
+void CPlayer::Init(tagPlayerName _name, tagPadName _padName)
 {
-	CCharacterBase::Init(_attackManager);
+	CCharacterBase::Init();
 
 	m_transformTimeCount = TRANSFORM_TIME;
 	for (int keepHndl_i = 0; keepHndl_i < HNDL_NUM; keepHndl_i++)
@@ -182,7 +201,6 @@ void CPlayer::Init(CAttackManager* _attackManager, tagPlayerName _name, tagPadNa
 	m_atk = ATK;
 	m_isDodgeroll = false;
 	m_isTransform = false;
-	m_isShot = false;
 	m_attackNum = ATTACK_NONE;
 	m_weaponDurability = 0;
 	m_money = INIT_MONEY;
@@ -208,38 +226,32 @@ void CPlayer::Load(int _modelHndl)
 //-----------------------
 //–ˆƒtƒŒ[ƒ€‚·‚éˆ—
 //-----------------------
-void CPlayer::Step(float _rotY, VECTOR* _targetPos, CShotManager* _shotManage)
+void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManager, CShotManager* _shotManager)
 {
-	if (m_isShot == true)
-	{
-		_shotManage->Request(GetCenter(),m_rot, SHOT_SIZE, SHOT_SPEED,m_atk, SHOT_LOST_TIME,m_name,-1,m_targetPos);
-		m_isShot = false;
-	}
-
 	m_targetPos = _targetPos;
 
 	//ƒvƒŒƒCƒ„[“¯m‚Ì‹——£
-	VECTOR vLen = VSub(m_pos, *m_targetPos);
-	float fLen = VSize(vLen);
+	//VECTOR vLen = VSub(m_pos, *m_targetPos);
+	//float fLen = VSize(vLen);
 
-	//í‚¢‚Ì‹——£‚É‚È‚Á‚½‚çŒİ‚¢‚Ì•ûŒü‚ğŒü‚­
-	if (fLen <= FIGHT_LEN)
-	{
-		if (!m_isDodgeroll)
-		{
-			float rotY1 = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
+	////í‚¢‚Ì‹——£‚É‚È‚Á‚½‚çŒİ‚¢‚Ì•ûŒü‚ğŒü‚­
+	//if (fLen <= FIGHT_LEN)
+	//{
+	//	if (!m_isDodgeroll)
+	//	{
+	//		float rotY1 = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
 
-			m_rot.y = rotY1;
-		}
-	}
+	//		m_rot.y = rotY1;
+	//	}
+	//}
 
-	//ƒvƒŒƒCƒ„[‚ÌŒü‚«‚ğ•Ï‚¦‚é
-	if (m_state == ITEM_THROW_IN)
-	{
-		float rotY = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
+	////ƒvƒŒƒCƒ„[‚ÌŒü‚«‚ğ•Ï‚¦‚é
+	//if (m_state == ITEM_THROW_IN)
+	//{
+	//	float rotY = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
 
-		m_rot.y = rotY;
-	}
+	//	m_rot.y = rotY;
+	//}
 
 	if (m_isTransform == true)
 	{
@@ -303,7 +315,7 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CShotManager* _shotManage)
 	//ƒAƒCƒeƒ€‚ğE‚¤ˆ—
 	PickUpItem();
 
-	CCharacterBase::Step();
+	CCharacterBase::Step(_attackManager,_shotManager);
 
 	//‘Ì—Í‚ª‘‚¦‚·‚¬‚È‚¢‚æ‚¤‚É
 	if (m_hp >= m_maxHp)
@@ -331,7 +343,6 @@ void CPlayer::Draw()
 
 	attackPos = VAdd(attackPos, m_pos);
 
-	DrawSphere3D(GetCenter(), ATTACKB_SIZE, 16, GetColor(0, 255, 0), GetColor(0, 255, 0), FALSE);
 #endif // DEBUG
 
 }
@@ -371,7 +382,8 @@ void CPlayer::Respawn(VECTOR _respawnPos)
 	m_hp = m_maxHp;
 	m_weaponId = WEAPON_ID_HAND;
 	m_weaponDurability = 0;
-	m_money -= static_cast<int>(m_money * MONEY_RESPAWN_RATE);
+	m_dropCoin = static_cast<int>(m_money * MONEY_RESPAWN_RATE);
+	m_money -= m_dropCoin;
 	m_state = WAIT;
 }
 
@@ -455,17 +467,6 @@ void CPlayer::HitCalc(CObject* _hitObject)
 			shot->GetPos().z - GetCenter().z);
 
 		CCharacterBase::HitAttack(shot->GetAtk(), 90, rot);
-
-		//•Ïg’†‚Ìê‡•ÏgŠÔ‚ğŒ¸‚ç‚·
-		if (m_isTransform == true)
-		{
-			m_transformTimeCount += shot->GetAtk();
-		}
-		//•Ïg‚µ‚Ä‚¢‚È‚¢ê‡ƒRƒCƒ“‚ğ—‚Æ‚·
-		else
-		{
-			m_dropCoin++;
-		}
 
 		shot->SetActive(false);
 
@@ -654,7 +655,7 @@ void CPlayer::Dodgeroll()
 //-----------------------
 void CPlayer::AttackIn()
 {
-	if (m_isTransform == false)
+	if (m_weaponId != WEAPON_ID_GUN)
 	{
 
 		//i‚Ş‘¬“x
@@ -674,6 +675,7 @@ void CPlayer::AttackIn()
 
 	switch (m_weaponId)
 	{
+	//•Ší‚ª‘fè‚Ìê‡
 	case WEAPON_ID_HAND:
 		switch (m_attackNum)
 		{
@@ -682,45 +684,70 @@ void CPlayer::AttackIn()
 			if (m_isTransform == true)
 			{
 				//UŒ‚‘O‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
-				RequestAnim(ANIMID_ATTACKA1_IN, 0.5f);
+				RequestAnim(ANIMID_ATTACK1_HAND_IN, 0.5f);
 			}
 			else
 			{
 				//UŒ‚‘O‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
-				RequestAnim(ANIMID_ATTACKA1_IN, 1.0f);
+				RequestAnim(ANIMID_ATTACK1_HAND_IN, 1.0f);
 			}
 
 			break;
 		case 1:
 			//UŒ‚‘O‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
-			RequestAnim(ANIMID_ATTACKA2_IN, 0.8f);
+			RequestAnim(ANIMID_ATTACK2_HAND_IN, 0.8f);
 			break;
 		case 2:
 			//UŒ‚‘O‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
-			RequestAnim(ANIMID_ATTACKA3_IN, 0.8f);
+			RequestAnim(ANIMID_ATTACK3_HAND_IN, 0.8f);
 			break;
 		}
 
 		break;
+	//•Ší‚ªŒ•‚Ìê‡
 	case WEAPON_ID_SWORD:
 		switch (m_attackNum)
 		{
 		case 0:
 			//UŒ‚‘O‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
-			RequestAnim(ANIMID_ATTACKB1_IN, 1.0f);
+			RequestAnim(ANIMID_ATTACK1_SWORD_IN, 1.6f);
 			break;
 		case 1:
 			//UŒ‚‘O‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
-			RequestAnim(ANIMID_ATTACKB2_IN, 1.0f);
+			RequestAnim(ANIMID_ATTACK2_SWORD_IN, 1.0f);
 			break;
 		case 2:
 			//UŒ‚‘O‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
-			RequestAnim(ANIMID_ATTACKB3_IN, 1.0f);
+			RequestAnim(ANIMID_ATTACK3_SWORD_IN, 1.0f);
 			break;
 		}
 
 		break;
+	//•Ší‚ª•€‚Ìê‡
+	case WEAPON_ID_AX:
+		switch (m_attackNum)
+		{
+		case 0:
+			//UŒ‚‘O‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+			RequestAnim(ANIMID_ATTACK1_AX_IN, 1.0f);
+			break;
+		case 1:
+			//UŒ‚‘O‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+			RequestAnim(ANIMID_ATTACK2_AX_IN, 1.0f);
+			break;
+		case 2:
+			//UŒ‚‘O‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+			RequestAnim(ANIMID_ATTACK3_AX_IN, 1.0f);
+			break;
+		}
+		break;
+	//•Ší‚ªe‚Ìê‡
+	case WEAPON_ID_GUN:
+		//UŒ‚‘O‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+		RequestAnim(ANIMID_ATTACK1_GUN_IN, 0.5f);
+		break;
 	}
+
 
 	//ƒAƒjƒ[ƒVƒ‡ƒ“‚ªI‚í‚Á‚½‚çUŒ‚’†‚ÉˆÚs
 	if (GetAnimEnd() == true)
@@ -733,7 +760,7 @@ void CPlayer::AttackIn()
 //-----------------------
 //		UŒ‚’†
 //-----------------------
-void CPlayer::Attack()
+void CPlayer::Attack(CAttackManager* _attackManager, CShotManager* _shotManager)
 {
 
 	//UŒ‚‚ÌÀ•W
@@ -743,74 +770,110 @@ void CPlayer::Attack()
 
 	attackPos = VAdd(attackPos, m_pos);
 
-	attackPos.y = GetCenter().y;
+	attackPos.y = m_pos.y;
 
 	//UŒ‚—Í‚ğŒvZ
-	int atk = static_cast<int>(m_atk * ATTACK_MAGNIFICATION[m_attackNum]);
+	int atk = static_cast<int>(m_atk * ATTACK_MAGNIFICATION[m_weaponId][m_attackNum]);
 
-	int blown = ATTACK_BLOWN[m_attackNum];
+	int blown = ATTACK_BLOWN[m_weaponId][m_attackNum];
+
+	float attackSize = ATTACK_SIZE[m_weaponId][m_attackNum];
 
 	switch (m_weaponId)
 	{
+	//•Ší‚ª‘fè‚Ìê‡
 	case WEAPON_ID_HAND:
 
 		switch (m_attackNum)
 		{
 		case 0:
 			//UŒ‚’†‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
-			if (RequestAnim(ANIMID_ATTACKA1, 1.0f))
+			if (RequestAnim(ANIMID_ATTACK1_HAND, 1.0f))
 			{
 				if (m_isTransform == true)
 				{
-					m_isShot = true;
 				}
 				else
 				{
-					m_attackManager->Request(attackPos, ATTACK_SIZE, atk, blown, m_name);
+					_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
 				}
 			}
 			break;
 		case 1:
 			//UŒ‚’†‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
-			if (RequestAnim(ANIMID_ATTACKA2, 1.0f))
+			if (RequestAnim(ANIMID_ATTACK2_HAND, 1.0f))
 			{
-				m_attackManager->Request(attackPos, ATTACK_SIZE, atk, blown, m_name);
+				_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
 			}
 			break;
 		case 2:
 			//UŒ‚’†‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
-			if(RequestAnim(ANIMID_ATTACKA3, 1.0f))
+			if(RequestAnim(ANIMID_ATTACK3_HAND, 1.0f))
 			{
-				m_attackManager->Request(attackPos, ATTACK_SIZE, atk, blown, m_name);
+				_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
 			}
 			break;
 		}
 
 		break;
+	//•Ší‚ªŒ•‚Ìê‡
 	case WEAPON_ID_SWORD:
 		switch (m_attackNum)
 		{
 		case 0:
 			//UŒ‚’†‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
-			if (RequestAnim(ANIMID_ATTACKB1, 1.0f))
+			if (RequestAnim(ANIMID_ATTACK1_SWORD, 1.0f))
 			{
-				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, blown, m_name);
+				_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
 			}
 			break;
 		case 1:
 			//UŒ‚’†‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
-			if (RequestAnim(ANIMID_ATTACKB2, 1.0f))
+			if (RequestAnim(ANIMID_ATTACK2_SWORD, 1.0f))
 			{
-				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, blown, m_name);
+				_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
 			}
 			break;
 		case 2:
 			//UŒ‚’†‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
-			if (RequestAnim(ANIMID_ATTACKB3, 1.0f))
+			if (RequestAnim(ANIMID_ATTACK3_SWORD, 1.0f))
 			{
-				m_attackManager->Request(attackPos, ATTACK_SIZE, m_atk, blown, m_name);
+				_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
 			}
 			break;
+		}
+		break;
+	//•Ší‚ª•€‚Ìê‡
+	case WEAPON_ID_AX:
+		switch (m_attackNum)
+		{
+		case 0:
+			//UŒ‚’†‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+			if (RequestAnim(ANIMID_ATTACK1_AX, 1.0f))
+			{
+				_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
+			}
+			break;
+		case 1:
+			if (RequestAnim(ANIMID_ATTACK2_AX, 1.0f))
+			{
+				_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
+			}
+			break;
+		case 2:
+			if (RequestAnim(ANIMID_ATTACK3_AX, 1.0f))
+			{
+				_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
+			}
+			break;
+		}
+		break;
+	//•Ší‚ªe‚Ìê‡
+	case WEAPON_ID_GUN:
+		if (RequestAnim(ANIMID_ATTACK1_GUN, 1.0f))
+		{
+			VECTOR shotPos = MV1GetFramePosition(m_hndl, 11);
+			_shotManager->Request(shotPos,m_rot,attackSize,SHOT_SPEED,atk,SHOT_LOST_TIME,m_name);
 		}
 		break;
 	}
@@ -837,41 +900,66 @@ void CPlayer::AttackOut()
 
 	switch (m_weaponId)
 	{
+	//•Ší‚ª‘fè‚Ìê‡
 	case WEAPON_ID_HAND:
 		switch (m_attackNum)
 		{
 		case 0:
 			//UŒ‚Œã‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
-			RequestAnim(ANIMID_ATTACKA1_OUT, 1.0f);
+			RequestAnim(ANIMID_ATTACK1_HAND_OUT, 1.0f);
 			break;
 		case 1:
 			//UŒ‚Œã‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
-			RequestAnim(ANIMID_ATTACKA2_OUT, 0.8f);
+			RequestAnim(ANIMID_ATTACK2_HAND_OUT, 0.8f);
 			break;
 		case 2:
 			//UŒ‚Œã‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
-			RequestAnim(ANIMID_ATTACKA3_OUT, 0.3f);
+			RequestAnim(ANIMID_ATTACK3_HAND_OUT, 0.3f);
 			break;
 		}
 
 		break;
+	//•Ší‚ªŒ•‚Ìê‡
 	case WEAPON_ID_SWORD:
 		switch (m_attackNum)
 		{
 		case 0:
 			//UŒ‚Œã‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
-			RequestAnim(ANIMID_ATTACKB1_OUT, 0.8f);
+			RequestAnim(ANIMID_ATTACK1_SWORD_OUT, 0.8f);
 			break;
 		case 1:
 			//UŒ‚Œã‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
-			RequestAnim(ANIMID_ATTACKB2_OUT, 1.0f);
+			RequestAnim(ANIMID_ATTACK2_SWORD_OUT, 1.0f);
 			break;
 		case 2:
 			//UŒ‚Œã‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
-			RequestAnim(ANIMID_ATTACKB3_OUT, 1.0f);
+			RequestAnim(ANIMID_ATTACK3_SWORD_OUT, 1.0f);
 			break;
 		}
 
+		break;
+	//•Ší‚ª•€‚Ìê‡
+	case WEAPON_ID_AX:
+		switch (m_attackNum)
+		{
+		case 0:
+			//UŒ‚Œã‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+			RequestAnim(ANIMID_ATTACK1_AX_OUT, 0.8f);
+			break;
+		case 1:
+			//UŒ‚Œã‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+			RequestAnim(ANIMID_ATTACK2_AX_OUT, 1.0f);
+			break;
+		case 2:
+			//UŒ‚Œã‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+			RequestAnim(ANIMID_ATTACK3_AX_OUT, 1.0f);
+			break;
+		}
+		break;
+	//•Ší‚ªe‚Ìê‡
+	case WEAPON_ID_GUN:
+		//UŒ‚Œã‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+		RequestAnim(ANIMID_ATTACK1_GUN_OUT, 1.0f);
 		break;
 	}
 
@@ -963,25 +1051,25 @@ void CPlayer::SkillIn()
 //-----------------------
 void CPlayer::Skill()
 {
-	switch (m_weaponId)
-	{
-	case WEAPON_ID_HAND:
-		//UŒ‚’†‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
-		if (RequestAnim(ANIMID_SKILLA, 1.0f))
-		{
-			//UŒ‚‚ÌŒÄ‚Ño‚µ
-			m_attackManager->Request(GetCenter(), ATTACKB_SIZE, ATTACKB_ATK,0, m_name);
-		}
-		break;
-	case WEAPON_ID_SWORD:
-		//UŒ‚’†‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
-		if (RequestAnim(ANIMID_SKILLB, 1.0f))
-		{
-			//UŒ‚‚ÌŒÄ‚Ño‚µ
-			m_attackManager->Request(GetCenter(), ATTACKB_SIZE, ATTACKB_ATK,0, m_name);
-		}
-		break;
-	}
+	//switch (m_weaponId)
+	//{
+	//case WEAPON_ID_HAND:
+	//	//UŒ‚’†‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+	//	if (RequestAnim(ANIMID_SKILLA, 1.0f))
+	//	{
+	//		//UŒ‚‚ÌŒÄ‚Ño‚µ
+	//		m_attackManager->Request(GetCenter(), ATTACKB_SIZE, ATTACKB_ATK,0, m_name);
+	//	}
+	//	break;
+	//case WEAPON_ID_SWORD:
+	//	//UŒ‚’†‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+	//	if (RequestAnim(ANIMID_SKILLB, 1.0f))
+	//	{
+	//		//UŒ‚‚ÌŒÄ‚Ño‚µ
+	//		m_attackManager->Request(GetCenter(), ATTACKB_SIZE, ATTACKB_ATK,0, m_name);
+	//	}
+	//	break;
+	//}
 
 	//ƒAƒjƒ[ƒVƒ‡ƒ“‚ªI‚í‚Á‚½‚ç‘Ò‹@ó‘Ô‚É–ß‚·
 	if (GetAnimEnd() == true)
