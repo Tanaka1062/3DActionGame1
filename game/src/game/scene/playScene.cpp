@@ -29,12 +29,12 @@ void CPlayScene::Draw()
 {
 	m_ground.Draw();
 	m_sky.Draw();
-	m_playerManager.Draw();
 	m_shot.Draw();
 	m_attackManager.Draw();
 	m_itemManager.Draw();
 	m_weaponManager.Draw();
 	m_uiManager.Draw();
+	m_playerManager.Draw();
 
 	m_camera.Draw();
 

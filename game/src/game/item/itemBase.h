@@ -3,6 +3,7 @@
 #include "../../lib/model/actor.h"
 #include "../player/player.h"
 #include "../shadow/shadow.h"
+#include "../3DUi/3DUi.h"
 
 //アイテムのタイプ
 enum tagItemType
@@ -44,6 +45,7 @@ protected:
 	tagItemType m_itemType;	//アイテムのタイプ
 	tagItemState m_state;	//状態
 	tagItemName m_itemName;	//アイテムの名前
+	C3DUi m_costUi;			//コストを表示
 
 public:
 	//コンストラクタ

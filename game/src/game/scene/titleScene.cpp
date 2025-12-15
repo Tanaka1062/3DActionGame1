@@ -5,7 +5,6 @@
 #include "../system/soundManager.h"
 
 //定義関連====================================
-static const char BACKGROUND_HNDL_PATH[] = "data/graphic/title/backGround.png";		//背景の画像パス
 //============================================
 
 //---------------------------
@@ -31,8 +30,8 @@ CTitleScene::~CTitleScene() {
 //---------------------------
 void CTitleScene::Draw()
 {
-	//背景の画像描写
-	m_backGround.Draw();
+	//UIの描写
+	m_uiManager.Draw();
 
 	DrawFormatString(32, 32, GetColor(255, 0, 0), "タイトル");
 }
@@ -42,12 +41,8 @@ void CTitleScene::Draw()
 //---------------------------
 void CTitleScene::Init()
 {
-	//背景の初期化
-	VECTOR backGroundPos;
-	backGroundPos.x = static_cast<float>(WINDOW_SIZE_X / 2);
-	backGroundPos.y = static_cast<float>(WINDOW_SIZE_Y / 2);
-
-	m_backGround.Init(backGroundPos);
+	//UIの初期化
+	m_uiManager.Init();
 
 }
 
@@ -56,9 +51,8 @@ void CTitleScene::Init()
 //---------------------------
 void CTitleScene::Load()
 {
-
-	//背景の画像ロード
-	m_backGround.Load(BACKGROUND_HNDL_PATH);
+	//UIの画像ロード
+	m_uiManager.Load();
 
 	CSoundManager::Play(CSoundManager::BGM_TITLE, DX_PLAYTYPE_LOOP);
 }
@@ -68,6 +62,9 @@ void CTitleScene::Load()
 //---------------------------
 void CTitleScene::Step()
 {
+	//UIの毎フレームする処理
+	m_uiManager.Step();
+
 	//スペースで終わる
 	if (CKeyInput::IsTrg(KEY_SELECT) ||
 		CControllerManager::SetId() == true)
@@ -82,8 +79,8 @@ void CTitleScene::Step()
 //---------------------------
 void CTitleScene::Exit()
 {
-	//背景の画像破棄
-	m_backGround.Exit();
+	//UIの終了処理
+	m_uiManager.Exit();
 
 	CSoundManager::StopAll();
 }

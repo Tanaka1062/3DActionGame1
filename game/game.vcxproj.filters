@@ -133,6 +133,9 @@
     <Filter Include="ソース ファイル\game\winner">
       <UniqueIdentifier>{a95fac4b-e1b8-4a2a-af36-9ef736a0f4a5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\game\3DUi">
+      <UniqueIdentifier>{5357a3e1-7b5d-48dc-ac5b-1c81e770ad99}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\number.cpp">
@@ -255,7 +258,7 @@
     <ClCompile Include="src\game\weapon\weaponManager.cpp">
       <Filter>ソース ファイル\game\weapon</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\ui\uiManager.cpp">
+    <ClCompile Include="src\game\ui\uiGameManager.cpp">
       <Filter>ソース ファイル\game\ui</Filter>
     </ClCompile>
     <ClCompile Include="src\game\ui\hpber\hpbar.cpp">
@@ -308,6 +311,15 @@
     </ClCompile>
     <ClCompile Include="src\game\winner\winner.cpp">
       <Filter>ソース ファイル\game\winner</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\3DUi\3DUi.cpp">
+      <Filter>ソース ファイル\game\3DUi</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\ui\uiTitleManager.cpp">
+      <Filter>ソース ファイル\game\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\ui\uiSelectManager.cpp">
+      <Filter>ソース ファイル\game\ui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -431,7 +443,7 @@
     <ClInclude Include="src\game\weapon\weaponManager.h">
       <Filter>ソース ファイル\game\weapon</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\ui\uiManager.h">
+    <ClInclude Include="src\game\ui\uiGameManager.h">
       <Filter>ソース ファイル\game\ui</Filter>
     </ClInclude>
     <ClInclude Include="src\game\ui\hpber\hpbar.h">
@@ -490,6 +502,15 @@
     </ClInclude>
     <ClInclude Include="src\game\winner\winner.h">
       <Filter>ソース ファイル\game\winner</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\3DUi\3DUi.h">
+      <Filter>ソース ファイル\game\3DUi</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\ui\uiTitleManager.h">
+      <Filter>ソース ファイル\game\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\ui\uiSelectManager.h">
+      <Filter>ソース ファイル\game\ui</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

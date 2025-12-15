@@ -130,10 +130,10 @@ void CPlayerManager::Load()
 			start = MV1GetFramePosition(frameHndl, 3);
 			break;
 		case PLAYER_3:
-			start = MV1GetFramePosition(frameHndl, 31);
+			start = MV1GetFramePosition(frameHndl, 33);
 			break;
 		case PLAYER_4:
-			start = MV1GetFramePosition(frameHndl, 33);
+			start = MV1GetFramePosition(frameHndl, 31);
 			break;
 		}
 

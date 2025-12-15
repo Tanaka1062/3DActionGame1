@@ -130,7 +130,7 @@ void CItemObjectBase::HitCalc(CObject* _hitObject)
 
 		//プレイヤーがアイテムを取ろうとしていたらする処理
 		if (player->GetItemState() == ITEM_STATE_PICK_UP &&
-			player->GetWeaponId() != WEAPON_ID_HAND)
+			player->GetWeaponId() == WEAPON_ID_HAND)
 		{
 			//誰にも持たれていなかったら購入できる
 			if (m_owner == nullptr)

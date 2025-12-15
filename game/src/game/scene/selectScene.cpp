@@ -5,7 +5,6 @@
 #include "../system/soundManager.h"
 
 //定義関連====================================
-static const char BACKGROUND_HNDL_PATH[] = "data/graphic/select/backGround.png";		//背景の画像パス
 //============================================
 
 //---------------------------
@@ -31,8 +30,8 @@ CSelectScene::~CSelectScene() {
 //---------------------------
 void CSelectScene::Draw()
 {
-	//背景の画像描写
-	m_backGround.Draw();
+	//UIの画像表示
+	m_uiManager.Draw();
 
 	DrawFormatString(32, 32, GetColor(255, 0, 0), "セレクト");
 
@@ -45,12 +44,8 @@ void CSelectScene::Draw()
 //---------------------------
 void CSelectScene::Init()
 {
-	//背景の初期化
-	VECTOR backGroundPos;
-	backGroundPos.x = static_cast<float>(WINDOW_SIZE_X / 2);
-	backGroundPos.y = static_cast<float>(WINDOW_SIZE_Y / 2);
-
-	m_backGround.Init(backGroundPos);
+	//UIの初期設定
+	m_uiManager.Init();
 
 }
 
@@ -59,9 +54,8 @@ void CSelectScene::Init()
 //---------------------------
 void CSelectScene::Load()
 {
-
-	//背景の画像ロード
-	m_backGround.Load(BACKGROUND_HNDL_PATH);
+	//UIの画像ロード
+	m_uiManager.Load();
 
 	CSoundManager::Play(CSoundManager::BGM_TITLE, DX_PLAYTYPE_LOOP);
 }
@@ -71,6 +65,9 @@ void CSelectScene::Load()
 //---------------------------
 void CSelectScene::Step()
 {
+	//UIの毎フレームする処理
+	m_uiManager.Step();
+
 	//コントローラーをセット
 	CControllerManager::SetId();
 
@@ -88,8 +85,8 @@ void CSelectScene::Step()
 //---------------------------
 void CSelectScene::Exit()
 {
-	//背景の画像破棄
-	m_backGround.Exit();
+	//UIの終了処理
+	m_uiManager.Exit();
 
 	CSoundManager::StopAll();
 }

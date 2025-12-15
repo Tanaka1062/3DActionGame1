@@ -28,7 +28,7 @@ void CTimeUi::Init()
 
 	pos.x = POS.x - NUM_SIZE / 2;
 
-	m_division.Init();
+	m_division.Init(pos);
 }
 
 //‰æ‘œƒ[ƒh

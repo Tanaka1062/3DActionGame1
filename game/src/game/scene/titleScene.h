@@ -1,13 +1,14 @@
 #pragma once
 #include "sceneBase.h"
 #include <DxLib.h>
-#include"../../lib/2DUi/2DUi.h"
+#include "../ui/uiTitleManager.h"
 
 //ゲーム本編を管理するクラス
 class CTitleScene :public CSceneBase
 {
 private:
-	C2DUi m_backGround;		//背景
+	CUiTitleManager m_uiManager;
+
 public:
 
 	//コンストラクタ

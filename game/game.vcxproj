@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\game\3DUi\3DUi.cpp" />
     <ClCompile Include="src\game\attack\attackBase.cpp" />
     <ClCompile Include="src\game\attack\attackManager.cpp" />
     <ClCompile Include="src\game\camera\cameraBase.cpp" />
@@ -181,7 +182,9 @@
     <ClCompile Include="src\game\ui\hpber\hpbarManager.cpp" />
     <ClCompile Include="src\game\ui\powerUpGauge\powerUpGouge.cpp" />
     <ClCompile Include="src\game\ui\time\timeUi.cpp" />
-    <ClCompile Include="src\game\ui\uiManager.cpp" />
+    <ClCompile Include="src\game\ui\uiGameManager.cpp" />
+    <ClCompile Include="src\game\ui\uiSelectManager.cpp" />
+    <ClCompile Include="src\game\ui\uiTitleManager.cpp" />
     <ClCompile Include="src\game\weapon\weapon.cpp" />
     <ClCompile Include="src\game\weapon\weaponManager.cpp" />
     <ClCompile Include="src\game\winner\winner.cpp" />
@@ -199,6 +202,7 @@
     <ClCompile Include="src\lib\system\fps.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\game\3DUi\3DUi.h" />
     <ClInclude Include="src\game\attack\attackBase.h" />
     <ClInclude Include="src\game\attack\attackManager.h" />
     <ClInclude Include="src\game\camera\cameraBase.h" />
@@ -243,7 +247,9 @@
     <ClInclude Include="src\game\ui\hpber\hpbarManager.h" />
     <ClInclude Include="src\game\ui\powerUpGauge\powerUpGouge.h" />
     <ClInclude Include="src\game\ui\time\timeUi.h" />
-    <ClInclude Include="src\game\ui\uiManager.h" />
+    <ClInclude Include="src\game\ui\uiGameManager.h" />
+    <ClInclude Include="src\game\ui\uiSelectManager.h" />
+    <ClInclude Include="src\game\ui\uiTitleManager.h" />
     <ClInclude Include="src\game\weapon\weapon.h" />
     <ClInclude Include="src\game\weapon\weaponManager.h" />
     <ClInclude Include="src\game\winner\winner.h" />

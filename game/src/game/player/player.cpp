@@ -210,6 +210,7 @@ void CPlayer::Init(tagPlayerName _name, tagPadName _padName)
 	m_name = _name;
 	m_shadow.Init(m_pos, SHADOW_SIZE);
 	m_objectTypy = OBJECT_PLAYER;
+	m_CoinNowUi.Init();
 }
 
 //-----------------------
@@ -221,6 +222,7 @@ void CPlayer::Load(int _modelHndl)
 	m_keepHndl[NORMAL_HNDL] = m_hndl;
 	m_keepHndl[TRANSFORM_HNDL] = MV1LoadModel(MODEL_PATH);
 	m_shadow.Load();
+	m_CoinNowUi.Load();
 }
 
 //-----------------------
@@ -228,6 +230,8 @@ void CPlayer::Load(int _modelHndl)
 //-----------------------
 void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManager, CShotManager* _shotManager)
 {
+	m_CoinNowUi.Step(m_pos,m_rad,_rotY,m_money);
+
 	m_targetPos = _targetPos;
 
 	//プレイヤー同士の距離
@@ -331,6 +335,7 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 void CPlayer::Draw()
 {
 	CCharacterBase::Draw();
+	m_CoinNowUi.Draw();
 
 #ifdef DEBUG
 	//当たり判定を表示
@@ -353,6 +358,7 @@ void CPlayer::Draw()
 void CPlayer::Update()
 {
 	CCharacterBase::Update();
+	m_CoinNowUi.Update();
 
 	//速度のリセット
 	ResetSpeed();
@@ -363,6 +369,7 @@ void CPlayer::Update()
 void CPlayer::Exit()
 {
 	CCharacterBase::Exit();
+	m_CoinNowUi.Exit();
 
 	for (int keepHndl_i = 0; keepHndl_i < HNDL_NUM; keepHndl_i++)
 	{
