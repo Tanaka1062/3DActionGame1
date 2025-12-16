@@ -65,7 +65,7 @@ void CItemBase::Load(int _hndl)
 void CItemBase::Step()
 {
 	CActor::Step();
-	m_costUi.Step(m_pos,m_rad);
+	//m_costUi.Step(m_pos,m_rad);
 
 	m_shadow.Step(m_pos);
 

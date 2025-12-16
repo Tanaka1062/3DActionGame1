@@ -1,10 +1,14 @@
 #pragma once
 #include "../../lib/model/3DObject.h"
+#include <vector>
+#include <iostream>
+
+using namespace std;
 
 class C3DUi :public CObject
 {
 private:
-
+	vector<int>m_materialHndl;		//マテリアルのハンドル
 public:
 	C3DUi();
 	~C3DUi();

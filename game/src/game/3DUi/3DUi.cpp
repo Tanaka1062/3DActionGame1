@@ -1,9 +1,48 @@
 #include "3DUi.h"
 
+enum tagMaterialName
+{
+	MT_NUMBER0,		//ナンバー0
+	MT_NUMBER1,		//ナンバー1
+	MT_NUMBER2,		//ナンバー2
+	MT_NUMBER3,		//ナンバー3
+	MT_NUMBER4,		//ナンバー4
+	MT_NUMBER5,		//ナンバー5
+	MT_NUMBER6,		//ナンバー6
+	MT_NUMBER7,		//ナンバー7
+	MT_NUMBER8,		//ナンバー8
+	MT_NUMBER9,		//ナンバー9
+
+	MT_NUM,			//ナンバーの数
+};
+
+enum tagModelName
+{
+	MODEL_ICON,		//アイコン
+	MODEL_TEN,		//十の位
+	MODEL_ONE,		//一の位
+
+	MODEL_NUM,		//モデルの数
+};
+
 static const float POS_Y_UP = 19.0f;		//どれくらい上に上がるか
 static const char* MODEL_PATH =
 {"data/model/3DUi/3DUi.mv1"};
 
+static const char* MATERIAL_PATH[MT_NUM] =
+{
+	"data/material/3DUi/number0Body.png",
+	"data/material/3DUi/number1Body.png",
+	"data/material/3DUi/number2Body.png",
+	"data/material/3DUi/number3Body.png",
+	"data/material/3DUi/number4Body.png",
+	"data/material/3DUi/number5Body.png",
+	"data/material/3DUi/number6Body.png",
+	"data/material/3DUi/number7Body.png",
+	"data/material/3DUi/number8Body.png",
+	"data/material/3DUi/number9Body.png",
+
+};
 
 C3DUi::C3DUi()
 {
@@ -20,11 +59,19 @@ void C3DUi::Init()
 {
 	CObject::Init();
 
+	m_materialHndl.clear();
 }
 
 //モデルロード
 void C3DUi::Load()
 {
+	for (int material_i = 0; material_i < MT_NUM; material_i++)
+	{
+		int hndl = LoadGraph(MATERIAL_PATH[material_i]);
+
+		m_materialHndl.push_back(hndl);
+	}
+
 	CObject::LoadModel(MODEL_PATH);
 }
 
@@ -38,4 +85,10 @@ void C3DUi::Step(VECTOR _pos, float _rad,float _cameraRotY, int _money)
 	CObject::Step();
 
 	m_rot.y = _cameraRotY;
+
+	int ten = _money / 10;
+	int one = _money % 10;
+
+	MV1SetTextureGraphHandle(m_hndl,MODEL_TEN,m_materialHndl[ten],FALSE);
+	MV1SetTextureGraphHandle(m_hndl, MODEL_ONE, m_materialHndl[one], FALSE);
 }
