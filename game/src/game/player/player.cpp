@@ -13,34 +13,34 @@
 //定義関連---------------------------
 
 //プレイヤー関連--------------------------------
-static const char MODEL_PATH[] =
-{ "data/model/player/playerTransformTest.mv1" };			//ロードするファイル名
+constexpr const char MODEL_PATH[] =
+ "data/model/player/playerTransformTest.mv1" ;			//ロードするファイル名
 static const VECTOR INIT_POS = { 0.0f,1.0f,0.0f };			//初期座標
-static const float SHADOW_SIZE = 0.5f;						//丸影の大きさ
-static const int MAX_HP = 300;								//体力
-static const int ATK = 20;									//攻撃力
-static const float MOVE_SPEED = 1.2f;						//移動スピード
-static const float RADIUS = 10.0f;							//半径
-static const float DODGEROLL_SPEED = 1.5f;					//回避スピード
-static const float JUMP_SPEED = 3.0f;						//ジャンプスピード
-static const int TRANSFORM_COIN_NUM = 3;					//変身に必要なコインの数
-static const int POWER_UP_ATK = 1;							//増加する攻撃力
-static const float TRANSFORM_UP_SPEED = 0.3f;				//変身後のスピードアップ
-static const int BLOWN_MAX = 100;							//吹き飛び最大値
+constexpr float SHADOW_SIZE = 0.5f;						//丸影の大きさ
+constexpr int MAX_HP = 300;								//体力
+constexpr int ATK = 20;									//攻撃力
+constexpr float MOVE_SPEED = 1.2f;						//移動スピード
+constexpr float RADIUS = 10.0f;							//半径
+constexpr float DODGEROLL_SPEED = 1.5f;					//回避スピード
+constexpr float JUMP_SPEED = 3.0f;						//ジャンプスピード
+constexpr int TRANSFORM_COIN_NUM = 3;					//変身に必要なコインの数
+constexpr int POWER_UP_ATK = 1;							//増加する攻撃力
+constexpr float TRANSFORM_UP_SPEED = 0.3f;				//変身後のスピードアップ
+constexpr int BLOWN_MAX = 100;							//吹き飛び最大値
 static const VECTOR KNOCK_BACK_SPEED = { 0.0f,3.0f,-0.8f };	//吹き飛ぶスピード
-static const int INIT_MONEY = 3;							//最初の所持金
-static const float MONEY_DROP_RATE = 0.4f;					//落とすお金の割合
-static const float MONEY_RESPAWN_RATE = 0.5f;				//復活するときに消費するお金の割合
+constexpr int INIT_MONEY = 3;							//最初の所持金
+constexpr float MONEY_DROP_RATE = 0.4f;					//落とすお金の割合
+constexpr float MONEY_RESPAWN_RATE = 0.5f;				//復活するときに消費するお金の割合
 //----------------------------------------------
 
 //攻撃関連---------------------------
-static const float ATTACK_LENGTH = 15.0f;				//攻撃の長さ
-static const int ATTACKB_ATK = 100;						//攻撃Bの攻撃力
-static const float ATTACK_MOVE_SPEED = 0.5f;			//攻撃時に前進する力
-static const float FIGHT_LEN = 40.0f;					//戦う距離
-static const float SHOT_SIZE = 10.0f;					//弾の大きさ
-static const float SHOT_SPEED = 2.5f;					//弾の速度
-static const int SHOT_LOST_TIME = 2 * 60;				//弾が消えるまでの時間
+constexpr float ATTACK_LENGTH = 15.0f;				//攻撃の長さ
+constexpr int ATTACKB_ATK = 100;						//攻撃Bの攻撃力
+constexpr float ATTACK_MOVE_SPEED = 0.5f;			//攻撃時に前進する力
+constexpr float FIGHT_LEN = 40.0f;					//戦う距離
+constexpr float SHOT_SIZE = 10.0f;					//弾の大きさ
+constexpr float SHOT_SPEED = 2.5f;					//弾の速度
+constexpr int SHOT_LOST_TIME = 2 * 60;				//弾が消えるまでの時間
 //-----------------------------------
 
 //アニメーション一覧---------------------------

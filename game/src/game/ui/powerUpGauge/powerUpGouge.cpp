@@ -1,6 +1,6 @@
 #include "powerUpGouge.h"
 
-static const int POWER_GOUGE_LEN = 495;		//パワーゲージの長さ		
+constexpr int POWER_GOUGE_LEN = 495;		//パワーゲージの長さ		
 
 //コンストラクタ・デストラクタ
 CPowerUpGouge::CPowerUpGouge()

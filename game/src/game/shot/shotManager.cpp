@@ -1,7 +1,7 @@
 #include "shotManager.h"
 
-static const char MODEL_PATH[] =
-{ "data/model/shot/shotTest.mv1" };				//ロードするファイル名
+constexpr const char MODEL_PATH[] =
+ "data/model/shot/shotTest.mv1" ;				//ロードするファイル名
 
 //------------------------
 //	  コンストラクタ

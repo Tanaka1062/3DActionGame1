@@ -1,8 +1,8 @@
 #include "box.h"
 #include "../../../data.h"
 
-static const int SPAWN_TIME = 12 * 60;		//スポーンするまでの時間
-static const float ATK = 10.0f;				//攻撃力
+constexpr int SPAWN_TIME = 12 * 60;		//スポーンするまでの時間
+constexpr float ATK = 10.0f;				//攻撃力
 
 CBox::CBox()
 {

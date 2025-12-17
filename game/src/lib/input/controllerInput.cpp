@@ -1,7 +1,7 @@
 #include "controllerInput.h"
 #include<DxLib.h>
 
-static const int BUTTON_PATH[BUTTON_NUM] = {
+constexpr int BUTTON_PATH[BUTTON_NUM] = {
 	PAD_INPUT_DOWN,
 	PAD_INPUT_LEFT,
 	PAD_INPUT_RIGHT,

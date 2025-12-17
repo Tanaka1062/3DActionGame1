@@ -4,7 +4,7 @@
 
 CGameTime* CGameTime::m_instance = nullptr;
 
-static const int END_TIME = 3 * 60;	//I‚í‚é‚Ü‚Å‚ÌŠÔ
+constexpr int END_TIME = 3 * 60;	//I‚í‚é‚Ü‚Å‚ÌŠÔ
 
 CGameTime::CGameTime()
 {

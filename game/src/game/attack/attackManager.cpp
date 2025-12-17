@@ -1,7 +1,7 @@
 #include "attackManager.h"
 
-static const char MODEL_PATH[] =
-{ "data/model/shot/shotTest.mv1" };				//ロードするファイル名
+constexpr const char MODEL_PATH[] =
+ "data/model/shot/shotTest.mv1" ;				//ロードするファイル名
 
 list<CAttackBase*> CAttackManager::m_attack;
 

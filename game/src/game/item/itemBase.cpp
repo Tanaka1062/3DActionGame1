@@ -1,9 +1,9 @@
 #include "itemBase.h"
 #include "../../lib/myMath/myMath.h"
 
-static const float RADIUS = 7.5f;				//半径
-static const float DROP_SPEED = 6.0f;			//飛ぶスピード
-static const float DROP_JUMP = 7.0f;			//上に飛ぶ力
+constexpr float RADIUS = 7.5f;				//半径
+constexpr float DROP_SPEED = 6.0f;			//飛ぶスピード
+constexpr float DROP_JUMP = 7.0f;			//上に飛ぶ力
 
 //--------------------------
 //	   コンストラクタ

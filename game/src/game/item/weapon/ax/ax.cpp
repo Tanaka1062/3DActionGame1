@@ -1,7 +1,7 @@
 #include "ax.h"
 
-static const int COST = 5;						//‰¿Ši
-static const int DURABILITY = 20;				//•Ší‚Ì‘Ï‹v“x
+constexpr int COST = 5;						//‰¿Ši
+constexpr int DURABILITY = 20;				//•Ší‚Ì‘Ï‹v“x
 
 CAx::CAx()
 {

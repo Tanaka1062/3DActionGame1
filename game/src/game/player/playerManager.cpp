@@ -12,14 +12,14 @@ enum tagModelName					//モデル一覧
 	MODEL_NUM,						//モデルの数
 };
 
-static const char* MODEL_PATH[PLAYER_NUM] =
+constexpr const char* MODEL_PATH[PLAYER_NUM] =
 { "data/model/player/playerTest7-1.mv1" ,
   "data/model/player/playerTest7-2.mv1" ,
   "data/model/player/playerTest7-3.mv1" ,
   "data/model/player/playerTest7-4.mv1" ,};			//ロードするファイル名
 
-static const char FRAME_PATH[] =
-{ "data/model/map/TestMap6Frame.mv1" };			//ロードするファイル名
+constexpr const char FRAME_PATH[] =
+"data/model/map/TestMap6Frame.mv1";			//ロードするファイル名
 
 
 //------------------------

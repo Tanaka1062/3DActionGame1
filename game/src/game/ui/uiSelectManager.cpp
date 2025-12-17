@@ -10,7 +10,7 @@ enum tagUiName
 	UI_NUM,				//UIの数
 };
 
-static const char* UI_GRAPHIC_PATH[UI_NUM] =		//背景の画像パス
+constexpr const char* UI_GRAPHIC_PATH[UI_NUM] =		//背景の画像パス
 {
 	"data/graphic/select/backGround.png",
 

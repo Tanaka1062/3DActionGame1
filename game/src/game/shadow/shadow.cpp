@@ -1,7 +1,7 @@
 #include "shadow.h"
 
-static const char* MODEL_PATH =
-{ "data/model/shadow/shadow.mv1" };
+constexpr const char* MODEL_PATH =
+ "data/model/shadow/shadow.mv1" ;
 
 
 //‰Šú‰»

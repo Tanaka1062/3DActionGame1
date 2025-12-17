@@ -3,8 +3,8 @@
 #include "../data.h"
 #include "../gameTime/gameTime.h"
 
-static const char MODEL_PATH[] =
-{ "data/graphic/ui/powerUpGauge.png" };			//ロードするファイル名
+constexpr const char MODEL_PATH[] =
+ "data/graphic/ui/powerUpGauge.png" ;			//ロードするファイル名
 
 static const VECTOR GET_COIN_POS[PLAYER_NUM] =
 {

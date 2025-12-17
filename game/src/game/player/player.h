@@ -5,7 +5,7 @@
 #include "playerData.h"
 #include "../3DUi/3DUi.h"
 
-static const int TRANSFORM_TIME = 10 * 60;					//•Ïg‚µ‚Ä‚¢‚éŠÔ
+constexpr int TRANSFORM_TIME = 10 * 60;					//•Ïg‚µ‚Ä‚¢‚éŠÔ
 
 //•Ší‚ÌID
 enum tagWeaponId

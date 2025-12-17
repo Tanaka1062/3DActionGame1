@@ -3,11 +3,11 @@
 
 //定義関連====================================
 static const VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
-static const float CAMERA_BACK = 40.0f;				//カメラとプレイヤーの距離
-static const float CAMERA_OFFSET_Y = 40.0f;			//カメラの修正Y
-static const float TARGET_OFFSET_Y = 20.0f;			//ターゲットの修正Y
-static const float CAMERA_SPEED = 4.0f;				//カメラの移動速度
-static const float CAMERA_ROT_SPEED = 0.01f;		//カメラの回転速度
+constexpr float CAMERA_BACK = 40.0f;				//カメラとプレイヤーの距離
+constexpr float CAMERA_OFFSET_Y = 40.0f;			//カメラの修正Y
+constexpr float TARGET_OFFSET_Y = 20.0f;			//ターゲットの修正Y
+constexpr float CAMERA_SPEED = 4.0f;				//カメラの移動速度
+constexpr float CAMERA_ROT_SPEED = 0.01f;			//カメラの回転速度
 //============================================
 
 //コンストラクタ

@@ -8,8 +8,8 @@
 //定義関連---------------------------
 
 //プレイヤー関連--------------------------------
-static const float MOVE_SPEED = 0.5f;			//スピード
-static const float HOMING_LEN = 45.0f;			//ホーミングする距離
+constexpr float MOVE_SPEED = 0.5f;			//スピード
+constexpr float HOMING_LEN = 45.0f;			//ホーミングする距離
 //----------------------------------------------
 
 //-----------------------

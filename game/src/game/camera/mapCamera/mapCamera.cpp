@@ -3,19 +3,19 @@
 
 //定義関連====================================
 static const VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
-static const float CAMERA_OFFSET_Y = 10.0f;			//カメラの修正Y
-static const float TARGET_OFFSET_Y = 2.0f;			//ターゲットの修正Y
+constexpr float CAMERA_OFFSET_Y = 10.0f;			//カメラの修正Y
+constexpr float TARGET_OFFSET_Y = 2.0f;			//ターゲットの修正Y
 
-static const float MAX_LEN_NEAR = 30.0f;			//この距離より離れるとカメラ移動開始
-static const float MAX_LEN_FAR = 35.0f;				//これ以上は離させない
-static const float MIN_LEN_NEAR = 25.0f;			//この距離より近づくとカメラ移動開始
-static const float MIN_LEN_FAR = 20.0f;				//これ以上は近づけさせない
-static const float CAMERA_MOVE_SPEED = 0.5f;		//カメラのデフォルト移動速度
-static const float CAMERA_ROT_SPEED = 2.0f;			//カメラの回転速度
+constexpr float MAX_LEN_NEAR = 30.0f;			//この距離より離れるとカメラ移動開始
+constexpr float MAX_LEN_FAR = 35.0f;				//これ以上は離させない
+constexpr float MIN_LEN_NEAR = 25.0f;			//この距離より近づくとカメラ移動開始
+constexpr float MIN_LEN_FAR = 20.0f;				//これ以上は近づけさせない
+constexpr float CAMERA_MOVE_SPEED = 0.5f;		//カメラのデフォルト移動速度
+constexpr float CAMERA_ROT_SPEED = 2.0f;			//カメラの回転速度
 //============================================
 
-static const char POS_PATH[] =
-{ "data/model/map/TestMap4FramePos.mv1" };			//ロードするファイル名
+constexpr const char POS_PATH[] =
+ "data/model/map/TestMap4FramePos.mv1" ;			//ロードするファイル名
 
 //---------------------------------
 //		コンストラクタ

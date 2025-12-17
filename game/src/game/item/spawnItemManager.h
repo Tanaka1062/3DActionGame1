@@ -23,7 +23,7 @@ enum tagItemSpawnPos
 	ITEM_SPAWN_POS_NUM,		//アイテムの出現座標の数
 };
 
-static const int SPAWN_ITEM_MAX = 10;		//アイテムの最大量
+constexpr int SPAWN_ITEM_MAX = 10;		//アイテムの最大量
 
 //アイテムマネージャークラス
 class CSpawnItemManager

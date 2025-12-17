@@ -25,11 +25,11 @@ enum tagModelName
 	MODEL_NUM,		//ÉÇÉfÉãÇÃêî
 };
 
-static const float POS_Y_UP = 19.0f;		//Ç«ÇÍÇ≠ÇÁÇ¢è„Ç…è„Ç™ÇÈÇ©
-static const char* MODEL_PATH =
-{"data/model/3DUi/3DUi.mv1"};
+constexpr float POS_Y_UP = 19.0f;		//Ç«ÇÍÇ≠ÇÁÇ¢è„Ç…è„Ç™ÇÈÇ©
+constexpr const char* MODEL_PATH =
+"data/model/3DUi/3DUi.mv1";
 
-static const char* MATERIAL_PATH[MT_NUM] =
+constexpr const char* MATERIAL_PATH[MT_NUM] =
 {
 	"data/material/3DUi/number0Body.png",
 	"data/material/3DUi/number1Body.png",

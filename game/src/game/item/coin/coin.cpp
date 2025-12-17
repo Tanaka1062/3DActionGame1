@@ -1,8 +1,8 @@
 #include "coin.h"
 #include "../../lib/myMath/myMath.h"
 
-static const float ROT_SPEED = 0.05f;			//‰ñ“]‘¬“x
-static const int ADD_MONEY = 1;					//‘‚¦‚é‚¨‹à‚Ì—Ê
+constexpr float ROT_SPEED = 0.05f;			//‰ñ“]‘¬“x
+constexpr int ADD_MONEY = 1;					//‘‚¦‚é‚¨‹à‚Ì—Ê
 
 CCoin::CCoin()
 {

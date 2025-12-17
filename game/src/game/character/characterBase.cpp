@@ -2,8 +2,8 @@
 #include "../../lib/myMath/myMath.h"
 
 static const VECTOR KNOCK_BACK_SPEED = { 0.0f,3.0f,-0.8f };
-static const float BACK_DOWN_SPEED = 0.9f;					//速度の減速
-static const int BLOWN_MAX = 100;							//吹き飛び最大値
+constexpr float BACK_DOWN_SPEED = 0.9f;					//速度の減速
+constexpr int BLOWN_MAX = 100;							//吹き飛び最大値
 
 //------------------------------
 //		コンストラクタ

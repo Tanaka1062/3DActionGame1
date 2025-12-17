@@ -6,7 +6,7 @@
 #include"weapon/ax/ax.h"
 
 
-static const char* MODEL_PATH[ITEM_NUM] =				//モデルのパス
+constexpr const char* MODEL_PATH[ITEM_NUM] =				//モデルのパス
 {
 	"data/model/item/powerCoin/coin.mv1",
 	"data/model/item/bomb/bomb.mv1",
@@ -16,11 +16,11 @@ static const char* MODEL_PATH[ITEM_NUM] =				//モデルのパス
 
 };
 
-static const char FRAME_PATH[] =
-{ "data/model/map/TestMap6Frame.mv1" };			//ロードするファイル名
+constexpr const char FRAME_PATH[] =
+"data/model/map/TestMap6Frame.mv1";			//ロードするファイル名
 
 
-static const int SPAWN_TIME = 7 * 60;		//スポーンするまで時間
+constexpr int SPAWN_TIME = 7 * 60;		//スポーンするまで時間
 
 //-----------------------
 //	  コンストラクタ

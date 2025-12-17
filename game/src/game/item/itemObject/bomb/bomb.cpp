@@ -3,11 +3,11 @@
 #include "../../../../lib/effekseer/effekseer.h"
 #include "../../../system/effectData/effectData.h"
 
-static const int EXPLOSION_TIME = 5 * 60;		//”š”­‚·‚éŠÔ
-static const int EXPLOSION_IN_TIME = 1 * 60;	//”š”­‚·‚é‘O‚ÌŠÔ
-static const float EXPLOSION_RADIUS = 40.0f;	//”š”­‚Ì”¼Œa
-static const int EXPLOSION_ATK = 30;			//”š”­‚ÌUŒ‚—Í
-static const int COST = 2;						//‰¿Ši
+constexpr int EXPLOSION_TIME = 5 * 60;		//”š”­‚·‚éŠÔ
+constexpr int EXPLOSION_IN_TIME = 1 * 60;	//”š”­‚·‚é‘O‚ÌŠÔ
+constexpr float EXPLOSION_RADIUS = 40.0f;	//”š”­‚Ì”¼Œa
+constexpr int EXPLOSION_ATK = 30;			//”š”­‚ÌUŒ‚—Í
+constexpr int COST = 2;						//‰¿Ši
 
 //ƒAƒjƒ[ƒVƒ‡ƒ“ˆê——----------------------------------
 enum tagAnim

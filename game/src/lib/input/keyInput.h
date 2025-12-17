@@ -6,6 +6,7 @@
 #define KEY_NORMAL	(0b000100)	//ノーマルボタン
 #define KEY_SUPER	(0b001000)	//スーパーボタン
 #define KEY_HYPER	(0b010000)	//ハイパーボタン
+
 //---------------------------------------------
 
 class CKeyInput

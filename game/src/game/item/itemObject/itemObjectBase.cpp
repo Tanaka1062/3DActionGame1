@@ -1,8 +1,8 @@
 #include "itemObjectBase.h"
 #include "../../../lib/myMath/myMath.h"
 	
-static const float THROW_SPEED = 12.0f;				//投げられるスピード
-static const float RADIUS = 10.0f;					//半径
+constexpr float THROW_SPEED = 12.0f;				//投げられるスピード
+constexpr float RADIUS = 10.0f;					//半径
 
 CItemObjectBase::CItemObjectBase()
 {

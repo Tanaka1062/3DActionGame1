@@ -5,7 +5,7 @@
 #include "../system/soundManager.h"
 
 //’è‹`ŠÖ˜A====================================
-static const char BACKGROUND_HNDL_PATH[] = "data/graphic/result/backGround.png";		//”wŒi‚Ì‰æ‘œƒpƒX
+constexpr const char BACKGROUND_HNDL_PATH[] = "data/graphic/result/backGround.png";		//”wŒi‚Ì‰æ‘œƒpƒX
 //============================================
 
 //---------------------------

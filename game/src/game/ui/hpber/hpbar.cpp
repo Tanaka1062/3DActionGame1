@@ -1,6 +1,6 @@
 #include "hpbar.h"
 
-static const int HP_BAR_LEN = 595;		//HPバーの長さ		
+constexpr int HP_BAR_LEN = 595;		//HPバーの長さ		
 
 //コンストラクタ・デストラクタ
 CHpbar::CHpbar()

@@ -3,10 +3,10 @@
 #include "../../lib/effekseer/effekseer.h"
 
 //定義関連====================================
-static const float CAMERA_NEAR = 1.0f;						//ニアー
-static const float CAMERA_FAR = 5000.0f;					//ファー
-static const float CAMERA_PERS = 60.0f * DX_PI_F / 180.0f;	//パース
-static const float ASPECT_RATIO =							//アスペクト比
+constexpr float CAMERA_NEAR = 1.0f;						//ニアー
+constexpr float CAMERA_FAR = 5000.0f;					//ファー
+constexpr float CAMERA_PERS = 60.0f * DX_PI_F / 180.0f;	//パース
+constexpr float ASPECT_RATIO =							//アスペクト比
 static_cast<float>(WINDOW_SIZE_X / WINDOW_SIZE_Y);
 //============================================
 

@@ -2,8 +2,8 @@
 #include "../../data.h"
 #include "../../lib/number.h"
 
-static const char GRAPHIC_PATH[] =
-{ "data/graphic/ui/division.png" };				//ロードするファイル名
+constexpr const char GRAPHIC_PATH[] =
+ "data/graphic/ui/division.png" ;				//ロードするファイル名
 
 static const VECTOR POS = {static_cast<float>(WINDOW_SIZE_X / 2.0f),100.0f,0.0f};
 
