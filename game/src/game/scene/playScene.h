@@ -14,8 +14,6 @@
 #include "../gameTime/gameTime.h"
 #include "../winner/winner.h"
 
-using namespace std;
-
 //ゲーム本編を管理するクラス
 class CPlayScene :public CSceneBase
 {

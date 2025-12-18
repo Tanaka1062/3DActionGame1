@@ -5,8 +5,9 @@
 #include "weapon/gun/gun.h"
 #include"weapon/ax/ax.h"
 
+using namespace std;
 
-constexpr const char* MODEL_PATH[ITEM_NUM] =				//モデルのパス
+static const char* MODEL_PATH[ITEM_NUM] =				//モデルのパス
 {
 	"data/model/item/powerCoin/coin.mv1",
 	"data/model/item/bomb/bomb.mv1",
@@ -16,7 +17,7 @@ constexpr const char* MODEL_PATH[ITEM_NUM] =				//モデルのパス
 
 };
 
-constexpr const char FRAME_PATH[] =
+static const char FRAME_PATH[] =
 "data/model/map/TestMap6Frame.mv1";			//ロードするファイル名
 
 

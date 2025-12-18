@@ -2,10 +2,10 @@
 #include "../../data.h"
 #include "../../lib/number.h"
 
-constexpr const char GRAPHIC_PATH[] =
+static const char GRAPHIC_PATH[] =
  "data/graphic/ui/division.png" ;				//ロードするファイル名
 
-static const VECTOR POS = {static_cast<float>(WINDOW_SIZE_X / 2.0f),100.0f,0.0f};
+constexpr VECTOR POS = {static_cast<float>(WINDOW_SIZE_X / 2.0f),100.0f,0.0f};
 
 CTimeUi::CTimeUi()
 {
@@ -50,10 +50,10 @@ void CTimeUi::Step(int _time)
 //描画処理
 void CTimeUi::Draw()
 {
-	CNumber::RequestNumber(POS.x - NUM_SIZE, POS.y,m_oneM,1.0f);
+	CNumber::RequestNumber(POS.x - static_cast<float>(NUM_SIZE), POS.y,m_oneM,1.0f);
 	m_division.Draw();
-	CNumber::RequestNumber(POS.x + NUM_SIZE / 8, POS.y, m_tenS, 1.0f);
-	CNumber::RequestNumber(POS.x + NUM_SIZE, POS.y, m_oneS, 1.0f);
+	CNumber::RequestNumber(POS.x + static_cast<float>(NUM_SIZE / 8), POS.y, m_tenS, 1.0f);
+	CNumber::RequestNumber(POS.x + static_cast<float>(NUM_SIZE), POS.y, m_oneS, 1.0f);
 
 }
 

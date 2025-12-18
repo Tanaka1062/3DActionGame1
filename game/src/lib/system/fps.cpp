@@ -2,8 +2,8 @@
 #include "fps.h"
 
 //定義関連----------------------
-static float FRAME_PATE = 60.0f;									//1秒辺りのフレーム数
-static float FRAME_RATE_MILLI_SECOND = 1000.0f / FRAME_PATE;		//何ミリ秒で1フレームか
+constexpr float FRAME_PATE = 60.0f;									//1秒辺りのフレーム数
+constexpr float FRAME_RATE_MILLI_SECOND = 1000.0f / FRAME_PATE;		//何ミリ秒で1フレームか
 //------------------------------
 
 float CFps::m_frameRate;	//今のフレームレートを保存

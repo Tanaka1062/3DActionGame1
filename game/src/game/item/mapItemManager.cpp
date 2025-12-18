@@ -2,6 +2,7 @@
 #include "itemObject/bomb/bomb.h"
 #include "itemObject/box/box.h"
 
+using namespace std;
 
 static const char* MODEL_PATH =				//ƒ‚ƒfƒ‹‚ÌƒpƒX
 {

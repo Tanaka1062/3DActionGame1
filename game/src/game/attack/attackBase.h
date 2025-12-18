@@ -1,6 +1,4 @@
 #pragma once
-
-#pragma once
 #include "../../lib/model/3DObject.h"
 #include "../player/playerData.h"
 

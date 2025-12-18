@@ -1,7 +1,7 @@
 #include "characterBase.h"
 #include "../../lib/myMath/myMath.h"
 
-static const VECTOR KNOCK_BACK_SPEED = { 0.0f,3.0f,-0.8f };
+constexpr VECTOR KNOCK_BACK_SPEED = { 0.0f,3.0f,-0.8f };
 constexpr float BACK_DOWN_SPEED = 0.9f;					//‘¬“x‚ÌŒ¸‘¬
 constexpr int BLOWN_MAX = 100;							//‚«”ò‚ÑÅ‘å’l
 
@@ -257,12 +257,6 @@ void CCharacterBase::HitAttack(int _atk, int _blown, float _rotY)
 	m_state = STAGGER;
 	//Hp‚ğUŒ‚—Í•ªŒ¸‚ç‚·
 	m_hp -= _atk;
-}
-
-//’e‚ğH‚ç‚Á‚½‚É‚·‚éˆ—
-void CCharacterBase::ShotAttack(int _atk, float _rotY)
-{
-	HitAttack(_atk, _rotY);
 }
 
 //------------------------------

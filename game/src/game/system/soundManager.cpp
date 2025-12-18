@@ -1,5 +1,7 @@
 #include "soundManager.h"
 
+using namespace std;
+
 vector<int> CSoundManager::m_hndl;
 
 

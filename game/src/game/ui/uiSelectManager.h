@@ -3,12 +3,10 @@
 #include <iostream>
 #include <vector>
 
-using namespace std;
-
 class CUiSelectManager
 {
 private:
-	vector<C2DUi*>m_ui;		//UI
+	std:: vector<C2DUi*>m_ui;		//UI
 public:
 	//コンストラクタ・デストラクタ
 	CUiSelectManager();

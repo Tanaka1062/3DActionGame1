@@ -3,15 +3,13 @@
 #include <vector>
 #include "player.h"
 
-using namespace std;
-
 //エネミーマネージャーのクラス
 class CPlayerManager
 {
 private:
-	vector<CPlayer*> m_player;			//プレイヤーのクラス
-	vector <int> m_modelHndl;			//モデルのハンドル
-	vector <VECTOR>m_spawnPos;			//プレイヤーの出現座標
+	std::vector<CPlayer*> m_player;			//プレイヤーのクラス
+	std::vector <int> m_modelHndl;			//モデルのハンドル
+	std::vector <VECTOR>m_spawnPos;			//プレイヤーの出現座標
 
 public:
 	//コンストラクタ・デストラクタ

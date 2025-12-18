@@ -13,9 +13,9 @@
 //定義関連---------------------------
 
 //プレイヤー関連--------------------------------
-constexpr const char MODEL_PATH[] =
+static const char MODEL_PATH[] =
  "data/model/player/playerTransformTest.mv1" ;			//ロードするファイル名
-static const VECTOR INIT_POS = { 0.0f,1.0f,0.0f };			//初期座標
+constexpr VECTOR INIT_POS = { 0.0f,1.0f,0.0f };			//初期座標
 constexpr float SHADOW_SIZE = 0.5f;						//丸影の大きさ
 constexpr int MAX_HP = 300;								//体力
 constexpr int ATK = 20;									//攻撃力
@@ -134,7 +134,7 @@ static const int ATTACK_BLOWN[WEAPON_ID_NUM][ATTACK_NUM] =				//攻撃の吹き飛び度
 	{60,60,80},
 };
 
-static const int ATTACK_SIZE[WEAPON_ID_NUM][ATTACK_NUM] =
+static const float ATTACK_SIZE[WEAPON_ID_NUM][ATTACK_NUM] =
 {
 	{10.0f,10.0f,10.0f},
 	{14.0f,14.0f,18.0f},
@@ -169,6 +169,7 @@ CPlayer::CPlayer()
 	m_dodgerollRotY = 0.0f;
 	m_padName = PAD_NONE;
 	m_weaponId = WEAPON_ID_HAND;
+	m_weaponDurability = 0;
 	m_itemState = ITEM_STATE_NONE;
 	m_targetPos = nullptr;
 }

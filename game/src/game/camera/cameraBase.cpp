@@ -1,7 +1,7 @@
 #include "cameraBase.h"
 
-static const VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
-static const VECTOR CAMERA_UP = { 0.0f,1.0f,0.0f };	//カメラの上方向
+constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
+constexpr VECTOR CAMERA_UP = { 0.0f,1.0f,0.0f };	//カメラの上方向
 
 //コンストラクタ
 CCameraBase::CCameraBase()

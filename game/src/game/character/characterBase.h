@@ -76,9 +76,6 @@ public:
 	//UŒ‚‚ğH‚ç‚Á‚½‚É‚·‚éˆ—
 	virtual void HitAttack(int _atk,int _blown,float _rotY = 0.0f);
 
-	//’e‚ğH‚ç‚Á‚½‚É‚·‚éˆ—
-	virtual void ShotAttack(int _atk, float _rotY = 0.0f);
-
 	//‘Ì—Í‚ğæ“¾
 	int GetHp() { return m_hp; }
 

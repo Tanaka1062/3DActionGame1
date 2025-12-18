@@ -2,11 +2,11 @@
 #include <math.h>
 
 //定義関連==================================
-static const VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
-static const VECTOR SCALE = { 1.0f,1.0f,1.0f };		//大きさ
-constexpr const char GROUND_MODEL_PATH[] =
+constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
+constexpr VECTOR SCALE = { 1.0f,1.0f,1.0f };		//大きさ
+static const char GROUND_MODEL_PATH[] =
  "data/model/map/TestMap6.mv1" ;					//ロードするファイル名
-constexpr const char GROUND_HIT_MODEL_PATH[] =
+static const char GROUND_HIT_MODEL_PATH[] =
  "data/model/map/TestMap6Hit.mv1" ;				//ロードするファイル名
 
 //==========================================

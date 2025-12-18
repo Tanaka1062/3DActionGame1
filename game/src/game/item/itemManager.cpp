@@ -1,5 +1,7 @@
 #include "itemManager.h"
 
+using namespace std;
+
 //-----------------------
 //	  コンストラクタ
 //-----------------------

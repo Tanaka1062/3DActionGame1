@@ -2,7 +2,7 @@
 
 #include <DxLib.h>
 
-static const int NUM_SIZE = 64;	//数字のサイズ
+constexpr int NUM_SIZE = 64;	//数字のサイズ
 
 class CNumber
 {

@@ -1,7 +1,7 @@
 #include "hpbarManager.h"
 #include "../../data.h"
 
-constexpr const char MODEL_PATH[] =
+static const char MODEL_PATH[] =
  "data/graphic/ui/hpbar.png" ;			//ロードするファイル名
 
 //-------------------------

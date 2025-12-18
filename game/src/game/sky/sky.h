@@ -1,5 +1,4 @@
 #pragma once
-#include<DxLib.h>
 #include"../../lib/model/3DObject.h"
 
 

@@ -1,6 +1,6 @@
 #include "weaponManager.h"
 
-constexpr const char* MODEL_PATH[WEAPON_ID_NUM] ={		//ロードするファイル名
+static const char* MODEL_PATH[WEAPON_ID_NUM] ={		//ロードするファイル名
 	"",
 	"data/model/item/weapon/sword/sword.mv1",
 	"data/model/item/weapon/ax/ax.mv1",

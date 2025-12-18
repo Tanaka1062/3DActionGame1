@@ -5,7 +5,7 @@
 #include "../system/soundManager.h"
 
 //定義関連====================================
-constexpr const char BACKGROUND_HNDL_PATH[] = "data/graphic/result/backGround.png";		//背景の画像パス
+static const char BACKGROUND_HNDL_PATH[] = "data/graphic/result/backGround.png";		//背景の画像パス
 //============================================
 
 //---------------------------
@@ -14,6 +14,8 @@ constexpr const char BACKGROUND_HNDL_PATH[] = "data/graphic/result/backGround.pn
 CResultScene::CResultScene() {
 	//最初はデータ初期化
 	m_state = INIT;
+
+	m_winner = CWinner::GetInstance();
 }
 
 //---------------------------
@@ -32,27 +34,26 @@ void CResultScene::Draw()
 {
 	m_backGround.Draw();
 
-	m_winner = CWinner::GetInstance();
-
 	DrawFormatString(32, 32, GetColor(255, 0, 0), "リザルト");
 
-	VECTOR pos;
-	pos.x = static_cast<float>(WINDOW_SIZE_X / 2);
-	pos.y = static_cast<float>(WINDOW_SIZE_Y / 2);
+	int posX = 0;
+	int posY = 0;
+	posX = WINDOW_SIZE_X / 2;
+	posY = WINDOW_SIZE_Y / 2;
 
 	switch (m_winner->GetWinnerPlayerName())
 	{
 	case PLAYER_1:
-	DrawFormatString(pos.x, pos.y, GetColor(255, 0, 0), "プレイヤー１勝利");
+	DrawFormatString(posX, posY, GetColor(255, 0, 0), "プレイヤー１勝利");
 		break;
 	case PLAYER_2:
-		DrawFormatString(pos.x, pos.y, GetColor(255, 0, 0), "プレイヤー2勝利");
+		DrawFormatString(posX, posY, GetColor(255, 0, 0), "プレイヤー2勝利");
 		break;
 	case PLAYER_3:
-		DrawFormatString(pos.x, pos.y, GetColor(255, 0, 0), "プレイヤー3勝利");
+		DrawFormatString(posX, posY, GetColor(255, 0, 0), "プレイヤー3勝利");
 		break;
 	case PLAYER_4:
-		DrawFormatString(pos.x, pos.y, GetColor(255, 0, 0), "プレイヤー4勝利");
+		DrawFormatString(posX, posY, GetColor(255, 0, 0), "プレイヤー4勝利");
 		break;
 	}
 

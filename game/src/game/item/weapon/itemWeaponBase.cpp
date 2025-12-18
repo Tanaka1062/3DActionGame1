@@ -2,7 +2,7 @@
 
 CWeaponBase::CWeaponBase()
 {
-	CItemBase::Init();
+	Init();
 }
 
 CWeaponBase::~CWeaponBase()

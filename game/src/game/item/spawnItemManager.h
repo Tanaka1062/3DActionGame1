@@ -7,8 +7,6 @@
 #include "coin/coin.h"
 #include "itemObject/box/box.h"
 
-using namespace std;
-
 enum tagItemSpawnPos
 {
 	ITEM_SPAWN_POS_1,		//アイテムの出現座標1
@@ -29,7 +27,7 @@ constexpr int SPAWN_ITEM_MAX = 10;		//アイテムの最大量
 class CSpawnItemManager
 {
 private:
-	vector<unique_ptr<CItemBase>> m_item;
+	std::vector<std::unique_ptr<CItemBase>> m_item;
 	int m_hndl[ITEM_NUM];								//アイテムのモデルハンドル
 	int m_spawnTime;									//時間カウント
 	bool m_isItemSpawn;									//アイテムがスポーンするかどうか
@@ -64,16 +62,16 @@ public:
 	CItemBase* GetItem(int _num);
 
 	//アイテムを出現させる
-	unique_ptr<CItemBase> SpawnItem();
+	std::unique_ptr<CItemBase> SpawnItem();
 
 	//コインを出現させる
-	unique_ptr<CItemBase> SpawnCoin();
+	std::unique_ptr<CItemBase> SpawnCoin();
 
 	//アイテムがスポーンするかを取得
 	bool GetIsItemSpawn() { return m_isItemSpawn; }
 
 	//アイテムを元に戻す
-	void ReturnItem(unique_ptr<CItemBase> _returnItme);
+	void ReturnItem(std::unique_ptr<CItemBase> _returnItme);
 
 };
 

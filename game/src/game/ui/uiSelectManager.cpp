@@ -3,6 +3,8 @@
 #include "../data.h"
 #include "../gameTime/gameTime.h"
 
+using namespace std;
+
 enum tagUiName
 {
 	UI_BACKGROUND,		//”wŒi
@@ -10,7 +12,7 @@ enum tagUiName
 	UI_NUM,				//UI‚Ì”
 };
 
-constexpr const char* UI_GRAPHIC_PATH[UI_NUM] =		//”wŒi‚Ì‰æ‘œƒpƒX
+static const char* UI_GRAPHIC_PATH[UI_NUM] =		//”wŒi‚Ì‰æ‘œƒpƒX
 {
 	"data/graphic/select/backGround.png",
 

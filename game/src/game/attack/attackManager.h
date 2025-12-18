@@ -6,13 +6,11 @@
 #include"attackBase.h"
 #include "../player/playerData.h"
 
-using namespace std;
-
 //攻撃の当たり判定のマネージャーのクラス
 class CAttackManager
 {
 private:
-	static list<CAttackBase*> m_attack;			//攻撃の当たり判定のクラス
+	static std::list<CAttackBase*> m_attack;			//攻撃の当たり判定のクラス
 public:
 	//コンストラクタ・デストラクタ
 	CAttackManager();
@@ -20,8 +18,6 @@ public:
 
 	//初期化
 	static void Init();
-	//モデルロード
-	static void Load();
 	//更新処理
 	static void Update();
 	//オブジェクトの描写

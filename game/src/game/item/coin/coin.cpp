@@ -2,7 +2,7 @@
 #include "../../lib/myMath/myMath.h"
 
 constexpr float ROT_SPEED = 0.05f;			//‰ñ“]‘¬“x
-constexpr int ADD_MONEY = 1;					//‘‚¦‚é‚¨‹à‚Ì—Ê
+constexpr int ADD_MONEY = 1;				//‘‚¦‚é‚¨‹à‚Ì—Ê
 
 CCoin::CCoin()
 {

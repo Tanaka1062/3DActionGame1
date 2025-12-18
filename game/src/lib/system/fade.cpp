@@ -3,7 +3,7 @@
 #include "../../game/data.h"
 
 //定義関連----------------------
-static int FADE_SPEED = 10;		//フェードの速さ
+constexpr int FADE_SPEED = 10;		//フェードの速さ
 //------------------------------
  
 tagFadeSteate CFade::m_state;

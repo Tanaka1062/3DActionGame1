@@ -3,12 +3,10 @@
 #include <iostream>
 #include <vector>
 
-using namespace std;
-
 class CUiTitleManager
 {
 private:
-	vector<C2DUi*>m_ui;		//UI
+	std::vector<C2DUi*>m_ui;		//UI
 public:
 	//コンストラクタ・デストラクタ
 	CUiTitleManager();

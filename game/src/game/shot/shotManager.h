@@ -3,14 +3,11 @@
 #include <list>
 #include "shotBase.h"
 
-using namespace std;
-
-
 //エネミーマネージャーのクラス
 class CShotManager
 {
 private:
-	list<CShotBase*> m_shot;			//弾のクラス
+	std::list<CShotBase*> m_shot;			//弾のクラス
 	int m_hndl;							//弾のモデルハンドル
 public:
 	//コンストラクタ・デストラクタ

@@ -1,6 +1,8 @@
 #include "shotManager.h"
 
-constexpr const char MODEL_PATH[] =
+using namespace std;
+
+static const char MODEL_PATH[] =
  "data/model/shot/shotTest.mv1" ;				//ロードするファイル名
 
 //------------------------

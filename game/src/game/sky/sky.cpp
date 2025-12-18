@@ -1,10 +1,11 @@
 #include "sky.h"
+//#include<DxLib.h>
 
 //定義関連==================================
 constexpr float ALL_SCALE = 18.0f;
-static const VECTOR SCALE = VGet(ALL_SCALE, ALL_SCALE, ALL_SCALE);
+constexpr VECTOR SCALE = { ALL_SCALE, ALL_SCALE, ALL_SCALE };
 constexpr float ROTATE_SPEED = 0.1f;				//回転速度
-static const VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
+constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
 constexpr char SKY_MODEL_PATH[] =
  "data/model/sky/sky.mv1" ;	//ロードするファイル名
 //==========================================

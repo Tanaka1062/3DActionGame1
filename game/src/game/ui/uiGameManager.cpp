@@ -3,10 +3,12 @@
 #include "../data.h"
 #include "../gameTime/gameTime.h"
 
-constexpr const char MODEL_PATH[] =
+using namespace std;
+
+static const char MODEL_PATH[] =
  "data/graphic/ui/powerUpGauge.png" ;			//ロードするファイル名
 
-static const VECTOR GET_COIN_POS[PLAYER_NUM] =
+constexpr VECTOR GET_COIN_POS[PLAYER_NUM] =
 {
 	{115.0f,60.0f,0.0f},
 	{static_cast<float>(WINDOW_SIZE_X - 115),60.0f,0.0f},
@@ -15,7 +17,7 @@ static const VECTOR GET_COIN_POS[PLAYER_NUM] =
 
 };
 
-static const VECTOR GET_POWER_GOUGE_POS[PLAYER_NUM] =
+constexpr VECTOR GET_POWER_GOUGE_POS[PLAYER_NUM] =
 {
 	{360.0f,60.0f,0.0f},
 	{static_cast<float>(WINDOW_SIZE_X - 360),60.0f,0.0f},

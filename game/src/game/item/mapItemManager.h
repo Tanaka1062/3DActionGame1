@@ -5,8 +5,6 @@
 #include "../data.h"
 #include "itemObject/box/box.h"
 
-using namespace std;
-
 //アイテムの名前
 enum tagMapItemSpawnPos
 {
@@ -22,7 +20,7 @@ enum tagMapItemSpawnPos
 class CMapItemManager
 {
 private:
-	vector<unique_ptr<CItemBase>> m_item;
+	std::vector<std::unique_ptr<CItemBase>> m_item;
 	int m_hndl;											//アイテムのモデルハンドル
 
 public:
@@ -43,7 +41,7 @@ public:
 	int GetItemNum() { return MAP_ITEM_SPAWN_POS_NUM; }
 
 	//アイテムのアドレスを取得
-	unique_ptr<CItemBase> GetItem(int _num);
+	std::unique_ptr<CItemBase> GetItem(int _num);
 
 };
 

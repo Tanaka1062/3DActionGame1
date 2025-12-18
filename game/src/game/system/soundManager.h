@@ -2,8 +2,6 @@
 #include<DxLib.h>
 #include<vector>
 
-using namespace std;
-
 //定義ルール-------------------
 //BGMID_名前	//名前のBGM
 //SEID_名前		//名前の効果音
@@ -26,7 +24,7 @@ public:
 	};
 
 private:
-	static vector<int> m_hndl;		//音楽ハンドル
+	static std::vector<int> m_hndl;		//音楽ハンドル
 
 public:
 	//初期化

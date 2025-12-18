@@ -1,8 +1,8 @@
 #include"3DObject.h"
 #include "../../game/common.h"
 
-static const float GRAVITIY = 0.1f;						//重力
-static const float GRAVITIY_MAX = 5.0f;					//最大重力
+constexpr float GRAVITIY = 0.1f;						//重力
+constexpr float GRAVITIY_MAX = 5.0f;					//最大重力
 
 //---------------------
 //	コンストラクタ

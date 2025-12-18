@@ -9,13 +9,11 @@
 #include "mapItemManager.h"
 #include "spawnItemManager.h"
 
-using namespace std;
-
 //アイテムマネージャークラス
 class CItemManager
 {
 private:
-	list<unique_ptr<CItemBase>> m_item;					//アイテムのクラス
+	std::list<std::unique_ptr<CItemBase>> m_item;					//アイテムのクラス
 	CMapItemManager m_mapItemManager;					//マップに置いてあるアイテムマネージャー
 	CSpawnItemManager m_spawnItemManager;				//スポーンするアイテムのマネージャー
 
