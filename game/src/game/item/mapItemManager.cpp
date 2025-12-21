@@ -12,6 +12,13 @@ static const char* MODEL_PATH =				//モデルのパス
 static const char FRAME_PATH[] =
 { "data/model/map/TestMap6Frame.mv1" };		//ロードするファイル名
 
+constexpr int SPAWN_POS_FRAME_ID[MAP_ITEM_SPAWN_POS_NUM] =	//スポーンする座標のフレームID
+{
+	23,
+	25,
+	27,
+	29,
+};
 
 //-----------------------
 //	  コンストラクタ
@@ -76,21 +83,7 @@ void CMapItemManager::Load()
 		//アイテムの出現座標を保存
 		VECTOR spawnPos = ZERO;
 
-		switch (spawnPos_i)
-		{
-		case MAP_ITEM_SPAWN_POS_1:
-			spawnPos = MV1GetFramePosition(mapFrameHndl, 23);
-			break;
-		case MAP_ITEM_SPAWN_POS_2:
-			spawnPos = MV1GetFramePosition(mapFrameHndl, 25);
-			break;
-		case MAP_ITEM_SPAWN_POS_3:
-			spawnPos = MV1GetFramePosition(mapFrameHndl, 27);
-			break;
-		case MAP_ITEM_SPAWN_POS_4:
-			spawnPos = MV1GetFramePosition(mapFrameHndl, 29);
-			break;
-		}
+		spawnPos = MV1GetFramePosition(mapFrameHndl, SPAWN_POS_FRAME_ID[spawnPos_i]);
 
 		m_item[spawnPos_i]->SetSpawnPos(spawnPos);
 	}
@@ -102,10 +95,6 @@ void CMapItemManager::Load()
 //-----------------------
 void CMapItemManager::Step()
 {
-	//for (int item_i = 0; item_i < m_item.size(); item_i++)
-	//{
-	//	m_item[item_i]->Step();
-	//}
 }
 
 //-----------------------
@@ -118,12 +107,6 @@ void CMapItemManager::Exit()
 		MV1DeleteModel(m_hndl);
 		m_hndl = -1;
 	}
-
-	//for (int item_i = 0; item_i < m_item.size();item_i++)
-	//{
-	//	m_item[item_i]->Exit();
-
-	//}
 
 	//deleteの代わり
 	m_item.clear();
