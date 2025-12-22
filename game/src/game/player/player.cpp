@@ -639,7 +639,12 @@ void CPlayer::Walk()
 //-----------------------
 void CPlayer::Jump()
 {
-	m_state = WAIT;
+	RequestAnim(ANIMID_JUMP, 1.0f);
+
+	if (GetAnimEnd() == true)
+	{
+		m_state = WAIT;
+	}
 }
 
 //-----------------------
