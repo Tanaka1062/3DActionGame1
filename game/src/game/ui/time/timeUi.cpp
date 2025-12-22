@@ -5,7 +5,8 @@
 static const char GRAPHIC_PATH[] =
  "data/graphic/ui/division.png" ;				//ロードするファイル名
 
-constexpr VECTOR POS = {static_cast<float>(WINDOW_SIZE_X / 2.0f),100.0f,0.0f};
+constexpr int POS_X = WINDOW_SIZE_X / 2;
+constexpr int POS_Y = 100;
 
 CTimeUi::CTimeUi()
 {
@@ -24,9 +25,10 @@ void CTimeUi::Init()
 	m_tenS = 0;
 	m_oneS = 0;
 
-	VECTOR pos = POS;
+	VECTOR pos = ZERO;
 
-	pos.x = POS.x - NUM_SIZE / 2;
+	pos.x = static_cast<float>(POS_X - NUM_SIZE / 2);
+	pos.y = static_cast<float>(POS_Y);
 
 	m_division.Init(pos);
 }
@@ -50,10 +52,10 @@ void CTimeUi::Step(int _time)
 //描画処理
 void CTimeUi::Draw()
 {
-	CNumber::RequestNumber(POS.x - static_cast<float>(NUM_SIZE), POS.y,m_oneM,1.0f);
+	CNumber::RequestNumber(POS_X - NUM_SIZE, POS_Y,m_oneM,1.0f);
 	m_division.Draw();
-	CNumber::RequestNumber(POS.x + static_cast<float>(NUM_SIZE / 8), POS.y, m_tenS, 1.0f);
-	CNumber::RequestNumber(POS.x + static_cast<float>(NUM_SIZE), POS.y, m_oneS, 1.0f);
+	CNumber::RequestNumber(POS_X + NUM_SIZE / 8, POS_Y, m_tenS, 1.0f);
+	CNumber::RequestNumber(POS_X + NUM_SIZE, POS_Y, m_oneS, 1.0f);
 
 }
 

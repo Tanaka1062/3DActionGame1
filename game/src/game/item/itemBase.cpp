@@ -4,6 +4,7 @@
 constexpr float RADIUS = 7.5f;				//半径
 constexpr float DROP_SPEED = 6.0f;			//飛ぶスピード
 constexpr float DROP_JUMP = 7.0f;			//上に飛ぶ力
+constexpr float DELETE_POS_Y = -100.0f;		//消滅する高度
 
 //--------------------------
 //	   コンストラクタ
@@ -69,7 +70,7 @@ void CItemBase::Step()
 
 	m_shadow.Step(m_pos);
 
-	if (m_pos.y <= -100.0f)
+	if (m_pos.y <= DELETE_POS_Y)
 	{
 		m_isActive = false;
 	}

@@ -73,7 +73,7 @@ void CSelectScene::Step()
 
 	//スペースで終わる
 	if (CKeyInput::IsTrg(KEY_SELECT) ||
-		CControllerManager::IsAllSetId() == true)
+		CControllerManager::IsAllConnection() == true)
 	{
 		m_state = END;
 	}

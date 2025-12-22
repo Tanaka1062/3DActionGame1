@@ -2,7 +2,7 @@
 #include "../../../data.h"
 
 constexpr int SPAWN_TIME = 12 * 60;		//ƒXƒ|[ƒ“‚·‚é‚Ü‚Å‚ÌŠÔ
-constexpr float ATK = 10.0f;			//UŒ‚—Í
+constexpr int ATK = 10;				//UŒ‚—Í
 
 CBox::CBox()
 {

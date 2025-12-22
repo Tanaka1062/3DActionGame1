@@ -216,11 +216,12 @@ void CCollisionManager::CheckHitPlayerToMap(CPlayerManager& _playerManager,CMap&
 			if (col.HitNum != 0)
 			{
 				shadowPos.y += 1.5f;
-
-				player->SetShadowPos(shadowPos);
 				break;
 			}
 		}
+		player->SetShadowPos(shadowPos);
+	
+
 		//毎回データを削除
 		MV1CollResultPolyDimTerminate(col);
 
@@ -296,10 +297,12 @@ void CCollisionManager::CheckHitItemToMap(CItemManager& _itemManager, CMap& _map
 			{
 				shadowPos.y += 1.5f;
 
-				item->SetShadowPos(shadowPos);
 				break;
 			}
 		}
+
+		item->SetShadowPos(shadowPos);
+
 		//毎回データを削除
 		MV1CollResultPolyDimTerminate(col);
 	}

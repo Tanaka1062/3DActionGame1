@@ -48,7 +48,10 @@ public:
 	static bool SetId();
 
 	//コントローラーが全部接続されているかどうか
-	static bool IsAllSetId();
+	static bool IsAllConnection();
+
+	//コントローラーが接続されているかどうか
+	static bool IsConnection(tagPadName _padName);
 
 	//コントローラーの名前を取得
 	static tagPadName GetName(int _num);

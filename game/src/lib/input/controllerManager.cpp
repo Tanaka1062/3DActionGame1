@@ -21,8 +21,6 @@ void CControllerManager::Init()
 	{
 		m_controller[i].Init();
 	}
-	//m_controller[PAD_1].SetId(DX_INPUT_PAD1);
-	//m_controller[PAD_2].SetId(DX_INPUT_PAD2);
 }
 
 //-------------------------------
@@ -122,7 +120,7 @@ bool CControllerManager::SetId()
 //-------------------------------
 //コントローラーが全部接続されているかどうか
 //-------------------------------
-bool CControllerManager::IsAllSetId()
+bool CControllerManager::IsAllConnection()
 {
 	//idをセットされているコントローラーの数
 	int setIdPadNum = 0;
@@ -136,6 +134,20 @@ bool CControllerManager::IsAllSetId()
 	}
 
 	if (setIdPadNum == PAD_NUM)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+//-------------------------------
+//コントローラーが接続されているかどうか
+//-------------------------------
+bool CControllerManager::IsConnection(tagPadName _padName)
+{
+	//コントローラーのIDが設定されていたらtrueを返す
+	if (m_controller[_padName].GetId() != PAD_NONE)
 	{
 		return true;
 	}

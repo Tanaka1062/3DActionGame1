@@ -2,6 +2,16 @@
 
 constexpr int HP_BAR_LEN = 595;		//HPバーの長さ		
 
+typedef unsigned int UnInt;
+
+static const UnInt HP_COLOR[PLAYER_NUM] =
+{
+	GetColor(255,0,0),
+	GetColor(0,0,255),
+	GetColor(0,255,0),
+	GetColor(255,255,0),
+};
+
 //コンストラクタ・デストラクタ
 CHpbar::CHpbar()
 {
@@ -49,12 +59,12 @@ void CHpbar::Draw(float _size)
 	case PLAYER_1:
 	case PLAYER_3:
 		DrawBox(static_cast<int>(m_pos.x + (HP_BAR_LEN * 0.5f)), static_cast<int>(m_pos.y + 10),
-			static_cast<int>((m_pos.x + (HP_BAR_LEN * 0.5f)) - m_hp), static_cast<int>(m_pos.y - 10), GetColor(0, 255, 0), TRUE);
+			static_cast<int>((m_pos.x + (HP_BAR_LEN * 0.5f)) - m_hp), static_cast<int>(m_pos.y - 10), HP_COLOR[m_player->GetPlayerName()], TRUE);
 		break;
 	case PLAYER_2:
 	case PLAYER_4:
 		DrawBox(static_cast<int>(m_pos.x - (HP_BAR_LEN * 0.5f)), static_cast<int>(m_pos.y + 10),
-			static_cast<int>((m_pos.x - (HP_BAR_LEN * 0.5f)) + m_hp), static_cast<int>(m_pos.y - 10), GetColor(0, 255, 0), TRUE);
+			static_cast<int>((m_pos.x - (HP_BAR_LEN * 0.5f)) + m_hp), static_cast<int>(m_pos.y - 10), HP_COLOR[m_player->GetPlayerName()], TRUE);
 		break;
 
 	}

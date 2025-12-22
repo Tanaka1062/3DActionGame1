@@ -1,6 +1,6 @@
 #include "gun.h"
 
-constexpr int COST = 7;						//‰¿Ši
+constexpr int COST = 6;						//‰¿Ši
 constexpr int DURABILITY = 20;				//•Ší‚Ì‘Ï‹v“x
 
 CGun::CGun()

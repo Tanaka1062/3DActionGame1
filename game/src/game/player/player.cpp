@@ -17,7 +17,7 @@ static const char MODEL_PATH[] =
  "data/model/player/playerTransformTest.mv1" ;			//ロードするファイル名
 constexpr VECTOR INIT_POS = { 0.0f,1.0f,0.0f };			//初期座標
 constexpr float SHADOW_SIZE = 0.5f;						//丸影の大きさ
-constexpr int MAX_HP = 300;								//体力
+constexpr int MAX_HP = 200;								//体力
 constexpr int ATK = 20;									//攻撃力
 constexpr float MOVE_SPEED = 1.2f;						//移動スピード
 constexpr float RADIUS = 10.0f;							//半径
@@ -31,6 +31,7 @@ static const VECTOR KNOCK_BACK_SPEED = { 0.0f,3.0f,-0.8f };	//吹き飛ぶスピード
 constexpr int INIT_MONEY = 3;							//最初の所持金
 constexpr float MONEY_DROP_RATE = 0.4f;					//落とすお金の割合
 constexpr float MONEY_RESPAWN_RATE = 0.5f;				//復活するときに消費するお金の割合
+constexpr float DIE_POS_Y = -100.0f;					//死ぬ高さ
 //----------------------------------------------
 
 //攻撃関連---------------------------
@@ -46,6 +47,10 @@ constexpr int SHOT_LOST_TIME = 2 * 60;				//弾が消えるまでの時間
 //アニメーション一覧---------------------------
 
 enum tagAnim {
+	ANIMID_AIR,						//空中にいるときのアニメーション
+	ANIMID_AIR_ATTACK_HAND,			//空中で素手攻撃中アニメーション
+	ANIMID_AIR_ATTACK_HAND_IN,		//空中で素手攻撃前アニメーション
+	ANIMID_AIR_ATTACK_HAND_OUT,		//空中で素手攻撃後アニメーション
 	ANIMID_ATTACK1_AX,				//斧攻撃1中アニメーション
 	ANIMID_ATTACK1_AX_IN,			//斧攻撃1前アニメーション
 	ANIMID_ATTACK1_AX_OUT,			//斧攻撃1後アニメーション
@@ -88,6 +93,8 @@ enum tagAnim {
 	ANIMID_ITEM_USE,				//アイテムを使用中のアニメーション
 	ANIMID_ITEM_USE_IN,				//アイテムを使用する前のアニメーション
 	ANIMID_ITEM_USE_OUT,			//アイテムを使用した後のアニメーション
+	ANIMID_JUMP,					//ジャンプするアニメーション
+	ANIMID_LANDING,					//着地するアニメーション
 	ANIMID_LIFT_UP,					//物を持ち上げるアニメーション
 	ANIMID_PUT_DOWN,				//物を下ろすアニメーション
 	ANIMID_SKILLA,					//スキルA使用中のアニメーション
@@ -258,6 +265,16 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 	//	m_rot.y = rotY;
 	//}
 
+	if (m_state == DIE)
+	{
+	}
+
+	//指定した高度よりしたに落ちたら死んで復活する
+	if (m_pos.y <= DIE_POS_Y)
+	{
+		m_state = DIE;
+	}
+
 	if (m_isTransform == true)
 	{
 		switch (m_state)
@@ -390,9 +407,9 @@ void CPlayer::Respawn(VECTOR _respawnPos)
 	m_hp = m_maxHp;
 	m_weaponId = WEAPON_ID_HAND;
 	m_weaponDurability = 0;
+	m_state = WAIT;
 	m_dropCoin = static_cast<int>(m_money * MONEY_RESPAWN_RATE);
 	m_money -= m_dropCoin;
-	m_state = WAIT;
 }
 
 //当たり判定後の処理

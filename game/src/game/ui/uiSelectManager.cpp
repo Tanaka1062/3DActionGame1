@@ -2,6 +2,7 @@
 #include "hpber/hpbar.h"
 #include "../data.h"
 #include "../gameTime/gameTime.h"
+#include "../../lib/input/controllerManager.h"
 
 using namespace std;
 
@@ -64,6 +65,25 @@ void CUiSelectManager::Step()
 	for (int ui_i = 0; ui_i < m_ui.size(); ui_i++)
 	{
 		m_ui[ui_i]->Step();
+	}
+
+	for (int pad_i = 0; pad_i < PAD_NUM; pad_i++)
+	{
+		if (CControllerManager::IsConnection(static_cast<tagPadName>(pad_i)) == true)
+		{
+			switch (pad_i)
+			{
+			case PAD_1:
+
+				break;
+			case PAD_2:
+				break;
+			case PAD_3:
+				break;
+			case PAD_4:
+				break;
+			}
+		}
 	}
 }
 

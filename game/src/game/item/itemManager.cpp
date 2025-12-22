@@ -93,13 +93,7 @@ void CItemManager::Step(CPlayerManager* _playerManager)
 			unique_ptr<CItemBase> dropCoin = m_spawnItemManager.SpawnCoin();
 			
 			//飛ばす方向を求める
-			float radian = static_cast<float>((GetRand(60) - 30) * (DX_PI_F / 180.0f));
-
-			//とりあえず中心に飛ばす
-			float rotY = atan2f(-player->GetPos().x, -player->GetPos().z);
-
-			//飛ばす方向にプラスで角度を加える
-			rotY += radian;
+			float rotY = static_cast<float>((GetRand(360)) * (DX_PI_F / 180.0f));
 
 			//コインを飛ばす
 			dropCoin->Drop(player->GetCenter(), rotY);
