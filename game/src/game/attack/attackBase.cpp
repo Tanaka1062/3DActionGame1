@@ -15,6 +15,7 @@ void CAttackBase::Init()
 {
 	CObject::Init();
 	m_isAttack = false;
+	m_isPushed = false;
 	m_atk = 0;
 	m_blown = 0;
 	m_num = 0;

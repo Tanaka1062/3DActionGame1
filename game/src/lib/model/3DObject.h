@@ -67,7 +67,7 @@ public:
 	virtual void HitMapCalc();
 
 	//重力リセット
-	void GravityReset();
+	virtual void GravityReset();
 
 	//取得・設定---------------------
 	//座標を取得

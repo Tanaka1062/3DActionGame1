@@ -17,6 +17,7 @@ void CItemObjectBase::Init()
 	m_rad = RADIUS;
 	m_isLift = false;
 	m_isDrop = false;
+	m_isPushed = true;
 	m_itemType = ITEM_TYPE_OBJECT;
 }
 

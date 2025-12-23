@@ -44,9 +44,6 @@ void CPowerUpGouge::Draw(float _size)
 	if (m_player == nullptr)return;
 
 
-	DrawFormatString(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y), GetColor(255, 0, 0), "‚¨‹à%d", m_player->GetMoney());
-
-
 }
 
 

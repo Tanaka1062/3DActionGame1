@@ -42,6 +42,7 @@ void CShotBase::Init()
 	m_effectHndl = -1;
 	m_objectTypy = OBJECT_SHOT;
 	m_isHoming = true;
+	m_isPushed = false;
 }
 
 //-----------------------

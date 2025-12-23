@@ -78,6 +78,16 @@ void CCharacterBase::Step(CAttackManager* _attackManager, CShotManager* _shotMan
 		Jump();
 		break;
 
+		//空中
+	case AIR:
+		Air();
+		break;
+
+		//着地
+	case LANDING:
+		Landing();
+		break;
+
 		//回避
 	case DODGEROLL:
 		Dodgeroll();
@@ -279,6 +289,22 @@ void CCharacterBase::Walk()
 //			ジャンプ
 //------------------------------
 void CCharacterBase::Jump()
+{
+
+}
+
+//------------------------------
+//				空中
+//------------------------------
+void CCharacterBase::Air()
+{
+
+}
+
+//------------------------------
+//				着地
+//------------------------------
+void CCharacterBase::Landing()
 {
 
 }

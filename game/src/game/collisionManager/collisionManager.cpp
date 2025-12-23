@@ -22,14 +22,9 @@ void CCollisionManager::CheckHitObjectToObject(CObject* _objectA, CObject* _obje
 
 	}
 
-	//攻撃の当たり判定は押し出し処理をしない
-	if (_objectA->GetObjectType() == OBJECT_ATTACK ||
-		_objectB->GetObjectType() == OBJECT_ATTACK)
-		return;
-
-	//弾の当たり判定は押し出し処理をしない
-	if (_objectA->GetObjectType() == OBJECT_SHOT ||
-		_objectB->GetObjectType() == OBJECT_SHOT)
+	//押し出しフラグがfalseなら処理をしない
+	if (_objectA->GetIsPushed() == false ||
+		_objectB->GetIsPushed() == false)
 		return;
 
 	//押し戻し処理-------------------------------------------------

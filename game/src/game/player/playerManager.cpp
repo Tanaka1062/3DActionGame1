@@ -1,6 +1,7 @@
 #include "playerManager.h"
 #include "../../lib/input/controllerManager.h"
 #include "../data.h"
+#include "../../lib/myMath/myMath.h"
 
 using namespace std;
 
@@ -13,6 +14,9 @@ enum tagModelName					//モデル一覧
 
 	MODEL_NUM,						//モデルの数
 };
+
+constexpr float TARGET_LEN = 70.0f;				//ターゲットと認識するまでの長さ
+constexpr float TARGET_MAX_DISTANCE = 20.0f;	//どれくらい法線から離せるか
 
 static const char* MODEL_PATH[PLAYER_NUM] =
 { "data/model/player/playerTest7-1.mv1" ,
@@ -153,23 +157,65 @@ void CPlayerManager::Step(CAttackManager* _attackManager, CShotManager* _shotMan
 {
 	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
+		//ターゲットの座標アドレス保存用
 		VECTOR* targetPos = nullptr;
 
-		//一番近いプレイヤー同士の距離
-		float playerLen = 0.0f;
+		//プレイヤーとターゲットの最小距離保存用
+		float minLen = -1.0f;
+
+		//プレイヤーの座標
+		VECTOR playerPos = m_player[player_i]->GetPos();
+
+		//プレイヤーが向いてる方向の長さベクトル
+		VECTOR vecLen = playerPos;
+		//プレイヤーの向いている方向
+		float playerRotY = m_player[player_i]->GetRot().y;
+
+		vecLen.x += sinf(playerRotY) * TARGET_LEN;
+		vecLen.z += cosf(playerRotY) * TARGET_LEN;
+
 		//一番近いプレイヤーの座標を求める
 		for (int target_i = 0; target_i < m_player.size(); target_i++)
 		{
 			//同じプレイヤーはスキップする
 			if (player_i == target_i)continue;
 
-			//プレイヤー同士の距離保存用
-			float len = VSize(VSub(m_player[player_i]->GetPos(), m_player[target_i]->GetPos()));
+			//プレイヤーとターゲットの内積
+			float dot1 = CMyMath::VecDot(m_player[target_i]->GetPos(), playerPos);
+			//プレイヤーの向いている方向ベクトルとターゲットの内積
+			float dot2 = CMyMath::VecDot(m_player[target_i]->GetPos(), vecLen);
+
+			//ターゲットが前方にいるかを判断し後方なら処理をしない
+			if (dot1 < 0 && dot2 < 0)continue;
+
+			//外積を出すために必要なベクトル１
+			VECTOR vec1 = VSub(vecLen, playerPos);
+			//外積を出すために必要なベクトル２
+			VECTOR vec2 = VSub(m_player[target_i]->GetPos(),playerPos);
+
+			//外積を求める
+			VECTOR cross = ZERO;
+			cross.x = vec1.y * vec2.z - vec1.z * vec2.y;
+			cross.y = vec1.z * vec2.x - vec1.x * vec2.z;
+			cross.z = vec1.x * vec2.y - vec1.y * vec2.x;
+
+			//外積から平行四辺形の面積を計算
+			float area = cross.x * cross.x + cross.y * cross.y + cross.z * cross.z;
+
+			area = sqrtf(area);
+
+			//平行四辺形の底辺を求める
+			float baseLength = vec1.x * vec1.x + vec1.y * vec1.y + vec1.z * vec1.z;
+
+			baseLength = sqrtf(baseLength);
+
+			//プレイヤーの向いてる方向ベクトルからターゲットまでの距離
+			float len = area / baseLength;
 
 			//今の距離より近かったらターゲットの座標を変更
-			if (playerLen >= len || playerLen == 0.0f)
+			if ((minLen >= len && TARGET_MAX_DISTANCE >= len) || minLen == -1.0f)
 			{
-				playerLen = len;
+				minLen = len;
 
 				targetPos = m_player[target_i]->GetPosPoint();
 			}

@@ -91,6 +91,9 @@ public:
 	//攻撃を食らった時にする処理
 	void HitAttack(int _atk, int _blown, float _rotY = 0.0f);
 
+	//重力リセット
+	void GravityReset();
+
 	//回避しているかを取得
 	bool GetIsDodgeroll() { return m_isDodgeroll; }
 
@@ -159,7 +162,13 @@ private:
 	//ジャンプ状態処理
 	void Jump();
 
-	//回避
+	//空中状態処理
+	void Air();
+
+	//着地状態処理
+	void Landing();
+
+	//回避状態処理
 	void Dodgeroll();
 
 	//攻撃前処理

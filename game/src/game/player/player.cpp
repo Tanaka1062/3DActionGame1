@@ -32,6 +32,7 @@ constexpr int INIT_MONEY = 3;							//最初の所持金
 constexpr float MONEY_DROP_RATE = 0.4f;					//落とすお金の割合
 constexpr float MONEY_RESPAWN_RATE = 0.5f;				//復活するときに消費するお金の割合
 constexpr float DIE_POS_Y = -100.0f;					//死ぬ高さ
+constexpr float FALL_OUT_DAMAGER_RATE = 0.3f;			//ステージから落下したときの割合ダメージ
 //----------------------------------------------
 
 //攻撃関連---------------------------
@@ -242,28 +243,46 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 
 	m_targetPos = _targetPos;
 
-	//プレイヤー同士の距離
-	//VECTOR vLen = VSub(m_pos, *m_targetPos);
-	//float fLen = VSize(vLen);
+	if (m_targetPos != nullptr)
+	{
+		//プレイヤー同士の距離
+		VECTOR vLen = VSub(m_pos, *m_targetPos);
+		float fLen = VSize(vLen);
 
-	////戦いの距離になったら互いの方向を向く
-	//if (fLen <= FIGHT_LEN)
-	//{
-	//	if (!m_isDodgeroll)
-	//	{
-	//		float rotY1 = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
+		//戦いの距離になったら互いの方向を向く
+		if (fLen <= FIGHT_LEN)
+		{
+			if (!m_isDodgeroll)
+			{
+				float rotY1 = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
 
-	//		m_rot.y = rotY1;
-	//	}
-	//}
+				m_rot.y = rotY1;
+			}
+		}
 
-	////プレイヤーの向きを変える
-	//if (m_state == ITEM_THROW_IN)
-	//{
-	//	float rotY = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
+		//プレイヤーの向きを変える
+		if (m_state == ITEM_THROW_IN)
+		{
+			float rotY = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
 
-	//	m_rot.y = rotY;
-	//}
+			m_rot.y = rotY;
+		}
+	}
+
+	//空中にいたら状態を空中に変える
+	if (m_isFlying == true)
+	{
+		switch (m_state)
+		{
+		case ATTACK_IN:
+		case ATTACK:
+		case ATTACK_OUT:
+			break;
+		default:
+			m_state = AIR;
+			break;
+		}
+	}
 
 	if (m_state == DIE)
 	{
@@ -272,7 +291,7 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 	//指定した高度よりしたに落ちたら死んで復活する
 	if (m_pos.y <= DIE_POS_Y)
 	{
-		m_state = DIE;
+		m_isActive = false;
 	}
 
 	if (m_isTransform == true)
@@ -355,6 +374,11 @@ void CPlayer::Draw()
 	CCharacterBase::Draw();
 	m_CoinNowUi.Draw();
 
+	if (m_targetPos != nullptr && m_name == PLAYER_2)
+	{
+		DrawSphere3D(*m_targetPos, 10.0f, 16, GetColor(0, 255, 0), GetColor(0, 255, 0), FALSE);
+	}
+
 #ifdef DEBUG
 	//当たり判定を表示
 	DrawSphere3D(GetCenter(), m_rad, 16, GetColor(255, 0, 0), GetColor(255, 0, 0), FALSE);
@@ -404,12 +428,23 @@ void CPlayer::Respawn(VECTOR _respawnPos)
 {
 	m_pos = _respawnPos;
 	m_isActive = true;
-	m_hp = m_maxHp;
-	m_weaponId = WEAPON_ID_HAND;
-	m_weaponDurability = 0;
-	m_state = WAIT;
-	m_dropCoin = static_cast<int>(m_money * MONEY_RESPAWN_RATE);
-	m_money -= m_dropCoin;
+	switch (m_state)
+	{
+	//死んでいた場合
+	case DIE:
+		m_hp = m_maxHp;
+		m_weaponId = WEAPON_ID_HAND;
+		m_weaponDurability = 0;
+		m_state = WAIT;
+		m_dropCoin = static_cast<int>(m_money * MONEY_RESPAWN_RATE);
+		m_money -= m_dropCoin;
+		break;
+	//死んでいない場合
+	default:
+		m_state = WAIT;
+		m_hp -= m_maxHp * FALL_OUT_DAMAGER_RATE;
+		break;
+	}
 }
 
 //当たり判定後の処理
@@ -562,6 +597,17 @@ void CPlayer::HitAttack(int _atk, int _blown, float _rotY)
 	m_hp -= _atk;
 }
 
+//重力リセット
+void CPlayer::GravityReset()
+{
+	CObject::GravityReset();
+
+	if (m_state == AIR)
+	{
+		m_state = LANDING;
+	}
+}
+
 //お金を減らす
 bool CPlayer::SubMoney(int _subMoney)
 {
@@ -648,6 +694,34 @@ void CPlayer::Jump()
 }
 
 //-----------------------
+//			空中
+//-----------------------
+void CPlayer::Air()
+{
+	RequestAnim(ANIMID_AIR, 1.0f, true);
+
+	RequestAttack();
+
+	if (m_isFlying == false)
+	{
+		m_state = WAIT;
+	}
+}
+
+//-----------------------
+//			着地
+//-----------------------
+void CPlayer::Landing()
+{
+	RequestAnim(ANIMID_LANDING, 1.0f);
+
+	if (GetAnimEnd() == true)
+	{
+		m_state = WAIT;
+	}
+}
+
+//-----------------------
 //		  回避
 //-----------------------
 void CPlayer::Dodgeroll()
@@ -685,99 +759,111 @@ void CPlayer::Dodgeroll()
 //-----------------------
 void CPlayer::AttackIn()
 {
-	if (m_weaponId != WEAPON_ID_GUN)
+	if (m_isFlying == true)
+	{
+		RequestAnim(ANIMID_AIR_ATTACK_HAND_IN, 1.2f);
+	}
+	else
 	{
 
-		//進む速度
-		VECTOR defaultDir = { 0.0f,0.0f,-ATTACK_MOVE_SPEED };
-		//上記を行列に変換
-		MATRIX dir = CMyMath::GetTranslateMatrix(defaultDir);
-		//Y軸回転行列
-		MATRIX mRotY = CMyMath::GetYawMatrix(m_rot.y);
-		//行列の合成
-		MATRIX res = CMyMath::MatMult(mRotY, dir);
-
-		//移動をスピードに代入
-		m_speed.x = res.m[0][3];
-		m_speed.y = res.m[1][3];
-		m_speed.z = res.m[2][3];
-	}
-
-	switch (m_weaponId)
-	{
-	//武器が素手の場合
-	case WEAPON_ID_HAND:
-		switch (m_attackNum)
+		if (m_weaponId != WEAPON_ID_GUN)
 		{
-		case 0:
 
-			if (m_isTransform == true)
+			//進む速度
+			VECTOR defaultDir = { 0.0f,0.0f,-ATTACK_MOVE_SPEED };
+			//上記を行列に変換
+			MATRIX dir = CMyMath::GetTranslateMatrix(defaultDir);
+			//Y軸回転行列
+			MATRIX mRotY = CMyMath::GetYawMatrix(m_rot.y);
+			//行列の合成
+			MATRIX res = CMyMath::MatMult(mRotY, dir);
+
+			//移動をスピードに代入
+			m_speed.x = res.m[0][3];
+			m_speed.y = res.m[1][3];
+			m_speed.z = res.m[2][3];
+		}
+
+		switch (m_weaponId)
+		{
+		//武器が素手の場合
+		case WEAPON_ID_HAND:
+			switch (m_attackNum)
 			{
+			case 0:
+
+				if (m_isTransform == true)
+				{
+					//攻撃前のアニメーション
+					RequestAnim(ANIMID_ATTACK1_HAND_IN, 0.5f);
+				}
+				else
+				{
+					//攻撃前のアニメーション
+					RequestAnim(ANIMID_ATTACK1_HAND_IN, 1.0f);
+				}
+
+				break;
+			case 1:
 				//攻撃前のアニメーション
-				RequestAnim(ANIMID_ATTACK1_HAND_IN, 0.5f);
+				RequestAnim(ANIMID_ATTACK2_HAND_IN, 0.8f);
+				break;
+			case 2:
+				//攻撃前のアニメーション
+				RequestAnim(ANIMID_ATTACK3_HAND_IN, 0.8f);
+				break;
 			}
-			else
+
+			break;
+		//武器が剣の場合
+		case WEAPON_ID_SWORD:
+			switch (m_attackNum)
 			{
+			case 0:
 				//攻撃前のアニメーション
-				RequestAnim(ANIMID_ATTACK1_HAND_IN, 1.0f);
+				RequestAnim(ANIMID_ATTACK1_SWORD_IN, 1.6f);
+				break;
+			case 1:
+				//攻撃前のアニメーション
+				RequestAnim(ANIMID_ATTACK2_SWORD_IN, 1.0f);
+				break;
+			case 2:
+				//攻撃前のアニメーション
+				RequestAnim(ANIMID_ATTACK3_SWORD_IN, 1.0f);
+				break;
 			}
 
 			break;
-		case 1:
-			//攻撃前のアニメーション
-			RequestAnim(ANIMID_ATTACK2_HAND_IN, 0.8f);
+		//武器が斧の場合
+		case WEAPON_ID_AX:
+			switch (m_attackNum)
+			{
+			case 0:
+				//攻撃前のアニメーション
+				RequestAnim(ANIMID_ATTACK1_AX_IN, 1.0f);
+				break;
+			case 1:
+				//攻撃前のアニメーション
+				RequestAnim(ANIMID_ATTACK2_AX_IN, 1.0f);
+				break;
+			case 2:
+				//攻撃前のアニメーション
+				RequestAnim(ANIMID_ATTACK3_AX_IN, 1.0f);
+				break;
+			}
 			break;
-		case 2:
+		//武器が銃の場合
+		case WEAPON_ID_GUN:
 			//攻撃前のアニメーション
-			RequestAnim(ANIMID_ATTACK3_HAND_IN, 0.8f);
+			RequestAnim(ANIMID_ATTACK1_GUN_IN, 0.5f);
+			float rotY = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
+
+			m_rot.y = rotY;
+
 			break;
 		}
 
-		break;
-	//武器が剣の場合
-	case WEAPON_ID_SWORD:
-		switch (m_attackNum)
-		{
-		case 0:
-			//攻撃前のアニメーション
-			RequestAnim(ANIMID_ATTACK1_SWORD_IN, 1.6f);
-			break;
-		case 1:
-			//攻撃前のアニメーション
-			RequestAnim(ANIMID_ATTACK2_SWORD_IN, 1.0f);
-			break;
-		case 2:
-			//攻撃前のアニメーション
-			RequestAnim(ANIMID_ATTACK3_SWORD_IN, 1.0f);
-			break;
-		}
-
-		break;
-	//武器が斧の場合
-	case WEAPON_ID_AX:
-		switch (m_attackNum)
-		{
-		case 0:
-			//攻撃前のアニメーション
-			RequestAnim(ANIMID_ATTACK1_AX_IN, 1.0f);
-			break;
-		case 1:
-			//攻撃前のアニメーション
-			RequestAnim(ANIMID_ATTACK2_AX_IN, 1.0f);
-			break;
-		case 2:
-			//攻撃前のアニメーション
-			RequestAnim(ANIMID_ATTACK3_AX_IN, 1.0f);
-			break;
-		}
-		break;
-	//武器が銃の場合
-	case WEAPON_ID_GUN:
-		//攻撃前のアニメーション
-		RequestAnim(ANIMID_ATTACK1_GUN_IN, 0.5f);
-		break;
 	}
-
 
 	//アニメーションが終わったら攻撃中に移行
 	if (GetAnimEnd() == true)
@@ -809,103 +895,115 @@ void CPlayer::Attack(CAttackManager* _attackManager, CShotManager* _shotManager)
 
 	float attackSize = ATTACK_SIZE[m_weaponId][m_attackNum];
 
-	switch (m_weaponId)
+	if (m_isFlying == true)
 	{
-	//武器が素手の場合
-	case WEAPON_ID_HAND:
-
-		switch (m_attackNum)
+		if (RequestAnim(ANIMID_AIR_ATTACK_HAND, 1.2f) == true)
 		{
-		case 0:
-			//攻撃中のアニメーション
-			if (RequestAnim(ANIMID_ATTACK1_HAND, 1.0f))
+			_attackManager->Request(attackPos,attackSize,atk,blown,m_name);
+		}
+	}
+	else
+	{
+
+		switch (m_weaponId)
+		{
+		//武器が素手の場合
+		case WEAPON_ID_HAND:
+
+			switch (m_attackNum)
 			{
-				if (m_isTransform == true)
+			case 0:
+				//攻撃中のアニメーション
+				if (RequestAnim(ANIMID_ATTACK1_HAND, 1.0f) == true)
 				{
+					if (m_isTransform == true)
+					{
+					}
+					else
+					{
+						_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
+					}
 				}
-				else
+				break;
+			case 1:
+				//攻撃中のアニメーション
+				if (RequestAnim(ANIMID_ATTACK2_HAND, 1.0f) == true)
 				{
 					_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
 				}
+				break;
+			case 2:
+				//攻撃中のアニメーション
+				if(RequestAnim(ANIMID_ATTACK3_HAND, 1.0f) == true)
+				{
+					_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
+				}
+				break;
+			}
+
+			break;
+		//武器が剣の場合
+		case WEAPON_ID_SWORD:
+			switch (m_attackNum)
+			{
+			case 0:
+				//攻撃中のアニメーション
+				if (RequestAnim(ANIMID_ATTACK1_SWORD, 1.0f) == true)
+				{
+					_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
+				}
+				break;
+			case 1:
+				//攻撃中のアニメーション
+				if (RequestAnim(ANIMID_ATTACK2_SWORD, 1.0f) == true)
+				{
+					_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
+				}
+				break;
+			case 2:
+				//攻撃中のアニメーション
+				if (RequestAnim(ANIMID_ATTACK3_SWORD, 1.0f) == true)
+				{
+					_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
+				}
+				break;
 			}
 			break;
-		case 1:
-			//攻撃中のアニメーション
-			if (RequestAnim(ANIMID_ATTACK2_HAND, 1.0f))
+		//武器が斧の場合
+		case WEAPON_ID_AX:
+			switch (m_attackNum)
 			{
-				_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
+			case 0:
+				//攻撃中のアニメーション
+				if (RequestAnim(ANIMID_ATTACK1_AX, 1.0f) == true)
+				{
+					_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
+				}
+				break;
+			case 1:
+				if (RequestAnim(ANIMID_ATTACK2_AX, 1.0f) == true)
+				{
+					_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
+				}
+				break;
+			case 2:
+				if (RequestAnim(ANIMID_ATTACK3_AX, 1.0f) == true)
+				{
+					_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
+				}
+				break;
 			}
 			break;
-		case 2:
-			//攻撃中のアニメーション
-			if(RequestAnim(ANIMID_ATTACK3_HAND, 1.0f))
+		//武器が銃の場合
+		case WEAPON_ID_GUN:
+			if (RequestAnim(ANIMID_ATTACK1_GUN, 1.0f) == true)
 			{
-				_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
+				VECTOR shotPos = MV1GetFramePosition(m_hndl, 11);
+				_shotManager->Request(shotPos,m_rot,attackSize,SHOT_SPEED,atk,SHOT_LOST_TIME,m_name);
 			}
 			break;
 		}
 
-		break;
-	//武器が剣の場合
-	case WEAPON_ID_SWORD:
-		switch (m_attackNum)
-		{
-		case 0:
-			//攻撃中のアニメーション
-			if (RequestAnim(ANIMID_ATTACK1_SWORD, 1.0f))
-			{
-				_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
-			}
-			break;
-		case 1:
-			//攻撃中のアニメーション
-			if (RequestAnim(ANIMID_ATTACK2_SWORD, 1.0f))
-			{
-				_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
-			}
-			break;
-		case 2:
-			//攻撃中のアニメーション
-			if (RequestAnim(ANIMID_ATTACK3_SWORD, 1.0f))
-			{
-				_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
-			}
-			break;
-		}
-		break;
-	//武器が斧の場合
-	case WEAPON_ID_AX:
-		switch (m_attackNum)
-		{
-		case 0:
-			//攻撃中のアニメーション
-			if (RequestAnim(ANIMID_ATTACK1_AX, 1.0f))
-			{
-				_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
-			}
-			break;
-		case 1:
-			if (RequestAnim(ANIMID_ATTACK2_AX, 1.0f))
-			{
-				_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
-			}
-			break;
-		case 2:
-			if (RequestAnim(ANIMID_ATTACK3_AX, 1.0f))
-			{
-				_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
-			}
-			break;
-		}
-		break;
-	//武器が銃の場合
-	case WEAPON_ID_GUN:
-		if (RequestAnim(ANIMID_ATTACK1_GUN, 1.0f))
-		{
-			VECTOR shotPos = MV1GetFramePosition(m_hndl, 11);
-			_shotManager->Request(shotPos,m_rot,attackSize,SHOT_SPEED,atk,SHOT_LOST_TIME,m_name);
-		}
-		break;
 	}
 
 	//アニメーションが終わったら待機状態に戻す
@@ -927,74 +1025,82 @@ void CPlayer::Attack(CAttackManager* _attackManager, CShotManager* _shotManager)
 //-----------------------
 void CPlayer::AttackOut()
 {
-
-	switch (m_weaponId)
+	if (m_isFlying == true)
 	{
-	//武器が素手の場合
-	case WEAPON_ID_HAND:
-		switch (m_attackNum)
-		{
-		case 0:
-			//攻撃後のアニメーション
-			RequestAnim(ANIMID_ATTACK1_HAND_OUT, 1.0f);
-			break;
-		case 1:
-			//攻撃後のアニメーション
-			RequestAnim(ANIMID_ATTACK2_HAND_OUT, 0.8f);
-			break;
-		case 2:
-			//攻撃後のアニメーション
-			RequestAnim(ANIMID_ATTACK3_HAND_OUT, 0.3f);
-			break;
-		}
-
-		break;
-	//武器が剣の場合
-	case WEAPON_ID_SWORD:
-		switch (m_attackNum)
-		{
-		case 0:
-			//攻撃後のアニメーション
-			RequestAnim(ANIMID_ATTACK1_SWORD_OUT, 0.8f);
-			break;
-		case 1:
-			//攻撃後のアニメーション
-			RequestAnim(ANIMID_ATTACK2_SWORD_OUT, 1.0f);
-			break;
-		case 2:
-			//攻撃後のアニメーション
-			RequestAnim(ANIMID_ATTACK3_SWORD_OUT, 1.0f);
-			break;
-		}
-
-		break;
-	//武器が斧の場合
-	case WEAPON_ID_AX:
-		switch (m_attackNum)
-		{
-		case 0:
-			//攻撃後のアニメーション
-			RequestAnim(ANIMID_ATTACK1_AX_OUT, 0.8f);
-			break;
-		case 1:
-			//攻撃後のアニメーション
-			RequestAnim(ANIMID_ATTACK2_AX_OUT, 1.0f);
-			break;
-		case 2:
-			//攻撃後のアニメーション
-			RequestAnim(ANIMID_ATTACK3_AX_OUT, 1.0f);
-			break;
-		}
-		break;
-	//武器が銃の場合
-	case WEAPON_ID_GUN:
-		//攻撃後のアニメーション
-		RequestAnim(ANIMID_ATTACK1_GUN_OUT, 1.0f);
-		break;
+		RequestAnim(ANIMID_AIR_ATTACK_HAND_OUT,1.2f);
 	}
+	else
+	{
 
-	//攻撃の呼び出し
-	RequestAttack();
+		switch (m_weaponId)
+		{
+		//武器が素手の場合
+		case WEAPON_ID_HAND:
+			switch (m_attackNum)
+			{
+			case 0:
+				//攻撃後のアニメーション
+				RequestAnim(ANIMID_ATTACK1_HAND_OUT, 1.0f);
+				break;
+			case 1:
+				//攻撃後のアニメーション
+				RequestAnim(ANIMID_ATTACK2_HAND_OUT, 0.8f);
+				break;
+			case 2:
+				//攻撃後のアニメーション
+				RequestAnim(ANIMID_ATTACK3_HAND_OUT, 0.3f);
+				break;
+			}
+
+			break;
+		//武器が剣の場合
+		case WEAPON_ID_SWORD:
+			switch (m_attackNum)
+			{
+			case 0:
+				//攻撃後のアニメーション
+				RequestAnim(ANIMID_ATTACK1_SWORD_OUT, 0.8f);
+				break;
+			case 1:
+				//攻撃後のアニメーション
+				RequestAnim(ANIMID_ATTACK2_SWORD_OUT, 1.0f);
+				break;
+			case 2:
+				//攻撃後のアニメーション
+				RequestAnim(ANIMID_ATTACK3_SWORD_OUT, 1.0f);
+				break;
+			}
+
+			break;
+		//武器が斧の場合
+		case WEAPON_ID_AX:
+			switch (m_attackNum)
+			{
+			case 0:
+				//攻撃後のアニメーション
+				RequestAnim(ANIMID_ATTACK1_AX_OUT, 0.8f);
+				break;
+			case 1:
+				//攻撃後のアニメーション
+				RequestAnim(ANIMID_ATTACK2_AX_OUT, 1.0f);
+				break;
+			case 2:
+				//攻撃後のアニメーション
+				RequestAnim(ANIMID_ATTACK3_AX_OUT, 1.0f);
+				break;
+			}
+			break;
+		//武器が銃の場合
+		case WEAPON_ID_GUN:
+			//攻撃後のアニメーション
+			RequestAnim(ANIMID_ATTACK1_GUN_OUT, 1.0f);
+			break;
+		}
+
+		//攻撃の呼び出し
+		RequestAttack();
+
+	}
 
 	//アニメーションが終わったら待機状態に戻す
 	if (GetAnimEnd() == true)
@@ -1308,6 +1414,7 @@ void CPlayer::Move(float _rotY)
 	case WAIT:
 	case WALK:
 	case JUMP:
+	case AIR:
 		break;
 	default:
 		return;
@@ -1361,8 +1468,9 @@ void CPlayer::Move(float _rotY)
 
 
 	//移動していたら歩きモーションに以降
-	if (speed.x != 0.0f ||
-		speed.z != 0.0f)
+	if ((speed.x != 0.0f ||
+		speed.z != 0.0f) &&
+		m_state != AIR)
 	{
 		m_state = WALK;
 	}
@@ -1419,9 +1527,6 @@ void CPlayer::RequestAttack()
 
 		return;
 	}
-
-	//空中いるときは攻撃を出せない
-	if (m_isFlying == true)return;
 
 	//攻撃ボタンを押したか
 	if (CheckHitKey(KEY_INPUT_J) != 0 ||

@@ -16,6 +16,8 @@ enum tagState						//キャラクターの状態
 	WAIT,							//待機
 	WALK,							//歩く
 	JUMP,							//ジャンプ
+	AIR,							//空中
+	LANDING,						//着地
 	DODGEROLL,						//回避
 	ATTACK_IN,						//攻撃前
 	ATTACK,							//攻撃中
@@ -104,6 +106,12 @@ protected:
 
 	//ジャンプ
 	virtual void Jump();
+
+	//空中
+	virtual void Air();
+
+	//着地
+	virtual void Landing();
 
 	//回避
 	virtual void Dodgeroll();

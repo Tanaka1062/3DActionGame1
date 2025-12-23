@@ -24,6 +24,7 @@ void CItemBase::Init()
 	m_rad = RADIUS;
 	m_isActive = false;
 	m_shadow.Init(m_pos,0.5f);	
+	m_isPushed = false;
 	m_isGravity = true;
 	m_isSpawn = false;
 	m_isBuy = false;
