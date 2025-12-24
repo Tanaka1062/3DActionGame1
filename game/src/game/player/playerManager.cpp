@@ -15,8 +15,8 @@ enum tagModelName					//モデル一覧
 	MODEL_NUM,						//モデルの数
 };
 
-constexpr float TARGET_LEN = 70.0f;				//ターゲットと認識するまでの長さ
-constexpr float TARGET_MAX_DISTANCE = 20.0f;	//どれくらい法線から離せるか
+constexpr float TARGET_LEN = 200.0f;				//ターゲットと認識するまでの長さ
+constexpr float TARGET_MAX_DISTANCE = 40.0f;	//どれくらい法線から離せるか
 
 static const char* MODEL_PATH[PLAYER_NUM] =
 { "data/model/player/playerTest7-1.mv1" ,
@@ -155,24 +155,36 @@ void CPlayerManager::Load()
 //------------------------
 void CPlayerManager::Step(CAttackManager* _attackManager, CShotManager* _shotManager, float _rot)
 {
+	test = 0;
+
 	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
+
 		//ターゲットの座標アドレス保存用
 		VECTOR* targetPos = nullptr;
 
 		//プレイヤーとターゲットの最小距離保存用
-		float minLen = -1.0f;
+		float minLen = TARGET_MAX_DISTANCE;
 
 		//プレイヤーの座標
 		VECTOR playerPos = m_player[player_i]->GetPos();
 
-		//プレイヤーが向いてる方向の長さベクトル
-		VECTOR vecLen = playerPos;
 		//プレイヤーの向いている方向
 		float playerRotY = m_player[player_i]->GetRot().y;
 
-		vecLen.x += sinf(playerRotY) * TARGET_LEN;
-		vecLen.z += cosf(playerRotY) * TARGET_LEN;
+		VECTOR forwardVec;
+
+		forwardVec.x = cosf(playerRotY);
+		forwardVec.z = sinf(playerRotY);
+		forwardVec.y = 0.0f;
+
+		VECTOR endPos = VAdd(playerPos, VScale(forwardVec, TARGET_LEN));
+
+		if (player_i != PLAYER_2)
+		{
+			m_player[player_i]->Step(_rot, targetPos, _attackManager, _shotManager);
+			continue;
+		}
 
 		//一番近いプレイヤーの座標を求める
 		for (int target_i = 0; target_i < m_player.size(); target_i++)
@@ -180,44 +192,57 @@ void CPlayerManager::Step(CAttackManager* _attackManager, CShotManager* _shotMan
 			//同じプレイヤーはスキップする
 			if (player_i == target_i)continue;
 
-			//プレイヤーとターゲットの内積
-			float dot1 = CMyMath::VecDot(m_player[target_i]->GetPos(), playerPos);
-			//プレイヤーの向いている方向ベクトルとターゲットの内積
-			float dot2 = CMyMath::VecDot(m_player[target_i]->GetPos(), vecLen);
+			float fArea;		// 面積を保存
+			float fBottom;		// 底辺を保存
+			float fLength;		// キャラクター1と線分の最短距離を保存
+			VECTOR v1, v2, vCross;
 
-			//ターゲットが前方にいるかを判断し後方なら処理をしない
-			if (dot1 < 0 && dot2 < 0)continue;
+			v1 = VSub(m_player[target_i]->GetPos(),forwardVec);
 
-			//外積を出すために必要なベクトル１
-			VECTOR vec1 = VSub(vecLen, playerPos);
-			//外積を出すために必要なベクトル２
-			VECTOR vec2 = VSub(m_player[target_i]->GetPos(),playerPos);
+			v2 = VSub(playerPos,forwardVec);
 
-			//外積を求める
-			VECTOR cross = ZERO;
-			cross.x = vec1.y * vec2.z - vec1.z * vec2.y;
-			cross.y = vec1.z * vec2.x - vec1.x * vec2.z;
-			cross.z = vec1.x * vec2.y - vec1.y * vec2.x;
+			VECTOR cross = VCross(v1, v2);
 
-			//外積から平行四辺形の面積を計算
-			float area = cross.x * cross.x + cross.y * cross.y + cross.z * cross.z;
+			fArea = cross.x * cross.x + cross.y * cross.y + cross.z * cross.z;
+			fArea = sqrt(fArea);
 
-			area = sqrtf(area);
+			v1 = VSub(playerPos,forwardVec);
+			fBottom = v1.x * v1.x + v1.y * v1.y + v1.z * v1.z;
+			fBottom = sqrtf(fBottom);
 
-			//平行四辺形の底辺を求める
-			float baseLength = vec1.x * vec1.x + vec1.y * vec1.y + vec1.z * vec1.z;
+			fLength = fArea / fBottom;
 
-			baseLength = sqrtf(baseLength);
+			v1 = VSub(m_player[target_i]->GetPos(), playerPos);
+			v2 = VSub(forwardVec, playerPos);
 
-			//プレイヤーの向いてる方向ベクトルからターゲットまでの距離
-			float len = area / baseLength;
+			float fDot = VDot(v1,v2);
 
-			//今の距離より近かったらターゲットの座標を変更
-			if ((minLen >= len && TARGET_MAX_DISTANCE >= len) || minLen == -1.0f)
+			if (fDot < 0.0f)
 			{
-				minLen = len;
+				VECTOR v3 = VSub(m_player[target_i]->GetPos(),playerPos );
+				fLength = sqrtf((v3.x * v3.x) + (v3.y * v3.y) + (v3.z * v3.z));
+			}
+
+			v1 = VSub(m_player[target_i]->GetPos(),forwardVec);
+			v2 = VSub(m_player[target_i]->GetPos(), forwardVec);
+			fDot = VDot(v1, v2);
+
+			if (fDot < 0.0f)
+			{
+				VECTOR V3 = VSub(m_player[target_i]->GetPos(),forwardVec);
+				fLength = sqrt((V3.x * V3.x) + (V3.y * V3.y) + (V3.z * V3.z));
+			}
+
+			if (fLength < minLen)
+			{
+				minLen = fLength;
 
 				targetPos = m_player[target_i]->GetPosPoint();
+			}
+	
+			if (target_i == PLAYER_1)
+			{
+				test = minLen;
 			}
 		}
 
@@ -253,6 +278,10 @@ void CPlayerManager::Draw()
 	{
 		m_player[i]->Draw();
 	}
+
+
+	DrawFormatString(300, 200, GetColor(255, 0, 0), "%f", test);
+
 }
 
 //------------------------

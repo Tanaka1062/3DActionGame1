@@ -144,10 +144,10 @@ static const int ATTACK_BLOWN[WEAPON_ID_NUM][ATTACK_NUM] =				//攻撃の吹き飛び度
 
 static const float ATTACK_SIZE[WEAPON_ID_NUM][ATTACK_NUM] =
 {
-	{10.0f,10.0f,10.0f},
-	{14.0f,14.0f,18.0f},
-	{22.0f,22.0f,24.0f},
-	{14.0f,14.0f,14.0f},
+	{12.0f,12.0f,12.0f},
+	{16.0f,16.0f,20.0f},
+	{24.0f,24.0f,26.0f},
+	{16.0f,16.0f,16.0f},
 };
 
 //---------------------------------------------------------
@@ -378,6 +378,14 @@ void CPlayer::Draw()
 	{
 		DrawSphere3D(*m_targetPos, 10.0f, 16, GetColor(0, 255, 0), GetColor(0, 255, 0), FALSE);
 	}
+
+	////プレイヤーの向いている方向
+	//VECTOR vecLen = m_pos;
+
+	//vecLen.x += sinf(m_rot.y) * -80.0f;
+	//vecLen.z += cosf(m_rot.y) * -80.0f;
+
+	//DrawSphere3D(vecLen, 40.0f, 16, GetColor(0, 255, 0), GetColor(0, 255, 0), FALSE);
 
 #ifdef DEBUG
 	//当たり判定を表示
@@ -856,9 +864,12 @@ void CPlayer::AttackIn()
 		case WEAPON_ID_GUN:
 			//攻撃前のアニメーション
 			RequestAnim(ANIMID_ATTACK1_GUN_IN, 0.5f);
-			float rotY = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
 
-			m_rot.y = rotY;
+			if (m_targetPos == nullptr)
+			{
+				float rotY = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
+				m_rot.y = rotY;
+			}
 
 			break;
 		}
