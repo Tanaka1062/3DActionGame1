@@ -172,6 +172,7 @@ CPlayer::CPlayer()
 	m_atk = 0;
 	m_isDodgeroll = false;
 	m_isTransform = false;
+	m_isJump = false;
 	m_attackNum = ATTACK_NONE;
 	m_money = INIT_MONEY;
 	m_dodgerollRotY = 0.0f;
@@ -243,6 +244,13 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 
 	m_targetPos = _targetPos;
 
+	if (m_isJump == true)
+	{
+		m_isJump = false;
+		m_gravity = JUMP_SPEED;
+		m_isFlying = true;
+	}
+
 	if (m_targetPos != nullptr)
 	{
 		//プレイヤー同士の距離
@@ -269,6 +277,12 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 		}
 	}
 
+	//丸影とプレイヤーの座標が離れていたら飛んでいる
+	if (m_pos.y - m_shadow.GetPos().y > 0.0f)
+	{
+		m_isFlying = true;
+	}
+
 	//空中にいたら状態を空中に変える
 	if (m_isFlying == true)
 	{
@@ -277,15 +291,12 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 		case ATTACK_IN:
 		case ATTACK:
 		case ATTACK_OUT:
+		case STAGGER:
 			break;
 		default:
 			m_state = AIR;
 			break;
 		}
-	}
-
-	if (m_state == DIE)
-	{
 	}
 
 	//指定した高度よりしたに落ちたら死んで復活する
@@ -374,19 +385,6 @@ void CPlayer::Draw()
 	CCharacterBase::Draw();
 	m_CoinNowUi.Draw();
 
-	if (m_targetPos != nullptr && m_name == PLAYER_2)
-	{
-		DrawSphere3D(*m_targetPos, 10.0f, 16, GetColor(0, 255, 0), GetColor(0, 255, 0), FALSE);
-	}
-
-	////プレイヤーの向いている方向
-	//VECTOR vecLen = m_pos;
-
-	//vecLen.x += sinf(m_rot.y) * -80.0f;
-	//vecLen.z += cosf(m_rot.y) * -80.0f;
-
-	//DrawSphere3D(vecLen, 40.0f, 16, GetColor(0, 255, 0), GetColor(0, 255, 0), FALSE);
-
 #ifdef DEBUG
 	//当たり判定を表示
 	DrawSphere3D(GetCenter(), m_rad, 16, GetColor(255, 0, 0), GetColor(255, 0, 0), FALSE);
@@ -450,7 +448,7 @@ void CPlayer::Respawn(VECTOR _respawnPos)
 	//死んでいない場合
 	default:
 		m_state = WAIT;
-		m_hp -= m_maxHp * FALL_OUT_DAMAGER_RATE;
+		m_hp -= static_cast<int>(m_maxHp * FALL_OUT_DAMAGER_RATE);
 		break;
 	}
 }
@@ -562,7 +560,7 @@ void CPlayer::HitAttack(int _atk, int _blown, float _rotY)
 
 	VECTOR knockBack = KNOCK_BACK_SPEED;
 
-	if (m_blown >= BLOWN_MAX)
+	if (m_blown >= BLOWN_MAX || m_state == AIR)
 	{
 		knockBack = VScale(knockBack, 10.0f);
 		m_blown = 0;
@@ -697,7 +695,8 @@ void CPlayer::Jump()
 
 	if (GetAnimEnd() == true)
 	{
-		m_state = WAIT;
+		m_isJump = true;
+		m_state = AIR;
 	}
 }
 
@@ -725,6 +724,8 @@ void CPlayer::Landing()
 
 	if (GetAnimEnd() == true)
 	{
+		m_isJump = false;
+
 		m_state = WAIT;
 	}
 }
@@ -865,7 +866,7 @@ void CPlayer::AttackIn()
 			//攻撃前のアニメーション
 			RequestAnim(ANIMID_ATTACK1_GUN_IN, 0.5f);
 
-			if (m_targetPos == nullptr)
+			if (m_targetPos != nullptr)
 			{
 				float rotY = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
 				m_rot.y = rotY;
@@ -1424,7 +1425,6 @@ void CPlayer::Move(float _rotY)
 	{
 	case WAIT:
 	case WALK:
-	case JUMP:
 	case AIR:
 		break;
 	default:
@@ -1600,8 +1600,6 @@ void CPlayer::RequestJump()
 		(CheckHitKey(KEY_INPUT_SPACE) && !m_isFlying))
 	{
 		m_state = JUMP;
-		m_gravity = JUMP_SPEED;
-		m_isFlying = true;
 
 	}
 

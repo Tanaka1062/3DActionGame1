@@ -15,7 +15,7 @@ enum tagModelName					//モデル一覧
 	MODEL_NUM,						//モデルの数
 };
 
-constexpr float TARGET_LEN = 200.0f;				//ターゲットと認識するまでの長さ
+constexpr float TARGET_LEN = -200.0f;				//ターゲットと認識するまでの長さ
 constexpr float TARGET_MAX_DISTANCE = 40.0f;	//どれくらい法線から離せるか
 
 static const char* MODEL_PATH[PLAYER_NUM] =
@@ -155,8 +155,6 @@ void CPlayerManager::Load()
 //------------------------
 void CPlayerManager::Step(CAttackManager* _attackManager, CShotManager* _shotManager, float _rot)
 {
-	test = 0;
-
 	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
 
@@ -172,19 +170,15 @@ void CPlayerManager::Step(CAttackManager* _attackManager, CShotManager* _shotMan
 		//プレイヤーの向いている方向
 		float playerRotY = m_player[player_i]->GetRot().y;
 
+		//プレイヤーの向いている方向ベクトル
 		VECTOR forwardVec;
 
-		forwardVec.x = cosf(playerRotY);
-		forwardVec.z = sinf(playerRotY);
+		forwardVec.x = sinf(playerRotY);
+		forwardVec.z = cosf(playerRotY);
 		forwardVec.y = 0.0f;
 
+		//方向ベクトルを加算して終点を求める
 		VECTOR endPos = VAdd(playerPos, VScale(forwardVec, TARGET_LEN));
-
-		if (player_i != PLAYER_2)
-		{
-			m_player[player_i]->Step(_rot, targetPos, _attackManager, _shotManager);
-			continue;
-		}
 
 		//一番近いプレイヤーの座標を求める
 		for (int target_i = 0; target_i < m_player.size(); target_i++)
@@ -194,55 +188,79 @@ void CPlayerManager::Step(CAttackManager* _attackManager, CShotManager* _shotMan
 
 			float fArea;		// 面積を保存
 			float fBottom;		// 底辺を保存
-			float fLength;		// キャラクター1と線分の最短距離を保存
-			VECTOR v1, v2, vCross;
+			float fLength;		// ターゲットとプレイヤーの目線の最短距離を保存
+			VECTOR v1, v2;		//ベクトル保存用
 
-			v1 = VSub(m_player[target_i]->GetPos(),forwardVec);
+			//終点からターゲットまでの距離を求める
+			v1 = VSub(m_player[target_i]->GetPos(), endPos);
+			v1.y = 0.0f;
 
-			v2 = VSub(playerPos,forwardVec);
+			//終点からプレイヤーまでの距離を求める
+			v2 = VSub(playerPos, endPos);
+			v2.y = 0.0f;
 
+			//上の二つの外積を求める
 			VECTOR cross = VCross(v1, v2);
 
+			//外積から平行四辺形の面積を求める
 			fArea = cross.x * cross.x + cross.y * cross.y + cross.z * cross.z;
 			fArea = sqrt(fArea);
 
-			v1 = VSub(playerPos,forwardVec);
+			//終点からプレイヤーまでの距離を求める
+			v1 = VSub(playerPos, endPos);
+			v1.y = 0.0f;
+
+			//v1を使って平行四辺形の底辺を求める
 			fBottom = v1.x * v1.x + v1.y * v1.y + v1.z * v1.z;
 			fBottom = sqrtf(fBottom);
 
+			//面積から底辺を割って離れている距離を求める
 			fLength = fArea / fBottom;
 
+			//プレイヤーからターゲットまでの距離を求める
 			v1 = VSub(m_player[target_i]->GetPos(), playerPos);
-			v2 = VSub(forwardVec, playerPos);
+			v1.y = 0.0f;
 
+			//プレイヤーからプレイヤーの視点の終点までの距離を求める
+			v2 = VSub(endPos, playerPos);
+			v2.y = 0.0f;
+
+			//v1とv2の内積を求める
 			float fDot = VDot(v1,v2);
 
+			//内積が0以下なら範囲に入っているので最短距離を求めて保存
 			if (fDot < 0.0f)
 			{
 				VECTOR v3 = VSub(m_player[target_i]->GetPos(),playerPos );
+				v3.y = 0.0f;
 				fLength = sqrtf((v3.x * v3.x) + (v3.y * v3.y) + (v3.z * v3.z));
 			}
 
-			v1 = VSub(m_player[target_i]->GetPos(),forwardVec);
-			v2 = VSub(m_player[target_i]->GetPos(), forwardVec);
+			//プレイヤーの視点の終点からターゲットまでの距離を求める
+			v1 = VSub(m_player[target_i]->GetPos(), endPos);
+			v1.y = 0.0f;
+
+			//プレイヤーの視点の終点からターゲットまでの距離を求める
+			v2 = VSub(m_player[target_i]->GetPos(), endPos);
+			v2.y = 0.0f;
+
+			//v1とv2の内積を求める
 			fDot = VDot(v1, v2);
 
+			//内積が0以下なら範囲に入っているので最短距離を求めて保存
 			if (fDot < 0.0f)
 			{
-				VECTOR V3 = VSub(m_player[target_i]->GetPos(),forwardVec);
+				VECTOR V3 = VSub(m_player[target_i]->GetPos(), endPos);
+				V3.y = 0.0f;
 				fLength = sqrt((V3.x * V3.x) + (V3.y * V3.y) + (V3.z * V3.z));
 			}
 
+			//最短距離が今の最小距離以下なら長さを保存してターゲットを保存
 			if (fLength < minLen)
 			{
 				minLen = fLength;
 
 				targetPos = m_player[target_i]->GetPosPoint();
-			}
-	
-			if (target_i == PLAYER_1)
-			{
-				test = minLen;
 			}
 		}
 
@@ -278,9 +296,6 @@ void CPlayerManager::Draw()
 	{
 		m_player[i]->Draw();
 	}
-
-
-	DrawFormatString(300, 200, GetColor(255, 0, 0), "%f", test);
 
 }
 

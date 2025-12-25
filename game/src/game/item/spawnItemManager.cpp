@@ -7,7 +7,25 @@
 
 using namespace std;
 
-static const char* MODEL_PATH[ITEM_NUM] =				//モデルのパス
+constexpr int SPAWN_PROBABILITY_INIT[ITEM_NUM] =					//アイテムの出現確率の初期値
+{
+	30,
+	5,
+	5,
+	5,
+	5,
+};
+
+constexpr int SPAWN_PROBABILITY_DECREASE[ITEM_NUM] =				//アイテムの出現確率の減少値
+{
+	2,
+	5,
+	5,
+	5,
+	5,
+};
+
+static const char* MODEL_PATH[ITEM_NUM] =							//モデルのパス
 {
 	"data/model/item/powerCoin/coin.mv1",
 	"data/model/item/bomb/bomb.mv1",
@@ -41,6 +59,8 @@ CSpawnItemManager::CSpawnItemManager()
 	for (int spawnPos_i = 0; spawnPos_i < ITEM_SPAWN_POS_NUM; spawnPos_i++)
 	{
 		m_spawnPos[spawnPos_i] = ZERO;
+
+		m_isSpawnPos[spawnPos_i] = false;
 	}
 
 }
@@ -61,6 +81,9 @@ void CSpawnItemManager::Init(CPlayerManager* _playerManager)
 {
 	//アイテムが増えすぎないようにする
 	m_item.clear();
+
+	//アイテムの出現確率を全て消す
+	m_spawnProbability.clear();
 
 	//生成用アイテムの生成
 	for (int spawn_i = 0; spawn_i < SPAWN_ITEM_MAX * ITEM_NUM; spawn_i++)
@@ -86,6 +109,11 @@ void CSpawnItemManager::Init(CPlayerManager* _playerManager)
 		{
 			m_item.push_back(make_unique<CAx>());
 		}
+	}
+
+	for (int item_i = 0; item_i < ITEM_NUM; item_i++)
+	{
+		m_spawnProbability.push_back(SPAWN_PROBABILITY_INIT[item_i]);
 	}
 
 	for (int spawn_i = 0; spawn_i < m_item.size(); spawn_i++)
@@ -210,6 +238,7 @@ void CSpawnItemManager::Step()
 			m_isSpawnPos[spawnPos_i] = false;
 		}
 	}
+	
 
 }
 
@@ -255,43 +284,74 @@ unique_ptr<CItemBase> CSpawnItemManager::SpawnItem()
 
 	//どのアイテムをスポーンさせるかを決める----------
 	
+	//スポーンさせるアイテムの名前
 	tagItemName itemNameId = ITEM_NONE;
 
-	while (true)
+	//アイテムの出現確率の合計を求める
+	int spawnProbabilitySum = 0;
+	for (int item_i = 0; item_i < m_spawnProbability.size(); item_i++)
 	{
-		int randNum = GetRand(100);
-
-
-		//スポーンするアイテムを作成
-
-		if (randNum < 70)
-		{
-			itemNameId = ITEM_COIN;
-			break;
-		}
-		else if(randNum < 80)
-		{
-			itemNameId = ITEM_BOMB;
-			break;
-		}
-		else if(randNum <= 90)
-		{
-			itemNameId = ITEM_SWORD;
-			break;
-		}
-		else if (randNum <= 95)
-		{
-			itemNameId = ITEM_AX;
-			break;
-		}
-		else
-		{
-			itemNameId = ITEM_GUN;
-			break;
-		}
-
-		break;
+		spawnProbabilitySum += m_spawnProbability[item_i];
 	}
+
+	//確率の合計を最大値としてランダムな値を取得する
+	int randNum = GetRand(spawnProbabilitySum);
+
+	//スポーンするアイテムを作成
+
+	//アイテムの出現確率
+	int spawnProbability = 0;
+	//出現確率の減少量を保存
+	int spawnProbabilityDecrease = 0;
+
+	for (int item_i = 0; item_i < ITEM_NUM; item_i++)
+	{
+		//アイテムの出現確率を求める
+		spawnProbability += m_spawnProbability[item_i];
+
+		//出現確率に入ったら出現するアイテムを特定する
+		if (randNum <= spawnProbability)
+		{
+			itemNameId = static_cast<tagItemName>(item_i);
+
+			//出現確率がマイナスになる場合は0になるまでの減少量を保存する
+			if (m_spawnProbability[item_i] - SPAWN_PROBABILITY_DECREASE[item_i] > 0)
+			{
+				m_spawnProbability[item_i] -= SPAWN_PROBABILITY_DECREASE[item_i];
+				spawnProbabilityDecrease = SPAWN_PROBABILITY_DECREASE[item_i];
+			}
+			//出現確率の減少量を保存する
+			else
+			{
+				spawnProbabilityDecrease = m_spawnProbability[item_i];
+				m_spawnProbability[item_i] = 0;
+			}
+			break;
+		}
+	}
+
+	//出現確率の最低値保存用
+	int minSpawnProbability = -1;
+	//一番低い出現確率のアイテム
+	tagItemName minSpawnProbabilityItem = ITEM_NONE;
+
+	//一番出現確率が低いアイテムを調べる
+	for (int item_i = 0; item_i < m_spawnProbability.size(); item_i++)
+	{
+		//今回出現したアイテムはスキップする
+		if (item_i == itemNameId)continue;
+
+		//出現確率が現在の値より低かったら値を保存する
+		if (minSpawnProbability > m_spawnProbability[item_i] || minSpawnProbability == -1)
+		{
+			minSpawnProbabilityItem = static_cast<tagItemName>(item_i);
+			minSpawnProbability = m_spawnProbability[item_i];
+		}
+
+	}
+
+	//一番出現確率が低いアイテムの出現確率を減少量分上げる
+	m_spawnProbability[minSpawnProbabilityItem] += spawnProbabilityDecrease;
 	
 	//------------------------------------------------
 
@@ -351,6 +411,7 @@ unique_ptr<CItemBase> CSpawnItemManager::SpawnItem()
 		if (m_isSpawnPos[spawnPosId] == false)
 		{
 			spawnItem->SetPos(m_spawnPos[spawnPosId]);
+			m_isSpawnPos[spawnPosId] = true;
 			m_isItemSpawn = true;
 			break;
 		}

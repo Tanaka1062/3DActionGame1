@@ -48,6 +48,7 @@ private:
 	int m_dropCoin;					//コインを落とす数
 	bool m_isDodgeroll;				//回避しているかフラグ
 	bool m_isTransform;				//変身しているかフラグ
+	bool m_isJump;					//ジャンプしているかフラグ
 	int m_attackNum;				//攻撃の番号
 	int m_weaponDurability;			//武器の耐久度
 	float m_dodgerollRotY;			//回避時の角度

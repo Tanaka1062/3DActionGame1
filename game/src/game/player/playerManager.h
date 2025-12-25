@@ -10,8 +10,6 @@ private:
 	std::vector<CPlayer*> m_player;			//プレイヤーのクラス
 	std::vector <int> m_modelHndl;			//モデルのハンドル
 	std::vector <VECTOR>m_spawnPos;			//プレイヤーの出現座標
-
-	float test;
 public:
 	//コンストラクタ・デストラクタ
 	CPlayerManager();
