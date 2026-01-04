@@ -8,6 +8,7 @@ enum tagObjectType
 	OBJECT_ITEM,			//アイテム
 	OBJECT_ATTACK,			//攻撃の当たり判定
 	OBJECT_SHOT,			//弾
+	OBJECT_FOV,				//CPUの視界の当たり判定
 	
 	OBJECT_TYPE_NUM,		//タイプの数
 };

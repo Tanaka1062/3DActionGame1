@@ -13,11 +13,18 @@ enum tagPadName
 	PAD_NUM,			//コントローラーの数
 };
 
+struct ControllerIdData								//コントローラーのIDデータ
+{
+	int Id;
+	bool isConnection;
+};
+
 //コントローラーのマネージャー
 class CControllerManager
 {
 private:
 	static CControllerInput m_controller[PAD_NUM];		//コントローラークラス
+	static ControllerIdData m_controlerIdData[PAD_NUM];	//コントローラーのIDデータ
 	
 public:
 	//コンストラクタ

@@ -102,6 +102,9 @@ public:
 	//出現座標をセット
 	virtual void SetSpawnPos(VECTOR _pos) {}
 
+	//価格を取得
+	int GetCost() { return m_cost; }
+
 };
 
 

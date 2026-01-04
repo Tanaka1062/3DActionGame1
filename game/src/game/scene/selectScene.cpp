@@ -30,8 +30,13 @@ CSelectScene::~CSelectScene() {
 //---------------------------
 void CSelectScene::Draw()
 {
+	m_cameraManager.Draw();
+	m_map.Draw();
+	m_sky.Draw();
+	m_selectPlayerManager.Draw();
+
 	//UIの画像表示
-	m_uiManager.Draw();
+	//m_uiManager.Draw();
 
 	DrawFormatString(32, 32, GetColor(255, 0, 0), "セレクト");
 
@@ -44,6 +49,12 @@ void CSelectScene::Draw()
 //---------------------------
 void CSelectScene::Init()
 {
+	m_cameraManager.Init(ZERO);
+	m_cameraManager.ChangeCamera(CCameraManager::CAMERA_ID_SELECT);
+	m_map.Init();
+	m_sky.Init();
+	m_selectPlayerManager.Init();
+
 	//UIの初期設定
 	m_uiManager.Init();
 
@@ -54,6 +65,10 @@ void CSelectScene::Init()
 //---------------------------
 void CSelectScene::Load()
 {
+	m_map.Load(MAP_ID_SELECT);
+	m_sky.Load();
+	m_selectPlayerManager.Load();
+
 	//UIの画像ロード
 	m_uiManager.Load();
 
@@ -65,8 +80,16 @@ void CSelectScene::Load()
 //---------------------------
 void CSelectScene::Step()
 {
+	m_cameraManager.Step(ZERO,0.0f);
+	m_sky.Step();
+	m_selectPlayerManager.Step();
+
 	//UIの毎フレームする処理
 	m_uiManager.Step();
+
+	m_cameraManager.Update(ZERO);
+	m_sky.Update();
+	m_selectPlayerManager.Update();
 
 	//コントローラーをセット
 	CControllerManager::SetId();
@@ -85,6 +108,10 @@ void CSelectScene::Step()
 //---------------------------
 void CSelectScene::Exit()
 {
+	m_map.Exit();
+	m_sky.Exit();
+	m_selectPlayerManager.Exit();
+
 	//UIの終了処理
 	m_uiManager.Exit();
 

@@ -2,12 +2,21 @@
 #include "sceneBase.h"
 #include <DxLib.h>
 #include"../ui/uiSelectManager.h"
+#include"../camera/cameraManager.h"
+#include"../map/map.h"
+#include"../sky/sky.h"
+#include"../player/selectPlayer/selectPlayerManager.h"
 
 //ゲーム本編を管理するクラス
 class CSelectScene :public CSceneBase
 {
 private:
 	CUiSelectManager m_uiManager;
+	CCameraManager m_cameraManager;
+	CMap m_map;
+	CSky m_sky;
+	CSelectPlayerManager m_selectPlayerManager;
+
 public:
 
 	//コンストラクタ

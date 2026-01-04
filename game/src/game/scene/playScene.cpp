@@ -64,7 +64,7 @@ void CPlayScene::Init()
 //---------------------------
 void CPlayScene::Load()
 {
-	m_ground.Load();
+	m_ground.Load(MAP_ID_GRASSLAND);
 	m_sky.Load();
 	m_playerManager.Load();
 	m_shot.Load();
@@ -106,6 +106,8 @@ void CPlayScene::Step()
 	CCollisionManager::CheckHitPlayerToPlayerAttack(m_playerManager, m_attackManager);
 	CCollisionManager::CheckHitItemToItem(m_itemManager);
 	CCollisionManager::CheckHitPlayerToShot(m_playerManager, m_shot);
+	CCollisionManager::CheckHitCpuPlayerFOVToPlayer(m_playerManager);
+	CCollisionManager::CheckHitCpuPlayerFOVToItem(m_playerManager, m_itemManager);
 	//--------------------------------------------
 
 	//‚·‚×‚Ä‚ÌŒ‹‰Ê‚ð”½‰f‚³‚¹‚é

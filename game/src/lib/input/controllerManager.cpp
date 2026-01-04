@@ -2,7 +2,7 @@
 #include <DxLib.h>
 
 CControllerInput CControllerManager::m_controller[PAD_NUM];		//コントローラークラス
-
+ControllerIdData CControllerManager::m_controlerIdData[PAD_NUM];//コントローラーのIDデータ
 
 //-------------------------------
 //		  コンストラクタ
@@ -17,9 +17,21 @@ CControllerManager::CControllerManager()
 //-------------------------------
 void CControllerManager::Init()
 {
+	//コントローラーのID一覧
+	int controllerId[4] =
+	{
+		DX_INPUT_PAD1,
+		DX_INPUT_PAD2,
+		DX_INPUT_PAD3,
+		DX_INPUT_PAD4,
+	};
+
 	for (int i = 0; i < PAD_NUM; i++)
 	{
 		m_controller[i].Init();
+
+		m_controlerIdData[i].Id = controllerId[i];
+		m_controlerIdData[i].isConnection = false;
 	}
 }
 
@@ -87,14 +99,6 @@ float CControllerManager::GetRY(tagPadName _padName)
 //-------------------------------
 bool CControllerManager::SetId()
 {
-	//コントローラーのID一覧
-	int controllerId[4] =
-	{
-		DX_INPUT_PAD1,
-		DX_INPUT_PAD2,
-		DX_INPUT_PAD3,
-		DX_INPUT_PAD4,
-	};
 
 	//Bを押したコントローラーを調べ、IDに設定する、
 	for (int controllerId_i = 0; controllerId_i < 4; controllerId_i++)
@@ -103,13 +107,18 @@ bool CControllerManager::SetId()
 		{
 
 			//すでにIDが設定されている場合スキップする
-			if (m_controller[controllerId_i].GetId() != -1)continue;
+			if (m_controller[controller_j].GetId() != -1)continue;
 	
-			if (PAD_INPUT_2 == GetJoypadInputState(controllerId[controllerId_i]))
+			//すでに使われていたらスキップする
+			if (m_controlerIdData[controllerId_i].isConnection == true)continue;
+
+			if (PAD_INPUT_2 == GetJoypadInputState(m_controlerIdData[controllerId_i].Id))
 			{
-	
-				m_controller[controllerId_i].SetId(controllerId[controllerId_i]);
+				
+				m_controller[controller_j].SetId(m_controlerIdData[controllerId_i].Id);
+				m_controlerIdData[controllerId_i].isConnection = true;
 				return true;
+
 			}
 		}
 	}

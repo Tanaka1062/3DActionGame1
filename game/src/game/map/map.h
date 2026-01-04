@@ -2,6 +2,14 @@
 #include<DxLib.h>
 #include "../../lib/model/3DObject.h"
 
+//マップのID
+enum tagMapId
+{
+	MAP_ID_GRASSLAND,		//草原ステージ
+	MAP_ID_SELECT,			//選択画面のマップ
+
+	MAP_NUM,				//マップの数
+};
 
 
 class CMap :public CObject
@@ -18,7 +26,7 @@ public:
 	void Init();
 
 	//モデルロード
-	void Load();
+	void Load(tagMapId _id);
 
 	//モデル描写
 	void Draw();

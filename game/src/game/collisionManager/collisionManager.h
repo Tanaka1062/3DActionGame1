@@ -39,5 +39,10 @@ public:
 	//プレイヤーと弾の当たり判定
 	static void CheckHitPlayerToShot(CPlayerManager& _playerManager, CShotManager& _shotManager);
 
+	//CPUの視界とプレイヤーの当たり判定
+	static void CheckHitCpuPlayerFOVToPlayer(CPlayerManager& _playerManager);
+
+	//CPUの視界とアイテムの当たり判定
+	static void CheckHitCpuPlayerFOVToItem(CPlayerManager& _playerManager, CItemManager& _itemManager);
 };
 

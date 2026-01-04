@@ -1,7 +1,4 @@
 #pragma once
-#include "playCamera/playCamera.h"
-#include "debugCamera/debugCamera.h"
-#include "mapCamera/mapCamera.h"
 #include "cameraBase.h"
 
 //複数のカメラタイプを管理するクラス
@@ -15,6 +12,7 @@ public:
 		CAMERA_ID_PLAY,						//ゲームのメインカメラ
 		CAMERA_ID_MAP,						//マップのカメラ
 		CAMERA_ID_DEBUG,					//デバッグ時のカメラ
+		CAMERA_ID_SELECT,					//セレクト画面のカメラ
 
 		CAMERA_ID_NUM,						//カメラのタイプの数
 	};

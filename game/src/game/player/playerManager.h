@@ -2,14 +2,16 @@
 #include <iostream>
 #include <vector>
 #include "player.h"
+#include"cpuPlayer/cpuPlayerFOV.h"
 
 //エネミーマネージャーのクラス
 class CPlayerManager
 {
 private:
-	std::vector<CPlayer*> m_player;			//プレイヤーのクラス
-	std::vector <int> m_modelHndl;			//モデルのハンドル
-	std::vector <VECTOR>m_spawnPos;			//プレイヤーの出現座標
+	std::vector<CPlayer*> m_player;				//プレイヤーのクラス
+	std::vector <int> m_modelHndl;				//モデルのハンドル
+	std::vector <VECTOR>m_spawnPos;				//プレイヤーの出現座標
+	std::vector<CCpuPlayerFOV*>m_cpuFOV;		//CPUの視界範囲クラス
 public:
 	//コンストラクタ・デストラクタ
 	CPlayerManager();
@@ -33,6 +35,12 @@ public:
 
 	//プレイヤーを取得
 	CPlayer* GetPlayer(int _num) { return m_player[_num]; }
+
+	//CPUの視界範囲の数を取得
+	int GetCpuPlayerFOVNum() { return static_cast<int>(m_cpuFOV.size()); }
+
+	//CPUの視界範囲を取得
+	CCpuPlayerFOV* GetCpuPlayerFOV(int _num) { return m_cpuFOV[_num]; }
 
 	//ゲームが終わったかを取得
 	bool GetIsEnd();

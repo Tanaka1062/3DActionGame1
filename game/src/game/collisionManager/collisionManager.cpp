@@ -3,6 +3,7 @@
 #include "../FOV/FOV.h"
 #include "../../lib/effekseer/effekseer.h"
 #include "../system/effectData/effectData.h"
+#include "../../lib/myMath/myMath.h"
 
 //----------------------------------------------
 //			オブジェクト同士の当たり判定
@@ -198,6 +199,38 @@ void CCollisionManager::CheckHitPlayerToMap(CPlayerManager& _playerManager,CMap&
 			MV1CollResultPolyDimTerminate(col);
 		}
 
+		//cpuなら前方に障害物があるか判断してジャンプする--------------
+		if (player->GetIsCpu() == true &&
+			player->GetState() != JUMP)
+		{
+			VECTOR vec = player->GetCenter();
+
+			//障害物の判定を行う座標までの距離
+			VECTOR defaultDir = { 0.0f,0.0f,-30.0f };
+			//上記を行列に変換
+			MATRIX dir = CMyMath::GetTranslateMatrix(defaultDir);
+			//Y軸回転行列
+			MATRIX mRotY = CMyMath::GetYawMatrix(player->GetRot().y);
+			//行列の合成
+			MATRIX res = CMyMath::MatMult(mRotY, dir);
+
+			vec.x += res.m[0][3];
+			vec.z += res.m[2][3];
+
+			col = MV1CollCheck_Sphere(_map.GetHitHndl(), -1,
+				vec, 1.0f);
+
+			if (col.HitNum != 0)
+			{
+				player->SetState(JUMP);
+			}
+			//毎回データを削除
+			MV1CollResultPolyDimTerminate(col);
+
+		}
+		//-------------------------------------------------------------
+
+
 		VECTOR shadowPos = player->GetPos();
 
 		//少しずつ座標を落として当たった場所に丸影の座標を設定する
@@ -343,7 +376,9 @@ void CCollisionManager::CheckHitItemToItem(CItemManager& _itemManager)
 	}
 }
 
-//プレイヤーと弾の当たり判定
+//----------------------------------------------
+//			プレイヤーと弾の当たり判定
+//----------------------------------------------
 void CCollisionManager::CheckHitPlayerToShot(CPlayerManager& _playerManager, CShotManager& _shotManager)
 {
 	for (int player_i = 0; player_i < _playerManager.GetPlayerNum(); player_i++)
@@ -358,3 +393,40 @@ void CCollisionManager::CheckHitPlayerToShot(CPlayerManager& _playerManager, CSh
 		}
 	}
 }
+
+//----------------------------------------------
+//		CPUの視界とプレイヤーの当たり判定
+//----------------------------------------------
+void CCollisionManager::CheckHitCpuPlayerFOVToPlayer(CPlayerManager& _playerManager)
+{
+	for (int cpuPlayerFOV_i = 0; cpuPlayerFOV_i < _playerManager.GetCpuPlayerFOVNum(); cpuPlayerFOV_i++)
+	{
+		CCpuPlayerFOV* cpuPlayerFOV = _playerManager.GetCpuPlayerFOV(cpuPlayerFOV_i);
+
+		for (int player_i = 0; player_i < _playerManager.GetPlayerNum(); player_i++)
+		{
+			CPlayer* player = _playerManager.GetPlayer(player_i);
+
+			CheckHitObjectToObject(cpuPlayerFOV, player);
+		}
+	}
+}
+
+//----------------------------------------------
+//			CPUの視界とアイテムの当たり判定
+//----------------------------------------------
+void CCollisionManager::CheckHitCpuPlayerFOVToItem(CPlayerManager& _playerManager, CItemManager& _itemManager)
+{
+	for (int cpuPlayerFOV_i = 0; cpuPlayerFOV_i < _playerManager.GetCpuPlayerFOVNum(); cpuPlayerFOV_i++)
+	{
+		CCpuPlayerFOV* cpuPlayerFOV = _playerManager.GetCpuPlayerFOV(cpuPlayerFOV_i);
+
+		for (int item_i = 0; item_i < _itemManager.GetItemNum(); item_i++)
+		{
+			CItemBase* item = _itemManager.GetItem(item_i);
+
+			CheckHitObjectToObject(cpuPlayerFOV, item);
+		}
+	}
+}
+

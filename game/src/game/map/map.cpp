@@ -4,8 +4,10 @@
 //定義関連==================================
 constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
 constexpr VECTOR SCALE = { 1.0f,1.0f,1.0f };		//大きさ
-static const char GROUND_MODEL_PATH[] =
- "data/model/map/TestMap6.mv1" ;					//ロードするファイル名
+static const char* MAP_MODEL_PATH[MAP_NUM] ={
+	"data/model/map/TestMap6.mv1",
+	"data/model/map/selectMap/selectMap.mv1",
+};					//ロードするファイル名
 static const char GROUND_HIT_MODEL_PATH[] =
  "data/model/map/TestMap6.mv1" ;				//ロードするファイル名
 
@@ -44,9 +46,9 @@ void CMap::Init()
 //------------------------
 //		モデルロード
 //------------------------
-void CMap::Load()
+void CMap::Load(tagMapId _id)
 {
-	LoadModel(GROUND_MODEL_PATH);
+	LoadModel(MAP_MODEL_PATH[_id]);
 
 	m_hitHndl = MV1LoadModel(GROUND_HIT_MODEL_PATH);
 

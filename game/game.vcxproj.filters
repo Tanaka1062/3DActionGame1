@@ -136,6 +136,15 @@
     <Filter Include="ソース ファイル\game\3DUi">
       <UniqueIdentifier>{5357a3e1-7b5d-48dc-ac5b-1c81e770ad99}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\game\camera\selectCamera">
+      <UniqueIdentifier>{4b547d9d-e6eb-4a65-8fa6-1ed71f2a11a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\game\player\selectPlayer">
+      <UniqueIdentifier>{99f2adaa-19bb-4801-8552-561f00af9d20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\game\player\cpuPlayer">
+      <UniqueIdentifier>{9d28384c-e55e-43ec-9648-6bf7c3bd189c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\number.cpp">
@@ -320,6 +329,21 @@
     </ClCompile>
     <ClCompile Include="src\game\ui\uiSelectManager.cpp">
       <Filter>ソース ファイル\game\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\camera\selectCamera\selectCamera.cpp">
+      <Filter>ソース ファイル\game\camera\selectCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\player\selectPlayer\selectPlayer.cpp">
+      <Filter>ソース ファイル\game\player\selectPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\player\selectPlayer\selectPlayerManager.cpp">
+      <Filter>ソース ファイル\game\player\selectPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\player\cpuPlayer\cpuPlayer.cpp">
+      <Filter>ソース ファイル\game\player\cpuPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\player\cpuPlayer\cpuPlayerFOV.cpp">
+      <Filter>ソース ファイル\game\player\cpuPlayer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -511,6 +535,21 @@
     </ClInclude>
     <ClInclude Include="src\game\ui\uiSelectManager.h">
       <Filter>ソース ファイル\game\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\camera\selectCamera\selectCamera.h">
+      <Filter>ソース ファイル\game\camera\selectCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\player\selectPlayer\selectPlayer.h">
+      <Filter>ソース ファイル\game\player\selectPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\player\selectPlayer\selectPlayerManager.h">
+      <Filter>ソース ファイル\game\player\selectPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\player\cpuPlayer\cpuPlayer.h">
+      <Filter>ソース ファイル\game\player\cpuPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\player\cpuPlayer\cpuPlayerFOV.h">
+      <Filter>ソース ファイル\game\player\cpuPlayer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

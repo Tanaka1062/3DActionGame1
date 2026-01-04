@@ -1,6 +1,10 @@
 #include "cameraManager.h"
 #include "../data.h"
 #include "../../lib/effekseer/effekseer.h"
+#include "playCamera/playCamera.h"
+#include "debugCamera/debugCamera.h"
+#include "mapCamera/mapCamera.h"
+#include "selectCamera/selectCamera.h"
 
 //定義関連====================================
 constexpr float CAMERA_NEAR = 1.0f;						//ニアー
@@ -29,6 +33,7 @@ void CCameraManager::Init(VECTOR _focus)
 	m_camera[CAMERA_ID_PLAY] = new CPlayCamera;
 	m_camera[CAMERA_ID_MAP] = new CMapCamera;
 	m_camera[CAMERA_ID_DEBUG] = new CDbugCamera;
+	m_camera[CAMERA_ID_SELECT] = new CSelectCamera;
 
 	//カメラの初期化
 	for (int i = 0; i < CAMERA_ID_NUM; i++)

@@ -2,6 +2,7 @@
 #include "../../lib/input/controllerManager.h"
 #include "../data.h"
 #include "../../lib/myMath/myMath.h"
+#include "cpuPlayer/cpuPlayer.h"
 
 using namespace std;
 
@@ -33,7 +34,6 @@ static const char FRAME_PATH[] =
 //------------------------
 CPlayerManager::CPlayerManager()
 {
-	Init();
 }
 
 //------------------------
@@ -43,10 +43,18 @@ CPlayerManager::~CPlayerManager()
 {
 	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
-		delete m_player[player_i];
 
 		m_player[player_i]->Exit();
 
+		delete m_player[player_i];
+
+	}
+
+	for (int cpuFOV_i = 0; cpuFOV_i < m_cpuFOV.size(); cpuFOV_i++)
+	{
+		m_cpuFOV[cpuFOV_i]->Exit();
+
+		delete m_cpuFOV[cpuFOV_i];
 	}
 }
 
@@ -63,16 +71,31 @@ void CPlayerManager::Init()
 		}
 	}
 
+	for (int cpuFOV_i = 0; cpuFOV_i < PLAYER_NUM; cpuFOV_i++)
+	{
+		m_cpuFOV.push_back(new CCpuPlayerFOV);
+	}
+
 	for (int player_i = 0; player_i < PLAYER_NUM; player_i++)
 	{
 		//コントローラーの名前を取得
 		tagPadName padName = CControllerManager::GetName(player_i);
 
-		//プレイヤーがいなかったら増やす
-		if (m_player.size() < PLAYER_NUM)
+		CPlayer* player = nullptr;
+
+		//コントローラーが接続されているかでCPUかを判断
+		if (CControllerManager::IsConnection(padName) == true)
 		{
-			m_player.push_back(new CPlayer);
+			player = new CPlayer;
 		}
+		else
+		{
+			CCpuPlayer* cpuPlayer = new CCpuPlayer;
+			cpuPlayer->SetFOV(m_cpuFOV[player_i]);
+
+			player = cpuPlayer;
+		}
+
 
 		tagPlayerName name = PLAYER_NONE;
 
@@ -95,10 +118,11 @@ void CPlayerManager::Init()
 
 		}
 
-		m_player[player_i]->Init(name, padName);
+		player->Init(name,padName);
 
+		m_player.push_back(player);
 	}
-	
+
 	//スポーン座標を全て消す
 	m_spawnPos.clear();
 }
@@ -304,8 +328,12 @@ void CPlayerManager::Draw()
 //------------------------
 void CPlayerManager::Exit()
 {
-	for (int i = 0; i < m_player.size(); i++)
+	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
+
+		m_player[player_i]->Exit();
+
+		delete m_player[player_i];
 
 	}
 	m_player.clear();
@@ -314,8 +342,16 @@ void CPlayerManager::Exit()
 	{
 		m_modelHndl[i] = -1;
 	}
-
 	m_modelHndl.clear();
+
+	for (int cpuFOV_i = 0; cpuFOV_i < m_cpuFOV.size(); cpuFOV_i++)
+	{
+		m_cpuFOV[cpuFOV_i]->Exit();
+
+		delete m_cpuFOV[cpuFOV_i];
+	}
+	m_cpuFOV.clear();
+
 }
 
 //------------------------

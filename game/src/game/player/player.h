@@ -42,7 +42,7 @@ enum tagHaveItemState
 //プレイヤークラス
 class CPlayer:public CCharacterBase
 {
-private:
+protected:
 	int m_transformTimeCount;		//変身時間カウント
 	int m_keepHndl[HNDL_NUM];		//モデルハンドル保存用
 	int m_dropCoin;					//コインを落とす数
@@ -59,6 +59,78 @@ private:
 	tagHaveItemState m_itemState;	//アイテムの状態
 	VECTOR* m_targetPos;			//相手の座標ポインタ
 	C3DUi m_CoinNowUi;				//現在のコインの量表示用
+	bool m_isCpu;					//cpuかどうかフラグ
+
+	//アニメーション一覧---------------------------
+
+	enum tagAnim {
+		ANIMID_AIR,						//空中にいるときのアニメーション
+		ANIMID_AIR_ATTACK_HAND,			//空中で素手攻撃中アニメーション
+		ANIMID_AIR_ATTACK_HAND_IN,		//空中で素手攻撃前アニメーション
+		ANIMID_AIR_ATTACK_HAND_OUT,		//空中で素手攻撃後アニメーション
+		ANIMID_ATTACK1_AX,				//斧攻撃1中アニメーション
+		ANIMID_ATTACK1_AX_IN,			//斧攻撃1前アニメーション
+		ANIMID_ATTACK1_AX_OUT,			//斧攻撃1後アニメーション
+		ANIMID_ATTACK2_AX,				//斧攻撃2中アニメーション
+		ANIMID_ATTACK2_AX_IN,			//斧攻撃2前アニメーション
+		ANIMID_ATTACK2_AX_OUT,			//斧攻撃2後アニメーション
+		ANIMID_ATTACK3_AX,				//斧攻撃3中アニメーション
+		ANIMID_ATTACK3_AX_IN,			//斧攻撃3前アニメーション
+		ANIMID_ATTACK3_AX_OUT,			//斧攻撃3後アニメーション
+		ANIMID_ATTACK1_GUN,				//銃攻撃1中アニメーション
+		ANIMID_ATTACK1_GUN_IN,			//銃攻撃1前アニメーション
+		ANIMID_ATTACK1_GUN_OUT,			//銃攻撃1後アニメーション
+		ANIMID_ATTACK1_HAND,			//素手攻撃1中アニメーション
+		ANIMID_ATTACK1_HAND_IN,			//素手攻撃1前アニメーション
+		ANIMID_ATTACK1_HAND_OUT,		//素手攻撃1後アニメーション
+		ANIMID_ATTACK2_HAND,			//素手攻撃2中アニメーション
+		ANIMID_ATTACK2_HAND_IN,			//素手攻撃2前アニメーション
+		ANIMID_ATTACK2_HAND_OUT,		//素手攻撃2後アニメーション
+		ANIMID_ATTACK3_HAND,			//素手攻撃3中アニメーション
+		ANIMID_ATTACK3_HAND_IN,			//素手攻撃3前アニメーション
+		ANIMID_ATTACK3_HAND_OUT,		//素手攻撃3後アニメーション
+		ANIMID_ATTACK1_SWORD,			//剣攻撃1中アニメーション
+		ANIMID_ATTACK1_SWORD_IN,		//剣攻撃1前アニメーション
+		ANIMID_ATTACK1_SWORD_OUT,		//剣攻撃1後アニメーション
+		ANIMID_ATTACK2_SWORD,			//剣攻撃2中アニメーション
+		ANIMID_ATTACK2_SWORD_IN,		//剣攻撃2前アニメーション
+		ANIMID_ATTACK2_SWORD_OUT,		//剣攻撃2後アニメーション
+		ANIMID_ATTACK3_SWORD,			//剣攻撃3中アニメーション
+		ANIMID_ATTACK3_SWORD_IN,		//剣攻撃3前アニメーション
+		ANIMID_ATTACK3_SWORD_OUT,		//剣攻撃3後アニメーション
+		ANIMID_CHARGE,					//チャージ中のアニメーション
+		ANIMID_CHARGE_IN,				//チャージ前のアニメーション
+		ANIMID_DEFAULT,					//デフォルトのアニメーション
+		ANIMID_DIE,						//死亡時のアニメーション
+		ANIMID_DODGEROLL,				//回避のアニメーション
+		ANIMID_GUARD,					//ガード中アニメーション
+		ANIMID_GUARD_IN,				//ガード前アニメーション
+		ANIMID_GUARD_OUT,				//ガード後アニメーション
+		ANIMID_HIT,						//被弾のアニメーション
+		ANIMID_ITEM_USE,				//アイテムを使用中のアニメーション
+		ANIMID_ITEM_USE_IN,				//アイテムを使用する前のアニメーション
+		ANIMID_ITEM_USE_OUT,			//アイテムを使用した後のアニメーション
+		ANIMID_JUMP,					//ジャンプするアニメーション
+		ANIMID_LANDING,					//着地するアニメーション
+		ANIMID_LIFT_UP,					//物を持ち上げるアニメーション
+		ANIMID_PUT_DOWN,				//物を下ろすアニメーション
+		ANIMID_SKILLA,					//スキルA使用中のアニメーション
+		ANIMID_SKILLA_IN,				//スキルA使用前のアニメーション
+		ANIMID_SKILLA_OUT,				//スキルA使用後のアニメーション
+		ANIMID_SKILLB,					//スキルB使用中のアニメーション
+		ANIMID_SKILLB_IN,				//スキルB使用前のアニメーション
+		ANIMID_SKILLB_OUT,				//スキルB使用後のアニメーション
+		ANIMID_THROW,					//物を投げる中のアニメーション
+		ANIMID_THROW_IN,				//物を投げる前のアニメーション
+		ANIMID_THROW_OUT,				//物を投げる後のアニメーション
+		ANIMID_WAIT,					//待機状態のアニメーション
+		ANIMID_WAIT_LIFTING_UP,			//物を持ち上げている待機状態のアニメーション
+		ANIMID_WALK,					//歩きのアニメーション
+		ANIMID_WALK_LIFTING_UP,			//物を持ち上げている歩きのアニメーション
+
+	};
+
+	//---------------------------------------------
 
 public:
 	//コンストラクタ・デストラクタ
@@ -66,28 +138,28 @@ public:
 	~CPlayer();
 
 	//初期化
-	void Init(tagPlayerName _name, tagPadName _padName);
+	virtual void Init(tagPlayerName _name, tagPadName _padName);
 
 	//モデルロード
-	void Load(int _modelHndl);
+	virtual void Load(int _modelHndl);
 
 	//毎フレームする処理
-	void Step(float _rotY,VECTOR* _targetPos, CAttackManager* _attackManager, CShotManager* _shotManager);
+	virtual void Step(float _rotY,VECTOR* _targetPos, CAttackManager* _attackManager, CShotManager* _shotManager);
 
 	//描写処理
-	void Draw();
+	virtual void Draw();
 
 	//更新処理
-	void Update();
+	virtual void Update();
 
 	//終了処理
-	void Exit();
+	virtual void Exit();
 
 	//復活処理
 	void Respawn(VECTOR _respawnPos);
 
 	//当たり判定後の処理
-	void HitCalc(CObject* _hitObject);
+	virtual void HitCalc(CObject* _hitObject);
 
 	//攻撃を食らった時にする処理
 	void HitAttack(int _atk, int _blown, float _rotY = 0.0f);
@@ -153,7 +225,13 @@ public:
 	//変身しているかを取得する
 	bool GetIsTransform() { return m_isTransform; }
 
-private:
+	//cpuかどうかを取得
+	bool GetIsCpu() { return m_isCpu; }
+
+	//状態を設定
+	void SetState(tagState _state) { m_state = _state; }
+
+protected:
 	//待機状態処理
 	void Wait();
 
@@ -227,13 +305,13 @@ private:
 	void Die();
 
 	//移動処理
-	void Move(float _rotY);
+	virtual void Move(float _rotY);
 
 	//攻撃を呼び出す処理
-	void RequestAttack();
+	virtual void RequestAttack();
 
 	//ジャンプの呼び出し処理
-	void RequestJump();
+	virtual void RequestJump();
 
 	//回避に移行する処理
 	void RequestDodgeroll(float _rotY);

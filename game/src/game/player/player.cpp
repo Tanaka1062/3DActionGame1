@@ -45,77 +45,6 @@ constexpr float SHOT_SPEED = 2.5f;					//弾の速度
 constexpr int SHOT_LOST_TIME = 2 * 60;				//弾が消えるまでの時間
 //-----------------------------------
 
-//アニメーション一覧---------------------------
-
-enum tagAnim {
-	ANIMID_AIR,						//空中にいるときのアニメーション
-	ANIMID_AIR_ATTACK_HAND,			//空中で素手攻撃中アニメーション
-	ANIMID_AIR_ATTACK_HAND_IN,		//空中で素手攻撃前アニメーション
-	ANIMID_AIR_ATTACK_HAND_OUT,		//空中で素手攻撃後アニメーション
-	ANIMID_ATTACK1_AX,				//斧攻撃1中アニメーション
-	ANIMID_ATTACK1_AX_IN,			//斧攻撃1前アニメーション
-	ANIMID_ATTACK1_AX_OUT,			//斧攻撃1後アニメーション
-	ANIMID_ATTACK2_AX,				//斧攻撃2中アニメーション
-	ANIMID_ATTACK2_AX_IN,			//斧攻撃2前アニメーション
-	ANIMID_ATTACK2_AX_OUT,			//斧攻撃2後アニメーション
-	ANIMID_ATTACK3_AX,				//斧攻撃3中アニメーション
-	ANIMID_ATTACK3_AX_IN,			//斧攻撃3前アニメーション
-	ANIMID_ATTACK3_AX_OUT,			//斧攻撃3後アニメーション
-	ANIMID_ATTACK1_GUN,				//銃攻撃1中アニメーション
-	ANIMID_ATTACK1_GUN_IN,			//銃攻撃1前アニメーション
-	ANIMID_ATTACK1_GUN_OUT,			//銃攻撃1後アニメーション
-	ANIMID_ATTACK1_HAND,			//素手攻撃1中アニメーション
-	ANIMID_ATTACK1_HAND_IN,			//素手攻撃1前アニメーション
-	ANIMID_ATTACK1_HAND_OUT,		//素手攻撃1後アニメーション
-	ANIMID_ATTACK2_HAND,			//素手攻撃2中アニメーション
-	ANIMID_ATTACK2_HAND_IN,			//素手攻撃2前アニメーション
-	ANIMID_ATTACK2_HAND_OUT,		//素手攻撃2後アニメーション
-	ANIMID_ATTACK3_HAND,			//素手攻撃3中アニメーション
-	ANIMID_ATTACK3_HAND_IN,			//素手攻撃3前アニメーション
-	ANIMID_ATTACK3_HAND_OUT,		//素手攻撃3後アニメーション
-	ANIMID_ATTACK1_SWORD,			//剣攻撃1中アニメーション
-	ANIMID_ATTACK1_SWORD_IN,		//剣攻撃1前アニメーション
-	ANIMID_ATTACK1_SWORD_OUT,		//剣攻撃1後アニメーション
-	ANIMID_ATTACK2_SWORD,			//剣攻撃2中アニメーション
-	ANIMID_ATTACK2_SWORD_IN,		//剣攻撃2前アニメーション
-	ANIMID_ATTACK2_SWORD_OUT,		//剣攻撃2後アニメーション
-	ANIMID_ATTACK3_SWORD,			//剣攻撃3中アニメーション
-	ANIMID_ATTACK3_SWORD_IN,		//剣攻撃3前アニメーション
-	ANIMID_ATTACK3_SWORD_OUT,		//剣攻撃3後アニメーション
-	ANIMID_CHARGE,					//チャージ中のアニメーション
-	ANIMID_CHARGE_IN,				//チャージ前のアニメーション
-	ANIMID_DEFAULT,					//デフォルトのアニメーション
-	ANIMID_DIE,						//死亡時のアニメーション
-	ANIMID_DODGEROLL,				//回避のアニメーション
-	ANIMID_GUARD,					//ガード中アニメーション
-	ANIMID_GUARD_IN,				//ガード前アニメーション
-	ANIMID_GUARD_OUT,				//ガード後アニメーション
-	ANIMID_HIT,						//被弾のアニメーション
-	ANIMID_ITEM_USE,				//アイテムを使用中のアニメーション
-	ANIMID_ITEM_USE_IN,				//アイテムを使用する前のアニメーション
-	ANIMID_ITEM_USE_OUT,			//アイテムを使用した後のアニメーション
-	ANIMID_JUMP,					//ジャンプするアニメーション
-	ANIMID_LANDING,					//着地するアニメーション
-	ANIMID_LIFT_UP,					//物を持ち上げるアニメーション
-	ANIMID_PUT_DOWN,				//物を下ろすアニメーション
-	ANIMID_SKILLA,					//スキルA使用中のアニメーション
-	ANIMID_SKILLA_IN,				//スキルA使用前のアニメーション
-	ANIMID_SKILLA_OUT,				//スキルA使用後のアニメーション
-	ANIMID_SKILLB,					//スキルB使用中のアニメーション
-	ANIMID_SKILLB_IN,				//スキルB使用前のアニメーション
-	ANIMID_SKILLB_OUT,				//スキルB使用後のアニメーション
-	ANIMID_THROW,					//物を投げる中のアニメーション
-	ANIMID_THROW_IN,				//物を投げる前のアニメーション
-	ANIMID_THROW_OUT,				//物を投げる後のアニメーション
-	ANIMID_WAIT,					//待機状態のアニメーション
-	ANIMID_WAIT_LIFTING_UP,			//物を持ち上げている待機状態のアニメーション
-	ANIMID_WALK,					//歩きのアニメーション
-	ANIMID_WALK_LIFTING_UP,			//物を持ち上げている歩きのアニメーション
-
-};
-
-//---------------------------------------------
-
 enum tagAttackNum
 {
 	ATTACK_NONE = -1,	//攻撃をしていない
@@ -221,6 +150,7 @@ void CPlayer::Init(tagPlayerName _name, tagPadName _padName)
 	m_shadow.Init(m_pos, SHADOW_SIZE);
 	m_objectTypy = OBJECT_PLAYER;
 	m_CoinNowUi.Init();
+	m_isCpu = false;
 }
 
 //-----------------------
@@ -350,7 +280,22 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 
 	//------------------------------------------------
 
-
+	//攻撃の呼び出し
+	if (CheckHitKey(KEY_INPUT_J) != 0 ||
+		CControllerManager::IsTrg(BUTTON_X, m_padName))
+	{
+		RequestAttack();
+	}
+	else
+	{
+		switch (m_state)
+		{
+		case WAIT:
+		case WALK:
+			m_attackNum = 0;
+			break;
+		}
+	}
 
 	//移動処理
 	Move(_rotY);
@@ -364,8 +309,25 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 	//アイテム使用処理
 	Item();
 
-	//アイテムを拾う処理
-	PickUpItem();
+	//アイテムを手に入れていたら持ち上げる
+	if (m_itemState == ITEM_STATE_GET)
+	{
+		m_itemState = ITEM_STATE_HAVE;
+		m_state = ITEM_LIFT_UP;
+	}
+
+	//アイテムを取ろうとしていたら持っていない状態に戻す
+	if (m_itemState == ITEM_STATE_PICK_UP)
+	{
+		m_itemState = ITEM_STATE_NONE;
+	}
+
+	if (CheckHitKey(KEY_INPUT_I) != 0 ||
+		CControllerManager::IsTrg(BUTTON_B, m_padName) == true)
+	{
+		//アイテムを拾う処理
+		PickUpItem();
+	}
 
 	CCharacterBase::Step(_attackManager,_shotManager);
 
@@ -652,8 +614,6 @@ void CPlayer::Wait()
 		m_state = WALK;
 	}
 	
-	//攻撃の呼び出し
-	RequestAttack();
 }
 
 //-----------------------
@@ -681,9 +641,6 @@ void CPlayer::Walk()
 		m_state = WAIT;
 	}
 
-	//攻撃の呼び出し
-	RequestAttack();
-
 }
 
 //-----------------------
@@ -706,8 +663,6 @@ void CPlayer::Jump()
 void CPlayer::Air()
 {
 	RequestAnim(ANIMID_AIR, 1.0f, true);
-
-	RequestAttack();
 
 	if (m_isFlying == false)
 	{
@@ -1109,9 +1064,6 @@ void CPlayer::AttackOut()
 			break;
 		}
 
-		//攻撃の呼び出し
-		RequestAttack();
-
 	}
 
 	//アニメーションが終わったら待機状態に戻す
@@ -1511,66 +1463,49 @@ void CPlayer::Move(float _rotY)
 //-----------------------
 void CPlayer::RequestAttack()
 {
+	if (m_attackNum >= ATTACK_3)return;
+
 	switch (m_state)
 	{
-	case ATTACK_IN:
-	case ATTACK:
+	case AIR:
+	case WAIT:
+	case WALK:
 	case ATTACK_OUT:
 		break;
 	default:
-		if (m_attackNum != ATTACK_NONE)
-		{
-			m_attackNum = ATTACK_NONE;
-		}
-		break;
+		return;
 	}
 
 	//アイテムを持ち上げている状態ではアイテムを投げる
 	if (m_itemState == ITEM_STATE_HAVE)
 	{
 		//攻撃ボタンを押したら投げる
-		if (CheckHitKey(KEY_INPUT_J) != 0 ||
-			CControllerManager::IsTrg(BUTTON_X, m_padName))
-		{
-			m_state = ITEM_THROW_IN;
-		}
-
+		m_state = ITEM_THROW_IN;
 
 		return;
 	}
 
-	//攻撃ボタンを押したか
-	if (CheckHitKey(KEY_INPUT_J) != 0 ||
-		CControllerManager::IsTrg(BUTTON_X,m_padName))
+	//変身中の攻撃モーション(仮)TODO
+	if (m_isTransform == true)
 	{
+		m_attackNum = 0;
+		m_state = ATTACK_IN;
+		return;
+	}
 
-		//変身中の攻撃モーション(仮)TODO
-		if (m_isTransform == true)
-		{
-			m_attackNum = 0;
-			m_state = ATTACK_IN;
-			return;
-		}
+	//攻撃中なら次に移行する
+	if (m_attackNum >= ATTACK_1)
+	{
+		//最後の攻撃以外は攻撃を進める
+		m_attackNum++;
+		m_state = ATTACK_IN;
 
-		//攻撃中なら次に移行する
-		if ((m_state == ATTACK ||
-			m_state == ATTACK_OUT) &&
-			m_attackNum >= ATTACK_1)
-		{
-			//最後の攻撃以外は攻撃を進める
-			if (m_attackNum < ATTACK_3)
-			{
-				m_attackNum++;
-				m_state = ATTACK_IN;
-			}
-
-		}
-		//攻撃してない時に攻撃前に移行する
-		else if(m_attackNum == ATTACK_NONE)
-		{
-			m_attackNum++;
-			m_state = ATTACK_IN;
-		}
+	}
+	//攻撃してない時に攻撃前に移行する
+	else if(m_attackNum == ATTACK_NONE || m_attackNum == 0)
+	{
+		m_attackNum++;
+		m_state = ATTACK_IN;
 	}
 
 	//攻撃ボタンを押したか
@@ -1725,19 +1660,6 @@ void CPlayer::PickUpItem()
 	//空中いるときは攻撃を出せない
 	if (m_isFlying == true)return;
 
-	//アイテムを手に入れていたら持ち上げる
-	if (m_itemState == ITEM_STATE_GET)
-	{
-		m_itemState = ITEM_STATE_HAVE;
-		m_state = ITEM_LIFT_UP;
-	}
-
-	//アイテムを取ろうとしていたら持っていない状態に戻す
-	if (m_itemState == ITEM_STATE_PICK_UP)
-	{
-		m_itemState = ITEM_STATE_NONE;
-	}
-
 	switch (m_state)
 	{
 	case WAIT:
@@ -1748,23 +1670,19 @@ void CPlayer::PickUpItem()
 	}
 
 	//アイテムを取得・下ろす
-	if (CheckHitKey(KEY_INPUT_I) != 0 ||
-		CControllerManager::IsTrg(BUTTON_B,m_padName) == true)
+
+	//アイテムをすでに持っている場合はアイテムを下ろす
+	if (m_itemState == ITEM_STATE_HAVE)
 	{
-
-		//アイテムをすでに持っている場合はアイテムを下ろす
-		if (m_itemState == ITEM_STATE_HAVE)
-		{
-			m_state = ITEM_PUT_DOWN;
-			m_itemState = ITEM_STATE_PUT_DOWN;
-		}
-		//アイテムを持っていない場合アイテムを取得する
-		else
-		{
-			m_itemState = ITEM_STATE_PICK_UP;
-		}
-
+		m_state = ITEM_PUT_DOWN;
+		m_itemState = ITEM_STATE_PUT_DOWN;
 	}
+	//アイテムを持っていない場合アイテムを取得する
+	else
+	{
+		m_itemState = ITEM_STATE_PICK_UP;
+	}
+
 }
 
 //-----------------------
