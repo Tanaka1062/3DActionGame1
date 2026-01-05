@@ -5,6 +5,7 @@
 #include "debugCamera/debugCamera.h"
 #include "mapCamera/mapCamera.h"
 #include "selectCamera/selectCamera.h"
+#include "resultCamera/resultCamera.h"
 
 //定義関連====================================
 constexpr float CAMERA_NEAR = 1.0f;						//ニアー
@@ -14,6 +15,9 @@ constexpr float ASPECT_RATIO =							//アスペクト比
 static_cast<float>(WINDOW_SIZE_X / WINDOW_SIZE_Y);
 //============================================
 
+CCameraBase* CCameraManager::m_camera[CAMERA_ID_NUM];
+CCameraManager::tagCAMERA_ID CCameraManager::m_id;
+VECTOR CCameraManager::m_rot;
 
 //---------------------------
 //		コンストラクタ
@@ -34,6 +38,7 @@ void CCameraManager::Init(VECTOR _focus)
 	m_camera[CAMERA_ID_MAP] = new CMapCamera;
 	m_camera[CAMERA_ID_DEBUG] = new CDbugCamera;
 	m_camera[CAMERA_ID_SELECT] = new CSelectCamera;
+	m_camera[CAMERA_ID_RESULT] = new CResultCamera;
 
 	//カメラの初期化
 	for (int i = 0; i < CAMERA_ID_NUM; i++)

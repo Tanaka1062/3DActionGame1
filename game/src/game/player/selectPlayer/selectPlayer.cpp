@@ -39,6 +39,7 @@ void CSelectPlayer::Init(tagPlayerName _name, tagPadName _padName)
 	m_state = WAIT;
 	m_isActive = false;
 	m_rot.y = 90.0f * (DX_PI_F/180.0f);
+	m_isReady = false;
 }
 
 //-----------------------
@@ -55,7 +56,28 @@ void CSelectPlayer::Load(int _modelHndl)
 //-----------------------
 void CSelectPlayer::Step()
 {
-	CPlayer::Wait();
+	if (m_isActive == false)return;
+
+	//Bƒ{ƒ^ƒ“‚Å€”õŠ®—¹‚©‚Ç‚¤‚©‚ğØ‚è‘Ö‚¦‚ê‚é
+	if (CControllerManager::IsTrg(BUTTON_B, m_padName) == true)
+	{
+		if (m_isReady == true)
+		{
+			m_isReady = false;
+		}
+		else
+		{
+			m_isReady = true;
+		}
+	}
+	if (m_isReady == true)
+	{
+		CPlayer::Walk();
+	}
+	else
+	{
+		CPlayer::Wait();
+	}
 }
 
 //-----------------------

@@ -187,7 +187,7 @@ void CCpuPlayer::Load(int _modelHndl)
 //-----------------------
 void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManager, CShotManager* _shotManager)
 {
-	m_CoinNowUi.Step(m_pos,m_rad,_rotY,m_money);
+	m_CoinNowUi.Step(m_pos,m_rad,m_money);
 
 	m_targetPos = _targetPos;
 
@@ -233,9 +233,15 @@ void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackMa
 	//-----------------------------------------------------------------------------------
 
 	//相手が攻撃可能範囲にいたら攻撃する-------------------------------------------------
-
 	if (m_cpuState == CPU_STATE_ATTACK && m_targetObject != nullptr)
 	{
+
+		//銃と投げるアイテムはターゲットがいたら攻撃する
+		if ((m_itemState == ITEM_STATE_HAVE || m_weaponId == WEAPON_ID_GUN) &&
+			m_targetPos != nullptr)
+		{
+			RequestAttack();
+		}
 
 		VECTOR vec = VSub(m_pos, m_targetObject->GetPos());
 
@@ -246,10 +252,6 @@ void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackMa
 			RequestAttack();
 		}
 
-		if (m_itemState == ITEM_STATE_HAVE)
-		{
-			RequestAttack();
-		}
 	}
 	else
 	{
@@ -399,7 +401,7 @@ void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackMa
 	}
 
 	//アイテムを取ろうとしていたら持っていない状態に戻す
-	if (m_itemState == ITEM_STATE_PICK_UP)
+	if (m_itemState == ITEM_STATE_PICK_UP && m_cpuState != CPU_STATE_PICK_UP_ITEM)
 	{
 		m_itemState = ITEM_STATE_NONE;
 	}
@@ -483,7 +485,7 @@ void CCpuPlayer::HitCalc(CObject* _hitObject)
 		item = dynamic_cast<CItemBase*>(_hitObject);
 
 		//アイテムがオブジェクトタイプ以外の場合処理をしない
-		if (item->GetItemType() != ITEM_TYPE_OBJECT)return;
+		//if (item->GetItemType() != ITEM_TYPE_OBJECT)return;
 
 		if (m_cpuState == CPU_STATE_PICK_UP_ITEM)
 		{
@@ -709,9 +711,17 @@ void CCpuPlayer::ChangeCpuState()
 		{
 			CObject* object = m_FOV->GetObjectBuf(object_i);
 
-			if (object->GetObjectType() == OBJECT_PLAYER)continue;
+			if (object->GetObjectType() != OBJECT_ITEM)continue;
 
-			if (itemNum == targetObjectNum)
+			CItemBase* item = dynamic_cast<CItemBase*>(object);
+
+			//コインを優先的に追うように
+			if (item->GetItemName() == ITEM_COIN)
+			{
+				m_targetObject = item;
+				break;
+			}
+			else if (itemNum == targetObjectNum)
 			{
 				m_targetObject = object;
 				break;

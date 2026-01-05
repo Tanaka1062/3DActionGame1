@@ -6,7 +6,7 @@
 class CSelectPlayer:public CPlayer 
 {
 private:
-
+	bool m_isReady;			//準備できているかフラグ
 public:
 	//コンストラクタ・デストラクタ
 	CSelectPlayer();
@@ -29,6 +29,9 @@ public:
 
 	//終了処理
 	void Exit();
+
+	//準備できているかを取得
+	bool GetIsReady() { return m_isReady; }
 
 private:
 

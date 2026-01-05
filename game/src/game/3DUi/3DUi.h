@@ -19,7 +19,7 @@ public:
 	void Load();
 
 	//–ˆƒtƒŒ[ƒ€‚·‚éˆ—
-	void Step(VECTOR _pos, float _rad,float _cameraRotY,int _money);
+	void Step(VECTOR _pos, float _rad,int _money);
 
 };
 

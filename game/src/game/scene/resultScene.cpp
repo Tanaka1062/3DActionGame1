@@ -3,9 +3,17 @@
 #include "../../lib/input/keyInput.h"
 #include"../../lib/input/controllerManager.h"
 #include "../system/soundManager.h"
+#include "../camera/cameraManager.h"
 
 //定義関連====================================
-static const char BACKGROUND_HNDL_PATH[] = "data/graphic/result/backGround.png";		//背景の画像パス
+static const char* TEXT_GRAPHIC_PATH[PLAYER_NUM] =		//テキストのグラフィックパス
+{
+	"data/graphic/result/resultText1.png",
+	"data/graphic/result/resultText2.png",
+	"data/graphic/result/resultText3.png",
+	"data/graphic/result/resultText4.png",
+
+};
 //============================================
 
 //---------------------------
@@ -32,9 +40,13 @@ CResultScene::~CResultScene() {
 //---------------------------
 void CResultScene::Draw()
 {
-	m_backGround.Draw();
+	m_sky.Draw();
+	m_map.Draw();
+	m_resultPlayerManager.Draw();
 
 	DrawFormatString(32, 32, GetColor(255, 0, 0), "リザルト");
+
+	m_winPlayerText.Draw();
 
 	int posX = 0;
 	int posY = 0;
@@ -64,13 +76,18 @@ void CResultScene::Draw()
 //---------------------------
 void CResultScene::Init()
 {
-	//背景の初期化
-	VECTOR backGroundPos;
-	backGroundPos.x = static_cast<float>(WINDOW_SIZE_X / 2);
-	backGroundPos.y = static_cast<float>(WINDOW_SIZE_Y / 2);
+	m_sky.Init();
+	m_map.Init();
+	m_resultPlayerManager.Init(m_winner->GetWinnerPlayerName());
 
-	m_backGround.Init(backGroundPos);
+	CCameraManager::Init(ZERO);
+	CCameraManager::ChangeCamera(CCameraManager::CAMERA_ID_RESULT);
 
+	VECTOR textPos = ZERO;
+	textPos.x = WINDOW_SIZE_X * 0.5f;
+	textPos.y = WINDOW_SIZE_Y * 0.5f;
+
+	m_winPlayerText.Init(textPos);
 }
 
 //---------------------------
@@ -78,8 +95,10 @@ void CResultScene::Init()
 //---------------------------
 void CResultScene::Load()
 {
-	m_backGround.Load(BACKGROUND_HNDL_PATH);
-
+	m_sky.Load();
+	m_map.Load(MAP_ID_RESULT);
+	m_resultPlayerManager.Load();
+	m_winPlayerText.Load(TEXT_GRAPHIC_PATH[m_winner->GetWinnerPlayerName()]);
 }
 
 //---------------------------
@@ -87,11 +106,21 @@ void CResultScene::Load()
 //---------------------------
 void CResultScene::Step()
 {
+	m_sky.Step();
+	m_map.Step();
+	m_resultPlayerManager.Step();
+	CCameraManager::Step(ZERO,0.0f);
+
 	if (CKeyInput::IsTrg(KEY_SELECT) ||
-		CControllerManager::IsTrg(BUTTON_A))
+		CControllerManager::IsTrg(BUTTON_B))
 	{
 		m_state = END;
 	}
+
+	m_sky.Update();
+	m_map.Update();
+	m_resultPlayerManager.Update();
+	CCameraManager::Update(ZERO);
 }
 
 //---------------------------
@@ -99,7 +128,10 @@ void CResultScene::Step()
 //---------------------------
 void CResultScene::Exit()
 {
-	m_backGround.Exit();
+	m_sky.Exit();
+	m_map.Exit();
+	m_resultPlayerManager.Exit();
+	m_winPlayerText.Exit();
 
 	CSoundManager::StopAll();
 }

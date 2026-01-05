@@ -218,7 +218,7 @@ void CCollisionManager::CheckHitPlayerToMap(CPlayerManager& _playerManager,CMap&
 			vec.z += res.m[2][3];
 
 			col = MV1CollCheck_Sphere(_map.GetHitHndl(), -1,
-				vec, 1.0f);
+				vec, 5.0f);
 
 			if (col.HitNum != 0)
 			{

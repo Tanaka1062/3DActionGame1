@@ -145,6 +145,12 @@
     <Filter Include="ソース ファイル\game\player\cpuPlayer">
       <UniqueIdentifier>{9d28384c-e55e-43ec-9648-6bf7c3bd189c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\game\player\resultPlayer">
+      <UniqueIdentifier>{4c589cd9-ee65-458b-b018-a1123e907255}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\game\camera\resultCamera">
+      <UniqueIdentifier>{0148b797-af02-43d5-96e1-69d07ad04012}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\number.cpp">
@@ -344,6 +350,15 @@
     </ClCompile>
     <ClCompile Include="src\game\player\cpuPlayer\cpuPlayerFOV.cpp">
       <Filter>ソース ファイル\game\player\cpuPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\player\resultPlayer\resultPlayer.cpp">
+      <Filter>ソース ファイル\game\player\resultPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\player\resultPlayer\resultPlayerManager.cpp">
+      <Filter>ソース ファイル\game\player\resultPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\camera\resultCamera\resultCamera.cpp">
+      <Filter>ソース ファイル\game\camera\resultCamera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -550,6 +565,15 @@
     </ClInclude>
     <ClInclude Include="src\game\player\cpuPlayer\cpuPlayerFOV.h">
       <Filter>ソース ファイル\game\player\cpuPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\player\resultPlayer\resultPlayer.h">
+      <Filter>ソース ファイル\game\player\resultPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\player\resultPlayer\resultPlayerManager.h">
+      <Filter>ソース ファイル\game\player\resultPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\camera\resultCamera\resultCamera.h">
+      <Filter>ソース ファイル\game\camera\resultCamera</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

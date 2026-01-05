@@ -1,6 +1,5 @@
 #pragma once
 #include "sceneBase.h"
-#include "../camera/cameraManager.h"
 #include "../map/map.h"
 #include "../sky/sky.h"
 #include"../data.h"
@@ -21,7 +20,6 @@ private:
 
 	CMap m_ground;							//背景
 	CSky m_sky;								//空
-	CCameraManager m_camera;				//カメラ
 	CPlayerManager m_playerManager;			//プレイヤー
 	CShotManager m_shot;					//弾
 	CItemManager m_itemManager;				//アイテムマネージャークラス

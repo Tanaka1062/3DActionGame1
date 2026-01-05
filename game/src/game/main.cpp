@@ -79,6 +79,7 @@ int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		ClearDrawScreen();	// 画面クリア
 
 		//ここにゲームの本体を書く
+		
 
 		//シーンの実行処理
 		scene.Loop();
@@ -88,7 +89,7 @@ int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 		//コントローラー入力の更新処理
 		CControllerManager::Update();
-		
+
 		//Fps更新処理
 		CFps::Update();
 

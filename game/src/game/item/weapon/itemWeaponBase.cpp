@@ -61,7 +61,6 @@ void CWeaponBase::HitCalc(CObject* _hitObject)
 
 				if (isPickUp == true)
 				{
-					m_owner = player;
 					player->SetWeaponId(m_id);
 					player->SetWeaponDurability(m_weaponDurability);
 					m_isActive = false;

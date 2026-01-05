@@ -7,6 +7,7 @@ constexpr VECTOR SCALE = { 1.0f,1.0f,1.0f };		//大きさ
 static const char* MAP_MODEL_PATH[MAP_NUM] ={
 	"data/model/map/TestMap6.mv1",
 	"data/model/map/selectMap/selectMap.mv1",
+	"data/model/map/resultMap/resultMap.mv1",
 };					//ロードするファイル名
 static const char GROUND_HIT_MODEL_PATH[] =
  "data/model/map/TestMap6.mv1" ;				//ロードするファイル名

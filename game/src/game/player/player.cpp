@@ -170,7 +170,7 @@ void CPlayer::Load(int _modelHndl)
 //-----------------------
 void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManager, CShotManager* _shotManager)
 {
-	m_CoinNowUi.Step(m_pos,m_rad,_rotY,m_money);
+	m_CoinNowUi.Step(m_pos,m_rad,m_money);
 
 	m_targetPos = _targetPos;
 
@@ -295,6 +295,20 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 			m_attackNum = 0;
 			break;
 		}
+	}
+
+	switch (m_state)
+	{
+	case ATTACK_IN:
+	case ATTACK:
+	case ATTACK_OUT:
+		break;
+	default:
+		if (m_attackNum != ATTACK_NONE)
+		{
+			m_attackNum = ATTACK_NONE;
+		}
+		break;
 	}
 
 	//ˆÚ“®ˆ—
@@ -518,6 +532,9 @@ void CPlayer::HitCalc(CObject* _hitObject)
 //------------------------------
 void CPlayer::HitAttack(int _atk, int _blown, float _rotY)
 {
+	//€–S‚µ‚Ä‚¢‚½‚çˆ—‚ğ‚µ‚È‚¢
+	if (m_state == DIE)return;
+
 	m_blown += _blown;
 
 	VECTOR knockBack = KNOCK_BACK_SPEED;
@@ -1502,7 +1519,7 @@ void CPlayer::RequestAttack()
 
 	}
 	//UŒ‚‚µ‚Ä‚È‚¢‚ÉUŒ‚‘O‚ÉˆÚs‚·‚é
-	else if(m_attackNum == ATTACK_NONE || m_attackNum == 0)
+	else if(m_attackNum == ATTACK_NONE)
 	{
 		m_attackNum++;
 		m_state = ATTACK_IN;

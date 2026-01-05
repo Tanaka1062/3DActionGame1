@@ -209,23 +209,34 @@ void CSelectPlayerManager::Exit()
 }
 
 //------------------------
-//ゲームが終わったかを取得
+//全員の準備が完了しているか
 //------------------------
-bool CSelectPlayerManager::GetIsEnd()
+bool CSelectPlayerManager::GetIsAllReady()
 {
-	//死んだプレイヤーの数
-	int playerDieNum = 0;
+	//現在いるプレイヤーの数
+	int playerNum = 0;
 	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
-		//死んでいるプレイヤーを確認
-		if (m_player[player_i]->GetState() == DIE)
+		//現在いるプレイヤーを確認
+		if (m_player[player_i]->GetActive() == true)
 		{
-			playerDieNum++;
+			playerNum++;
 		}
 	}
 
-	//一人以外死んでいたらゲームを終わる
-	if (playerDieNum == PLAYER_NUM - 1)
+	//準備できているプレイヤーの数
+	int isReadyPlayerNum = 0;
+	for (int player_i = 0; player_i < m_player.size(); player_i++)
+	{
+		//現在いるプレイヤーを確認
+		if (m_player[player_i]->GetIsReady() == true)
+		{
+			isReadyPlayerNum++;
+		}
+	}
+
+	//全員が準備完了ならtrue
+	if (playerNum == isReadyPlayerNum)
 	{
 		return true;
 	}

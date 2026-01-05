@@ -1,16 +1,21 @@
 #pragma once
 #include "sceneBase.h"
 #include <DxLib.h>
-#include "../../lib/2DUi/2DUi.h"
 #include "../winner/winner.h"
+#include "../sky/sky.h"
+#include "../map/map.h"
+#include "../player/resultPlayer/resultPlayerManager.h"
+#include "../../lib/2DUi/2DUi.h"
 
 //ゲーム本編を管理するクラス
 class CResultScene :public CSceneBase
 {
 private:
-	C2DUi m_backGround;		//背景
-	CWinner* m_winner;		//勝利したプレイヤー
-
+	CWinner* m_winner;							//勝利したプレイヤー
+	CSky m_sky;									//天球
+	CMap m_map;									//マップ
+	CResultPlayerManager m_resultPlayerManager;	//リザルトプレイヤー
+	C2DUi m_winPlayerText;						//勝利したプレイヤーのテキスト
 public:
 
 	//コンストラクタ

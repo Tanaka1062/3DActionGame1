@@ -1,6 +1,6 @@
 #include "sword.h"
 
-constexpr int COST = 3;						//‰¿Ši
+constexpr int COST = 0;						//‰¿Ši
 constexpr int DURABILITY = 20;				//•Ší‚Ì‘Ï‹v“x
 
 CSword::CSword()

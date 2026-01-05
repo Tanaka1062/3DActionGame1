@@ -4,6 +4,7 @@
 #include "../../lib/input/keyInput.h"
 #include"../collisionManager/collisionManager.h"
 #include "../../lib/effekseer/effekseer.h"
+#include "../camera/cameraManager.h"
 
 //---------------------------
 //		コンストラクタ
@@ -36,7 +37,7 @@ void CPlayScene::Draw()
 	m_uiManager.Draw();
 	m_playerManager.Draw();
 
-	m_camera.Draw();
+	CCameraManager::Draw();
 
 }
 
@@ -52,7 +53,8 @@ void CPlayScene::Init()
 	m_itemManager.Init(&m_playerManager);
 	m_weaponManager.Init();
 	m_uiManager.Init(&m_playerManager,&m_itemManager);
-	m_camera.Init(ZERO);
+	CCameraManager::Init(ZERO);
+	CCameraManager::ChangeCamera(CCameraManager::CAMERA_ID_MAP);
 	m_gameTime = CGameTime::GetInstance();
 	m_gameTime->Init();
 	m_winner = CWinner::GetInstance();
@@ -81,7 +83,7 @@ void CPlayScene::Step()
 	//各種計算処理を実行
 	m_sky.Step();
 
-	m_playerManager.Step(&m_attackManager,&m_shot,m_camera.GetRot().y);
+	m_playerManager.Step(&m_attackManager,&m_shot, CCameraManager::GetRot().y);
 
 	m_shot.Step();
 
@@ -91,7 +93,7 @@ void CPlayScene::Step()
 
 	m_uiManager.Step();
 
-	m_camera.Step(ZERO,0.0f);
+	CCameraManager::Step(ZERO,0.0f);
 
 	m_gameTime->Step();
 
@@ -118,7 +120,7 @@ void CPlayScene::Step()
 	m_attackManager.Update();
 	m_itemManager.Update();
 	m_weaponManager.Update(m_playerManager);
-	m_camera.Update(ZERO);
+	CCameraManager::Update(ZERO);
 
 	if (CKeyInput::IsTrg(KEY_SELECT) == true ||
 		m_gameTime->GetTimeEnd() == true)

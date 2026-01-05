@@ -3,6 +3,7 @@
 #include"../../lib/input/keyInput.h"
 #include"../../lib/input/controllerManager.h"
 #include "../system/soundManager.h"
+#include "../camera/cameraManager.h"
 
 //定義関連====================================
 //============================================
@@ -30,7 +31,7 @@ CSelectScene::~CSelectScene() {
 //---------------------------
 void CSelectScene::Draw()
 {
-	m_cameraManager.Draw();
+	CCameraManager::Draw();
 	m_map.Draw();
 	m_sky.Draw();
 	m_selectPlayerManager.Draw();
@@ -49,8 +50,8 @@ void CSelectScene::Draw()
 //---------------------------
 void CSelectScene::Init()
 {
-	m_cameraManager.Init(ZERO);
-	m_cameraManager.ChangeCamera(CCameraManager::CAMERA_ID_SELECT);
+	CCameraManager::Init(ZERO);
+	CCameraManager::ChangeCamera(CCameraManager::CAMERA_ID_SELECT);
 	m_map.Init();
 	m_sky.Init();
 	m_selectPlayerManager.Init();
@@ -80,14 +81,14 @@ void CSelectScene::Load()
 //---------------------------
 void CSelectScene::Step()
 {
-	m_cameraManager.Step(ZERO,0.0f);
+	CCameraManager::Step(ZERO,0.0f);
 	m_sky.Step();
 	m_selectPlayerManager.Step();
 
 	//UIの毎フレームする処理
 	m_uiManager.Step();
 
-	m_cameraManager.Update(ZERO);
+	CCameraManager::Update(ZERO);
 	m_sky.Update();
 	m_selectPlayerManager.Update();
 
@@ -96,7 +97,7 @@ void CSelectScene::Step()
 
 	//スペースで終わる
 	if (CKeyInput::IsTrg(KEY_SELECT) ||
-		CControllerManager::IsAllConnection() == true)
+		m_selectPlayerManager.GetIsAllReady() == true)
 	{
 		m_state = END;
 	}

@@ -9,7 +9,7 @@ using namespace std;
 
 constexpr int SPAWN_PROBABILITY_INIT[ITEM_NUM] =					//アイテムの出現確率の初期値
 {
-	30,
+	0,
 	5,
 	5,
 	5,

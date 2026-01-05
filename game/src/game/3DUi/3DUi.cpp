@@ -1,4 +1,5 @@
 #include "3DUi.h"
+#include "../camera/cameraManager.h"
 
 using namespace std;
 
@@ -78,7 +79,7 @@ void C3DUi::Load()
 }
 
 //–ˆƒtƒŒ[ƒ€‚·‚éˆ—
-void C3DUi::Step(VECTOR _pos, float _rad,float _cameraRotY, int _money)
+void C3DUi::Step(VECTOR _pos, float _rad, int _money)
 {
 	m_pos = _pos;
 
@@ -86,7 +87,7 @@ void C3DUi::Step(VECTOR _pos, float _rad,float _cameraRotY, int _money)
 
 	CObject::Step();
 
-	m_rot.y = _cameraRotY;
+	m_rot.y = CCameraManager::GetRot().y;
 
 	int ten = _money / 10;
 	int one = _money % 10;

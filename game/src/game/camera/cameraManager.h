@@ -13,14 +13,15 @@ public:
 		CAMERA_ID_MAP,						//マップのカメラ
 		CAMERA_ID_DEBUG,					//デバッグ時のカメラ
 		CAMERA_ID_SELECT,					//セレクト画面のカメラ
+		CAMERA_ID_RESULT,					//リザルト画面のカメラ
 
 		CAMERA_ID_NUM,						//カメラのタイプの数
 	};
 
 private:
-	CCameraBase* m_camera[CAMERA_ID_NUM];	//カメラ
-	tagCAMERA_ID m_id;						//カメラのタイプ
-	VECTOR m_rot;							//カメラの回転値
+	static CCameraBase* m_camera[CAMERA_ID_NUM];	//カメラ
+	static tagCAMERA_ID m_id;						//カメラのタイプ
+	static VECTOR m_rot;							//カメラの回転値
 
 public:
 
@@ -28,25 +29,25 @@ public:
 	CCameraManager();
 
 	//初期化
-	void Init(VECTOR _focus);
+	static void Init(VECTOR _focus);
 
 	//毎フレームする処理
-	void Step(VECTOR _focus, float _rot);
+	static void Step(VECTOR _focus, float _rot);
 
 	//表示
-	void Draw();
+	static void Draw();
 
 	//カメラの更新
 	// @_tagetPos	:カメラの注視点の座標
-	void Update(VECTOR _tagetPos);
+	static void Update(VECTOR _tagetPos);
 
 	//カメラのタイプ切り替え
-	void ChangeCamera(tagCAMERA_ID _id) { m_id = _id; };
+	static void ChangeCamera(tagCAMERA_ID _id) { m_id = _id; };
 	//カメラタイプの取得
-	tagCAMERA_ID GetID() { return m_id; }
+ 	static tagCAMERA_ID GetID() { return m_id; }
 
 	//カメラの回転値の取得
-	VECTOR  GetRot() { return m_rot; }
+	static VECTOR  GetRot() { return m_rot; }
 
 };
 

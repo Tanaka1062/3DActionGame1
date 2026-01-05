@@ -34,8 +34,8 @@ public:
 	//プレイヤーを取得
 	CPlayer* GetPlayer(int _num) { return m_player[_num]; }
 
-	//ゲームが終わったかを取得
-	bool GetIsEnd();
+	//全員の準備が完了しているか
+	bool GetIsAllReady();
 
 };
 

@@ -9,7 +9,7 @@ static const UnInt HP_COLOR[PLAYER_NUM] =
 	GetColor(255,0,0),
 	GetColor(0,0,255),
 	GetColor(0,255,0),
-	GetColor(255,255,0),
+	GetColor(220,220,0),
 };
 
 //コンストラクタ・デストラクタ

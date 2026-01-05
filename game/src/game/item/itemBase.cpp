@@ -34,11 +34,6 @@ void CItemBase::Init()
 	m_itemName = ITEM_NONE;
 	m_costUi.Init();
 
-	//コストが0の場合はUI表示をしない
-	if (m_cost == 0)
-	{
-		m_costUi.SetActive(false);
-	}
 }
 
 //--------------------------
@@ -66,8 +61,14 @@ void CItemBase::Load(int _hndl)
 //--------------------------
 void CItemBase::Step()
 {
+	//コストが0の場合はUI表示をしない
+	if (m_cost == 0)
+	{
+		m_costUi.SetActive(false);
+	}
+
 	CActor::Step();
-	//m_costUi.Step(m_pos,m_rad);
+	m_costUi.Step(m_pos,m_rad,m_cost);
 
 	m_shadow.Step(m_pos);
 

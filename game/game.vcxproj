@@ -147,6 +147,7 @@
     <ClCompile Include="src\game\camera\debugCamera\debugCamera.cpp" />
     <ClCompile Include="src\game\camera\mapCamera\mapCamera.cpp" />
     <ClCompile Include="src\game\camera\playCamera\playCamera.cpp" />
+    <ClCompile Include="src\game\camera\resultCamera\resultCamera.cpp" />
     <ClCompile Include="src\game\camera\selectCamera\selectCamera.cpp" />
     <ClCompile Include="src\game\character\characterBase.cpp" />
     <ClCompile Include="src\game\collisionManager\collisionManager.cpp" />
@@ -169,6 +170,8 @@
     <ClCompile Include="src\game\player\cpuPlayer\cpuPlayerFOV.cpp" />
     <ClCompile Include="src\game\player\player.cpp" />
     <ClCompile Include="src\game\player\playerManager.cpp" />
+    <ClCompile Include="src\game\player\resultPlayer\resultPlayer.cpp" />
+    <ClCompile Include="src\game\player\resultPlayer\resultPlayerManager.cpp" />
     <ClCompile Include="src\game\player\selectPlayer\selectPlayer.cpp" />
     <ClCompile Include="src\game\player\selectPlayer\selectPlayerManager.cpp" />
     <ClCompile Include="src\game\scene\playScene.cpp" />
@@ -215,6 +218,7 @@
     <ClInclude Include="src\game\camera\debugCamera\debugCamera.h" />
     <ClInclude Include="src\game\camera\mapCamera\mapCamera.h" />
     <ClInclude Include="src\game\camera\playCamera\playCamera.h" />
+    <ClInclude Include="src\game\camera\resultCamera\resultCamera.h" />
     <ClInclude Include="src\game\camera\selectCamera\selectCamera.h" />
     <ClInclude Include="src\game\character\characterBase.h" />
     <ClInclude Include="src\game\collisionManager\collisionManager.h" />
@@ -239,6 +243,8 @@
     <ClInclude Include="src\game\player\player.h" />
     <ClInclude Include="src\game\player\playerData.h" />
     <ClInclude Include="src\game\player\playerManager.h" />
+    <ClInclude Include="src\game\player\resultPlayer\resultPlayer.h" />
+    <ClInclude Include="src\game\player\resultPlayer\resultPlayerManager.h" />
     <ClInclude Include="src\game\player\selectPlayer\selectPlayer.h" />
     <ClInclude Include="src\game\player\selectPlayer\selectPlayerManager.h" />
     <ClInclude Include="src\game\scene\playScene.h" />
