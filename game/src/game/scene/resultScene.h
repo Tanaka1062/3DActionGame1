@@ -16,6 +16,7 @@ private:
 	CMap m_map;									//マップ
 	CResultPlayerManager m_resultPlayerManager;	//リザルトプレイヤー
 	C2DUi m_winPlayerText;						//勝利したプレイヤーのテキスト
+	C2DUi m_resultText;							//リザルト画面に表示されるテキスト
 public:
 
 	//コンストラクタ

@@ -9,6 +9,7 @@
 #include "../../lib/effekseer/effekseer.h"
 #include "../system/effectData/effectData.h"
 #include "../item/itemBase.h"
+#include "../system/soundManager.h"
 
 //’è‹`ŠÖ˜A---------------------------
 
@@ -535,6 +536,8 @@ void CPlayer::HitAttack(int _atk, int _blown, float _rotY)
 	//€–S‚µ‚Ä‚¢‚½‚çˆ—‚ğ‚µ‚È‚¢
 	if (m_state == DIE)return;
 
+	CSoundManager::Play(CSoundManager::SE_HIT, DX_PLAYTYPE_BACK);
+
 	m_blown += _blown;
 
 	VECTOR knockBack = KNOCK_BACK_SPEED;
@@ -893,6 +896,7 @@ void CPlayer::Attack(CAttackManager* _attackManager, CShotManager* _shotManager)
 		{
 		//•Ší‚ª‘fè‚Ìê‡
 		case WEAPON_ID_HAND:
+			CSoundManager::Play(CSoundManager::SE_HAND, DX_PLAYTYPE_BACK);
 
 			switch (m_attackNum)
 			{
@@ -928,6 +932,8 @@ void CPlayer::Attack(CAttackManager* _attackManager, CShotManager* _shotManager)
 			break;
 		//•Ší‚ªŒ•‚Ìê‡
 		case WEAPON_ID_SWORD:
+			CSoundManager::Play(CSoundManager::SE_SWORD, DX_PLAYTYPE_BACK);
+
 			switch (m_attackNum)
 			{
 			case 0:
@@ -955,6 +961,8 @@ void CPlayer::Attack(CAttackManager* _attackManager, CShotManager* _shotManager)
 			break;
 		//•Ší‚ª•€‚Ìê‡
 		case WEAPON_ID_AX:
+			CSoundManager::Play(CSoundManager::SE_AX, DX_PLAYTYPE_BACK);
+
 			switch (m_attackNum)
 			{
 			case 0:
@@ -980,6 +988,8 @@ void CPlayer::Attack(CAttackManager* _attackManager, CShotManager* _shotManager)
 			break;
 		//•Ší‚ªe‚Ìê‡
 		case WEAPON_ID_GUN:
+			CSoundManager::Play(CSoundManager::SE_GUN, DX_PLAYTYPE_BACK);
+
 			if (RequestAnim(ANIMID_ATTACK1_GUN, 1.0f) == true)
 			{
 				VECTOR shotPos = MV1GetFramePosition(m_hndl, 11);

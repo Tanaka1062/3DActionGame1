@@ -1,5 +1,6 @@
 #include "coin.h"
 #include "../../lib/myMath/myMath.h"
+#include "../../system/soundManager.h"
 
 constexpr float ROT_SPEED = 0.05f;			//回転速度
 constexpr int ADD_MONEY = 1;				//増えるお金の量
@@ -81,13 +82,15 @@ void CCoin::HitCalc(CObject* _hitObject)
 		//飛んでいる場合は処理をしない
 		if (m_state == ITEM_FLYING)return;
 
+		CSoundManager::Play(CSoundManager::SE_COINGET, DX_PLAYTYPE_BACK);
+
 		//プレイヤーデータ保存用
 		CPlayer* player = nullptr;
 
 		//プレイヤークラスにダウンキャストする
 		player = dynamic_cast<CPlayer*>(_hitObject);
 
-		//プレイヤーをパワーアップさせる
+		//プレイヤーのお金を増やす
 		player->AddMoney(ADD_MONEY);
 
 		m_isActive = false;

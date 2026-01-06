@@ -1,4 +1,5 @@
 #include "itemWeaponBase.h"
+#include "../../system/soundManager.h"
 
 CWeaponBase::CWeaponBase()
 {
@@ -50,6 +51,8 @@ void CWeaponBase::HitCalc(CObject* _hitObject)
 					//‚¨‹à‚ª‘«‚è‚½‚çŽ‚¿ã‚°‚ê‚é
 					if (player->SubMoney(m_cost) == true)
 					{
+						CSoundManager::Play(CSoundManager::SE_BUY, DX_PLAYTYPE_BACK);
+
 						isPickUp = true;
 					}
 				}

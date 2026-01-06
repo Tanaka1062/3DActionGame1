@@ -8,20 +8,23 @@ using namespace std;
 
 enum tagUiName
 {
-	UI_BACKGROUND,		//背景
+	UI_TEXT,		//テキスト
+	UI_TEXT2,		//テキスト２
 
 	UI_NUM,				//UIの数
 };
 
 static const char* UI_GRAPHIC_PATH[UI_NUM] =		//背景の画像パス
 {
-	"data/graphic/select/backGround.png",
+	"data/graphic/select/selectText.png",
+	"data/graphic/select/selectText2.png",
 
 };
 
 static const VECTOR UI_POS[UI_NUM] =					//UIの座標
 {
-	{static_cast<float>(WINDOW_SIZE_X * 0.5f),static_cast<float>(WINDOW_SIZE_Y * 0.5f),0.0f},
+	{static_cast<float>(WINDOW_SIZE_X * 0.5f),static_cast<float>(WINDOW_SIZE_Y * 0.5f) + 100.0f,0.0f},
+	{static_cast<float>(WINDOW_SIZE_X * 0.5f),static_cast<float>(WINDOW_SIZE_Y * 0.5f) + 300.0f,0.0f},
 };
 
 //コンストラクタ・デストラクタ

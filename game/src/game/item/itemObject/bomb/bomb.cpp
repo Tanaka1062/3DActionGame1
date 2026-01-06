@@ -2,13 +2,14 @@
 #include "../../../attack/attackManager.h"
 #include "../../../../lib/effekseer/effekseer.h"
 #include "../../../system/effectData/effectData.h"
+#include "../../../system/soundManager.h"
 
 constexpr int EXPLOSION_TIME = 5 * 60;				//”š”­‚·‚éŽžŠÔ
 constexpr int EXPLOSION_IN_TIME = 1 * 60;			//”š”­‚·‚é‘O‚ÌŽžŠÔ
 constexpr float EXPLOSION_RADIUS = 60.0f;			//”š”­‚Ì”¼Œa
 constexpr float POWER_UP_EXPLOSION_RADIUS = 1.0f;	//ƒpƒ[ƒAƒbƒvŒã‚Ì”š”­‚Ì”¼Œa
 constexpr int EXPLOSION_ATK = 50;					//”š”­‚ÌUŒ‚—Í
-constexpr int COST = 1;								//‰¿Ši
+constexpr int COST = 0;								//‰¿Ši
 
 //ƒAƒjƒ[ƒVƒ‡ƒ“ˆê——----------------------------------
 enum tagAnim
@@ -55,6 +56,7 @@ void CBomb::Step()
 	//”š”­ŽžŠÔ‚ð‰ß‚¬‚½‚ç”šŽž‚³‚¹‚é
 	if (m_timeCount >= EXPLOSION_TIME)
 	{
+		CSoundManager::Play(CSoundManager::SE_EXPLOSION, DX_PLAYTYPE_BACK);
 		m_isActive = false;
 		m_timeCount = 0;
 

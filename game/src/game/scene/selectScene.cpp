@@ -31,17 +31,26 @@ CSelectScene::~CSelectScene() {
 //---------------------------
 void CSelectScene::Draw()
 {
-	CCameraManager::Draw();
-	m_map.Draw();
-	m_sky.Draw();
-	m_selectPlayerManager.Draw();
+	switch (m_state)
+	{
+	case CSceneBase::LOAD:
+		m_LoadBG.Draw();
+		break;
+	default:
+		CCameraManager::Draw();
+		m_map.Draw();
+		m_sky.Draw();
+		m_selectPlayerManager.Draw();
+		//UIの画像表示
+		m_uiManager.Draw();
 
-	//UIの画像表示
-	//m_uiManager.Draw();
+		break;
+	}
 
-	DrawFormatString(32, 32, GetColor(255, 0, 0), "セレクト");
 
-	DrawFormatString(32, 64, GetColor(255, 0, 0), "コントローラー");
+
+
+	//DrawFormatString(32, 32, GetColor(255, 0, 0), "セレクト");
 
 }
 
@@ -50,6 +59,8 @@ void CSelectScene::Draw()
 //---------------------------
 void CSelectScene::Init()
 {
+	CSceneBase::Init();
+
 	CCameraManager::Init(ZERO);
 	CCameraManager::ChangeCamera(CCameraManager::CAMERA_ID_SELECT);
 	m_map.Init();
@@ -66,14 +77,33 @@ void CSelectScene::Init()
 //---------------------------
 void CSelectScene::Load()
 {
-	m_map.Load(MAP_ID_SELECT);
-	m_sky.Load();
-	m_selectPlayerManager.Load();
+	CSceneBase::Load();
+	switch (m_LoadState)
+	{
+	case 0:
+		m_map.Load(MAP_ID_SELECT);
+		m_sky.Load();
+		m_selectPlayerManager.Load();
 
-	//UIの画像ロード
-	m_uiManager.Load();
+		//UIの画像ロード
+		m_uiManager.Load();
 
-	CSoundManager::Play(CSoundManager::BGM_TITLE, DX_PLAYTYPE_LOOP);
+		m_LoadState = 1;
+		break;
+	case 1:
+		if (GetASyncLoadNum() == 0)
+		{
+			m_LoadState = 2;
+		}
+		break;
+
+	case 2:
+		SetUseASyncLoadFlag(FALSE);
+		CSoundManager::Play(CSoundManager::BGM_SELECT, DX_PLAYTYPE_LOOP);
+		m_state = MAIN;
+		break;
+	}
+
 }
 
 //---------------------------

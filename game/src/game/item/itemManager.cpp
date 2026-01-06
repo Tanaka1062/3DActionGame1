@@ -1,4 +1,5 @@
 #include "itemManager.h"
+#include "../system/soundManager.h"
 
 using namespace std;
 
@@ -89,6 +90,8 @@ void CItemManager::Step(CPlayerManager* _playerManager)
 
 		for (int dropCoin_i = 0; dropCoin_i < dropCoin; dropCoin_i++)
 		{
+			CSoundManager::Play(CSoundManager::SE_COINDROP, DX_PLAYTYPE_BACK);
+
 			//ƒRƒCƒ“‚ð¶¬‚µ‚Ä•Û‘¶‚·‚é
 			unique_ptr<CItemBase> dropCoin = m_spawnItemManager.SpawnCoin();
 			

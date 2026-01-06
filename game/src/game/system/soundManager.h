@@ -17,7 +17,15 @@ public:
 		BGM_GAME,		//BGM ゲーム本編
 		BGM_TITLE,		//BGM タイトル
 		BGM_RESULT,		//BGM リザルト
-		SE_PLSHOT,		//SE プレイヤーの弾を撃つ音
+		BGM_SELECT,		//BGM 選択画面
+		SE_GUN,			//SE 銃を撃った音
+		SE_SWORD,		//SE 剣を振った音
+		SE_AX,			//SE 斧を振った音
+		SE_HAND,		//SE 素手で攻撃した音
+		SE_HIT,			//SE 攻撃が当たった時の音
+		SE_COINDROP,	//SE コインを落とした音
+		SE_COINGET,		//SE コインを取得した音
+		SE_BUY,			//SE アイテムを購入した音
 		SE_EXPLOSION,	//SE 爆発音
 
 		SOUND_NUM,		//BGM,SEの総数

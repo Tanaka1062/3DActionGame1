@@ -11,7 +11,7 @@
 class CUiGameManager
 {
 private:
-	std::vector<C2DUi*> m_ui;						//UI
+	std::vector<C2DUi*> m_ui;					//UI
 	CHpbarManager m_hpbarManager;				//HPバーのマネージャー
 	CPowerUpGouge m_powerUpGouge[PLAYER_NUM];	//パワーゲージUi
 	CTimeUi m_time;								//時間

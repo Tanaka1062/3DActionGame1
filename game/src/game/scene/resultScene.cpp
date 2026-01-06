@@ -40,34 +40,24 @@ CResultScene::~CResultScene() {
 //---------------------------
 void CResultScene::Draw()
 {
-	m_sky.Draw();
-	m_map.Draw();
-	m_resultPlayerManager.Draw();
-
-	DrawFormatString(32, 32, GetColor(255, 0, 0), "リザルト");
-
-	m_winPlayerText.Draw();
-
-	int posX = 0;
-	int posY = 0;
-	posX = WINDOW_SIZE_X / 2;
-	posY = WINDOW_SIZE_Y / 2;
-
-	switch (m_winner->GetWinnerPlayerName())
+	switch (m_state)
 	{
-	case PLAYER_1:
-	DrawFormatString(posX, posY, GetColor(255, 0, 0), "プレイヤー１勝利");
+	case CSceneBase::LOAD:
+		m_LoadBG.Draw();
 		break;
-	case PLAYER_2:
-		DrawFormatString(posX, posY, GetColor(255, 0, 0), "プレイヤー2勝利");
-		break;
-	case PLAYER_3:
-		DrawFormatString(posX, posY, GetColor(255, 0, 0), "プレイヤー3勝利");
-		break;
-	case PLAYER_4:
-		DrawFormatString(posX, posY, GetColor(255, 0, 0), "プレイヤー4勝利");
+	default:
+		m_sky.Draw();
+		m_map.Draw();
+		m_resultPlayerManager.Draw();
+		m_winPlayerText.Draw();
+		m_resultText.Draw();
+
 		break;
 	}
+
+
+
+	//DrawFormatString(32, 32, GetColor(255, 0, 0), "リザルト");
 
 }
 
@@ -76,6 +66,8 @@ void CResultScene::Draw()
 //---------------------------
 void CResultScene::Init()
 {
+	CSceneBase::Init();
+
 	m_sky.Init();
 	m_map.Init();
 	m_resultPlayerManager.Init(m_winner->GetWinnerPlayerName());
@@ -88,6 +80,10 @@ void CResultScene::Init()
 	textPos.y = WINDOW_SIZE_Y * 0.5f;
 
 	m_winPlayerText.Init(textPos);
+
+	textPos.y += 200.0f;
+
+	m_resultText.Init(textPos);
 }
 
 //---------------------------
@@ -95,10 +91,33 @@ void CResultScene::Init()
 //---------------------------
 void CResultScene::Load()
 {
-	m_sky.Load();
-	m_map.Load(MAP_ID_RESULT);
-	m_resultPlayerManager.Load();
-	m_winPlayerText.Load(TEXT_GRAPHIC_PATH[m_winner->GetWinnerPlayerName()]);
+	CSceneBase::Load();
+	switch (m_LoadState)
+	{
+	case 0:
+		m_sky.Load();
+		m_map.Load(MAP_ID_RESULT);
+		m_resultPlayerManager.Load();
+		m_winPlayerText.Load(TEXT_GRAPHIC_PATH[m_winner->GetWinnerPlayerName()]);
+		m_resultText.Load("data/graphic/result/resultText.png");
+		CSoundManager::Play(CSoundManager::BGM_RESULT, DX_PLAYTYPE_LOOP);
+
+		m_LoadState = 1;
+		break;
+	case 1:
+		if (GetASyncLoadNum() == 0)
+		{
+			m_LoadState = 2;
+		}
+		break;
+
+	case 2:
+		SetUseASyncLoadFlag(FALSE);
+		m_state = MAIN;
+		break;
+	}
+
+
 }
 
 //---------------------------
@@ -132,6 +151,7 @@ void CResultScene::Exit()
 	m_map.Exit();
 	m_resultPlayerManager.Exit();
 	m_winPlayerText.Exit();
+	m_resultText.Exit();
 
 	CSoundManager::StopAll();
 }

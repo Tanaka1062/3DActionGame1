@@ -1,4 +1,5 @@
 #pragma once
+#include "../../lib/2DUi/2DUi.h"
 
 //ゲーム本編を管理するクラス
 class CSceneBase
@@ -15,6 +16,8 @@ protected:
 	};
 
 	tagScene m_state;	//シーンの状態	
+	int m_LoadState;	//ロード状態
+	C2DUi m_LoadBG;		//ロード画面
 
 public:
 	//コンストラクタ

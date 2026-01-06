@@ -30,10 +30,21 @@ CTitleScene::~CTitleScene() {
 //---------------------------
 void CTitleScene::Draw()
 {
-	//UIの描写
-	m_uiManager.Draw();
+	switch (m_state)
+	{
+	case CSceneBase::LOAD:
+		m_LoadBG.Draw();
+		break;
+	default:
+		//UIの描写
+		m_uiManager.Draw();
 
-	DrawFormatString(32, 32, GetColor(255, 0, 0), "タイトル");
+		break;
+	}
+
+
+
+	//DrawFormatString(32, 32, GetColor(255, 0, 0), "タイトル");
 }
 
 //---------------------------
@@ -41,6 +52,8 @@ void CTitleScene::Draw()
 //---------------------------
 void CTitleScene::Init()
 {
+	CSceneBase::Init();
+
 	//UIの初期化
 	m_uiManager.Init();
 
@@ -51,10 +64,28 @@ void CTitleScene::Init()
 //---------------------------
 void CTitleScene::Load()
 {
-	//UIの画像ロード
-	m_uiManager.Load();
+	CSceneBase::Load();
+	switch (m_LoadState)
+	{
+	case 0:
+		//UIの画像ロード
+		m_uiManager.Load();
 
-	CSoundManager::Play(CSoundManager::BGM_TITLE, DX_PLAYTYPE_LOOP);
+		m_LoadState = 1;
+		break;
+	case 1:
+		if (GetASyncLoadNum() == 0)
+		{
+			m_LoadState = 2;
+		}
+		break;
+
+	case 2:
+		SetUseASyncLoadFlag(FALSE);
+		CSoundManager::Play(CSoundManager::BGM_TITLE, DX_PLAYTYPE_LOOP);
+		m_state = MAIN;
+		break;
+	}
 }
 
 //---------------------------

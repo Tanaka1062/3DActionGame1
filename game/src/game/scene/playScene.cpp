@@ -28,16 +28,25 @@ CPlayScene::~CPlayScene() {
 //---------------------------
 void CPlayScene::Draw()
 {
-	m_ground.Draw();
-	m_sky.Draw();
-	m_shot.Draw();
-	m_attackManager.Draw();
-	m_itemManager.Draw();
-	m_weaponManager.Draw();
-	m_uiManager.Draw();
-	m_playerManager.Draw();
+	
+	switch (m_state)
+	{
+	case CSceneBase::LOAD:
+		m_LoadBG.Draw();
+		break;
+	default:
+		m_ground.Draw();
+		m_sky.Draw();
+		m_shot.Draw();
+		m_attackManager.Draw();
+		m_itemManager.Draw();
+		m_weaponManager.Draw();
+		m_uiManager.Draw();
+		m_playerManager.Draw();
 
-	CCameraManager::Draw();
+		CCameraManager::Draw();
+		break;
+	}
 
 }
 
@@ -46,6 +55,7 @@ void CPlayScene::Draw()
 //---------------------------
 void CPlayScene::Init()
 {
+	CSceneBase::Init();
 	m_ground.Init();
 	m_sky.Init();
 	m_playerManager.Init();
@@ -66,13 +76,35 @@ void CPlayScene::Init()
 //---------------------------
 void CPlayScene::Load()
 {
-	m_ground.Load(MAP_ID_GRASSLAND);
-	m_sky.Load();
-	m_playerManager.Load();
-	m_shot.Load();
-	m_itemManager.Load();
-	m_weaponManager.Load();
-	m_uiManager.Load();
+	CSceneBase::Load();
+	switch (m_LoadState)
+	{
+	case 0:
+		m_ground.Load(MAP_ID_GRASSLAND);
+		m_sky.Load();
+		m_playerManager.Load();
+		m_shot.Load();
+		m_itemManager.Load();
+		m_weaponManager.Load();
+		m_uiManager.Load();
+		CSoundManager::Play(CSoundManager::BGM_GAME, DX_PLAYTYPE_LOOP);
+
+		m_LoadState = 1;
+		break;
+	case 1:
+
+		if (GetASyncLoadNum() == 0)
+		{
+			m_LoadState = 2;
+		}
+		break;
+
+	case 2:
+		SetUseASyncLoadFlag(FALSE);
+		m_state = MAIN;
+		break;
+	}
+
 }
 
 //---------------------------

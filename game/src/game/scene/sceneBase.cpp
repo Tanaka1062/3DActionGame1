@@ -1,4 +1,5 @@
 #include "sceneBase.h"
+#include "../data.h"
 
 //---------------------------
 //コンストラクタ
@@ -35,8 +36,6 @@ int CSceneBase::Loop()
 	case LOAD:
 		//データ読み込み
 		Load();
-
-		m_state = MAIN;	//メインの処理に進む
 		break;
 	case MAIN:
 		//メイン処理
@@ -67,6 +66,14 @@ void CSceneBase::Draw()
 //---------------------------
 void CSceneBase::Init()
 {
+	m_LoadState = 0;
+
+	VECTOR loadBGPos = ZERO;
+
+	loadBGPos.x = WINDOW_SIZE_X * 0.5f;
+	loadBGPos.y = WINDOW_SIZE_Y * 0.5f;
+
+	m_LoadBG.Init(loadBGPos);
 }
 
 //---------------------------
@@ -74,7 +81,10 @@ void CSceneBase::Init()
 //---------------------------
 void CSceneBase::Load()
 {
+	m_LoadBG.Load("data/graphic/Load/Load.png");
 
+	//非同期読み込みを行う
+	SetUseASyncLoadFlag(TRUE);
 }
 
 //---------------------------
