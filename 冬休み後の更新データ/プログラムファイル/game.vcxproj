@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{7f78dd73-fca6-4149-ae0b-bb4943363632}</ProjectGuid>
+    <RootNamespace>game</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)src\effekseer\include;C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)src\effekseer;C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用</AdditionalLibraryDirectories>
+      <AdditionalOptions>/ignore:4099 %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)src\effekseer\include;C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)src\effekseer;C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用</AdditionalLibraryDirectories>
+      <AdditionalOptions>/ignore:4099 %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)src\effekseer\include;C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)src\effekseer;C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用</AdditionalLibraryDirectories>
+      <AdditionalOptions>/ignore:4099 %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)src\effekseer\include;C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)src\effekseer;C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用</AdditionalLibraryDirectories>
+      <AdditionalOptions>/ignore:4099 %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\game\3DUi\3DUi.cpp" />
+    <ClCompile Include="src\game\attack\attackBase.cpp" />
+    <ClCompile Include="src\game\attack\attackManager.cpp" />
+    <ClCompile Include="src\game\camera\cameraBase.cpp" />
+    <ClCompile Include="src\game\camera\cameraManager.cpp" />
+    <ClCompile Include="src\game\camera\debugCamera\debugCamera.cpp" />
+    <ClCompile Include="src\game\camera\mapCamera\mapCamera.cpp" />
+    <ClCompile Include="src\game\camera\playCamera\playCamera.cpp" />
+    <ClCompile Include="src\game\camera\resultCamera\resultCamera.cpp" />
+    <ClCompile Include="src\game\camera\selectCamera\selectCamera.cpp" />
+    <ClCompile Include="src\game\character\characterBase.cpp" />
+    <ClCompile Include="src\game\collisionManager\collisionManager.cpp" />
+    <ClCompile Include="src\game\gameTime\gameTime.cpp" />
+    <ClCompile Include="src\game\item\coin\coin.cpp" />
+    <ClCompile Include="src\game\item\itemBase.cpp" />
+    <ClCompile Include="src\game\item\itemManager.cpp" />
+    <ClCompile Include="src\game\item\itemObject\bomb\bomb.cpp" />
+    <ClCompile Include="src\game\item\itemObject\box\box.cpp" />
+    <ClCompile Include="src\game\item\itemObject\itemObjectBase.cpp" />
+    <ClCompile Include="src\game\item\mapItemManager.cpp" />
+    <ClCompile Include="src\game\item\spawnItemManager.cpp" />
+    <ClCompile Include="src\game\item\weapon\ax\ax.cpp" />
+    <ClCompile Include="src\game\item\weapon\gun\gun.cpp" />
+    <ClCompile Include="src\game\item\weapon\itemWeaponBase.cpp" />
+    <ClCompile Include="src\game\item\weapon\sword\sword.cpp" />
+    <ClCompile Include="src\game\main.cpp" />
+    <ClCompile Include="src\game\map\map.cpp" />
+    <ClCompile Include="src\game\player\cpuPlayer\cpuPlayer.cpp" />
+    <ClCompile Include="src\game\player\cpuPlayer\cpuPlayerFOV.cpp" />
+    <ClCompile Include="src\game\player\player.cpp" />
+    <ClCompile Include="src\game\player\playerManager.cpp" />
+    <ClCompile Include="src\game\player\resultPlayer\resultPlayer.cpp" />
+    <ClCompile Include="src\game\player\resultPlayer\resultPlayerManager.cpp" />
+    <ClCompile Include="src\game\player\selectPlayer\selectPlayer.cpp" />
+    <ClCompile Include="src\game\player\selectPlayer\selectPlayerManager.cpp" />
+    <ClCompile Include="src\game\scene\playScene.cpp" />
+    <ClCompile Include="src\game\scene\resultScene.cpp" />
+    <ClCompile Include="src\game\scene\sceneBase.cpp" />
+    <ClCompile Include="src\game\scene\sceneManager.cpp" />
+    <ClCompile Include="src\game\scene\selectScene.cpp" />
+    <ClCompile Include="src\game\scene\titleScene.cpp" />
+    <ClCompile Include="src\game\shadow\shadow.cpp" />
+    <ClCompile Include="src\game\shot\shotBase.cpp" />
+    <ClCompile Include="src\game\shot\shotManager.cpp" />
+    <ClCompile Include="src\game\sky\sky.cpp" />
+    <ClCompile Include="src\game\system\effectData\effectData.cpp" />
+    <ClCompile Include="src\game\system\soundManager.cpp" />
+    <ClCompile Include="src\game\ui\hpber\hpbar.cpp" />
+    <ClCompile Include="src\game\ui\hpber\hpbarManager.cpp" />
+    <ClCompile Include="src\game\ui\powerUpGauge\powerUpGouge.cpp" />
+    <ClCompile Include="src\game\ui\time\timeUi.cpp" />
+    <ClCompile Include="src\game\ui\uiGameManager.cpp" />
+    <ClCompile Include="src\game\ui\uiSelectManager.cpp" />
+    <ClCompile Include="src\game\ui\uiTitleManager.cpp" />
+    <ClCompile Include="src\game\weapon\weapon.cpp" />
+    <ClCompile Include="src\game\weapon\weaponManager.cpp" />
+    <ClCompile Include="src\game\winner\winner.cpp" />
+    <ClCompile Include="src\lib\2DUi\2DUi.cpp" />
+    <ClCompile Include="src\lib\collision\collision.cpp" />
+    <ClCompile Include="src\lib\effekseer\effekseer.cpp" />
+    <ClCompile Include="src\lib\input\controllerInput.cpp" />
+    <ClCompile Include="src\lib\input\controllerManager.cpp" />
+    <ClCompile Include="src\lib\input\KeyInput.cpp" />
+    <ClCompile Include="src\lib\model\3DObject.cpp" />
+    <ClCompile Include="src\lib\model\actor.cpp" />
+    <ClCompile Include="src\lib\myMath\myMath.cpp" />
+    <ClCompile Include="src\lib\number.cpp" />
+    <ClCompile Include="src\lib\system\fade.cpp" />
+    <ClCompile Include="src\lib\system\fps.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\game\3DUi\3DUi.h" />
+    <ClInclude Include="src\game\attack\attackBase.h" />
+    <ClInclude Include="src\game\attack\attackManager.h" />
+    <ClInclude Include="src\game\camera\cameraBase.h" />
+    <ClInclude Include="src\game\camera\cameraManager.h" />
+    <ClInclude Include="src\game\camera\debugCamera\debugCamera.h" />
+    <ClInclude Include="src\game\camera\mapCamera\mapCamera.h" />
+    <ClInclude Include="src\game\camera\playCamera\playCamera.h" />
+    <ClInclude Include="src\game\camera\resultCamera\resultCamera.h" />
+    <ClInclude Include="src\game\camera\selectCamera\selectCamera.h" />
+    <ClInclude Include="src\game\character\characterBase.h" />
+    <ClInclude Include="src\game\collisionManager\collisionManager.h" />
+    <ClInclude Include="src\game\common.h" />
+    <ClInclude Include="src\game\data.h" />
+    <ClInclude Include="src\game\gameTime\gameTime.h" />
+    <ClInclude Include="src\game\item\coin\coin.h" />
+    <ClInclude Include="src\game\item\itemBase.h" />
+    <ClInclude Include="src\game\item\itemManager.h" />
+    <ClInclude Include="src\game\item\itemObject\bomb\bomb.h" />
+    <ClInclude Include="src\game\item\itemObject\box\box.h" />
+    <ClInclude Include="src\game\item\itemObject\itemObjectBase.h" />
+    <ClInclude Include="src\game\item\mapItemManager.h" />
+    <ClInclude Include="src\game\item\spawnItemManager.h" />
+    <ClInclude Include="src\game\item\weapon\ax\ax.h" />
+    <ClInclude Include="src\game\item\weapon\gun\gun.h" />
+    <ClInclude Include="src\game\item\weapon\itemWeaponBase.h" />
+    <ClInclude Include="src\game\item\weapon\sword\sword.h" />
+    <ClInclude Include="src\game\map\map.h" />
+    <ClInclude Include="src\game\player\cpuPlayer\cpuPlayer.h" />
+    <ClInclude Include="src\game\player\cpuPlayer\cpuPlayerFOV.h" />
+    <ClInclude Include="src\game\player\player.h" />
+    <ClInclude Include="src\game\player\playerData.h" />
+    <ClInclude Include="src\game\player\playerManager.h" />
+    <ClInclude Include="src\game\player\resultPlayer\resultPlayer.h" />
+    <ClInclude Include="src\game\player\resultPlayer\resultPlayerManager.h" />
+    <ClInclude Include="src\game\player\selectPlayer\selectPlayer.h" />
+    <ClInclude Include="src\game\player\selectPlayer\selectPlayerManager.h" />
+    <ClInclude Include="src\game\scene\playScene.h" />
+    <ClInclude Include="src\game\scene\resultScene.h" />
+    <ClInclude Include="src\game\scene\sceneBase.h" />
+    <ClInclude Include="src\game\scene\sceneManager.h" />
+    <ClInclude Include="src\game\scene\selectScene.h" />
+    <ClInclude Include="src\game\scene\titleScene.h" />
+    <ClInclude Include="src\game\shadow\shadow.h" />
+    <ClInclude Include="src\game\shot\shotBase.h" />
+    <ClInclude Include="src\game\shot\shotManager.h" />
+    <ClInclude Include="src\game\sky\sky.h" />
+    <ClInclude Include="src\game\system\effectData\effectData.h" />
+    <ClInclude Include="src\game\system\soundManager.h" />
+    <ClInclude Include="src\game\ui\hpber\hpbar.h" />
+    <ClInclude Include="src\game\ui\hpber\hpbarManager.h" />
+    <ClInclude Include="src\game\ui\powerUpGauge\powerUpGouge.h" />
+    <ClInclude Include="src\game\ui\time\timeUi.h" />
+    <ClInclude Include="src\game\ui\uiGameManager.h" />
+    <ClInclude Include="src\game\ui\uiSelectManager.h" />
+    <ClInclude Include="src\game\ui\uiTitleManager.h" />
+    <ClInclude Include="src\game\weapon\weapon.h" />
+    <ClInclude Include="src\game\weapon\weaponManager.h" />
+    <ClInclude Include="src\game\winner\winner.h" />
+    <ClInclude Include="src\lib\2DUi\2DUi.h" />
+    <ClInclude Include="src\lib\collision\collision.h" />
+    <ClInclude Include="src\lib\effekseer\effekseer.h" />
+    <ClInclude Include="src\lib\input\controllerInput.h" />
+    <ClInclude Include="src\lib\input\controllerManager.h" />
+    <ClInclude Include="src\lib\input\keyInput.h" />
+    <ClInclude Include="src\lib\model\3DObject.h" />
+    <ClInclude Include="src\lib\model\actor.h" />
+    <ClInclude Include="src\lib\myMath\myMath.h" />
+    <ClInclude Include="src\lib\number.h" />
+    <ClInclude Include="src\lib\system\fade.h" />
+    <ClInclude Include="src\lib\system\fps.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
