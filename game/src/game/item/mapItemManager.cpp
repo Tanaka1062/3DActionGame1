@@ -1,6 +1,7 @@
 #include  "mapItemManager.h"
 #include "itemObject/bomb/bomb.h"
 #include "itemObject/box/box.h"
+#include "../map/map.h"
 
 using namespace std;
 
@@ -9,15 +10,16 @@ static const char* MODEL_PATH =				//モデルのパス
 	"data/model/item/box/box.mv1",
 };
 
-static const char FRAME_PATH[] =
-{ "data/model/map/TestMap6Frame.mv1" };		//ロードするファイル名
-
 constexpr int SPAWN_POS_FRAME_ID[MAP_ITEM_SPAWN_POS_NUM] =	//スポーンする座標のフレームID
 {
-	23,
-	25,
-	27,
-	29,
+	59,
+	61,
+	63,
+	65,
+	67,
+	69,
+	71,
+	73,
 };
 
 //-----------------------
@@ -76,7 +78,7 @@ void CMapItemManager::Load()
 	}
 
 	//マップのフレームハンドルをロード
-	int mapFrameHndl = MV1LoadModel(FRAME_PATH);
+	int mapFrameHndl = MV1LoadModel(MAP_FRAME_PATH[MAP_ID_GRASSLAND]);
 
 	for (int spawnPos_i = 0; spawnPos_i < MAP_ITEM_SPAWN_POS_NUM; spawnPos_i++)
 	{

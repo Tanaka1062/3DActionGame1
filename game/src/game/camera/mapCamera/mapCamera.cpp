@@ -1,12 +1,10 @@
 #include "mapCamera.h"
 #include <math.h>
+#include "../../map/map.h"
 
 //定義関連====================================
 constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
 //============================================
-
-static const char POS_PATH[] =
- "data/model/map/TestMap4FramePos.mv1" ;			//ロードするファイル名
 
 //---------------------------------
 //		コンストラクタ
@@ -24,9 +22,9 @@ void CMapCamera::Init(VECTOR _focus)
 	m_focusPos = ZERO;
 
 	//フレームのハンドルをロード
-	int frameHndl = MV1LoadModel(POS_PATH);
+	int frameHndl = MV1LoadModel(MAP_FRAME_PATH[MAP_ID_GRASSLAND]);
 
-	m_pos = MV1GetFramePosition(frameHndl,9);
+	m_pos = MV1GetFramePosition(frameHndl,1);
 }
 
 //---------------------------------

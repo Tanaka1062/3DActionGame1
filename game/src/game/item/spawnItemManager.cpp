@@ -4,6 +4,7 @@
 #include "weapon/sword/sword.h"
 #include "weapon/gun/gun.h"
 #include"weapon/ax/ax.h"
+#include "../map/map.h"
 
 using namespace std;
 
@@ -38,8 +39,7 @@ static const char* MODEL_PATH[ITEM_NUM] =							//モデルのパス
 static const char FRAME_PATH[] =
 "data/model/map/TestMap6Frame.mv1";			//ロードするファイル名
 
-
-constexpr int SPAWN_TIME = 7 * 60;		//スポーンするまで時間
+constexpr int SPAWN_TIME = 7 * 60;			//スポーンするまで時間
 
 //-----------------------
 //	  コンストラクタ
@@ -136,7 +136,12 @@ void CSpawnItemManager::Init(CPlayerManager* _playerManager)
 		m_spawnPos[spawnPos_i] = ZERO;
 
 		m_isSpawnPos[spawnPos_i] = false;
+
+		m_spawnData[spawnPos_i].pos = ZERO;
+		m_spawnData[spawnPos_i].isSpawn = false;
+		m_spawnData[spawnPos_i].centerId = MAP_ID_CENTER_NONE;
 	}
+
 
 }
 
@@ -165,43 +170,49 @@ void CSpawnItemManager::Load()
 	//マップのフレームハンドルをロード
 	int mapFrameHndl = MV1LoadModel(FRAME_PATH);
 
+	int frameNum = 26;
+
 	for (int spawnPos_i = 0; spawnPos_i < ITEM_SPAWN_POS_NUM; spawnPos_i++)
 	{
 		//アイテムの出現座標を保存
 		VECTOR spawnPos = ZERO;
 
-		switch (spawnPos_i)
-		{
-		case ITEM_SPAWN_POS_1:
-			spawnPos = MV1GetFramePosition(mapFrameHndl, 7);
-			break;
-		case ITEM_SPAWN_POS_2:
-			spawnPos = MV1GetFramePosition(mapFrameHndl, 9);
-			break;
-		case ITEM_SPAWN_POS_3:
-			spawnPos = MV1GetFramePosition(mapFrameHndl, 11);
-			break;
-		case ITEM_SPAWN_POS_4:
-			spawnPos = MV1GetFramePosition(mapFrameHndl, 13);
-			break;
-		case ITEM_SPAWN_POS_5:
-			spawnPos = MV1GetFramePosition(mapFrameHndl, 15);
-			break;
-		case ITEM_SPAWN_POS_6:
-			spawnPos = MV1GetFramePosition(mapFrameHndl, 17);
-			break;
-		case ITEM_SPAWN_POS_7:
-			spawnPos = MV1GetFramePosition(mapFrameHndl, 19);
-			break;
-		case ITEM_SPAWN_POS_8:
-			spawnPos = MV1GetFramePosition(mapFrameHndl, 21);
-			break;
+		spawnPos = MV1GetFramePosition(mapFrameHndl,frameNum + (spawnPos_i * 2));
 
-		}
+		//switch (spawnPos_i)
+		//{
+		//case ITEM_SPAWN_POS_1:
+		//	spawnPos = MV1GetFramePosition(mapFrameHndl, 7);
+		//	break;
+		//case ITEM_SPAWN_POS_2:
+		//	spawnPos = MV1GetFramePosition(mapFrameHndl, 9);
+		//	break;
+		//case ITEM_SPAWN_POS_3:
+		//	spawnPos = MV1GetFramePosition(mapFrameHndl, 11);
+		//	break;
+		//case ITEM_SPAWN_POS_4:
+		//	spawnPos = MV1GetFramePosition(mapFrameHndl, 13);
+		//	break;
+		//case ITEM_SPAWN_POS_5:
+		//	spawnPos = MV1GetFramePosition(mapFrameHndl, 15);
+		//	break;
+		//case ITEM_SPAWN_POS_6:
+		//	spawnPos = MV1GetFramePosition(mapFrameHndl, 17);
+		//	break;
+		//case ITEM_SPAWN_POS_7:
+		//	spawnPos = MV1GetFramePosition(mapFrameHndl, 19);
+		//	break;
+		//case ITEM_SPAWN_POS_8:
+		//	spawnPos = MV1GetFramePosition(mapFrameHndl, 21);
+		//	break;
+
+		//}
 
 		spawnPos.y += 10.0f;
 
 		m_spawnPos[spawnPos_i] = spawnPos;
+
+		m_spawnData[spawnPos_i].pos = spawnPos;
 
 		m_isSpawnPos[spawnPos_i] = false;
 	}

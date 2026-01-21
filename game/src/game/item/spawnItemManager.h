@@ -6,6 +6,7 @@
 #include "../player/playerManager.h"
 #include "coin/coin.h"
 #include "itemObject/box/box.h"
+#include "../map/map.h"
 
 enum tagItemSpawnPos
 {
@@ -17,6 +18,15 @@ enum tagItemSpawnPos
 	ITEM_SPAWN_POS_6,		//アイテムの出現座標6
 	ITEM_SPAWN_POS_7,		//アイテムの出現座標7
 	ITEM_SPAWN_POS_8,		//アイテムの出現座標8
+	ITEM_SPAWN_POS_9,		//アイテムの出現座標9
+	ITEM_SPAWN_POS_10,		//アイテムの出現座標10
+	ITEM_SPAWN_POS_11,		//アイテムの出現座標11
+	ITEM_SPAWN_POS_12,		//アイテムの出現座標12
+	ITEM_SPAWN_POS_13,		//アイテムの出現座標13
+	ITEM_SPAWN_POS_14,		//アイテムの出現座標14
+	ITEM_SPAWN_POS_15,		//アイテムの出現座標15
+	ITEM_SPAWN_POS_16,		//アイテムの出現座標16
+
 
 	ITEM_SPAWN_POS_NUM,		//アイテムの出現座標の数
 };
@@ -27,6 +37,14 @@ constexpr int SPAWN_ITEM_MAX = 10;		//アイテムの最大量
 class CSpawnItemManager
 {
 private:
+
+	struct tagSpawnData									//スポーンデータ
+	{
+		VECTOR pos;										//出現する座標
+		bool isSpawn;									//出現したかどうか
+		tagMapCenterId centerId;						//中心のID
+	};
+
 	std::vector<std::unique_ptr<CItemBase>> m_item;		//アイテム保存用
 	std::vector<int> m_spawnProbability;				//アイテムの出現確率
 	int m_hndl[ITEM_NUM];								//アイテムのモデルハンドル
@@ -34,6 +52,7 @@ private:
 	bool m_isItemSpawn;									//アイテムがスポーンするかどうか
 	bool m_isSpawnPos[ITEM_SPAWN_POS_NUM];				//その座標でアイテムが出現したかどうか
 	VECTOR m_spawnPos[ITEM_SPAWN_POS_NUM];				//アイテムの出現座標
+	tagSpawnData m_spawnData[ITEM_SPAWN_POS_NUM];		//スポーンデータ							
 public:
 	//コンストラクタ・デストラクタ
 	CSpawnItemManager();

@@ -12,6 +12,10 @@ enum tagMapItemSpawnPos
 	MAP_ITEM_SPAWN_POS_2,	//マップに置かれているアイテムの出現座標2
 	MAP_ITEM_SPAWN_POS_3,	//マップに置かれているアイテムの出現座標3
 	MAP_ITEM_SPAWN_POS_4,	//マップに置かれているアイテムの出現座標4
+	MAP_ITEM_SPAWN_POS_5,	//マップに置かれているアイテムの出現座標5
+	MAP_ITEM_SPAWN_POS_6,	//マップに置かれているアイテムの出現座標6
+	MAP_ITEM_SPAWN_POS_7,	//マップに置かれているアイテムの出現座標7
+	MAP_ITEM_SPAWN_POS_8,	//マップに置かれているアイテムの出現座標8
 
 	MAP_ITEM_SPAWN_POS_NUM,	//マップに置かれているアイテムの出現座標の数
 };
