@@ -52,5 +52,8 @@ public:
 
 	//当たり判定ようのマップのハンドルを取得
 	int GetHitHndl() { return m_hitHndl; }
+
+	//マップのIDを取得
+	tagMapCenterId GetCenterId() { return m_mapId; }
 };
 
