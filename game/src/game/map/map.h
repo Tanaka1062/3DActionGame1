@@ -33,7 +33,8 @@ static const char* MAP_FRAME_PATH[MAP_NUM] = {
 class CMap :public CObject
 {
 private:
-	int m_hitHndl;		//当たり判定ようのマップのハンドル
+	int m_hitHndl;			//当たり判定ようのマップのハンドル
+	tagMapCenterId m_mapId;	//マップのID
 public:
 	//コンストラクタ・デストラクタ
 	CMap();

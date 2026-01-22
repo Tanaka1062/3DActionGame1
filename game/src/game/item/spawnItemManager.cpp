@@ -131,17 +131,39 @@ void CSpawnItemManager::Init(CPlayerManager* _playerManager)
 
 	m_isItemSpawn = false;
 
-	for (int spawnPos_i = 0; spawnPos_i < ITEM_SPAWN_POS_NUM; spawnPos_i++)
+	//for (int spawnPos_i = 0; spawnPos_i < SPAWN_POS_ALL_NUM; spawnPos_i++)
+	//{
+	//	m_spawnPos[spawnPos_i] = ZERO;
+
+	//	m_isSpawnPos[spawnPos_i] = false;
+
+	//	m_spawnData[spawnPos_i].pos = ZERO;
+	//	m_spawnData[spawnPos_i].isSpawn = false;
+	//	m_spawnData[spawnPos_i].centerId = MAP_ID_CENTER_NONE;
+	//}
+
+	int spawnNum = 0;
+	for (int map_i = 0; map_i < MAP_CENTER_NUM; map_i++)
 	{
-		m_spawnPos[spawnPos_i] = ZERO;
+		m_spawnData.push_back(vector<tagSpawnData>());
+		switch (map_i)
+		{
+		case MAP_ID_CENTER1:
+			spawnNum = MAP1_SPAWN_POS_NUM;
+			break;
+		case MAP_ID_CENTER2:
+			spawnNum = MAP2_SPAWN_POS_NUM;
+			break;
+		}
 
-		m_isSpawnPos[spawnPos_i] = false;
-
-		m_spawnData[spawnPos_i].pos = ZERO;
-		m_spawnData[spawnPos_i].isSpawn = false;
-		m_spawnData[spawnPos_i].centerId = MAP_ID_CENTER_NONE;
+		for (int spawn_i = 0; spawn_i < spawnNum; spawn_i++)
+		{
+			tagSpawnData spawnData;
+			spawnData.isSpawn = false;
+			spawnData.pos = ZERO;
+			m_spawnData[map_i].push_back(spawnData);
+		}
 	}
-
 
 }
 
@@ -170,52 +192,87 @@ void CSpawnItemManager::Load()
 	//マップのフレームハンドルをロード
 	int mapFrameHndl = MV1LoadModel(FRAME_PATH);
 
+	//フレームの番号
 	int frameNum = 26;
 
-	for (int spawnPos_i = 0; spawnPos_i < ITEM_SPAWN_POS_NUM; spawnPos_i++)
+	//出現位置をアイテムのスポーン情報に入力-------------------------------------	
+	for (int map_i = 0; map_i < m_spawnData.size(); map_i++)
 	{
-		//アイテムの出現座標を保存
-		VECTOR spawnPos = ZERO;
+		for (int spawn_i = 0; spawn_i < m_spawnData[map_i].size(); spawn_i++)
+		{
+			//出現座標保存用
+			VECTOR spawnPos = ZERO;
 
-		spawnPos = MV1GetFramePosition(mapFrameHndl,frameNum + (spawnPos_i * 2));
+			//フレームから出現座標を取得
+			spawnPos = MV1GetFramePosition(mapFrameHndl, frameNum);
 
-		//switch (spawnPos_i)
-		//{
-		//case ITEM_SPAWN_POS_1:
-		//	spawnPos = MV1GetFramePosition(mapFrameHndl, 7);
-		//	break;
-		//case ITEM_SPAWN_POS_2:
-		//	spawnPos = MV1GetFramePosition(mapFrameHndl, 9);
-		//	break;
-		//case ITEM_SPAWN_POS_3:
-		//	spawnPos = MV1GetFramePosition(mapFrameHndl, 11);
-		//	break;
-		//case ITEM_SPAWN_POS_4:
-		//	spawnPos = MV1GetFramePosition(mapFrameHndl, 13);
-		//	break;
-		//case ITEM_SPAWN_POS_5:
-		//	spawnPos = MV1GetFramePosition(mapFrameHndl, 15);
-		//	break;
-		//case ITEM_SPAWN_POS_6:
-		//	spawnPos = MV1GetFramePosition(mapFrameHndl, 17);
-		//	break;
-		//case ITEM_SPAWN_POS_7:
-		//	spawnPos = MV1GetFramePosition(mapFrameHndl, 19);
-		//	break;
-		//case ITEM_SPAWN_POS_8:
-		//	spawnPos = MV1GetFramePosition(mapFrameHndl, 21);
-		//	break;
+			//アイテムのスポーン情報に設定
+			m_spawnData[map_i][spawn_i].pos = spawnPos;
 
-		//}
+			//フレームの番号を進める
+			frameNum += 2;
 
-		spawnPos.y += 10.0f;
+		}
 
-		m_spawnPos[spawnPos_i] = spawnPos;
-
-		m_spawnData[spawnPos_i].pos = spawnPos;
-
-		m_isSpawnPos[spawnPos_i] = false;
 	}
+	//---------------------------------------------------------------------------
+
+
+	//for (int spawnPos_i = 0; spawnPos_i < SPAWN_POS_ALL_NUM; spawnPos_i++)
+	//{
+	//	//アイテムの出現座標を保存
+	//	VECTOR spawnPos = ZERO;
+
+	//	spawnPos = MV1GetFramePosition(mapFrameHndl,frameNum + (spawnPos_i * 2));
+
+	//	//switch (spawnPos_i)
+	//	//{
+	//	//case ITEM_SPAWN_POS_1:
+	//	//	spawnPos = MV1GetFramePosition(mapFrameHndl, 7);
+	//	//	break;
+	//	//case ITEM_SPAWN_POS_2:
+	//	//	spawnPos = MV1GetFramePosition(mapFrameHndl, 9);
+	//	//	break;
+	//	//case ITEM_SPAWN_POS_3:
+	//	//	spawnPos = MV1GetFramePosition(mapFrameHndl, 11);
+	//	//	break;
+	//	//case ITEM_SPAWN_POS_4:
+	//	//	spawnPos = MV1GetFramePosition(mapFrameHndl, 13);
+	//	//	break;
+	//	//case ITEM_SPAWN_POS_5:
+	//	//	spawnPos = MV1GetFramePosition(mapFrameHndl, 15);
+	//	//	break;
+	//	//case ITEM_SPAWN_POS_6:
+	//	//	spawnPos = MV1GetFramePosition(mapFrameHndl, 17);
+	//	//	break;
+	//	//case ITEM_SPAWN_POS_7:
+	//	//	spawnPos = MV1GetFramePosition(mapFrameHndl, 19);
+	//	//	break;
+	//	//case ITEM_SPAWN_POS_8:
+	//	//	spawnPos = MV1GetFramePosition(mapFrameHndl, 21);
+	//	//	break;
+
+	//	//}
+
+	//	spawnPos.y += 10.0f;
+
+	//	m_spawnPos[spawnPos_i] = spawnPos;
+
+	//	m_spawnData[spawnPos_i].pos = spawnPos;
+
+	//	m_spawnData[spawnPos_i].isSpawn = false;
+
+	//	if (spawnPos_i < MAP1_SPAWN_POS_NUM)
+	//	{
+	//		m_spawnData[spawnPos_i].centerId = MAP_ID_CENTER1;
+	//	}
+	//	else
+	//	{
+	//		m_spawnData[spawnPos_i].centerId = MAP_ID_CENTER2;
+	//	}
+
+	//	m_isSpawnPos[spawnPos_i] = false;
+	//}
 
 }
 
@@ -232,13 +289,25 @@ void CSpawnItemManager::Step()
 		m_isItemSpawn = true;
 	}
 
-	int spawnPosNum = 0;
+	int map1SpawnPosNum = 0;
+	int map2SpawnPosNum = 0;
 
 	//全てのスポーン座標がtrueになったらリセットする
-	for (int spawnPos_i = 0; spawnPos_i < ITEM_SPAWN_POS_NUM; spawnPos_i++)
+	for (int spawnPos_i = 0; spawnPos_i < SPAWN_POS_ALL_NUM; spawnPos_i++)
 	{
-		if (m_isSpawnPos[spawnPos_i] == true)
-			spawnPosNum++;
+
+		if (m_spawnData[spawnPos_i].isSpawn == true)
+		{
+			switch (m_spawnData[spawnPos_i].centerId)
+			{
+			case MAP_ID_CENTER1:
+				map1SpawnPosNum++;
+				break;
+			case MAP_ID_CENTER2:
+				map2SpawnPosNum++;
+				break;
+			}
+		}
 	}
 
 	//すべての座標にアイテムが出現したら全部の出現フラグをfalseにする

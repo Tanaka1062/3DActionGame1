@@ -42,6 +42,7 @@ void CMap::Init()
 	m_rot = ZERO;
 	m_hndl = -1;
 	m_hitHndl = -1;
+	m_mapId = MAP_ID_CENTER1;
 }
 
 //------------------------

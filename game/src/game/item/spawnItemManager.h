@@ -10,26 +10,33 @@
 
 enum tagItemSpawnPos
 {
-	ITEM_SPAWN_POS_1,		//アイテムの出現座標1
-	ITEM_SPAWN_POS_2,		//アイテムの出現座標2
-	ITEM_SPAWN_POS_3,		//アイテムの出現座標3
-	ITEM_SPAWN_POS_4,		//アイテムの出現座標4
-	ITEM_SPAWN_POS_5,		//アイテムの出現座標5
-	ITEM_SPAWN_POS_6,		//アイテムの出現座標6
-	ITEM_SPAWN_POS_7,		//アイテムの出現座標7
-	ITEM_SPAWN_POS_8,		//アイテムの出現座標8
-	ITEM_SPAWN_POS_9,		//アイテムの出現座標9
-	ITEM_SPAWN_POS_10,		//アイテムの出現座標10
-	ITEM_SPAWN_POS_11,		//アイテムの出現座標11
-	ITEM_SPAWN_POS_12,		//アイテムの出現座標12
-	ITEM_SPAWN_POS_13,		//アイテムの出現座標13
-	ITEM_SPAWN_POS_14,		//アイテムの出現座標14
-	ITEM_SPAWN_POS_15,		//アイテムの出現座標15
-	ITEM_SPAWN_POS_16,		//アイテムの出現座標16
-
+	//ITEM_SPAWN_POS_1,		//アイテムの出現座標1
+	//ITEM_SPAWN_POS_2,		//アイテムの出現座標2
+	//ITEM_SPAWN_POS_3,		//アイテムの出現座標3
+	//ITEM_SPAWN_POS_4,		//アイテムの出現座標4
+	//ITEM_SPAWN_POS_5,		//アイテムの出現座標5
+	//ITEM_SPAWN_POS_6,		//アイテムの出現座標6
+	//ITEM_SPAWN_POS_7,		//アイテムの出現座標7
+	//ITEM_SPAWN_POS_8,		//アイテムの出現座標8
+	//ITEM_SPAWN_POS_9,		//アイテムの出現座標9
+	//ITEM_SPAWN_POS_10,		//アイテムの出現座標10
+	//ITEM_SPAWN_POS_11,		//アイテムの出現座標11
+	//ITEM_SPAWN_POS_12,		//アイテムの出現座標12
+	//ITEM_SPAWN_POS_13,		//アイテムの出現座標13
+	//ITEM_SPAWN_POS_14,		//アイテムの出現座標14
+	//ITEM_SPAWN_POS_15,		//アイテムの出現座標15
+	//ITEM_SPAWN_POS_16,		//アイテムの出現座標16
+	MAP1_SPAWN_POS_NUM,			//マップ１のアイテムのスポーン場所の数
+	MAP2_SPAWN_POS_NUM,			//マップ２のアイテムのスポーン場所の数
 
 	ITEM_SPAWN_POS_NUM,		//アイテムの出現座標の数
 };
+
+
+constexpr int MAP1_SPAWN_POS_NUM = 8;		//マップ１のアイテムのスポーン場所の数
+constexpr int MAP2_SPAWN_POS_NUM = 8;		//マップ２のアイテムのスポーン場所の数
+constexpr int SPAWN_POS_ALL_NUM =			//アイテムのスポーン場所の総数
+MAP1_SPAWN_POS_NUM + MAP2_SPAWN_POS_NUM;
 
 constexpr int SPAWN_ITEM_MAX = 10;		//アイテムの最大量
 
@@ -42,7 +49,6 @@ private:
 	{
 		VECTOR pos;										//出現する座標
 		bool isSpawn;									//出現したかどうか
-		tagMapCenterId centerId;						//中心のID
 	};
 
 	std::vector<std::unique_ptr<CItemBase>> m_item;		//アイテム保存用
@@ -52,7 +58,7 @@ private:
 	bool m_isItemSpawn;									//アイテムがスポーンするかどうか
 	bool m_isSpawnPos[ITEM_SPAWN_POS_NUM];				//その座標でアイテムが出現したかどうか
 	VECTOR m_spawnPos[ITEM_SPAWN_POS_NUM];				//アイテムの出現座標
-	tagSpawnData m_spawnData[ITEM_SPAWN_POS_NUM];		//スポーンデータ							
+	std::vector<std::vector<tagSpawnData>> m_spawnData;	//アイテムのスポーン情報
 public:
 	//コンストラクタ・デストラクタ
 	CSpawnItemManager();
