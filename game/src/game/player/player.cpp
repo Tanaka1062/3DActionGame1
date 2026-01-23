@@ -38,7 +38,7 @@ constexpr float FALL_OUT_DAMAGER_RATE = 0.3f;			//ステージから落下したときの割合
 
 //攻撃関連---------------------------
 constexpr float ATTACK_LENGTH = 15.0f;				//攻撃の長さ
-constexpr int ATTACKB_ATK = 100;						//攻撃Bの攻撃力
+constexpr int ATTACKB_ATK = 100;					//攻撃Bの攻撃力
 constexpr float ATTACK_MOVE_SPEED = 0.5f;			//攻撃時に前進する力
 constexpr float FIGHT_LEN = 40.0f;					//戦う距離
 constexpr float SHOT_SIZE = 10.0f;					//弾の大きさ

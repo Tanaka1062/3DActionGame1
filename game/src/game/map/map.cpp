@@ -9,8 +9,6 @@ static const char* MAP_MODEL_PATH[MAP_NUM] ={
 	"data/model/map/selectMap/selectMap.mv1",
 	"data/model/map/resultMap/resultMap.mv1",
 };					//ロードするファイル名
-static const char GROUND_HIT_MODEL_PATH[] =
- "data/model/map/TestMap7.mv1" ;				//ロードするファイル名
 
 //==========================================
 
@@ -42,7 +40,7 @@ void CMap::Init()
 	m_rot = ZERO;
 	m_hndl = -1;
 	m_hitHndl = -1;
-	m_mapId = MAP_ID_CENTER1;
+	m_mapId = MAP_ID_CENTER2;
 }
 
 //------------------------
@@ -52,7 +50,7 @@ void CMap::Load(tagMapId _id)
 {
 	LoadModel(MAP_MODEL_PATH[_id]);
 
-	m_hitHndl = MV1LoadModel(GROUND_HIT_MODEL_PATH);
+	m_hitHndl = MV1LoadModel(MAP_MODEL_PATH[_id]);
 
 	//マップの当たり判定を取るためにコリジョン情報を構築する
 	MV1SetupCollInfo(m_hitHndl);

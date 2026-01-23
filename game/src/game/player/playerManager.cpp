@@ -3,6 +3,7 @@
 #include "../data.h"
 #include "../../lib/myMath/myMath.h"
 #include "cpuPlayer/cpuPlayer.h"
+#include "../map/map.h"
 
 using namespace std;
 
@@ -24,9 +25,6 @@ static const char* MODEL_PATH[PLAYER_NUM] =
   "data/model/player/playerTest7-2.mv1" ,
   "data/model/player/playerTest7-3.mv1" ,
   "data/model/player/playerTest7-4.mv1" ,};			//ロードするファイル名
-
-static const char FRAME_PATH[] =
-"data/model/map/TestMap6Frame.mv1";			//ロードするファイル名
 
 
 //------------------------
@@ -123,8 +121,7 @@ void CPlayerManager::Init()
 		m_player.push_back(player);
 	}
 
-	//スポーン座標を全て消す
-	m_spawnPos.clear();
+
 }
 
 //------------------------
@@ -143,7 +140,7 @@ void CPlayerManager::Load()
 	}
 
 	//マップのフレームのハンドルをロード
-	int frameHndl = MV1LoadModel(FRAME_PATH);
+	int frameHndl = MV1LoadModel(MAP_FRAME_PATH[MAP_ID_GRASSLAND]);
 
 	for (int i = 0; i < m_player.size(); i++)
 	{
@@ -172,6 +169,12 @@ void CPlayerManager::Load()
 		m_player[i]->SetPos(start);
 		m_spawnPos.push_back(start);
 	}
+
+	for (int map_i = 0; map_i < MAP_CENTER_NUM; map_i++)
+	{
+		
+	}
+
 }
 
 //------------------------
@@ -352,6 +355,8 @@ void CPlayerManager::Exit()
 	}
 	m_cpuFOV.clear();
 
+	//スポーン座標を全て消す
+	m_spawnPos.clear();
 }
 
 //------------------------

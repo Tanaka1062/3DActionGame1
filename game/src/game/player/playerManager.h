@@ -8,10 +8,10 @@
 class CPlayerManager
 {
 private:
-	std::vector<CPlayer*> m_player;				//プレイヤーのクラス
-	std::vector <int> m_modelHndl;				//モデルのハンドル
-	std::vector <VECTOR>m_spawnPos;				//プレイヤーの出現座標
-	std::vector<CCpuPlayerFOV*>m_cpuFOV;		//CPUの視界範囲クラス
+	std::vector<CPlayer*> m_player;					//プレイヤーのクラス
+	std::vector <int> m_modelHndl;					//モデルのハンドル
+	std::vector <std::vector<VECTOR>> m_spawnPos;	//プレイヤーの出現座標
+	std::vector<CCpuPlayerFOV*>m_cpuFOV;			//CPUの視界範囲クラス
 public:
 	//コンストラクタ・デストラクタ
 	CPlayerManager();

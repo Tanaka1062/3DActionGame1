@@ -119,7 +119,7 @@ void CPlayScene::Step()
 
 	m_shot.Step();
 
-	m_itemManager.Step(&m_playerManager);
+	m_itemManager.Step(&m_playerManager,m_ground.GetCenterId());
 
 	m_weaponManager.Step(m_playerManager);
 

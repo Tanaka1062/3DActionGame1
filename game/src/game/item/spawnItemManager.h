@@ -26,10 +26,10 @@ enum tagItemSpawnPos
 	//ITEM_SPAWN_POS_14,		//アイテムの出現座標14
 	//ITEM_SPAWN_POS_15,		//アイテムの出現座標15
 	//ITEM_SPAWN_POS_16,		//アイテムの出現座標16
-	MAP1_SPAWN_POS_NUM,			//マップ１のアイテムのスポーン場所の数
-	MAP2_SPAWN_POS_NUM,			//マップ２のアイテムのスポーン場所の数
+	//MAP1_SPAWN_POS_NUM,			//マップ１のアイテムのスポーン場所の数
+	//MAP2_SPAWN_POS_NUM,			//マップ２のアイテムのスポーン場所の数
 
-	ITEM_SPAWN_POS_NUM,		//アイテムの出現座標の数
+	//ITEM_SPAWN_POS_NUM,		//アイテムの出現座標の数
 };
 
 
@@ -56,8 +56,6 @@ private:
 	int m_hndl[ITEM_NUM];								//アイテムのモデルハンドル
 	int m_spawnTime;									//時間カウント
 	bool m_isItemSpawn;									//アイテムがスポーンするかどうか
-	bool m_isSpawnPos[ITEM_SPAWN_POS_NUM];				//その座標でアイテムが出現したかどうか
-	VECTOR m_spawnPos[ITEM_SPAWN_POS_NUM];				//アイテムの出現座標
 	std::vector<std::vector<tagSpawnData>> m_spawnData;	//アイテムのスポーン情報
 public:
 	//コンストラクタ・デストラクタ
@@ -88,7 +86,7 @@ public:
 	CItemBase* GetItem(int _num);
 
 	//アイテムを出現させる
-	std::unique_ptr<CItemBase> SpawnItem();
+	std::unique_ptr<CItemBase> SpawnItem(tagMapCenterId _mapId);
 
 	//コインを出現させる
 	std::unique_ptr<CItemBase> SpawnCoin();
