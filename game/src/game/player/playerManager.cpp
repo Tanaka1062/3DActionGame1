@@ -3,7 +3,6 @@
 #include "../data.h"
 #include "../../lib/myMath/myMath.h"
 #include "cpuPlayer/cpuPlayer.h"
-#include "../map/map.h"
 
 using namespace std;
 
@@ -17,8 +16,10 @@ enum tagModelName					//モデル一覧
 	MODEL_NUM,						//モデルの数
 };
 
-constexpr float TARGET_LEN = -200.0f;				//ターゲットと認識するまでの長さ
+constexpr float TARGET_LEN = -200.0f;			//ターゲットと認識するまでの長さ
 constexpr float TARGET_MAX_DISTANCE = 40.0f;	//どれくらい法線から離せるか
+
+constexpr int MAP_FRAME_NUM = 9;				//マップのフレーム番号
 
 static const char* MODEL_PATH[PLAYER_NUM] =
 { "data/model/player/playerTest7-1.mv1" ,
@@ -121,7 +122,11 @@ void CPlayerManager::Init()
 		m_player.push_back(player);
 	}
 
-
+	//リスポーン場所作成
+	for (int map_i = 0; map_i < MAP_CENTER_NUM; map_i++)
+	{
+		m_spawnPos.push_back(vector<VECTOR>());
+	}
 }
 
 //------------------------
@@ -142,45 +147,42 @@ void CPlayerManager::Load()
 	//マップのフレームのハンドルをロード
 	int frameHndl = MV1LoadModel(MAP_FRAME_PATH[MAP_ID_GRASSLAND]);
 
-	for (int i = 0; i < m_player.size(); i++)
+	int frameNum = MAP_FRAME_NUM;
+	//マップのリスポーン位置を取得して設定
+	for (int map_i = 0; map_i < m_spawnPos.size(); map_i++)
 	{
-		//プレイヤーのスポーン位置をロード
-		VECTOR start = { 0.0f,0.0f,0.0f };
-
-		//スポーン位置をセット
-		switch (i)
+		for (int spawn_i = 0; spawn_i < PLAYER_NUM; spawn_i++)
 		{
-		case PLAYER_1:
-			start = MV1GetFramePosition(frameHndl, 1);
-			break;
-		case PLAYER_2:
-			start = MV1GetFramePosition(frameHndl, 3);
-			break;
-		case PLAYER_3:
-			start = MV1GetFramePosition(frameHndl, 33);
-			break;
-		case PLAYER_4:
-			start = MV1GetFramePosition(frameHndl, 31);
-			break;
+			//プレイヤーのスポーン位置をロード
+			VECTOR pos = { 0.0f,0.0f,0.0f };
+
+			//フレームから座標を取得
+			pos = MV1GetFramePosition(frameHndl, frameNum);
+
+			//フレームを次に進める
+			frameNum += 2;
+
+			//上空に移動させる
+			pos.y += 50;
+
+			//スポーン位置を生成して設定
+			m_spawnPos[map_i].push_back(pos);
 		}
-
-		start.y += 50;
-		m_player[i]->Load(m_modelHndl[i]);
-		m_player[i]->SetPos(start);
-		m_spawnPos.push_back(start);
 	}
 
-	for (int map_i = 0; map_i < MAP_CENTER_NUM; map_i++)
+	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
-		
+		m_player[player_i]->Load(m_modelHndl[player_i]);
+		m_player[player_i]->SetPos(m_spawnPos[MAP_ID_CENTER1][player_i]);
 	}
+
 
 }
 
 //------------------------
 //	毎フレームする処理
 //------------------------
-void CPlayerManager::Step(CAttackManager* _attackManager, CShotManager* _shotManager, float _rot)
+void CPlayerManager::Step(CAttackManager* _attackManager, CShotManager* _shotManager, float _rot,tagMapCenterId _mapId)
 {
 	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
@@ -294,7 +296,7 @@ void CPlayerManager::Step(CAttackManager* _attackManager, CShotManager* _shotMan
 		//プレイヤーが死んでいたら復活させる
 		if (m_player[player_i]->GetActive() == false)
 		{
-			m_player[player_i]->Respawn(m_spawnPos[player_i]);
+			m_player[player_i]->Respawn(m_spawnPos[_mapId][player_i]);
 		}
 
 		m_player[player_i]->Step(_rot,targetPos,_attackManager,_shotManager);

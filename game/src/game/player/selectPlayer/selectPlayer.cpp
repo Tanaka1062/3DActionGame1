@@ -34,7 +34,7 @@ void CSelectPlayer::Init(tagPlayerName _name, tagPadName _padName)
 	m_padName = _padName;
 	m_name = _name;
 	m_shadow.Init(m_pos, SHADOW_SIZE);
-	m_objectTypy = OBJECT_PLAYER;
+	m_objectName = OBJECT_PLAYER;
 	m_isGravity = false;
 	m_state = WAIT;
 	m_isActive = false;

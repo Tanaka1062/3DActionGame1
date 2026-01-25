@@ -77,7 +77,7 @@ void CCoin::HitCalc(CObject* _hitObject)
 	if (_hitObject == nullptr)return;
 
 	//ƒvƒŒƒCƒ„[‚Ìê‡‚Ìˆ—----------------------------------
-	if (_hitObject->GetObjectType() == OBJECT_PLAYER)
+	if (_hitObject->GetObjectName() == OBJECT_PLAYER)
 	{
 		//”ò‚ñ‚Å‚¢‚éê‡‚Íˆ—‚ğ‚µ‚È‚¢
 		if (m_state == ITEM_FLYING)return;

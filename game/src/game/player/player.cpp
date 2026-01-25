@@ -149,7 +149,7 @@ void CPlayer::Init(tagPlayerName _name, tagPadName _padName)
 	m_weaponId = WEAPON_ID_HAND;
 	m_name = _name;
 	m_shadow.Init(m_pos, SHADOW_SIZE);
-	m_objectTypy = OBJECT_PLAYER;
+	m_objectName = OBJECT_PLAYER;
 	m_CoinNowUi.Init();
 	m_isCpu = false;
 }
@@ -438,7 +438,7 @@ void CPlayer::HitCalc(CObject* _hitObject)
 	if (_hitObject == nullptr)return;
 
 	//攻撃の当たり判定の場合の処理-----------------------------------------
-	if (_hitObject->GetObjectType() == OBJECT_ATTACK)
+	if (_hitObject->GetObjectName() == OBJECT_ATTACK)
 	{
 		//プレイヤーが回避中なら処理をしない
 		if (m_isDodgeroll == true)return;
@@ -479,7 +479,7 @@ void CPlayer::HitCalc(CObject* _hitObject)
 	//---------------------------------------------------------------------
 
 	//アイテムの場合の処理-------------------------------------------------
-	if (_hitObject->GetObjectType() == OBJECT_ITEM)
+	if (_hitObject->GetObjectName() == OBJECT_ITEM)
 	{
 		//アイテム保存用
 		CItemBase* item = nullptr;
@@ -493,7 +493,7 @@ void CPlayer::HitCalc(CObject* _hitObject)
 	//---------------------------------------------------------------------
 
 	//弾の場合の処理-------------------------------------------------------
-	if (_hitObject->GetObjectType() == OBJECT_SHOT)
+	if (_hitObject->GetObjectName() == OBJECT_SHOT)
 	{
 
 		//プレイヤーが回避中なら処理をしない

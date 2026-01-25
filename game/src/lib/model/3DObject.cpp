@@ -29,6 +29,7 @@ void CObject::Init()
 	m_speed = { 0.0f,0.0f,0.0f };
 	m_rot = { 0.0f,0.0f,0.0f };
 	m_scale = { 1.0f,1.0f,1.0f };
+	m_size = { 0.0f,0.0f,0.0f };
 	m_hndl = -1;
 	m_rad = 0.0f;
 	m_gravity = 0.0f;
@@ -36,6 +37,7 @@ void CObject::Init()
 	m_isGravity = false;
 	m_owner = nullptr;
 	m_isPushed = true;
+	m_objectType = OBJECT_TYPE_SPHERE;
 }
 
 //---------------------
@@ -94,7 +96,48 @@ void CObject::Draw()
 
 #ifdef DEBUG
 	//ìñÇΩÇËîªíËÇï\é¶
-	DrawSphere3D(GetCenter(), m_rad, 16, GetColor(255, 0, 0), GetColor(255, 0, 0), FALSE);
+	switch (m_objectType)
+	{
+	case OBJECT_TYPE_SPHERE:
+		DrawSphere3D(GetCenter(), m_rad, 16, GetColor(255, 0, 0), GetColor(255, 0, 0), FALSE);
+		break;
+	case OBJECT_TYPE_BOX:
+		VECTOR half = VScale(m_size, 0.5f);
+		VECTOR boxMin = VSub(GetCenter(), half);
+		VECTOR boxMax = VAdd(GetCenter(), half);
+
+		VECTOR v[8];
+
+		v[0] = VGet(boxMin.x, boxMin.y, boxMin.z);
+		v[1] = VGet(boxMax.x, boxMin.y, boxMin.z);
+		v[2] = VGet(boxMax.x, boxMax.y, boxMin.z);
+		v[3] = VGet(boxMin.x, boxMax.y, boxMin.z);
+
+		v[4] = VGet(boxMin.x, boxMin.y, boxMax.z);
+		v[5] = VGet(boxMax.x, boxMin.y, boxMax.z);
+		v[6] = VGet(boxMax.x, boxMax.y, boxMax.z);
+		v[7] = VGet(boxMin.x, boxMax.y, boxMax.z);
+
+		DrawLine3D(v[0], v[1], GetColor(255, 0, 0));
+		DrawLine3D(v[1], v[2], GetColor(255, 0, 0));
+		DrawLine3D(v[2], v[3], GetColor(255, 0, 0));
+		DrawLine3D(v[3], v[0], GetColor(255, 0, 0));
+
+		// è„ÇÃñ 
+		DrawLine3D(v[4], v[5], GetColor(255, 0, 0));
+		DrawLine3D(v[5], v[6], GetColor(255, 0, 0));
+		DrawLine3D(v[6], v[7], GetColor(255, 0, 0));
+		DrawLine3D(v[7], v[4], GetColor(255, 0, 0));
+
+		// ë§ñ 
+		for (int i = 0; i < 4; i++)
+		{
+			DrawLine3D(v[i], v[i + 4], GetColor(255, 0, 0));
+		}
+		break;
+	}
+
+
 #endif // DEBUG
 
 	MV1DrawModel(m_hndl);
@@ -177,7 +220,16 @@ void CObject::GravityReset()
 VECTOR CObject::GetCenter()
 {
 	VECTOR center = m_pos;
-	center.y += m_rad;
+
+	switch (m_objectType)
+	{
+	case OBJECT_TYPE_BOX:
+		center.y += m_size.y * 0.5f;
+		break;
+	case OBJECT_TYPE_SPHERE:
+		center.y += m_rad;
+		break;
+	}
 
 	return center;
 }

@@ -32,7 +32,7 @@ void CWeaponBase::HitCalc(CObject* _hitObject)
 {
 
 	//ƒvƒŒƒCƒ„[‚Ìê‡‚Ìˆ—-----------------------------------
-	if (_hitObject->GetObjectType() == OBJECT_PLAYER)
+	if (_hitObject->GetObjectName() == OBJECT_PLAYER)
 	{
 		CPlayer* player = nullptr;
 

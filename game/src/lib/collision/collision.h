@@ -7,42 +7,51 @@ class CCollision
 public:
 
 	// 点と四角の当たり判定
-	//	dotPos		:	点の座標
-	//	squarePos	:	四角形の中心座標
-	//	width		:	四角形の横幅
-	//	height		:	四角形の縦幅
-	//	@return		:	true=当たった　false=当たっていない
-	static bool ChekHitDotToSquare(VECTOR dotPos, VECTOR squarePos,
-		int width, int height);
+	//	_dotPos		:	点の座標
+	//	_squarePos	:	四角形の中心座標
+	//	_width		:	四角形の横幅
+	//	_height		:	四角形の縦幅
+	//	return		:	true=当たった　false=当たっていない
+	static bool ChekHitDotToSquare(VECTOR _dotPos, VECTOR _squarePos,
+		int _width, int _height);
 
 	// 矩形同士の当たり判定
-	//	squarePos	:	矩形の中心座標
-	//	width		:	矩形の横幅
-	//	height		:	矩形の縦幅
-	//	@return		:	true=当たった　false=当たっていない
-	static bool CheckHitSquareToSquare(VECTOR squarePos1, int width1, int height1,
-		VECTOR squarePos2, int width2, int height2);
+	//	_squarePos	:	矩形の中心座標
+	//	_width		:	矩形の横幅
+	//	_height		:	矩形の縦幅
+	//	return		:	true=当たった　false=当たっていない
+	static bool CheckHitSquareToSquare(VECTOR _squarePos1, int _width1, int height1,
+		VECTOR _squarePos2, int _width2, int _height2);
 
 	// 円同士の当たり判定
-	//	circlePos	:	円の中心座標
-	//	radius		:	円の半径
-	//	@return		:	true=当たった　false=当たっていない
-	static bool CheckHitCircleToCircle(VECTOR circlePos1, int radius1,
-		VECTOR circlePos2, int radius2);
+	//	_circlePos	:	円の中心座標
+	//	_radius		:	円の半径
+	//	return		:	true=当たった　false=当たっていない
+	static bool CheckHitCircleToCircle(VECTOR _circlePos1, int _radius1,
+		VECTOR _circlePos2, int _radius2);
 
 	// 立方体同士の当たり判定
-	//	pos			:	箱の中心座標
-	//	size		:	箱のサイズ
-	//	@return		:	true=当たった　false=当たっていない
-	static bool CheckHitBoxToBox(VECTOR pos1, VECTOR size1,
-		VECTOR pos2, VECTOR size2);
+	//	_pos		:	箱の中心座標
+	//	_size		:	箱のサイズ
+	//	return		:	true=当たった　false=当たっていない
+	static bool CheckHitBoxToBox(VECTOR _pos1, VECTOR _size1,
+		VECTOR _pos2, VECTOR _size2);
 
 	// 球同士の当たり判定
-	//	spherePos	:	球の中心座標
-	//	radius		:	球のサイズ
-	//	@return		:	true=当たった　false=当たっていない
-	static bool CheckHitSphereToSphere(VECTOR spherePos1, float radius1,
-		VECTOR spherePos2, float radius2);
+	//	_spherePos	:	球の中心座標
+	//	_radius		:	球のサイズ
+	//	return		:	true=当たった　false=当たっていない
+	static bool CheckHitSphereToSphere(VECTOR _spherePos1, float _radius1,
+		VECTOR _spherePos2, float _radius2);
+
+	//立方体と球の当たり判定
+	// _boxPos		:	箱の中心座標
+	// _boxSize		:	箱のサイズ
+	// _spherePos	:	球の中心座標
+	// _sphereRadius:	球の半径
+	// rerurn		:	true=当たった　false=当たっていない
+	static bool CheckHitBoxToSohere(VECTOR _boxPos, VECTOR _boxSize,
+		VECTOR _spherePos, float _sphereRadius);
 
 };
 

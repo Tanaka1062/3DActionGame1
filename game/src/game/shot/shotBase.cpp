@@ -40,7 +40,7 @@ void CShotBase::Init()
 	m_rad = 0.0f;
 	m_moveSpeed = 0.0f;
 	m_effectHndl = -1;
-	m_objectTypy = OBJECT_SHOT;
+	m_objectName = OBJECT_SHOT;
 	m_isHoming = true;
 	m_isPushed = false;
 }

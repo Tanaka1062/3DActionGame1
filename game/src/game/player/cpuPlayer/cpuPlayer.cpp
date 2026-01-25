@@ -160,7 +160,7 @@ void CCpuPlayer::Init(tagPlayerName _name, tagPadName _padName)
 	m_weaponId = WEAPON_ID_HAND;
 	m_name = _name;
 	m_shadow.Init(m_pos, SHADOW_SIZE);
-	m_objectTypy = OBJECT_PLAYER;
+	m_objectName = OBJECT_PLAYER;
 	m_CoinNowUi.Init();
 	m_FOV->Init();
 	m_cpuState = CPU_STATE_NONE;
@@ -236,7 +236,7 @@ void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackMa
 	if (m_cpuState == CPU_STATE_ATTACK && m_targetObject != nullptr)
 	{
 
-		if (m_targetObject->GetObjectType() == OBJECT_PLAYER)
+		if (m_targetObject->GetObjectName() == OBJECT_PLAYER)
 		{
 			//銃と投げるアイテムはターゲットがいたら攻撃する
 			if ((m_itemState == ITEM_STATE_HAVE || m_weaponId == WEAPON_ID_GUN) &&
@@ -437,7 +437,7 @@ void CCpuPlayer::HitCalc(CObject* _hitObject)
 	if (_hitObject == nullptr)return;
 
 	//攻撃の当たり判定の場合の処理-----------------------------------------
-	if (_hitObject->GetObjectType() == OBJECT_ATTACK)
+	if (_hitObject->GetObjectName() == OBJECT_ATTACK)
 	{
 		//プレイヤーが回避中なら処理をしない
 		if (m_isDodgeroll == true)return;
@@ -481,7 +481,7 @@ void CCpuPlayer::HitCalc(CObject* _hitObject)
 	//---------------------------------------------------------------------
 
 	//アイテムの場合の処理-------------------------------------------------
-	if (_hitObject->GetObjectType() == OBJECT_ITEM)
+	if (_hitObject->GetObjectName() == OBJECT_ITEM)
 	{
 		//アイテム保存用
 		CItemBase* item = nullptr;
@@ -503,7 +503,7 @@ void CCpuPlayer::HitCalc(CObject* _hitObject)
 	//---------------------------------------------------------------------
 
 	//弾の場合の処理-------------------------------------------------------
-	if (_hitObject->GetObjectType() == OBJECT_SHOT)
+	if (_hitObject->GetObjectName() == OBJECT_SHOT)
 	{
 
 		//プレイヤーが回避中なら処理をしない
@@ -649,7 +649,7 @@ void CCpuPlayer::ChangeCpuState()
 		//自分はカウントしない
 		if (this == object)continue;
 
-		switch (object->GetObjectType())
+		switch (object->GetObjectName())
 		{
 		case OBJECT_PLAYER:
 			playerNum++;
@@ -714,7 +714,7 @@ void CCpuPlayer::ChangeCpuState()
 		{
 			CObject* object = m_FOV->GetObjectBuf(object_i);
 
-			if (this == object ||object->GetObjectType() == OBJECT_ITEM)continue;
+			if (this == object ||object->GetObjectName() == OBJECT_ITEM)continue;
 
 			if (playerNum == targetObjectNum)
 			{
@@ -734,7 +734,7 @@ void CCpuPlayer::ChangeCpuState()
 			{
 				CObject* object = m_FOV->GetObjectBuf(object_i);
 
-				if (object->GetObjectType() != OBJECT_ITEM)continue;
+				if (object->GetObjectName() != OBJECT_ITEM)continue;
 
 				CItemBase* item = dynamic_cast<CItemBase*>(object);
 
@@ -757,7 +757,7 @@ void CCpuPlayer::ChangeCpuState()
 			{
 				CObject* object = m_FOV->GetObjectBuf(object_i);
 
-				if (object->GetObjectType() != OBJECT_ITEM)continue;
+				if (object->GetObjectName() != OBJECT_ITEM)continue;
 
 				CItemBase* item = dynamic_cast<CItemBase*>(object);
 

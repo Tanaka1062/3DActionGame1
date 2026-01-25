@@ -36,8 +36,7 @@ static const char* MODEL_PATH[ITEM_NUM] =							//モデルのパス
 
 };
 
-static const char FRAME_PATH[] =
-"data/model/map/TestMap6Frame.mv1";			//ロードするファイル名
+constexpr int MAP_FRAME_NUM = 26;				//マップのフレーム番号
 
 constexpr int SPAWN_TIME = 7 * 60;			//スポーンするまで時間
 
@@ -175,7 +174,7 @@ void CSpawnItemManager::Load()
 	int mapFrameHndl = MV1LoadModel(MAP_FRAME_PATH[MAP_ID_GRASSLAND]);
 
 	//フレームの番号
-	int frameNum = 26;
+	int frameNum = MAP_FRAME_NUM;
 
 	//出現位置をアイテムのスポーン情報に入力-------------------------------------	
 	for (int map_i = 0; map_i < m_spawnData.size(); map_i++)

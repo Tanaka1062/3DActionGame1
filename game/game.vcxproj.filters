@@ -151,6 +151,9 @@
     <Filter Include="ソース ファイル\game\camera\resultCamera">
       <UniqueIdentifier>{0148b797-af02-43d5-96e1-69d07ad04012}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\game\map\gimmick">
+      <UniqueIdentifier>{8bc838ae-995d-40bb-9aa7-0fa22f9b7511}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\number.cpp">
@@ -359,6 +362,12 @@
     </ClCompile>
     <ClCompile Include="src\game\camera\resultCamera\resultCamera.cpp">
       <Filter>ソース ファイル\game\camera\resultCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\map\gimmick\moveBlock.cpp">
+      <Filter>ソース ファイル\game\map\gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\map\gimmick\gimmickManager.cpp">
+      <Filter>ソース ファイル\game\map\gimmick</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -574,6 +583,12 @@
     </ClInclude>
     <ClInclude Include="src\game\camera\resultCamera\resultCamera.h">
       <Filter>ソース ファイル\game\camera\resultCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\map\gimmick\moveBlock.h">
+      <Filter>ソース ファイル\game\map\gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\map\gimmick\gimmickManager.h">
+      <Filter>ソース ファイル\game\map\gimmick</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

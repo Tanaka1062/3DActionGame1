@@ -3,6 +3,7 @@
 #include <vector>
 #include "player.h"
 #include"cpuPlayer/cpuPlayerFOV.h"
+#include "../map/map.h"
 
 //エネミーマネージャーのクラス
 class CPlayerManager
@@ -22,7 +23,7 @@ public:
 	//オブジェクトのロード
 	void Load();
 	//毎フレームする処理
-	void Step(CAttackManager* _attackManager,CShotManager* _shotManager,float _rot);
+	void Step(CAttackManager* _attackManager,CShotManager* _shotManager,float _rot,tagMapCenterId _mapId);
 	//数値の更新
 	void Update();
 	//オブジェクトの描写

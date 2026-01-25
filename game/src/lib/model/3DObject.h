@@ -1,8 +1,8 @@
 #pragma once
 #include<DxLib.h>
 
-//オブジェクトのタイプ
-enum tagObjectType
+//オブジェクトの名前
+enum tagObjectName
 {
 	OBJECT_PLAYER,			//プレイヤー
 	OBJECT_ITEM,			//アイテム
@@ -10,6 +10,15 @@ enum tagObjectType
 	OBJECT_SHOT,			//弾
 	OBJECT_FOV,				//CPUの視界の当たり判定
 	
+	OBJECT_NAME_NUM,		//名前の数
+};
+
+//オブジェクトのタイプ
+enum tagObjectType
+{
+	OBJECT_TYPE_BOX,		//ボックスタイプ
+	OBJECT_TYPE_SPHERE,		//球タイプ
+
 	OBJECT_TYPE_NUM,		//タイプの数
 };
 
@@ -20,6 +29,7 @@ protected:
 	VECTOR m_speed;					//速度
 	VECTOR m_rot;					//回転角度
 	VECTOR m_scale;					//拡大縮小率
+	VECTOR m_size;					//大きさ
 	int m_hndl;						//オブジェクトのハンドル
 	float m_rad;					//半径
 	float m_gravity;				//重力
@@ -27,7 +37,8 @@ protected:
 	bool m_isGravity;				//重力処理をするかどうかフラグ
 	bool m_isFlying;				//空中にいるかどうかフラグ
 	bool m_isPushed;				//押し出し処理をするかどうかフラグ
-	tagObjectType m_objectTypy;		//オブジェクトのタイプ
+	tagObjectName m_objectName;		//オブジェクトの名前
+	tagObjectType m_objectType;		//オブジェクトのタイプ
 	CObject* m_owner;				//オーナーオブジェクト
 
 public:
@@ -103,6 +114,9 @@ public:
 	//回転角度を設定(VECTOR)
 	void SetRot(VECTOR _rot) { m_rot = _rot; }
 
+	//大きさを取得
+	VECTOR GetSize() { return m_size; }
+
 	//半径を取得
 	float GetRad() { return m_rad; }
 	//半径を設定
@@ -122,8 +136,11 @@ public:
 	//ハンドルを取得
 	int GetHndl() { return m_hndl; }
 
+	//オブジェクトの名前を取得
+	tagObjectName GetObjectName() { return m_objectName; }
+
 	//オブジェクトのタイプを取得
-	tagObjectType GetObjectType() { return m_objectTypy; }
+	tagObjectType GetObjectType() { return m_objectType; }
 
 	//-------------------------------
 

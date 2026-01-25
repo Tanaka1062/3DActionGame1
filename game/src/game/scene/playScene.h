@@ -12,6 +12,7 @@
 #include "../ui/uiGameManager.h"
 #include "../gameTime/gameTime.h"
 #include "../winner/winner.h"
+#include "../map/gimmick/gimmickManager.h"
 
 //ゲーム本編を管理するクラス
 class CPlayScene :public CSceneBase
@@ -28,6 +29,7 @@ private:
 	CUiGameManager m_uiManager;				//uiのマネージャークラス
 	CGameTime* m_gameTime;					//ゲームの制限時間
 	CWinner* m_winner;						//勝利したプレイヤー
+	CGimmickManager m_gimmickManager;		//ギミックのマネージャークラス
 
 public:
 

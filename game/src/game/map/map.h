@@ -47,6 +47,9 @@ public:
 	//モデルロード
 	void Load(tagMapId _id);
 
+	//毎フレームする処理
+	void Step();
+
 	//モデル描写
 	void Draw();
 

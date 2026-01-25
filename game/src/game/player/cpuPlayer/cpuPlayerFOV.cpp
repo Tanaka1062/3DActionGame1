@@ -23,7 +23,7 @@ void CCpuPlayerFOV::Init()
 	CObject::Init();
 	m_hitObject.clear();
 	m_objectBuf.clear();
-	m_objectTypy = OBJECT_FOV;
+	m_objectName = OBJECT_FOV;
 	m_isPushed = false;
 	m_isActive = true;
 	m_isGravity = false;
@@ -54,13 +54,13 @@ void CCpuPlayerFOV::Step(CObject* _object)
 void CCpuPlayerFOV::HitCalc(CObject* _hitObject)
 {
 	//プレイヤーとアイテムを保存する
-	if (_hitObject->GetObjectType() == OBJECT_PLAYER)
+	if (_hitObject->GetObjectName() == OBJECT_PLAYER)
 	{
 		m_hitObject.push_back(_hitObject);
 	}
 
 	//アイテムの場合------------------------------------------
-	if (_hitObject->GetObjectType() == OBJECT_ITEM)
+	if (_hitObject->GetObjectName() == OBJECT_ITEM)
 	{
 		CItemBase* item = dynamic_cast<CItemBase*>(_hitObject);
 

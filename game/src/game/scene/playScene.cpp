@@ -43,6 +43,7 @@ void CPlayScene::Draw()
 		m_weaponManager.Draw();
 		m_uiManager.Draw();
 		m_playerManager.Draw();
+		m_gimmickManager.Draw();
 
 		CCameraManager::Draw();
 		break;
@@ -69,6 +70,7 @@ void CPlayScene::Init()
 	m_gameTime->Init();
 	m_winner = CWinner::GetInstance();
 	m_winner->Init();
+	m_gimmickManager.Init();
 }
 
 //---------------------------
@@ -87,6 +89,7 @@ void CPlayScene::Load()
 		m_itemManager.Load();
 		m_weaponManager.Load();
 		m_uiManager.Load();
+		m_gimmickManager.Load();
 		CSoundManager::Play(CSoundManager::BGM_GAME, DX_PLAYTYPE_LOOP);
 
 		m_LoadState = 1;
@@ -113,23 +116,17 @@ void CPlayScene::Load()
 void CPlayScene::Step()
 {
 	//各種計算処理を実行
+	m_ground.Step();
 	m_sky.Step();
-
-	m_playerManager.Step(&m_attackManager,&m_shot, CCameraManager::GetRot().y);
-
+	m_playerManager.Step(&m_attackManager,&m_shot, CCameraManager::GetRot().y,m_ground.GetCenterId());
 	m_shot.Step();
-
 	m_itemManager.Step(&m_playerManager,m_ground.GetCenterId());
-
 	m_weaponManager.Step(m_playerManager);
-
 	m_uiManager.Step();
-
 	CCameraManager::Step(ZERO,0.0f);
-
 	m_gameTime->Step();
-
 	m_winner->Step(&m_playerManager);
+	m_gimmickManager.Step();
 
 	//当たり判定----------------------------------
 	//敵の視界範囲とプレイヤーの当たり判定
@@ -153,6 +150,7 @@ void CPlayScene::Step()
 	m_itemManager.Update();
 	m_weaponManager.Update(m_playerManager);
 	CCameraManager::Update(ZERO);
+	m_gimmickManager.Update();
 
 	if (CKeyInput::IsTrg(KEY_SELECT) == true ||
 		m_gameTime->GetTimeEnd() == true)
@@ -176,6 +174,7 @@ void CPlayScene::Exit()
 	m_itemManager.Exit();
 	m_weaponManager.Exit();
 	m_uiManager.Exit();
+	m_gimmickManager.Exit();
 
 	//エフェクトを全て消す
 	CEffekseerCtrl::StopAll();

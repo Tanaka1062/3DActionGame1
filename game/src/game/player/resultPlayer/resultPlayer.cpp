@@ -34,7 +34,7 @@ void CResultPlayer::Init(tagPlayerName _name, tagPadName _padName)
 	m_padName = _padName;
 	m_name = _name;
 	m_shadow.Init(m_pos, SHADOW_SIZE);
-	m_objectTypy = OBJECT_PLAYER;
+	m_objectName = OBJECT_PLAYER;
 	m_isGravity = false;
 	m_state = WAIT;
 	m_rot.y = 90.0f * (DX_PI_F/180.0f);
@@ -86,7 +86,7 @@ void CResultPlayer::Draw()
 	attackPos = VAdd(attackPos, m_pos);
 
 #endif // DEBUG
-
+	
 }
 
 //-----------------------
