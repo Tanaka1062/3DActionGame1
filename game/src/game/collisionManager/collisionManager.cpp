@@ -71,26 +71,47 @@ void CCollisionManager::CheckHitObjectToObject(CObject* _objectA, CObject* _obje
 		float dist = VSize(diff);
 
 		//求めた距離が球の半径の以上なら当たっていないので処理をしない
-		if (dist >= sphere->GetRad() || dist == 0.0f)return;
-
-		//押し出し方向を正規化
-		VECTOR pushDir = VScale(diff, 1.0f / dist);
-
-		//めり込み量を求める
-		float penetration = sphere->GetRad() - dist;
-
-		//球を押し戻す---------------------------
-		VECTOR spherePos = sphere->GetPos();
-
-		spherePos = VAdd(spherePos, VScale(pushDir, penetration));
-
-		sphere->SetPos(spherePos);
-
-		//箱の上に乗っていたら重力をリセットする
-		if (spherePos.y >= boxUp)
+		if (dist <= sphere->GetRad() || dist != 0.0f)
 		{
-			sphere->GravityReset();
+			//押し出し方向を正規化
+			VECTOR pushDir = VScale(diff, 1.0f / dist);
+
+			//めり込み量を求める
+			float penetration = sphere->GetRad() - dist;
+
+			//球を押し戻す---------------------------
+			VECTOR spherePos = sphere->GetPos();
+
+			spherePos = VAdd(spherePos, VScale(pushDir, penetration));
+
+			sphere->SetPos(spherePos);
+
+			//箱の上に乗っていたら重力をリセットする
+			if (spherePos.y >= boxUp)
+			{
+				sphere->GravityReset();
+			}
 		}
+
+		if (sphere->GetObjectName() == OBJECT_PLAYER)
+		{
+			CPlayer* player = dynamic_cast<CPlayer*>(sphere);
+
+			//上から見たプレイヤーと箱の当たり判定をとる
+			VECTOR playerPos = sphere->GetPos();
+			playerPos.y = 0.0f;
+			VECTOR boxPos = box->GetPos();
+			boxPos.y = 0.0f;
+			int boxWidth = box->GetSize().z;
+			int boxHeight = box->GetSize().x;
+
+			if (CCollision::ChekHitDotToSquare(playerPos, boxPos,
+				boxWidth, boxHeight) == true)
+			{
+				
+			}
+		}
+
 		//---------------------------------------
 
 

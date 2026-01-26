@@ -38,6 +38,9 @@ void CMapCamera::Init(VECTOR _focus)
 	}
 
 	m_focusPos = m_mapCenterPos[0];
+
+	m_pos.x = m_pos.x - 50.0f;
+
 }
 
 //---------------------------------
@@ -50,6 +53,7 @@ void CMapCamera::Step(VECTOR _focus, float _rot, tagMapCenterId _mapCenterId)
 	m_rot.y = atan2f(dir.x, dir.z);
 
 	Move(_mapCenterId);
+
 }
 
 //---------------------------------

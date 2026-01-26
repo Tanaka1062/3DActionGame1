@@ -309,7 +309,11 @@ void CPlayerManager::Step(CAttackManager* _attackManager, CShotManager* _shotMan
 		//ƒvƒŒƒCƒ„[‚ªŽ€‚ñ‚Å‚¢‚½‚ç•œŠˆ‚³‚¹‚é
 		if (m_player[player_i]->GetActive() == false)
 		{
-			m_player[player_i]->Respawn(m_spawnPos[_mapId][player_i]);
+			if (CCollision::CheckHitSphereToSphere(m_spawnPos[_mapId][player_i], m_player[player_i]->GetRad(),
+				CCameraManager::GetFocusPos(), DIE_RADIUS) == true)
+			{
+				m_player[player_i]->Respawn(m_spawnPos[_mapId][player_i]);
+			}
 		}
 
 		m_player[player_i]->Step(_rot,targetPos,_attackManager,_shotManager);

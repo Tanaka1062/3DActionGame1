@@ -10,7 +10,7 @@ static const char* MAP_MODEL_PATH[MAP_NUM] ={
 	"data/model/map/selectMap/selectMap.mv1",
 	"data/model/map/resultMap/resultMap.mv1",
 };					//ロードするファイル名
-constexpr int MAP_MOVE_TIME = 120;			//ステージが移動するまでの時間
+constexpr int MAP_MOVE_TIME = 150;			//ステージが移動するまでの時間
 
 //==========================================
 
