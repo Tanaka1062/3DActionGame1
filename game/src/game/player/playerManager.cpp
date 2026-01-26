@@ -3,6 +3,9 @@
 #include "../data.h"
 #include "../../lib/myMath/myMath.h"
 #include "cpuPlayer/cpuPlayer.h"
+#include "../camera/cameraManager.h"
+#include "../common.h"
+#include "../../lib/collision/collision.h"
 
 using namespace std;
 
@@ -20,6 +23,7 @@ constexpr float TARGET_LEN = -200.0f;			//ターゲットと認識するまでの長さ
 constexpr float TARGET_MAX_DISTANCE = 40.0f;	//どれくらい法線から離せるか
 
 constexpr int MAP_FRAME_NUM = 9;				//マップのフレーム番号
+constexpr float DIE_RADIUS = 240.0f;			//画面外判定の半径
 
 static const char* MODEL_PATH[PLAYER_NUM] =
 { "data/model/player/playerTest7-1.mv1" ,
@@ -186,6 +190,15 @@ void CPlayerManager::Step(CAttackManager* _attackManager, CShotManager* _shotMan
 {
 	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
+		//プレイヤーがカメラの外に行くと死ぬ処理---------------
+
+		if (CCollision::CheckHitSphereToSphere(m_player[player_i]->GetCenter(), m_player[player_i]->GetRad(),
+			CCameraManager::GetFocusPos(), DIE_RADIUS) == false)
+		{
+			m_player[player_i]->SetActive(false);
+		}
+
+		//-----------------------------------------------------
 
 		//ターゲットの座標アドレス保存用
 		VECTOR* targetPos = nullptr;
@@ -325,6 +338,10 @@ void CPlayerManager::Draw()
 	{
 		m_player[i]->Draw();
 	}
+
+#ifdef DEBUG
+	DrawSphere3D(CCameraManager::GetFocusPos(), DIE_RADIUS, 16, GetColor(0, 0, 255), GetColor(0, 0, 255), FALSE);
+#endif // DEBUG
 
 }
 

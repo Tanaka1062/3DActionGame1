@@ -2,12 +2,12 @@
 #pragma once
 #include <DxLib.h>
 #include "../cameraBase.h"
+#include "../../map/map.h"
 
 class CMapCamera : public CCameraBase
 {
 private:
-	VECTOR m_focusPos;	//カメラの注視点
-
+	VECTOR m_mapCenterPos[MAP_CENTER_NUM];
 public:
 	//コンストラクタ
 	CMapCamera();
@@ -16,7 +16,7 @@ public:
 	void Init(VECTOR _focus);
 
 	// 毎フレーム呼ぶ処理
-	void Step(VECTOR _focus, float _rot);
+	void Step(VECTOR _focus, float _rot, tagMapCenterId _mapCenterId);
 
 	//カメラの更新
 	void Update();
@@ -27,7 +27,7 @@ private:
 	void Rotate(VECTOR _focus);
 
 	//カメラの移動処理
-	void Move(VECTOR _focus, float _rot);
+	void Move(tagMapCenterId _mapCenterId);
 
 };
 

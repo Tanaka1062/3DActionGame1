@@ -8,6 +8,7 @@ protected:
 	VECTOR m_pos;		// カメラの位置
 	VECTOR m_rot;		//カメラの回転値
 	VECTOR m_upVec;		// カメラ上方向
+	VECTOR m_focusPos;	//カメラの注視点
 
 public:
 	//コンストラクタ
@@ -37,6 +38,7 @@ public:
 	//カメラの上方向を取得
 	VECTOR GetUp() { return m_upVec; }
 
-
+	//カメラの注視点を取得
+	VECTOR GetFocusPos() { return m_focusPos; }
 };
 

@@ -9,6 +9,7 @@
 #include "../../lib/effekseer/effekseer.h"
 #include "../../system/effectData/effectData.h"
 #include "../../item/itemBase.h"
+#include "../../camera/cameraManager.h"
 
 //’è‹`ŠÖ˜A---------------------------
 
@@ -191,7 +192,7 @@ void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackMa
 
 	m_targetPos = _targetPos;
 
-	m_FOV->SetPos(m_pos);
+	m_FOV->SetPos(CCameraManager::GetFocusPos());
 
 	m_FOV->Step(this);
 

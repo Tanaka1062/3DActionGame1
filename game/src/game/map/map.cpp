@@ -1,14 +1,16 @@
 #include "map.h"
 #include <math.h>
+#include "../gameTime/gameTime.h"
 
 //定義関連==================================
 constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
 constexpr VECTOR SCALE = { 1.0f,1.0f,1.0f };		//大きさ
 static const char* MAP_MODEL_PATH[MAP_NUM] ={
-	"data/model/map/TestMap7.mv1",
+	"data/model/map/TestMap7test.mv1",
 	"data/model/map/selectMap/selectMap.mv1",
 	"data/model/map/resultMap/resultMap.mv1",
 };					//ロードするファイル名
+constexpr int MAP_MOVE_TIME = 120;			//ステージが移動するまでの時間
 
 //==========================================
 
@@ -40,7 +42,7 @@ void CMap::Init()
 	m_rot = ZERO;
 	m_hndl = -1;
 	m_hitHndl = -1;
-	m_mapId = MAP_ID_CENTER2;
+	m_mapId = MAP_ID_CENTER1;
 }
 
 //------------------------
@@ -63,6 +65,19 @@ void CMap::Step()
 {
 	CObject::Step();
 
+	CGameTime* gameTime = CGameTime::GetInstance();
+
+	if (MAP_MOVE_TIME >= gameTime->GetTime())
+	{
+		switch (m_mapId)
+		{
+		case MAP_ID_CENTER1:
+			m_mapId = MAP_ID_CENTER2;
+			break;
+		case MAP_ID_CENTER2:
+			break;
+		}
+	}
 }
 
 //------------------------

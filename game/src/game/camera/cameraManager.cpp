@@ -60,9 +60,18 @@ void CCameraManager::Init(VECTOR _focus)
 //---------------------------
 //	毎フレームする処理
 //---------------------------
-void CCameraManager::Step(VECTOR _focus, float _rot)
+void CCameraManager::Step(VECTOR _focus, float _rot, tagMapCenterId _mapCenterId)
 {
-	m_camera[m_id]->Step(_focus,_rot);
+	if (m_id == CAMERA_ID_MAP)
+	{
+		CMapCamera* mapCamera = dynamic_cast<CMapCamera*>(m_camera[m_id]);
+
+		mapCamera->Step(_focus, _rot, _mapCenterId);
+	}
+	else
+	{
+		m_camera[m_id]->Step(_focus, _rot);
+	}
 
 	//カメラのモード切替
 	//デバックモードに変更

@@ -158,8 +158,8 @@ bool CCollision::CheckHitBoxToSohere(VECTOR _boxPos, VECTOR _boxSize,
 	//球と箱の最近接点を求める
 	VECTOR closest;
 	closest.x = Clamp(_spherePos.x, boxLeft, boxRight);
-	closest.y = Clamp(_spherePos.y, boxDown, boxUp);
-	closest.z = Clamp(_spherePos.z, boxBack, boxFront);
+	closest.y = Clamp(_spherePos.y, boxUp, boxDown);
+	closest.z = Clamp(_spherePos.z, boxFront, boxBack);
 
 	//最近接点から球の中心座標までの距離を求める
 	VECTOR diff = VSub(_spherePos, closest);

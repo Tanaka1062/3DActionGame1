@@ -1,5 +1,6 @@
 #pragma once
 #include "cameraBase.h"
+#include "../map/map.h"
 
 //複数のカメラタイプを管理するクラス
 class CCameraManager
@@ -32,7 +33,7 @@ public:
 	static void Init(VECTOR _focus);
 
 	//毎フレームする処理
-	static void Step(VECTOR _focus, float _rot);
+	static void Step(VECTOR _focus, float _rot,tagMapCenterId _mapCenterId = MAP_ID_CENTER1);
 
 	//表示
 	static void Draw();
@@ -48,6 +49,9 @@ public:
 
 	//カメラの回転値の取得
 	static VECTOR  GetRot() { return m_rot; }
+
+	//カメラの注視点を取得
+	static VECTOR GetFocusPos() { return m_camera[m_id]->GetFocusPos(); }
 
 };
 

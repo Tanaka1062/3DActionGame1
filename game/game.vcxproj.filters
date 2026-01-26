@@ -369,6 +369,9 @@
     <ClCompile Include="src\game\map\gimmick\gimmickManager.cpp">
       <Filter>ソース ファイル\game\map\gimmick</Filter>
     </ClCompile>
+    <ClCompile Include="src\game\map\gimmick\gimmickBase.cpp">
+      <Filter>ソース ファイル\game\map\gimmick</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\lib\number.h">
@@ -588,6 +591,9 @@
       <Filter>ソース ファイル\game\map\gimmick</Filter>
     </ClInclude>
     <ClInclude Include="src\game\map\gimmick\gimmickManager.h">
+      <Filter>ソース ファイル\game\map\gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\map\gimmick\gimmickBase.h">
       <Filter>ソース ファイル\game\map\gimmick</Filter>
     </ClInclude>
   </ItemGroup>

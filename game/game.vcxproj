@@ -165,6 +165,7 @@
     <ClCompile Include="src\game\item\weapon\itemWeaponBase.cpp" />
     <ClCompile Include="src\game\item\weapon\sword\sword.cpp" />
     <ClCompile Include="src\game\main.cpp" />
+    <ClCompile Include="src\game\map\gimmick\gimmickBase.cpp" />
     <ClCompile Include="src\game\map\gimmick\gimmickManager.cpp" />
     <ClCompile Include="src\game\map\gimmick\moveBlock.cpp" />
     <ClCompile Include="src\game\map\map.cpp" />
@@ -239,6 +240,7 @@
     <ClInclude Include="src\game\item\weapon\gun\gun.h" />
     <ClInclude Include="src\game\item\weapon\itemWeaponBase.h" />
     <ClInclude Include="src\game\item\weapon\sword\sword.h" />
+    <ClInclude Include="src\game\map\gimmick\gimmickBase.h" />
     <ClInclude Include="src\game\map\gimmick\gimmickManager.h" />
     <ClInclude Include="src\game\map\gimmick\moveBlock.h" />
     <ClInclude Include="src\game\map\map.h" />

@@ -1,7 +1,7 @@
 #pragma once
-#include "../../../lib/model/3DObject.h"
+#include "gimmickBase.h"
 
-class CMoveBlock :public CObject
+class CMoveBlock :public CGimmickBase
 {
 private:
 
@@ -13,9 +13,6 @@ public:
 	//初期化
 	void Init();
 	
-	//モデルロード
-	void Load(const char* _filePath);
-
 	//毎フレームする処理
 	void Step();
 };

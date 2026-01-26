@@ -5,7 +5,7 @@
 
 using namespace std;
 
-constexpr float RADIUS = 400.0f;							//”¼Œa
+constexpr float RADIUS = 200.0f;							//”¼Œa
 
 CCpuPlayerFOV::CCpuPlayerFOV()
 {

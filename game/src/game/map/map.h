@@ -58,5 +58,6 @@ public:
 
 	//ƒ}ƒbƒv‚ÌID‚ğæ“¾
 	tagMapCenterId GetCenterId() { return m_mapId; }
+
 };
 

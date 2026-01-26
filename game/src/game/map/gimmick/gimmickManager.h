@@ -1,10 +1,12 @@
 #pragma once
-#include "moveBlock.h"
+#include "gimmickBase.h"
+#include <iostream>
+#include <vector>
 
 class CGimmickManager
 {
 private:
-	CMoveBlock m_moveBlock;
+	std::vector<CGimmickBase*> m_gimmick;
 public:
 	CGimmickManager();
 	~CGimmickManager();
@@ -22,5 +24,10 @@ public:
 	//終了処理
 	void Exit();
 
+	//ギミックの数を取得
+	int GetGimmickNum() { return static_cast<int>(m_gimmick.size()); }
+
+	//ギミックを取得
+	CGimmickBase* GetGimmick(int _num) { return m_gimmick[_num]; }
 };
 

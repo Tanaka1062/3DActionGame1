@@ -123,7 +123,7 @@ void CPlayScene::Step()
 	m_itemManager.Step(&m_playerManager,m_ground.GetCenterId());
 	m_weaponManager.Step(m_playerManager);
 	m_uiManager.Step();
-	CCameraManager::Step(ZERO,0.0f);
+	CCameraManager::Step(ZERO,0.0f,m_ground.GetCenterId());
 	m_gameTime->Step();
 	m_winner->Step(&m_playerManager);
 	m_gimmickManager.Step();
@@ -139,6 +139,7 @@ void CPlayScene::Step()
 	CCollisionManager::CheckHitPlayerToShot(m_playerManager, m_shot);
 	CCollisionManager::CheckHitCpuPlayerFOVToPlayer(m_playerManager);
 	CCollisionManager::CheckHitCpuPlayerFOVToItem(m_playerManager, m_itemManager);
+	CCollisionManager::CheckHitPlayerToGimmick(m_playerManager, m_gimmickManager);
 	//--------------------------------------------
 
 	//‚·‚×‚Ä‚ÌŒ‹‰Ê‚ð”½‰f‚³‚¹‚é

@@ -13,73 +13,162 @@ void CCollisionManager::CheckHitObjectToObject(CObject* _objectA, CObject* _obje
 	//二つのオブジェクトが消えていたら処理をしない
 	if (_objectA->GetActive() == false || _objectB->GetActive() == false)return;
 
-	//オブジェクト同士が当たっているか
-	if (CCollision::CheckHitSphereToSphere(_objectA->GetCenter(), _objectA->GetRad(),
-		_objectB->GetCenter(), _objectB->GetRad()) == true)
+	//オブジェクトのタイプが球か箱かで当たり判定を変更する
+	//球と箱の当たり判定の場合
+	if (_objectA->GetObjectType() == OBJECT_TYPE_BOX || _objectB->GetObjectType() == OBJECT_TYPE_BOX)
 	{
-		//それぞれ当たり判定の処理をする
-		_objectA->HitCalc(_objectB);
-		_objectB->HitCalc(_objectA);
+		CObject* box = nullptr;
+		CObject* sphere = nullptr;
 
-	}
+		if (_objectA->GetObjectType() == OBJECT_TYPE_BOX)
+		{
+			box = _objectA;
+			sphere = _objectB;
+		}
+		else
+		{
+			box = _objectB;
+			sphere = _objectA;
+		}
 
-	//押し出しフラグがfalseなら処理をしない
-	if (_objectA->GetIsPushed() == false ||
-		_objectB->GetIsPushed() == false)
-		return;
+		//オブジェクト同士が当たっているか
+		if (CCollision::CheckHitBoxToSohere(box->GetCenter(), box->GetSize(),
+			sphere->GetCenter(), sphere->GetRad()) == true)
+		{
+			//それぞれ当たり判定の処理をする
+			box->HitCalc(sphere);
+			sphere->HitCalc(box);
+		}
 
-	//押し戻し処理-------------------------------------------------
+		//押し戻し処理-------------------------------------------------
 
-	//本来離れてほしい距離を求める
-	float len1 = _objectA->GetRad() + _objectB->GetRad();
+		// 四角形の上下左右手前奥それぞれの座標を計算する
+		float boxUp = box->GetCenter().y - box->GetSize().y * 0.5f;
+		float boxDown = box->GetCenter().y + box->GetSize().y * 0.5f;
+		float boxLeft = box->GetCenter().x - box->GetSize().x * 0.5f;
+		float boxRight = box->GetCenter().x + box->GetSize().x * 0.5f;
+		float boxFront = box->GetCenter().z - box->GetSize().z * 0.5f;
+		float boxBack = box->GetCenter().z + box->GetSize().z * 0.5f;
 
-	//実際に離れている距離を求める
-	VECTOR objectAPos = _objectA->GetPos();
-	VECTOR objectBPos = _objectB->GetPos();
+		//値をmin～maxの間に収める
+		auto Clamp = [](float v, float min, float max)
+			{
+				if (v < min)return min;
+				if (v > max)return max;
+				return v;
+			};
 
-	VECTOR dir = VSub(objectBPos, objectAPos);
-	float len2 = VSize(dir);
+		//球と箱の最近接点を求める
+		VECTOR closest;
+		closest.x = Clamp(sphere->GetCenter().x, boxLeft, boxRight);
+		closest.y = Clamp(sphere->GetCenter().y, boxUp, boxDown);
+		closest.z = Clamp(sphere->GetCenter().z, boxFront, boxBack);
 
-	//めり込んでいたら
-	if (len1 > len2)
-	{
+		//最近接点から球の中心座標までの距離を求める
+		VECTOR diff = VSub(sphere->GetCenter(), closest);
+
+		//距離を求める
+		float dist = VSize(diff);
+
+		//求めた距離が球の半径の以上なら当たっていないので処理をしない
+		if (dist >= sphere->GetRad() || dist == 0.0f)return;
+
+		//押し出し方向を正規化
+		VECTOR pushDir = VScale(diff, 1.0f / dist);
+
 		//めり込み量を求める
-		float len3 = len1 - len2;
+		float penetration = sphere->GetRad() - dist;
 
-		len3 = len3 * 0.5f;
+		//球を押し戻す---------------------------
+		VECTOR spherePos = sphere->GetPos();
 
-		//移動させるベクトルを求める
+		spherePos = VAdd(spherePos, VScale(pushDir, penetration));
 
-		//方向ベクトルなので正規化する
+		sphere->SetPos(spherePos);
 
-		//オブジェクトBの押し出し----------------
-		if (_objectB->GetIsPushed() == true)
+		//箱の上に乗っていたら重力をリセットする
+		if (spherePos.y >= boxUp)
 		{
-			dir = VNorm(dir);
-
-			dir = VScale(dir, len3);
-
-			objectBPos = VAdd(_objectB->GetPos(), dir);
-
-			_objectB->SetPos(VAdd(_objectB->GetPos(), dir));
+			sphere->GravityReset();
 		}
 		//---------------------------------------
 
-		//オブジェクトAの押し出し----------------
-		if (_objectA->GetIsPushed() == true)
-		{
-			VECTOR dir2 = VSub(objectAPos, objectBPos);
-			dir2 = VNorm(dir2);
-			dir2 = VScale(dir2, len3);
 
-			objectAPos = VAdd(_objectA->GetPos(), dir2);
+		//-------------------------------------------------------------
 
-			_objectA->SetPos(VAdd(_objectA->GetPos(), dir2));
-		}
-		//---------------------------------------
 	}
+	//球同士の当たり判定の場合
+	else
+	{
+		//オブジェクト同士が当たっているか
+		if (CCollision::CheckHitSphereToSphere(_objectA->GetCenter(), _objectA->GetRad(),
+			_objectB->GetCenter(), _objectB->GetRad()) == true)
+		{
+			//それぞれ当たり判定の処理をする
+			_objectA->HitCalc(_objectB);
+			_objectB->HitCalc(_objectA);
 
-	//-------------------------------------------------------------
+		}
+
+		//押し出しフラグがfalseなら処理をしない
+		if (_objectA->GetIsPushed() == false ||
+			_objectB->GetIsPushed() == false)
+			return;
+
+		//押し戻し処理-------------------------------------------------
+
+		//本来離れてほしい距離を求める
+		float len1 = _objectA->GetRad() + _objectB->GetRad();
+
+		//実際に離れている距離を求める
+		VECTOR objectAPos = _objectA->GetPos();
+		VECTOR objectBPos = _objectB->GetPos();
+
+		VECTOR dir = VSub(objectBPos, objectAPos);
+		float len2 = VSize(dir);
+
+		//めり込んでいたら
+		if (len1 > len2)
+		{
+			//めり込み量を求める
+			float len3 = len1 - len2;
+
+			len3 = len3 * 0.5f;
+
+			//移動させるベクトルを求める
+
+			//方向ベクトルなので正規化する
+
+			//オブジェクトBの押し出し----------------
+			if (_objectB->GetIsPushed() == true)
+			{
+				dir = VNorm(dir);
+
+				dir = VScale(dir, len3);
+
+				objectBPos = VAdd(_objectB->GetPos(), dir);
+
+				_objectB->SetPos(VAdd(_objectB->GetPos(), dir));
+			}
+			//---------------------------------------
+
+			//オブジェクトAの押し出し----------------
+			if (_objectA->GetIsPushed() == true)
+			{
+				VECTOR dir2 = VSub(objectAPos, objectBPos);
+				dir2 = VNorm(dir2);
+				dir2 = VScale(dir2, len3);
+
+				objectAPos = VAdd(_objectA->GetPos(), dir2);
+
+				_objectA->SetPos(VAdd(_objectA->GetPos(), dir2));
+			}
+			//---------------------------------------
+		}
+
+		//-------------------------------------------------------------
+
+	}
 
 }
 
@@ -426,6 +515,24 @@ void CCollisionManager::CheckHitCpuPlayerFOVToItem(CPlayerManager& _playerManage
 			CItemBase* item = _itemManager.GetItem(item_i);
 
 			CheckHitObjectToObject(cpuPlayerFOV, item);
+		}
+	}
+}
+
+//----------------------------------------------
+//		プレイヤーとギミックの当たり判定
+//----------------------------------------------
+void CCollisionManager::CheckHitPlayerToGimmick(CPlayerManager& _playerManager, CGimmickManager& _gimmickManager)
+{
+	for (int player_i = 0; player_i < _playerManager.GetPlayerNum(); player_i++)
+	{
+		CPlayer* player = _playerManager.GetPlayer(player_i);
+
+		for (int gimmick_i = 0; gimmick_i < _gimmickManager.GetGimmickNum(); gimmick_i++)
+		{
+			CGimmickBase* gimmick = _gimmickManager.GetGimmick(gimmick_i);
+
+			CheckHitObjectToObject(player, gimmick);
 		}
 	}
 }
