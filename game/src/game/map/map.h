@@ -18,12 +18,15 @@ enum tagMapCenterId
 	MAP_ID_CENTER_NONE = -1,	//ID無し
 	MAP_ID_CENTER1,				//中心一つ目
 	MAP_ID_CENTER2,				//中心二つ目
+	MAP_ID_CENTER3,				//中心三つ目
+	MAP_ID_CENTER4,				//中心四つ目
+	MAP_ID_CENTER5,				//中心五つ目
 
 	MAP_CENTER_NUM,				//中心の数
 };
 
 static const char* MAP_FRAME_PATH[MAP_NUM] = {
-	"data/model/map/TestMap7Frame.mv1",
+	"data/model/map/TestMap8Frame.mv1",
 	"data/model/map/selectMap/selectMapFrame.mv1",
 	"data/model/map/resultMap/resultMapFrame.mv1",
 };					//マップのフレームパス
@@ -34,7 +37,7 @@ class CMap :public CObject
 {
 private:
 	int m_hitHndl;			//当たり判定ようのマップのハンドル
-	tagMapCenterId m_mapId;	//マップのID
+	int  m_mapId;			//マップのID
 public:
 	//コンストラクタ・デストラクタ
 	CMap();
@@ -57,7 +60,7 @@ public:
 	int GetHitHndl() { return m_hitHndl; }
 
 	//マップのIDを取得
-	tagMapCenterId GetCenterId() { return m_mapId; }
+	tagMapCenterId GetCenterId() { return static_cast<tagMapCenterId>(m_mapId); }
 
 };
 

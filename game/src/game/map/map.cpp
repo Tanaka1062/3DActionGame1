@@ -6,11 +6,11 @@
 constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
 constexpr VECTOR SCALE = { 1.0f,1.0f,1.0f };		//大きさ
 static const char* MAP_MODEL_PATH[MAP_NUM] ={
-	"data/model/map/TestMap7test.mv1",
+	"data/model/map/TestMap8.mv1",
 	"data/model/map/selectMap/selectMap.mv1",
 	"data/model/map/resultMap/resultMap.mv1",
 };					//ロードするファイル名
-constexpr int MAP_MOVE_TIME = 150;			//ステージが移動するまでの時間
+constexpr int MAP_MOVE_TIME = 30;			//ステージが移動するまでの時間
 
 //==========================================
 
@@ -67,16 +67,15 @@ void CMap::Step()
 
 	CGameTime* gameTime = CGameTime::GetInstance();
 
-	if (MAP_MOVE_TIME >= gameTime->GetTime())
+	if (0 >= gameTime->GetTime() % MAP_MOVE_TIME)
 	{
-		switch (m_mapId)
+		m_mapId += 1;
+
+		if (m_mapId >= MAP_ID_CENTER5)
 		{
-		case MAP_ID_CENTER1:
-			m_mapId = MAP_ID_CENTER2;
-			break;
-		case MAP_ID_CENTER2:
-			break;
+			m_mapId = MAP_ID_CENTER5;
 		}
+
 	}
 }
 
