@@ -40,6 +40,16 @@ constexpr int MAP_FRAME_NUM = 26;				//マップのフレーム番号
 
 constexpr int SPAWN_TIME = 7 * 60;			//スポーンするまで時間
 
+constexpr int SPAWN_NUM[MAP_CENTER_NUM]		//マップごとのフレームの数
+	{
+		8,
+		8,
+		8,
+		8,
+		11,
+	};
+
+
 //-----------------------
 //	  コンストラクタ
 //-----------------------
