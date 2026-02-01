@@ -36,7 +36,7 @@ static const char* MODEL_PATH[ITEM_NUM] =							//モデルのパス
 
 };
 
-constexpr int MAP_FRAME_NUM = 26;				//マップのフレーム番号
+constexpr int MAP_FRAME_NUM = 56;			//マップのフレーム番号
 
 constexpr int SPAWN_TIME = 7 * 60;			//スポーンするまで時間
 
@@ -137,15 +137,7 @@ void CSpawnItemManager::Init(CPlayerManager* _playerManager)
 	for (int map_i = 0; map_i < MAP_CENTER_NUM; map_i++)
 	{
 		m_spawnData.push_back(vector<tagSpawnData>());
-		switch (map_i)
-		{
-		case MAP_ID_CENTER1:
-			spawnNum = MAP1_SPAWN_POS_NUM;
-			break;
-		case MAP_ID_CENTER2:
-			spawnNum = MAP2_SPAWN_POS_NUM;
-			break;
-		}
+		spawnNum = SPAWN_NUM[map_i];
 
 		for (int spawn_i = 0; spawn_i < spawnNum; spawn_i++)
 		{

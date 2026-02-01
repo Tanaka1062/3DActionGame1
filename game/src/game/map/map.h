@@ -38,6 +38,7 @@ class CMap :public CObject
 private:
 	int m_hitHndl;			//当たり判定ようのマップのハンドル
 	int  m_mapId;			//マップのID
+	int m_mapMoveTimer;		//マップの移動する時間
 public:
 	//コンストラクタ・デストラクタ
 	CMap();

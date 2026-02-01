@@ -22,7 +22,7 @@ enum tagModelName					//モデル一覧
 constexpr float TARGET_LEN = -200.0f;			//ターゲットと認識するまでの長さ
 constexpr float TARGET_MAX_DISTANCE = 40.0f;	//どれくらい法線から離せるか
 
-constexpr int MAP_FRAME_NUM = 9;				//マップのフレーム番号
+constexpr int MAP_FRAME_NUM = 15;				//マップのフレーム番号
 constexpr float DIE_RADIUS = 240.0f;			//画面外判定の半径
 
 static const char* MODEL_PATH[PLAYER_NUM] =

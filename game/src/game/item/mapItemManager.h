@@ -5,21 +5,6 @@
 #include "../data.h"
 #include "itemObject/box/box.h"
 
-//アイテムの名前
-enum tagMapItemSpawnPos
-{
-	MAP_ITEM_SPAWN_POS_1,	//マップに置かれているアイテムの出現座標1
-	MAP_ITEM_SPAWN_POS_2,	//マップに置かれているアイテムの出現座標2
-	MAP_ITEM_SPAWN_POS_3,	//マップに置かれているアイテムの出現座標3
-	MAP_ITEM_SPAWN_POS_4,	//マップに置かれているアイテムの出現座標4
-	MAP_ITEM_SPAWN_POS_5,	//マップに置かれているアイテムの出現座標5
-	MAP_ITEM_SPAWN_POS_6,	//マップに置かれているアイテムの出現座標6
-	MAP_ITEM_SPAWN_POS_7,	//マップに置かれているアイテムの出現座標7
-	MAP_ITEM_SPAWN_POS_8,	//マップに置かれているアイテムの出現座標8
-
-	MAP_ITEM_SPAWN_POS_NUM,	//マップに置かれているアイテムの出現座標の数
-};
-
 //アイテムマネージャークラス
 class CMapItemManager
 {
@@ -42,7 +27,7 @@ public:
 	void Exit();
 
 	//アイテムの数を取得
-	int GetItemNum() { return MAP_ITEM_SPAWN_POS_NUM; }
+	int GetItemNum() { return static_cast<int>(m_item.size()); }
 
 	//アイテムのアドレスを取得
 	std::unique_ptr<CItemBase> GetItem(int _num);

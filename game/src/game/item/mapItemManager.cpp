@@ -10,16 +10,15 @@ static const char* MODEL_PATH =				//モデルのパス
 	"data/model/item/box/box.mv1",
 };
 
-constexpr int SPAWN_POS_FRAME_ID[MAP_ITEM_SPAWN_POS_NUM] =	//スポーンする座標のフレームID
+constexpr int MAP_FRAME_NUM = 143;				//スポーンする座標のフレームID
+
+constexpr int SPAWN_NUM[MAP_CENTER_NUM]		//マップごとのフレームの数
 {
-	59,
-	61,
-	63,
-	65,
-	67,
-	69,
-	71,
-	73,
+	4,
+	4,
+	4,
+	4,
+	4,
 };
 
 //-----------------------
@@ -48,16 +47,18 @@ void CMapItemManager::Init()
 {
 	//アイテムが増えすぎないようにする
 	m_item.clear();
-	m_item.reserve(MAP_ITEM_SPAWN_POS_NUM);
 
 	//アイテムの初期化
-	for (int item_i = 0; item_i < MAP_ITEM_SPAWN_POS_NUM; item_i++)
+	for (int map_i = 0; map_i < MAP_CENTER_NUM; map_i++)
 	{
-		unique_ptr<CItemBase> box = make_unique<CBox>();
+		for (int item_i = 0; item_i < SPAWN_NUM[map_i]; item_i++)
+		{
+			unique_ptr<CItemBase> box = make_unique<CBox>();
 
-		box->Init();
+			box->Init();
 
-		m_item.push_back(move(box));
+			m_item.push_back(move(box));
+		}
 	}
 
 	m_hndl = -1;
@@ -80,12 +81,14 @@ void CMapItemManager::Load()
 	//マップのフレームハンドルをロード
 	int mapFrameHndl = MV1LoadModel(MAP_FRAME_PATH[MAP_ID_GRASSLAND]);
 
-	for (int spawnPos_i = 0; spawnPos_i < MAP_ITEM_SPAWN_POS_NUM; spawnPos_i++)
+	int mapFrameNum = MAP_FRAME_NUM;
+	for (int spawnPos_i = 0; spawnPos_i < m_item.size(); spawnPos_i++)
 	{
 		//アイテムの出現座標を保存
 		VECTOR spawnPos = ZERO;
 
-		spawnPos = MV1GetFramePosition(mapFrameHndl, SPAWN_POS_FRAME_ID[spawnPos_i]);
+		spawnPos = MV1GetFramePosition(mapFrameHndl, mapFrameNum);
+		mapFrameNum += 2;
 
 		m_item[spawnPos_i]->SetSpawnPos(spawnPos);
 	}

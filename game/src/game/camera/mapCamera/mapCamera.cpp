@@ -7,6 +7,7 @@ constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
 
 constexpr float MOVE_SPEED = 0.5f;				//カメラの移動速度
 
+constexpr int MAP_FRAME_NUM = 4;				//マップのフレーム番号
 //============================================
 
 //---------------------------------
@@ -29,7 +30,7 @@ void CMapCamera::Init(VECTOR _focus)
 
 	m_pos = MV1GetFramePosition(frameHndl,1);
 
-	int frameNum = 4;
+	int frameNum = MAP_FRAME_NUM;
 	for (int mapCenter_i = 0; mapCenter_i < MAP_CENTER_NUM; mapCenter_i++)
 	{
 		m_mapCenterPos[mapCenter_i] = MV1GetFramePosition(frameHndl, frameNum);
