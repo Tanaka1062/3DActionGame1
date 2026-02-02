@@ -5,6 +5,7 @@
 #include "../../player/playerManager.h"
 #include "../coin/coin.h"
 #include "../../map/map.h"
+#include "../itemBase.h"
 
 constexpr int SPAWN_ITEM_MAX = 20;		//アイテムの最大量
 
@@ -19,7 +20,7 @@ private:
 		bool isSpawn;									//出現したかどうか
 	};
 
-	std::vector<std::unique_ptr<CCoin>> m_coin;			//コイン保存用
+	std::vector<std::unique_ptr<CItemBase>> m_coin;			//コイン保存用
 	int m_hndl;											//アイテムのモデルハンドル
 	int m_spawnTime;									//時間カウント
 	bool m_isItemSpawn;									//アイテムがスポーンするかどうか

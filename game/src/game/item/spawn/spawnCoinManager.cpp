@@ -72,32 +72,7 @@ void CSpawnCoinManager::Init(CPlayerManager* _playerManager)
 	//生成用アイテムの生成
 	for (int spawn_i = 0; spawn_i < SPAWN_ITEM_MAX * ITEM_NUM; spawn_i++)
 	{
-
-		if (spawn_i <= SPAWN_ITEM_MAX * (ITEM_COIN + 1))
-		{
-			m_coin.push_back(make_unique<CCoin>());
-		}
-		else if (spawn_i <= SPAWN_ITEM_MAX * (ITEM_BOMB + 1))
-		{
-			m_coin.push_back(make_unique<CBomb>());
-		}
-		else if (spawn_i <= SPAWN_ITEM_MAX * (ITEM_SWORD + 1))
-		{
-			m_coin.push_back(make_unique<CSword>());
-		}
-		else if (spawn_i <= SPAWN_ITEM_MAX * (ITEM_GUN)+1)
-		{
-			m_coin.push_back(make_unique<CGun>());
-		}
-		else if (spawn_i <= SPAWN_ITEM_MAX * (ITEM_AX)+1)
-		{
-			m_coin.push_back(make_unique<CAx>());
-		}
-	}
-
-	for (int item_i = 0; item_i < ITEM_NUM; item_i++)
-	{
-		m_spawnProbability.push_back(SPAWN_PROBABILITY_INIT[item_i]);
+		m_coin.push_back(make_unique<CCoin>());
 	}
 
 	for (int spawn_i = 0; spawn_i < m_coin.size(); spawn_i++)
@@ -105,14 +80,8 @@ void CSpawnCoinManager::Init(CPlayerManager* _playerManager)
 		m_coin[spawn_i]->Init();
 	}
 
-
-	for (int hndl_i = 0; hndl_i < ITEM_NUM; hndl_i++)
-	{
-		m_hndl[hndl_i] = -1;
-	}
-
+	m_hndl = -1;
 	m_spawnTime = 0;
-
 	m_isItemSpawn = false;
 
 	int spawnNum = 0;
@@ -138,20 +107,12 @@ void CSpawnCoinManager::Init(CPlayerManager* _playerManager)
 void CSpawnCoinManager::Load()
 {
 	//アイテムのモデル読み込み
-	for (int hndl_i = 0; hndl_i < ITEM_NUM; hndl_i++)
-	{
-		if (m_hndl[hndl_i] == -1)
-		{
-			m_hndl[hndl_i] = MV1LoadModel(MODEL_PATH[hndl_i]);
-		}
-	}
+	m_hndl = MV1LoadModel(MODEL_PATH);
 
 	//アイテムのモデルロード
 	for (int spawn_i = 0; spawn_i < m_coin.size(); spawn_i++)
 	{
-		int hndl = m_hndl[m_coin[spawn_i]->GetItemName()];
-
-		m_coin[spawn_i]->Load(hndl);
+		m_coin[spawn_i]->Load(m_hndl);
 	}
 
 	//マップのフレームハンドルをロード
@@ -233,10 +194,10 @@ void CSpawnCoinManager::Exit()
 {
 	for (int hndl_i = 0; hndl_i < ITEM_NUM; hndl_i++)
 	{
-		if (m_hndl[hndl_i] != -1)
+		if (m_hndl != -1)
 		{
-			MV1DeleteModel(m_hndl[hndl_i]);
-			m_hndl[hndl_i] = -1;
+			MV1DeleteModel(m_hndl);
+			m_hndl = -1;
 		}
 	}
 
@@ -273,71 +234,10 @@ unique_ptr<CItemBase> CSpawnCoinManager::SpawnItem(tagMapCenterId _mapId)
 	//スポーンさせるアイテムの名前
 	tagItemName itemNameId = ITEM_NONE;
 
-	//アイテムの出現確率の合計を求める
-	int spawnProbabilitySum = 0;
-	for (int item_i = 0; item_i < m_spawnProbability.size(); item_i++)
-	{
-		spawnProbabilitySum += m_spawnProbability[item_i];
-	}
-
-	//確率の合計を最大値としてランダムな値を取得する
-	int randNum = GetRand(spawnProbabilitySum);
-
-	//スポーンするアイテムを作成
-
 	//アイテムの出現確率
 	int spawnProbability = 0;
 	//出現確率の減少量を保存
 	int spawnProbabilityDecrease = 0;
-
-	for (int item_i = 0; item_i < ITEM_NUM; item_i++)
-	{
-		//アイテムの出現確率を求める
-		spawnProbability += m_spawnProbability[item_i];
-
-		//出現確率に入ったら出現するアイテムを特定する
-		if (randNum <= spawnProbability)
-		{
-			itemNameId = static_cast<tagItemName>(item_i);
-
-			//出現確率がマイナスになる場合は0になるまでの減少量を保存する
-			if (m_spawnProbability[item_i] - SPAWN_PROBABILITY_DECREASE[item_i] > 0)
-			{
-				m_spawnProbability[item_i] -= SPAWN_PROBABILITY_DECREASE[item_i];
-				spawnProbabilityDecrease = SPAWN_PROBABILITY_DECREASE[item_i];
-			}
-			//出現確率の減少量を保存する
-			else
-			{
-				spawnProbabilityDecrease = m_spawnProbability[item_i];
-				m_spawnProbability[item_i] = 0;
-			}
-			break;
-		}
-	}
-
-	//出現確率の最低値保存用
-	int minSpawnProbability = -1;
-	//一番低い出現確率のアイテム
-	tagItemName minSpawnProbabilityItem = ITEM_NONE;
-
-	//一番出現確率が低いアイテムを調べる
-	for (int item_i = 0; item_i < m_spawnProbability.size(); item_i++)
-	{
-		//今回出現したアイテムはスキップする
-		if (item_i == itemNameId)continue;
-
-		//出現確率が現在の値より低かったら値を保存する
-		if (minSpawnProbability > m_spawnProbability[item_i] || minSpawnProbability == -1)
-		{
-			minSpawnProbabilityItem = static_cast<tagItemName>(item_i);
-			minSpawnProbability = m_spawnProbability[item_i];
-		}
-
-	}
-
-	//一番出現確率が低いアイテムの出現確率を減少量分上げる
-	m_spawnProbability[minSpawnProbabilityItem] += spawnProbabilityDecrease;
 	
 	//------------------------------------------------
 
@@ -359,27 +259,10 @@ unique_ptr<CItemBase> CSpawnCoinManager::SpawnItem(tagMapCenterId _mapId)
 	//もしも用意しているアイテムがなかったら生成する
 	if (spawnItem == nullptr)
 	{
-		switch (itemNameId)
-		{
-		case ITEM_COIN:
-			spawnItem = make_unique<CCoin>();
-			break;
-		case ITEM_BOMB:
-			spawnItem = make_unique<CBomb>();
-			break;
-		case ITEM_SWORD:
-			spawnItem = make_unique<CSword>();
-			break;
-		case ITEM_GUN:
-			spawnItem = make_unique<CGun>();
-			break;
-		case ITEM_AX:
-			spawnItem = make_unique<CAx>();
-			break;
-		}
+		spawnItem = make_unique<CCoin>();
 
 		spawnItem->Init();
-		spawnItem->Load(m_hndl[itemNameId]);
+		spawnItem->Load(m_hndl);
 
 	}
 
@@ -404,8 +287,6 @@ unique_ptr<CItemBase> CSpawnCoinManager::SpawnItem(tagMapCenterId _mapId)
 	}
 
 	//-----------------------------------------------
-
-
 
 	//スポーンしているかをリセット
 	m_isItemSpawn = false;
@@ -437,7 +318,7 @@ unique_ptr<CItemBase> CSpawnCoinManager::SpawnCoin()
 		spawnCoin = make_unique<CCoin>();
 
 		spawnCoin->Init();
-		spawnCoin->Load(m_hndl[ITEM_COIN]);
+		spawnCoin->Load(m_hndl);
 	}
 
 	//コインの生存フラグをtrueにする
