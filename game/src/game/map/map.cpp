@@ -68,12 +68,10 @@ void CMap::Step()
 
 	CGameTime* gameTime = CGameTime::GetInstance();
 
-	m_mapMoveTimer += gameTime->GetTime();
-
 	//Œˆ‚ß‚ç‚ê‚½ŽžŠÔ‚¾‚¯’Ê‚é
-	if (m_mapMoveTimer >= MAP_MOVE_TIME)
+	if (gameTime->GetTime() - m_mapMoveTimer == MAP_MOVE_TIME)
 	{
-		m_mapMoveTimer -= MAP_MOVE_TIME;
+		m_mapMoveTimer += MAP_MOVE_TIME;
 
 		m_mapId += 1;
 

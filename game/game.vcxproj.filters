@@ -154,6 +154,9 @@
     <Filter Include="ソース ファイル\game\map\gimmick">
       <UniqueIdentifier>{8bc838ae-995d-40bb-9aa7-0fa22f9b7511}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\game\item\spawn">
+      <UniqueIdentifier>{97015016-7803-4003-be0e-d490f5136772}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\number.cpp">
@@ -300,9 +303,6 @@
     <ClCompile Include="src\game\item\mapItemManager.cpp">
       <Filter>ソース ファイル\game\item</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\item\spawnItemManager.cpp">
-      <Filter>ソース ファイル\game\item</Filter>
-    </ClCompile>
     <ClCompile Include="src\game\ui\powerUpGauge\powerUpGouge.cpp">
       <Filter>ソース ファイル\game\ui\powerUpGauge</Filter>
     </ClCompile>
@@ -371,6 +371,12 @@
     </ClCompile>
     <ClCompile Include="src\game\map\gimmick\gimmickBase.cpp">
       <Filter>ソース ファイル\game\map\gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\item\spawn\spawnItemManager.cpp">
+      <Filter>ソース ファイル\game\item\spawn</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\item\spawn\spawnCoinManager.cpp">
+      <Filter>ソース ファイル\game\item\spawn</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -521,9 +527,6 @@
     <ClInclude Include="src\game\item\mapItemManager.h">
       <Filter>ソース ファイル\game\item</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\item\spawnItemManager.h">
-      <Filter>ソース ファイル\game\item</Filter>
-    </ClInclude>
     <ClInclude Include="src\game\ui\powerUpGauge\powerUpGouge.h">
       <Filter>ソース ファイル\game\ui\powerUpGauge</Filter>
     </ClInclude>
@@ -595,6 +598,12 @@
     </ClInclude>
     <ClInclude Include="src\game\map\gimmick\gimmickBase.h">
       <Filter>ソース ファイル\game\map\gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\item\spawn\spawnItemManager.h">
+      <Filter>ソース ファイル\game\item\spawn</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\item\spawn\spawnCoinManager.h">
+      <Filter>ソース ファイル\game\item\spawn</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

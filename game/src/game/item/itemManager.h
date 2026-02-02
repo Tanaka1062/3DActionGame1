@@ -14,7 +14,7 @@
 class CItemManager
 {
 private:
-	std::list<std::unique_ptr<CItemBase>> m_item;					//アイテムのクラス
+	std::list<std::unique_ptr<CItemBase>> m_item;		//アイテムのクラス
 	CMapItemManager m_mapItemManager;					//マップに置いてあるアイテムマネージャー
 	CSpawnItemManager m_spawnItemManager;				//スポーンするアイテムのマネージャー
 

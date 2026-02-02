@@ -31,9 +31,10 @@ private:
 	CGameTime();
 	~CGameTime();
 
-	int m_timeCount;					//タイムカウント
+	int m_timeCount;					//経過時間
 	bool m_isEnd;						//終わったかフラグ
 	int m_startTime;					//開始時間
+	int m_endTime;						//終了時間
 
 public:
 	
@@ -49,5 +50,7 @@ public:
 	//時間を取得
 	int GetTime() { return m_timeCount; }
 
+	//終了時間を取得
+	int GetEndTime() { return m_endTime; }
 };
 

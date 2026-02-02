@@ -1,7 +1,6 @@
 #pragma once
 #include"../../lib/model/3DObject.h"
 
-
 class CSky:public CObject
 {
 private:
@@ -11,7 +10,6 @@ public:
 	CSky();
 	~CSky();
 
-
 	//‰Šú‰»
 	void Init();
 
@@ -19,7 +17,7 @@ public:
 	void Load();
 
 	//–ˆƒtƒŒ[ƒ€‚·‚éˆ—
-	void Step();
+	void Step(VECTOR _centerPos = VGet(0.0f,0.0f,0.0f));
 
 private:
 

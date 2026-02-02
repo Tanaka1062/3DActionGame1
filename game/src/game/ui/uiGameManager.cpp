@@ -103,7 +103,7 @@ void CUiGameManager::Step()
 
 	CGameTime* gameTime = CGameTime::GetInstance();
 
-	m_time.Step(gameTime->GetTime());
+	m_time.Step(gameTime->GetEndTime() - gameTime->GetTime());
 }
 
 //•`ŽÊ

@@ -159,7 +159,8 @@
     <ClCompile Include="src\game\item\itemObject\box\box.cpp" />
     <ClCompile Include="src\game\item\itemObject\itemObjectBase.cpp" />
     <ClCompile Include="src\game\item\mapItemManager.cpp" />
-    <ClCompile Include="src\game\item\spawnItemManager.cpp" />
+    <ClCompile Include="src\game\item\spawn\spawnCoinManager.cpp" />
+    <ClCompile Include="src\game\item\spawn\spawnItemManager.cpp" />
     <ClCompile Include="src\game\item\weapon\ax\ax.cpp" />
     <ClCompile Include="src\game\item\weapon\gun\gun.cpp" />
     <ClCompile Include="src\game\item\weapon\itemWeaponBase.cpp" />
@@ -235,7 +236,8 @@
     <ClInclude Include="src\game\item\itemObject\box\box.h" />
     <ClInclude Include="src\game\item\itemObject\itemObjectBase.h" />
     <ClInclude Include="src\game\item\mapItemManager.h" />
-    <ClInclude Include="src\game\item\spawnItemManager.h" />
+    <ClInclude Include="src\game\item\spawn\spawnCoinManager.h" />
+    <ClInclude Include="src\game\item\spawn\spawnItemManager.h" />
     <ClInclude Include="src\game\item\weapon\ax\ax.h" />
     <ClInclude Include="src\game\item\weapon\gun\gun.h" />
     <ClInclude Include="src\game\item\weapon\itemWeaponBase.h" />

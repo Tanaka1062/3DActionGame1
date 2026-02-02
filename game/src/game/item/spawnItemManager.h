@@ -8,7 +8,7 @@
 #include "itemObject/box/box.h"
 #include "../map/map.h"
 
-constexpr int SPAWN_ITEM_MAX = 10;		//アイテムの最大量
+constexpr int SPAWN_ITEM_MAX = 20;		//アイテムの最大量
 
 //アイテムマネージャークラス
 class CSpawnItemManager

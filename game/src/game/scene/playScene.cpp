@@ -117,7 +117,7 @@ void CPlayScene::Step()
 {
 	//ŠeíŒvZˆ—‚ğÀs
 	m_ground.Step();
-	m_sky.Step();
+	m_sky.Step(CCameraManager::GetFocusPos());
 	m_playerManager.Step(&m_attackManager,&m_shot, CCameraManager::GetRot().y,m_ground.GetCenterId());
 	m_shot.Step();
 	m_itemManager.Step(&m_playerManager,m_ground.GetCenterId());

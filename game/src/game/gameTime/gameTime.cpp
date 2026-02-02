@@ -20,9 +20,10 @@ CGameTime::~CGameTime()
 //初期化
 void CGameTime::Init()
 {
-	m_timeCount = END_TIME;
+	m_timeCount = 0;
 	m_isEnd = false;
 	m_startTime = -1;
+	m_endTime = END_TIME;
 }
 
 //ステップ
@@ -37,10 +38,10 @@ void CGameTime::Step()
 	if (GetNowCount() - m_startTime >= 1000)
 	{
 		m_startTime = GetNowCount();
-		m_timeCount--;
+		m_timeCount++;
 	}
 
-	if (m_timeCount <= 0)
+	if (m_timeCount >= m_endTime)
 	{
 		m_isEnd = true;
 	}

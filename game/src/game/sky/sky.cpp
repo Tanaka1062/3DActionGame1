@@ -2,7 +2,7 @@
 //#include<DxLib.h>
 
 //定義関連==================================
-constexpr float ALL_SCALE = 18.0f;
+constexpr float ALL_SCALE = 22.0f;
 constexpr VECTOR SCALE = { ALL_SCALE, ALL_SCALE, ALL_SCALE };
 constexpr float ROTATE_SPEED = 0.1f;				//回転速度
 constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
@@ -50,11 +50,13 @@ void CSky::Load()
 //---------------------------
 //	毎フレームする処理
 //---------------------------
-void CSky::Step()
+void CSky::Step(VECTOR _centerPos)
 {
 	//プレイヤーの回転
 	Rotate();
 
+	//カメラの注視点を中心にする
+	m_pos = _centerPos;
 }
 
 //---------------------------

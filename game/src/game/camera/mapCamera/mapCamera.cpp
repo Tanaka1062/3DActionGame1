@@ -5,7 +5,7 @@
 //定義関連====================================
 constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
 
-constexpr float MOVE_SPEED = 0.5f;				//カメラの移動速度
+constexpr float MOVE_SPEED = 0.8f;				//カメラの移動速度
 
 constexpr int MAP_FRAME_NUM = 4;				//マップのフレーム番号
 //============================================
