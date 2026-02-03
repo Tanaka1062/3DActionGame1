@@ -10,7 +10,7 @@ static const char* MODEL_PATH =				//モデルのパス
 	"data/model/item/box/box.mv1",
 };
 
-constexpr int MAP_FRAME_NUM = 143;				//スポーンする座標のフレームID
+constexpr int MAP_FRAME_NUM = 89;				//スポーンする座標のフレームID
 
 constexpr int SPAWN_NUM[MAP_CENTER_NUM]		//マップごとのフレームの数
 {

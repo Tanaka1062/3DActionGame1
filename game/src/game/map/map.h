@@ -26,7 +26,7 @@ enum tagMapCenterId
 };
 
 static const char* MAP_FRAME_PATH[MAP_NUM] = {
-	"data/model/map/TestMap8Frame.mv1",
+	"data/model/map/TestMap9Frame.mv1",
 	"data/model/map/selectMap/selectMapFrame.mv1",
 	"data/model/map/resultMap/resultMapFrame.mv1",
 };					//マップのフレームパス

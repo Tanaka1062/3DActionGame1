@@ -19,7 +19,6 @@ enum tagItemType
 enum tagItemName
 {
 	ITEM_NONE = -1,			//âΩÇ‡Ç»Ç¢	
-	ITEM_COIN,				//ÉRÉCÉì
 	ITEM_BOMB,				//îöíe
 	ITEM_SWORD,				//åï
 	ITEM_GUN,				//èe

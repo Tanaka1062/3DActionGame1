@@ -10,7 +10,6 @@ using namespace std;
 
 constexpr int SPAWN_PROBABILITY_INIT[ITEM_NUM] =					//ƒAƒCƒeƒ€‚ÌoŒ»Šm—¦‚Ì‰Šú’l
 {
-	40,
 	5,
 	5,
 	5,
@@ -19,7 +18,6 @@ constexpr int SPAWN_PROBABILITY_INIT[ITEM_NUM] =					//ƒAƒCƒeƒ€‚ÌoŒ»Šm—¦‚Ì‰Šú’
 
 constexpr int SPAWN_PROBABILITY_DECREASE[ITEM_NUM] =				//ƒAƒCƒeƒ€‚ÌoŒ»Šm—¦‚ÌŒ¸­’l
 {
-	0,
 	5,
 	5,
 	5,
@@ -28,7 +26,6 @@ constexpr int SPAWN_PROBABILITY_DECREASE[ITEM_NUM] =				//ƒAƒCƒeƒ€‚ÌoŒ»Šm—¦‚ÌŒ¸
 
 static const char* MODEL_PATH[ITEM_NUM] =							//ƒ‚ƒfƒ‹‚ÌƒpƒX
 {
-	"data/model/item/powerCoin/coin.mv1",
 	"data/model/item/bomb/bomb.mv1",
 	"data/model/item/weapon/sword/sword.mv1",
 	"data/model/item/weapon/gun/gun.mv1",
@@ -42,11 +39,11 @@ constexpr int SPAWN_TIME = 3 * 60;			//ƒXƒ|[ƒ“‚·‚é‚Ü‚ÅŠÔ
 
 constexpr int SPAWN_NUM[MAP_CENTER_NUM]		//ƒ}ƒbƒv‚²‚Æ‚ÌƒtƒŒ[ƒ€‚Ì”
 	{
-		8,
-		8,
-		8,
-		8,
-		11,
+		0,
+		4,
+		4,
+		4,
+		4,
 	};
 
 
@@ -90,12 +87,7 @@ void CSpawnItemManager::Init(CPlayerManager* _playerManager)
 	//¶¬—pƒAƒCƒeƒ€‚Ì¶¬
 	for (int spawn_i = 0; spawn_i < SPAWN_ITEM_MAX * ITEM_NUM; spawn_i++)
 	{
-
-		if (spawn_i <= SPAWN_ITEM_MAX * (ITEM_COIN + 1))
-		{
-			m_item.push_back(make_unique<CCoin>());
-		}
-		else if (spawn_i <= SPAWN_ITEM_MAX * (ITEM_BOMB + 1))
+		if (spawn_i <= SPAWN_ITEM_MAX * (ITEM_BOMB + 1))
 		{
 			m_item.push_back(make_unique<CBomb>());
 		}
@@ -271,20 +263,17 @@ void CSpawnItemManager::Exit()
 	//----------------------------
 }
 
-//-----------------------
-//ƒAƒCƒeƒ€‚ÌƒAƒhƒŒƒX‚ğæ“¾
-//-----------------------
-CItemBase* CSpawnItemManager::GetItem(int _num)
-{
-	if (m_item.size() < _num)return nullptr;
-
-	return m_item[_num].get();
-
-}
-
 //ƒAƒCƒeƒ€‚ğoŒ»‚³‚¹‚é
 unique_ptr<CItemBase> CSpawnItemManager::SpawnItem(tagMapCenterId _mapId)
 {
+	//ƒ}ƒbƒv‚ÉƒAƒCƒeƒ€oŒ»êŠ‚ª‚È‚¢ê‡nullptr‚ğ•Ô‚·
+	if (m_spawnData[_mapId].size() == 0)
+	{
+		//ƒXƒ|[ƒ“‚µ‚Ä‚¢‚é‚©‚ğƒŠƒZƒbƒg
+		m_isItemSpawn = false;
+
+		return nullptr;
+	}
 
 	//‚Ç‚ÌƒAƒCƒeƒ€‚ğƒXƒ|[ƒ“‚³‚¹‚é‚©‚ğŒˆ‚ß‚é----------
 	
@@ -379,9 +368,6 @@ unique_ptr<CItemBase> CSpawnItemManager::SpawnItem(tagMapCenterId _mapId)
 	{
 		switch (itemNameId)
 		{
-		case ITEM_COIN:
-			spawnItem = make_unique<CCoin>();
-			break;
 		case ITEM_BOMB:
 			spawnItem = make_unique<CBomb>();
 			break;
@@ -430,40 +416,6 @@ unique_ptr<CItemBase> CSpawnItemManager::SpawnItem(tagMapCenterId _mapId)
 
 	//ƒXƒ|[ƒ“‚µ‚½ƒAƒCƒeƒ€‚ğ•Ô‚·
 	return spawnItem;
-}
-
-//ƒRƒCƒ“‚ğoŒ»‚³‚¹‚é
-unique_ptr<CItemBase> CSpawnItemManager::SpawnCoin()
-{
-	//oŒ»‚³‚¹‚éƒRƒCƒ“‚Ì•Û‘¶—p
-	unique_ptr<CItemBase> spawnCoin = nullptr;
-
-	//ƒŠƒXƒg‚Ì’†‚©‚çƒRƒCƒ“‚ğ’T‚µ‚Ä•Û‘¶—p‚É“ü‚ê‚é
-	for (int spawn_i = 0; spawn_i < m_item.size(); spawn_i++)
-	{
-		if (m_item[spawn_i] == nullptr)continue;
-
-		if (m_item[spawn_i]->GetItemName() == ITEM_COIN)
-		{
-			spawnCoin = move(m_item[spawn_i]);
-		}
-	}
-
-	//ƒRƒCƒ“‚ÌƒNƒ‰ƒX‚ª‚È‚©‚Á‚½‚çV‚µ‚­ì‚é
-	if (spawnCoin == nullptr)
-	{
-		spawnCoin = make_unique<CCoin>();
-
-		spawnCoin->Init();
-		spawnCoin->Load(m_hndl[ITEM_COIN]);
-	}
-
-	//ƒRƒCƒ“‚Ì¶‘¶ƒtƒ‰ƒO‚ğtrue‚É‚·‚é
-	spawnCoin->SetActive(true);
-	spawnCoin->SetIsSpawn(true);
-
-	//ƒXƒ|[ƒ“‚µ‚½ƒRƒCƒ“‚ğ•Ô‚·
-	return spawnCoin;
 }
 
 //ƒAƒCƒeƒ€‚ğŒ³‚É–ß‚·

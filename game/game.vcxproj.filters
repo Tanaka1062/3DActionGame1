@@ -378,6 +378,9 @@
     <ClCompile Include="src\game\item\spawn\spawnCoinManager.cpp">
       <Filter>ソース ファイル\game\item\spawn</Filter>
     </ClCompile>
+    <ClCompile Include="src\game\item\coin\spawnCoin.cpp">
+      <Filter>ソース ファイル\game\item\coin</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\lib\number.h">
@@ -604,6 +607,9 @@
     </ClInclude>
     <ClInclude Include="src\game\item\spawn\spawnCoinManager.h">
       <Filter>ソース ファイル\game\item\spawn</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\item\coin\spawnCoin.h">
+      <Filter>ソース ファイル\game\item\coin</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

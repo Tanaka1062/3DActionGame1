@@ -153,6 +153,7 @@
     <ClCompile Include="src\game\collisionManager\collisionManager.cpp" />
     <ClCompile Include="src\game\gameTime\gameTime.cpp" />
     <ClCompile Include="src\game\item\coin\coin.cpp" />
+    <ClCompile Include="src\game\item\coin\spawnCoin.cpp" />
     <ClCompile Include="src\game\item\itemBase.cpp" />
     <ClCompile Include="src\game\item\itemManager.cpp" />
     <ClCompile Include="src\game\item\itemObject\bomb\bomb.cpp" />
@@ -230,6 +231,7 @@
     <ClInclude Include="src\game\data.h" />
     <ClInclude Include="src\game\gameTime\gameTime.h" />
     <ClInclude Include="src\game\item\coin\coin.h" />
+    <ClInclude Include="src\game\item\coin\spawnCoin.h" />
     <ClInclude Include="src\game\item\itemBase.h" />
     <ClInclude Include="src\game\item\itemManager.h" />
     <ClInclude Include="src\game\item\itemObject\bomb\bomb.h" />

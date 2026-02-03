@@ -1,7 +1,5 @@
 #pragma once
 #include "../itemBase.h"
-#include "../../player/player.h"
-#include "../../player/playerData.h"
 
 class CCoin : public CItemBase
 {
@@ -12,10 +10,10 @@ public:
 	~CCoin();
 
 	//初期化
-	void Init();
+	virtual void Init();
 
 	//毎フレームする処理
-	void Step();
+	virtual void Step();
 
 	//数値の更新
 	void Update();

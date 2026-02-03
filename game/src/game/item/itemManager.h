@@ -9,6 +9,7 @@
 #include "mapItemManager.h"
 #include "spawnItemManager.h"
 #include "../map/map.h"
+#include "spawn/spawnCoinManager.h"
 
 //アイテムマネージャークラス
 class CItemManager
@@ -17,6 +18,7 @@ private:
 	std::list<std::unique_ptr<CItemBase>> m_item;		//アイテムのクラス
 	CMapItemManager m_mapItemManager;					//マップに置いてあるアイテムマネージャー
 	CSpawnItemManager m_spawnItemManager;				//スポーンするアイテムのマネージャー
+	CSpawnCoinManager m_coinManager;					//コインのマネージャークラス
 
 public:
 	//コンストラクタ・デストラクタ

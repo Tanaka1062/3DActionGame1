@@ -6,7 +6,7 @@
 constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
 constexpr VECTOR SCALE = { 1.0f,1.0f,1.0f };		//大きさ
 static const char* MAP_MODEL_PATH[MAP_NUM] ={
-	"data/model/map/TestMap8.mv1",
+	"data/model/map/TestMap9.mv1",
 	"data/model/map/selectMap/selectMap.mv1",
 	"data/model/map/resultMap/resultMap.mv1",
 };					//ロードするファイル名

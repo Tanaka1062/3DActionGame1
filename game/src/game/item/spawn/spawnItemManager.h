@@ -8,7 +8,7 @@
 #include "../itemObject/box/box.h"
 #include "../../map/map.h"
 
-constexpr int SPAWN_ITEM_MAX = 20;		//アイテムの最大量
+constexpr int SPAWN_ITEM_MAX = 10;		//アイテムの最大量
 
 //アイテムマネージャークラス
 class CSpawnItemManager
@@ -52,14 +52,8 @@ public:
 	//アイテムの数を取得
 	int GetItemNum() { return static_cast<int>(m_item.size()); }
 
-	//アイテムのアドレスを取得
-	CItemBase* GetItem(int _num);
-
 	//アイテムを出現させる
 	std::unique_ptr<CItemBase> SpawnItem(tagMapCenterId _mapId);
-
-	//コインを出現させる
-	std::unique_ptr<CItemBase> SpawnCoin();
 
 	//アイテムがスポーンするかを取得
 	bool GetIsItemSpawn() { return m_isItemSpawn; }
