@@ -50,6 +50,9 @@ public:
 	//アイテムの数を取得
 	int GetItemNum() { return static_cast<int>(m_item.size()); }
 
+	//アイテムのクラス全体を取得
+	std::list<unique_ptr<CItemBase>>& GetItemList() { return m_item; };
+
 	//アイテムのアドレスを取得
 	CItemBase* GetItem(int _num);
 

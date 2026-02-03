@@ -154,7 +154,15 @@ void CItemManager::Draw()
 {
 	for (auto item_i = m_item.begin(); item_i != m_item.end(); ++item_i)
 	{
-		(*item_i)->Draw();
+		if ((*item_i)->GetItemType() == ITEM_TYPE_COIN)
+		{
+			CCoin* coin = dynamic_cast<CCoin*>((*item_i).get());
+			coin->Draw(m_coinManager.GetHndl());
+		}
+		else
+		{
+			(*item_i)->Draw();
+		}
 	}
 }
 
@@ -182,8 +190,9 @@ CItemBase* CItemManager::GetItem(int _num)
 {
 	int itemNum = 0;
 
-	for (auto item_i = m_item.begin(); item_i != m_item.end(); item_i++)
+	for (auto item_i = m_item.begin(); item_i != m_item.end(); ++item_i)
 	{
+		return (*item_i).get();
 		if (itemNum == _num)
 		{
 			return (*item_i).get();

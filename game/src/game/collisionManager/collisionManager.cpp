@@ -8,19 +8,20 @@
 //----------------------------------------------
 //			オブジェクト同士の当たり判定
 //----------------------------------------------
-void CCollisionManager::CheckHitObjectToObject(CObject* _objectA, CObject* _objectB)
+void CCollisionManager::CheckHitObjectToObject(CObject& _objectA, CObject& _objectB)
 {
+	return;
 	//二つのオブジェクトが消えていたら処理をしない
-	if (_objectA->GetActive() == false || _objectB->GetActive() == false)return;
+	if (_objectA.GetActive() == false || _objectB.GetActive() == false)return;
 
 	//オブジェクトのタイプが球か箱かで当たり判定を変更する
 	//球と箱の当たり判定の場合
-	if (_objectA->GetObjectType() == OBJECT_TYPE_BOX || _objectB->GetObjectType() == OBJECT_TYPE_BOX)
+	if (_objectA.GetObjectType() == OBJECT_TYPE_BOX || _objectB.GetObjectType() == OBJECT_TYPE_BOX)
 	{
-		CObject* box = nullptr;
-		CObject* sphere = nullptr;
+		CObject box;
+		CObject sphere;
 
-		if (_objectA->GetObjectType() == OBJECT_TYPE_BOX)
+		if (_objectA.GetObjectType() == OBJECT_TYPE_BOX)
 		{
 			box = _objectA;
 			sphere = _objectB;
@@ -32,23 +33,23 @@ void CCollisionManager::CheckHitObjectToObject(CObject* _objectA, CObject* _obje
 		}
 
 		//オブジェクト同士が当たっているか
-		if (CCollision::CheckHitBoxToSohere(box->GetCenter(), box->GetSize(),
-			sphere->GetCenter(), sphere->GetRad()) == true)
+		if (CCollision::CheckHitBoxToSohere(box.GetCenter(), box.GetSize(),
+			sphere.GetCenter(), sphere.GetRad()) == true)
 		{
 			//それぞれ当たり判定の処理をする
-			box->HitCalc(sphere);
-			sphere->HitCalc(box);
+			box.HitCalc(&sphere);
+			sphere.HitCalc(&box);
 		}
 
 		//押し戻し処理-------------------------------------------------
 
 		// 四角形の上下左右手前奥それぞれの座標を計算する
-		float boxUp = box->GetCenter().y - box->GetSize().y * 0.5f;
-		float boxDown = box->GetCenter().y + box->GetSize().y * 0.5f;
-		float boxLeft = box->GetCenter().x - box->GetSize().x * 0.5f;
-		float boxRight = box->GetCenter().x + box->GetSize().x * 0.5f;
-		float boxFront = box->GetCenter().z - box->GetSize().z * 0.5f;
-		float boxBack = box->GetCenter().z + box->GetSize().z * 0.5f;
+		float boxUp = box.GetCenter().y - box.GetSize().y * 0.5f;
+		float boxDown = box.GetCenter().y + box.GetSize().y * 0.5f;
+		float boxLeft = box.GetCenter().x - box.GetSize().x * 0.5f;
+		float boxRight = box.GetCenter().x + box.GetSize().x * 0.5f;
+		float boxFront = box.GetCenter().z - box.GetSize().z * 0.5f;
+		float boxBack = box.GetCenter().z + box.GetSize().z * 0.5f;
 
 		//値をmin～maxの間に収める
 		auto Clamp = [](float v, float min, float max)
@@ -60,50 +61,50 @@ void CCollisionManager::CheckHitObjectToObject(CObject* _objectA, CObject* _obje
 
 		//球と箱の最近接点を求める
 		VECTOR closest;
-		closest.x = Clamp(sphere->GetCenter().x, boxLeft, boxRight);
-		closest.y = Clamp(sphere->GetCenter().y, boxUp, boxDown);
-		closest.z = Clamp(sphere->GetCenter().z, boxFront, boxBack);
+		closest.x = Clamp(sphere.GetCenter().x, boxLeft, boxRight);
+		closest.y = Clamp(sphere.GetCenter().y, boxUp, boxDown);
+		closest.z = Clamp(sphere.GetCenter().z, boxFront, boxBack);
 
 		//最近接点から球の中心座標までの距離を求める
-		VECTOR diff = VSub(sphere->GetCenter(), closest);
+		VECTOR diff = VSub(sphere.GetCenter(), closest);
 
 		//距離を求める
 		float dist = VSize(diff);
 
 		//求めた距離が球の半径の以上なら当たっていないので処理をしない
-		if (dist <= sphere->GetRad() || dist != 0.0f)
+		if (dist <= sphere.GetRad() || dist != 0.0f)
 		{
 			//押し出し方向を正規化
 			VECTOR pushDir = VScale(diff, 1.0f / dist);
 
 			//めり込み量を求める
-			float penetration = sphere->GetRad() - dist;
+			float penetration = sphere.GetRad() - dist;
 
 			//球を押し戻す---------------------------
-			VECTOR spherePos = sphere->GetPos();
+			VECTOR spherePos = sphere.GetPos();
 
 			spherePos = VAdd(spherePos, VScale(pushDir, penetration));
 
-			sphere->SetPos(spherePos);
+			sphere.SetPos(spherePos);
 
 			//箱の上に乗っていたら重力をリセットする
 			if (spherePos.y >= boxUp)
 			{
-				sphere->GravityReset();
+				sphere.GravityReset();
 			}
 		}
 
-		if (sphere->GetObjectName() == OBJECT_PLAYER)
+		if (sphere.GetObjectName() == OBJECT_PLAYER)
 		{
-			CPlayer* player = dynamic_cast<CPlayer*>(sphere);
+			CPlayer* player = dynamic_cast<CPlayer*>(&sphere);
 
 			//上から見たプレイヤーと箱の当たり判定をとる
-			VECTOR playerPos = sphere->GetPos();
+			VECTOR playerPos = sphere.GetPos();
 			playerPos.y = 0.0f;
-			VECTOR boxPos = box->GetPos();
+			VECTOR boxPos = box.GetPos();
 			boxPos.y = 0.0f;
-			int boxWidth = box->GetSize().z;
-			int boxHeight = box->GetSize().x;
+			int boxWidth = box.GetSize().z;
+			int boxHeight = box.GetSize().x;
 
 			if (CCollision::ChekHitDotToSquare(playerPos, boxPos,
 				boxWidth, boxHeight) == true)
@@ -122,28 +123,28 @@ void CCollisionManager::CheckHitObjectToObject(CObject* _objectA, CObject* _obje
 	else
 	{
 		//オブジェクト同士が当たっているか
-		if (CCollision::CheckHitSphereToSphere(_objectA->GetCenter(), _objectA->GetRad(),
-			_objectB->GetCenter(), _objectB->GetRad()) == true)
+		if (CCollision::CheckHitSphereToSphere(_objectA.GetCenter(), _objectA.GetRad(),
+			_objectB.GetCenter(), _objectB.GetRad()) == true)
 		{
 			//それぞれ当たり判定の処理をする
-			_objectA->HitCalc(_objectB);
-			_objectB->HitCalc(_objectA);
+			_objectA.HitCalc(&_objectB);
+			_objectB.HitCalc(&_objectA);
 
 		}
 
 		//押し出しフラグがfalseなら処理をしない
-		if (_objectA->GetIsPushed() == false ||
-			_objectB->GetIsPushed() == false)
+		if (_objectA.GetIsPushed() == false ||
+			_objectB.GetIsPushed() == false)
 			return;
 
 		//押し戻し処理-------------------------------------------------
 
 		//本来離れてほしい距離を求める
-		float len1 = _objectA->GetRad() + _objectB->GetRad();
+		float len1 = _objectA.GetRad() + _objectB.GetRad();
 
 		//実際に離れている距離を求める
-		VECTOR objectAPos = _objectA->GetPos();
-		VECTOR objectBPos = _objectB->GetPos();
+		VECTOR objectAPos = _objectA.GetPos();
+		VECTOR objectBPos = _objectB.GetPos();
 
 		VECTOR dir = VSub(objectBPos, objectAPos);
 		float len2 = VSize(dir);
@@ -161,28 +162,28 @@ void CCollisionManager::CheckHitObjectToObject(CObject* _objectA, CObject* _obje
 			//方向ベクトルなので正規化する
 
 			//オブジェクトBの押し出し----------------
-			if (_objectB->GetIsPushed() == true)
+			if (_objectB.GetIsPushed() == true)
 			{
 				dir = VNorm(dir);
 
 				dir = VScale(dir, len3);
 
-				objectBPos = VAdd(_objectB->GetPos(), dir);
+				objectBPos = VAdd(_objectB.GetPos(), dir);
 
-				_objectB->SetPos(VAdd(_objectB->GetPos(), dir));
+				_objectB.SetPos(VAdd(_objectB.GetPos(), dir));
 			}
 			//---------------------------------------
 
 			//オブジェクトAの押し出し----------------
-			if (_objectA->GetIsPushed() == true)
+			if (_objectA.GetIsPushed() == true)
 			{
 				VECTOR dir2 = VSub(objectAPos, objectBPos);
 				dir2 = VNorm(dir2);
 				dir2 = VScale(dir2, len3);
 
-				objectAPos = VAdd(_objectA->GetPos(), dir2);
+				objectAPos = VAdd(_objectA.GetPos(), dir2);
 
-				_objectA->SetPos(VAdd(_objectA->GetPos(), dir2));
+				_objectA.SetPos(VAdd(_objectA.GetPos(), dir2));
 			}
 			//---------------------------------------
 		}
@@ -211,7 +212,7 @@ void CCollisionManager::CheckHitPlayerToPlayerAttack(CPlayerManager& _playerMana
 			CAttackBase* attack = _attackManager.GetAttack(attack_i);
 
 			//当たり判定
-			CheckHitObjectToObject(player, attack);
+			CheckHitObjectToObject(*player, *attack);
 		}
 	}
 
@@ -241,7 +242,7 @@ void CCollisionManager::CheckHitPlayerToPlayer(CPlayerManager& _playerManager)
 			//敵が死んでいたら処理をしない
 			if (player2->GetActive() == false)continue;
 
-			CheckHitObjectToObject(player1, player2);
+			CheckHitObjectToObject(*player1, *player2);
 			
 		}
 	}
@@ -376,18 +377,14 @@ void CCollisionManager::CheckHitItemToMap(CItemManager& _itemManager, CMap& _map
 	//当たり判定情報が格納される構造体
 	MV1_COLL_RESULT_POLY_DIM col;
 
-	for (int item_i = 0; item_i < _itemManager.GetItemNum(); item_i++)
+	std::list<unique_ptr<CItemBase>>& item = _itemManager.GetItemList();
+
+	for (auto item_i = item.begin(); item_i != item.end(); ++item_i)
 	{
-		CItemBase* item = _itemManager.GetItem(item_i);
-
-		//中身がnullならスキップする
-		if (item == nullptr)continue;
-
-		//生きていなかったら当たり判定をしない
-		if (item->GetActive() == false)continue;
+		if ((*item_i)->GetActive() == false)continue;
 
 		col = MV1CollCheck_Sphere(_map.GetHitHndl(), -1,
-			item->GetCenter(), item->GetRad());
+			(*item_i)->GetCenter(), (*item_i)->GetRad());
 
 		//ポリゴンと当たっていたか
 		if (col.HitNum != 0)
@@ -398,30 +395,30 @@ void CCollisionManager::CheckHitItemToMap(CItemManager& _itemManager, CMap& _map
 			{
 
 				//中心点から最近点を引き算
-				VECTOR vLen = VSub(item->GetCenter(), col.Dim[j].HitPosition);
+				VECTOR vLen = VSub((*item_i)->GetCenter(), col.Dim[j].HitPosition);
 				//取得した距離を三平方の定理の長さに変換
 				float fLen = VSize(vLen);
 				//実際にめり込んだ距離を計算
-				fLen = item->GetRad() - fLen;
+				fLen = (*item_i)->GetRad() - fLen;
 				//法線をめり込んだ距離分掛け算する
 				vLen = VScale(col.Dim[j].Normal, fLen);
 
 				//プレイヤーの座標を計算した分だけ移動させる
-				item->SetPos(VAdd(item->GetPos(), vLen));
+				(*item_i)->SetPos(VAdd((*item_i)->GetPos(), vLen));
 
 				//重力をリセット
-				item->GravityReset();
+				(*item_i)->GravityReset();
 
 			}
 			//-------------------------------------
 
-			item->HitMapCalc();
+			(*item_i)->HitMapCalc();
 
 			//毎回データを削除
 			MV1CollResultPolyDimTerminate(col);
 		}
 
-		VECTOR shadowPos = item->GetPos();
+		VECTOR shadowPos = (*item_i)->GetPos();
 
 		//少しずつ座標を落として当たった場所に丸影の座標を設定する
 		for (int shadowPosY_i = 0; shadowPosY_i < 1000; shadowPosY_i++)
@@ -437,12 +434,12 @@ void CCollisionManager::CheckHitItemToMap(CItemManager& _itemManager, CMap& _map
 
 				break;
 			}
+			//毎回データを削除
+			MV1CollResultPolyDimTerminate(col);
 		}
 
-		item->SetShadowPos(shadowPos);
+		(*item_i)->SetShadowPos(shadowPos);
 
-		//毎回データを削除
-		MV1CollResultPolyDimTerminate(col);
 	}
 }
 
@@ -455,12 +452,19 @@ void CCollisionManager::CheckHitPlayerToItem(CPlayerManager& _playerManager, CIt
 	{
 		CPlayer* player = _playerManager.GetPlayer(player_i);
 
+		std::list<unique_ptr<CItemBase>>& item = _itemManager.GetItemList();
+
+		for (auto item_i = item.begin(); item_i != item.end(); ++item_i)
+		{
+			CheckHitObjectToObject(*player,(*item_i));
+		}
+
 		for (int item_i = 0; item_i < _itemManager.GetItemNum(); item_i++)
 		{
 			CItemBase* item = _itemManager.GetItem(item_i);
 
 			//当たり判定
-			CheckHitObjectToObject(player, item);
+			CheckHitObjectToObject(*player, item);
 		}
 	}
 }
