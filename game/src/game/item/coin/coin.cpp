@@ -71,6 +71,7 @@ void CCoin::Update()
 //---------------------
 void CCoin::Draw(int _sharedModel)
 {
+
 	if (m_isActive == false) return;
 
 	MV1SetMatrix(_sharedModel, m_mat);

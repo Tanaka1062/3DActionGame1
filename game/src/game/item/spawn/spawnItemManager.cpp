@@ -35,7 +35,7 @@ static const char* MODEL_PATH[ITEM_NUM] =							//モデルのパス
 
 constexpr int MAP_FRAME_NUM = 56;			//マップのフレーム番号
 
-constexpr int SPAWN_TIME = 3 * 60;			//スポーンするまで時間
+constexpr int SPAWN_TIME = 10 * 60;			//スポーンするまで時間
 
 constexpr int SPAWN_NUM[MAP_CENTER_NUM]		//マップごとのフレームの数
 	{
@@ -264,7 +264,7 @@ void CSpawnItemManager::Exit()
 }
 
 //アイテムを出現させる
-unique_ptr<CItemBase> CSpawnItemManager::SpawnItem(tagMapCenterId _mapId)
+shared_ptr<CItemBase> CSpawnItemManager::SpawnItem(tagMapCenterId _mapId)
 {
 	//マップにアイテム出現場所がない場合nullptrを返す
 	if (m_spawnData[_mapId].size() == 0)
@@ -348,7 +348,7 @@ unique_ptr<CItemBase> CSpawnItemManager::SpawnItem(tagMapCenterId _mapId)
 	
 	//------------------------------------------------
 
-	unique_ptr<CItemBase> spawnItem = nullptr;
+	shared_ptr<CItemBase> spawnItem = nullptr;
 
 	for (int spawn_i = 0; spawn_i < m_item.size(); spawn_i++)
 	{
@@ -419,7 +419,7 @@ unique_ptr<CItemBase> CSpawnItemManager::SpawnItem(tagMapCenterId _mapId)
 }
 
 //アイテムを元に戻す
-void CSpawnItemManager::ReturnItem(unique_ptr<CItemBase> _returnItme)
+void CSpawnItemManager::ReturnItem(shared_ptr<CItemBase> _returnItme)
 {
 	for (int spawn_i = 0; spawn_i < m_item.size(); spawn_i++)
 	{

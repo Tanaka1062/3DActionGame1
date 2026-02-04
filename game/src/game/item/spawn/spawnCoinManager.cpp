@@ -5,14 +5,14 @@
 
 using namespace std;
 
-static const char* MODEL_PATH =							//モデルのパス
+static const char* MODEL_PATH =				//モデルのパス
 {
-	"data/model/item/powerCoin/coinTest.mv1",
+	"data/model/item/powerCoin/coin.mv1",
 };
 
 constexpr int MAP_FRAME_NUM = 130;			//マップのフレーム番号
 
-constexpr int SPAWN_ITEM_MAX = 20;		//アイテムの最大量
+constexpr int SPAWN_ITEM_MAX = 100;			//アイテムの最大量
 
 constexpr int SPAWN_NUM[MAP_CENTER_NUM]		//マップごとのフレームの数
 	{
@@ -22,16 +22,6 @@ constexpr int SPAWN_NUM[MAP_CENTER_NUM]		//マップごとのフレームの数
 		20,
 		9,
 	};
-
-//constexpr int SPAWN_NUM[MAP_CENTER_NUM]		//マップごとのフレームの数
-//	{
-//		22,
-//		6,
-//		0,
-//		0,
-//		0,
-//	};
-
 
 //-----------------------
 //	  コンストラクタ
@@ -64,7 +54,7 @@ void CSpawnCoinManager::Init()
 	{
 		for (int mapCoin_i = 0; mapCoin_i < SPAWN_NUM[map_i]; mapCoin_i++)
 		{
-			unique_ptr<CItemBase> mapCoin = make_unique<CSpawnCoin>();
+			shared_ptr<CItemBase> mapCoin = make_unique<CSpawnCoin>();
 
 			mapCoin->Init();
 
@@ -75,7 +65,7 @@ void CSpawnCoinManager::Init()
 	//ドロップするコインを生成
 	for (int dropCoin_i = 0; dropCoin_i < SPAWN_ITEM_MAX; dropCoin_i++)
 	{
-		unique_ptr<CItemBase> dropCoin = make_unique<CCoin>();
+		shared_ptr<CItemBase> dropCoin = make_unique<CCoin>();
 
 		dropCoin->Init();
 
@@ -170,11 +160,11 @@ void CSpawnCoinManager::Exit()
 //-----------------------
 //マップのコインのアドレスを取得
 //-----------------------
-unique_ptr<CItemBase> CSpawnCoinManager::GetMapCoin(int _num)
+shared_ptr<CItemBase> CSpawnCoinManager::GetMapCoin(int _num)
 {
 	if (m_mapCoin.size() < _num)return nullptr;
 
-	unique_ptr<CItemBase> mapCoin = move(m_mapCoin[_num]);
+	shared_ptr<CItemBase> mapCoin = move(m_mapCoin[_num]);
 
 	return mapCoin;
 }
@@ -182,10 +172,10 @@ unique_ptr<CItemBase> CSpawnCoinManager::GetMapCoin(int _num)
 //-----------------------
 //	コインを出現させる
 //-----------------------
-unique_ptr<CItemBase> CSpawnCoinManager::SpawnCoin()
+shared_ptr<CItemBase> CSpawnCoinManager::SpawnCoin()
 {
 	//出現させるコインの保存用
-	unique_ptr<CItemBase> spawnCoin = nullptr;
+	shared_ptr<CItemBase> spawnCoin = nullptr;
 
 	//リストの中からコインを探して保存用に入れる
 	for (int dropCoin_i = 0; dropCoin_i < m_dropCoin.size(); dropCoin_i++)
@@ -213,7 +203,7 @@ unique_ptr<CItemBase> CSpawnCoinManager::SpawnCoin()
 }
 
 //アイテムを元に戻す
-void CSpawnCoinManager::ReturnItem(unique_ptr<CItemBase> _returnItme)
+void CSpawnCoinManager::ReturnItem(shared_ptr<CItemBase> _returnItme)
 {
 	for (int dropCoin_i = 0; dropCoin_i < m_dropCoin.size(); dropCoin_i++)
 	{

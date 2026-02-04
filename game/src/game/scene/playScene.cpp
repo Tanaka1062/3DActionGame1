@@ -48,7 +48,7 @@ void CPlayScene::Draw()
 		CCameraManager::Draw();
 		break;
 	}
-
+	
 }
 
 //---------------------------

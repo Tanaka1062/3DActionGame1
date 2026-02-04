@@ -34,6 +34,7 @@ void CItemManager::Init(CPlayerManager* _playerManager)
 //-----------------------
 void CItemManager::Load()
 {
+
 	m_mapItemManager.Load();
 	m_spawnItemManager.Load();
 	m_coinManager.Load();
@@ -41,7 +42,7 @@ void CItemManager::Load()
 	//マップアイテムを代入
 	for (int mapItem_i = 0; mapItem_i < m_mapItemManager.GetItemNum(); mapItem_i++)
 	{
-		unique_ptr<CItemBase> mapItem = m_mapItemManager.GetItem(mapItem_i);
+		shared_ptr<CItemBase> mapItem = m_mapItemManager.GetItem(mapItem_i);
 
 		m_item.push_back(move(mapItem));
 	}
@@ -49,7 +50,7 @@ void CItemManager::Load()
 	//マップのコインを代入
 	for (int mapCoin_i = 0; mapCoin_i < m_coinManager.GetMapCoinNum(); mapCoin_i++)
 	{
-		unique_ptr<CItemBase> mapCoin = m_coinManager.GetMapCoin(mapCoin_i);
+		shared_ptr<CItemBase> mapCoin = m_coinManager.GetMapCoin(mapCoin_i);
 
 		m_item.push_back(move(mapCoin));
 	}
@@ -60,6 +61,7 @@ void CItemManager::Load()
 //-----------------------
 void CItemManager::Step(CPlayerManager* _playerManager, tagMapCenterId _mapId)
 {
+
 	m_mapItemManager.Step();
 	m_spawnItemManager.Step();
 	m_coinManager.Step();
@@ -67,7 +69,7 @@ void CItemManager::Step(CPlayerManager* _playerManager, tagMapCenterId _mapId)
 	//スポーンしたらアイテムを増やす
 	if (m_spawnItemManager.GetIsItemSpawn() == true)
 	{
-		unique_ptr<CItemBase> spawnItem = m_spawnItemManager.SpawnItem(_mapId);
+		shared_ptr<CItemBase> spawnItem = m_spawnItemManager.SpawnItem(_mapId);
 		
 		//アイテムが入っていたら生成する
 		if (spawnItem != nullptr)
@@ -97,9 +99,11 @@ void CItemManager::Step(CPlayerManager* _playerManager, tagMapCenterId _mapId)
 		}
 		else
 		{
+			//ここ消したら処理が増えない---------
 			(*item_i)->Step();
 
 			++item_i;
+			//-----------------------------------
 
 		}
 	
@@ -117,7 +121,7 @@ void CItemManager::Step(CPlayerManager* _playerManager, tagMapCenterId _mapId)
 			CSoundManager::Play(CSoundManager::SE_COINDROP, DX_PLAYTYPE_BACK);
 
 			//コインを生成して保存する
-			unique_ptr<CItemBase> dropCoin = m_coinManager.SpawnCoin();
+			shared_ptr<CItemBase> dropCoin = m_coinManager.SpawnCoin();
 			
 			//飛ばす方向を求める
 			float rotY = static_cast<float>((GetRand(360)) * (DX_PI_F / 180.0f));

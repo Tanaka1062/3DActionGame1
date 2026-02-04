@@ -471,7 +471,6 @@ void CCharacterBase::KnockBack()
 	//速度を徐々に下げていく
 	m_speed.x *= BACK_DOWN_SPEED;
 	m_speed.z *= BACK_DOWN_SPEED;
-	//m_speed = VScale(m_speed, BACK_DOWN_SPEED);
 	//一定速度より遅くなったらノックバック
 	if (VSize(m_speed) <= 0.3f)
 	{

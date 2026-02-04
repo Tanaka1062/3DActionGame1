@@ -53,7 +53,7 @@ void CMapItemManager::Init()
 	{
 		for (int item_i = 0; item_i < SPAWN_NUM[map_i]; item_i++)
 		{
-			unique_ptr<CItemBase> box = make_unique<CBox>();
+			shared_ptr<CItemBase> box = make_unique<CBox>();
 
 			box->Init();
 
@@ -118,11 +118,11 @@ void CMapItemManager::Exit()
 }
 
 //アイテムのアドレスを取得
-unique_ptr<CItemBase> CMapItemManager::GetItem(int _num)
+shared_ptr<CItemBase> CMapItemManager::GetItem(int _num)
 {
 	if (m_item.size() <= _num)return nullptr;
 
-	unique_ptr<CItemBase> item = move(m_item[_num]);
+	shared_ptr<CItemBase> item = move(m_item[_num]);
 
 	return item;
 }

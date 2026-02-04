@@ -10,7 +10,6 @@
 //----------------------------------------------
 void CCollisionManager::CheckHitObjectToObject(CObject& _objectA, CObject& _objectB)
 {
-	return;
 	//二つのオブジェクトが消えていたら処理をしない
 	if (_objectA.GetActive() == false || _objectB.GetActive() == false)return;
 
@@ -377,7 +376,7 @@ void CCollisionManager::CheckHitItemToMap(CItemManager& _itemManager, CMap& _map
 	//当たり判定情報が格納される構造体
 	MV1_COLL_RESULT_POLY_DIM col;
 
-	std::list<unique_ptr<CItemBase>>& item = _itemManager.GetItemList();
+	std::list<std::shared_ptr<CItemBase>>& item = _itemManager.GetItemList();
 
 	for (auto item_i = item.begin(); item_i != item.end(); ++item_i)
 	{
@@ -452,19 +451,12 @@ void CCollisionManager::CheckHitPlayerToItem(CPlayerManager& _playerManager, CIt
 	{
 		CPlayer* player = _playerManager.GetPlayer(player_i);
 
-		std::list<unique_ptr<CItemBase>>& item = _itemManager.GetItemList();
+		list<shared_ptr<CItemBase>>& item = _itemManager.GetItemList();
 
 		for (auto item_i = item.begin(); item_i != item.end(); ++item_i)
 		{
-			CheckHitObjectToObject(*player,(*item_i));
-		}
-
-		for (int item_i = 0; item_i < _itemManager.GetItemNum(); item_i++)
-		{
-			CItemBase* item = _itemManager.GetItem(item_i);
-
 			//当たり判定
-			CheckHitObjectToObject(*player, item);
+			CheckHitObjectToObject(*player,*(*item_i));
 		}
 	}
 }
@@ -474,18 +466,16 @@ void CCollisionManager::CheckHitPlayerToItem(CPlayerManager& _playerManager, CIt
 //----------------------------------------------
 void CCollisionManager::CheckHitItemToItem(CItemManager& _itemManager)
 {
-	for (int itemA_i = 0; itemA_i < _itemManager.GetItemNum(); itemA_i++)
-	{
-		CItemBase* itemA = _itemManager.GetItem(itemA_i);
+	list<shared_ptr<CItemBase>>& item = _itemManager.GetItemList();
 
-		for (int itemB_i = 0; itemB_i < _itemManager.GetItemNum(); itemB_i++)
+	for (auto itemA_i = item.begin(); itemA_i != item.end(); ++itemA_i)
+	{
+		for (auto itemB_i = item.begin(); itemB_i != item.end(); ++itemB_i)
 		{
 			//同じアイテムは処理をしない
-			if (itemA_i == itemB_i)continue;
+			if ((*itemA_i) == (*itemB_i))continue;
 
-			CItemBase* itemB = _itemManager.GetItem(itemB_i);
-
-			CheckHitObjectToObject(itemA, itemB);
+			CheckHitObjectToObject(*(*itemA_i), *(*itemB_i));
 		}
 	}
 }
@@ -503,7 +493,7 @@ void CCollisionManager::CheckHitPlayerToShot(CPlayerManager& _playerManager, CSh
 		{
 			CShotBase* shot = _shotManager.GetShot(shot_i);
 
-			CheckHitObjectToObject(player, shot);
+			CheckHitObjectToObject(*player, *shot);
 		}
 	}
 }
@@ -521,7 +511,7 @@ void CCollisionManager::CheckHitCpuPlayerFOVToPlayer(CPlayerManager& _playerMana
 		{
 			CPlayer* player = _playerManager.GetPlayer(player_i);
 
-			CheckHitObjectToObject(cpuPlayerFOV, player);
+			CheckHitObjectToObject(*cpuPlayerFOV, *player);
 		}
 	}
 }
@@ -531,15 +521,15 @@ void CCollisionManager::CheckHitCpuPlayerFOVToPlayer(CPlayerManager& _playerMana
 //----------------------------------------------
 void CCollisionManager::CheckHitCpuPlayerFOVToItem(CPlayerManager& _playerManager, CItemManager& _itemManager)
 {
+	list<shared_ptr<CItemBase>>& item = _itemManager.GetItemList();
+
 	for (int cpuPlayerFOV_i = 0; cpuPlayerFOV_i < _playerManager.GetCpuPlayerFOVNum(); cpuPlayerFOV_i++)
 	{
 		CCpuPlayerFOV* cpuPlayerFOV = _playerManager.GetCpuPlayerFOV(cpuPlayerFOV_i);
 
-		for (int item_i = 0; item_i < _itemManager.GetItemNum(); item_i++)
+		for (auto item_i = item.begin(); item_i != item.end(); ++item_i)
 		{
-			CItemBase* item = _itemManager.GetItem(item_i);
-
-			CheckHitObjectToObject(cpuPlayerFOV, item);
+			CheckHitObjectToObject(*cpuPlayerFOV, *(*item_i));
 		}
 	}
 }
@@ -557,7 +547,7 @@ void CCollisionManager::CheckHitPlayerToGimmick(CPlayerManager& _playerManager, 
 		{
 			CGimmickBase* gimmick = _gimmickManager.GetGimmick(gimmick_i);
 
-			CheckHitObjectToObject(player, gimmick);
+			CheckHitObjectToObject(*player, *gimmick);
 		}
 	}
 }

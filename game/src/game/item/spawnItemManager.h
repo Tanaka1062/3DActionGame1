@@ -21,7 +21,7 @@ private:
 		bool isSpawn;									//出現したかどうか
 	};
 
-	std::vector<std::unique_ptr<CItemBase>> m_item;		//アイテム保存用
+	std::vector<std::shared_ptr<CItemBase>> m_item;		//アイテム保存用
 	std::vector<int> m_spawnProbability;				//アイテムの出現確率
 	int m_hndl[ITEM_NUM];								//アイテムのモデルハンドル
 	int m_spawnTime;									//時間カウント
@@ -56,16 +56,16 @@ public:
 	CItemBase* GetItem(int _num);
 
 	//アイテムを出現させる
-	std::unique_ptr<CItemBase> SpawnItem(tagMapCenterId _mapId);
+	std::shared_ptr<CItemBase> SpawnItem(tagMapCenterId _mapId);
 
 	//コインを出現させる
-	std::unique_ptr<CItemBase> SpawnCoin();
+	std::shared_ptr<CItemBase> SpawnCoin();
 
 	//アイテムがスポーンするかを取得
 	bool GetIsItemSpawn() { return m_isItemSpawn; }
 
 	//アイテムを元に戻す
-	void ReturnItem(std::unique_ptr<CItemBase> _returnItme);
+	void ReturnItem(std::shared_ptr<CItemBase> _returnItme);
 
 };
 

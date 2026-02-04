@@ -11,8 +11,8 @@ class CSpawnCoinManager
 {
 private:
 
-	std::vector<std::unique_ptr<CItemBase>> m_mapCoin;		//マップのコイン保存用
-	std::vector<std::unique_ptr<CItemBase>> m_dropCoin;		//ドロップするコイン保存用
+	std::vector<std::shared_ptr<CItemBase>> m_mapCoin;		//マップのコイン保存用
+	std::vector<std::shared_ptr<CItemBase>> m_dropCoin;		//ドロップするコイン保存用
 	int m_hndl;											//アイテムのモデルハンドル
 public:
 	//コンストラクタ・デストラクタ
@@ -40,13 +40,13 @@ public:
 	int GetMapCoinNum() { return static_cast<int>(m_mapCoin.size()); }
 
 	//マップのコインのアドレスを取得
-	std::unique_ptr<CItemBase> GetMapCoin(int _num);
+	std::shared_ptr<CItemBase> GetMapCoin(int _num);
 
 	//コインを出現させる
-	std::unique_ptr<CItemBase> SpawnCoin();
+	std::shared_ptr<CItemBase> SpawnCoin();
 
 	//アイテムを元に戻す
-	void ReturnItem(std::unique_ptr<CItemBase> _returnItme);
+	void ReturnItem(std::shared_ptr<CItemBase> _returnItme);
 
 	//ハンドルを取得
 	int GetHndl() { return m_hndl; }
