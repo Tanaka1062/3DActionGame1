@@ -25,8 +25,20 @@ VECTOR CCameraManager::m_rot;
 CCameraManager::CCameraManager() {
 	//初期カメラはプレイカメラ
 	m_id = CAMERA_ID_MAP;
+
+	for (int camera_i = 0; camera_i < CAMERA_ID_NUM; camera_i++)
+	{
+		m_camera[camera_i] = nullptr;
+	}
 }
 
+//---------------------------
+//		 デストラクタ
+//---------------------------
+CCameraManager::~CCameraManager()
+{
+
+}
 
 //---------------------------
 //			初期化
@@ -138,5 +150,19 @@ void CCameraManager::Update(VECTOR _tagetPos)
 
 	CEffekseerCtrl::SetCameraRotMtx(pos, rot, up);
 	CEffekseerCtrl::UpdateAutoCamera();
+}
+
+//終了処理
+void CCameraManager::Exit()
+{
+	for (int camera_i = 0; camera_i < CAMERA_ID_NUM; camera_i++)
+	{
+		if (m_camera[camera_i] != nullptr) 
+		{
+			delete m_camera[camera_i];
+
+			m_camera[camera_i] = nullptr;
+		}
+	}
 }
 

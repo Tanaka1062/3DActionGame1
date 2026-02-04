@@ -35,6 +35,8 @@ int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	// ‚c‚wƒ‰ƒCƒuƒ‰ƒŠ‰Šú‰»ˆ—
 	if (DxLib_Init() == -1) return -1;
 
+	_CrtSetBreakAlloc(20973);
+
 	//ˆê”ÔÅ‰‚É‚P‰ñ‚¾‚¯‚â‚éˆ—
 	SetDrawScreen(DX_SCREEN_BACK);
 	SetMainWindowText(GAME_NAME);

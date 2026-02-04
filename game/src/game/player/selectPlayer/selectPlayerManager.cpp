@@ -197,6 +197,8 @@ void CSelectPlayerManager::Exit()
 	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
 		m_player[player_i]->Exit();
+
+		delete m_player[player_i];
 	}
 	m_player.clear();
 

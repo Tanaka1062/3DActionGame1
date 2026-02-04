@@ -10,7 +10,7 @@ protected:
 
 public:
 	CWeaponBase();
-	~CWeaponBase();
+	virtual ~CWeaponBase();
 
 	//‰Šú‰»
 	void Init();

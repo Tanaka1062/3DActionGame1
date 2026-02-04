@@ -8,6 +8,7 @@ protected:
 	bool m_isDrop;			//アイテムが落とされているかどうか
 
 public:
+	//コンストラクタ
 	CItemObjectBase();
 
 	//初期化

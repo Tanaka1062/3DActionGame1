@@ -176,6 +176,7 @@ void CPlayScene::Exit()
 	m_weaponManager.Exit();
 	m_uiManager.Exit();
 	m_gimmickManager.Exit();
+	CCameraManager::Exit();
 
 	//エフェクトを全て消す
 	CEffekseerCtrl::StopAll();

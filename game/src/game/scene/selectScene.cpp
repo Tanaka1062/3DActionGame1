@@ -14,7 +14,6 @@
 CSelectScene::CSelectScene() {
 	//最初はデータ初期化
 	m_state = INIT;
-	Init();
 }
 
 //---------------------------
@@ -46,11 +45,6 @@ void CSelectScene::Draw()
 
 		break;
 	}
-
-
-
-
-	//DrawFormatString(32, 32, GetColor(255, 0, 0), "セレクト");
 
 }
 
@@ -142,6 +136,7 @@ void CSelectScene::Exit()
 	m_map.Exit();
 	m_sky.Exit();
 	m_selectPlayerManager.Exit();
+	CCameraManager::Exit();
 
 	//UIの終了処理
 	m_uiManager.Exit();

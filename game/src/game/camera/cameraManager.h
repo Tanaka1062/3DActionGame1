@@ -26,8 +26,9 @@ private:
 
 public:
 
-	//コンストラクタ
+	//コンストラクタ・デストラクタ
 	CCameraManager();
+	~CCameraManager();
 
 	//初期化
 	static void Init(VECTOR _focus);
@@ -41,6 +42,9 @@ public:
 	//カメラの更新
 	// @_tagetPos	:カメラの注視点の座標
 	static void Update(VECTOR _tagetPos);
+
+	//終了処理
+	static void Exit();
 
 	//カメラのタイプ切り替え
 	static void ChangeCamera(tagCAMERA_ID _id) { m_id = _id; };

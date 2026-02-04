@@ -5,6 +5,7 @@
 #include "selectScene.h"
 #include"../system/soundManager.h"
 #include"../../lib/effekseer/effekseer.h"
+#include "../gameTime/gameTime.h"
 
 //’è‹`ŠÖ˜A====================================
 
@@ -36,6 +37,7 @@ CSceneManager::~CSceneManager() {
 		delete m_scene[i];
 	}
 
+	CGameTime::DeleteInstance();
 	CSoundManager::Exit();
 }
 

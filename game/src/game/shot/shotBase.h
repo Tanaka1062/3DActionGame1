@@ -18,7 +18,7 @@ private:
 public:
 	//コンストラクタ・デストラクタ
 	CShotBase();
-	~CShotBase();
+	virtual ~CShotBase();
 
 	//初期化
 	void Init();

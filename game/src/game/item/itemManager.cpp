@@ -17,6 +17,7 @@ CItemManager::CItemManager()
 CItemManager::~CItemManager()
 {
 	Exit();
+
 }
 
 //-----------------------
@@ -66,6 +67,7 @@ void CItemManager::Step(CPlayerManager* _playerManager, tagMapCenterId _mapId)
 	m_spawnItemManager.Step();
 	m_coinManager.Step();
 
+
 	//スポーンしたらアイテムを増やす
 	if (m_spawnItemManager.GetIsItemSpawn() == true)
 	{
@@ -77,8 +79,15 @@ void CItemManager::Step(CPlayerManager* _playerManager, tagMapCenterId _mapId)
 			m_item.push_back(move(spawnItem));
 		}
 	}
+	//return;
 
-	for (auto item_i = m_item.begin(); item_i != m_item.end(); )
+
+	//for (auto& a : m_item)
+	//{
+	//	a->Step();
+	//}
+
+	for (list<shared_ptr<CItemBase>>::iterator item_i = m_item.begin(); item_i != m_item.end(); )
 	{
 		if ((*item_i)->GetActive() == false &&
 			(*item_i)->GetIsSpawn() == true)
@@ -108,6 +117,7 @@ void CItemManager::Step(CPlayerManager* _playerManager, tagMapCenterId _mapId)
 		}
 	
 	}
+
 
 	//プレイヤーのコインを落とす処理
 	for (int player_i = 0; player_i < _playerManager->GetPlayerNum(); player_i++)
@@ -184,6 +194,8 @@ void CItemManager::Exit()
 		item_i = m_item.erase(item_i);
 
 	}
+	//アイテムを全て消す
+	m_item.clear();
 
 }
 

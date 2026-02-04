@@ -32,6 +32,8 @@ CResultScene::CResultScene() {
 CResultScene::~CResultScene() {
 	//安全のためにデータ破棄処理を呼び出し
 	Exit();
+
+	CWinner::DeleteInstance();
 }
 
 
@@ -55,9 +57,6 @@ void CResultScene::Draw()
 		break;
 	}
 
-
-
-	//DrawFormatString(32, 32, GetColor(255, 0, 0), "リザルト");
 
 }
 
@@ -152,6 +151,8 @@ void CResultScene::Exit()
 	m_resultPlayerManager.Exit();
 	m_winPlayerText.Exit();
 	m_resultText.Exit();
+	CCameraManager::Exit();
 
 	CSoundManager::StopAll();
 }
+

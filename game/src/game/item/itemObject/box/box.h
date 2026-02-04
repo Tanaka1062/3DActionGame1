@@ -8,6 +8,7 @@ private:
 	VECTOR m_spawnPos;		//出現座標
 
 public:
+	//コンストラクタ
 	CBox();
 
 	//初期化

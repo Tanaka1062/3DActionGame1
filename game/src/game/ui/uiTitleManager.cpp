@@ -43,8 +43,8 @@ CUiTitleManager::~CUiTitleManager()
 
 void CUiTitleManager::Init()
 {
-	//ˆê’U‚·‚×‚Äíœ
-	m_ui.clear();
+	//‘‚¦‚·‚¬‚È‚¢‚æ‚¤‚É
+	if (m_ui.size() == UI_NUM)return;
 
 	for (int ui_i = 0; ui_i < UI_NUM; ui_i++)
 	{
@@ -89,6 +89,8 @@ void CUiTitleManager::Exit()
 	for (int ui_i = 0; ui_i < m_ui.size(); ui_i++)
 	{
 		m_ui[ui_i]->Exit();
+
+		delete m_ui[ui_i];
 	}
 
 	//I‚í‚é‚Æ‚«‚É‘S‚ÄÁ‚·

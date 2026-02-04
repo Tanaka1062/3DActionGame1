@@ -6,8 +6,9 @@ class CCoin : public CItemBase
 private:
 	MATRIX m_mat;		//全体の情報を持っている行列
 public:
+	//コンストラクタ・デストラクタ
 	CCoin();
-	~CCoin();
+	virtual ~CCoin();
 
 	//初期化
 	virtual void Init();

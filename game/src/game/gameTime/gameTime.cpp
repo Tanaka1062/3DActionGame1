@@ -14,7 +14,6 @@ CGameTime::CGameTime()
 
 CGameTime::~CGameTime()
 {
-
 }
 
 //‰Šú‰»
