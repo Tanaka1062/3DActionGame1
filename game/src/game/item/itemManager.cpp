@@ -35,7 +35,6 @@ void CItemManager::Init(CPlayerManager* _playerManager)
 //-----------------------
 void CItemManager::Load()
 {
-
 	m_mapItemManager.Load();
 	m_spawnItemManager.Load();
 	m_coinManager.Load();
@@ -62,7 +61,6 @@ void CItemManager::Load()
 //-----------------------
 void CItemManager::Step(CPlayerManager* _playerManager, tagMapCenterId _mapId)
 {
-
 	m_mapItemManager.Step();
 	m_spawnItemManager.Step();
 	m_coinManager.Step();
@@ -79,15 +77,8 @@ void CItemManager::Step(CPlayerManager* _playerManager, tagMapCenterId _mapId)
 			m_item.push_back(move(spawnItem));
 		}
 	}
-	//return;
 
-
-	//for (auto& a : m_item)
-	//{
-	//	a->Step();
-	//}
-
-	for (list<shared_ptr<CItemBase>>::iterator item_i = m_item.begin(); item_i != m_item.end(); )
+	for (auto item_i = m_item.begin(); item_i != m_item.end(); )
 	{
 		if ((*item_i)->GetActive() == false &&
 			(*item_i)->GetIsSpawn() == true)
@@ -185,6 +176,8 @@ void CItemManager::Draw()
 //-----------------------
 void CItemManager::Exit()
 {
+
+
 	m_mapItemManager.Exit();
 	m_spawnItemManager.Exit();
 	m_coinManager.Exit();

@@ -29,26 +29,6 @@ CMapItemManager::CMapItemManager()
 
 	m_hndl = -1;
 
-}
-
-//-----------------------
-//	  デストラクタ
-//-----------------------
-CMapItemManager::~CMapItemManager()
-{
-	Exit();
-
-}
-
-//-----------------------
-//		初期化
-//-----------------------
-void CMapItemManager::Init()
-{
-	//アイテムが増えすぎないようにする
-	m_item.clear();
-
-	//アイテムの初期化
 	for (int map_i = 0; map_i < MAP_CENTER_NUM; map_i++)
 	{
 		for (int item_i = 0; item_i < SPAWN_NUM[map_i]; item_i++)
@@ -60,6 +40,38 @@ void CMapItemManager::Init()
 			m_item.push_back(move(box));
 		}
 	}
+}
+
+//-----------------------
+//	  デストラクタ
+//-----------------------
+CMapItemManager::~CMapItemManager()
+{
+	Exit();
+
+	m_item.clear();
+}
+
+//-----------------------
+//		初期化
+//-----------------------
+void CMapItemManager::Init()
+{
+	////アイテムが増えすぎないようにする
+	//m_item.clear();
+
+	////アイテムの初期化
+	//for (int map_i = 0; map_i < MAP_CENTER_NUM; map_i++)
+	//{
+	//	for (int item_i = 0; item_i < SPAWN_NUM[map_i]; item_i++)
+	//	{
+	//		shared_ptr<CItemBase> box = make_unique<CBox>();
+
+	//		box->Init();
+
+	//		m_item.push_back(move(box));
+	//	}
+	//}
 
 	m_hndl = -1;
 
@@ -114,7 +126,7 @@ void CMapItemManager::Exit()
 	}
 
 	//deleteの代わり
-	m_item.clear();
+	//m_item.clear();
 }
 
 //アイテムのアドレスを取得

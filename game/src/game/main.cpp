@@ -23,6 +23,8 @@ int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 {
 	// メモリリーク発見用
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	_CrtSetBreakAlloc(38085);
+
 	// スクリーン設定
 	ChangeWindowMode(TRUE);			// フルスクリーンorウィンドウモード
 	SetGraphMode(WINDOW_SIZE_X, WINDOW_SIZE_Y, 32);	// ウィンドウのサイズ
@@ -34,8 +36,6 @@ int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 	// ＤＸライブラリ初期化処理
 	if (DxLib_Init() == -1) return -1;
-
-	_CrtSetBreakAlloc(20973);
 
 	//一番最初に１回だけやる処理
 	SetDrawScreen(DX_SCREEN_BACK);

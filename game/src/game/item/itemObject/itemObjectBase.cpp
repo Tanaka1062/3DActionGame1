@@ -2,7 +2,7 @@
 #include "../../../lib/myMath/myMath.h"
 	
 constexpr float THROW_SPEED = 12.0f;				//投げられるスピード
-constexpr float RADIUS = 10.0f;					//半径
+constexpr float RADIUS = 10.0f;						//半径
 
 CItemObjectBase::CItemObjectBase()
 {

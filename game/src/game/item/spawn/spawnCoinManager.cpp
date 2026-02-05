@@ -29,26 +29,7 @@ constexpr int SPAWN_NUM[MAP_CENTER_NUM]		//マップごとのフレームの数
 CSpawnCoinManager::CSpawnCoinManager()
 {
 	m_hndl = -1;
-}
 
-//-----------------------
-//	  デストラクタ
-//-----------------------
-CSpawnCoinManager::~CSpawnCoinManager()
-{
-	Exit();
-
-}
-
-//-----------------------
-//		初期化
-//-----------------------
-void CSpawnCoinManager::Init()
-{
-	//コインが増えすぎないようにする
-	m_mapCoin.clear();
-	m_dropCoin.clear();
-	
 	//マップに出現するコインを生成
 	for (int map_i = 0; map_i < MAP_CENTER_NUM; map_i++)
 	{
@@ -71,6 +52,51 @@ void CSpawnCoinManager::Init()
 
 		m_dropCoin.push_back(move(dropCoin));
 	}
+
+}
+
+//-----------------------
+//	  デストラクタ
+//-----------------------
+CSpawnCoinManager::~CSpawnCoinManager()
+{
+	Exit();
+
+	m_mapCoin.clear();
+	m_dropCoin.clear();
+}
+
+//-----------------------
+//		初期化
+//-----------------------
+void CSpawnCoinManager::Init()
+{
+	//コインが増えすぎないようにする
+	//m_mapCoin.clear();
+	//m_dropCoin.clear();
+	
+	////マップに出現するコインを生成
+	//for (int map_i = 0; map_i < MAP_CENTER_NUM; map_i++)
+	//{
+	//	for (int mapCoin_i = 0; mapCoin_i < SPAWN_NUM[map_i]; mapCoin_i++)
+	//	{
+	//		shared_ptr<CItemBase> mapCoin = make_unique<CSpawnCoin>();
+
+	//		mapCoin->Init();
+
+	//		m_mapCoin.push_back(move(mapCoin));
+	//	}
+	//}
+
+	////ドロップするコインを生成
+	//for (int dropCoin_i = 0; dropCoin_i < SPAWN_ITEM_MAX; dropCoin_i++)
+	//{
+	//	shared_ptr<CItemBase> dropCoin = make_unique<CCoin>();
+
+	//	dropCoin->Init();
+
+	//	m_dropCoin.push_back(move(dropCoin));
+	//}
 
 	m_hndl = -1;
 
@@ -152,8 +178,8 @@ void CSpawnCoinManager::Exit()
 	}
 
 	//増えすぎないように消す------
-	m_mapCoin.clear();
-	m_dropCoin.clear();
+	//m_mapCoin.clear();
+	//m_dropCoin.clear();
 	//----------------------------
 }
 
@@ -180,9 +206,11 @@ shared_ptr<CItemBase> CSpawnCoinManager::SpawnCoin()
 	//リストの中からコインを探して保存用に入れる
 	for (int dropCoin_i = 0; dropCoin_i < m_dropCoin.size(); dropCoin_i++)
 	{
-		if (m_dropCoin[dropCoin_i] == nullptr)continue;
-
-		spawnCoin = move(m_dropCoin[dropCoin_i]);
+		if (m_dropCoin[dropCoin_i] != nullptr)
+		{
+			spawnCoin = move(m_dropCoin[dropCoin_i]);
+			break;
+		}
 	}
 
 	//コインのクラスがなかったら新しく作る

@@ -340,7 +340,6 @@ void CCollisionManager::CheckHitPlayerToMap(CPlayerManager& _playerManager,CMap&
 		}
 		//-------------------------------------------------------------
 
-
 		VECTOR shadowPos = player->GetPos();
 
 		//少しずつ座標を落として当たった場所に丸影の座標を設定する
@@ -354,10 +353,10 @@ void CCollisionManager::CheckHitPlayerToMap(CPlayerManager& _playerManager,CMap&
 			if (col.HitNum != 0)
 			{
 				shadowPos.y += 1.5f;
+				//毎回データを削除
+				MV1CollResultPolyDimTerminate(col);
 				break;
 			}
-			//毎回データを削除
-			MV1CollResultPolyDimTerminate(col);
 		}
 		player->SetShadowPos(shadowPos);
 	
@@ -430,11 +429,11 @@ void CCollisionManager::CheckHitItemToMap(CItemManager& _itemManager, CMap& _map
 			if (col.HitNum != 0)
 			{
 				shadowPos.y += 1.5f;
+				//毎回データを削除
+				MV1CollResultPolyDimTerminate(col);
 
 				break;
 			}
-			//毎回データを削除
-			MV1CollResultPolyDimTerminate(col);
 		}
 
 		(*item_i)->SetShadowPos(shadowPos);
