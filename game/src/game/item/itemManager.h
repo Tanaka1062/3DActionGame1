@@ -15,7 +15,7 @@
 class CItemManager
 {
 private:
-	std::list<std::shared_ptr<CItemBase>> m_item;		//アイテムのクラス
+	std::list<std::unique_ptr<CItemBase>> m_item;		//アイテムのクラス
 	CMapItemManager m_mapItemManager;					//マップに置いてあるアイテムマネージャー
 	CSpawnItemManager m_spawnItemManager;				//スポーンするアイテムのマネージャー
 	CSpawnCoinManager m_coinManager;					//コインのマネージャークラス
@@ -51,7 +51,7 @@ public:
 	int GetItemNum() { return static_cast<int>(m_item.size()); }
 
 	//アイテムのクラス全体を取得
-	std::list<std::shared_ptr<CItemBase>>& GetItemList() { return m_item; };
+	std::list<std::unique_ptr<CItemBase>>& GetItemList() { return m_item; };
 
 	//アイテムのアドレスを取得
 	CItemBase* GetItem(int _num);

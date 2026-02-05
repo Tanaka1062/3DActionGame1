@@ -133,6 +133,7 @@ void CSelectScene::Step()
 //---------------------------
 void CSelectScene::Exit()
 {
+	CSceneBase::Exit();
 	m_map.Exit();
 	m_sky.Exit();
 	m_selectPlayerManager.Exit();

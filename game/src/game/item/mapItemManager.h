@@ -9,7 +9,7 @@
 class CMapItemManager
 {
 private:
-	std::vector<std::shared_ptr<CItemBase>> m_item;
+	std::vector<std::unique_ptr<CItemBase>> m_item;
 	int m_hndl;											//アイテムのモデルハンドル
 
 public:
@@ -30,7 +30,7 @@ public:
 	int GetItemNum() { return static_cast<int>(m_item.size()); }
 
 	//アイテムのアドレスを取得
-	std::shared_ptr<CItemBase> GetItem(int _num);
+	std::unique_ptr<CItemBase> GetItem(int _num);
 
 };
 

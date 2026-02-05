@@ -146,6 +146,7 @@ void CResultScene::Step()
 //---------------------------
 void CResultScene::Exit()
 {
+	CSceneBase::Exit();
 	m_sky.Exit();
 	m_map.Exit();
 	m_resultPlayerManager.Exit();

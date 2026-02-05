@@ -30,5 +30,7 @@ public:
 	//–ˆƒtƒŒ[ƒ€‚·‚éˆ—
 	void Step(VECTOR _pos, float _rad,int _money, tag3DUiType _type);
 
+	void Exit();
+
 };
 

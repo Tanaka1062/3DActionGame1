@@ -84,6 +84,7 @@ void C3DUi::Load()
 //–ˆƒtƒŒ[ƒ€‚·‚éˆ—
 void C3DUi::Step(VECTOR _pos, float _rad, int _money, tag3DUiType _type)
 {
+	return;
 	switch (_type)
 	{
 	case UI_TYPE_COIN:
@@ -109,4 +110,14 @@ void C3DUi::Step(VECTOR _pos, float _rad, int _money, tag3DUiType _type)
 
 	MV1SetTextureGraphHandle(m_hndl,MODEL_TEN,m_materialHndl[ten],FALSE);
 	MV1SetTextureGraphHandle(m_hndl, MODEL_ONE, m_materialHndl[one], FALSE);
+}
+
+void C3DUi::Exit()
+{
+	CObject::Exit();
+
+	for (int i = 0; i < m_materialHndl.size(); i++)
+	{
+		DeleteGraph(m_materialHndl[i]);
+	}
 }

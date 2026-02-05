@@ -61,6 +61,27 @@ CSpawnItemManager::CSpawnItemManager()
 
 	m_isItemSpawn = false;
 
+}
+
+//-----------------------
+//	  デストラクタ
+//-----------------------
+CSpawnItemManager::~CSpawnItemManager()
+{
+	Exit();
+}
+
+//-----------------------
+//		初期化
+//-----------------------
+void CSpawnItemManager::Init(CPlayerManager* _playerManager)
+{
+	//アイテムが増えすぎないようにする
+	m_item.clear();
+
+	//アイテムの出現確率を全て消す
+	m_spawnProbability.clear();
+
 	//生成用アイテムの生成
 	for (int spawn_i = 0; spawn_i < SPAWN_ITEM_MAX * ITEM_NUM; spawn_i++)
 	{
@@ -87,6 +108,21 @@ CSpawnItemManager::CSpawnItemManager()
 		m_spawnProbability.push_back(SPAWN_PROBABILITY_INIT[item_i]);
 	}
 
+	for (int spawn_i = 0; spawn_i < m_item.size(); spawn_i++)
+	{
+		m_item[spawn_i]->Init();
+	}
+
+
+	for (int hndl_i = 0; hndl_i < ITEM_NUM; hndl_i++)
+	{
+		m_hndl[hndl_i] = -1;
+	}
+
+	m_spawnTime = 0;
+
+	m_isItemSpawn = false;
+
 	int spawnNum = 0;
 	for (int map_i = 0; map_i < MAP_CENTER_NUM; map_i++)
 	{
@@ -105,86 +141,6 @@ CSpawnItemManager::CSpawnItemManager()
 }
 
 //-----------------------
-//	  デストラクタ
-//-----------------------
-CSpawnItemManager::~CSpawnItemManager()
-{
-	Exit();
-	m_item.clear();
-	m_spawnData.clear();
-
-}
-
-//-----------------------
-//		初期化
-//-----------------------
-void CSpawnItemManager::Init(CPlayerManager* _playerManager)
-{
-	////アイテムが増えすぎないようにする
-	//m_item.clear();
-
-	////アイテムの出現確率を全て消す
-	//m_spawnProbability.clear();
-
-	////生成用アイテムの生成
-	//for (int spawn_i = 0; spawn_i < SPAWN_ITEM_MAX * ITEM_NUM; spawn_i++)
-	//{
-	//	if (spawn_i <= SPAWN_ITEM_MAX * (ITEM_BOMB + 1))
-	//	{
-	//		m_item.push_back(make_unique<CBomb>());
-	//	}
-	//	else if (spawn_i <= SPAWN_ITEM_MAX * (ITEM_SWORD + 1))
-	//	{
-	//		m_item.push_back(make_unique<CSword>());
-	//	}
-	//	else if (spawn_i <= SPAWN_ITEM_MAX * (ITEM_GUN)+1)
-	//	{
-	//		m_item.push_back(make_unique<CGun>());
-	//	}
-	//	else if (spawn_i <= SPAWN_ITEM_MAX * (ITEM_AX)+1)
-	//	{
-	//		m_item.push_back(make_unique<CAx>());
-	//	}
-	//}
-
-	//for (int item_i = 0; item_i < ITEM_NUM; item_i++)
-	//{
-	//	m_spawnProbability.push_back(SPAWN_PROBABILITY_INIT[item_i]);
-	//}
-
-	for (int spawn_i = 0; spawn_i < m_item.size(); spawn_i++)
-	{
-		m_item[spawn_i]->Init();
-	}
-
-
-	for (int hndl_i = 0; hndl_i < ITEM_NUM; hndl_i++)
-	{
-		m_hndl[hndl_i] = -1;
-	}
-
-	m_spawnTime = 0;
-
-	m_isItemSpawn = false;
-
-	//int spawnNum = 0;
-	//for (int map_i = 0; map_i < MAP_CENTER_NUM; map_i++)
-	//{
-	//	m_spawnData.push_back(vector<tagSpawnData>());
-	//	spawnNum = SPAWN_NUM[map_i];
-
-	//	for (int spawn_i = 0; spawn_i < spawnNum; spawn_i++)
-	//	{
-	//		tagSpawnData spawnData;
-	//		spawnData.isSpawn = false;
-	//		spawnData.pos = ZERO;
-	//		m_spawnData[map_i].push_back(spawnData);
-	//	}
-	//}
-
-}
-
-//-----------------------
 //	  モデルロード
 //-----------------------
 void CSpawnItemManager::Load()
@@ -194,7 +150,7 @@ void CSpawnItemManager::Load()
 	{
 		if (m_hndl[hndl_i] == -1)
 		{
-			m_hndl[hndl_i] = MV1LoadModel(MODEL_PATH[hndl_i]);
+			//m_hndl[hndl_i] = MV1LoadModel(MODEL_PATH[hndl_i]);
 		}
 	}
 
@@ -300,13 +256,13 @@ void CSpawnItemManager::Exit()
 	}
 
 	//増えすぎないように消す------
-	//m_item.clear();
-	//m_spawnData.clear();
+	m_item.clear();
+	m_spawnData.clear();
 	//----------------------------
 }
 
 //アイテムを出現させる
-shared_ptr<CItemBase> CSpawnItemManager::SpawnItem(tagMapCenterId _mapId)
+unique_ptr<CItemBase> CSpawnItemManager::SpawnItem(tagMapCenterId _mapId)
 {
 	//マップにアイテム出現場所がない場合nullptrを返す
 	if (m_spawnData[_mapId].size() == 0)
@@ -390,7 +346,7 @@ shared_ptr<CItemBase> CSpawnItemManager::SpawnItem(tagMapCenterId _mapId)
 	
 	//------------------------------------------------
 
-	shared_ptr<CItemBase> spawnItem = nullptr;
+	unique_ptr<CItemBase> spawnItem = nullptr;
 
 	for (int spawn_i = 0; spawn_i < m_item.size(); spawn_i++)
 	{
@@ -431,7 +387,6 @@ shared_ptr<CItemBase> CSpawnItemManager::SpawnItem(tagMapCenterId _mapId)
 
 	//アイテムをの生存フラグをtrueにする
 	spawnItem->SetActive(true);
-	spawnItem->SetIsSpawn(true);
 
 	//スポーンさせる座標を決める---------------------
 	int spawnPosId = 0;
@@ -461,7 +416,7 @@ shared_ptr<CItemBase> CSpawnItemManager::SpawnItem(tagMapCenterId _mapId)
 }
 
 //アイテムを元に戻す
-void CSpawnItemManager::ReturnItem(shared_ptr<CItemBase> _returnItme)
+void CSpawnItemManager::ReturnItem(unique_ptr<CItemBase> _returnItme)
 {
 	for (int spawn_i = 0; spawn_i < m_item.size(); spawn_i++)
 	{
@@ -469,14 +424,12 @@ void CSpawnItemManager::ReturnItem(shared_ptr<CItemBase> _returnItme)
 		{
 			m_item[spawn_i] = move(_returnItme);
 			m_item[spawn_i]->SetActive(false);
-			m_item[spawn_i]->SetIsSpawn(false);
 			return;
 		}
 
 	}
 	//空きが無かったらvectorに入れる
 	_returnItme->SetActive(false);
-	_returnItme->SetIsSpawn(false);
 	m_item.push_back(move(_returnItme));
 
 }

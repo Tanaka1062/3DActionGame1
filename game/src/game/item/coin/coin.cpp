@@ -116,6 +116,5 @@ void CCoin::HitCalc(CObject* _hitObject)
 void CCoin::Delete()
 {
 	m_state = ITEM_WAIT;
-	m_isSpawn = true;
 }
 

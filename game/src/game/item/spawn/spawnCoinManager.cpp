@@ -30,12 +30,31 @@ CSpawnCoinManager::CSpawnCoinManager()
 {
 	m_hndl = -1;
 
+}
+
+//-----------------------
+//	  デストラクタ
+//-----------------------
+CSpawnCoinManager::~CSpawnCoinManager()
+{
+	Exit();
+}
+
+//-----------------------
+//		初期化
+//-----------------------
+void CSpawnCoinManager::Init()
+{
+	//コインが増えすぎないようにする
+	m_mapCoin.clear();
+	m_dropCoin.clear();
+	
 	//マップに出現するコインを生成
 	for (int map_i = 0; map_i < MAP_CENTER_NUM; map_i++)
 	{
 		for (int mapCoin_i = 0; mapCoin_i < SPAWN_NUM[map_i]; mapCoin_i++)
 		{
-			shared_ptr<CItemBase> mapCoin = make_unique<CSpawnCoin>();
+			unique_ptr<CItemBase> mapCoin = make_unique<CSpawnCoin>();
 
 			mapCoin->Init();
 
@@ -46,57 +65,12 @@ CSpawnCoinManager::CSpawnCoinManager()
 	//ドロップするコインを生成
 	for (int dropCoin_i = 0; dropCoin_i < SPAWN_ITEM_MAX; dropCoin_i++)
 	{
-		shared_ptr<CItemBase> dropCoin = make_unique<CCoin>();
+		unique_ptr<CItemBase> dropCoin = make_unique<CCoin>();
 
 		dropCoin->Init();
 
 		m_dropCoin.push_back(move(dropCoin));
 	}
-
-}
-
-//-----------------------
-//	  デストラクタ
-//-----------------------
-CSpawnCoinManager::~CSpawnCoinManager()
-{
-	Exit();
-
-	m_mapCoin.clear();
-	m_dropCoin.clear();
-}
-
-//-----------------------
-//		初期化
-//-----------------------
-void CSpawnCoinManager::Init()
-{
-	//コインが増えすぎないようにする
-	//m_mapCoin.clear();
-	//m_dropCoin.clear();
-	
-	////マップに出現するコインを生成
-	//for (int map_i = 0; map_i < MAP_CENTER_NUM; map_i++)
-	//{
-	//	for (int mapCoin_i = 0; mapCoin_i < SPAWN_NUM[map_i]; mapCoin_i++)
-	//	{
-	//		shared_ptr<CItemBase> mapCoin = make_unique<CSpawnCoin>();
-
-	//		mapCoin->Init();
-
-	//		m_mapCoin.push_back(move(mapCoin));
-	//	}
-	//}
-
-	////ドロップするコインを生成
-	//for (int dropCoin_i = 0; dropCoin_i < SPAWN_ITEM_MAX; dropCoin_i++)
-	//{
-	//	shared_ptr<CItemBase> dropCoin = make_unique<CCoin>();
-
-	//	dropCoin->Init();
-
-	//	m_dropCoin.push_back(move(dropCoin));
-	//}
 
 	m_hndl = -1;
 
@@ -108,7 +82,7 @@ void CSpawnCoinManager::Init()
 void CSpawnCoinManager::Load()
 {
 	//アイテムのモデル読み込み
-	m_hndl = MV1LoadModel(MODEL_PATH);
+	//m_hndl = MV1LoadModel(MODEL_PATH);
 
 	//アイテムのモデルロード
 	for (int mapCoin_i = 0; mapCoin_i < m_mapCoin.size(); mapCoin_i++)
@@ -178,19 +152,19 @@ void CSpawnCoinManager::Exit()
 	}
 
 	//増えすぎないように消す------
-	//m_mapCoin.clear();
-	//m_dropCoin.clear();
+	m_mapCoin.clear();
+	m_dropCoin.clear();
 	//----------------------------
 }
 
 //-----------------------
 //マップのコインのアドレスを取得
 //-----------------------
-shared_ptr<CItemBase> CSpawnCoinManager::GetMapCoin(int _num)
+unique_ptr<CItemBase> CSpawnCoinManager::GetMapCoin(int _num)
 {
 	if (m_mapCoin.size() < _num)return nullptr;
 
-	shared_ptr<CItemBase> mapCoin = move(m_mapCoin[_num]);
+	unique_ptr<CItemBase> mapCoin = move(m_mapCoin[_num]);
 
 	return mapCoin;
 }
@@ -198,10 +172,10 @@ shared_ptr<CItemBase> CSpawnCoinManager::GetMapCoin(int _num)
 //-----------------------
 //	コインを出現させる
 //-----------------------
-shared_ptr<CItemBase> CSpawnCoinManager::SpawnCoin()
+unique_ptr<CItemBase> CSpawnCoinManager::SpawnCoin()
 {
 	//出現させるコインの保存用
-	shared_ptr<CItemBase> spawnCoin = nullptr;
+	unique_ptr<CItemBase> spawnCoin = nullptr;
 
 	//リストの中からコインを探して保存用に入れる
 	for (int dropCoin_i = 0; dropCoin_i < m_dropCoin.size(); dropCoin_i++)
@@ -224,29 +198,47 @@ shared_ptr<CItemBase> CSpawnCoinManager::SpawnCoin()
 
 	//コインの生存フラグをtrueにする
 	spawnCoin->SetActive(true);
-	spawnCoin->SetIsSpawn(true);
 
 	//スポーンしたコインを返す
 	return spawnCoin;
 }
 
 //アイテムを元に戻す
-void CSpawnCoinManager::ReturnItem(shared_ptr<CItemBase> _returnItme)
+void CSpawnCoinManager::ReturnCoin(unique_ptr<CItemBase> _returnItme)
 {
-	for (int dropCoin_i = 0; dropCoin_i < m_dropCoin.size(); dropCoin_i++)
+	//マップのコインを戻す
+	if (_returnItme->GetIsSpawn() == true)
 	{
-		if (m_dropCoin[dropCoin_i] == nullptr)
+		for (int mapCoin_i = 0; mapCoin_i < m_mapCoin.size(); mapCoin_i++)
 		{
-			m_dropCoin[dropCoin_i] = move(_returnItme);
-			m_dropCoin[dropCoin_i]->SetActive(false);
-			m_dropCoin[dropCoin_i]->SetIsSpawn(false);
-			return;
+			if (m_mapCoin[mapCoin_i] == nullptr) 
+			{
+				m_mapCoin[mapCoin_i] = move(_returnItme);
+				m_mapCoin[mapCoin_i]->SetActive(false);
+				return;
+			}
 		}
-
+		//空きが無かったら新しく作り入れる
+		_returnItme->SetActive(false);
+		m_mapCoin.push_back(move(_returnItme));
 	}
-	//空きが無かったらvectorに入れる
-	_returnItme->SetActive(false);
-	_returnItme->SetIsSpawn(false);
-	m_dropCoin.push_back(move(_returnItme));
+	//ドロップのコインを戻す
+	else
+	{
+		for (int dropCoin_i = 0; dropCoin_i < m_dropCoin.size(); dropCoin_i++)
+		{
+			if (m_dropCoin[dropCoin_i] == nullptr)
+			{
+				m_dropCoin[dropCoin_i] = move(_returnItme);
+				m_dropCoin[dropCoin_i]->SetActive(false);
+				return;
+			}
+		}
+		//空きが無かったら新しく作り入れる
+		_returnItme->SetActive(false);
+		m_dropCoin.push_back(move(_returnItme));
+	}
+
 
 }
+

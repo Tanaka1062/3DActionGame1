@@ -23,7 +23,6 @@ int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 {
 	// メモリリーク発見用
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	_CrtSetBreakAlloc(38085);
 
 	// スクリーン設定
 	ChangeWindowMode(TRUE);			// フルスクリーンorウィンドウモード

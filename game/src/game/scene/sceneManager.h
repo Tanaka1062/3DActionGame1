@@ -20,7 +20,10 @@ private:
 	//各種シーン変数
 	tagScene m_sceneID;	//今のシーン
 
-	CSceneBase* m_scene[SCENE_NUM];
+	CSceneBase* m_scene;
+
+	void Factory();
+
 public:
 
 	//コンストラクタ

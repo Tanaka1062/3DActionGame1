@@ -111,6 +111,7 @@ void CTitleScene::Step()
 //---------------------------
 void CTitleScene::Exit()
 {
+	CSceneBase::Exit();
 	//UI‚ÌI—¹ˆ—
 	m_uiManager.Exit();
 

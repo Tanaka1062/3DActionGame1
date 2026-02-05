@@ -125,7 +125,7 @@ void CPlayScene::Step()
 	m_uiManager.Step();
 	CCameraManager::Step(ZERO,0.0f,m_ground.GetCenterId());
 	m_gameTime->Step();
-	m_winner->Step(&m_playerManager);
+	//m_winner->Step(&m_playerManager);
 	m_gimmickManager.Step();
 
 	//“–‚½‚è”»’è----------------------------------
@@ -167,6 +167,7 @@ void CPlayScene::Step()
 //---------------------------
 void CPlayScene::Exit()
 {
+	CSceneBase::Exit();
 	m_ground.Exit();
 	m_sky.Exit();
 	m_playerManager.Exit();

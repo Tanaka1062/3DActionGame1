@@ -375,7 +375,7 @@ void CCollisionManager::CheckHitItemToMap(CItemManager& _itemManager, CMap& _map
 	//“–‚½‚è”»’èî•ñ‚ªŠi”[‚³‚ê‚é\‘¢‘Ì
 	MV1_COLL_RESULT_POLY_DIM col;
 
-	std::list<std::shared_ptr<CItemBase>>& item = _itemManager.GetItemList();
+	std::list<std::unique_ptr<CItemBase>>& item = _itemManager.GetItemList();
 
 	for (auto item_i = item.begin(); item_i != item.end(); ++item_i)
 	{
@@ -450,7 +450,7 @@ void CCollisionManager::CheckHitPlayerToItem(CPlayerManager& _playerManager, CIt
 	{
 		CPlayer* player = _playerManager.GetPlayer(player_i);
 
-		list<shared_ptr<CItemBase>>& item = _itemManager.GetItemList();
+		list<unique_ptr<CItemBase>>& item = _itemManager.GetItemList();
 
 		for (auto item_i = item.begin(); item_i != item.end(); ++item_i)
 		{
@@ -465,7 +465,7 @@ void CCollisionManager::CheckHitPlayerToItem(CPlayerManager& _playerManager, CIt
 //----------------------------------------------
 void CCollisionManager::CheckHitItemToItem(CItemManager& _itemManager)
 {
-	list<shared_ptr<CItemBase>>& item = _itemManager.GetItemList();
+	list<unique_ptr<CItemBase>>& item = _itemManager.GetItemList();
 
 	for (auto itemA_i = item.begin(); itemA_i != item.end(); ++itemA_i)
 	{
@@ -520,7 +520,7 @@ void CCollisionManager::CheckHitCpuPlayerFOVToPlayer(CPlayerManager& _playerMana
 //----------------------------------------------
 void CCollisionManager::CheckHitCpuPlayerFOVToItem(CPlayerManager& _playerManager, CItemManager& _itemManager)
 {
-	list<shared_ptr<CItemBase>>& item = _itemManager.GetItemList();
+	list<unique_ptr<CItemBase>>& item = _itemManager.GetItemList();
 
 	for (int cpuPlayerFOV_i = 0; cpuPlayerFOV_i < _playerManager.GetCpuPlayerFOVNum(); cpuPlayerFOV_i++)
 	{

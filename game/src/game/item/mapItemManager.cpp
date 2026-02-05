@@ -26,20 +26,7 @@ constexpr int SPAWN_NUM[MAP_CENTER_NUM]		//マップごとのフレームの数
 //-----------------------
 CMapItemManager::CMapItemManager()
 {
-
 	m_hndl = -1;
-
-	for (int map_i = 0; map_i < MAP_CENTER_NUM; map_i++)
-	{
-		for (int item_i = 0; item_i < SPAWN_NUM[map_i]; item_i++)
-		{
-			shared_ptr<CItemBase> box = make_unique<CBox>();
-
-			box->Init();
-
-			m_item.push_back(move(box));
-		}
-	}
 }
 
 //-----------------------
@@ -48,8 +35,6 @@ CMapItemManager::CMapItemManager()
 CMapItemManager::~CMapItemManager()
 {
 	Exit();
-
-	m_item.clear();
 }
 
 //-----------------------
@@ -57,21 +42,21 @@ CMapItemManager::~CMapItemManager()
 //-----------------------
 void CMapItemManager::Init()
 {
-	////アイテムが増えすぎないようにする
-	//m_item.clear();
+	//アイテムが増えすぎないようにする
+	m_item.clear();
 
-	////アイテムの初期化
-	//for (int map_i = 0; map_i < MAP_CENTER_NUM; map_i++)
-	//{
-	//	for (int item_i = 0; item_i < SPAWN_NUM[map_i]; item_i++)
-	//	{
-	//		shared_ptr<CItemBase> box = make_unique<CBox>();
+	//アイテムの初期化
+	for (int map_i = 0; map_i < MAP_CENTER_NUM; map_i++)
+	{
+		for (int item_i = 0; item_i < SPAWN_NUM[map_i]; item_i++)
+		{
+			unique_ptr<CItemBase> box = make_unique<CBox>();
 
-	//		box->Init();
+			box->Init();
 
-	//		m_item.push_back(move(box));
-	//	}
-	//}
+			m_item.push_back(move(box));
+		}
+	}
 
 	m_hndl = -1;
 
@@ -126,15 +111,16 @@ void CMapItemManager::Exit()
 	}
 
 	//deleteの代わり
-	//m_item.clear();
+	m_item.clear();
 }
 
 //アイテムのアドレスを取得
-shared_ptr<CItemBase> CMapItemManager::GetItem(int _num)
+unique_ptr<CItemBase> CMapItemManager::GetItem(int _num)
 {
 	if (m_item.size() <= _num)return nullptr;
 
-	shared_ptr<CItemBase> item = move(m_item[_num]);
+	unique_ptr<CItemBase> item = move(m_item[_num]);
 
 	return item;
 }
+

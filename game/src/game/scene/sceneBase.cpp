@@ -100,5 +100,5 @@ void CSceneBase::Step()
 //---------------------------
 void CSceneBase::Exit()
 {
-
+	m_LoadBG.Exit();
 }

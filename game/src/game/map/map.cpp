@@ -53,10 +53,14 @@ void CMap::Load(tagMapId _id)
 {
 	LoadModel(MAP_MODEL_PATH[_id]);
 
-	m_hitHndl = MV1LoadModel(MAP_MODEL_PATH[_id]);
+	if (m_hitHndl == -1)
+	{
+		m_hitHndl = MV1LoadModel(MAP_MODEL_PATH[_id]);
 
-	//マップの当たり判定を取るためにコリジョン情報を構築する
-	MV1SetupCollInfo(m_hitHndl);
+		//マップの当たり判定を取るためにコリジョン情報を構築する
+		MV1SetupCollInfo(m_hitHndl);
+	}
+
 }
 
 //------------------------
