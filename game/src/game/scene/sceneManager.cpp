@@ -73,6 +73,8 @@ void CSceneManager::Factory()
 			m_scene =  new CTitleScene;
 			break;
 		}
+
+
 	}
 }
 

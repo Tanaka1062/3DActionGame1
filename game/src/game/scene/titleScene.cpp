@@ -42,9 +42,6 @@ void CTitleScene::Draw()
 		break;
 	}
 
-
-
-	//DrawFormatString(32, 32, GetColor(255, 0, 0), "ƒ^ƒCƒgƒ‹");
 }
 
 //---------------------------

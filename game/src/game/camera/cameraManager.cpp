@@ -130,7 +130,6 @@ void CCameraManager::Draw()
 //---------------------------
 void CCameraManager::Update(VECTOR _tagetPos)
 {
-
 	//カメラの更新
 	//プレイカメラの場合はプレイヤーの座標を入れる
 	if (m_id == CAMERA_ID_PLAY)

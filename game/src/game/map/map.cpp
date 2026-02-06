@@ -96,3 +96,17 @@ void CMap::Draw()
 
 }
 
+//------------------------
+//		èIóπèàóù
+//------------------------
+void CMap::Exit()
+{
+	CObject::Exit();
+	
+	if (m_hitHndl != -1)
+	{
+		MV1DeleteModel(m_hitHndl);
+		m_hitHndl = -1;
+	}
+}
+

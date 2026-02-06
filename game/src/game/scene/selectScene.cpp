@@ -79,7 +79,7 @@ void CSelectScene::Load()
 		m_sky.Load();
 		m_selectPlayerManager.Load();
 
-		//UIの画像ロード
+		////UIの画像ロード
 		m_uiManager.Load();
 
 		m_LoadState = 1;

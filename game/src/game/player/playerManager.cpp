@@ -99,7 +99,6 @@ void CPlayerManager::Init()
 			player = cpuPlayer;
 		}
 
-
 		tagPlayerName name = PLAYER_NONE;
 
 		VECTOR* pointerPos = nullptr;
@@ -140,16 +139,16 @@ void CPlayerManager::Load()
 {
 
 	//モデルのロード
-	for (int i = 0; i < MODEL_NUM; i++)
+	for (int model_i = 0; model_i < MODEL_NUM; model_i++)
 	{
-		if (m_modelHndl[i] == -1)
+		if (m_modelHndl[model_i] == -1)
 		{
-			m_modelHndl[i] = MV1LoadModel(MODEL_PATH[i]);
+			m_modelHndl[model_i] = MV1LoadModel(MODEL_PATH[model_i]);
 		}
 	}
 
 	//マップのフレームのハンドルをロード
-	int frameHndl = MV1LoadModel(MAP_FRAME_PATH[MAP_ID_GRASSLAND]);
+	int mapFrameHndl = MV1LoadModel(MAP_FRAME_PATH[MAP_ID_GRASSLAND]);
 
 	int frameNum = MAP_FRAME_NUM;
 	//マップのリスポーン位置を取得して設定
@@ -161,7 +160,7 @@ void CPlayerManager::Load()
 			VECTOR pos = { 0.0f,0.0f,0.0f };
 
 			//フレームから座標を取得
-			pos = MV1GetFramePosition(frameHndl, frameNum);
+			pos = MV1GetFramePosition(mapFrameHndl, frameNum);
 
 			//フレームを次に進める
 			frameNum += 2;
@@ -172,6 +171,12 @@ void CPlayerManager::Load()
 			//スポーン位置を生成して設定
 			m_spawnPos[map_i].push_back(pos);
 		}
+	}
+
+	///マップのフレームを削除
+	if (mapFrameHndl != -1)
+	{
+		MV1DeleteModel(mapFrameHndl);
 	}
 
 	for (int player_i = 0; player_i < m_player.size(); player_i++)
@@ -307,14 +312,14 @@ void CPlayerManager::Step(CAttackManager* _attackManager, CShotManager* _shotMan
 		}
 
 		//プレイヤーが死んでいたら復活させる
-		//if (m_player[player_i]->GetActive() == false)
-		//{
-		//	if (CCollision::CheckHitSphereToSphere(m_spawnPos[_mapId][player_i], m_player[player_i]->GetRad(),
-		//		CCameraManager::GetFocusPos(), DIE_RADIUS) == true)
-		//	{
-		//		m_player[player_i]->Respawn(m_spawnPos[_mapId][player_i]);
-		//	}
-		//}
+		if (m_player[player_i]->GetActive() == false)
+		{
+			if (CCollision::CheckHitSphereToSphere(m_spawnPos[_mapId][player_i], m_player[player_i]->GetRad(),
+				CCameraManager::GetFocusPos(), DIE_RADIUS) == true)
+			{
+				m_player[player_i]->Respawn(m_spawnPos[_mapId][player_i]);
+			}
+		}
 
 		m_player[player_i]->Step(_rot,targetPos,_attackManager,_shotManager);
 	}
@@ -327,9 +332,9 @@ void CPlayerManager::Step(CAttackManager* _attackManager, CShotManager* _shotMan
 //------------------------
 void CPlayerManager::Update()
 {
-	for (int i = 0; i < m_player.size(); i++)
+	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
-		m_player[i]->Update();
+		m_player[player_i]->Update();
 	}
 }
 
@@ -338,9 +343,9 @@ void CPlayerManager::Update()
 //------------------------
 void CPlayerManager::Draw()
 {
-	for (int i = 0; i < m_player.size(); i++)
+	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
-		m_player[i]->Draw();
+		m_player[player_i]->Draw();
 	}
 
 #ifdef DEBUG
@@ -364,9 +369,13 @@ void CPlayerManager::Exit()
 	}
 	m_player.clear();
 
-	for (int i = 0; i < m_modelHndl.size(); i++)
+	for (int model_i = 0; model_i < m_modelHndl.size(); model_i++)
 	{
-		m_modelHndl[i] = -1;
+		if (m_modelHndl[model_i] != -1)
+		{
+			MV1DeleteModel(m_modelHndl[model_i]);
+			m_modelHndl[model_i] = -1;
+		}
 	}
 	m_modelHndl.clear();
 

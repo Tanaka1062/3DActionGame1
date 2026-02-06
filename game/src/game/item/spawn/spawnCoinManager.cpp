@@ -82,7 +82,7 @@ void CSpawnCoinManager::Init()
 void CSpawnCoinManager::Load()
 {
 	//アイテムのモデル読み込み
-	//m_hndl = MV1LoadModel(MODEL_PATH);
+	m_hndl = MV1LoadModel(MODEL_PATH);
 
 	//アイテムのモデルロード
 	for (int mapCoin_i = 0; mapCoin_i < m_mapCoin.size(); mapCoin_i++)
@@ -117,6 +117,13 @@ void CSpawnCoinManager::Load()
 
 	}
 	//---------------------------------------------------------------------------
+
+	///マップのフレームを削除
+	if (mapFrameHndl != -1)
+	{
+		MV1DeleteModel(mapFrameHndl);
+	}
+
 }
 
 //-----------------------

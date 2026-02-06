@@ -150,7 +150,7 @@ void CSpawnItemManager::Load()
 	{
 		if (m_hndl[hndl_i] == -1)
 		{
-			//m_hndl[hndl_i] = MV1LoadModel(MODEL_PATH[hndl_i]);
+			m_hndl[hndl_i] = MV1LoadModel(MODEL_PATH[hndl_i]);
 		}
 	}
 
@@ -189,6 +189,13 @@ void CSpawnItemManager::Load()
 
 	}
 	//---------------------------------------------------------------------------
+
+	///マップのフレームを削除
+	if (mapFrameHndl != -1)
+	{
+		MV1DeleteModel(mapFrameHndl);
+	}
+
 }
 
 //-----------------------

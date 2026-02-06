@@ -22,9 +22,15 @@ void CSelectCamera::Init(VECTOR _focus)
 	m_focusPos = ZERO;
 
 	//フレームのハンドルをロード
-	int frameHndl = MV1LoadModel(MAP_FRAME_PATH[MAP_ID_SELECT]);
+	int mapFrameHndl = MV1LoadModel(MAP_FRAME_PATH[MAP_ID_SELECT]);
 
-	m_pos = MV1GetFramePosition(frameHndl,5);
+	m_pos = MV1GetFramePosition(mapFrameHndl,5);
+
+	///マップのフレームを削除
+	if (mapFrameHndl != -1)
+	{
+		MV1DeleteModel(mapFrameHndl);
+	}
 }
 
 //---------------------------------

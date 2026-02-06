@@ -55,7 +55,7 @@ int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 	//エフェクトデータのロード
 	CEffectData::Load();
-
+	
 	//キー入力の初期化
 	CKeyInput::Init();
 	//コントローラー入力の初期化

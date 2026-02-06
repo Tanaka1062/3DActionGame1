@@ -84,7 +84,6 @@ void C3DUi::Load()
 //–ˆƒtƒŒ[ƒ€‚·‚éˆ—
 void C3DUi::Step(VECTOR _pos, float _rad, int _money, tag3DUiType _type)
 {
-	return;
 	switch (_type)
 	{
 	case UI_TYPE_COIN:

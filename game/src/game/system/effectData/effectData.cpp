@@ -33,9 +33,10 @@ void CEffectData::Load()
 	// -------------------------------------
 
 	//エフェクトのロード
-	for (int i = 0; i < EFFECT_NUM; i++)
+	for (int effect_i = 0; effect_i < EFFECT_NUM; effect_i++)
 	{
-		m_id[i] = CEffekseerCtrl::LoadData(EFFECT_PATH[i]);
+		m_id[effect_i] = CEffekseerCtrl::LoadData(EFFECT_PATH[effect_i]);
 	}
 }
+
 

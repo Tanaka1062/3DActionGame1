@@ -22,10 +22,17 @@ void CResultCamera::Init(VECTOR _focus)
 	m_focusPos = ZERO;
 
 	//フレームのハンドルをロード
-	int frameHndl = MV1LoadModel(MAP_FRAME_PATH[MAP_ID_RESULT]);
+	int mapFrameHndl = MV1LoadModel(MAP_FRAME_PATH[MAP_ID_RESULT]);
 
-	m_pos = MV1GetFramePosition(frameHndl,5);
-	m_focusPos = MV1GetFramePosition(frameHndl, 1);
+	m_pos = MV1GetFramePosition(mapFrameHndl,5);
+	m_focusPos = MV1GetFramePosition(mapFrameHndl, 1);
+
+	///マップのフレームを削除
+	if (mapFrameHndl != -1)
+	{
+		MV1DeleteModel(mapFrameHndl);
+	}
+
 }
 
 //---------------------------------
