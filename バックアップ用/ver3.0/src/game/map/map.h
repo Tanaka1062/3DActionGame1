@@ -57,6 +57,9 @@ public:
 	//モデル描写
 	void Draw();
 
+	//終了処理
+	void Exit();
+
 	//当たり判定ようのマップのハンドルを取得
 	int GetHitHndl() { return m_hitHndl; }
 

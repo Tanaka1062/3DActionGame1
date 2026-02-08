@@ -48,7 +48,7 @@ void CPlayScene::Draw()
 		CCameraManager::Draw();
 		break;
 	}
-
+	
 }
 
 //---------------------------
@@ -167,6 +167,7 @@ void CPlayScene::Step()
 //---------------------------
 void CPlayScene::Exit()
 {
+	CSceneBase::Exit();
 	m_ground.Exit();
 	m_sky.Exit();
 	m_playerManager.Exit();
@@ -176,6 +177,7 @@ void CPlayScene::Exit()
 	m_weaponManager.Exit();
 	m_uiManager.Exit();
 	m_gimmickManager.Exit();
+	CCameraManager::Exit();
 
 	//エフェクトを全て消す
 	CEffekseerCtrl::StopAll();

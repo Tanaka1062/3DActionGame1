@@ -214,7 +214,7 @@ unique_ptr<CItemBase> CSpawnCoinManager::SpawnCoin()
 void CSpawnCoinManager::ReturnCoin(unique_ptr<CItemBase> _returnItme)
 {
 	//マップのコインを戻す
-	if (_returnItme->GetIsSpawn() == true)
+	if (_returnItme->GetIsSpawn() == false)
 	{
 		for (int mapCoin_i = 0; mapCoin_i < m_mapCoin.size(); mapCoin_i++)
 		{

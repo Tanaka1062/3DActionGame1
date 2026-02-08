@@ -38,7 +38,7 @@ enum tagItemState
 class CItemBase :public CActor
 {
 protected:
-	bool m_isSpawn;			//スポーン可能かフラグ
+	bool m_isSpawn;			//スポーンするかフラグ
 	bool m_isBuy;			//購入されているか
 	int m_cost;				//価格
 	CShadow m_shadow;		//丸影のクラス

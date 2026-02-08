@@ -105,8 +105,6 @@ void CShotBase::Step()
 		m_isActive = false;
 	}
 
-
-
 }
 
 //-----------------------

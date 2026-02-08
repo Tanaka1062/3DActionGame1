@@ -35,7 +35,7 @@ static const char* MODEL_PATH[ITEM_NUM] =							//モデルのパス
 
 constexpr int MAP_FRAME_NUM = 56;			//マップのフレーム番号
 
-constexpr int SPAWN_TIME = 3 * 60;			//スポーンするまで時間
+constexpr int SPAWN_TIME = 10 * 60;			//スポーンするまで時間
 
 constexpr int SPAWN_NUM[MAP_CENTER_NUM]		//マップごとのフレームの数
 	{
@@ -52,8 +52,6 @@ constexpr int SPAWN_NUM[MAP_CENTER_NUM]		//マップごとのフレームの数
 //-----------------------
 CSpawnItemManager::CSpawnItemManager()
 {
-	
-
 	for (int hndl_i = 0; hndl_i < ITEM_NUM; hndl_i++)
 	{
 		m_hndl[hndl_i] = -1;
@@ -62,6 +60,7 @@ CSpawnItemManager::CSpawnItemManager()
 	m_spawnTime = 0;
 
 	m_isItemSpawn = false;
+
 }
 
 //-----------------------
@@ -70,7 +69,6 @@ CSpawnItemManager::CSpawnItemManager()
 CSpawnItemManager::~CSpawnItemManager()
 {
 	Exit();
-
 }
 
 //-----------------------
@@ -191,6 +189,13 @@ void CSpawnItemManager::Load()
 
 	}
 	//---------------------------------------------------------------------------
+
+	///マップのフレームを削除
+	if (mapFrameHndl != -1)
+	{
+		MV1DeleteModel(mapFrameHndl);
+	}
+
 }
 
 //-----------------------
@@ -389,7 +394,6 @@ unique_ptr<CItemBase> CSpawnItemManager::SpawnItem(tagMapCenterId _mapId)
 
 	//アイテムをの生存フラグをtrueにする
 	spawnItem->SetActive(true);
-	spawnItem->SetIsSpawn(true);
 
 	//スポーンさせる座標を決める---------------------
 	int spawnPosId = 0;
@@ -427,14 +431,12 @@ void CSpawnItemManager::ReturnItem(unique_ptr<CItemBase> _returnItme)
 		{
 			m_item[spawn_i] = move(_returnItme);
 			m_item[spawn_i]->SetActive(false);
-			m_item[spawn_i]->SetIsSpawn(false);
 			return;
 		}
 
 	}
 	//空きが無かったらvectorに入れる
 	_returnItme->SetActive(false);
-	_returnItme->SetIsSpawn(false);
 	m_item.push_back(move(_returnItme));
 
 }

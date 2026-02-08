@@ -19,6 +19,7 @@ void CSpawnCoin::Init()
 
 	m_spawnTime = SPAWN_TIME;
 	m_spawnPos = ZERO;
+	m_isSpawn = false;
 }
 
 //---------------------

@@ -57,7 +57,7 @@ void CSelectPlayerManager::Init()
 {
 	if (m_modelHndl.size() < MODEL_NUM)
 	{
-		for (int modelHndl_i = 0; modelHndl_i < MODEL_NUM; modelHndl_i++)
+		for (int model_i = 0; model_i < MODEL_NUM; model_i++)
 		{
 			m_modelHndl.push_back(-1);
 		}
@@ -110,43 +110,50 @@ void CSelectPlayerManager::Load()
 {
 
 	//モデルのロード
-	for (int i = 0; i < MODEL_NUM; i++)
+	for (int model_i = 0; model_i < MODEL_NUM; model_i++)
 	{
-		if (m_modelHndl[i] == -1)
+		if (m_modelHndl[model_i] == -1)
 		{
-			m_modelHndl[i] = MV1LoadModel(MODEL_PATH[i]);
+			m_modelHndl[model_i] = MV1LoadModel(MODEL_PATH[model_i]);
 		}
 	}
 
 	//マップのフレームのハンドルをロード
-	int frameHndl = MV1LoadModel(FRAME_PATH);
+	int mapFrameHndl = MV1LoadModel(FRAME_PATH);
 
-	for (int i = 0; i < m_player.size(); i++)
+	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
 		//プレイヤーのスポーン位置をロード
 		VECTOR start = { 0.0f,0.0f,0.0f };
 
 		//スポーン位置をセット
-		switch (i)
+		switch (player_i)
 		{
 		case PLAYER_1:
-			start = MV1GetFramePosition(frameHndl, 1);
+			start = MV1GetFramePosition(mapFrameHndl, 1);
 			break;
 		case PLAYER_2:
-			start = MV1GetFramePosition(frameHndl, 3);
+			start = MV1GetFramePosition(mapFrameHndl, 3);
 			break;
 		case PLAYER_3:
-			start = MV1GetFramePosition(frameHndl, 7);
+			start = MV1GetFramePosition(mapFrameHndl, 7);
 			break;
 		case PLAYER_4:
-			start = MV1GetFramePosition(frameHndl, 9);
+			start = MV1GetFramePosition(mapFrameHndl, 9);
 			break;
 		}
 
-		m_player[i]->Load(m_modelHndl[i]);
-		m_player[i]->SetPos(start);
+		m_player[player_i]->Load(m_modelHndl[player_i]);
+		m_player[player_i]->SetPos(start);
 		m_spawnPos.push_back(start);
 	}
+	
+	//マップのフレームを削除
+	if (mapFrameHndl != -1)
+	{
+		MV1DeleteModel(mapFrameHndl);
+	}
+	
 }
 
 //------------------------
@@ -171,9 +178,9 @@ void CSelectPlayerManager::Step()
 //------------------------
 void CSelectPlayerManager::Update()
 {
-	for (int i = 0; i < m_player.size(); i++)
+	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
-		m_player[i]->Update();
+		m_player[player_i]->Update();
 	}
 }
 
@@ -182,9 +189,9 @@ void CSelectPlayerManager::Update()
 //------------------------
 void CSelectPlayerManager::Draw()
 {
-	for (int i = 0; i < m_player.size(); i++)
+	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
-		m_player[i]->Draw();
+		m_player[player_i]->Draw();
 	}
 
 }
@@ -197,12 +204,18 @@ void CSelectPlayerManager::Exit()
 	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
 		m_player[player_i]->Exit();
+
+		delete m_player[player_i];
 	}
 	m_player.clear();
 
-	for (int i = 0; i < m_modelHndl.size(); i++)
+	for (int model_i = 0; model_i < m_modelHndl.size(); model_i++)
 	{
-		m_modelHndl[i] = -1;
+		if (m_modelHndl[model_i] != -1)
+		{
+			MV1DeleteModel(m_modelHndl[model_i]);
+			m_modelHndl[model_i] = -1;
+		}
 	}
 
 	m_modelHndl.clear();

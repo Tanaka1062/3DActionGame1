@@ -42,9 +42,6 @@ void CTitleScene::Draw()
 		break;
 	}
 
-
-
-	//DrawFormatString(32, 32, GetColor(255, 0, 0), "タイトル");
 }
 
 //---------------------------
@@ -111,8 +108,10 @@ void CTitleScene::Step()
 //---------------------------
 void CTitleScene::Exit()
 {
+	CSceneBase::Exit();
 	//UIの終了処理
 	m_uiManager.Exit();
 
 	CSoundManager::StopAll();
 }
+

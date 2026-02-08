@@ -135,7 +135,7 @@ protected:
 public:
 	//コンストラクタ・デストラクタ
 	CPlayer();
-	~CPlayer();
+	virtual ~CPlayer();
 
 	//初期化
 	virtual void Init(tagPlayerName _name, tagPadName _padName);

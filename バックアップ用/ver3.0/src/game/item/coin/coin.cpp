@@ -71,6 +71,7 @@ void CCoin::Update()
 //---------------------
 void CCoin::Draw(int _sharedModel)
 {
+
 	if (m_isActive == false) return;
 
 	MV1SetMatrix(_sharedModel, m_mat);
@@ -115,6 +116,5 @@ void CCoin::HitCalc(CObject* _hitObject)
 void CCoin::Delete()
 {
 	m_state = ITEM_WAIT;
-	m_isSpawn = true;
 }
 

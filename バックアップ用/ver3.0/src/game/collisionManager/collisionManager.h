@@ -14,7 +14,7 @@ class CCollisionManager
 private:
 
 	//オブジェクト同士の当たり判定
-	static void CheckHitObjectToObject(CObject* _objectA, CObject* _objectB);
+	static void CheckHitObjectToObject(CObject& _objectA, CObject& _objectB);
 
 public:
 

@@ -28,5 +28,6 @@ public:
 
 	//エフェクトのIDを取得
 	static int GetId(tagEffectKind _kind) { return m_id[_kind]; }
+
 };
 

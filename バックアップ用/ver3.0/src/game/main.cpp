@@ -23,6 +23,7 @@ int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 {
 	// メモリリーク発見用
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
 	// スクリーン設定
 	ChangeWindowMode(TRUE);			// フルスクリーンorウィンドウモード
 	SetGraphMode(WINDOW_SIZE_X, WINDOW_SIZE_Y, 32);	// ウィンドウのサイズ
@@ -54,7 +55,7 @@ int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 	//エフェクトデータのロード
 	CEffectData::Load();
-
+	
 	//キー入力の初期化
 	CKeyInput::Init();
 	//コントローラー入力の初期化

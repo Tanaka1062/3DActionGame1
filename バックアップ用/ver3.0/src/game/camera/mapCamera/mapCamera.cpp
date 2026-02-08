@@ -26,16 +26,22 @@ void CMapCamera::Init(VECTOR _focus)
 	m_focusPos = ZERO;
 
 	//フレームのハンドルをロード
-	int frameHndl = MV1LoadModel(MAP_FRAME_PATH[MAP_ID_GRASSLAND]);
+	int mapFrameHndl = MV1LoadModel(MAP_FRAME_PATH[MAP_ID_GRASSLAND]);
 
-	m_pos = MV1GetFramePosition(frameHndl,1);
+	m_pos = MV1GetFramePosition(mapFrameHndl,1);
 
 	int frameNum = MAP_FRAME_NUM;
 	for (int mapCenter_i = 0; mapCenter_i < MAP_CENTER_NUM; mapCenter_i++)
 	{
-		m_mapCenterPos[mapCenter_i] = MV1GetFramePosition(frameHndl, frameNum);
+		m_mapCenterPos[mapCenter_i] = MV1GetFramePosition(mapFrameHndl, frameNum);
 
 		frameNum += 2;
+	}
+
+	///マップのフレームを削除
+	if (mapFrameHndl != -1)
+	{
+		MV1DeleteModel(mapFrameHndl);
 	}
 
 	m_focusPos = m_mapCenterPos[0];

@@ -17,6 +17,7 @@ CItemManager::CItemManager()
 CItemManager::~CItemManager()
 {
 	Exit();
+
 }
 
 //-----------------------
@@ -34,6 +35,7 @@ void CItemManager::Init(CPlayerManager* _playerManager)
 //-----------------------
 void CItemManager::Load()
 {
+
 	m_mapItemManager.Load();
 	m_spawnItemManager.Load();
 	m_coinManager.Load();
@@ -60,9 +62,11 @@ void CItemManager::Load()
 //-----------------------
 void CItemManager::Step(CPlayerManager* _playerManager, tagMapCenterId _mapId)
 {
+
 	m_mapItemManager.Step();
 	m_spawnItemManager.Step();
 	m_coinManager.Step();
+
 
 	//スポーンしたらアイテムを増やす
 	if (m_spawnItemManager.GetIsItemSpawn() == true)
@@ -89,7 +93,7 @@ void CItemManager::Step(CPlayerManager* _playerManager, tagMapCenterId _mapId)
 			else
 			{
 				//消えたコインをコインマネージャーに戻す
-				m_coinManager.ReturnItem(move(*item_i));
+				m_coinManager.ReturnCoin(move(*item_i));
 			}
 
 			//消えたアイテムをリストから消す
@@ -97,13 +101,16 @@ void CItemManager::Step(CPlayerManager* _playerManager, tagMapCenterId _mapId)
 		}
 		else
 		{
+			//ここ消したら処理が増えない---------
 			(*item_i)->Step();
 
 			++item_i;
+			//-----------------------------------
 
 		}
 	
 	}
+
 
 	//プレイヤーのコインを落とす処理
 	for (int player_i = 0; player_i < _playerManager->GetPlayerNum(); player_i++)
@@ -141,6 +148,7 @@ void CItemManager::Step(CPlayerManager* _playerManager, tagMapCenterId _mapId)
 //-----------------------
 void CItemManager::Update()
 {
+
 	for (auto item_i = m_item.begin(); item_i != m_item.end(); ++item_i)
 	{
 		(*item_i)->Update();
@@ -152,6 +160,7 @@ void CItemManager::Update()
 //-----------------------
 void CItemManager::Draw()
 {
+
 	for (auto item_i = m_item.begin(); item_i != m_item.end(); ++item_i)
 	{
 		if ((*item_i)->GetItemType() == ITEM_TYPE_COIN)
@@ -171,15 +180,21 @@ void CItemManager::Draw()
 //-----------------------
 void CItemManager::Exit()
 {
+
 	m_mapItemManager.Exit();
 	m_spawnItemManager.Exit();
 	m_coinManager.Exit();
 
-	for (auto item_i = m_item.begin(); item_i != m_item.end();)
+	for (auto item_i = m_item.begin(); item_i != m_item.end(); ++item_i)
 	{
-		item_i = m_item.erase(item_i);
-
+		if ((*item_i) != nullptr)
+		{
+			(*item_i)->Exit();
+		}
 	}
+
+	//アイテムを全て消す
+	m_item.clear();
 
 }
 
@@ -190,8 +205,9 @@ CItemBase* CItemManager::GetItem(int _num)
 {
 	int itemNum = 0;
 
-	for (auto item_i = m_item.begin(); item_i != m_item.end(); item_i++)
+	for (auto item_i = m_item.begin(); item_i != m_item.end(); ++item_i)
 	{
+		return (*item_i).get();
 		if (itemNum == _num)
 		{
 			return (*item_i).get();

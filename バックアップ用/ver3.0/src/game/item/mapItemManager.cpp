@@ -26,9 +26,7 @@ constexpr int SPAWN_NUM[MAP_CENTER_NUM]		//マップごとのフレームの数
 //-----------------------
 CMapItemManager::CMapItemManager()
 {
-
 	m_hndl = -1;
-
 }
 
 //-----------------------
@@ -37,7 +35,6 @@ CMapItemManager::CMapItemManager()
 CMapItemManager::~CMapItemManager()
 {
 	Exit();
-
 }
 
 //-----------------------
@@ -93,6 +90,12 @@ void CMapItemManager::Load()
 		m_item[spawnPos_i]->SetSpawnPos(spawnPos);
 	}
 
+	///マップのフレームを削除
+	if (mapFrameHndl != -1)
+	{
+		MV1DeleteModel(mapFrameHndl);
+	}
+
 }
 
 //-----------------------
@@ -126,3 +129,4 @@ unique_ptr<CItemBase> CMapItemManager::GetItem(int _num)
 
 	return item;
 }
+

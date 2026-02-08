@@ -45,8 +45,8 @@ public:
 	//コインを出現させる
 	std::unique_ptr<CItemBase> SpawnCoin();
 
-	//アイテムを元に戻す
-	void ReturnItem(std::unique_ptr<CItemBase> _returnItme);
+	//マップのコインを元に戻す
+	void ReturnCoin(std::unique_ptr<CItemBase> _returnItme);
 
 	//ハンドルを取得
 	int GetHndl() { return m_hndl; }

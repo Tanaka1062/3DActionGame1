@@ -114,39 +114,45 @@ void CResultPlayerManager::Load()
 {
 
 	//モデルのロード
-	for (int i = 0; i < MODEL_NUM; i++)
+	for (int model_i = 0; model_i < MODEL_NUM; model_i++)
 	{
-		if (m_modelHndl[i] == -1)
+		if (m_modelHndl[model_i] == -1)
 		{
-			m_modelHndl[i] = MV1LoadModel(MODEL_PATH[i]);
+			m_modelHndl[model_i] = MV1LoadModel(MODEL_PATH[model_i]);
 		}
 	}
 
 	//マップのフレームのハンドルをロード
-	int frameHndl = MV1LoadModel(FRAME_PATH);
+	int mapFrameHndl = MV1LoadModel(FRAME_PATH);
 
 	int frameId[3] = { 3,7,9 };
 	int frameIdNum = 0;
 
-	for (int i = 0; i < m_player.size(); i++)
+	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
 		//プレイヤーのスポーン位置をロード
 		VECTOR start = { 0.0f,0.0f,0.0f };
 
 		//スポーン位置をセット
-		if (m_player[i]->GetIsWin() == true)
+		if (m_player[player_i]->GetIsWin() == true)
 		{
-			start = MV1GetFramePosition(frameHndl, 1);
+			start = MV1GetFramePosition(mapFrameHndl, 1);
 		}
 		else
 		{
-			start = MV1GetFramePosition(frameHndl, frameId[frameIdNum]);
+			start = MV1GetFramePosition(mapFrameHndl, frameId[frameIdNum]);
 			frameIdNum++;
 		}
 
-		m_player[i]->Load(m_modelHndl[i]);
-		m_player[i]->SetPos(start);
+		m_player[player_i]->Load(m_modelHndl[player_i]);
+		m_player[player_i]->SetPos(start);
 		m_spawnPos.push_back(start);
+	}
+
+	///マップのフレームを削除
+	if (mapFrameHndl != -1)
+	{
+		MV1DeleteModel(mapFrameHndl);
 	}
 }
 
@@ -172,9 +178,9 @@ void CResultPlayerManager::Step()
 //------------------------
 void CResultPlayerManager::Update()
 {
-	for (int i = 0; i < m_player.size(); i++)
+	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
-		m_player[i]->Update();
+		m_player[player_i]->Update();
 	}
 }
 
@@ -183,9 +189,9 @@ void CResultPlayerManager::Update()
 //------------------------
 void CResultPlayerManager::Draw()
 {
-	for (int i = 0; i < m_player.size(); i++)
+	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
-		m_player[i]->Draw();
+		m_player[player_i]->Draw();
 	}
 
 }
@@ -198,12 +204,18 @@ void CResultPlayerManager::Exit()
 	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
 		m_player[player_i]->Exit();
+
+		delete m_player[player_i];
 	}
 	m_player.clear();
 
-	for (int i = 0; i < m_modelHndl.size(); i++)
+	for (int model_i = 0; model_i < m_modelHndl.size(); model_i++)
 	{
-		m_modelHndl[i] = -1;
+		if (m_modelHndl[model_i] != -1)
+		{
+			MV1DeleteModel(m_modelHndl[model_i]);
+			m_modelHndl[model_i] = -1;
+		}
 	}
 
 	m_modelHndl.clear();
