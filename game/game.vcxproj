@@ -151,6 +151,10 @@
     <ClCompile Include="src\game\camera\selectCamera\selectCamera.cpp" />
     <ClCompile Include="src\game\character\characterBase.cpp" />
     <ClCompile Include="src\game\collisionManager\collisionManager.cpp" />
+    <ClCompile Include="src\game\event\bombParty\bombParty.cpp" />
+    <ClCompile Include="src\game\event\eventBase.cpp" />
+    <ClCompile Include="src\game\event\eventManager.cpp" />
+    <ClCompile Include="src\game\event\itemEvent\itemEventBase.cpp" />
     <ClCompile Include="src\game\gameTime\gameTime.cpp" />
     <ClCompile Include="src\game\item\coin\coinBase.cpp" />
     <ClCompile Include="src\game\item\coin\dropCoin.cpp" />
@@ -231,6 +235,10 @@
     <ClInclude Include="src\game\collisionManager\collisionManager.h" />
     <ClInclude Include="src\game\common.h" />
     <ClInclude Include="src\game\data.h" />
+    <ClInclude Include="src\game\event\bombParty\bombParty.h" />
+    <ClInclude Include="src\game\event\eventBase.h" />
+    <ClInclude Include="src\game\event\eventManager.h" />
+    <ClInclude Include="src\game\event\itemEvent\itemEventBase.h" />
     <ClInclude Include="src\game\gameTime\gameTime.h" />
     <ClInclude Include="src\game\item\coin\coinBase.h" />
     <ClInclude Include="src\game\item\coin\dropCoin.h" />

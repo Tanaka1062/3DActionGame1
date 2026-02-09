@@ -2,9 +2,9 @@
 
 static const char* MODEL_PATH[WEAPON_ID_NUM] ={		//ロードするファイル名
 	"",
-	"data/model/item/weapon/sword/sword.mv1",
-	"data/model/item/weapon/ax/ax.mv1",
-	"data/model/item/weapon/gun/gun.mv1",
+	"data/model/weapon/sword/weapon_sword.mv1",
+	"data/model/weapon/ax/weapon_ax.mv1",
+	"data/model/weapon/gun/weapon_gun.mv1",
 };				
 
 //---------------------------
@@ -83,6 +83,7 @@ void CWeaponManager::Update(CPlayerManager& _playerManager)
 	{
 		//プレイヤーのハンドルを取得
 		int hndl = _playerManager.GetPlayer(player_i)->GetHndl();
+		tagWeaponId weaponId = _playerManager.GetPlayer(player_i)->GetWeaponId();
 		m_weapon[player_i].Update(hndl);
 	}
 }
