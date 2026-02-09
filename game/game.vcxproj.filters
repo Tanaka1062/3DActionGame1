@@ -157,6 +157,9 @@
     <Filter Include="ソース ファイル\game\item\spawn">
       <UniqueIdentifier>{97015016-7803-4003-be0e-d490f5136772}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\game\ui\countDown">
+      <UniqueIdentifier>{0471a652-de33-4cc2-8aca-66ccabb949ea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\number.cpp">
@@ -312,7 +315,7 @@
     <ClCompile Include="src\game\ui\time\timeUi.cpp">
       <Filter>ソース ファイル\game\ui\time</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\item\coin\coin.cpp">
+    <ClCompile Include="src\game\item\coin\coinBase.cpp">
       <Filter>ソース ファイル\game\item\coin</Filter>
     </ClCompile>
     <ClCompile Include="src\game\item\weapon\itemWeaponBase.cpp">
@@ -379,6 +382,12 @@
       <Filter>ソース ファイル\game\item\spawn</Filter>
     </ClCompile>
     <ClCompile Include="src\game\item\coin\spawnCoin.cpp">
+      <Filter>ソース ファイル\game\item\coin</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\ui\countDown\countDown.cpp">
+      <Filter>ソース ファイル\game\ui\countDown</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\item\coin\dropCoin.cpp">
       <Filter>ソース ファイル\game\item\coin</Filter>
     </ClCompile>
   </ItemGroup>
@@ -539,7 +548,7 @@
     <ClInclude Include="src\game\ui\time\timeUi.h">
       <Filter>ソース ファイル\game\ui\time</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\item\coin\coin.h">
+    <ClInclude Include="src\game\item\coin\coinBase.h">
       <Filter>ソース ファイル\game\item\coin</Filter>
     </ClInclude>
     <ClInclude Include="src\game\map\map.h">
@@ -609,6 +618,12 @@
       <Filter>ソース ファイル\game\item\spawn</Filter>
     </ClInclude>
     <ClInclude Include="src\game\item\coin\spawnCoin.h">
+      <Filter>ソース ファイル\game\item\coin</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\ui\countDown\countDown.h">
+      <Filter>ソース ファイル\game\ui\countDown</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\item\coin\dropCoin.h">
       <Filter>ソース ファイル\game\item\coin</Filter>
     </ClInclude>
   </ItemGroup>

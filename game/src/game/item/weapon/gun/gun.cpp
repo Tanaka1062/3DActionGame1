@@ -22,11 +22,14 @@ void CGun::Init()
 	m_itemName = ITEM_GUN;
 	m_id = WEAPON_ID_GUN;
 	m_weaponDurability = DURABILITY;
+
+	m_rot.x += 0.2f;
 }
 
 //–ˆƒtƒŒ[ƒ€‚·‚éˆ—
 void CGun::Step()
 {
 	CWeaponBase::Step();
+	m_rot.y += 0.01;
 
 }

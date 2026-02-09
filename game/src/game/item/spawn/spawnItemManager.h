@@ -4,7 +4,6 @@
 #include "../itemBase.h"
 #include "../../data.h"
 #include "../../player/playerManager.h"
-#include "../coin/coin.h"
 #include "../itemObject/box/box.h"
 #include "../../map/map.h"
 

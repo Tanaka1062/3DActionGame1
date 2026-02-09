@@ -4,7 +4,6 @@
 #include "itemBase.h"
 #include "../data.h"
 #include "../player/playerManager.h"
-#include "coin/coin.h"
 #include "itemObject/box/box.h"
 #include "../map/map.h"
 
@@ -57,9 +56,6 @@ public:
 
 	//アイテムを出現させる
 	std::unique_ptr<CItemBase> SpawnItem(tagMapCenterId _mapId);
-
-	//コインを出現させる
-	std::unique_ptr<CItemBase> SpawnCoin();
 
 	//アイテムがスポーンするかを取得
 	bool GetIsItemSpawn() { return m_isItemSpawn; }

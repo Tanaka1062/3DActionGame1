@@ -420,8 +420,6 @@ void CPlayer::Respawn(VECTOR _respawnPos)
 		m_weaponId = WEAPON_ID_HAND;
 		m_weaponDurability = 0;
 		m_state = WAIT;
-		m_dropCoin = static_cast<int>(m_money * MONEY_RESPAWN_RATE);
-		m_money -= m_dropCoin;
 		break;
 	//死んでいない場合
 	default:
@@ -669,7 +667,7 @@ void CPlayer::Walk()
 //-----------------------
 void CPlayer::Jump()
 {
-	RequestAnim(ANIMID_JUMP, 1.0f);
+	RequestAnim(ANIMID_JUMP, 2.0f);
 
 	if (GetAnimEnd() == true)
 	{
@@ -1386,7 +1384,11 @@ void CPlayer::Stagger()
 void CPlayer::Die()
 {
 	//死亡のアニメーション
-	RequestAnim(ANIMID_DIE, 0.5f);
+	if (RequestAnim(ANIMID_DIE, 0.5f) == true)
+	{
+		m_dropCoin = static_cast<int>(m_money * MONEY_RESPAWN_RATE);
+		m_money -= m_dropCoin;
+	}
 
 	//死亡アニメーションが終わったら消える
 	if (GetAnimEnd() == true)

@@ -345,6 +345,7 @@ void CPlayerManager::Draw()
 {
 	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
+		if (m_player[player_i]->GetActive() == false)continue;
 		m_player[player_i]->Draw();
 	}
 

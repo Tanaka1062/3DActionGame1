@@ -1,7 +1,7 @@
 #pragma once
-#include "coin.h"
+#include "coinBase.h"
 
-class CSpawnCoin : public CCoin
+class CSpawnCoin : public CCoinBase
 {
 private:
 	int m_spawnTime;		//ŽžŠÔƒJƒEƒ“ƒg

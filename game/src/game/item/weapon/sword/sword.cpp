@@ -22,11 +22,14 @@ void CSword::Init()
 	m_itemName = ITEM_SWORD;
 	m_id = WEAPON_ID_SWORD;
 	m_weaponDurability = DURABILITY;
+
+	m_rot.x += 0.2f;
 }
 
 //–ˆƒtƒŒ[ƒ€‚·‚éˆ—
 void CSword::Step()
 {
 	CWeaponBase::Step();
+	m_rot.y += 0.01;
 
 }

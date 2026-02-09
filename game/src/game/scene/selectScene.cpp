@@ -79,7 +79,7 @@ void CSelectScene::Load()
 		m_sky.Load();
 		m_selectPlayerManager.Load();
 
-		////UIの画像ロード
+		//UIの画像ロード
 		m_uiManager.Load();
 
 		m_LoadState = 1;
@@ -110,7 +110,7 @@ void CSelectScene::Step()
 	m_selectPlayerManager.Step();
 
 	//UIの毎フレームする処理
-	m_uiManager.Step();
+	m_uiManager.Step(m_selectPlayerManager.GetIsAllReady());
 
 	CCameraManager::Update(ZERO);
 	m_sky.Update();
@@ -121,7 +121,7 @@ void CSelectScene::Step()
 
 	//スペースで終わる
 	if (CKeyInput::IsTrg(KEY_SELECT) ||
-		m_selectPlayerManager.GetIsAllReady() == true)
+		m_uiManager.GetCountDownEnd() == true)
 	{
 		m_state = END;
 	}

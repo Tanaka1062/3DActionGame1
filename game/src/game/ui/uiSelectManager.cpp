@@ -51,6 +51,8 @@ void CUiSelectManager::Init()
 
 		m_ui.push_back(ui);
 	}
+
+	m_countDown.Init();
 }
 
 //ロード
@@ -60,15 +62,18 @@ void CUiSelectManager::Load()
 	{
 		m_ui[ui_i]->LoadGraphic(UI_GRAPHIC_PATH[ui_i]);
 	}
+	m_countDown.Load();
 }
 
 //毎フレームする処理
-void CUiSelectManager::Step()
+void CUiSelectManager::Step(bool _allReady)
 {
 	for (int ui_i = 0; ui_i < m_ui.size(); ui_i++)
 	{
 		m_ui[ui_i]->Step();
 	}
+
+	m_countDown.Step(_allReady);
 
 	for (int pad_i = 0; pad_i < PAD_NUM; pad_i++)
 	{
@@ -97,6 +102,7 @@ void CUiSelectManager::Draw()
 	{
 		m_ui[ui_i]->Draw();
 	}
+	m_countDown.Draw();
 }
 
 //破棄
@@ -108,6 +114,7 @@ void CUiSelectManager::Exit()
 
 		delete m_ui[ui_i];
 	}
+	m_countDown.Exit();
 
 	//終わるときに全て消す
 	m_ui.clear();

@@ -59,6 +59,7 @@ void CBomb::Step()
 		CSoundManager::Play(CSoundManager::SE_EXPLOSION, DX_PLAYTYPE_BACK);
 		m_isActive = false;
 		m_timeCount = 0;
+		m_isLift = false;
 
 		Explosion();
 	}
@@ -71,6 +72,7 @@ void CBomb::Break()
 {
 	m_timeCount = 0;
 	m_isActive = false;
+	m_isLift = false;
 
 	Explosion();
 }

@@ -22,6 +22,8 @@ void CAx::Init()
 	m_itemName = ITEM_AX;
 	m_id = WEAPON_ID_AX;
 	m_weaponDurability = DURABILITY;
+
+	m_rot.x += 0.2f;
 }
 
 //–ˆƒtƒŒ[ƒ€‚·‚éˆ—
@@ -29,4 +31,5 @@ void CAx::Step()
 {
 	CWeaponBase::Step();
 
+	m_rot.y += 0.01;
 }

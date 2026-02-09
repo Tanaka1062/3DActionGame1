@@ -15,7 +15,7 @@ CSpawnCoin::CSpawnCoin()
 //---------------------
 void CSpawnCoin::Init()
 {
-	CCoin::Init();
+	CCoinBase::Init();
 
 	m_spawnTime = SPAWN_TIME;
 	m_spawnPos = ZERO;
@@ -27,7 +27,7 @@ void CSpawnCoin::Init()
 //---------------------
 void CSpawnCoin::Step()
 {
-	CCoin::Step();
+	CCoinBase::Step();
 
 	if (m_isActive == false)
 	{

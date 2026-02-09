@@ -1,7 +1,7 @@
 #include "spawnCoinManager.h"
 #include "../../map/map.h"
 #include "../coin/spawnCoin.h"
-#include "../coin/coin.h"
+#include "../coin/dropCoin.h"
 
 using namespace std;
 
@@ -12,7 +12,7 @@ static const char* MODEL_PATH =				//モデルのパス
 
 constexpr int MAP_FRAME_NUM = 130;			//マップのフレーム番号
 
-constexpr int SPAWN_ITEM_MAX = 100;			//アイテムの最大量
+constexpr int DROP_COIN_MAX = 100;			//コインの最大量
 
 constexpr int SPAWN_NUM[MAP_CENTER_NUM]		//マップごとのフレームの数
 	{
@@ -63,9 +63,9 @@ void CSpawnCoinManager::Init()
 	}
 
 	//ドロップするコインを生成
-	for (int dropCoin_i = 0; dropCoin_i < SPAWN_ITEM_MAX; dropCoin_i++)
+	for (int dropCoin_i = 0; dropCoin_i < DROP_COIN_MAX; dropCoin_i++)
 	{
-		unique_ptr<CItemBase> dropCoin = make_unique<CCoin>();
+		unique_ptr<CItemBase> dropCoin = make_unique<CDropCoin>();
 
 		dropCoin->Init();
 
@@ -197,7 +197,7 @@ unique_ptr<CItemBase> CSpawnCoinManager::SpawnCoin()
 	//コインのクラスがなかったら新しく作る
 	if (spawnCoin == nullptr)
 	{
-		spawnCoin = make_unique<CCoin>();
+		spawnCoin = make_unique<CDropCoin>();
 
 		spawnCoin->Init();
 		spawnCoin->Load(m_hndl);
