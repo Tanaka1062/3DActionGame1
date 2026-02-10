@@ -163,11 +163,11 @@
     <Filter Include="ソース ファイル\game\event">
       <UniqueIdentifier>{555a9073-aa4e-4403-af4b-94eb7608f8f3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\game\event\bombParty">
-      <UniqueIdentifier>{ffdac244-23b3-4435-9261-763cce90b043}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\game\event\ItemEvent">
       <UniqueIdentifier>{a930e668-4824-4c6b-bd01-3be763bae14f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\game\event\ItemEvent\bombParty">
+      <UniqueIdentifier>{ffdac244-23b3-4435-9261-763cce90b043}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -405,11 +405,11 @@
     <ClCompile Include="src\game\event\eventManager.cpp">
       <Filter>ソース ファイル\game\event</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\event\bombParty\bombParty.cpp">
-      <Filter>ソース ファイル\game\event\bombParty</Filter>
-    </ClCompile>
     <ClCompile Include="src\game\event\itemEvent\itemEventBase.cpp">
       <Filter>ソース ファイル\game\event\ItemEvent</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\event\itemEvent\bombParty\bombParty.cpp">
+      <Filter>ソース ファイル\game\event\ItemEvent\bombParty</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -653,11 +653,11 @@
     <ClInclude Include="src\game\event\eventManager.h">
       <Filter>ソース ファイル\game\event</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\event\bombParty\bombParty.h">
-      <Filter>ソース ファイル\game\event\bombParty</Filter>
-    </ClInclude>
     <ClInclude Include="src\game\event\itemEvent\itemEventBase.h">
       <Filter>ソース ファイル\game\event\ItemEvent</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\event\itemEvent\bombParty\bombParty.h">
+      <Filter>ソース ファイル\game\event\ItemEvent\bombParty</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

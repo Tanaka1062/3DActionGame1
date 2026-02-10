@@ -422,6 +422,55 @@ unique_ptr<CItemBase> CSpawnItemManager::SpawnItem(tagMapCenterId _mapId)
 	return spawnItem;
 }
 
+//指定したアイテムを呼び出す
+unique_ptr<CItemBase> CSpawnItemManager::RequestItem(tagItemName _itemName)
+{
+	unique_ptr<CItemBase> spawnItem = nullptr;
+
+	for (int spawn_i = 0; spawn_i < m_item.size(); spawn_i++)
+	{
+		//中身が無いアイテムはスキップする
+		if (m_item[spawn_i] == nullptr)continue;
+
+		if (m_item[spawn_i]->GetItemName() == _itemName &&
+			m_item[spawn_i]->GetActive() == false)
+		{
+			spawnItem = move(m_item[spawn_i]);
+			break;
+		}
+	}
+
+	//もしも用意しているアイテムがなかったら生成する
+	if (spawnItem == nullptr)
+	{
+		switch (_itemName)
+		{
+		case ITEM_BOMB:
+			spawnItem = make_unique<CBomb>();
+			break;
+		case ITEM_SWORD:
+			spawnItem = make_unique<CSword>();
+			break;
+		case ITEM_GUN:
+			spawnItem = make_unique<CGun>();
+			break;
+		case ITEM_AX:
+			spawnItem = make_unique<CAx>();
+			break;
+		}
+
+		spawnItem->Init();
+		spawnItem->Load(m_hndl[_itemName]);
+
+	}
+
+	//アイテムをの生存フラグをtrueにする
+	spawnItem->SetActive(true);
+
+	//アイテムを返す
+	return spawnItem;
+}
+
 //アイテムを元に戻す
 void CSpawnItemManager::ReturnItem(unique_ptr<CItemBase> _returnItme)
 {

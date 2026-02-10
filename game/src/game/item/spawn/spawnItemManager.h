@@ -54,6 +54,9 @@ public:
 	//アイテムを出現させる
 	std::unique_ptr<CItemBase> SpawnItem(tagMapCenterId _mapId);
 
+	//指定したアイテムを呼び出す
+	std::unique_ptr<CItemBase> RequestItem(tagItemName _itemName);
+
 	//アイテムがスポーンするかを取得
 	bool GetIsItemSpawn() { return m_isItemSpawn; }
 

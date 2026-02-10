@@ -2,6 +2,7 @@
 #include "eventBase.h"
 #include <iostream>
 #include <vector>
+#include "../item/itemManager.h"
 
 class CEventManager
 {
@@ -18,7 +19,7 @@ public:
 	void Init();
 
 	//–ˆƒtƒŒ[ƒ€‚·‚éˆ—
-	void Step();
+	void Step(VECTOR _center, CItemManager& _itemManager);
 
 	//I—¹ˆ—
 	void Exit();

@@ -29,7 +29,7 @@ void CEventBase::Init()
 //-----------------------
 //	–ˆƒtƒŒ[ƒ€‚·‚éˆ—
 //-----------------------
-void CEventBase::Step()
+void CEventBase::Step(VECTOR _center)
 {
 
 }

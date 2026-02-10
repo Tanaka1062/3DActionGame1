@@ -1,4 +1,5 @@
 #pragma once
+#include <DxLib.h>
 
 //イベントのタイプ
 enum tagEventType
@@ -11,7 +12,7 @@ enum tagEventType
 
 class CEventBase
 {
-private:
+protected:
 	int m_timeCount;		//制限時間
 	bool m_isActive;		//生存フラグ
 	tagEventType m_type;	//タイプ
@@ -25,7 +26,7 @@ public:
 	virtual void Init();
 
 	//毎フレームする処理
-	virtual void Step();
+	virtual void Step(VECTOR _center);
 
 	//終了処理
 	virtual void Exit();
