@@ -9,7 +9,7 @@ static 	const char* GRAPHIC_PATH[CCountDown::COUNT_NUM] =		//画像のパス
 	"data/graphic/ui/countDown3.png",
 };
 
-constexpr int COUNT_DOWN_TIME = 60;								//カウントダウンが変わるまでの時間
+constexpr int COUNT_DOWN_TIME = 40;								//カウントダウンが変わるまでの時間
 
 //-----------------------
 //	  コンストラクタ
