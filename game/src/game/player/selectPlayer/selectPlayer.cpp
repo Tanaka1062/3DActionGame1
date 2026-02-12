@@ -63,20 +63,30 @@ void CSelectPlayer::Step()
 	{
 		if (m_isReady == true)
 		{
+			m_state = READY_OUT;
 			m_isReady = false;
 		}
 		else
 		{
+			m_state = READY;
 			m_isReady = true;
 		}
 	}
-	if (m_isReady == true)
+
+	//準備完了状態なら準備完了のアニメーションに移行する
+	if (m_state == READY)
 	{
-		CPlayer::Walk();
+		Ready();
 	}
-	else
+	//待機状態なら待機のアニメーションに移行する
+	else if(m_state == WAIT)
 	{
-		CPlayer::Wait();
+		Wait();
+	}
+	//準備完了を解除なら準備解除のアニメーションに移行する
+	else if (m_state == READY_OUT)
+	{
+		ReadyOut();
 	}
 }
 

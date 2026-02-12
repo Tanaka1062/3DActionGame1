@@ -32,7 +32,7 @@ static const char FRAME_PATH[] =
 //------------------------
 CResultPlayerManager::CResultPlayerManager()
 {
-	Init(PLAYER_1);
+	Init(nullptr);
 }
 
 //------------------------
@@ -52,7 +52,7 @@ CResultPlayerManager::~CResultPlayerManager()
 //------------------------
 //		  初期化
 //------------------------
-void CResultPlayerManager::Init(tagPlayerName _winPlayer)
+void CResultPlayerManager::Init(CWinner* _winner)
 {
 	if (m_modelHndl.size() < MODEL_NUM)
 	{
@@ -96,11 +96,15 @@ void CResultPlayerManager::Init(tagPlayerName _winPlayer)
 
 		m_player[player_i]->Init(name, padName);
 
+		if (_winner == nullptr)continue;
 
-		if (m_player[player_i]->GetPlayerName() == _winPlayer)
+		if (m_player[player_i]->GetPlayerName() == _winner->GetWinnerPlayerName())
 		{
 			m_player[player_i]->SetIsWin(true);
 		}
+
+		//ゲーム中の取得コイン量を取得
+		m_player[player_i]->SetMoney(_winner->GetPlayerGetCoin(m_player[player_i]->GetPlayerName()));
 	}
 	
 	//スポーン座標を全て消す

@@ -34,6 +34,7 @@ private:
 	~CWinner();
 
 	tagPlayerName m_winnerPlayer;		//勝利したプレイヤー
+	int m_playerGetCoin[PLAYER_NUM];	//プレイヤーの持っているコイン
 
 public:
 
@@ -43,8 +44,10 @@ public:
 	//ステップ
 	void Step(CPlayerManager* _playerManager);
 
-	//時間が終了したかを取得
+	//勝者を取得
 	tagPlayerName GetWinnerPlayerName() { return m_winnerPlayer; }
 
+	//プレイヤーの獲得したコインを取得
+	int GetPlayerGetCoin(tagPlayerName _playerName) { return m_playerGetCoin[_playerName]; }
 };
 

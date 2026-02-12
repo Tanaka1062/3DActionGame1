@@ -37,6 +37,8 @@ enum tagState						//キャラクターの状態
 	ITEM_THROW_OUT,					//アイテムを投げた後
 	STAGGER,						//怯み
 	DIE,							//死亡
+	READY,							//準備完了
+	READY_OUT,						//準備完了を解除
 };
 
 class CCharacterBase:public CActor

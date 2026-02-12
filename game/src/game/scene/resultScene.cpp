@@ -69,7 +69,7 @@ void CResultScene::Init()
 
 	m_sky.Init();
 	m_map.Init();
-	m_resultPlayerManager.Init(m_winner->GetWinnerPlayerName());
+	m_resultPlayerManager.Init(m_winner);
 
 	CCameraManager::Init(ZERO);
 	CCameraManager::ChangeCamera(CCameraManager::CAMERA_ID_RESULT);

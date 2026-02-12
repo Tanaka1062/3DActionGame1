@@ -100,6 +100,7 @@ protected:
 		ANIMID_ATTACK3_SWORD_OUT,		//剣攻撃3後アニメーション
 		ANIMID_CHARGE,					//チャージ中のアニメーション
 		ANIMID_CHARGE_IN,				//チャージ前のアニメーション
+		ANIMID_CLAP,					//拍手のアニメーション
 		ANIMID_DEFAULT,					//デフォルトのアニメーション
 		ANIMID_DIE,						//死亡時のアニメーション
 		ANIMID_DODGEROLL,				//回避のアニメーション
@@ -114,6 +115,8 @@ protected:
 		ANIMID_LANDING,					//着地するアニメーション
 		ANIMID_LIFT_UP,					//物を持ち上げるアニメーション
 		ANIMID_PUT_DOWN,				//物を下ろすアニメーション
+		ANIMID_READY,					//準備完了のアニメーション
+		ANIMID_READY_OUT,				//準備完了をやめるアニメーション
 		ANIMID_SKILLA,					//スキルA使用中のアニメーション
 		ANIMID_SKILLA_IN,				//スキルA使用前のアニメーション
 		ANIMID_SKILLA_OUT,				//スキルA使用後のアニメーション
@@ -127,6 +130,7 @@ protected:
 		ANIMID_WAIT_LIFTING_UP,			//物を持ち上げている待機状態のアニメーション
 		ANIMID_WALK,					//歩きのアニメーション
 		ANIMID_WALK_LIFTING_UP,			//物を持ち上げている歩きのアニメーション
+		ANIMID_WINNER,					//勝者のアニメーション
 
 	};
 
@@ -203,6 +207,9 @@ public:
 
 	//お金を取得
 	int GetMoney() { return m_money; }
+
+	//お金を設定
+	void SetMoney(int _money) { m_money = _money; }
 
 	//お金を増やす
 	void AddMoney(int _addMoney) { m_money += _addMoney; }
@@ -303,6 +310,18 @@ protected:
 
 	//死亡
 	void Die();
+
+	//準備完了
+	void Ready();
+
+	//準備完了を解除
+	void ReadyOut();
+
+	//拍手
+	void Clap();
+
+	//勝利モーション
+	void Winner();
 
 	//移動処理
 	virtual void Move(float _rotY);

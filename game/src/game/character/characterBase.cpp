@@ -21,7 +21,7 @@ void CCharacterBase::Init()
 	CActor::Init();
 	
 	m_gravity = 0.0f;
-	m_hp = 0;
+	m_hp = 1;
 	m_maxHp = 0;
 	m_blown = 0;
 	m_atk = 0;

@@ -4,7 +4,7 @@ CWinner* CWinner::m_instanse = nullptr;
 
 CWinner::CWinner()
 {
-	m_winnerPlayer = PLAYER_NONE;
+	Init();
 }
 
 CWinner::~CWinner()
@@ -16,6 +16,11 @@ CWinner::~CWinner()
 void CWinner::Init()
 {
 	m_winnerPlayer = PLAYER_NONE;
+
+	for (int player_i = 0; player_i < PLAYER_NUM; player_i++)
+	{
+		m_playerGetCoin[player_i] = 0;
+	}
 }
 
 //ステップ
@@ -27,9 +32,11 @@ void CWinner::Step(CPlayerManager* _playerManager)
 	{
 		CPlayer* player = _playerManager->GetPlayer(player_i);
 
-		if (high <= player->GetMoney())
+		m_playerGetCoin[player_i] = player->GetMoney();
+
+		if (high <= m_playerGetCoin[player_i])
 		{
-			high = player->GetMoney();
+			high = m_playerGetCoin[player_i];
 			m_winnerPlayer = player->GetPlayerName();
 		}
 	}

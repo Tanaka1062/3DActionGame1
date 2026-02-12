@@ -107,7 +107,7 @@ void CCameraManager::Step(VECTOR _focus, float _rot, tagMapCenterId _mapCenterId
 	}
 
 	//プレイカメラの回転値を設定
-	m_rot = m_camera[CAMERA_ID_MAP]->GetRot();
+	m_rot = m_camera[m_id]->GetRot();
 
 }
 

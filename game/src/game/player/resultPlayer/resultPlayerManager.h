@@ -2,12 +2,13 @@
 #include <iostream>
 #include <vector>
 #include "resultPlayer.h"
+#include "../../winner/winner.h"
 
 //エネミーマネージャーのクラス
 class CResultPlayerManager
 {
 private:
-	std::vector<CResultPlayer*> m_player;			//プレイヤーのクラス
+	std::vector<CResultPlayer*> m_player;	//プレイヤーのクラス
 	std::vector <int> m_modelHndl;			//モデルのハンドル
 	std::vector <VECTOR>m_spawnPos;			//プレイヤーの出現座標
 public:
@@ -16,7 +17,7 @@ public:
 	~CResultPlayerManager();
 
 	//初期化
-	void Init(tagPlayerName _winPlayer);
+	void Init(CWinner* _winner);
 	//オブジェクトのロード
 	void Load();
 	//毎フレームする処理

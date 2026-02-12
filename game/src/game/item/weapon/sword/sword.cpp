@@ -30,6 +30,6 @@ void CSword::Init()
 void CSword::Step()
 {
 	CWeaponBase::Step();
-	m_rot.y += 0.01;
+	m_rot.y += 0.01f;
 
 }

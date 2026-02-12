@@ -68,5 +68,5 @@ void CFps::Print()
 	}
 
 	//文字の表示　引数は「横の位置」「縦の位置」「色」「」
-	DrawFormatString(10, 10, GetColor(0, 255, 0), "FPS:%.2f", m_frameRate);
+	//DrawFormatString(10, 10, GetColor(0, 255, 0), "FPS:%.2f", m_frameRate);
 }

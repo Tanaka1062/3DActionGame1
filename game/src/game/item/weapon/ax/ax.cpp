@@ -31,5 +31,5 @@ void CAx::Step()
 {
 	CWeaponBase::Step();
 
-	m_rot.y += 0.01;
+	m_rot.y += 0.01f;
 }

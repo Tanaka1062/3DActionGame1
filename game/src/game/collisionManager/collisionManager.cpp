@@ -102,8 +102,8 @@ void CCollisionManager::CheckHitObjectToObject(CObject& _objectA, CObject& _obje
 			playerPos.y = 0.0f;
 			VECTOR boxPos = box->GetPos();
 			boxPos.y = 0.0f;
-			int boxWidth = box->GetSize().z;
-			int boxHeight = box->GetSize().x;
+			int boxWidth = static_cast<int>(box->GetSize().z);
+			int boxHeight = static_cast<int>(box->GetSize().x);
 
 			if (CCollision::ChekHitDotToSquare(playerPos, boxPos,
 				boxWidth, boxHeight) == true)

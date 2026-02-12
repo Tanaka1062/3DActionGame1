@@ -39,6 +39,7 @@ void CResultPlayer::Init(tagPlayerName _name, tagPadName _padName)
 	m_state = WAIT;
 	m_rot.y = 90.0f * (DX_PI_F/180.0f);
 	m_isWin = false;
+	m_CoinNowUi.Init();
 }
 
 //-----------------------
@@ -48,6 +49,7 @@ void CResultPlayer::Load(int _modelHndl)
 {
 	CObject::DuplicateModel(_modelHndl);
 	m_shadow.Load();
+	m_CoinNowUi.Load();
 }
 
 //-----------------------
@@ -56,14 +58,17 @@ void CResultPlayer::Load(int _modelHndl)
 void CResultPlayer::Step()
 {
 	if (m_isActive == false)return;
-
+	VECTOR uiPos = m_pos;
+	uiPos.x -= 8.0f;
+	uiPos.y -= 5.0f;
+	m_CoinNowUi.Step(uiPos,m_rad,m_money,UI_TYPE_COIN);
 	if (m_isWin == true)
 	{
-		CPlayer::Walk();
+		CPlayer::Winner();
 	}
 	else
 	{
-		CPlayer::Wait();
+		CPlayer::Clap();
 	}
 }
 
@@ -73,7 +78,7 @@ void CResultPlayer::Step()
 void CResultPlayer::Draw()
 {
 	CCharacterBase::Draw();
-
+	m_CoinNowUi.Draw();
 #ifdef DEBUG
 	//ìñÇΩÇËîªíËÇï\é¶
 	DrawSphere3D(GetCenter(), m_rad, 16, GetColor(255, 0, 0), GetColor(255, 0, 0), FALSE);
@@ -95,12 +100,13 @@ void CResultPlayer::Draw()
 void CResultPlayer::Update()
 {
 	CCharacterBase::Update();
-
+	m_CoinNowUi.Update();
 }
 
 //èIóπèàóù
 void CResultPlayer::Exit()
 {
 	CCharacterBase::Exit();
+	m_CoinNowUi.Exit();
 }
 

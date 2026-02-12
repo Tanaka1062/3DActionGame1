@@ -1398,6 +1398,48 @@ void CPlayer::Die()
 }
 
 //-----------------------
+//		  準備完了
+//-----------------------
+void CPlayer::Ready()
+{
+	//準備完了のアニメーション
+	RequestAnim(ANIMID_READY, 1.0f);
+}
+
+//-----------------------
+//	  準備完了を解除
+//-----------------------
+void CPlayer::ReadyOut()
+{
+	//準備完了をやめるアニメーション
+	RequestAnim(ANIMID_READY_OUT, 1.0f);
+
+	//アニメーションが終わったら待機状態に戻す
+	if (GetAnimEnd() == true)
+	{
+		m_state = WAIT;
+	}
+}
+
+//-----------------------
+//		   拍手
+//-----------------------
+void CPlayer::Clap()
+{
+	//拍手のアニメーション
+	RequestAnim(ANIMID_CLAP, 0.8f,true);
+}
+
+//-----------------------
+//	   勝利モーション
+//-----------------------
+void CPlayer::Winner()
+{
+	//勝利のアニメーション
+	RequestAnim(ANIMID_WINNER, 0.8f,true);
+}
+
+//-----------------------
 //		移動処理
 //-----------------------
 void CPlayer::Move(float _rotY)
@@ -1734,3 +1776,4 @@ VECTOR CPlayer::GetWeaponPos()
 
 	return weaponPos;
 }
+
