@@ -13,6 +13,7 @@
 #include "../gameTime/gameTime.h"
 #include "../winner/winner.h"
 #include "../map/gimmick/gimmickManager.h"
+#include "../event/eventManager.h"
 
 //ゲーム本編を管理するクラス
 class CPlayScene :public CSceneBase
@@ -30,6 +31,7 @@ private:
 	CGameTime* m_gameTime;					//ゲームの制限時間
 	CWinner* m_winner;						//勝利したプレイヤー
 	CGimmickManager m_gimmickManager;		//ギミックのマネージャークラス
+	CEventManager m_eventManager;			//イベントのマネージャー
 
 public:
 

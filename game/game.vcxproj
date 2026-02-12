@@ -154,6 +154,7 @@
     <ClCompile Include="src\game\event\eventBase.cpp" />
     <ClCompile Include="src\game\event\eventManager.cpp" />
     <ClCompile Include="src\game\event\itemEvent\bombParty\bombParty.cpp" />
+    <ClCompile Include="src\game\event\itemEvent\coinParty\coinParty.cpp" />
     <ClCompile Include="src\game\event\itemEvent\itemEventBase.cpp" />
     <ClCompile Include="src\game\gameTime\gameTime.cpp" />
     <ClCompile Include="src\game\item\coin\coinBase.cpp" />
@@ -238,6 +239,7 @@
     <ClInclude Include="src\game\event\eventBase.h" />
     <ClInclude Include="src\game\event\eventManager.h" />
     <ClInclude Include="src\game\event\itemEvent\bombParty\bombParty.h" />
+    <ClInclude Include="src\game\event\itemEvent\coinParty\coinParty.h" />
     <ClInclude Include="src\game\event\itemEvent\itemEventBase.h" />
     <ClInclude Include="src\game\gameTime\gameTime.h" />
     <ClInclude Include="src\game\item\coin\coinBase.h" />

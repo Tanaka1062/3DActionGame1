@@ -211,3 +211,36 @@ CItemBase* CItemManager::GetItem(int _num)
 
 }
 
+//-----------------------
+//	アイテムの呼び出し
+//-----------------------
+void CItemManager::RequestItem(tagItemName _itemName, VECTOR _requestPos)
+{
+	//呼び出すアイテムを持ってくる
+	unique_ptr<CItemBase> requestItem = m_spawnItemManager.RequestItem(_itemName);
+
+	//アイテムを指定した座標に移動させ出現させる
+	requestItem->SetPos(_requestPos);
+	requestItem->SetActive(true);
+
+	//呼び出したアイテムをクラスに保存する
+	m_item.push_back(move(requestItem));
+
+}
+
+//-----------------------
+//	 コインの呼び出し
+//-----------------------
+void CItemManager::RequestCoin(VECTOR _requestPos)
+{
+	//呼び出すコインを持ってくる
+	unique_ptr<CItemBase> requestCoin = m_coinManager.SpawnCoin();
+
+	//コインを指定した座標に移動させ出現させる
+	requestCoin->SetPos(_requestPos);
+	requestCoin->SetActive(true);
+
+	//呼び出したコインをクラスに保存する
+	m_item.push_back(move(requestCoin));
+}
+

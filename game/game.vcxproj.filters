@@ -169,6 +169,9 @@
     <Filter Include="ソース ファイル\game\event\ItemEvent\bombParty">
       <UniqueIdentifier>{ffdac244-23b3-4435-9261-763cce90b043}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\game\event\ItemEvent\coinParty">
+      <UniqueIdentifier>{b2b1835e-9a39-4062-9975-d8999886dad2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\number.cpp">
@@ -410,6 +413,9 @@
     </ClCompile>
     <ClCompile Include="src\game\event\itemEvent\bombParty\bombParty.cpp">
       <Filter>ソース ファイル\game\event\ItemEvent\bombParty</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\event\itemEvent\coinParty\coinParty.cpp">
+      <Filter>ソース ファイル\game\event\ItemEvent\coinParty</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -658,6 +664,9 @@
     </ClInclude>
     <ClInclude Include="src\game\event\itemEvent\bombParty\bombParty.h">
       <Filter>ソース ファイル\game\event\ItemEvent\bombParty</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\event\itemEvent\coinParty\coinParty.h">
+      <Filter>ソース ファイル\game\event\ItemEvent\coinParty</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

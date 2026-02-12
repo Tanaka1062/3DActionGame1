@@ -53,7 +53,6 @@ void CTitleScene::Init()
 
 	//UIの初期化
 	m_uiManager.Init();
-
 }
 
 //---------------------------
@@ -92,6 +91,11 @@ void CTitleScene::Step()
 {
 	//UIの毎フレームする処理
 	m_uiManager.Step();
+
+	if (CheckHitKey(KEY_INPUT_R) == 1)
+	{
+		CControllerManager::Init();
+	}
 
 	//スペースで終わる
 	if (CKeyInput::IsTrg(KEY_SELECT) ||

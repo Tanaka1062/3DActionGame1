@@ -15,7 +15,7 @@ enum tagModelName					//モデル一覧
 	MODEL_NUM,						//モデルの数
 };
 
-constexpr float TARGET_LEN = -200.0f;				//ターゲットと認識するまでの長さ
+constexpr float TARGET_LEN = -200.0f;			//ターゲットと認識するまでの長さ
 constexpr float TARGET_MAX_DISTANCE = 40.0f;	//どれくらい法線から離せるか
 
 static const char* MODEL_PATH[PLAYER_NUM] =
@@ -191,6 +191,8 @@ void CSelectPlayerManager::Draw()
 {
 	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
+		if (m_player[player_i]->GetActive() == false)continue;
+
 		m_player[player_i]->Draw();
 	}
 

@@ -21,15 +21,10 @@ void CSoundManager::Load()
 {
 	// ロードする予定の音楽のパスを管理-----
 	const char* SOUND_PATH[SOUND_NUM] = {
-		//"data/sound/game/gameBGM.mp3",
-		//"data/sound/title/titleBGM.mp3",
-		//"data/sound/result/resultBGM.mp3",
-		//"data/sound/select/selectBGM.mp3",
-		"",
-		"",
-		"",
-		"",
-
+		"data/sound/game/gameBGM.mp3",
+		"data/sound/title/titleBGM.mp3",
+		"data/sound/result/resultBGM.mp3",
+		"data/sound/select/selectBGM.mp3",
 		"data/sound/game/gunSE.mp3",
 		"data/sound/game/swordSE.mp3",
 		"data/sound/game/axSE.mp3",

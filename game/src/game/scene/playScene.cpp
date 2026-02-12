@@ -71,6 +71,7 @@ void CPlayScene::Init()
 	m_winner = CWinner::GetInstance();
 	m_winner->Init();
 	m_gimmickManager.Init();
+	m_eventManager.Init();
 }
 
 //---------------------------
@@ -127,6 +128,7 @@ void CPlayScene::Step()
 	m_gameTime->Step();
 	m_winner->Step(&m_playerManager);
 	m_gimmickManager.Step();
+	m_eventManager.Step(CCameraManager::GetFocusPos(),m_itemManager);
 
 	//当たり判定----------------------------------
 	//敵の視界範囲とプレイヤーの当たり判定
@@ -177,6 +179,7 @@ void CPlayScene::Exit()
 	m_weaponManager.Exit();
 	m_uiManager.Exit();
 	m_gimmickManager.Exit();
+	m_eventManager.Exit();
 	CCameraManager::Exit();
 
 	//エフェクトを全て消す

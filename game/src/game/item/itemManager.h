@@ -6,7 +6,7 @@
 #include "../player/playerManager.h"
 #include "itemObject/box/box.h"
 #include "mapItemManager.h"
-#include "spawnItemManager.h"
+#include "spawn/spawnItemManager.h"
 #include "../map/map.h"
 #include "spawn/spawnCoinManager.h"
 
@@ -55,5 +55,10 @@ public:
 	//アイテムのアドレスを取得
 	CItemBase* GetItem(int _num);
 
+	//アイテムの呼び出し
+	void RequestItem(tagItemName _itemName,VECTOR _requestPos);
+
+	//コインの呼び出し
+	void RequestCoin(VECTOR _requestPos);
 };
 

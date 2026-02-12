@@ -7,8 +7,8 @@
 class CEventManager
 {
 private:
-	std::vector<CEventBase*> m_event;
-	int m_eventTime;
+	std::vector<CEventBase*> m_event;		//イベント
+	int m_eventTime;						//イベントが始まるまでの時間
 
 public:
 	//コンストラクタ・デストラクタ

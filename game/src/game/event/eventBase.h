@@ -32,7 +32,9 @@ public:
 	virtual void Exit();
 
 	//生存フラグを取得
-	bool GetIsActive() { return m_isActive; }
+	bool GetActive() { return m_isActive; }
+	//生存フラグを設定
+	void SetActive(bool _active) { m_isActive = _active; }
 
 	//タイプを取得
 	tagEventType GetType() { return m_type; }
