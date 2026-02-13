@@ -85,6 +85,9 @@ void CItemManager::Step(CPlayerManager* _playerManager, tagMapCenterId _mapId)
 		if ((*item_i)->GetActive() == false &&
 			(*item_i)->GetIsSpawn() == true)
 		{
+			//速度をゼロにする
+			(*item_i)->SetSpeed(ZERO);
+
 			if ((*item_i)->GetItemType() != ITEM_TYPE_COIN)
 			{
 				//消えたアイテムをスポーンアイテムマネージャーに戻す

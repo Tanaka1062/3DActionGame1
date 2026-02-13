@@ -5,6 +5,8 @@
 #include "../weapon/gun/gun.h"
 #include"../weapon/ax/ax.h"
 #include "../../map/map.h"
+#include "../../system/effectData/effectData.h"
+#include "../../../lib/effekseer/effekseer.h"
 
 using namespace std;
 
@@ -412,8 +414,11 @@ unique_ptr<CItemBase> CSpawnItemManager::SpawnItem(tagMapCenterId _mapId)
 	}
 
 	//-----------------------------------------------
+	//アイテムが出現するエフェクトのID
+	int effectId = CEffectData::GetId(EFFECT_SPAWNITEM);
 
-
+	//エフェクトを呼び出す
+	CEffekseerCtrl::Request(effectId, m_spawnData[_mapId][spawnPosId].pos, false);
 
 	//スポーンしているかをリセット
 	m_isItemSpawn = false;

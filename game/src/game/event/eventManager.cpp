@@ -4,15 +4,6 @@
 
 constexpr int EVENT_START_TIME = 50 * 60;			//爆弾を落とすまでの間隔
 
-//イベントの名前
-enum tagEventName
-{
-	EVENT_BOMBPARTY,			//爆弾パーティー
-	EVENT_COINPARTY,			//コインパーティー	
-
-	EVENT_NUM,					//イベントの数
-};
-
 //---------------------------
 //		コンストラクタ
 //---------------------------
@@ -42,6 +33,9 @@ void CEventManager::Init()
 	{
 		m_event[event_i]->Init();
 	}
+
+	m_eventTime = 0;
+	m_nowEvent = EVENT_NONE;
 }
 
 //---------------------------
@@ -49,16 +43,25 @@ void CEventManager::Init()
 //---------------------------
 void CEventManager::Step(VECTOR _center, CItemManager& _itemManager)
 {
+	//実行されているイベントを数える
+	int activeEventNum = 0;
 	for (int event_i = 0; event_i < m_event.size(); event_i++)
 	{
 		if (m_event[event_i]->GetActive() == false)continue;
-
+		
+		activeEventNum++;
 		if (m_event[event_i]->GetType() == EVENT_ITEM_TYPE)
 		{
 			CItemEventBase* itemEvent = dynamic_cast<CItemEventBase*>(m_event[event_i]);
 
 			itemEvent->Step(_center,_itemManager);
 		}
+	}
+
+	//イベントが一つも実行されていない場合現在のイベントを初期化する
+	if (activeEventNum <= 0)
+	{
+		m_nowEvent = EVENT_NONE;
 	}
 
 	m_eventTime++;
@@ -69,6 +72,7 @@ void CEventManager::Step(VECTOR _center, CItemManager& _itemManager)
 
 		m_event[rand]->SetActive(true);
 		m_eventTime = 0;
+		m_nowEvent = static_cast<tagEventName>(rand);
 	}
 }
 

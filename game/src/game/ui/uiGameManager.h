@@ -7,6 +7,8 @@
 #include "../item/itemManager.h"
 #include "powerUpGauge/powerUpGouge.h"
 #include "time/timeUi.h"
+#include "eventText/eventText.h"
+#include "../event/eventManager.h"
 
 class CUiGameManager
 {
@@ -15,6 +17,7 @@ private:
 	CHpbarManager m_hpbarManager;				//HPバーのマネージャー
 	CPowerUpGouge m_powerUpGouge[PLAYER_NUM];	//パワーゲージUi
 	CTimeUi m_time;								//時間
+	CEventText m_eventText;						//イベントテキスト
 public:
 	//コンストラクタ・デストラクタ
 	CUiGameManager();
@@ -25,7 +28,7 @@ public:
 	//ロード
 	void Load();
 	//毎フレームする処理
-	void Step();
+	void Step(CEventManager::tagEventName _nowEvent);
 	//描写
 	void Draw();
 	//破棄

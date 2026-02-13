@@ -66,6 +66,7 @@ void CUiGameManager::Init(CPlayerManager* _playerManager,
 	}
 
 	m_time.Init();
+	m_eventText.Init();
 }
 
 //ƒ[ƒh
@@ -84,10 +85,11 @@ void CUiGameManager::Load()
 	}
 
 	m_time.Load();
+	m_eventText.Load();
 }
 
 //–ˆƒtƒŒ[ƒ€‚·‚éˆ—
-void CUiGameManager::Step()
+void CUiGameManager::Step(CEventManager::tagEventName _nowEvent)
 {
 	m_hpbarManager.Step();
 
@@ -104,6 +106,7 @@ void CUiGameManager::Step()
 	CGameTime* gameTime = CGameTime::GetInstance();
 
 	m_time.Step(gameTime->GetEndTime() - gameTime->GetTime());
+	m_eventText.Step(_nowEvent);
 }
 
 //•`ŽÊ
@@ -121,6 +124,7 @@ void CUiGameManager::Draw()
 		m_powerUpGouge[powerUpGuge_i].Draw();
 	}
 	m_time.Draw();
+	m_eventText.Draw();
 }
 
 //”jŠü
@@ -142,5 +146,6 @@ void CUiGameManager::Exit()
 	}
 
 	m_time.Exit();
+	m_eventText.Exit();
 }
 

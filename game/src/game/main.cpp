@@ -14,7 +14,7 @@
 
 constexpr int EFFECT_MAX_NUM = 10;			//一度に表示できるエフェクトの最大数
 constexpr int PARTICLE_MAX_NUM = 2000;		//一度に表示できるパーティクルの最大数
-static const char* GAME_NAME =					//ゲームのタイトル
+static const char* GAME_NAME =				//ゲームのタイトル
 "COINウォーズ";
 
 // プログラムは WinMain から始まります
@@ -25,7 +25,7 @@ int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
 	// スクリーン設定
-	ChangeWindowMode(TRUE);			// フルスクリーンorウィンドウモード
+	ChangeWindowMode(FALSE);			// フルスクリーンorウィンドウモード
 	SetGraphMode(WINDOW_SIZE_X, WINDOW_SIZE_Y, 32);	// ウィンドウのサイズ
 	
 #ifndef _DEBUG

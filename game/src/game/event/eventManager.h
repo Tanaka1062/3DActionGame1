@@ -6,11 +6,23 @@
 
 class CEventManager
 {
+public:
+	//イベントの名前
+	enum tagEventName
+	{
+		EVENT_NONE = -1,			//イベントなし
+		EVENT_BOMBPARTY,			//爆弾パーティー
+		EVENT_COINPARTY,			//コインパーティー	
+
+		EVENT_NUM,					//イベントの数
+	};
 private:
 	std::vector<CEventBase*> m_event;		//イベント
 	int m_eventTime;						//イベントが始まるまでの時間
+	tagEventName m_nowEvent;				//現在のイベント
 
 public:
+
 	//コンストラクタ・デストラクタ
 	CEventManager();
 	~CEventManager();
@@ -24,5 +36,7 @@ public:
 	//終了処理
 	void Exit();
 
+	//現在のイベントを取得
+	tagEventName GetNowEventName() { return m_nowEvent; }
 };
 

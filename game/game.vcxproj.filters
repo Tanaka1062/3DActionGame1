@@ -172,6 +172,9 @@
     <Filter Include="ソース ファイル\game\event\ItemEvent\coinParty">
       <UniqueIdentifier>{b2b1835e-9a39-4062-9975-d8999886dad2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\game\ui\eventText">
+      <UniqueIdentifier>{90b4855c-fcba-41fc-83a2-2d84558116ab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\number.cpp">
@@ -416,6 +419,9 @@
     </ClCompile>
     <ClCompile Include="src\game\event\itemEvent\coinParty\coinParty.cpp">
       <Filter>ソース ファイル\game\event\ItemEvent\coinParty</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\ui\eventText\eventText.cpp">
+      <Filter>ソース ファイル\game\ui\eventText</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -667,6 +673,9 @@
     </ClInclude>
     <ClInclude Include="src\game\event\itemEvent\coinParty\coinParty.h">
       <Filter>ソース ファイル\game\event\ItemEvent\coinParty</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\ui\eventText\eventText.h">
+      <Filter>ソース ファイル\game\ui\eventText</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
