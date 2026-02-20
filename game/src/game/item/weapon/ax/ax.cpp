@@ -1,6 +1,6 @@
 #include "ax.h"
 
-constexpr int COST = 1;						//‰¿Ši
+constexpr int COST = 0;						//‰¿Ši
 constexpr int DURABILITY = 15;				//•Ší‚Ì‘Ï‹v“x
 
 CAx::CAx()

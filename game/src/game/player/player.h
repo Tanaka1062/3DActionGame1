@@ -3,7 +3,6 @@
 #include "../shot/shotManager.h"
 #include"../../lib/input/controllerManager.h"
 #include "playerData.h"
-#include "../3DUi/3DUi.h"
 
 constexpr int TRANSFORM_TIME = 10 * 60;					//変身している時間
 
@@ -58,7 +57,6 @@ protected:
 	tagPlayerName m_name;			//プレイヤーの名前
 	tagHaveItemState m_itemState;	//アイテムの状態
 	VECTOR* m_targetPos;			//相手の座標ポインタ
-	C3DUi m_CoinNowUi;				//現在のコインの量表示用
 	bool m_isCpu;					//cpuかどうかフラグ
 
 	//アニメーション一覧---------------------------

@@ -29,7 +29,7 @@ constexpr int POWER_UP_ATK = 1;							//増加する攻撃力
 constexpr float TRANSFORM_UP_SPEED = 0.3f;				//変身後のスピードアップ
 constexpr int BLOWN_MAX = 100;							//吹き飛び最大値
 static const VECTOR KNOCK_BACK_SPEED = { 0.0f,3.0f,-0.8f };	//吹き飛ぶスピード
-constexpr int INIT_MONEY = 3;							//最初の所持金
+constexpr int INIT_MONEY = 0;							//最初の所持金
 constexpr float MONEY_DROP_RATE = 0.4f;					//落とすお金の割合
 constexpr float MONEY_RESPAWN_RATE = 0.5f;				//復活するときに消費するお金の割合
 constexpr float DIE_POS_Y = -100.0f;					//死ぬ高さ
@@ -150,7 +150,6 @@ void CPlayer::Init(tagPlayerName _name, tagPadName _padName)
 	m_name = _name;
 	m_shadow.Init(m_pos, SHADOW_SIZE);
 	m_objectName = OBJECT_PLAYER;
-	m_CoinNowUi.Init();
 	m_isCpu = false;
 }
 
@@ -163,7 +162,6 @@ void CPlayer::Load(int _modelHndl)
 	m_keepHndl[NORMAL_HNDL] = m_hndl;
 	m_keepHndl[TRANSFORM_HNDL] = MV1LoadModel(MODEL_PATH);
 	m_shadow.Load();
-	m_CoinNowUi.Load();
 }
 
 //-----------------------
@@ -171,8 +169,6 @@ void CPlayer::Load(int _modelHndl)
 //-----------------------
 void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManager, CShotManager* _shotManager)
 {
-	m_CoinNowUi.Step(m_pos,m_rad,m_money,UI_TYPE_COIN);
-
 	m_targetPos = _targetPos;
 
 	if (m_isJump == true)
@@ -361,7 +357,6 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 void CPlayer::Draw()
 {
 	CCharacterBase::Draw();
-	m_CoinNowUi.Draw();
 
 #ifdef DEBUG
 	//当たり判定を表示
@@ -384,7 +379,6 @@ void CPlayer::Draw()
 void CPlayer::Update()
 {
 	CCharacterBase::Update();
-	m_CoinNowUi.Update();
 
 	//速度のリセット
 	ResetSpeed();
@@ -395,7 +389,6 @@ void CPlayer::Update()
 void CPlayer::Exit()
 {
 	CCharacterBase::Exit();
-	m_CoinNowUi.Exit();
 
 	for (int keepHndl_i = 0; keepHndl_i < HNDL_NUM; keepHndl_i++)
 	{

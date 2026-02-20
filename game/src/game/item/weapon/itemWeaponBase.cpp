@@ -80,3 +80,4 @@ void CWeaponBase::HitCalc(CObject* _hitObject)
 
 	//---------------------------------------------------------
 }
+

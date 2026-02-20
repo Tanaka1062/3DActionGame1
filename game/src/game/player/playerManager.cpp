@@ -59,6 +59,7 @@ CPlayerManager::~CPlayerManager()
 
 		delete m_cpuFOV[cpuFOV_i];
 	}
+
 }
 
 //------------------------
@@ -130,6 +131,9 @@ void CPlayerManager::Init()
 	{
 		m_spawnPos.push_back(vector<VECTOR>());
 	}
+
+	//王冠の初期化
+	m_crown.Init();
 }
 
 //------------------------
@@ -185,7 +189,8 @@ void CPlayerManager::Load()
 		m_player[player_i]->SetPos(m_spawnPos[MAP_ID_CENTER1][player_i]);
 	}
 
-
+	//王冠のモデルロード
+	m_crown.Load();
 }
 
 //------------------------
@@ -193,6 +198,10 @@ void CPlayerManager::Load()
 //------------------------
 void CPlayerManager::Step(CAttackManager* _attackManager, CShotManager* _shotManager, float _rot,tagMapCenterId _mapId)
 {
+	int topPlayerCoinCount = 0;	//現在の一番コインを持っている量
+	int topPlayerNum = -1;		//一番のプレイヤーの番号
+	bool isTieAtTop = false;	//同率一位がいるかどうかフラグ
+
 	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
 		//プレイヤーがカメラの外に行くと死ぬ処理---------------
@@ -322,9 +331,38 @@ void CPlayerManager::Step(CAttackManager* _attackManager, CShotManager* _shotMan
 		}
 
 		m_player[player_i]->Step(_rot,targetPos,_attackManager,_shotManager);
+
+		//現在のコイン取得数が一番多い人を求める-------------------------------------------
+
+		//お金が一番か調べる
+		if (m_player[player_i]->GetMoney() >= topPlayerCoinCount)
+		{
+			//一位と一緒ならフラグをtrueにする
+			if (m_player[player_i]->GetMoney() == topPlayerCoinCount)
+			{
+				isTieAtTop = true;
+			}
+			else
+			{
+				topPlayerCoinCount = m_player[player_i]->GetMoney();
+				topPlayerNum = player_i;
+			}
+		}
+
+		//---------------------------------------------------------------------------------
 	}
 
-
+	//一位に王冠を表示する-----------------------------------------------------------------
+	if (isTieAtTop == false && topPlayerNum != -1)
+	{
+		m_crown.SetActive(true);
+		m_crown.Step(m_player[topPlayerNum]->GetPos(), m_player[topPlayerNum]->GetRad(), _rot);
+	}
+	else
+	{
+		m_crown.SetActive(false);
+	}
+	//-------------------------------------------------------------------------------------
 }
 
 //------------------------
@@ -336,6 +374,7 @@ void CPlayerManager::Update()
 	{
 		m_player[player_i]->Update();
 	}
+	m_crown.Update();
 }
 
 //------------------------
@@ -347,12 +386,15 @@ void CPlayerManager::Draw()
 	{
 		if (m_player[player_i]->GetActive() == false)continue;
 		m_player[player_i]->Draw();
+
+		DrawFormatString(60, 100 + player_i * 60, GetColor(255, 0, 0),"プレイヤー%dのお金 = %d",player_i + 1,m_player[player_i]->GetMoney());
 	}
+
+	m_crown.Draw();
 
 #ifdef DEBUG
 	DrawSphere3D(CCameraManager::GetFocusPos(), DIE_RADIUS, 16, GetColor(0, 0, 255), GetColor(0, 0, 255), FALSE);
 #endif // DEBUG
-
 }
 
 //------------------------
@@ -390,6 +432,8 @@ void CPlayerManager::Exit()
 
 	//スポーン座標を全て消す
 	m_spawnPos.clear();
+
+	m_crown.Exit();
 }
 
 //------------------------

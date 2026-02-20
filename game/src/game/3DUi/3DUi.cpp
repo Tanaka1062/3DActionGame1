@@ -1,22 +1,10 @@
 #include "3DUi.h"
-#include "../camera/cameraManager.h"
 
 using namespace std;
 
 enum tagMaterialName
 {
-	MT_NUMBER0,		//ナンバー0
-	MT_NUMBER1,		//ナンバー1
-	MT_NUMBER2,		//ナンバー2
-	MT_NUMBER3,		//ナンバー3
-	MT_NUMBER4,		//ナンバー4
-	MT_NUMBER5,		//ナンバー5
-	MT_NUMBER6,		//ナンバー6
-	MT_NUMBER7,		//ナンバー7
-	MT_NUMBER8,		//ナンバー8
-	MT_NUMBER9,		//ナンバー9
-	MT_COIN,		//お金
-	MT_MINUS_COIN,	//引かれるお金
+	MT_CROWN,		//王冠
 
 	MT_NUM,			//ナンバーの数
 };
@@ -24,8 +12,6 @@ enum tagMaterialName
 enum tagModelName
 {
 	MODEL_ICON,		//アイコン
-	MODEL_TEN,		//十の位
-	MODEL_ONE,		//一の位
 
 	MODEL_NUM,		//モデルの数
 };
@@ -36,31 +22,28 @@ static const char* MODEL_PATH =
 
 static const char* MATERIAL_PATH[MT_NUM] =
 {
-	"data/material/3DUi/number0Body.png",
-	"data/material/3DUi/number1Body.png",
-	"data/material/3DUi/number2Body.png",
-	"data/material/3DUi/number3Body.png",
-	"data/material/3DUi/number4Body.png",
-	"data/material/3DUi/number5Body.png",
-	"data/material/3DUi/number6Body.png",
-	"data/material/3DUi/number7Body.png",
-	"data/material/3DUi/number8Body.png",
-	"data/material/3DUi/number9Body.png",
-	"data/material/3DUi/coinUi.png",
-	"data/material/3DUi/minusCoinUi.png",
+	"data/material/3DUi/crown.png",
 };
 
+//--------------------------
+//		コンストラクタ
+//--------------------------
 C3DUi::C3DUi()
 {
 	CObject::Init();
 }
 
+//--------------------------
+//		デストラクタ
+//--------------------------
 C3DUi::~C3DUi()
 {
 	CObject::Exit();
 }
 
-//初期化
+//--------------------------
+//		   初期化
+//--------------------------
 void C3DUi::Init()
 {
 	CObject::Init();
@@ -68,9 +51,12 @@ void C3DUi::Init()
 	m_materialHndl.clear();
 }
 
-//モデルロード
+//--------------------------
+//		モデルロード
+//--------------------------
 void C3DUi::Load()
 {
+	//マテリアルをロード
 	for (int material_i = 0; material_i < MT_NUM; material_i++)
 	{
 		int hndl = LoadGraph(MATERIAL_PATH[material_i]);
@@ -78,23 +64,18 @@ void C3DUi::Load()
 		m_materialHndl.push_back(hndl);
 	}
 
+	//モデルをロード
 	CObject::LoadModel(MODEL_PATH);
+
+	//マテリアルをモデルにセット
+	MV1SetTextureGraphHandle(m_hndl, MODEL_ICON, m_materialHndl[MT_CROWN], FALSE);
 }
 
-//毎フレームする処理
-void C3DUi::Step(VECTOR _pos, float _rad, int _money, tag3DUiType _type)
+//--------------------------
+//	 毎フレームする処理
+//--------------------------
+void C3DUi::Step(VECTOR _pos, float _rad, float _cameraRotY)
 {
-	switch (_type)
-	{
-	case UI_TYPE_COIN:
-		MV1SetTextureGraphHandle(m_hndl, MODEL_ICON, m_materialHndl[MT_COIN], FALSE);
-		break;
-	case UI_TYPE_COIN_COST:
-		MV1SetTextureGraphHandle(m_hndl, MODEL_ICON, m_materialHndl[MT_MINUS_COIN], FALSE);
-		break;
-	default:
-		break;
-	}
 
 	m_pos = _pos;
 
@@ -102,15 +83,13 @@ void C3DUi::Step(VECTOR _pos, float _rad, int _money, tag3DUiType _type)
 
 	CObject::Step();
 
-	m_rot.y = CCameraManager::GetRot().y;
+	m_rot.y = _cameraRotY;
 
-	int ten = _money / 10;
-	int one = _money % 10;
-
-	MV1SetTextureGraphHandle(m_hndl,MODEL_TEN,m_materialHndl[ten],FALSE);
-	MV1SetTextureGraphHandle(m_hndl, MODEL_ONE, m_materialHndl[one], FALSE);
 }
 
+//--------------------------
+//		   終了処理
+//--------------------------
 void C3DUi::Exit()
 {
 	CObject::Exit();
@@ -120,3 +99,4 @@ void C3DUi::Exit()
 		DeleteGraph(m_materialHndl[i]);
 	}
 }
+

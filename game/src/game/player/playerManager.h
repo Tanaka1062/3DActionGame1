@@ -4,6 +4,7 @@
 #include "player.h"
 #include"cpuPlayer/cpuPlayerFOV.h"
 #include "../map/map.h"
+#include "../3DUi/3DUi.h"
 
 //エネミーマネージャーのクラス
 class CPlayerManager
@@ -13,6 +14,8 @@ private:
 	std::vector <int> m_modelHndl;					//モデルのハンドル
 	std::vector <std::vector<VECTOR>> m_spawnPos;	//プレイヤーの出現座標
 	std::vector<CCpuPlayerFOV*>m_cpuFOV;			//CPUの視界範囲クラス
+	C3DUi m_crown;									//王冠
+
 public:
 	//コンストラクタ・デストラクタ
 	CPlayerManager();

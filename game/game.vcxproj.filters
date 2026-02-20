@@ -175,6 +175,9 @@
     <Filter Include="ソース ファイル\game\ui\eventText">
       <UniqueIdentifier>{90b4855c-fcba-41fc-83a2-2d84558116ab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\game\ui\playerStatusPanel">
+      <UniqueIdentifier>{46701614-a789-425a-b0d2-5be984d2601b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\number.cpp">
@@ -422,6 +425,9 @@
     </ClCompile>
     <ClCompile Include="src\game\ui\eventText\eventText.cpp">
       <Filter>ソース ファイル\game\ui\eventText</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\ui\playerStatusPanel\playerStatusPanel.cpp">
+      <Filter>ソース ファイル\game\ui\playerStatusPanel</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -676,6 +682,9 @@
     </ClInclude>
     <ClInclude Include="src\game\ui\eventText\eventText.h">
       <Filter>ソース ファイル\game\ui\eventText</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\ui\playerStatusPanel\playerStatusPanel.h">
+      <Filter>ソース ファイル\game\ui\playerStatusPanel</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

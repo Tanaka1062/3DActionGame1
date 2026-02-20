@@ -32,7 +32,6 @@ void CItemBase::Init()
 	m_objectName = OBJECT_ITEM;
 	m_state = ITEM_WAIT;
 	m_itemName = ITEM_NONE;
-	m_costUi.Init();
 
 }
 
@@ -43,7 +42,6 @@ void CItemBase::Load(const char* _modelPath)
 {
 	CActor::LoadModel(_modelPath);
 	m_shadow.Load();
-	m_costUi.Load();
 }
 
 //--------------------------
@@ -53,7 +51,6 @@ void CItemBase::Load(int _hndl)
 {
 	CActor::DuplicateModel(_hndl);
 	m_shadow.Load();
-	m_costUi.Load();
 }
 
 //--------------------------
@@ -61,14 +58,7 @@ void CItemBase::Load(int _hndl)
 //--------------------------
 void CItemBase::Step()
 {
-	//コストが0の場合はUI表示をしない
-	if (m_cost == 0)
-	{
-		m_costUi.SetActive(false);
-	}
-
 	CActor::Step();
-	m_costUi.Step(m_pos,m_rad,m_cost,UI_TYPE_COIN_COST);
 
 	m_shadow.Step(m_pos);
 
@@ -85,7 +75,6 @@ void CItemBase::Update()
 {
 	CActor::Update();
 	m_shadow.Update();
-	m_costUi.Update();
 }
 
 //--------------------------
@@ -97,7 +86,6 @@ void CItemBase::Draw()
 
 	CActor::Draw();
 	m_shadow.Draw();
-	m_costUi.Draw();
 }
 
 //--------------------------
@@ -107,7 +95,6 @@ void CItemBase::Exit()
 {
 	CActor::Exit();
 	m_shadow.Exit();
-	m_costUi.Exit();
 }
 
 //--------------------------
