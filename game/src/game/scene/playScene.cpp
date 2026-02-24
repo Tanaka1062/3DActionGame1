@@ -123,7 +123,7 @@ void CPlayScene::Step()
 	m_shot.Step();
 	m_itemManager.Step(&m_playerManager,m_ground.GetCenterId());
 	m_weaponManager.Step(m_playerManager);
-	m_uiManager.Step(m_eventManager.GetNowEventName());
+	m_uiManager.Step(m_eventManager.GetNowEventName(),m_playerManager);
 	CCameraManager::Step(ZERO,0.0f,m_ground.GetCenterId());
 	m_gameTime->Step();
 	m_winner->Step(&m_playerManager);

@@ -55,6 +55,7 @@ public:
 	//生存フラグを取得
 	bool GetActive() { return m_isActive; }
 
-
+	//画像ハンドルの設定
+	void SetHndl(int _hndl) { m_hndl = _hndl; }
 };
 

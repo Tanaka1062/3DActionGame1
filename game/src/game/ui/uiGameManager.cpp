@@ -67,6 +67,11 @@ void CUiGameManager::Init(CPlayerManager* _playerManager,
 
 	m_time.Init();
 	m_eventText.Init();
+
+	for (int playerStautusPanel_i = 0; playerStautusPanel_i < PLAYER_NUM; playerStautusPanel_i++)
+	{
+		m_playerStautusPanel[playerStautusPanel_i].Init();
+	}
 }
 
 //ƒ[ƒh
@@ -86,10 +91,15 @@ void CUiGameManager::Load()
 
 	m_time.Load();
 	m_eventText.Load();
+
+	for (int playerStautusPanel_i = 0; playerStautusPanel_i < PLAYER_NUM; playerStautusPanel_i++)
+	{
+		m_playerStautusPanel[playerStautusPanel_i].Load(static_cast<tagPlayerName>(playerStautusPanel_i));
+	}
 }
 
 //–ˆƒtƒŒ[ƒ€‚·‚éˆ—
-void CUiGameManager::Step(CEventManager::tagEventName _nowEvent)
+void CUiGameManager::Step(CEventManager::tagEventName _nowEvent, CPlayerManager& _playerManager)
 {
 	m_hpbarManager.Step();
 
@@ -107,6 +117,11 @@ void CUiGameManager::Step(CEventManager::tagEventName _nowEvent)
 
 	m_time.Step(gameTime->GetEndTime() - gameTime->GetTime());
 	m_eventText.Step(_nowEvent);
+
+	for (int player_i = 0; player_i < PLAYER_NUM; player_i++)
+	{
+		m_playerStautusPanel[player_i].Step(_playerManager.GetPlayer(player_i));
+	}
 }
 
 //•`ŽÊ
@@ -125,6 +140,11 @@ void CUiGameManager::Draw()
 	}
 	m_time.Draw();
 	m_eventText.Draw();
+	
+	for (int playerStautusPanel_i = 0; playerStautusPanel_i < PLAYER_NUM; playerStautusPanel_i++)
+	{
+		m_playerStautusPanel[playerStautusPanel_i].Draw();
+	}
 }
 
 //”jŠü
@@ -147,5 +167,10 @@ void CUiGameManager::Exit()
 
 	m_time.Exit();
 	m_eventText.Exit();
+
+	for (int playerStautusPanel_i = 0; playerStautusPanel_i < PLAYER_NUM; playerStautusPanel_i++)
+	{
+		m_playerStautusPanel[playerStautusPanel_i].Exit();
+	}
 }
 

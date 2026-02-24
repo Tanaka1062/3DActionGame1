@@ -9,3 +9,4 @@ enum tagPlayerName
 
 	PLAYER_NUM,			//ƒvƒŒƒCƒ„[‚Ì”
 };
+
