@@ -17,15 +17,6 @@ enum tagWeaponId
 	WEAPON_ID_NUM,		//武器の種類
 };
 
-//モデルハンドル名
-enum tagHndlName
-{
-	NORMAL_HNDL,		//ノーマルハンドル
-	TRANSFORM_HNDL,		//変身後のハンドル
-
-	HNDL_NUM,			//ハンドルの数
-};
-
 //アイテムの状態
 enum tagHaveItemState
 {
@@ -42,15 +33,10 @@ enum tagHaveItemState
 class CPlayer:public CCharacterBase
 {
 protected:
-	int m_transformTimeCount;		//変身時間カウント
-	int m_keepHndl[HNDL_NUM];		//モデルハンドル保存用
 	int m_dropCoin;					//コインを落とす数
-	bool m_isDodgeroll;				//回避しているかフラグ
-	bool m_isTransform;				//変身しているかフラグ
 	bool m_isJump;					//ジャンプしているかフラグ
 	int m_attackNum;				//攻撃の番号
 	int m_weaponDurability;			//武器の耐久度
-	float m_dodgerollRotY;			//回避時の角度
 	int m_money;					//お金
 	tagPadName m_padName;			//コントローラーの名前
 	tagWeaponId m_weaponId;			//武器のID
@@ -169,9 +155,6 @@ public:
 	//重力リセット
 	void GravityReset();
 
-	//回避しているかを取得
-	bool GetIsDodgeroll() { return m_isDodgeroll; }
-
 	//コインを落としているかを取得
 	int GetDropCoin() { return m_dropCoin; }
 	//コインを落としているかを設定
@@ -223,12 +206,6 @@ public:
 
 	//座標をアドレスを取得
 	VECTOR* GetPosPoint() { return &m_pos; }
-
-	//変身時間を取得する
-	int GetTransformTimeCount() { return m_transformTimeCount; }
-
-	//変身しているかを取得する
-	bool GetIsTransform() { return m_isTransform; }
 
 	//cpuかどうかを取得
 	bool GetIsCpu() { return m_isCpu; }

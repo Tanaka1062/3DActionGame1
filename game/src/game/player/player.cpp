@@ -22,11 +22,7 @@ constexpr int MAX_HP = 200;								//体力
 constexpr int ATK = 20;									//攻撃力
 constexpr float MOVE_SPEED = 1.2f;						//移動スピード
 constexpr float RADIUS = 10.0f;							//半径
-constexpr float DODGEROLL_SPEED = 1.5f;					//回避スピード
 constexpr float JUMP_SPEED = 3.0f;						//ジャンプスピード
-constexpr int TRANSFORM_COIN_NUM = 3;					//変身に必要なコインの数
-constexpr int POWER_UP_ATK = 1;							//増加する攻撃力
-constexpr float TRANSFORM_UP_SPEED = 0.3f;				//変身後のスピードアップ
 constexpr int BLOWN_MAX = 100;							//吹き飛び最大値
 static const VECTOR KNOCK_BACK_SPEED = { 0.0f,3.0f,-0.8f };	//吹き飛ぶスピード
 constexpr int INIT_MONEY = 0;							//最初の所持金
@@ -87,25 +83,17 @@ static const float ATTACK_SIZE[WEAPON_ID_NUM][ATTACK_NUM] =
 //-----------------------
 CPlayer::CPlayer()
 {
-	m_transformTimeCount = 0;
 	m_name = PLAYER_NONE;
 	CCharacterBase::Init();
-	for (int keepHndl_i = 0; keepHndl_i < HNDL_NUM; keepHndl_i++)
-	{
-		m_keepHndl[keepHndl_i] = -1;
-	}
 	m_dropCoin = 0;
 	m_pos = ZERO;
 	m_rad = 0.0f;
 	m_maxHp = 0;
 	m_hp = 0;
 	m_atk = 0;
-	m_isDodgeroll = false;
-	m_isTransform = false;
 	m_isJump = false;
 	m_attackNum = ATTACK_NONE;
 	m_money = INIT_MONEY;
-	m_dodgerollRotY = 0.0f;
 	m_padName = PAD_NONE;
 	m_weaponId = WEAPON_ID_HAND;
 	m_weaponDurability = 0;
@@ -128,24 +116,16 @@ void CPlayer::Init(tagPlayerName _name, tagPadName _padName)
 {
 	CCharacterBase::Init();
 
-	m_transformTimeCount = TRANSFORM_TIME;
-	for (int keepHndl_i = 0; keepHndl_i < HNDL_NUM; keepHndl_i++)
-	{
-		m_keepHndl[keepHndl_i] = -1;
-	}
 	m_dropCoin = 0;
 	m_pos = ZERO;
 	m_rad = RADIUS;
 	m_maxHp = MAX_HP;
 	m_hp = m_maxHp;
 	m_atk = ATK;
-	m_isDodgeroll = false;
-	m_isTransform = false;
 	m_attackNum = ATTACK_NONE;
 	m_weaponDurability = 0;
 	m_money = INIT_MONEY;
 	m_padName = _padName;
-	m_dodgerollRotY = 0.0f;
 	m_weaponId = WEAPON_ID_HAND;
 	m_name = _name;
 	m_shadow.Init(m_pos, SHADOW_SIZE);
@@ -159,8 +139,6 @@ void CPlayer::Init(tagPlayerName _name, tagPadName _padName)
 void CPlayer::Load(int _modelHndl)
 {
 	CObject::DuplicateModel(_modelHndl);
-	m_keepHndl[NORMAL_HNDL] = m_hndl;
-	m_keepHndl[TRANSFORM_HNDL] = MV1LoadModel(MODEL_PATH);
 	m_shadow.Load();
 }
 
@@ -187,12 +165,9 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 		//戦いの距離になったら互いの方向を向く
 		if (fLen <= FIGHT_LEN)
 		{
-			if (!m_isDodgeroll)
-			{
-				float rotY1 = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
+			float rotY1 = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
 
-				m_rot.y = rotY1;
-			}
+			m_rot.y = rotY1;
 		}
 
 		//プレイヤーの向きを変える
@@ -231,38 +206,6 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 	if (m_pos.y <= DIE_POS_Y)
 	{
 		m_isActive = false;
-	}
-
-	if (m_isTransform == true)
-	{
-		switch (m_state)
-		{
-		case ATTACK_IN:
-		case ATTACK:
-			float rotY = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
-
-			m_rot.y = rotY;
-			break;
-		}
-	}
-
-	//変身中は見た目を変える
-	if (m_isTransform == true)
-	{
-		m_hndl = m_keepHndl[TRANSFORM_HNDL];
-		
-		//変身の時間がすぎたら解除
-		m_transformTimeCount--;
-		if (m_transformTimeCount <= 0)
-		{
-			m_dropCoin = TRANSFORM_COIN_NUM;
-			m_transformTimeCount = TRANSFORM_TIME;
-			m_isTransform = false;
-		}
-	}
-	else
-	{
-		m_hndl = m_keepHndl[NORMAL_HNDL];
 	}
 
 	//武器の耐久度処理--------------------------------
@@ -389,15 +332,6 @@ void CPlayer::Update()
 void CPlayer::Exit()
 {
 	CCharacterBase::Exit();
-
-	for (int keepHndl_i = 0; keepHndl_i < HNDL_NUM; keepHndl_i++)
-	{
-		if (m_keepHndl[keepHndl_i] != -1)
-		{
-			DeleteGraph(m_keepHndl[keepHndl_i]);
-			m_keepHndl[keepHndl_i] = -1;
-		}
-	}
 }
 
 //復活処理
@@ -431,9 +365,6 @@ void CPlayer::HitCalc(CObject* _hitObject)
 	//攻撃の当たり判定の場合の処理-----------------------------------------
 	if (_hitObject->GetObjectName() == OBJECT_ATTACK)
 	{
-		//プレイヤーが回避中なら処理をしない
-		if (m_isDodgeroll == true)return;
-
 		//当たり判定保存用
 		CAttackBase* attack = nullptr;
 
@@ -450,12 +381,6 @@ void CPlayer::HitCalc(CObject* _hitObject)
 			attack->GetPos().z - GetCenter().z);
 
 		HitAttack(attack->GetAtk(),attack->GetBlown(), rot);
-
-		//変身中の場合変身時間を減らす
-		if (m_isTransform == true)
-		{
-			m_transformTimeCount -= attack->GetAtk();
-		}
 
 		//呼び出すエフェクトのID
 		int effectId = CEffectData::GetId(EFFECT_ATTACK);
@@ -486,9 +411,6 @@ void CPlayer::HitCalc(CObject* _hitObject)
 	//弾の場合の処理-------------------------------------------------------
 	if (_hitObject->GetObjectName() == OBJECT_SHOT)
 	{
-
-		//プレイヤーが回避中なら処理をしない
-		if (m_isDodgeroll == true)return;
 
 		CShotBase* shot = nullptr;
 
@@ -567,11 +489,8 @@ void CPlayer::HitAttack(int _atk, int _blown, float _rotY)
 
 	//------------------------------------
 
-	if (m_isTransform == false)
-	{
-		//怯み状態にする
-		m_state = STAGGER;
-	}
+	//怯み状態にする
+	m_state = STAGGER;
 
 	//Hpを攻撃力分減らす
 	m_hp -= _atk;
@@ -702,32 +621,6 @@ void CPlayer::Landing()
 //-----------------------
 void CPlayer::Dodgeroll()
 {
-	//回避のアニメーション
-	RequestAnim(ANIMID_DODGEROLL, 1.0f);
-
-	//進む速度
-	VECTOR defaultDir = { 0.0f,0.0f,-DODGEROLL_SPEED };
-	//上記を行列に変換
-	MATRIX dir = CMyMath::GetTranslateMatrix(defaultDir);
-	//Y軸回転行列
-	MATRIX mRotY = CMyMath::GetYawMatrix(m_dodgerollRotY);
-	//行列の合成
-	MATRIX res = CMyMath::MatMult(mRotY, dir);
-
-	//移動をスピードに代入
-	m_speed.x = res.m[0][3];
-	m_speed.y = res.m[1][3];
-	m_speed.z = res.m[2][3];
-
-	//回避の方向に向ける
-	m_rot.y = m_dodgerollRotY;
-
-	//アニメーションが終わったら待機状態に移行
-	if (GetAnimEnd() == true)
-	{
-		m_isDodgeroll = false;
-		m_state = WAIT;
-	}
 }
 
 //-----------------------
@@ -767,18 +660,8 @@ void CPlayer::AttackIn()
 			switch (m_attackNum)
 			{
 			case 0:
-
-				if (m_isTransform == true)
-				{
-					//攻撃前のアニメーション
-					RequestAnim(ANIMID_ATTACK1_HAND_IN, 0.5f);
-				}
-				else
-				{
-					//攻撃前のアニメーション
-					RequestAnim(ANIMID_ATTACK1_HAND_IN, 1.0f);
-				}
-
+				//攻撃前のアニメーション
+				RequestAnim(ANIMID_ATTACK1_HAND_IN, 1.0f);
 				break;
 			case 1:
 				//攻撃前のアニメーション
@@ -896,13 +779,7 @@ void CPlayer::Attack(CAttackManager* _attackManager, CShotManager* _shotManager)
 				//攻撃中のアニメーション
 				if (RequestAnim(ANIMID_ATTACK1_HAND, 1.0f) == true)
 				{
-					if (m_isTransform == true)
-					{
-					}
-					else
-					{
-						_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
-					}
+					_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
 				}
 				break;
 			case 1:
@@ -1550,14 +1427,6 @@ void CPlayer::RequestAttack()
 		return;
 	}
 
-	//変身中の攻撃モーション(仮)TODO
-	if (m_isTransform == true)
-	{
-		m_attackNum = 0;
-		m_state = ATTACK_IN;
-		return;
-	}
-
 	//攻撃中なら次に移行する
 	if (m_attackNum >= ATTACK_1)
 	{
@@ -1572,13 +1441,6 @@ void CPlayer::RequestAttack()
 		m_attackNum++;
 		m_state = ATTACK_IN;
 	}
-
-	//攻撃ボタンを押したか
-	//if (CheckHitKey(KEY_INPUT_U) != 0 ||
-	//	CControllerManager::IsTrg(BUTTON_Y,m_padName))
-	//{
-	//	m_state = ATTACK_CHARGE_IN;
-	//}
 
 }
 
@@ -1652,39 +1514,6 @@ void CPlayer::RequestDodgeroll(float _rotY)
 	if (isController == true)
 	{
 		vec.x = -CControllerManager::GetLX(m_padName);
-	}
-
-	//入力されていない場合前方向に移動する
-	if (VSize(vec) == 0.0f)
-	{
-		m_dodgerollRotY = m_rot.y;
-	}
-	else
-	{
-		////カメラの角度がオールゼロの時に進む速度
-		VECTOR defaultDir = { vec.x,0.0f,vec.z };
-		//上記を行列に変換
-		MATRIX dir = CMyMath::GetTranslateMatrix(defaultDir);
-		//Y軸回転行列
-		MATRIX mRotY = CMyMath::GetYawMatrix(_rotY);
-		//行列の合成
-		MATRIX res = CMyMath::MatMult(mRotY, dir);
-
-		//移動をスピードに代入
-		vec.x = res.m[0][3];
-		vec.y = res.m[1][3];
-		vec.z = res.m[2][3];
-
-		m_dodgerollRotY = atan2f(-vec.x, -vec.z);
-	}
-
-	//回避ボタンを押したか
-	if (CheckHitKey(KEY_INPUT_L) != 0 ||
-		CControllerManager::IsTrg(BUTTON_RB, m_padName))
-	{
-		m_attackNum = 0;
-		m_isDodgeroll = true;
-		m_state = DODGEROLL;
 	}
 
 }

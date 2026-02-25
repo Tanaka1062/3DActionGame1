@@ -1,5 +1,4 @@
 #include "uiSelectManager.h"
-#include "hpber/hpbar.h"
 #include "../data.h"
 #include "../gameTime/gameTime.h"
 #include "../../lib/input/controllerManager.h"

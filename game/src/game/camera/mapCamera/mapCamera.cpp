@@ -46,8 +46,9 @@ void CMapCamera::Init(VECTOR _focus)
 
 	m_focusPos = m_mapCenterPos[0];
 
-	m_pos.x = m_pos.x - 50.0f;
+	m_pos.x = m_pos.x - 100.0f;
 
+	//m_pos.y = m_pos.y - 30.0f;
 }
 
 //---------------------------------

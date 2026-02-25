@@ -22,11 +22,7 @@ constexpr int MAX_HP = 200;								//体力
 constexpr int ATK = 20;									//攻撃力
 constexpr float MOVE_SPEED = 1.2f;						//移動スピード
 constexpr float RADIUS = 10.0f;							//半径
-constexpr float DODGEROLL_SPEED = 1.5f;					//回避スピード
 constexpr float JUMP_SPEED = 3.0f;						//ジャンプスピード
-constexpr int TRANSFORM_COIN_NUM = 3;					//変身に必要なコインの数
-constexpr int POWER_UP_ATK = 1;							//増加する攻撃力
-constexpr float TRANSFORM_UP_SPEED = 0.3f;				//変身後のスピードアップ
 constexpr int BLOWN_MAX = 100;							//吹き飛び最大値
 static const VECTOR KNOCK_BACK_SPEED = { 0.0f,3.0f,-0.8f };	//吹き飛ぶスピード
 constexpr int INIT_MONEY = 0;							//最初の所持金
@@ -90,25 +86,17 @@ static const float ATTACK_SIZE[WEAPON_ID_NUM][ATTACK_NUM] =
 //-----------------------
 CCpuPlayer::CCpuPlayer()
 {
-	m_transformTimeCount = 0;
 	m_name = PLAYER_NONE;
 	CCharacterBase::Init();
-	for (int keepHndl_i = 0; keepHndl_i < HNDL_NUM; keepHndl_i++)
-	{
-		m_keepHndl[keepHndl_i] = -1;
-	}
 	m_dropCoin = 0;
 	m_pos = ZERO;
 	m_rad = 0.0f;
 	m_maxHp = 0;
 	m_hp = 0;
 	m_atk = 0;
-	m_isDodgeroll = false;
-	m_isTransform = false;
 	m_isJump = false;
 	m_attackNum = ATTACK_NONE;
 	m_money = INIT_MONEY;
-	m_dodgerollRotY = 0.0f;
 	m_padName = PAD_NONE;
 	m_weaponId = WEAPON_ID_HAND;
 	m_weaponDurability = 0;
@@ -140,24 +128,16 @@ void CCpuPlayer::Init(tagPlayerName _name, tagPadName _padName)
 {
 	CCharacterBase::Init();
 
-	m_transformTimeCount = TRANSFORM_TIME;
-	for (int keepHndl_i = 0; keepHndl_i < HNDL_NUM; keepHndl_i++)
-	{
-		m_keepHndl[keepHndl_i] = -1;
-	}
 	m_dropCoin = 0;
 	m_pos = ZERO;
 	m_rad = RADIUS;
 	m_maxHp = MAX_HP;
 	m_hp = m_maxHp;
 	m_atk = ATK;
-	m_isDodgeroll = false;
-	m_isTransform = false;
 	m_attackNum = ATTACK_NONE;
 	m_weaponDurability = 0;
 	m_money = INIT_MONEY;
 	m_padName = _padName;
-	m_dodgerollRotY = 0.0f;
 	m_weaponId = WEAPON_ID_HAND;
 	m_name = _name;
 	m_shadow.Init(m_pos, SHADOW_SIZE);
@@ -176,8 +156,6 @@ void CCpuPlayer::Init(tagPlayerName _name, tagPadName _padName)
 void CCpuPlayer::Load(int _modelHndl)
 {
 	CObject::DuplicateModel(_modelHndl);
-	m_keepHndl[NORMAL_HNDL] = m_hndl;
-	m_keepHndl[TRANSFORM_HNDL] = MV1LoadModel(MODEL_PATH);
 	m_shadow.Load();
 }
 
@@ -289,12 +267,9 @@ void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackMa
 		//戦いの距離になったら互いの方向を向く
 		if (fLen <= FIGHT_LEN)
 		{
-			if (!m_isDodgeroll)
-			{
-				float rotY1 = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
+			float rotY1 = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
 
-				m_rot.y = rotY1;
-			}
+			m_rot.y = rotY1;
 		}
 
 		//プレイヤーの向きを変える
@@ -333,38 +308,6 @@ void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackMa
 	if (m_pos.y <= DIE_POS_Y)
 	{
 		m_isActive = false;
-	}
-
-	if (m_isTransform == true)
-	{
-		switch (m_state)
-		{
-		case ATTACK_IN:
-		case ATTACK:
-			float rotY = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
-
-			m_rot.y = rotY;
-			break;
-		}
-	}
-
-	//変身中は見た目を変える
-	if (m_isTransform == true)
-	{
-		m_hndl = m_keepHndl[TRANSFORM_HNDL];
-		
-		//変身の時間がすぎたら解除
-		m_transformTimeCount--;
-		if (m_transformTimeCount <= 0)
-		{
-			m_dropCoin = TRANSFORM_COIN_NUM;
-			m_transformTimeCount = TRANSFORM_TIME;
-			m_isTransform = false;
-		}
-	}
-	else
-	{
-		m_hndl = m_keepHndl[NORMAL_HNDL];
 	}
 
 	//武器の耐久度処理--------------------------------
@@ -436,9 +379,6 @@ void CCpuPlayer::HitCalc(CObject* _hitObject)
 	//攻撃の当たり判定の場合の処理-----------------------------------------
 	if (_hitObject->GetObjectName() == OBJECT_ATTACK)
 	{
-		//プレイヤーが回避中なら処理をしない
-		if (m_isDodgeroll == true)return;
-
 		//当たり判定保存用
 		CAttackBase* attack = nullptr;
 
@@ -455,12 +395,6 @@ void CCpuPlayer::HitCalc(CObject* _hitObject)
 			attack->GetPos().z - GetCenter().z);
 
 		HitAttack(attack->GetAtk(), attack->GetBlown(), rot);
-
-		//変身中の場合変身時間を減らす
-		if (m_isTransform == true)
-		{
-			m_transformTimeCount -= attack->GetAtk();
-		}
 
 		//呼び出すエフェクトのID
 		int effectId = CEffectData::GetId(EFFECT_ATTACK);
@@ -502,9 +436,6 @@ void CCpuPlayer::HitCalc(CObject* _hitObject)
 	//弾の場合の処理-------------------------------------------------------
 	if (_hitObject->GetObjectName() == OBJECT_SHOT)
 	{
-
-		//プレイヤーが回避中なら処理をしない
-		if (m_isDodgeroll == true)return;
 
 		CShotBase* shot = nullptr;
 

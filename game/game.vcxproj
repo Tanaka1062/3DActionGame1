@@ -199,10 +199,7 @@
     <ClCompile Include="src\game\system\soundManager.cpp" />
     <ClCompile Include="src\game\ui\countDown\countDown.cpp" />
     <ClCompile Include="src\game\ui\eventText\eventText.cpp" />
-    <ClCompile Include="src\game\ui\hpber\hpbar.cpp" />
-    <ClCompile Include="src\game\ui\hpber\hpbarManager.cpp" />
     <ClCompile Include="src\game\ui\playerStatusPanel\playerStatusPanel.cpp" />
-    <ClCompile Include="src\game\ui\powerUpGauge\powerUpGouge.cpp" />
     <ClCompile Include="src\game\ui\time\timeUi.cpp" />
     <ClCompile Include="src\game\ui\uiGameManager.cpp" />
     <ClCompile Include="src\game\ui\uiSelectManager.cpp" />
@@ -286,10 +283,7 @@
     <ClInclude Include="src\game\system\soundManager.h" />
     <ClInclude Include="src\game\ui\countDown\countDown.h" />
     <ClInclude Include="src\game\ui\eventText\eventText.h" />
-    <ClInclude Include="src\game\ui\hpber\hpbar.h" />
-    <ClInclude Include="src\game\ui\hpber\hpbarManager.h" />
     <ClInclude Include="src\game\ui\playerStatusPanel\playerStatusPanel.h" />
-    <ClInclude Include="src\game\ui\powerUpGauge\powerUpGouge.h" />
     <ClInclude Include="src\game\ui\time\timeUi.h" />
     <ClInclude Include="src\game\ui\uiGameManager.h" />
     <ClInclude Include="src\game\ui\uiSelectManager.h" />

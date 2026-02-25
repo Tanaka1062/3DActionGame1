@@ -386,8 +386,6 @@ void CPlayerManager::Draw()
 	{
 		if (m_player[player_i]->GetActive() == false)continue;
 		m_player[player_i]->Draw();
-
-		DrawFormatString(60, 100 + player_i * 60, GetColor(255, 0, 0),"ƒvƒŒƒCƒ„[%d‚Ì‚¨‹à = %d",player_i + 1,m_player[player_i]->GetMoney());
 	}
 
 	m_crown.Draw();

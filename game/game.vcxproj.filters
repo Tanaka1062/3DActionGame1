@@ -91,9 +91,6 @@
     <Filter Include="ソース ファイル\game\ui">
       <UniqueIdentifier>{54b55332-1df3-4934-99f5-e80fd7a1de6b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\game\ui\hpber">
-      <UniqueIdentifier>{8a8f2346-eab0-4879-9c01-96af7be7ad06}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\game\shadow">
       <UniqueIdentifier>{8f9b0397-0895-49dc-a379-015a6b7b24ae}</UniqueIdentifier>
     </Filter>
@@ -105,9 +102,6 @@
     </Filter>
     <Filter Include="ソース ファイル\game\item\itemObject\box">
       <UniqueIdentifier>{d6a5b4ac-a84d-4d35-a128-f43ccc23ba50}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\game\ui\powerUpGauge">
-      <UniqueIdentifier>{7524a5cd-6f67-4dad-afd1-2ec07d2be65f}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\game\gameTime">
       <UniqueIdentifier>{7b7bae07-2f0a-4cb1-a7d0-4ced597b9732}</UniqueIdentifier>
@@ -303,12 +297,6 @@
     <ClCompile Include="src\game\ui\uiGameManager.cpp">
       <Filter>ソース ファイル\game\ui</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\ui\hpber\hpbar.cpp">
-      <Filter>ソース ファイル\game\ui\hpber</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\ui\hpber\hpbarManager.cpp">
-      <Filter>ソース ファイル\game\ui\hpber</Filter>
-    </ClCompile>
     <ClCompile Include="src\game\shadow\shadow.cpp">
       <Filter>ソース ファイル\game\shadow</Filter>
     </ClCompile>
@@ -323,9 +311,6 @@
     </ClCompile>
     <ClCompile Include="src\game\item\mapItemManager.cpp">
       <Filter>ソース ファイル\game\item</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\ui\powerUpGauge\powerUpGouge.cpp">
-      <Filter>ソース ファイル\game\ui\powerUpGauge</Filter>
     </ClCompile>
     <ClCompile Include="src\game\gameTime\gameTime.cpp">
       <Filter>ソース ファイル\game\gameTime</Filter>
@@ -554,12 +539,6 @@
     <ClInclude Include="src\game\ui\uiGameManager.h">
       <Filter>ソース ファイル\game\ui</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\ui\hpber\hpbar.h">
-      <Filter>ソース ファイル\game\ui\hpber</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\ui\hpber\hpbarManager.h">
-      <Filter>ソース ファイル\game\ui\hpber</Filter>
-    </ClInclude>
     <ClInclude Include="src\game\shadow\shadow.h">
       <Filter>ソース ファイル\game\shadow</Filter>
     </ClInclude>
@@ -577,9 +556,6 @@
     </ClInclude>
     <ClInclude Include="src\game\item\mapItemManager.h">
       <Filter>ソース ファイル\game\item</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\ui\powerUpGauge\powerUpGouge.h">
-      <Filter>ソース ファイル\game\ui\powerUpGauge</Filter>
     </ClInclude>
     <ClInclude Include="src\game\gameTime\gameTime.h">
       <Filter>ソース ファイル\game\gameTime</Filter>

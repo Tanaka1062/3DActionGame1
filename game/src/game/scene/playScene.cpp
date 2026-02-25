@@ -41,9 +41,9 @@ void CPlayScene::Draw()
 		m_attackManager.Draw();
 		m_itemManager.Draw();
 		m_weaponManager.Draw();
-		m_uiManager.Draw();
 		m_playerManager.Draw();
 		m_gimmickManager.Draw();
+		m_uiManager.Draw();
 
 		CCameraManager::Draw();
 		break;
