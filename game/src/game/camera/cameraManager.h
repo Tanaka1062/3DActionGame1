@@ -1,6 +1,7 @@
 #pragma once
 #include "cameraBase.h"
 #include "../map/map.h"
+#include "../player/playerManager.h"
 
 //複数のカメラタイプを管理するクラス
 class CCameraManager
@@ -34,7 +35,7 @@ public:
 	static void Init(VECTOR _focus);
 
 	//毎フレームする処理
-	static void Step(VECTOR _focus, float _rot,tagMapCenterId _mapCenterId = MAP_ID_CENTER1);
+	static void Step(VECTOR _focus, float _rot, tagMapCenterId _mapCenterId = MAP_ID_CENTER1,CPlayerManager* _playerManager = nullptr);
 
 	//表示
 	static void Draw();

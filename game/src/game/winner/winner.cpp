@@ -41,3 +41,4 @@ void CWinner::Step(CPlayerManager* _playerManager)
 		}
 	}
 }
+

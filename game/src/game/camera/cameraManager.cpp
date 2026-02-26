@@ -72,13 +72,32 @@ void CCameraManager::Init(VECTOR _focus)
 //---------------------------
 //	毎フレームする処理
 //---------------------------
-void CCameraManager::Step(VECTOR _focus, float _rot, tagMapCenterId _mapCenterId)
+void CCameraManager::Step(VECTOR _focus, float _rot, tagMapCenterId _mapCenterId, CPlayerManager* _playerManager)
 {
+	VECTOR playerPos = ZERO;
+
+	if (_playerManager != nullptr)
+	{
+		//カメラから一番遠いプレイヤーを求める
+		float MaxLen = 0.0f;
+		for (int player_i = 0; player_i < _playerManager->GetPlayerNum(); player_i++)
+		{
+			CPlayer* player = _playerManager->GetPlayer(player_i);
+			VECTOR vec = VSub(m_camera[m_id]->GetPos(), player->GetPos());
+			float len = VSize(vec);
+			if (MaxLen <= len)
+			{
+				MaxLen = len;
+				playerPos = player->GetPos();
+			}
+		}
+	}
+
 	if (m_id == CAMERA_ID_MAP)
 	{
 		CMapCamera* mapCamera = dynamic_cast<CMapCamera*>(m_camera[m_id]);
 
-		mapCamera->Step(_focus, _rot, _mapCenterId);
+		mapCamera->Step(_focus, _rot, _mapCenterId, playerPos);
 	}
 	else
 	{

@@ -8,6 +8,7 @@ class CMapCamera : public CCameraBase
 {
 private:
 	VECTOR m_mapCenterPos[MAP_CENTER_NUM];
+	VECTOR m_basePos;
 public:
 	//コンストラクタ
 	CMapCamera();
@@ -16,7 +17,7 @@ public:
 	void Init(VECTOR _focus);
 
 	// 毎フレーム呼ぶ処理
-	void Step(VECTOR _focus, float _rot, tagMapCenterId _mapCenterId);
+	void Step(VECTOR _focus, float _rot, tagMapCenterId _mapCenterId,VECTOR _playerPos);
 
 	//カメラの更新
 	void Update();
