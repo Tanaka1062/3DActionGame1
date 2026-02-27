@@ -24,7 +24,7 @@ private:
 	static CCameraBase* m_camera[CAMERA_ID_NUM];	//カメラ
 	static tagCAMERA_ID m_id;						//カメラのタイプ
 	static VECTOR m_rot;							//カメラの回転値
-
+	
 public:
 
 	//コンストラクタ・デストラクタ

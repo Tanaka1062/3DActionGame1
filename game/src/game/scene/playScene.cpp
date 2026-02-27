@@ -121,7 +121,7 @@ void CPlayScene::Step()
 	m_itemManager.Step(&m_playerManager,m_ground.GetCenterId());
 	m_weaponManager.Step(m_playerManager);
 	m_uiManager.Step(m_eventManager.GetNowEventName(),m_playerManager);
-	CCameraManager::Step(ZERO,0.0f,m_ground.GetCenterId());
+	CCameraManager::Step(ZERO,0.0f,m_ground.GetCenterId(),&m_playerManager);
 	m_gameTime->Step();
 	m_winner->Step(&m_playerManager);
 	m_eventManager.Step(CCameraManager::GetFocusPos(),m_itemManager);

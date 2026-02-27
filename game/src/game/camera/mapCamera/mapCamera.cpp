@@ -9,7 +9,11 @@ constexpr float MOVE_SPEED = 0.8f;							//カメラの移動速度
 
 constexpr int MAP_FRAME_NUM = 4;							//マップのフレーム番号
 
-constexpr VECTOR CAMERA_LENGTH = { 100.0f,0.0f,0.0f };		//カメラとプレイヤーの距離
+constexpr float CAMERA_LENGTH =  -120.0f;					//カメラとプレイヤーの距離
+
+constexpr float ROT_SPEED = 0.5f * (DX_PI_F / 180.0f);		//カメラの回転スピード
+
+constexpr float ROT_Y_MAX = 90.0f * (DX_PI_F / 180.0f);		//カメラの最大のY軸回転角度
 //============================================
 
 //---------------------------------
@@ -52,9 +56,8 @@ void CMapCamera::Init(VECTOR _focus)
 
 	m_focusPos = m_mapCenterPos[0];
 
-	//m_pos.x = m_pos.x - 100.0f;
+	m_pos.x = m_pos.x - 50.0f;
 
-	//m_pos.y = m_pos.y - 30.0f;
 }
 
 //---------------------------------
@@ -68,17 +71,66 @@ void CMapCamera::Step(VECTOR _focus, float _rot, tagMapCenterId _mapCenterId, VE
 
 	Move(_mapCenterId);
 
+	float len = m_pos.x - _playerPos.x;
+
+	if (len > CAMERA_LENGTH)
+	{
+		m_pos.x -= MOVE_SPEED;
+		m_focusPos.x -= MOVE_SPEED;
+	}
+	else if (len < CAMERA_LENGTH)
+	{
+		m_pos.x += MOVE_SPEED;
+		m_focusPos.x += MOVE_SPEED;
+	}
+
 	//注視点からプレイヤーの角度を求める
-	float angle = atan2f(_playerPos.x - _focus.x, _playerPos.z - _focus.z);
+	float angle1 = atan2f(_playerPos.x - m_focusPos.x, _playerPos.z - m_focusPos.z);
+	float angle2 = atan2f(m_pos.x - m_focusPos.x, m_pos.z - m_focusPos.z);
+	
+	float diff = angle1 - angle2;
+
+	if (fabs(diff) > 0.05f)
+	{
+
+		while (diff > DX_PI_F)
+		{
+			diff -= DX_TWO_PI_F;
+		}
+		while (diff < -DX_PI_F)
+		{
+			diff += DX_TWO_PI_F;
+		}
+
+		if (diff < ROT_SPEED)
+		{
+			diff = ROT_SPEED;
+		}
+		else if (diff > -ROT_SPEED)
+		{
+			diff = -ROT_SPEED;
+		}
+
+		m_rot.y += diff;
+
+		if (m_rot.y > ROT_Y_MAX)
+		{
+			m_rot.y = ROT_Y_MAX;
+		}
+		else if (m_rot.y < -ROT_Y_MAX)
+		{
+			m_rot.y = -ROT_Y_MAX;
+		}
+	}
 
 	//角度を行列に変換する
-	MATRIX rot = MGetRotY(angle);
+	MATRIX rot = MGetRotY(m_rot.y);
 
 	//ベースの座標と角度を合体させる
 	VECTOR offset = VTransform(m_basePos, rot);
 
 	//カメラの注視点からベース
-	m_pos = VAdd(CAMERA_LENGTH,offset);
+	m_pos = VAdd(m_focusPos,offset);
 
 }
 
@@ -111,12 +163,13 @@ void CMapCamera::Move(tagMapCenterId _mapCenterId)
 	if (m_focusPos.z > m_mapCenterPos[_mapCenterId].z)
 	{
 		m_focusPos.z -= MOVE_SPEED;
+		m_basePos.z -= MOVE_SPEED;
 		m_pos.z -= MOVE_SPEED;
 	}
 	else
 	{
 		m_focusPos.z = m_mapCenterPos[_mapCenterId].z;
-		m_pos.z = m_mapCenterPos[_mapCenterId].z;
+	
 	}
 }
 
