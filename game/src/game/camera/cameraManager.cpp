@@ -79,32 +79,32 @@ void CCameraManager::Step(VECTOR _focus, float _rot, tagMapCenterId _mapCenterId
 	if (_playerManager != nullptr)
 	{
 		////カメラから一番遠いプレイヤーを求める
-		//float MaxLen = 0.0f;
-		//for (int player_i = 0; player_i < _playerManager->GetPlayerNum(); player_i++)
-		//{
-		//	CPlayer* player = _playerManager->GetPlayer(player_i);
-		//	VECTOR vec = VSub(m_camera[m_id]->GetPos(), player->GetPos());
-		//	float len = VSize(vec);
-		//	if (MaxLen <= len)
-		//	{
-		//		MaxLen = len;
-		//		playerPos = player->GetPos();
-		//	}
-		//}
-
-		//カメラから一番近いプレイヤーを求める
-		float MinLen = -1.0f;
+		float MaxLen = 0.0f;
 		for (int player_i = 0; player_i < _playerManager->GetPlayerNum(); player_i++)
 		{
 			CPlayer* player = _playerManager->GetPlayer(player_i);
 			VECTOR vec = VSub(m_camera[m_id]->GetPos(), player->GetPos());
 			float len = VSize(vec);
-			if (MinLen >= len || MinLen == -1.0f)
+			if (MaxLen <= len)
 			{
-				MinLen = len;
+				MaxLen = len;
 				playerPos = player->GetPos();
 			}
 		}
+
+		//カメラから一番近いプレイヤーを求める
+		//float MinLen = -1.0f;
+		//for (int player_i = 0; player_i < _playerManager->GetPlayerNum(); player_i++)
+		//{
+		//	CPlayer* player = _playerManager->GetPlayer(player_i);
+		//	VECTOR vec = VSub(m_camera[m_id]->GetPos(), player->GetPos());
+		//	float len = VSize(vec);
+		//	if (MinLen >= len || MinLen == -1.0f)
+		//	{
+		//		MinLen = len;
+		//		playerPos = player->GetPos();
+		//	}
+		//}
 	}
 
 	if (m_id == CAMERA_ID_MAP)

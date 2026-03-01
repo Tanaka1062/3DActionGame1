@@ -13,7 +13,7 @@ constexpr float CAMERA_LENGTH =  -120.0f;					//カメラとプレイヤーの距離
 
 constexpr float ROT_SPEED = 0.5f * (DX_PI_F / 180.0f);		//カメラの回転スピード
 
-constexpr float ROT_Y_MAX = 90.0f * (DX_PI_F / 180.0f);		//カメラの最大のY軸回転角度
+constexpr float ROT_Y_MAX = 45.0f * (DX_PI_F / 180.0f);		//カメラの最大のY軸回転角度
 //============================================
 
 //---------------------------------
@@ -73,16 +73,16 @@ void CMapCamera::Step(VECTOR _focus, float _rot, tagMapCenterId _mapCenterId, VE
 
 	float len = m_pos.x - _playerPos.x;
 
-	if (len > CAMERA_LENGTH)
-	{
-		m_pos.x -= MOVE_SPEED;
-		m_focusPos.x -= MOVE_SPEED;
-	}
-	else if (len < CAMERA_LENGTH)
-	{
-		m_pos.x += MOVE_SPEED;
-		m_focusPos.x += MOVE_SPEED;
-	}
+	//if (len > CAMERA_LENGTH)
+	//{
+	//	m_pos.x -= MOVE_SPEED;
+	//	m_focusPos.x -= MOVE_SPEED;
+	//}
+	//else if (len < CAMERA_LENGTH)
+	//{
+	//	m_pos.x += MOVE_SPEED;
+	//	m_focusPos.x += MOVE_SPEED;
+	//}
 
 	//注視点からプレイヤーの角度を求める
 	float angle1 = atan2f(_playerPos.x - m_focusPos.x, _playerPos.z - m_focusPos.z);
@@ -163,8 +163,8 @@ void CMapCamera::Move(tagMapCenterId _mapCenterId)
 	if (m_focusPos.z > m_mapCenterPos[_mapCenterId].z)
 	{
 		m_focusPos.z -= MOVE_SPEED;
-		m_basePos.z -= MOVE_SPEED;
-		m_pos.z -= MOVE_SPEED;
+		//m_basePos.z -= MOVE_SPEED;
+		//m_pos.z -= MOVE_SPEED;
 	}
 	else
 	{
