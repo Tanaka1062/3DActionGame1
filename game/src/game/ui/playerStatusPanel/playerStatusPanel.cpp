@@ -283,8 +283,8 @@ void CPlayerStatusPanel::Draw()
 	int ten = m_money / 10;
 	int one = m_money % 10;
 	VECTOR moneyNumberPos = VAdd(m_pos, MONEY_NUMBER_INIT_POS);
-	CNumber::RequestNumber(moneyNumberPos.x, moneyNumberPos.y, ten, MONEY_NUMBER_SIZE);
-	CNumber::RequestNumber(moneyNumberPos.x + (NUM_SIZE * MONEY_NUMBER_SIZE), moneyNumberPos.y, one, MONEY_NUMBER_SIZE);
+	CNumber::RequestNumber(static_cast<int>(moneyNumberPos.x), static_cast<int>(moneyNumberPos.y), ten, MONEY_NUMBER_SIZE);
+	CNumber::RequestNumber(static_cast<int>(moneyNumberPos.x + (NUM_SIZE * MONEY_NUMBER_SIZE)), static_cast<int>(moneyNumberPos.y), one, MONEY_NUMBER_SIZE);
 }
 
 //-----------------------------------

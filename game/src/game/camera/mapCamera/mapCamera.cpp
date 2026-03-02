@@ -5,15 +5,16 @@
 //定義関連====================================
 constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };					//VECTOR用初期化
 
-constexpr float MOVE_SPEED = 0.8f;							//カメラの移動速度
+constexpr float MOVE_SPEED = 0.6f;							//カメラの移動速度
 
 constexpr int MAP_FRAME_NUM = 4;							//マップのフレーム番号
 
 constexpr float CAMERA_LENGTH =  -120.0f;					//カメラとプレイヤーの距離
 
-constexpr float ROT_SPEED = 0.5f * (DX_PI_F / 180.0f);		//カメラの回転スピード
+constexpr float ROT_SPEED = 0.2f * (DX_PI_F / 180.0f);		//カメラの回転スピード
 
-constexpr float ROT_Y_MAX = 45.0f * (DX_PI_F / 180.0f);		//カメラの最大のY軸回転角度
+constexpr float ROT_Y_MAX = 30.0f * (DX_PI_F / 180.0f);		//カメラの最大のY軸回転角度
+
 //============================================
 
 //---------------------------------
@@ -29,9 +30,11 @@ CMapCamera::CMapCamera() {
 void CMapCamera::Init(VECTOR _focus)
 {
 	CCameraBase::Init(ZERO);
-	m_focusPos = ZERO;
 
+	m_focusPos = ZERO;
 	m_basePos = ZERO;
+	m_nextPos = ZERO;
+	m_nextFocus = ZERO;
 
 	//フレームのハンドルをロード
 	int mapFrameHndl = MV1LoadModel(MAP_FRAME_PATH[MAP_ID_GRASSLAND]);
@@ -58,70 +61,25 @@ void CMapCamera::Init(VECTOR _focus)
 
 	m_pos.x = m_pos.x - 50.0f;
 
+	m_state = ZOOM_CAMERA;
+
+	m_mapCenterId = MAP_ID_CENTER_NONE;
 }
 
 //---------------------------------
 //		毎フレームする処理
 //---------------------------------
-void CMapCamera::Step(VECTOR _focus, float _rot, tagMapCenterId _mapCenterId, VECTOR _playerPos)
+void CMapCamera::Step(VECTOR _focus, float _rot, tagMapCenterId _mapCenterId, CPlayerManager* _playerManager)
 {
-	//カメラの方向ベクトルを基にY軸回転角度を計算
-	VECTOR dir = VSub(m_pos, m_focusPos);
-	m_rot.y = atan2f(dir.x, dir.z);
-
-	Move(_mapCenterId);
-
-	float len = m_pos.x - _playerPos.x;
-
-	//if (len > CAMERA_LENGTH)
-	//{
-	//	m_pos.x -= MOVE_SPEED;
-	//	m_focusPos.x -= MOVE_SPEED;
-	//}
-	//else if (len < CAMERA_LENGTH)
-	//{
-	//	m_pos.x += MOVE_SPEED;
-	//	m_focusPos.x += MOVE_SPEED;
-	//}
-
-	//注視点からプレイヤーの角度を求める
-	float angle1 = atan2f(_playerPos.x - m_focusPos.x, _playerPos.z - m_focusPos.z);
-	float angle2 = atan2f(m_pos.x - m_focusPos.x, m_pos.z - m_focusPos.z);
-	
-	float diff = angle1 - angle2;
-
-	if (fabs(diff) > 0.05f)
+	if (m_mapCenterId != _mapCenterId)
 	{
-
-		while (diff > DX_PI_F)
-		{
-			diff -= DX_TWO_PI_F;
-		}
-		while (diff < -DX_PI_F)
-		{
-			diff += DX_TWO_PI_F;
-		}
-
-		if (diff < ROT_SPEED)
-		{
-			diff = ROT_SPEED;
-		}
-		else if (diff > -ROT_SPEED)
-		{
-			diff = -ROT_SPEED;
-		}
-
-		m_rot.y += diff;
-
-		if (m_rot.y > ROT_Y_MAX)
-		{
-			m_rot.y = ROT_Y_MAX;
-		}
-		else if (m_rot.y < -ROT_Y_MAX)
-		{
-			m_rot.y = -ROT_Y_MAX;
-		}
+		m_state = MAP_MOVE_CAMERA;
+		m_mapCenterId = _mapCenterId;
 	}
+
+	Move(_mapCenterId,_playerManager);
+
+	m_rot.y = atan2f(m_pos.x - m_focusPos.x, m_pos.z - m_focusPos.z);
 
 	//角度を行列に変換する
 	MATRIX rot = MGetRotY(m_rot.y);
@@ -130,7 +88,56 @@ void CMapCamera::Step(VECTOR _focus, float _rot, tagMapCenterId _mapCenterId, VE
 	VECTOR offset = VTransform(m_basePos, rot);
 
 	//カメラの注視点からベース
-	m_pos = VAdd(m_focusPos,offset);
+	m_nextPos = VAdd(m_focusPos, m_basePos);
+
+	VECTOR vec = VSub(m_nextPos, m_pos);
+
+	if (vec.x > 3.0f)
+	{
+		m_pos.x += MOVE_SPEED;
+	}
+	else if (vec.x < -3.0f)
+	{
+		m_pos.x -= MOVE_SPEED;
+	}
+
+	if (vec.z > 3.0f)
+	{
+		m_pos.z += MOVE_SPEED;
+	}
+	else if(vec.z < -3.0f)
+	{
+		m_pos.z -= MOVE_SPEED;
+	}
+
+	if (vec.y > 3.0f)
+	{
+		m_pos.y += MOVE_SPEED;
+	}
+	else if (vec.y < -3.0f)
+	{
+		m_pos.y -= MOVE_SPEED;
+	}
+
+	VECTOR vec2 = VSub(m_nextFocus, m_focusPos);
+
+	if (vec2.x > 3.0f)
+	{
+		m_focusPos.x += MOVE_SPEED;
+	}
+	else if (vec2.x < -3.0f)
+	{
+		m_focusPos.x -= MOVE_SPEED;
+	}
+
+	if (vec2.z > 3.0f)
+	{
+		m_focusPos.z += MOVE_SPEED;
+	}
+	else if (vec2.z < -3.0f)
+	{
+		m_focusPos.z -= MOVE_SPEED;
+	}
 
 }
 
@@ -156,20 +163,61 @@ void CMapCamera::Rotate(VECTOR _focus)
 //---------------------------------
 //		 カメラの移動処理
 //---------------------------------
-void CMapCamera::Move(tagMapCenterId _mapCenterId)
+void CMapCamera::Move(tagMapCenterId _mapCenterId,CPlayerManager* _playerManager)
 {
 
 	//カメラの注視点を次のマップに移動させる
-	if (m_focusPos.z > m_mapCenterPos[_mapCenterId].z)
+	if (m_focusPos.z > m_mapCenterPos[_mapCenterId].z &&m_state == MAP_MOVE_CAMERA)
 	{
-		m_focusPos.z -= MOVE_SPEED;
-		//m_basePos.z -= MOVE_SPEED;
-		//m_pos.z -= MOVE_SPEED;
+		m_nextFocus.z -= MOVE_SPEED;
+		m_nextPos.x = m_basePos.x;
 	}
 	else
 	{
-		m_focusPos.z = m_mapCenterPos[_mapCenterId].z;
-	
+		m_state = ZOOM_CAMERA;
+
+		float minX = 0.0f;
+		float maxX = 0.0f;
+		float minZ = 0.0f;
+		float maxZ = 0.0f;
+
+		for (int player_i = 0; player_i < _playerManager->GetPlayerNum(); player_i++)
+		{
+			CPlayer* player = _playerManager->GetPlayer(player_i);
+			VECTOR vec = player->GetPos();
+			//それぞれの最大X,Zと最小X,Z
+			if (minX > vec.x || minX == 0.0f)
+			{
+				minX = vec.x;
+			}
+			if (maxX < vec.x || maxX == 0.0f)
+			{
+				maxX = vec.x;
+			}
+			if (minZ > vec.z || minZ == 0.0f)
+			{
+				minZ = vec.z;
+			}
+			if (maxZ < vec.z || maxZ == 0.0f)
+			{
+				maxZ = vec.z;
+			}
+		}
+
+		//中央をカメラの注視点にする
+		m_nextFocus.x = (minX + maxX) / 2.0f;
+		m_nextFocus.z = (maxZ + minZ) / 2.0f;
+
+		//幅から必要な距離を計算
+		float width = maxX - minX;
+		float height = maxZ - minZ;
+		float distance = max(width, height) * 0.5f;
+
+		//保管して滑らかに動かす
+		m_nextPos.x = m_focusPos.x;
+		m_nextPos.y = distance;
+		m_nextPos.z = m_focusPos.z;
+
 	}
 }
 

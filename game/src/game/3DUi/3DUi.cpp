@@ -1,7 +1,5 @@
 #include "3DUi.h"
 
-using namespace std;
-
 enum tagMaterialName
 {
 	MT_CROWN,		//王冠
@@ -16,7 +14,8 @@ enum tagModelName
 	MODEL_NUM,		//モデルの数
 };
 
-constexpr float POS_Y_UP = 19.0f;		//どれくらい上に上がるか
+constexpr float POS_Y_UP = 19.0f;			//どれくらい上に上がるか
+constexpr float MATERIAL_SIZE = 12.8f;		
 static const char* MODEL_PATH =
 "data/model/3DUi/3DUi.mv1";
 
@@ -47,8 +46,6 @@ C3DUi::~C3DUi()
 void C3DUi::Init()
 {
 	CObject::Init();
-
-	m_materialHndl.clear();
 }
 
 //--------------------------
@@ -57,18 +54,11 @@ void C3DUi::Init()
 void C3DUi::Load()
 {
 	//マテリアルをロード
-	for (int material_i = 0; material_i < MT_NUM; material_i++)
-	{
-		int hndl = LoadGraph(MATERIAL_PATH[material_i]);
+	m_materialHndl = LoadGraph(MATERIAL_PATH[MT_CROWN]);
 
-		m_materialHndl.push_back(hndl);
-	}
 
 	//モデルをロード
 	CObject::LoadModel(MODEL_PATH);
-
-	//マテリアルをモデルにセット
-	MV1SetTextureGraphHandle(m_hndl, MODEL_ICON, m_materialHndl[MT_CROWN], FALSE);
 }
 
 //--------------------------
@@ -88,15 +78,27 @@ void C3DUi::Step(VECTOR _pos, float _rad, float _cameraRotY)
 }
 
 //--------------------------
+//		  描写処理
+//--------------------------
+void C3DUi::Draw()
+{
+	if (m_isActive == false)return;
+
+	float half = MATERIAL_SIZE * 0.5f;
+	DrawModiBillboard3D(m_pos, half, half, -half, half, -half, -half, half, -half, m_materialHndl, TRUE);
+}
+
+//--------------------------
 //		   終了処理
 //--------------------------
 void C3DUi::Exit()
 {
 	CObject::Exit();
 
-	for (int i = 0; i < m_materialHndl.size(); i++)
+	if (m_materialHndl != -1)
 	{
-		DeleteGraph(m_materialHndl[i]);
+		DeleteGraph(m_materialHndl);
+		m_materialHndl = -1;
 	}
 }
 

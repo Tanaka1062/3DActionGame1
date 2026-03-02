@@ -73,9 +73,6 @@
     <Filter Include="ソース ファイル\lib\effekseer">
       <UniqueIdentifier>{f8cc2464-89a2-42d1-809b-271ec42468ae}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\game\camera\playCamera">
-      <UniqueIdentifier>{22017e20-cc7b-422a-9575-377e026daeae}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\game\camera\debugCamera">
       <UniqueIdentifier>{578ef763-b049-4f80-ba2b-727e3fe82f73}</UniqueIdentifier>
     </Filter>
@@ -169,6 +166,9 @@
     <Filter Include="ソース ファイル\game\ui\playerStatusPanel">
       <UniqueIdentifier>{46701614-a789-425a-b0d2-5be984d2601b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\game\camera\mapCamera\playCamera">
+      <UniqueIdentifier>{22017e20-cc7b-422a-9575-377e026daeae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\number.cpp">
@@ -259,7 +259,7 @@
       <Filter>ソース ファイル\game\camera\debugCamera</Filter>
     </ClCompile>
     <ClCompile Include="src\game\camera\playCamera\playCamera.cpp">
-      <Filter>ソース ファイル\game\camera\playCamera</Filter>
+      <Filter>ソース ファイル\game\camera\mapCamera\playCamera</Filter>
     </ClCompile>
     <ClCompile Include="src\game\camera\cameraBase.cpp">
       <Filter>ソース ファイル\game\camera</Filter>
@@ -492,7 +492,7 @@
       <Filter>ソース ファイル\game\camera\debugCamera</Filter>
     </ClInclude>
     <ClInclude Include="src\game\camera\playCamera\playCamera.h">
-      <Filter>ソース ファイル\game\camera\playCamera</Filter>
+      <Filter>ソース ファイル\game\camera\mapCamera\playCamera</Filter>
     </ClInclude>
     <ClInclude Include="src\game\camera\cameraBase.h">
       <Filter>ソース ファイル\game\camera</Filter>
