@@ -1,28 +1,30 @@
 #pragma once
 #include<DxLib.h>
 #include "../../lib/model/3DObject.h"
+#include <iostream>
+#include <vector>
 
 //マップのID
 enum tagMapId
 {
-	MAP_ID_GRASSLAND,			//草原ステージ
-	MAP_ID_SELECT,				//選択画面のマップ
-	MAP_ID_RESULT,				//リザルト画面のマップ
+	MAP_ID_GRASSLAND,	//草原ステージ
+	MAP_ID_SELECT,		//選択画面のマップ
+	MAP_ID_RESULT,		//リザルト画面のマップ
 
-	MAP_NUM,					//マップの数
+	MAP_NUM,			//マップの数
 };
 
-//マップの中心ID
-enum tagMapCenterId
+//ステージのID
+enum tagStageId
 {
-	MAP_ID_CENTER_NONE = -1,	//ID無し
-	MAP_ID_CENTER1,				//中心一つ目
-	MAP_ID_CENTER2,				//中心二つ目
-	MAP_ID_CENTER3,				//中心三つ目
-	MAP_ID_CENTER4,				//中心四つ目
-	MAP_ID_CENTER5,				//中心五つ目
+	STAGE_ID_NONE = -1,	//ID無し
+	STAGE_ID_1,			//ステージ一つ目
+	STAGE_ID_2,			//ステージ二つ目
+	STAGE_ID_3,			//ステージ三つ目
+	STAGE_ID_4,			//ステージ四つ目
+	STAGE_ID_5,			//ステージ五つ目
 
-	MAP_CENTER_NUM,				//中心の数
+	STAGE_NUM,			//ステージの数
 };
 
 static const char* MAP_FRAME_PATH[MAP_NUM] = {
@@ -32,13 +34,13 @@ static const char* MAP_FRAME_PATH[MAP_NUM] = {
 };					//マップのフレームパス
 
 
-
-class CMap :public CObject
+class CMap
 {
 private:
-	int m_hitHndl;			//当たり判定ようのマップのハンドル
-	int  m_mapId;			//マップのID
-	int m_mapMoveTimer;		//マップの移動する時間
+	std::vector<CObject*>	m_stage;
+	int						m_hitHndl;		//当たり判定ようのマップのハンドル
+	int						m_mapId;		//マップのID
+	int						m_mapMoveTimer;	//マップの移動する時間
 public:
 	//コンストラクタ・デストラクタ
 	CMap();

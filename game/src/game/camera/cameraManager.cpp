@@ -125,11 +125,6 @@ void CCameraManager::Draw()
 		CDbugCamera* camera = dynamic_cast<CDbugCamera*>(m_camera[m_id]);
 		camera->Draw();
 	}
-	if (m_id == CAMERA_ID_MAP)
-	{
-		DrawFormatString(100, 100, GetColor(255, 0, 0), "ƒJƒƒ‰‚ÌŠp“x%f‹", m_camera[CAMERA_ID_MAP]->GetRot().y * (180.0f / DX_PI_F));
-
-	}
 }
 
 //---------------------------

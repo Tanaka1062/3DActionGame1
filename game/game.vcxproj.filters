@@ -169,6 +169,9 @@
     <Filter Include="ソース ファイル\game\camera\mapCamera\playCamera">
       <UniqueIdentifier>{22017e20-cc7b-422a-9575-377e026daeae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\game\map\stage">
+      <UniqueIdentifier>{c236f8a6-dcc2-4c24-b171-56256a2ba144}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\number.cpp">
@@ -401,6 +404,9 @@
     </ClCompile>
     <ClCompile Include="src\game\ui\playerStatusPanel\playerStatusPanel.cpp">
       <Filter>ソース ファイル\game\ui\playerStatusPanel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\map\stage\stage.cpp">
+      <Filter>ソース ファイル\game\map\stage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -640,6 +646,9 @@
     </ClInclude>
     <ClInclude Include="src\game\ui\playerStatusPanel\playerStatusPanel.h">
       <Filter>ソース ファイル\game\ui\playerStatusPanel</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\map\stage\stage.h">
+      <Filter>ソース ファイル\game\map\stage</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

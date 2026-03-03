@@ -42,6 +42,7 @@ void CMapCamera::Init(VECTOR _focus)
 	m_pos = MV1GetFramePosition(mapFrameHndl,1);
 	m_basePos = m_pos;
 	m_basePos.z = 0.0f;
+	m_basePos.x -= 80.0f;
 
 	int frameNum = MAP_FRAME_NUM;
 	for (int mapCenter_i = 0; mapCenter_i < MAP_CENTER_NUM; mapCenter_i++)
@@ -58,8 +59,6 @@ void CMapCamera::Init(VECTOR _focus)
 	}
 
 	m_focusPos = m_mapCenterPos[0];
-
-	m_pos.x = m_pos.x - 50.0f;
 
 	m_state = ZOOM_CAMERA;
 
@@ -80,12 +79,6 @@ void CMapCamera::Step(VECTOR _focus, float _rot, tagMapCenterId _mapCenterId, CP
 	Move(_mapCenterId,_playerManager);
 
 	m_rot.y = atan2f(m_pos.x - m_focusPos.x, m_pos.z - m_focusPos.z);
-
-	//角度を行列に変換する
-	MATRIX rot = MGetRotY(m_rot.y);
-
-	//ベースの座標と角度を合体させる
-	VECTOR offset = VTransform(m_basePos, rot);
 
 	//カメラの注視点からベース
 	m_nextPos = VAdd(m_focusPos, m_basePos);
@@ -108,15 +101,6 @@ void CMapCamera::Step(VECTOR _focus, float _rot, tagMapCenterId _mapCenterId, CP
 	else if(vec.z < -3.0f)
 	{
 		m_pos.z -= MOVE_SPEED;
-	}
-
-	if (vec.y > 3.0f)
-	{
-		m_pos.y += MOVE_SPEED;
-	}
-	else if (vec.y < -3.0f)
-	{
-		m_pos.y -= MOVE_SPEED;
 	}
 
 	VECTOR vec2 = VSub(m_nextFocus, m_focusPos);
@@ -207,16 +191,6 @@ void CMapCamera::Move(tagMapCenterId _mapCenterId,CPlayerManager* _playerManager
 		//中央をカメラの注視点にする
 		m_nextFocus.x = (minX + maxX) / 2.0f;
 		m_nextFocus.z = (maxZ + minZ) / 2.0f;
-
-		//幅から必要な距離を計算
-		float width = maxX - minX;
-		float height = maxZ - minZ;
-		float distance = max(width, height) * 0.5f;
-
-		//保管して滑らかに動かす
-		m_nextPos.x = m_focusPos.x;
-		m_nextPos.y = distance;
-		m_nextPos.z = m_focusPos.z;
 
 	}
 }
