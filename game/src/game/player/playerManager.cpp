@@ -22,7 +22,7 @@ enum tagModelName					//モデル一覧
 constexpr float TARGET_LEN = -200.0f;			//ターゲットと認識するまでの長さ
 constexpr float TARGET_MAX_DISTANCE = 40.0f;	//どれくらい法線から離せるか
 
-constexpr int MAP_FRAME_NUM = 15;				//マップのフレーム番号
+constexpr int MAP_FRAME_NUM = 7;				//マップのフレーム番号
 constexpr float DIE_RADIUS = 240.0f;			//画面外判定の半径
 
 static const char* MODEL_PATH[PLAYER_NUM] =
@@ -126,12 +126,6 @@ void CPlayerManager::Init()
 		m_player.push_back(player);
 	}
 
-	//リスポーン場所作成
-	for (int map_i = 0; map_i < MAP_CENTER_NUM; map_i++)
-	{
-		m_spawnPos.push_back(vector<VECTOR>());
-	}
-
 	//王冠の初期化
 	m_crown.Init();
 }
@@ -139,7 +133,7 @@ void CPlayerManager::Init()
 //------------------------
 //	オブジェクトのロード
 //------------------------
-void CPlayerManager::Load()
+void CPlayerManager::Load(CMapBase* _map)
 {
 
 	//モデルのロード
@@ -151,20 +145,22 @@ void CPlayerManager::Load()
 		}
 	}
 
-	//マップのフレームのハンドルをロード
-	int mapFrameHndl = MV1LoadModel(MAP_FRAME_PATH[MAP_ID_GRASSLAND]);
 
-	int frameNum = MAP_FRAME_NUM;
 	//マップのリスポーン位置を取得して設定
-	for (int map_i = 0; map_i < m_spawnPos.size(); map_i++)
+	for (int stage_i = 0; stage_i < _map->GetStageNum(); stage_i++)
 	{
+		m_spawnPos.push_back(vector<VECTOR>());
+		int frameNum = MAP_FRAME_NUM;
+		//マップのフレームのハンドルをロード
+		int mapHndl = _map->GetHndl(stage_i);
+
 		for (int spawn_i = 0; spawn_i < PLAYER_NUM; spawn_i++)
 		{
 			//プレイヤーのスポーン位置をロード
 			VECTOR pos = { 0.0f,0.0f,0.0f };
 
 			//フレームから座標を取得
-			pos = MV1GetFramePosition(mapFrameHndl, frameNum);
+			pos = MV1GetFramePosition(mapHndl, frameNum);
 
 			//フレームを次に進める
 			frameNum += 2;
@@ -173,20 +169,14 @@ void CPlayerManager::Load()
 			pos.y += 50;
 
 			//スポーン位置を生成して設定
-			m_spawnPos[map_i].push_back(pos);
+			m_spawnPos[stage_i].push_back(pos);
 		}
-	}
-
-	///マップのフレームを削除
-	if (mapFrameHndl != -1)
-	{
-		MV1DeleteModel(mapFrameHndl);
 	}
 
 	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
 		m_player[player_i]->Load(m_modelHndl[player_i]);
-		m_player[player_i]->SetPos(m_spawnPos[MAP_ID_CENTER1][player_i]);
+		m_player[player_i]->SetPos(m_spawnPos[0][player_i]);
 	}
 
 	//王冠のモデルロード
@@ -196,7 +186,7 @@ void CPlayerManager::Load()
 //------------------------
 //	毎フレームする処理
 //------------------------
-void CPlayerManager::Step(CAttackManager* _attackManager, CShotManager* _shotManager, float _rot,tagMapCenterId _mapId)
+void CPlayerManager::Step(CAttackManager* _attackManager, CShotManager* _shotManager, float _rot, int _stageId)
 {
 	int topPlayerCoinCount = 0;	//現在の一番コインを持っている量
 	int topPlayerNum = -1;		//一番のプレイヤーの番号
@@ -323,10 +313,10 @@ void CPlayerManager::Step(CAttackManager* _attackManager, CShotManager* _shotMan
 		//プレイヤーが死んでいたら復活させる
 		if (m_player[player_i]->GetActive() == false)
 		{
-			if (CCollision::CheckHitSphereToSphere(m_spawnPos[_mapId][player_i], m_player[player_i]->GetRad(),
+			if (CCollision::CheckHitSphereToSphere(m_spawnPos[_stageId][player_i], m_player[player_i]->GetRad(),
 				CCameraManager::GetFocusPos(), DIE_RADIUS) == true)
 			{
-				m_player[player_i]->Respawn(m_spawnPos[_mapId][player_i]);
+				m_player[player_i]->Respawn(m_spawnPos[_stageId][player_i]);
 			}
 		}
 

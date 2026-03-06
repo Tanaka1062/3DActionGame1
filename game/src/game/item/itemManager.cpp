@@ -60,7 +60,7 @@ void CItemManager::Load()
 //-----------------------
 //	毎フレームする処理
 //-----------------------
-void CItemManager::Step(CPlayerManager* _playerManager, tagMapCenterId _mapId)
+void CItemManager::Step(CPlayerManager* _playerManager, int _stageId)
 {
 
 	m_mapItemManager.Step();
@@ -71,7 +71,7 @@ void CItemManager::Step(CPlayerManager* _playerManager, tagMapCenterId _mapId)
 	//スポーンしたらアイテムを増やす
 	if (m_spawnItemManager.GetIsItemSpawn() == true)
 	{
-		unique_ptr<CItemBase> spawnItem = m_spawnItemManager.SpawnItem(_mapId);
+		unique_ptr<CItemBase> spawnItem = m_spawnItemManager.SpawnItem(_stageId);
 		
 		//アイテムが入っていたら生成する
 		if (spawnItem != nullptr)

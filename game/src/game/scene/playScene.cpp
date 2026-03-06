@@ -35,7 +35,7 @@ void CPlayScene::Draw()
 		m_LoadBG.Draw();
 		break;
 	default:
-		m_ground.Draw();
+		m_mapManager.Draw();
 		m_sky.Draw();
 		m_shot.Draw();
 		m_attackManager.Draw();
@@ -56,7 +56,7 @@ void CPlayScene::Draw()
 void CPlayScene::Init()
 {
 	CSceneBase::Init();
-	m_ground.Init();
+	m_mapManager.Init(MAP_ID_GRASSLAND);
 	m_sky.Init();
 	m_playerManager.Init();
 	m_shot.Init();
@@ -81,9 +81,9 @@ void CPlayScene::Load()
 	switch (m_LoadState)
 	{
 	case 0:
-		m_ground.Load(MAP_ID_GRASSLAND);
+		m_mapManager.Load();
 		m_sky.Load();
-		m_playerManager.Load();
+		m_playerManager.Load(m_mapManager.GetMap());
 		m_shot.Load();
 		m_itemManager.Load();
 		m_weaponManager.Load();
@@ -114,9 +114,9 @@ void CPlayScene::Load()
 void CPlayScene::Step()
 {
 	//ŠeŽíŒvŽZˆ—‚ðŽÀs
-	m_ground.Step();
+	m_mapManager.Step();
 	m_sky.Step(CCameraManager::GetFocusPos());
-	m_playerManager.Step(&m_attackManager,&m_shot, CCameraManager::GetRot().y,m_ground.GetCenterId());
+	m_playerManager.Step(&m_attackManager,&m_shot, CCameraManager::GetRot().y,m_mapManager.GetMap()->GetStageId());
 	m_shot.Step();
 	m_itemManager.Step(&m_playerManager,m_ground.GetCenterId());
 	m_weaponManager.Step(m_playerManager);
@@ -140,7 +140,7 @@ void CPlayScene::Step()
 	//--------------------------------------------
 
 	//‚·‚×‚Ä‚ÌŒ‹‰Ê‚ð”½‰f‚³‚¹‚é
-	m_ground.Update();
+	m_mapManager.Update();
 	m_sky.Update();
 	m_playerManager.Update();
 	m_shot.Update();
@@ -164,7 +164,7 @@ void CPlayScene::Step()
 void CPlayScene::Exit()
 {
 	CSceneBase::Exit();
-	m_ground.Exit();
+	m_mapManager.Exit();
 	m_sky.Exit();
 	m_playerManager.Exit();
 	m_attackManager.Exit();

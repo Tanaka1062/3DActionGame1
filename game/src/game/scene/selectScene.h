@@ -2,7 +2,7 @@
 #include "sceneBase.h"
 #include <DxLib.h>
 #include"../ui/uiSelectManager.h"
-#include"../map/map.h"
+#include"../map/mapManager.h"
 #include"../sky/sky.h"
 #include"../player/selectPlayer/selectPlayerManager.h"
 
@@ -11,7 +11,7 @@ class CSelectScene :public CSceneBase
 {
 private:
 	CUiSelectManager m_uiManager;
-	CMap m_map;
+	CMapManager m_mapManager;
 	CSky m_sky;
 	CSelectPlayerManager m_selectPlayerManager;
 

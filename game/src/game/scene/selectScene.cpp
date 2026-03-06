@@ -37,7 +37,7 @@ void CSelectScene::Draw()
 		break;
 	default:
 		CCameraManager::Draw();
-		m_map.Draw();
+		m_mapManager.Draw();
 		m_sky.Draw();
 		m_selectPlayerManager.Draw();
 		//UI‚Ì‰æ‘œ•\¦
@@ -57,7 +57,7 @@ void CSelectScene::Init()
 
 	CCameraManager::Init(ZERO);
 	CCameraManager::ChangeCamera(CCameraManager::CAMERA_ID_SELECT);
-	m_map.Init();
+	m_mapManager.Init(MAP_ID_SELECT);
 	m_sky.Init();
 	m_selectPlayerManager.Init();
 
@@ -75,9 +75,9 @@ void CSelectScene::Load()
 	switch (m_LoadState)
 	{
 	case 0:
-		m_map.Load(MAP_ID_SELECT);
+		m_mapManager.Load();
 		m_sky.Load();
-		m_selectPlayerManager.Load();
+		m_selectPlayerManager.Load(m_mapManager.GetMap());
 
 		//UI‚Ì‰æ‘œƒ[ƒh
 		m_uiManager.Load();
@@ -134,7 +134,7 @@ void CSelectScene::Step()
 void CSelectScene::Exit()
 {
 	CSceneBase::Exit();
-	m_map.Exit();
+	m_mapManager.Exit();
 	m_sky.Exit();
 	m_selectPlayerManager.Exit();
 	CCameraManager::Exit();

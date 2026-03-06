@@ -49,7 +49,7 @@ void CResultScene::Draw()
 		break;
 	default:
 		m_sky.Draw();
-		m_map.Draw();
+		m_mapManager.Draw();
 		m_resultPlayerManager.Draw();
 		m_winPlayerText.Draw();
 		m_resultText.Draw();
@@ -68,7 +68,7 @@ void CResultScene::Init()
 	CSceneBase::Init();
 
 	m_sky.Init();
-	m_map.Init();
+	m_mapManager.Init(MAP_ID_RESULT);
 	m_resultPlayerManager.Init(m_winner);
 
 	CCameraManager::Init(ZERO);
@@ -95,8 +95,8 @@ void CResultScene::Load()
 	{
 	case 0:
 		m_sky.Load();
-		m_map.Load(MAP_ID_RESULT);
-		m_resultPlayerManager.Load();
+		m_mapManager.Load();
+		m_resultPlayerManager.Load(m_mapManager.GetMap());
 		m_winPlayerText.Load(TEXT_GRAPHIC_PATH[m_winner->GetWinnerPlayerName()]);
 		m_resultText.Load("data/graphic/result/resultText.png");
 		CSoundManager::Play(CSoundManager::BGM_RESULT, DX_PLAYTYPE_LOOP);
@@ -125,7 +125,7 @@ void CResultScene::Load()
 void CResultScene::Step()
 {
 	m_sky.Step();
-	m_map.Step();
+	m_mapManager.Step();
 	m_resultPlayerManager.Step();
 	CCameraManager::Step(ZERO,0.0f);
 
@@ -136,7 +136,7 @@ void CResultScene::Step()
 	}
 
 	m_sky.Update();
-	m_map.Update();
+	m_mapManager.Update();
 	m_resultPlayerManager.Update();
 	CCameraManager::Update(ZERO);
 }
@@ -148,7 +148,7 @@ void CResultScene::Exit()
 {
 	CSceneBase::Exit();
 	m_sky.Exit();
-	m_map.Exit();
+	m_mapManager.Exit();
 	m_resultPlayerManager.Exit();
 	m_winPlayerText.Exit();
 	m_resultText.Exit();

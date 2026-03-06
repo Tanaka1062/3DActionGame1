@@ -4,8 +4,8 @@
 class CStage :public CObject
 {
 private:
-	
-public://コンストラクタ・デストラクタ
+public:
+	//コンストラクタ・デストラクタ
 	CStage();
 	~CStage();
 

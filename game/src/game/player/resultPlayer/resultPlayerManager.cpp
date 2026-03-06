@@ -24,9 +24,6 @@ static const char* MODEL_PATH[PLAYER_NUM] =
   "data/model/player/playerTest7-3.mv1" ,
   "data/model/player/playerTest7-4.mv1" ,};			//ロードするファイル名
 
-static const char FRAME_PATH[] =
-"data/model/map/resultMap/resultMapFrame.mv1";			//ロードするファイル名
-
 //------------------------
 //	  コンストラクタ
 //------------------------
@@ -114,7 +111,7 @@ void CResultPlayerManager::Init(CWinner* _winner)
 //------------------------
 //	オブジェクトのロード
 //------------------------
-void CResultPlayerManager::Load()
+void CResultPlayerManager::Load(CMapBase* _map)
 {
 
 	//モデルのロード
@@ -127,7 +124,7 @@ void CResultPlayerManager::Load()
 	}
 
 	//マップのフレームのハンドルをロード
-	int mapFrameHndl = MV1LoadModel(FRAME_PATH);
+	int mapHndl = _map->GetHndl(0);
 
 	int frameId[3] = { 3,7,9 };
 	int frameIdNum = 0;
@@ -140,23 +137,17 @@ void CResultPlayerManager::Load()
 		//スポーン位置をセット
 		if (m_player[player_i]->GetIsWin() == true)
 		{
-			start = MV1GetFramePosition(mapFrameHndl, 1);
+			start = MV1GetFramePosition(mapHndl, 1);
 		}
 		else
 		{
-			start = MV1GetFramePosition(mapFrameHndl, frameId[frameIdNum]);
+			start = MV1GetFramePosition(mapHndl, frameId[frameIdNum]);
 			frameIdNum++;
 		}
 
 		m_player[player_i]->Load(m_modelHndl[player_i]);
 		m_player[player_i]->SetPos(start);
 		m_spawnPos.push_back(start);
-	}
-
-	///マップのフレームを削除
-	if (mapFrameHndl != -1)
-	{
-		MV1DeleteModel(mapFrameHndl);
 	}
 }
 

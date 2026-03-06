@@ -24,10 +24,6 @@ static const char* MODEL_PATH[PLAYER_NUM] =
   "data/model/player/playerTest7-3.mv1" ,
   "data/model/player/playerTest7-4.mv1" ,};			//ロードするファイル名
 
-static const char FRAME_PATH[] =
-"data/model/map/selectMap/selectMapFrame.mv1";			//ロードするファイル名
-
-
 //------------------------
 //	  コンストラクタ
 //------------------------
@@ -106,7 +102,7 @@ void CSelectPlayerManager::Init()
 //------------------------
 //	オブジェクトのロード
 //------------------------
-void CSelectPlayerManager::Load()
+void CSelectPlayerManager::Load(CMapBase* _map)
 {
 
 	//モデルのロード
@@ -119,7 +115,7 @@ void CSelectPlayerManager::Load()
 	}
 
 	//マップのフレームのハンドルをロード
-	int mapFrameHndl = MV1LoadModel(FRAME_PATH);
+	int mapHndl = _map->GetHndl(0);
 
 	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
@@ -130,16 +126,16 @@ void CSelectPlayerManager::Load()
 		switch (player_i)
 		{
 		case PLAYER_1:
-			start = MV1GetFramePosition(mapFrameHndl, 1);
+			start = MV1GetFramePosition(mapHndl, 1);
 			break;
 		case PLAYER_2:
-			start = MV1GetFramePosition(mapFrameHndl, 3);
+			start = MV1GetFramePosition(mapHndl, 3);
 			break;
 		case PLAYER_3:
-			start = MV1GetFramePosition(mapFrameHndl, 7);
+			start = MV1GetFramePosition(mapHndl, 7);
 			break;
 		case PLAYER_4:
-			start = MV1GetFramePosition(mapFrameHndl, 9);
+			start = MV1GetFramePosition(mapHndl, 9);
 			break;
 		}
 
@@ -147,13 +143,7 @@ void CSelectPlayerManager::Load()
 		m_player[player_i]->SetPos(start);
 		m_spawnPos.push_back(start);
 	}
-	
-	//マップのフレームを削除
-	if (mapFrameHndl != -1)
-	{
-		MV1DeleteModel(mapFrameHndl);
-	}
-	
+		
 }
 
 //------------------------

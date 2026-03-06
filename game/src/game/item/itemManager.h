@@ -38,7 +38,7 @@ public:
 	//モデルロード
 	void Load();
 	//毎フレームする処理
-	void Step(CPlayerManager* _playerManager, tagMapCenterId _mapId);
+	void Step(CPlayerManager* _playerManager, int _stageId);
 	//数値の更新
 	void Update();
 	//オブジェクトの描写

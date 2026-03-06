@@ -172,6 +172,18 @@
     <Filter Include="ソース ファイル\game\map\stage">
       <UniqueIdentifier>{c236f8a6-dcc2-4c24-b171-56256a2ba144}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\game\map\resultMap">
+      <UniqueIdentifier>{fcaaba61-a540-46fe-aebd-3381000643ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\game\map\playMap">
+      <UniqueIdentifier>{8ff4b265-b311-45f7-a514-4290a14d81f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\game\map\playMap\grassland">
+      <UniqueIdentifier>{9af9b1ed-c2e5-4e33-bb14-bc77f21649bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\game\map\selectMap">
+      <UniqueIdentifier>{566e842c-178d-402c-85c9-ee0b0273083c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\number.cpp">
@@ -224,9 +236,6 @@
     </ClCompile>
     <ClCompile Include="src\game\sky\sky.cpp">
       <Filter>ソース ファイル\game\sky</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\map\map.cpp">
-      <Filter>ソース ファイル\game\map</Filter>
     </ClCompile>
     <ClCompile Include="src\game\character\characterBase.cpp">
       <Filter>ソース ファイル\game\character</Filter>
@@ -408,6 +417,21 @@
     <ClCompile Include="src\game\map\stage\stage.cpp">
       <Filter>ソース ファイル\game\map\stage</Filter>
     </ClCompile>
+    <ClCompile Include="src\game\map\mapBase.cpp">
+      <Filter>ソース ファイル\game\map</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\map\mapManager.cpp">
+      <Filter>ソース ファイル\game\map</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\map\titleMap\selectMap.cpp">
+      <Filter>ソース ファイル\game\map\selectMap</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\map\resultMap\resultMap.cpp">
+      <Filter>ソース ファイル\game\map\resultMap</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\map\playMap\grassland\grassland.cpp">
+      <Filter>ソース ファイル\game\map\playMap\grassland</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\lib\number.h">
@@ -560,9 +584,6 @@
     <ClInclude Include="src\game\item\coin\coinBase.h">
       <Filter>ソース ファイル\game\item\coin</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\map\map.h">
-      <Filter>ソース ファイル\game\map</Filter>
-    </ClInclude>
     <ClInclude Include="src\game\item\weapon\itemWeaponBase.h">
       <Filter>ソース ファイル\game\item\weapon</Filter>
     </ClInclude>
@@ -649,6 +670,21 @@
     </ClInclude>
     <ClInclude Include="src\game\map\stage\stage.h">
       <Filter>ソース ファイル\game\map\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\map\mapBase.h">
+      <Filter>ソース ファイル\game\map</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\map\mapManager.h">
+      <Filter>ソース ファイル\game\map</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\map\titleMap\selectMap.h">
+      <Filter>ソース ファイル\game\map\selectMap</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\map\resultMap\resultMap.h">
+      <Filter>ソース ファイル\game\map\resultMap</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\map\playMap\grassland\grassland.h">
+      <Filter>ソース ファイル\game\map\playMap\grassland</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

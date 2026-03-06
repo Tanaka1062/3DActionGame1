@@ -3,6 +3,7 @@
 #include <vector>
 #include "resultPlayer.h"
 #include "../../winner/winner.h"
+#include "../../map/mapBase.h"
 
 //エネミーマネージャーのクラス
 class CResultPlayerManager
@@ -19,7 +20,7 @@ public:
 	//初期化
 	void Init(CWinner* _winner);
 	//オブジェクトのロード
-	void Load();
+	void Load(CMapBase* _map);
 	//毎フレームする処理
 	void Step();
 	//数値の更新

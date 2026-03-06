@@ -1,6 +1,6 @@
 #pragma once
 #include "sceneBase.h"
-#include "../map/map.h"
+#include "../map/mapManager.h"
 #include "../sky/sky.h"
 #include"../data.h"
 #include"../character/characterBase.h"
@@ -19,7 +19,7 @@ class CPlayScene :public CSceneBase
 {
 private:
 
-	CMap m_ground;							//背景
+	CMapManager m_mapManager;				//マップ
 	CSky m_sky;								//空
 	CPlayerManager m_playerManager;			//プレイヤー
 	CShotManager m_shot;					//弾

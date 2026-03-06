@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include "selectPlayer.h"
+#include "../../map/mapBase.h"
 
 //エネミーマネージャーのクラス
 class CSelectPlayerManager
@@ -18,7 +19,7 @@ public:
 	//初期化
 	void Init();
 	//オブジェクトのロード
-	void Load();
+	void Load(CMapBase* _map);
 	//毎フレームする処理
 	void Step();
 	//数値の更新
