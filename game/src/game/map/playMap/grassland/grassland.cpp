@@ -6,20 +6,20 @@ constexpr int STAGE_NUM = 5;					//ステージの数
 constexpr VECTOR POS[STAGE_NUM] =
 {
 	{0.0f,0.0f,0.0f},
-	{0.0f,200.0f,0.0f },
-	{0.0f,400.0f,0.0f},
-	{0.0f,600.0f,0.0f},
-	{0.0f,800.0f,0.0f},
+	{0.0f,0.0f,-600.0f },
+	{0.0f,0.0f,-1200.0f},
+	{0.0f,0.0f,-1800.0f},
+	{0.0f,0.0f,-2400.0f},
 };
 
 constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
 constexpr VECTOR SCALE = { 1.0f,1.0f,1.0f };	//大きさ
 static const char* MAP_MODEL_PATH[STAGE_NUM] ={
-	"data/model/map/playMap/TestMap10-1.mv1",
-	"data/model/map/playMap/TestMap10-2.mv1",
-	"data/model/map/playMap/TestMap10-3.mv1",
-	"data/model/map/playMap/TestMap10-4.mv1",
-	"data/model/map/playMap/TestMap10-5.mv1",
+	"data/model/map/playMap/testMap10/TestMap10-1.mv1",
+	"data/model/map/playMap/testMap10/TestMap10-2.mv1",
+	"data/model/map/playMap/testMap10/TestMap10-3.mv1",
+	"data/model/map/playMap/testMap10/TestMap10-4.mv1",
+	"data/model/map/playMap/testMap10/TestMap10-5.mv1",
 
 };					//ロードするファイル名
 constexpr int MAP_MOVE_TIME = 30;			//ステージが移動するまでの時間
@@ -98,6 +98,7 @@ void CGrassland::Init()
 		m_stageSpawnData[stage_i].itemSpawnNum = ITEM_SPAWN_NUM[stage_i];
 		m_stageSpawnData[stage_i].mapItemFrameNum = MAPITEM_FRAME_NUM[stage_i];
 		m_stageSpawnData[stage_i].mapItemSpawnNum = MAPITEM_SPAWN_NUM[stage_i];
+
 	}
 
 	m_stageId = 0;
@@ -111,6 +112,9 @@ void CGrassland::Load()
 	for (int stage_i = 0; stage_i < m_stage.size(); stage_i++)
 	{
 		m_stage[stage_i]->LoadModel(MAP_MODEL_PATH[stage_i]);
+
+		CMapBase::Update();
+		MV1RefreshCollInfo(m_stage[stage_i]->GetHndl());
 	}
 }
 
@@ -128,9 +132,9 @@ void CGrassland::Step()
 
 		m_stageId += 1;
 
-		if (m_stageId >= STAGE_NUM)
+		if (m_stageId >= STAGE_NUM - 1)
 		{
-			m_stageId = STAGE_NUM;
+			m_stageId = STAGE_NUM - 1;
 		}
 
 	}

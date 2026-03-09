@@ -3,64 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\playMap\\grassland\\grassland.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\map\\playMap\\grassland\\grassland.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\mapBase.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\map\\mapBase.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\mapBase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\map\\mapBase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\mapManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\map\\mapManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\mapManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\map\\mapManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\playMap\\grassland\\grassland.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\map\\playMap\\grassland\\grassland.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\stage\\stage.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\map\\stage\\stage.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\stage\\stage.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\map\\stage\\stage.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\itemManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\item\\itemManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\spawn\\spawnCoinManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\item\\spawn\\spawnCoinManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\itemManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\item\\itemManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\itemManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\item\\itemManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\playScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\scene\\playScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\selectScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\scene\\selectScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\sceneBase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\scene\\sceneBase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\resultScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\scene\\resultScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\playerManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -71,28 +23,211 @@
       "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\player\\playerManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\resultPlayer\\resultPlayerManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\player\\resultPlayer\\resultPlayerManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\cameraManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\camera\\cameraManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\titleMap\\selectMap.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\map\\titleMap\\selectMap.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\selectPlayer\\selectPlayerManager.cpp||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\player\\selectPlayer\\selectPlayerManager.cpp||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\resultMap\\resultMap.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\map\\resultMap\\resultMap.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\playMap\\grassland\\grassland.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\map\\playMap\\grassland\\grassland.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\itemBase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\item\\itemBase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\mapBase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\map\\mapBase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\selectCamera\\selectCamera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\camera\\selectCamera\\selectCamera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\debugCamera\\debugCamera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\camera\\debugCamera\\debugCamera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\cameraBase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\camera\\cameraBase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\coin\\coinBase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\item\\coin\\coinBase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\selectPlayer\\selectPlayerManager.cpp||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\player\\selectPlayer\\selectPlayerManager.cpp||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\collisionManager\\collisionManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\collisionManager\\collisionManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\playMap\\grassland\\grassland.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\map\\playMap\\grassland\\grassland.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\mapBase.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\map\\mapBase.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\mapManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\map\\mapManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\lib\\system\\fps.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\lib\\system\\fps.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\lib\\model\\3DObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\lib\\model\\3DObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\lib\\2DUi\\2DUi.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\lib\\2DUi\\2DUi.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\resultMap\\resultMap.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\map\\resultMap\\resultMap.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.44.35207\\include\\vector||{3B902123-F8A7-4915-9F01-361F908088D0}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\collisionManager\\collisionManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\collisionManager\\collisionManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\player\\player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\spawn\\spawnItemManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\item\\spawn\\spawnItemManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\spawn\\spawnCoinManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\item\\spawn\\spawnCoinManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\mapItemManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\item\\mapItemManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\mapCamera\\mapCamera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\camera\\mapCamera\\mapCamera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\itemBase.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\item\\itemBase.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\mapManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\map\\mapManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\weapon\\itemWeaponBase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\item\\weapon\\itemWeaponBase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\selectPlayer\\selectPlayer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\player\\selectPlayer\\selectPlayer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\mapCamera\\mapCamera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\camera\\mapCamera\\mapCamera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\resultCamera\\resultCamera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\camera\\resultCamera\\resultCamera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\resultPlayer\\resultPlayerManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\player\\resultPlayer\\resultPlayerManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\resultPlayer\\resultPlayer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\player\\resultPlayer\\resultPlayer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\resultScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\scene\\resultScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\cameraManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\camera\\cameraManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\playScene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\scene\\playScene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\selectScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\scene\\selectScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\sceneBase.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\scene\\sceneBase.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\resultScene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\scene\\resultScene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\playCamera\\playCamera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\camera\\playCamera\\playCamera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\cameraBase.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\camera\\cameraBase.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\effekseer\\include\\Effekseer.Modules.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\effekseer\\include\\Effekseer.Modules.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\stage\\stage.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\map\\stage\\stage.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\selectCamera\\selectCamera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\camera\\selectCamera\\selectCamera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\resultCamera\\resultCamera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\camera\\resultCamera\\resultCamera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\USERS\\2409417\\DESKTOP\\GITHUB\\3DACTIONGAME1\\GAME\\SRC\\EFFEKSEER\\INCLUDE\\EFFEKSEER.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:SRC\\EFFEKSEER\\INCLUDE\\EFFEKSEER.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\event\\itemEvent\\coinParty\\coinParty.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\event\\itemEvent\\coinParty\\coinParty.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\itemManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\item\\itemManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\spawn\\spawnItemManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\item\\spawn\\spawnItemManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\mapItemManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\item\\mapItemManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\titleScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\scene\\titleScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\stage\\stage.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\map\\stage\\stage.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\sceneBase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\scene\\sceneBase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\itemBase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\item\\itemBase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\resultPlayer\\resultPlayerManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -107,72 +242,20 @@
       "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\scene\\selectScene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\playScene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\scene\\playScene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\resultScene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\scene\\resultScene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\titleScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\scene\\titleScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\resultMap\\resultMap.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\map\\resultMap\\resultMap.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\mapCamera\\mapCamera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\camera\\mapCamera\\mapCamera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\titleMap\\selectMap.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\map\\titleMap\\selectMap.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\player\\player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\player\\player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\collisionManager\\collisionManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\collisionManager\\collisionManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\mapItemManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\item\\mapItemManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\itemBase.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\item\\itemBase.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\cameraManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\camera\\cameraManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\cameraManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\camera\\cameraManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\event\\itemEvent\\itemEventBase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\event\\itemEvent\\itemEventBase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\event\\itemEvent\\coinParty\\coinParty.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\event\\itemEvent\\coinParty\\coinParty.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\cpuPlayer\\cpuPlayer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\player\\cpuPlayer\\cpuPlayer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\mapCamera\\mapCamera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\camera\\mapCamera\\mapCamera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\3DUi\\3DUi.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -181,9 +264,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\3DUi\\3DUi.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\3DUi\\3DUi.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.44.35207\\include\\vector||{3B902123-F8A7-4915-9F01-361F908088D0}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\ui\\playerStatusPanel\\playerStatusPanel.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -218,16 +298,8 @@
       "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\shadow\\shadow.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\collisionManager\\collisionManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\collisionManager\\collisionManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\sceneManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\scene\\sceneManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\weapon\\itemWeaponBase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\item\\weapon\\itemWeaponBase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\weapon\\sword\\sword.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -286,32 +358,12 @@
       "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\lib\\2DUi\\2DUi.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\effekseer\\include\\Effekseer.Modules.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\effekseer\\include\\Effekseer.Modules.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\lib\\2DUi\\2DUi.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\lib\\2DUi\\2DUi.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\mapItemManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\item\\mapItemManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\ui\\countDown\\countDown.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\ui\\countDown\\countDown.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\system\\soundManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\system\\soundManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\resultPlayer\\resultPlayer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\player\\resultPlayer\\resultPlayer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\spawn\\spawnItemManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\item\\spawn\\spawnItemManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\lib\\effekseer\\effekseer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -330,10 +382,6 @@
       "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\system\\effectData\\effectData.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\lib\\system\\fps.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\lib\\system\\fps.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\event\\eventManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\event\\eventManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -350,10 +398,6 @@
       "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\event\\eventManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\selectPlayer\\selectPlayer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\player\\selectPlayer\\selectPlayer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\event\\itemEvent\\bombParty\\bombParty.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\event\\itemEvent\\bombParty\\bombParty.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -362,16 +406,8 @@
       "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\event\\itemEvent\\coinParty\\coinParty.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\spawn\\spawnCoinManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\item\\spawn\\spawnCoinManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\event\\itemEvent\\bombParty\\bombParty.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\event\\itemEvent\\bombParty\\bombParty.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\resultCamera\\resultCamera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\camera\\resultCamera\\resultCamera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\character\\characterBase.cpp||{8B382828-6202-11D1-8870-0000F87579D2}",
@@ -423,14 +459,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\coin\\coinBase.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\item\\coin\\coinBase.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\selectCamera\\selectCamera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\camera\\selectCamera\\selectCamera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\sceneBase.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\scene\\sceneBase.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -439,18 +467,18 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 48,
+          "DockedWidth": 136,
           "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 15,
               "Title": "mapBase.h",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\mapBase.h",
               "RelativeDocumentMoniker": "src\\game\\map\\mapBase.h",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\mapBase.h*",
-              "RelativeToolTip": "src\\game\\map\\mapBase.h*",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABIAAAATAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\mapBase.h",
+              "RelativeToolTip": "src\\game\\map\\mapBase.h",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAACkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2026-03-06T00:33:30.55Z",
               "EditorCaption": ""
@@ -458,18 +486,18 @@
           ]
         },
         {
-          "DockedWidth": 286,
-          "SelectedChildIndex": 1,
+          "DockedWidth": 198,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 27,
               "Title": "mapCamera.cpp",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\mapCamera\\mapCamera.cpp",
               "RelativeDocumentMoniker": "src\\game\\camera\\mapCamera\\mapCamera.cpp",
               "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\mapCamera\\mapCamera.cpp",
               "RelativeToolTip": "src\\game\\camera\\mapCamera\\mapCamera.cpp",
-              "ViewState": "AgIAABIAAAAAAAAAAAAAACcAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAF0AAAAAAAAAAAAAAKoAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-02-06T02:56:49.122Z",
               "IsPinned": true,
@@ -477,397 +505,293 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "grassland.cpp",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\playMap\\grassland\\grassland.cpp",
-              "RelativeDocumentMoniker": "src\\game\\map\\playMap\\grassland\\grassland.cpp",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\playMap\\grassland\\grassland.cpp*",
-              "RelativeToolTip": "src\\game\\map\\playMap\\grassland\\grassland.cpp*",
-              "ViewState": "AgIAAFEAAAAAAAAAAAAAAGMAAABJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-03-06T05:05:52.262Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "mapBase.cpp",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\mapBase.cpp",
-              "RelativeDocumentMoniker": "src\\game\\map\\mapBase.cpp",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\mapBase.cpp*",
-              "RelativeToolTip": "src\\game\\map\\mapBase.cpp*",
-              "ViewState": "AgIAAEUAAAAAAAAAAAAAAGUAAAAaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-03-06T00:36:11.702Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "mapManager.cpp",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\mapManager.cpp",
-              "RelativeDocumentMoniker": "src\\game\\map\\mapManager.cpp",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\mapManager.cpp*",
-              "RelativeToolTip": "src\\game\\map\\mapManager.cpp*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD8AAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-03-06T01:06:26.561Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "mapManager.h",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\mapManager.h",
-              "RelativeDocumentMoniker": "src\\game\\map\\mapManager.h",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\mapManager.h*",
-              "RelativeToolTip": "src\\game\\map\\mapManager.h*",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAACgAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-03-06T01:06:35.721Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "grassland.h",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\playMap\\grassland\\grassland.h",
-              "RelativeDocumentMoniker": "src\\game\\map\\playMap\\grassland\\grassland.h",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\playMap\\grassland\\grassland.h*",
-              "RelativeToolTip": "src\\game\\map\\playMap\\grassland\\grassland.h*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-03-06T05:01:01.167Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "stage.h",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\stage\\stage.h",
-              "RelativeDocumentMoniker": "src\\game\\map\\stage\\stage.h",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\stage\\stage.h*",
-              "RelativeToolTip": "src\\game\\map\\stage\\stage.h*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-03-03T09:23:07.671Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "itemManager.cpp",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\itemManager.cpp",
-              "RelativeDocumentMoniker": "src\\game\\item\\itemManager.cpp",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\itemManager.cpp*",
-              "RelativeToolTip": "src\\game\\item\\itemManager.cpp*",
-              "ViewState": "AgIAAJYAAAAAAAAAAAAAAEkAAABJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-02-05T09:31:10.464Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "itemManager.h",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\itemManager.h",
-              "RelativeDocumentMoniker": "src\\game\\item\\itemManager.h",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\itemManager.h*",
-              "RelativeToolTip": "src\\game\\item\\itemManager.h*",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAACgAAAA3AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-02-05T10:05:50.989Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "spawnCoinManager.cpp",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\spawn\\spawnCoinManager.cpp",
-              "RelativeDocumentMoniker": "src\\game\\item\\spawn\\spawnCoinManager.cpp",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\spawn\\spawnCoinManager.cpp",
-              "RelativeToolTip": "src\\game\\item\\spawn\\spawnCoinManager.cpp",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAAMcAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-02-05T09:37:27.035Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "stage.cpp",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\stage\\stage.cpp",
-              "RelativeDocumentMoniker": "src\\game\\map\\stage\\stage.cpp",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\stage\\stage.cpp",
-              "RelativeToolTip": "src\\game\\map\\stage\\stage.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-03-03T09:22:21.794Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "playScene.cpp",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\playScene.cpp",
-              "RelativeDocumentMoniker": "src\\game\\scene\\playScene.cpp",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\playScene.cpp*",
-              "RelativeToolTip": "src\\game\\scene\\playScene.cpp*",
-              "ViewState": "AgIAAGAAAAAAAAAAAAAAAHkAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-02-05T08:21:49.876Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "selectScene.cpp",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\selectScene.cpp",
-              "RelativeDocumentMoniker": "src\\game\\scene\\selectScene.cpp",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\selectScene.cpp*",
-              "RelativeToolTip": "src\\game\\scene\\selectScene.cpp*",
-              "ViewState": "AgIAAD8AAAAAAAAAAAAAAE8AAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-02-05T09:25:57.774Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "sceneBase.cpp",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\sceneBase.cpp",
-              "RelativeDocumentMoniker": "src\\game\\scene\\sceneBase.cpp",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\sceneBase.cpp",
-              "RelativeToolTip": "src\\game\\scene\\sceneBase.cpp",
-              "ViewState": "AgIAACgAAAAAAAAAAAAAwCoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-02-05T09:22:10.031Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "resultScene.cpp",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\resultScene.cpp",
-              "RelativeDocumentMoniker": "src\\game\\scene\\resultScene.cpp",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\resultScene.cpp*",
-              "RelativeToolTip": "src\\game\\scene\\resultScene.cpp*",
-              "ViewState": "AgIAAGQAAAAAAAAAAAAAAGgAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-02-05T09:25:44.48Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
               "Title": "playerManager.cpp",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\playerManager.cpp",
               "RelativeDocumentMoniker": "src\\game\\player\\playerManager.cpp",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\playerManager.cpp*",
-              "RelativeToolTip": "src\\game\\player\\playerManager.cpp*",
-              "ViewState": "AgIAACIBAAAAAAAAAAAAAD4BAAAzAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\playerManager.cpp",
+              "RelativeToolTip": "src\\game\\player\\playerManager.cpp",
+              "ViewState": "AgIAAKYAAAAAAAAAAAAmwL0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-02-06T02:49:37.204Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 4,
               "Title": "playerManager.h",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\playerManager.h",
               "RelativeDocumentMoniker": "src\\game\\player\\playerManager.h",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\playerManager.h*",
-              "RelativeToolTip": "src\\game\\player\\playerManager.h*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAABcAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\playerManager.h",
+              "RelativeToolTip": "src\\game\\player\\playerManager.h",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAmwBwAAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2026-02-27T05:26:44.077Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "resultPlayerManager.cpp",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\resultPlayer\\resultPlayerManager.cpp",
-              "RelativeDocumentMoniker": "src\\game\\player\\resultPlayer\\resultPlayerManager.cpp",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\resultPlayer\\resultPlayerManager.cpp*",
-              "RelativeToolTip": "src\\game\\player\\resultPlayer\\resultPlayerManager.cpp*",
-              "ViewState": "AgIAAG8AAAAAAAAAAAAAAIEAAAAPAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "playScene.cpp",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\playScene.cpp",
+              "RelativeDocumentMoniker": "src\\game\\scene\\playScene.cpp",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\playScene.cpp",
+              "RelativeToolTip": "src\\game\\scene\\playScene.cpp",
+              "ViewState": "AgIAAFkAAAAAAAAAAAAmwHYAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-02-06T02:43:23.44Z",
+              "WhenOpened": "2026-02-05T08:21:49.876Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "selectMap.cpp",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\titleMap\\selectMap.cpp",
-              "RelativeDocumentMoniker": "src\\game\\map\\titleMap\\selectMap.cpp",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\titleMap\\selectMap.cpp",
-              "RelativeToolTip": "src\\game\\map\\titleMap\\selectMap.cpp",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA4AAAAYAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "spawnCoinManager.cpp",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\spawn\\spawnCoinManager.cpp",
+              "RelativeDocumentMoniker": "src\\game\\item\\spawn\\spawnCoinManager.cpp",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\spawn\\spawnCoinManager.cpp",
+              "RelativeToolTip": "src\\game\\item\\spawn\\spawnCoinManager.cpp",
+              "ViewState": "AgIAADYAAAAAAAAAAAAAAFsAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-03-06T04:08:21.686Z",
+              "WhenOpened": "2026-02-05T09:37:27.035Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "resultMap.cpp",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\resultMap\\resultMap.cpp",
-              "RelativeDocumentMoniker": "src\\game\\map\\resultMap\\resultMap.cpp",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\resultMap\\resultMap.cpp",
-              "RelativeToolTip": "src\\game\\map\\resultMap\\resultMap.cpp",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAACsAAAAXAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "itemManager.cpp",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\itemManager.cpp",
+              "RelativeDocumentMoniker": "src\\game\\item\\itemManager.cpp",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\itemManager.cpp",
+              "RelativeToolTip": "src\\game\\item\\itemManager.cpp",
+              "ViewState": "AgIAABYAAAAAAAAAAAAAACYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-03-06T04:40:15.719Z",
+              "WhenOpened": "2026-02-05T09:31:10.464Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "itemBase.cpp",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\itemBase.cpp",
-              "RelativeDocumentMoniker": "src\\game\\item\\itemBase.cpp",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\itemBase.cpp",
-              "RelativeToolTip": "src\\game\\item\\itemBase.cpp",
-              "ViewState": "AgIAAF0AAAAAAAAAAAAAAGEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-02-05T10:16:22.585Z",
+              "DocumentIndex": 5,
+              "Title": "cameraManager.h",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\cameraManager.h",
+              "RelativeDocumentMoniker": "src\\game\\camera\\cameraManager.h",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\cameraManager.h",
+              "RelativeToolTip": "src\\game\\camera\\cameraManager.h",
+              "ViewState": "AgIAACUAAAAAAAAAAAAAwDoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-02-25T09:51:16.626Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "coinBase.cpp",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\coin\\coinBase.cpp",
-              "RelativeDocumentMoniker": "src\\game\\item\\coin\\coinBase.cpp",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\coin\\coinBase.cpp",
-              "RelativeToolTip": "src\\game\\item\\coin\\coinBase.cpp",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAAAkAAAAVAAAAAAAAAA==",
+              "DocumentIndex": 9,
+              "Title": "selectCamera.cpp",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\selectCamera\\selectCamera.cpp",
+              "RelativeDocumentMoniker": "src\\game\\camera\\selectCamera\\selectCamera.cpp",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\selectCamera\\selectCamera.cpp",
+              "RelativeToolTip": "src\\game\\camera\\selectCamera\\selectCamera.cpp",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-02-09T02:21:16.312Z",
+              "WhenOpened": "2026-02-06T02:57:33.696Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 8,
+              "Title": "mapBase.cpp",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\mapBase.cpp",
+              "RelativeDocumentMoniker": "src\\game\\map\\mapBase.cpp",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\mapBase.cpp",
+              "RelativeToolTip": "src\\game\\map\\mapBase.cpp",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAAFIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-03-06T00:36:11.702Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "selectPlayerManager.cpp",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\selectPlayer\\selectPlayerManager.cpp",
               "RelativeDocumentMoniker": "src\\game\\player\\selectPlayer\\selectPlayerManager.cpp",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\selectPlayer\\selectPlayerManager.cpp*",
-              "RelativeToolTip": "src\\game\\player\\selectPlayer\\selectPlayerManager.cpp*",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABgAAAA6AAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\selectPlayer\\selectPlayerManager.cpp",
+              "RelativeToolTip": "src\\game\\player\\selectPlayer\\selectPlayerManager.cpp",
+              "ViewState": "AgIAAG8AAAAAAAAAAAAAAHUAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-02-06T02:00:10.026Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "resultPlayerManager.h",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\resultPlayer\\resultPlayerManager.h",
-              "RelativeDocumentMoniker": "src\\game\\player\\resultPlayer\\resultPlayerManager.h",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\resultPlayer\\resultPlayerManager.h*",
-              "RelativeToolTip": "src\\game\\player\\resultPlayer\\resultPlayerManager.h*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-02-12T02:26:08.372Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "selectPlayerManager.h",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\selectPlayer\\selectPlayerManager.h",
-              "RelativeDocumentMoniker": "src\\game\\player\\selectPlayer\\selectPlayerManager.h",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\selectPlayer\\selectPlayerManager.h*",
-              "RelativeToolTip": "src\\game\\player\\selectPlayer\\selectPlayerManager.h*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-03-06T06:56:16.934Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "selectScene.h",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\selectScene.h",
-              "RelativeDocumentMoniker": "src\\game\\scene\\selectScene.h",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\selectScene.h*",
-              "RelativeToolTip": "src\\game\\scene\\selectScene.h*",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA0AAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-02-09T00:31:55.789Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 26,
-              "Title": "playScene.h",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\playScene.h",
-              "RelativeDocumentMoniker": "src\\game\\scene\\playScene.h",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\playScene.h*",
-              "RelativeToolTip": "src\\game\\scene\\playScene.h*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-02-12T08:29:45.215Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "resultScene.h",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\resultScene.h",
-              "RelativeDocumentMoniker": "src\\game\\scene\\resultScene.h",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\resultScene.h*",
-              "RelativeToolTip": "src\\game\\scene\\resultScene.h*",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAAA8AAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-03-06T06:46:25.574Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "titleScene.cpp",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\titleScene.cpp",
-              "RelativeDocumentMoniker": "src\\game\\scene\\titleScene.cpp",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\titleScene.cpp",
-              "RelativeToolTip": "src\\game\\scene\\titleScene.cpp",
-              "ViewState": "AgIAAFcAAAAAAAAAAAAAAGcAAAACAAAAAAAAAA==",
+              "DocumentIndex": 7,
+              "Title": "grassland.cpp",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\playMap\\grassland\\grassland.cpp",
+              "RelativeDocumentMoniker": "src\\game\\map\\playMap\\grassland\\grassland.cpp",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\playMap\\grassland\\grassland.cpp",
+              "RelativeToolTip": "src\\game\\map\\playMap\\grassland\\grassland.cpp",
+              "ViewState": "AgIAAGwAAAAAAAAAAAAAAIgAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-02-05T09:24:50.319Z",
+              "WhenOpened": "2026-03-06T05:05:52.262Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
-              "Title": "selectMap.h",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\titleMap\\selectMap.h",
-              "RelativeDocumentMoniker": "src\\game\\map\\titleMap\\selectMap.h",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\titleMap\\selectMap.h",
-              "RelativeToolTip": "src\\game\\map\\titleMap\\selectMap.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 12,
+              "Title": "coinBase.cpp",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\coin\\coinBase.cpp",
+              "RelativeDocumentMoniker": "src\\game\\item\\coin\\coinBase.cpp",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\coin\\coinBase.cpp",
+              "RelativeToolTip": "src\\game\\item\\coin\\coinBase.cpp",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAAAkAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-02-09T02:21:16.312Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "debugCamera.cpp",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\debugCamera\\debugCamera.cpp",
+              "RelativeDocumentMoniker": "src\\game\\camera\\debugCamera\\debugCamera.cpp",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\debugCamera\\debugCamera.cpp",
+              "RelativeToolTip": "src\\game\\camera\\debugCamera\\debugCamera.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAjwBUAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-03-09T03:45:59.939Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "cameraBase.cpp",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\cameraBase.cpp",
+              "RelativeDocumentMoniker": "src\\game\\camera\\cameraBase.cpp",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\cameraBase.cpp",
+              "RelativeToolTip": "src\\game\\camera\\cameraBase.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-03-09T03:03:11.054Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "grassland.h",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\playMap\\grassland\\grassland.h",
+              "RelativeDocumentMoniker": "src\\game\\map\\playMap\\grassland\\grassland.h",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\playMap\\grassland\\grassland.h",
+              "RelativeToolTip": "src\\game\\map\\playMap\\grassland\\grassland.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-03-06T04:06:02.584Z",
+              "WhenOpened": "2026-03-06T05:01:01.167Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
-              "Title": "resultMap.h",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\resultMap\\resultMap.h",
-              "RelativeDocumentMoniker": "src\\game\\map\\resultMap\\resultMap.h",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\resultMap\\resultMap.h",
-              "RelativeToolTip": "src\\game\\map\\resultMap\\resultMap.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 18,
+              "Title": "3DObject.cpp",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\lib\\model\\3DObject.cpp",
+              "RelativeDocumentMoniker": "src\\lib\\model\\3DObject.cpp",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\lib\\model\\3DObject.cpp",
+              "RelativeToolTip": "src\\lib\\model\\3DObject.cpp",
+              "ViewState": "AgIAAEEAAAAAAAAAAADgv1YAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-03-09T06:42:57.534Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "collisionManager.cpp",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\collisionManager\\collisionManager.cpp",
+              "RelativeDocumentMoniker": "src\\game\\collisionManager\\collisionManager.cpp",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\collisionManager\\collisionManager.cpp",
+              "RelativeToolTip": "src\\game\\collisionManager\\collisionManager.cpp",
+              "ViewState": "AgIAAEkBAAAAAAAAAAAAAGABAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-02-05T10:05:42.554Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "mapManager.cpp",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\mapManager.cpp",
+              "RelativeDocumentMoniker": "src\\game\\map\\mapManager.cpp",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\mapManager.cpp",
+              "RelativeToolTip": "src\\game\\map\\mapManager.cpp",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAADkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-03-06T01:06:26.561Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "2DUi.cpp",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\lib\\2DUi\\2DUi.cpp",
+              "RelativeDocumentMoniker": "src\\lib\\2DUi\\2DUi.cpp",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\lib\\2DUi\\2DUi.cpp",
+              "RelativeToolTip": "src\\lib\\2DUi\\2DUi.cpp",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAjwFcAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-02-20T09:19:22.39Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "resultMap.cpp",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\resultMap\\resultMap.cpp",
+              "RelativeDocumentMoniker": "src\\game\\map\\resultMap\\resultMap.cpp",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\resultMap\\resultMap.cpp",
+              "RelativeToolTip": "src\\game\\map\\resultMap\\resultMap.cpp",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAACsAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-03-06T04:40:15.719Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "collisionManager.h",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\collisionManager\\collisionManager.h",
+              "RelativeDocumentMoniker": "src\\game\\collisionManager\\collisionManager.h",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\collisionManager\\collisionManager.h",
+              "RelativeToolTip": "src\\game\\collisionManager\\collisionManager.h",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAmwBsAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-03-06T04:39:43.422Z",
+              "WhenOpened": "2026-02-26T02:37:21.338Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 17,
+              "Title": "fps.cpp",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\lib\\system\\fps.cpp",
+              "RelativeDocumentMoniker": "src\\lib\\system\\fps.cpp",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\lib\\system\\fps.cpp",
+              "RelativeToolTip": "src\\lib\\system\\fps.cpp",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAAAEcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-02-12T03:11:12.344Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "vector",
+              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.44.35207\\include\\vector",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.44.35207\\include\\vector",
+              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.44.35207\\include\\vector",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.44.35207\\include\\vector",
+              "ViewState": "AgIAAHYHAAAAAAAAAADgv4kHAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-24T09:37:39.411Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
               "Title": "player.cpp",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\player.cpp",
               "RelativeDocumentMoniker": "src\\game\\player\\player.cpp",
@@ -880,33 +804,46 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
-              "Title": "player.h",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\player.h",
-              "RelativeDocumentMoniker": "src\\game\\player\\player.h",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\player.h",
-              "RelativeToolTip": "src\\game\\player\\player.h",
-              "ViewState": "AgIAAHcAAAAAAAAAAAAjwI0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-02-06T03:22:56.228Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 34,
-              "Title": "collisionManager.cpp",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\collisionManager\\collisionManager.cpp",
-              "RelativeDocumentMoniker": "src\\game\\collisionManager\\collisionManager.cpp",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\collisionManager\\collisionManager.cpp",
-              "RelativeToolTip": "src\\game\\collisionManager\\collisionManager.cpp",
-              "ViewState": "AgIAAPMAAAAAAAAAAAAmwAoBAAAhAAAAAAAAAA==",
+              "DocumentIndex": 24,
+              "Title": "spawnItemManager.cpp",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\spawn\\spawnItemManager.cpp",
+              "RelativeDocumentMoniker": "src\\game\\item\\spawn\\spawnItemManager.cpp",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\spawn\\spawnItemManager.cpp",
+              "RelativeToolTip": "src\\game\\item\\spawn\\spawnItemManager.cpp",
+              "ViewState": "AgIAAHsAAAAAAAAAAAAgwJ0AAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-02-05T10:05:42.554Z",
+              "WhenOpened": "2026-02-05T09:37:01.139Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 25,
+              "Title": "spawnCoinManager.h",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\spawn\\spawnCoinManager.h",
+              "RelativeDocumentMoniker": "src\\game\\item\\spawn\\spawnCoinManager.h",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\spawn\\spawnCoinManager.h",
+              "RelativeToolTip": "src\\game\\item\\spawn\\spawnCoinManager.h",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAgwCAAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-02-05T09:37:23.943Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "mapItemManager.cpp",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\mapItemManager.cpp",
+              "RelativeDocumentMoniker": "src\\game\\item\\mapItemManager.cpp",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\mapItemManager.cpp",
+              "RelativeToolTip": "src\\game\\item\\mapItemManager.cpp",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAAEQAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-02-05T10:05:54.423Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
               "Title": "itemBase.h",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\itemBase.h",
               "RelativeDocumentMoniker": "src\\game\\item\\itemBase.h",
@@ -914,7 +851,112 @@
               "RelativeToolTip": "src\\game\\item\\itemBase.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-02-05T10:16:23.434Z"
+              "WhenOpened": "2026-02-05T10:16:23.434Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "mapManager.h",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\mapManager.h",
+              "RelativeDocumentMoniker": "src\\game\\map\\mapManager.h",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\mapManager.h",
+              "RelativeToolTip": "src\\game\\map\\mapManager.h",
+              "ViewState": "AgIAABUAAAAAAAAAAADgvygAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-06T01:06:35.721Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "itemWeaponBase.cpp",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\weapon\\itemWeaponBase.cpp",
+              "RelativeDocumentMoniker": "src\\game\\item\\weapon\\itemWeaponBase.cpp",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\weapon\\itemWeaponBase.cpp",
+              "RelativeToolTip": "src\\game\\item\\weapon\\itemWeaponBase.cpp",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAAB4AAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-02-20T05:19:12.834Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "resultPlayer.cpp",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\resultPlayer\\resultPlayer.cpp",
+              "RelativeDocumentMoniker": "src\\game\\player\\resultPlayer\\resultPlayer.cpp",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\resultPlayer\\resultPlayer.cpp",
+              "RelativeToolTip": "src\\game\\player\\resultPlayer\\resultPlayer.cpp",
+              "ViewState": "AgIAADwAAAAAAAAAAAAjwD8AAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-02-12T02:09:04.713Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "mapCamera.h",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\mapCamera\\mapCamera.h",
+              "RelativeDocumentMoniker": "src\\game\\camera\\mapCamera\\mapCamera.h",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\mapCamera\\mapCamera.h",
+              "RelativeToolTip": "src\\game\\camera\\mapCamera\\mapCamera.h",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAACUAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-02-26T05:30:46.92Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "selectPlayer.cpp",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\selectPlayer\\selectPlayer.cpp",
+              "RelativeDocumentMoniker": "src\\game\\player\\selectPlayer\\selectPlayer.cpp",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\selectPlayer\\selectPlayer.cpp",
+              "RelativeToolTip": "src\\game\\player\\selectPlayer\\selectPlayer.cpp",
+              "ViewState": "AgIAADYAAAAAAAAAAAAAAEoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-02-06T02:31:45.443Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "resultPlayerManager.cpp",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\resultPlayer\\resultPlayerManager.cpp",
+              "RelativeDocumentMoniker": "src\\game\\player\\resultPlayer\\resultPlayerManager.cpp",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\resultPlayer\\resultPlayerManager.cpp",
+              "RelativeToolTip": "src\\game\\player\\resultPlayer\\resultPlayerManager.cpp",
+              "ViewState": "AgIAAHUAAAAAAAAAAAAAAIAAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-02-06T02:43:23.44Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "resultCamera.cpp",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\resultCamera\\resultCamera.cpp",
+              "RelativeDocumentMoniker": "src\\game\\camera\\resultCamera\\resultCamera.cpp",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\resultCamera\\resultCamera.cpp",
+              "RelativeToolTip": "src\\game\\camera\\resultCamera\\resultCamera.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-02-06T02:57:20.081Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "resultScene.cpp",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\resultScene.cpp",
+              "RelativeDocumentMoniker": "src\\game\\scene\\resultScene.cpp",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\resultScene.cpp",
+              "RelativeToolTip": "src\\game\\scene\\resultScene.cpp",
+              "ViewState": "AgIAADoAAAAAAAAAAAAAAEkAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-02-05T09:25:44.48Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -924,25 +966,318 @@
               "RelativeDocumentMoniker": "src\\game\\camera\\cameraManager.cpp",
               "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\cameraManager.cpp",
               "RelativeToolTip": "src\\game\\camera\\cameraManager.cpp",
-              "ViewState": "AgIAAIQAAAAAAAAAAADwv3QAAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAACcAAAAAAAAAAAAAADkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-03-03T08:55:21.493Z"
+              "WhenOpened": "2026-03-03T08:55:21.493Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 38,
+              "Title": "playScene.h",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\playScene.h",
+              "RelativeDocumentMoniker": "src\\game\\scene\\playScene.h",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\playScene.h",
+              "RelativeToolTip": "src\\game\\scene\\playScene.h",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABUAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-02-12T08:29:45.215Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "selectScene.cpp",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\selectScene.cpp",
+              "RelativeDocumentMoniker": "src\\game\\scene\\selectScene.cpp",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\selectScene.cpp",
+              "RelativeToolTip": "src\\game\\scene\\selectScene.cpp",
+              "ViewState": "AgIAACMAAAAAAAAAAADgvzUAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-02-05T09:25:57.774Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "sceneBase.h",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\sceneBase.h",
+              "RelativeDocumentMoniker": "src\\game\\scene\\sceneBase.h",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\sceneBase.h",
+              "RelativeToolTip": "src\\game\\scene\\sceneBase.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-02-05T09:36:49.078Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "resultScene.h",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\resultScene.h",
+              "RelativeDocumentMoniker": "src\\game\\scene\\resultScene.h",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\resultScene.h",
+              "RelativeToolTip": "src\\game\\scene\\resultScene.h",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA8AAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-06T06:46:25.574Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "playCamera.cpp",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\playCamera\\playCamera.cpp",
+              "RelativeDocumentMoniker": "src\\game\\camera\\playCamera\\playCamera.cpp",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\playCamera\\playCamera.cpp",
+              "RelativeToolTip": "src\\game\\camera\\playCamera\\playCamera.cpp",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAjwB4AAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-03-09T03:46:21.017Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "cameraBase.h",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\cameraBase.h",
+              "RelativeDocumentMoniker": "src\\game\\camera\\cameraBase.h",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\cameraBase.h",
+              "RelativeToolTip": "src\\game\\camera\\cameraBase.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-09T03:01:27.534Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "Effekseer.Modules.h",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\effekseer\\include\\Effekseer.Modules.h",
+              "RelativeDocumentMoniker": "src\\effekseer\\include\\Effekseer.Modules.h",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\effekseer\\include\\Effekseer.Modules.h",
+              "RelativeToolTip": "src\\effekseer\\include\\Effekseer.Modules.h",
+              "ViewState": "AgIAANwEAAAAAAAAAAAmwPMEAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-02-05T10:10:23.781Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "stage.h",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\stage\\stage.h",
+              "RelativeDocumentMoniker": "src\\game\\map\\stage\\stage.h",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\stage\\stage.h",
+              "RelativeToolTip": "src\\game\\map\\stage\\stage.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-03T09:23:07.671Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "selectCamera.h",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\selectCamera\\selectCamera.h",
+              "RelativeDocumentMoniker": "src\\game\\camera\\selectCamera\\selectCamera.h",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\selectCamera\\selectCamera.h",
+              "RelativeToolTip": "src\\game\\camera\\selectCamera\\selectCamera.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvxAAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-09T03:29:49.336Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "resultCamera.h",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\resultCamera\\resultCamera.h",
+              "RelativeDocumentMoniker": "src\\game\\camera\\resultCamera\\resultCamera.h",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\resultCamera\\resultCamera.h",
+              "RelativeToolTip": "src\\game\\camera\\resultCamera\\resultCamera.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-09T03:20:14.843Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "Effekseer.h",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\effekseer\\include\\Effekseer.h",
+              "RelativeDocumentMoniker": "src\\effekseer\\include\\Effekseer.h",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\effekseer\\include\\Effekseer.h",
+              "RelativeToolTip": "src\\effekseer\\include\\Effekseer.h",
+              "ViewState": "AgIAAFoDAAAAAAAAAAAmwHEDAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-09T03:17:57.299Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "coinParty.cpp",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\event\\itemEvent\\coinParty\\coinParty.cpp",
+              "RelativeDocumentMoniker": "src\\game\\event\\itemEvent\\coinParty\\coinParty.cpp",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\event\\itemEvent\\coinParty\\coinParty.cpp",
+              "RelativeToolTip": "src\\game\\event\\itemEvent\\coinParty\\coinParty.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-02-12T08:54:06.964Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "itemManager.h",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\itemManager.h",
+              "RelativeDocumentMoniker": "src\\game\\item\\itemManager.h",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\itemManager.h",
+              "RelativeToolTip": "src\\game\\item\\itemManager.h",
+              "ViewState": "AgIAABUAAAAAAAAAAAAgwCYAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-02-05T10:05:50.989Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "spawnItemManager.h",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\spawn\\spawnItemManager.h",
+              "RelativeDocumentMoniker": "src\\game\\item\\spawn\\spawnItemManager.h",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\spawn\\spawnItemManager.h",
+              "RelativeToolTip": "src\\game\\item\\spawn\\spawnItemManager.h",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAADYAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-06T10:02:38.885Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
               "Title": "mapItemManager.h",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\mapItemManager.h",
               "RelativeDocumentMoniker": "src\\game\\item\\mapItemManager.h",
               "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\mapItemManager.h",
               "RelativeToolTip": "src\\game\\item\\mapItemManager.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-02-05T10:04:29.96Z"
+              "WhenOpened": "2026-02-05T10:04:29.96Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 53,
+              "Title": "titleScene.cpp",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\titleScene.cpp",
+              "RelativeDocumentMoniker": "src\\game\\scene\\titleScene.cpp",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\titleScene.cpp",
+              "RelativeToolTip": "src\\game\\scene\\titleScene.cpp",
+              "ViewState": "AgIAAFcAAAAAAAAAAAAAAGcAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-02-05T09:24:50.319Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "stage.cpp",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\stage\\stage.cpp",
+              "RelativeDocumentMoniker": "src\\game\\map\\stage\\stage.cpp",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\stage\\stage.cpp",
+              "RelativeToolTip": "src\\game\\map\\stage\\stage.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-03-03T09:22:21.794Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "sceneBase.cpp",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\sceneBase.cpp",
+              "RelativeDocumentMoniker": "src\\game\\scene\\sceneBase.cpp",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\sceneBase.cpp",
+              "RelativeToolTip": "src\\game\\scene\\sceneBase.cpp",
+              "ViewState": "AgIAACgAAAAAAAAAAAAAwCoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-02-05T09:22:10.031Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "itemBase.cpp",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\itemBase.cpp",
+              "RelativeDocumentMoniker": "src\\game\\item\\itemBase.cpp",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\itemBase.cpp",
+              "RelativeToolTip": "src\\game\\item\\itemBase.cpp",
+              "ViewState": "AgIAAF0AAAAAAAAAAAAAAGEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-02-05T10:16:22.585Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "resultPlayerManager.h",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\resultPlayer\\resultPlayerManager.h",
+              "RelativeDocumentMoniker": "src\\game\\player\\resultPlayer\\resultPlayerManager.h",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\resultPlayer\\resultPlayerManager.h",
+              "RelativeToolTip": "src\\game\\player\\resultPlayer\\resultPlayerManager.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-02-12T02:26:08.372Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
+              "Title": "selectPlayerManager.h",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\selectPlayer\\selectPlayerManager.h",
+              "RelativeDocumentMoniker": "src\\game\\player\\selectPlayer\\selectPlayerManager.h",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\selectPlayer\\selectPlayerManager.h",
+              "RelativeToolTip": "src\\game\\player\\selectPlayer\\selectPlayerManager.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-06T06:56:16.934Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 59,
+              "Title": "selectScene.h",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\selectScene.h",
+              "RelativeDocumentMoniker": "src\\game\\scene\\selectScene.h",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\selectScene.h",
+              "RelativeToolTip": "src\\game\\scene\\selectScene.h",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA0AAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-02-09T00:31:55.789Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 60,
+              "Title": "resultMap.h",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\resultMap\\resultMap.h",
+              "RelativeDocumentMoniker": "src\\game\\map\\resultMap\\resultMap.h",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\map\\resultMap\\resultMap.h",
+              "RelativeToolTip": "src\\game\\map\\resultMap\\resultMap.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-06T04:39:43.422Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 61,
+              "Title": "player.h",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\player.h",
+              "RelativeDocumentMoniker": "src\\game\\player\\player.h",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\player.h",
+              "RelativeToolTip": "src\\game\\player\\player.h",
+              "ViewState": "AgIAAHcAAAAAAAAAAAAjwI0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-02-06T03:22:56.228Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 65,
               "Title": "3DUi.h",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\3DUi\\3DUi.h",
               "RelativeDocumentMoniker": "src\\game\\3DUi\\3DUi.h",
@@ -954,7 +1289,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 62,
               "Title": "itemEventBase.cpp",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\event\\itemEvent\\itemEventBase.cpp",
               "RelativeDocumentMoniker": "src\\game\\event\\itemEvent\\itemEventBase.cpp",
@@ -966,19 +1301,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
-              "Title": "coinParty.cpp",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\event\\itemEvent\\coinParty\\coinParty.cpp",
-              "RelativeDocumentMoniker": "src\\game\\event\\itemEvent\\coinParty\\coinParty.cpp",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\event\\itemEvent\\coinParty\\coinParty.cpp",
-              "RelativeToolTip": "src\\game\\event\\itemEvent\\coinParty\\coinParty.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-02-12T08:54:06.964Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 63,
               "Title": "cpuPlayer.cpp",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\cpuPlayer\\cpuPlayer.cpp",
               "RelativeDocumentMoniker": "src\\game\\player\\cpuPlayer\\cpuPlayer.cpp",
@@ -990,43 +1313,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
-              "Title": "cameraManager.h",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\cameraManager.h",
-              "RelativeDocumentMoniker": "src\\game\\camera\\cameraManager.h",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\cameraManager.h",
-              "RelativeToolTip": "src\\game\\camera\\cameraManager.h",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-02-25T09:51:16.626Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 45,
-              "Title": "vector",
-              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.44.35207\\include\\vector",
-              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.44.35207\\include\\vector",
-              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.44.35207\\include\\vector",
-              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.44.35207\\include\\vector",
-              "ViewState": "AgIAAHYHAAAAAAAAAADgv4kHAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-02-24T09:37:39.411Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 42,
-              "Title": "mapCamera.h",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\mapCamera\\mapCamera.h",
-              "RelativeDocumentMoniker": "src\\game\\camera\\mapCamera\\mapCamera.h",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\mapCamera\\mapCamera.h",
-              "RelativeToolTip": "src\\game\\camera\\mapCamera\\mapCamera.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-02-26T05:30:46.92Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 66,
               "Title": "playerStatusPanel.cpp",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\ui\\playerStatusPanel\\playerStatusPanel.cpp",
               "RelativeDocumentMoniker": "src\\game\\ui\\playerStatusPanel\\playerStatusPanel.cpp",
@@ -1038,7 +1325,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 67,
               "Title": "sceneManager.cpp",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\sceneManager.cpp",
               "RelativeDocumentMoniker": "src\\game\\scene\\sceneManager.cpp",
@@ -1050,7 +1337,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 64,
               "Title": "3DUi.cpp",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\3DUi\\3DUi.cpp",
               "RelativeDocumentMoniker": "src\\game\\3DUi\\3DUi.cpp",
@@ -1062,7 +1349,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 68,
               "Title": "main.cpp",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\main.cpp",
               "RelativeDocumentMoniker": "src\\game\\main.cpp",
@@ -1074,7 +1361,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 69,
               "Title": "cpuPlayer.h",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\cpuPlayer\\cpuPlayer.h",
               "RelativeDocumentMoniker": "src\\game\\player\\cpuPlayer\\cpuPlayer.h",
@@ -1086,7 +1373,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 70,
               "Title": "winner.cpp",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\winner\\winner.cpp",
               "RelativeDocumentMoniker": "src\\game\\winner\\winner.cpp",
@@ -1098,7 +1385,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 71,
               "Title": "controllerManager.cpp",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\lib\\input\\controllerManager.cpp",
               "RelativeDocumentMoniker": "src\\lib\\input\\controllerManager.cpp",
@@ -1110,7 +1397,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 72,
               "Title": "controllerManager.h",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\lib\\input\\controllerManager.h",
               "RelativeDocumentMoniker": "src\\lib\\input\\controllerManager.h",
@@ -1122,7 +1409,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 55,
+              "DocumentIndex": 74,
               "Title": "sceneManager.h",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\sceneManager.h",
               "RelativeDocumentMoniker": "src\\game\\scene\\sceneManager.h",
@@ -1134,7 +1421,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 53,
+              "DocumentIndex": 73,
               "Title": "shadow.cpp",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\shadow\\shadow.cpp",
               "RelativeDocumentMoniker": "src\\game\\shadow\\shadow.cpp",
@@ -1146,31 +1433,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 54,
-              "Title": "collisionManager.h",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\collisionManager\\collisionManager.h",
-              "RelativeDocumentMoniker": "src\\game\\collisionManager\\collisionManager.h",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\collisionManager\\collisionManager.h",
-              "RelativeToolTip": "src\\game\\collisionManager\\collisionManager.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-02-26T02:37:21.338Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 56,
-              "Title": "itemWeaponBase.cpp",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\weapon\\itemWeaponBase.cpp",
-              "RelativeDocumentMoniker": "src\\game\\item\\weapon\\itemWeaponBase.cpp",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\weapon\\itemWeaponBase.cpp",
-              "RelativeToolTip": "src\\game\\item\\weapon\\itemWeaponBase.cpp",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAAB4AAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-02-20T05:19:12.834Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 57,
+              "DocumentIndex": 75,
               "Title": "sword.h",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\weapon\\sword\\sword.h",
               "RelativeDocumentMoniker": "src\\game\\item\\weapon\\sword\\sword.h",
@@ -1182,7 +1445,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 58,
+              "DocumentIndex": 76,
               "Title": "sword.cpp",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\weapon\\sword\\sword.cpp",
               "RelativeDocumentMoniker": "src\\game\\item\\weapon\\sword\\sword.cpp",
@@ -1194,7 +1457,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 59,
+              "DocumentIndex": 77,
               "Title": "gun.cpp",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\weapon\\gun\\gun.cpp",
               "RelativeDocumentMoniker": "src\\game\\item\\weapon\\gun\\gun.cpp",
@@ -1206,7 +1469,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 60,
+              "DocumentIndex": 78,
               "Title": "ax.cpp",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\weapon\\ax\\ax.cpp",
               "RelativeDocumentMoniker": "src\\game\\item\\weapon\\ax\\ax.cpp",
@@ -1218,7 +1481,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 61,
+              "DocumentIndex": 79,
               "Title": "ax.h",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\weapon\\ax\\ax.h",
               "RelativeDocumentMoniker": "src\\game\\item\\weapon\\ax\\ax.h",
@@ -1230,7 +1493,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 62,
+              "DocumentIndex": 80,
               "Title": "gun.h",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\weapon\\gun\\gun.h",
               "RelativeDocumentMoniker": "src\\game\\item\\weapon\\gun\\gun.h",
@@ -1242,7 +1505,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 64,
+              "DocumentIndex": 82,
               "Title": "eventBase.cpp",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\event\\eventBase.cpp",
               "RelativeDocumentMoniker": "src\\game\\event\\eventBase.cpp",
@@ -1254,7 +1517,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 63,
+              "DocumentIndex": 81,
               "Title": "bomb.cpp",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\itemObject\\bomb\\bomb.cpp",
               "RelativeDocumentMoniker": "src\\game\\item\\itemObject\\bomb\\bomb.cpp",
@@ -1266,7 +1529,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 69,
+              "DocumentIndex": 87,
               "Title": "eventText.h",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\ui\\eventText\\eventText.h",
               "RelativeDocumentMoniker": "src\\game\\ui\\eventText\\eventText.h",
@@ -1278,7 +1541,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 66,
+              "DocumentIndex": 84,
               "Title": "uiTitleManager.cpp",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\ui\\uiTitleManager.cpp",
               "RelativeDocumentMoniker": "src\\game\\ui\\uiTitleManager.cpp",
@@ -1290,7 +1553,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 67,
+              "DocumentIndex": 85,
               "Title": "uiSelectManager.cpp",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\ui\\uiSelectManager.cpp",
               "RelativeDocumentMoniker": "src\\game\\ui\\uiSelectManager.cpp",
@@ -1302,7 +1565,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 65,
+              "DocumentIndex": 83,
               "Title": "uiGameManager.cpp",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\ui\\uiGameManager.cpp",
               "RelativeDocumentMoniker": "src\\game\\ui\\uiGameManager.cpp",
@@ -1314,7 +1577,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 68,
+              "DocumentIndex": 86,
               "Title": "eventText.cpp",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\ui\\eventText\\eventText.cpp",
               "RelativeDocumentMoniker": "src\\game\\ui\\eventText\\eventText.cpp",
@@ -1326,7 +1589,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 70,
+              "DocumentIndex": 88,
               "Title": "2DUi.h",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\lib\\2DUi\\2DUi.h",
               "RelativeDocumentMoniker": "src\\lib\\2DUi\\2DUi.h",
@@ -1338,43 +1601,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 71,
-              "Title": "Effekseer.Modules.h",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\effekseer\\include\\Effekseer.Modules.h",
-              "RelativeDocumentMoniker": "src\\effekseer\\include\\Effekseer.Modules.h",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\effekseer\\include\\Effekseer.Modules.h",
-              "RelativeToolTip": "src\\effekseer\\include\\Effekseer.Modules.h",
-              "ViewState": "AgIAANwEAAAAAAAAAAAmwPMEAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-02-05T10:10:23.781Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 72,
-              "Title": "2DUi.cpp",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\lib\\2DUi\\2DUi.cpp",
-              "RelativeDocumentMoniker": "src\\lib\\2DUi\\2DUi.cpp",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\lib\\2DUi\\2DUi.cpp",
-              "RelativeToolTip": "src\\lib\\2DUi\\2DUi.cpp",
-              "ViewState": "AgIAAEIAAAAAAAAAAAAjwFcAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-02-20T09:19:22.39Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 73,
-              "Title": "mapItemManager.cpp",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\mapItemManager.cpp",
-              "RelativeDocumentMoniker": "src\\game\\item\\mapItemManager.cpp",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\mapItemManager.cpp",
-              "RelativeToolTip": "src\\game\\item\\mapItemManager.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-02-05T10:05:54.423Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 74,
+              "DocumentIndex": 89,
               "Title": "countDown.h",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\ui\\countDown\\countDown.h",
               "RelativeDocumentMoniker": "src\\game\\ui\\countDown\\countDown.h",
@@ -1386,7 +1613,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 75,
+              "DocumentIndex": 90,
               "Title": "soundManager.cpp",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\system\\soundManager.cpp",
               "RelativeDocumentMoniker": "src\\game\\system\\soundManager.cpp",
@@ -1398,32 +1625,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 76,
-              "Title": "resultPlayer.cpp",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\resultPlayer\\resultPlayer.cpp",
-              "RelativeDocumentMoniker": "src\\game\\player\\resultPlayer\\resultPlayer.cpp",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\resultPlayer\\resultPlayer.cpp",
-              "RelativeToolTip": "src\\game\\player\\resultPlayer\\resultPlayer.cpp",
-              "ViewState": "AgIAACoAAAAAAAAAAAAjwD8AAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-02-12T02:09:04.713Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 77,
-              "Title": "spawnItemManager.cpp",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\spawn\\spawnItemManager.cpp",
-              "RelativeDocumentMoniker": "src\\game\\item\\spawn\\spawnItemManager.cpp",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\spawn\\spawnItemManager.cpp",
-              "RelativeToolTip": "src\\game\\item\\spawn\\spawnItemManager.cpp",
-              "ViewState": "AgIAAJEBAAAAAAAAAAAgwKQBAABPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-02-05T09:37:01.139Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 81,
+              "DocumentIndex": 94,
               "Title": "effectData.h",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\system\\effectData\\effectData.h",
               "RelativeDocumentMoniker": "src\\game\\system\\effectData\\effectData.h",
@@ -1435,19 +1637,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 82,
-              "Title": "fps.cpp",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\lib\\system\\fps.cpp",
-              "RelativeDocumentMoniker": "src\\lib\\system\\fps.cpp",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\lib\\system\\fps.cpp",
-              "RelativeToolTip": "src\\lib\\system\\fps.cpp",
-              "ViewState": "AgIAADgAAAAAAAAAAAAAAEcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-02-12T03:11:12.344Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 78,
+              "DocumentIndex": 91,
               "Title": "effekseer.h",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\lib\\effekseer\\effekseer.h",
               "RelativeDocumentMoniker": "src\\lib\\effekseer\\effekseer.h",
@@ -1459,7 +1649,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 79,
+              "DocumentIndex": 92,
               "Title": "effekseer.cpp",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\lib\\effekseer\\effekseer.cpp",
               "RelativeDocumentMoniker": "src\\lib\\effekseer\\effekseer.cpp",
@@ -1471,7 +1661,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 83,
+              "DocumentIndex": 95,
               "Title": "eventManager.cpp",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\event\\eventManager.cpp",
               "RelativeDocumentMoniker": "src\\game\\event\\eventManager.cpp",
@@ -1483,7 +1673,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 80,
+              "DocumentIndex": 93,
               "Title": "effectData.cpp",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\system\\effectData\\effectData.cpp",
               "RelativeDocumentMoniker": "src\\game\\system\\effectData\\effectData.cpp",
@@ -1495,7 +1685,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 84,
+              "DocumentIndex": 96,
               "Title": "eventBase.h",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\event\\eventBase.h",
               "RelativeDocumentMoniker": "src\\game\\event\\eventBase.h",
@@ -1507,7 +1697,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 85,
+              "DocumentIndex": 97,
               "Title": "itemEventBase.h",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\event\\itemEvent\\itemEventBase.h",
               "RelativeDocumentMoniker": "src\\game\\event\\itemEvent\\itemEventBase.h",
@@ -1519,19 +1709,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 87,
-              "Title": "selectPlayer.cpp",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\selectPlayer\\selectPlayer.cpp",
-              "RelativeDocumentMoniker": "src\\game\\player\\selectPlayer\\selectPlayer.cpp",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\player\\selectPlayer\\selectPlayer.cpp",
-              "RelativeToolTip": "src\\game\\player\\selectPlayer\\selectPlayer.cpp",
-              "ViewState": "AgIAAEIAAAAAAAAAAAAAAEoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-02-06T02:31:45.443Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 86,
+              "DocumentIndex": 98,
               "Title": "eventManager.h",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\event\\eventManager.h",
               "RelativeDocumentMoniker": "src\\game\\event\\eventManager.h",
@@ -1543,7 +1721,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 88,
+              "DocumentIndex": 99,
               "Title": "bombParty.cpp",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\event\\itemEvent\\bombParty\\bombParty.cpp",
               "RelativeDocumentMoniker": "src\\game\\event\\itemEvent\\bombParty\\bombParty.cpp",
@@ -1555,7 +1733,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 89,
+              "DocumentIndex": 100,
               "Title": "coinParty.h",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\event\\itemEvent\\coinParty\\coinParty.h",
               "RelativeDocumentMoniker": "src\\game\\event\\itemEvent\\coinParty\\coinParty.h",
@@ -1567,19 +1745,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 90,
-              "Title": "spawnCoinManager.h",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\spawn\\spawnCoinManager.h",
-              "RelativeDocumentMoniker": "src\\game\\item\\spawn\\spawnCoinManager.h",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\spawn\\spawnCoinManager.h",
-              "RelativeToolTip": "src\\game\\item\\spawn\\spawnCoinManager.h",
-              "ViewState": "AgIAACEAAAAAAAAAAAAAAA8AAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-02-05T09:37:23.943Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 91,
+              "DocumentIndex": 101,
               "Title": "bombParty.h",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\event\\itemEvent\\bombParty\\bombParty.h",
               "RelativeDocumentMoniker": "src\\game\\event\\itemEvent\\bombParty\\bombParty.h",
@@ -1591,19 +1757,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 92,
-              "Title": "resultCamera.cpp",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\resultCamera\\resultCamera.cpp",
-              "RelativeDocumentMoniker": "src\\game\\camera\\resultCamera\\resultCamera.cpp",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\resultCamera\\resultCamera.cpp",
-              "RelativeToolTip": "src\\game\\camera\\resultCamera\\resultCamera.cpp",
-              "ViewState": "AgIAADMAAAAAAAAAAAAAACsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-02-06T02:57:20.081Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 93,
+              "DocumentIndex": 102,
               "Title": "characterBase.cpp",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\character\\characterBase.cpp",
               "RelativeDocumentMoniker": "src\\game\\character\\characterBase.cpp",
@@ -1615,7 +1769,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 94,
+              "DocumentIndex": 103,
               "Title": "countDown.cpp",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\ui\\countDown\\countDown.cpp",
               "RelativeDocumentMoniker": "src\\game\\ui\\countDown\\countDown.cpp",
@@ -1627,7 +1781,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 95,
+              "DocumentIndex": 104,
               "Title": "winner.h",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\winner\\winner.h",
               "RelativeDocumentMoniker": "src\\game\\winner\\winner.h",
@@ -1639,7 +1793,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 96,
+              "DocumentIndex": 105,
               "Title": "uiSelectManager.h",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\ui\\uiSelectManager.h",
               "RelativeDocumentMoniker": "src\\game\\ui\\uiSelectManager.h",
@@ -1651,7 +1805,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 97,
+              "DocumentIndex": 106,
               "Title": "weaponManager.cpp",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\weapon\\weaponManager.cpp",
               "RelativeDocumentMoniker": "src\\game\\weapon\\weaponManager.cpp",
@@ -1663,7 +1817,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 98,
+              "DocumentIndex": 107,
               "Title": "weapon.cpp",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\weapon\\weapon.cpp",
               "RelativeDocumentMoniker": "src\\game\\weapon\\weapon.cpp",
@@ -1675,7 +1829,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 100,
+              "DocumentIndex": 109,
               "Title": "spawnCoin.h",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\coin\\spawnCoin.h",
               "RelativeDocumentMoniker": "src\\game\\item\\coin\\spawnCoin.h",
@@ -1687,7 +1841,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 99,
+              "DocumentIndex": 108,
               "Title": "weapon.h",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\weapon\\weapon.h",
               "RelativeDocumentMoniker": "src\\game\\weapon\\weapon.h",
@@ -1699,7 +1853,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 101,
+              "DocumentIndex": 110,
               "Title": "spawnItemManager.h",
               "DocumentMoniker": "D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\item\\spawnItemManager.h",
               "ToolTip": "D:\\Users\\2409417\\Desktop\\gitHub\\3DActionGame1\\game\\src\\game\\item\\spawnItemManager.h",
@@ -1709,7 +1863,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 105,
+              "DocumentIndex": 114,
               "Title": "coinBase.h",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\coin\\coinBase.h",
               "RelativeDocumentMoniker": "src\\game\\item\\coin\\coinBase.h",
@@ -1721,7 +1875,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 104,
+              "DocumentIndex": 113,
               "Title": "dropCoin.h",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\coin\\dropCoin.h",
               "RelativeDocumentMoniker": "src\\game\\item\\coin\\dropCoin.h",
@@ -1733,7 +1887,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 103,
+              "DocumentIndex": 112,
               "Title": "dropCoin.cpp",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\coin\\dropCoin.cpp",
               "RelativeDocumentMoniker": "src\\game\\item\\coin\\dropCoin.cpp",
@@ -1745,7 +1899,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 102,
+              "DocumentIndex": 111,
               "Title": "spawnCoin.cpp",
               "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\item\\coin\\spawnCoin.cpp",
               "RelativeDocumentMoniker": "src\\game\\item\\coin\\spawnCoin.cpp",
@@ -1754,30 +1908,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-02-09T02:50:36.767Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 106,
-              "Title": "selectCamera.cpp",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\selectCamera\\selectCamera.cpp",
-              "RelativeDocumentMoniker": "src\\game\\camera\\selectCamera\\selectCamera.cpp",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\camera\\selectCamera\\selectCamera.cpp",
-              "RelativeToolTip": "src\\game\\camera\\selectCamera\\selectCamera.cpp",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAAB8AAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-02-06T02:57:33.696Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 107,
-              "Title": "sceneBase.h",
-              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\sceneBase.h",
-              "RelativeDocumentMoniker": "src\\game\\scene\\sceneBase.h",
-              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\sceneBase.h",
-              "RelativeToolTip": "src\\game\\scene\\sceneBase.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-02-05T09:36:49.078Z"
             }
           ]
         }

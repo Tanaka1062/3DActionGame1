@@ -126,16 +126,16 @@ void CSelectPlayerManager::Load(CMapBase* _map)
 		switch (player_i)
 		{
 		case PLAYER_1:
-			start = MV1GetFramePosition(mapHndl, 1);
+			start = MV1GetFramePosition(mapHndl, 2);
 			break;
 		case PLAYER_2:
-			start = MV1GetFramePosition(mapHndl, 3);
+			start = MV1GetFramePosition(mapHndl, 4);
 			break;
 		case PLAYER_3:
-			start = MV1GetFramePosition(mapHndl, 7);
+			start = MV1GetFramePosition(mapHndl, 8);
 			break;
 		case PLAYER_4:
-			start = MV1GetFramePosition(mapHndl, 9);
+			start = MV1GetFramePosition(mapHndl, 10);
 			break;
 		}
 

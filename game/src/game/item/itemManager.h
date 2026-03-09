@@ -7,7 +7,7 @@
 #include "itemObject/box/box.h"
 #include "mapItemManager.h"
 #include "spawn/spawnItemManager.h"
-#include "../map/map.h"
+#include "../map/mapBase.h"
 #include "spawn/spawnCoinManager.h"
 
 //アイテムマネージャークラス
@@ -36,7 +36,7 @@ public:
 	//初期化
 	void Init(CPlayerManager* _playerManager);
 	//モデルロード
-	void Load();
+	void Load(CMapBase* _map);
 	//毎フレームする処理
 	void Step(CPlayerManager* _playerManager, int _stageId);
 	//数値の更新

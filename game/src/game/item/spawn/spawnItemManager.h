@@ -5,7 +5,7 @@
 #include "../../data.h"
 #include "../../player/playerManager.h"
 #include "../itemObject/box/box.h"
-#include "../../map/map.h"
+#include "../../map/mapBase.h"
 
 constexpr int SPAWN_ITEM_MAX = 10;		//アイテムの最大量
 
@@ -42,7 +42,7 @@ public:
 	//初期化
 	void Init(CPlayerManager* _playerManager);
 	//モデルロード
-	void Load();
+	void Load(CMapBase* _map);
 	//毎フレームする処理
 	void Step();
 	//終了処理
@@ -52,7 +52,7 @@ public:
 	int GetItemNum() { return static_cast<int>(m_item.size()); }
 
 	//アイテムを出現させる
-	std::unique_ptr<CItemBase> SpawnItem(tagMapCenterId _mapId);
+	std::unique_ptr<CItemBase> SpawnItem(int _stageId);
 
 	//指定したアイテムを呼び出す
 	std::unique_ptr<CItemBase> RequestItem(tagItemName _itemName);

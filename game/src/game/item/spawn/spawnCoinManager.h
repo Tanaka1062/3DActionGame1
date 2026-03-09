@@ -3,7 +3,7 @@
 #include <vector>
 #include "../../data.h"
 #include "../../player/playerManager.h"
-#include "../../map/map.h"
+#include "../../map/mapBase.h"
 #include "../itemBase.h"
 
 //アイテムマネージャークラス
@@ -30,7 +30,7 @@ public:
 	//初期化
 	void Init();
 	//モデルロード
-	void Load();
+	void Load(CMapBase* _map);
 	//毎フレームする処理
 	void Step();
 	//終了処理

@@ -46,6 +46,12 @@ public:
 	//ハンドルを取得
 	int GetHndl(int _num) { return m_stage[_num]->GetHndl(); }
 
+	//ステージの生存フラグを取得
+	bool GetStageActive(int _num) { return m_stage[_num]->GetActive(); }
+
+	//ステージの座標を取得
+	VECTOR GetStagePos(int _num) { return m_stage[_num]->GetPos(); }
+
 	//ステージの数を取得
 	int GetStageNum() { return static_cast<int>(m_stage.size()); }
 

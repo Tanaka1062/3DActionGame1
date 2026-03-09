@@ -4,6 +4,7 @@
 #include "itemBase.h"
 #include "../data.h"
 #include "itemObject/box/box.h"
+#include "../map/mapBase.h"
 
 //アイテムマネージャークラス
 class CMapItemManager
@@ -20,7 +21,7 @@ public:
 	//初期化
 	void Init();
 	//モデルロード
-	void Load();
+	void Load(CMapBase* _map);
 	//毎フレームする処理
 	void Step();
 	//終了処理

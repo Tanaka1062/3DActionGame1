@@ -63,7 +63,7 @@ void CPlayScene::Init()
 	m_itemManager.Init(&m_playerManager);
 	m_weaponManager.Init();
 	m_uiManager.Init(&m_playerManager,&m_itemManager);
-	CCameraManager::Init(ZERO);
+	CCameraManager::Init(ZERO,m_mapManager.GetMap());
 	CCameraManager::ChangeCamera(CCameraManager::CAMERA_ID_MAP);
 	m_gameTime = CGameTime::GetInstance();
 	m_gameTime->Init();
@@ -85,7 +85,7 @@ void CPlayScene::Load()
 		m_sky.Load();
 		m_playerManager.Load(m_mapManager.GetMap());
 		m_shot.Load();
-		m_itemManager.Load();
+		m_itemManager.Load(m_mapManager.GetMap());
 		m_weaponManager.Load();
 		m_uiManager.Load();
 		CSoundManager::Play(CSoundManager::BGM_GAME, DX_PLAYTYPE_LOOP);
@@ -118,10 +118,10 @@ void CPlayScene::Step()
 	m_sky.Step(CCameraManager::GetFocusPos());
 	m_playerManager.Step(&m_attackManager,&m_shot, CCameraManager::GetRot().y,m_mapManager.GetMap()->GetStageId());
 	m_shot.Step();
-	m_itemManager.Step(&m_playerManager,m_ground.GetCenterId());
+	m_itemManager.Step(&m_playerManager,m_mapManager.GetMap()->GetStageId());
 	m_weaponManager.Step(m_playerManager);
 	m_uiManager.Step(m_eventManager.GetNowEventName(),m_playerManager);
-	CCameraManager::Step(ZERO,0.0f,m_ground.GetCenterId(),&m_playerManager);
+	CCameraManager::Step(ZERO,0.0f,m_mapManager.GetMap()->GetStageId(), &m_playerManager);
 	m_gameTime->Step();
 	m_winner->Step(&m_playerManager);
 	m_eventManager.Step(CCameraManager::GetFocusPos(),m_itemManager);
@@ -129,8 +129,8 @@ void CPlayScene::Step()
 	//“–‚½‚è”»’è----------------------------------
 	//“G‚Ì‹ŠE”ÍˆÍ‚ÆƒvƒŒƒCƒ„[‚Ì“–‚½‚è”»’è
 	CCollisionManager::CheckHitPlayerToPlayer(m_playerManager);
-	CCollisionManager::CheckHitPlayerToMap(m_playerManager, m_ground);
-	CCollisionManager::CheckHitItemToMap(m_itemManager, m_ground);
+	CCollisionManager::CheckHitPlayerToMap(m_playerManager, m_mapManager.GetMap());
+	CCollisionManager::CheckHitItemToMap(m_itemManager, m_mapManager.GetMap());
 	CCollisionManager::CheckHitPlayerToItem(m_playerManager, m_itemManager);
 	CCollisionManager::CheckHitPlayerToPlayerAttack(m_playerManager, m_attackManager);
 	CCollisionManager::CheckHitItemToItem(m_itemManager);

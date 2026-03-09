@@ -251,7 +251,7 @@ void CCollisionManager::CheckHitPlayerToPlayer(CPlayerManager& _playerManager)
 //----------------------------------------------
 //		  プレイヤーとマップの当たり判定
 //----------------------------------------------
-void CCollisionManager::CheckHitPlayerToMap(CPlayerManager& _playerManager,CMap& _map)
+void CCollisionManager::CheckHitPlayerToMap(CPlayerManager& _playerManager, CMapBase* _map)
 {
 	for (int i = 0; i < _playerManager.GetPlayerNum(); i++)
 	{
@@ -264,104 +264,106 @@ void CCollisionManager::CheckHitPlayerToMap(CPlayerManager& _playerManager,CMap&
 		//当たり判定情報が格納される構造体
 		MV1_COLL_RESULT_POLY_DIM col;
 
-		col = MV1CollCheck_Sphere(_map.GetHitHndl(), -1,
-			player->GetCenter(), player->GetRad());
-
-		//ポリゴンと当たっていたか
-		if (col.HitNum != 0)
+		for (int stage_i = 0; stage_i < _map->GetStageNum(); stage_i++)
 		{
-			//押し戻しの計算-----------------------
+			//ステージが出現していない場合は処理をしない
+			if (_map->GetStageActive(stage_i) == false)continue;
 
-			for (int j = 0; j < col.HitNum; j++)
-			{
+			col = MV1CollCheck_Sphere(_map->GetHndl(_map->GetStageId()), -1,
+				player->GetCenter(), player->GetRad());
 
-				//中心点から最近点を引き算
-				VECTOR vLen = VSub(player->GetCenter(), col.Dim[j].HitPosition);
-				//取得した距離を三平方の定理の長さに変換
-				float fLen = VSize(vLen);
-				//実際にめり込んだ距離を計算
-				fLen = player->GetRad() - fLen;
-				//法線をめり込んだ距離分掛け算する
-				vLen = VScale(col.Dim[j].Normal, fLen);
-
-				//プレイヤーの座標を計算した分だけ移動させる
-				player->SetPos(VAdd(player->GetPos(), vLen));
-
-				//法線を取得
-				VECTOR normal = col.Dim[j].Normal;
-
-				//法線の角度を取得
-				float angle = atan2f(normal.y, normal.x);
-
-				//角度が90度の場合重力のリセットをする
-				if (angle == 90.0f * (DX_PI_F / 180.0f))
-				{
-					//重力をリセット
-					player->GravityReset();
-				}
-
-			}
-			//-------------------------------------
-
-
-
-		}
-			//毎回データを削除
-		MV1CollResultPolyDimTerminate(col);
-
-		//cpuなら前方に障害物があるか判断してジャンプする--------------
-		if (player->GetIsCpu() == true &&
-			player->GetState() != JUMP)
-		{
-			VECTOR vec = player->GetCenter();
-
-			//障害物の判定を行う座標までの距離
-			VECTOR defaultDir = { 0.0f,0.0f,-30.0f };
-			//上記を行列に変換
-			MATRIX dir = CMyMath::GetTranslateMatrix(defaultDir);
-			//Y軸回転行列
-			MATRIX mRotY = CMyMath::GetYawMatrix(player->GetRot().y);
-			//行列の合成
-			MATRIX res = CMyMath::MatMult(mRotY, dir);
-
-			vec.x += res.m[0][3];
-			vec.z += res.m[2][3];
-
-			col = MV1CollCheck_Sphere(_map.GetHitHndl(), -1,
-				vec, 5.0f);
-
+			//ポリゴンと当たっていたか
 			if (col.HitNum != 0)
 			{
-				player->SetState(JUMP);
+				//押し戻しの計算-----------------------
+
+				for (int j = 0; j < col.HitNum; j++)
+				{
+
+					//中心点から最近点を引き算
+					VECTOR vLen = VSub(player->GetCenter(), col.Dim[j].HitPosition);
+					//取得した距離を三平方の定理の長さに変換
+					float fLen = VSize(vLen);
+					//実際にめり込んだ距離を計算
+					fLen = player->GetRad() - fLen;
+					//法線をめり込んだ距離分掛け算する
+					vLen = VScale(col.Dim[j].Normal, fLen);
+
+					//プレイヤーの座標を計算した分だけ移動させる
+					player->SetPos(VAdd(player->GetPos(), vLen));
+
+					//法線を取得
+					VECTOR normal = col.Dim[j].Normal;
+
+					//法線の角度を取得
+					float angle = atan2f(normal.y, normal.x);
+
+					//角度が90度の場合重力のリセットをする
+					if (angle == 90.0f * (DX_PI_F / 180.0f))
+					{
+						//重力をリセット
+						player->GravityReset();
+					}
+
+				}
+				//-------------------------------------
+
 			}
 			//毎回データを削除
 			MV1CollResultPolyDimTerminate(col);
 
-		}
-		//-------------------------------------------------------------
-
-		VECTOR shadowPos = player->GetPos();
-
-		//少しずつ座標を落として当たった場所に丸影の座標を設定する
-		for (int shadowPosY_i = 0; shadowPosY_i < 1000; shadowPosY_i++)
-		{
-			shadowPos.y -= 0.01f * shadowPosY_i;
-
-			col = MV1CollCheck_Sphere(_map.GetHitHndl(), -1,
-				shadowPos, 1.0f);
-
-			if (col.HitNum != 0)
+			//cpuなら前方に障害物があるか判断してジャンプする--------------
+			if (player->GetIsCpu() == true &&
+				player->GetState() != JUMP)
 			{
-				shadowPos.y += 1.5f;
+				VECTOR vec = player->GetCenter();
+
+				//障害物の判定を行う座標までの距離
+				VECTOR defaultDir = { 0.0f,0.0f,-30.0f };
+				//上記を行列に変換
+				MATRIX dir = CMyMath::GetTranslateMatrix(defaultDir);
+				//Y軸回転行列
+				MATRIX mRotY = CMyMath::GetYawMatrix(player->GetRot().y);
+				//行列の合成
+				MATRIX res = CMyMath::MatMult(mRotY, dir);
+
+				vec.x += res.m[0][3];
+				vec.z += res.m[2][3];
+
+				col = MV1CollCheck_Sphere(_map->GetHndl(_map->GetStageId()), -1,
+					vec, 5.0f);
+
+				if (col.HitNum != 0)
+				{
+					player->SetState(JUMP);
+				}
 				//毎回データを削除
 				MV1CollResultPolyDimTerminate(col);
-				break;
+
 			}
+			//-------------------------------------------------------------
+
+			VECTOR shadowPos = player->GetPos();
+
+			//少しずつ座標を落として当たった場所に丸影の座標を設定する
+			for (int shadowPosY_i = 0; shadowPosY_i < 1000; shadowPosY_i++)
+			{
+				shadowPos.y -= 0.01f * shadowPosY_i;
+
+				col = MV1CollCheck_Sphere(_map->GetHndl(_map->GetStageId()), -1,
+					shadowPos, 1.0f);
+
+				if (col.HitNum != 0)
+				{
+					shadowPos.y += 1.5f;
+					//毎回データを削除
+					MV1CollResultPolyDimTerminate(col);
+					break;
+				}
+			}
+			player->SetShadowPos(shadowPos);
+
 		}
-		player->SetShadowPos(shadowPos);
-	
-
-
 
 	}
 }
@@ -369,7 +371,7 @@ void CCollisionManager::CheckHitPlayerToMap(CPlayerManager& _playerManager,CMap&
 //----------------------------------------------
 //		アイテムとマップの当たり判定
 //----------------------------------------------
-void CCollisionManager::CheckHitItemToMap(CItemManager& _itemManager, CMap& _map)
+void CCollisionManager::CheckHitItemToMap(CItemManager& _itemManager, CMapBase* _map)
 {
 
 	//当たり判定情報が格納される構造体
@@ -381,62 +383,69 @@ void CCollisionManager::CheckHitItemToMap(CItemManager& _itemManager, CMap& _map
 	{
 		if ((*item_i)->GetActive() == false)continue;
 
-		col = MV1CollCheck_Sphere(_map.GetHitHndl(), -1,
-			(*item_i)->GetCenter(), (*item_i)->GetRad());
-
-		//ポリゴンと当たっていたか
-		if (col.HitNum != 0)
+		for (int stage_i = 0; stage_i < _map->GetStageNum(); stage_i++)
 		{
-			//押し戻しの計算-----------------------
+			//ステージが出現していなかったら処理をしない
+			if (_map->GetStageActive(stage_i) == false)continue;
 
-			for (int j = 0; j < col.HitNum; j++)
-			{
+			col = MV1CollCheck_Sphere(_map->GetHndl(stage_i), -1,
+				(*item_i)->GetCenter(), (*item_i)->GetRad());
 
-				//中心点から最近点を引き算
-				VECTOR vLen = VSub((*item_i)->GetCenter(), col.Dim[j].HitPosition);
-				//取得した距離を三平方の定理の長さに変換
-				float fLen = VSize(vLen);
-				//実際にめり込んだ距離を計算
-				fLen = (*item_i)->GetRad() - fLen;
-				//法線をめり込んだ距離分掛け算する
-				vLen = VScale(col.Dim[j].Normal, fLen);
-
-				//プレイヤーの座標を計算した分だけ移動させる
-				(*item_i)->SetPos(VAdd((*item_i)->GetPos(), vLen));
-
-				//重力をリセット
-				(*item_i)->GravityReset();
-
-			}
-			//-------------------------------------
-
-			(*item_i)->HitMapCalc();
-
-		}
-		//毎回データを削除
-		MV1CollResultPolyDimTerminate(col);
-
-		VECTOR shadowPos = (*item_i)->GetPos();
-
-		//少しずつ座標を落として当たった場所に丸影の座標を設定する
-		for (int shadowPosY_i = 0; shadowPosY_i < 1000; shadowPosY_i++)
-		{
-			shadowPos.y -= 0.01f * shadowPosY_i;
-
-			col = MV1CollCheck_Sphere(_map.GetHitHndl(), -1,
-				shadowPos, 1.0f);
-
+			//ポリゴンと当たっていたか
 			if (col.HitNum != 0)
 			{
-				shadowPos.y += 1.5f;
-				//毎回データを削除
-				MV1CollResultPolyDimTerminate(col);
+				//押し戻しの計算-----------------------
 
-				break;
+				for (int j = 0; j < col.HitNum; j++)
+				{
+
+					//中心点から最近点を引き算
+					VECTOR vLen = VSub((*item_i)->GetCenter(), col.Dim[j].HitPosition);
+					//取得した距離を三平方の定理の長さに変換
+					float fLen = VSize(vLen);
+					//実際にめり込んだ距離を計算
+					fLen = (*item_i)->GetRad() - fLen;
+					//法線をめり込んだ距離分掛け算する
+					vLen = VScale(col.Dim[j].Normal, fLen);
+
+					//プレイヤーの座標を計算した分だけ移動させる
+					(*item_i)->SetPos(VAdd((*item_i)->GetPos(), vLen));
+
+					//重力をリセット
+					(*item_i)->GravityReset();
+
+				}
+				//-------------------------------------
+
+				(*item_i)->HitMapCalc();
+
 			}
-		}
+			//毎回データを削除
+			MV1CollResultPolyDimTerminate(col);
 
-		(*item_i)->SetShadowPos(shadowPos);
+			VECTOR shadowPos = (*item_i)->GetPos();
+
+			//少しずつ座標を落として当たった場所に丸影の座標を設定する
+			for (int shadowPosY_i = 0; shadowPosY_i < 1000; shadowPosY_i++)
+			{
+				shadowPos.y -= 0.01f * shadowPosY_i;
+
+				col = MV1CollCheck_Sphere(_map->GetHndl(stage_i), -1,
+					shadowPos, 1.0f);
+
+				if (col.HitNum != 0)
+				{
+					shadowPos.y += 1.5f;
+					//毎回データを削除
+					MV1CollResultPolyDimTerminate(col);
+
+					break;
+				}
+			}
+
+			(*item_i)->SetShadowPos(shadowPos);
+
+		}
 
 	}
 }

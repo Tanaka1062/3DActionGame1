@@ -6,11 +6,17 @@ constexpr VECTOR CAMERA_UP = { 0.0f,1.0f,0.0f };	//カメラの上方向
 //コンストラクタ
 CCameraBase::CCameraBase()
 {
-	Init(ZERO);
+	Init(nullptr);
+}
+
+//デストラクタ
+CCameraBase::~CCameraBase()
+{
+	Exit();
 }
 
 //初期化
-void CCameraBase::Init(VECTOR _focus)
+void CCameraBase::Init(CMapBase* _map)
 {
 	m_pos = ZERO;
 	m_rot = ZERO;
@@ -26,6 +32,12 @@ void CCameraBase::Step(VECTOR _focus, float _rot)
 
 //カメラの更新
 void CCameraBase::Update()
+{
+
+}
+
+//カメラの終了処理
+void CCameraBase::Exit()
 {
 
 }

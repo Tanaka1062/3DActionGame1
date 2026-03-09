@@ -52,12 +52,15 @@ void CMapManager::Update()
 //ƒ‚ƒfƒ‹‚Ì•`ŽÊ
 void CMapManager::Draw()
 {
+	if (m_map == nullptr)return;
+
 	m_map->Draw();
 }
 
 //I—¹ˆ—
 void CMapManager::Exit()
 {
+	if (m_map == nullptr)return;
 	m_map->Exit();
 
 	delete m_map;

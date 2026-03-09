@@ -423,14 +423,14 @@
     <ClCompile Include="src\game\map\mapManager.cpp">
       <Filter>ソース ファイル\game\map</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\map\titleMap\selectMap.cpp">
-      <Filter>ソース ファイル\game\map\selectMap</Filter>
-    </ClCompile>
     <ClCompile Include="src\game\map\resultMap\resultMap.cpp">
       <Filter>ソース ファイル\game\map\resultMap</Filter>
     </ClCompile>
     <ClCompile Include="src\game\map\playMap\grassland\grassland.cpp">
       <Filter>ソース ファイル\game\map\playMap\grassland</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\map\selectMap\selectMap.cpp">
+      <Filter>ソース ファイル\game\map\selectMap</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -677,14 +677,14 @@
     <ClInclude Include="src\game\map\mapManager.h">
       <Filter>ソース ファイル\game\map</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\map\titleMap\selectMap.h">
-      <Filter>ソース ファイル\game\map\selectMap</Filter>
-    </ClInclude>
     <ClInclude Include="src\game\map\resultMap\resultMap.h">
       <Filter>ソース ファイル\game\map\resultMap</Filter>
     </ClInclude>
     <ClInclude Include="src\game\map\playMap\grassland\grassland.h">
       <Filter>ソース ファイル\game\map\playMap\grassland</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\map\selectMap\selectMap.h">
+      <Filter>ソース ファイル\game\map\selectMap</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

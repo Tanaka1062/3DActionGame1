@@ -28,7 +28,7 @@ CPlayCamera::CPlayCamera() {
 //---------------------------------
 void CPlayCamera::Init(VECTOR _focus)
 {
-	CCameraBase::Init(_focus);
+	CCameraBase::Init(nullptr);
 	m_focusPos = _focus;						//ƒJƒƒ‰‚Ì’‹“_
 
 	m_pos = _focus;

@@ -71,7 +71,7 @@ void CResultScene::Init()
 	m_mapManager.Init(MAP_ID_RESULT);
 	m_resultPlayerManager.Init(m_winner);
 
-	CCameraManager::Init(ZERO);
+	CCameraManager::Init(ZERO,m_mapManager.GetMap());
 	CCameraManager::ChangeCamera(CCameraManager::CAMERA_ID_RESULT);
 
 	VECTOR textPos = ZERO;

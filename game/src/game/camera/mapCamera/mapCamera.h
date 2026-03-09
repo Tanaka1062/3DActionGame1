@@ -2,13 +2,15 @@
 #pragma once
 #include <DxLib.h>
 #include "../cameraBase.h"
-#include "../../map/map.h"
+#include "../../map/mapBase.h"
 #include "../../player/playerManager.h"
+#include <iostream>
+#include <vector>
 
 class CMapCamera : public CCameraBase
 {
 private:
-	VECTOR	m_mapCenterPos[MAP_CENTER_NUM];
+	std::vector<VECTOR>	m_stageCenterPos;
 	VECTOR	m_basePos;
 	VECTOR	m_nextPos;
 	VECTOR	m_nextFocus;
@@ -20,20 +22,24 @@ private:
 		CAMERA_STAE_NUM,		//カメラの状態の数
 	};
 	tagCameraSate m_state;
-	tagMapCenterId m_mapCenterId;
+	int m_stageCenterId;
 
 public:
-	//コンストラクタ
+	//コンストラクタ・デストラクタ
 	CMapCamera();
+	~CMapCamera();
 
 	//初期化
-	void Init(VECTOR _focus);
+	void Init(CMapBase* _map);
 
 	// 毎フレーム呼ぶ処理
-	void Step(VECTOR _focus, float _rot, tagMapCenterId _mapCenterId,CPlayerManager* _playerManager);
+	void Step(float _rot, int _stageCenterId,CPlayerManager* _playerManager);
 
 	//カメラの更新
 	void Update();
+
+	//カメラの終了処理
+	void Exit();
 
 private:
 
@@ -41,8 +47,7 @@ private:
 	void Rotate(VECTOR _focus);
 
 	//カメラの移動処理
-	void Move(tagMapCenterId _mapCenterId, CPlayerManager* _playerManager);
+	void Move(int _stageCenterId, CPlayerManager* _playerManager);
 
 };
-
 

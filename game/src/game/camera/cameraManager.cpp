@@ -43,7 +43,7 @@ CCameraManager::~CCameraManager()
 //---------------------------
 //			初期化
 //---------------------------
-void CCameraManager::Init(VECTOR _focus)
+void CCameraManager::Init(VECTOR _focus, CMapBase* _map)
 {
 	//カメラを設定
 	m_camera[CAMERA_ID_PLAY] = new CPlayCamera;
@@ -53,9 +53,9 @@ void CCameraManager::Init(VECTOR _focus)
 	m_camera[CAMERA_ID_RESULT] = new CResultCamera;
 
 	//カメラの初期化
-	for (int i = 0; i < CAMERA_ID_NUM; i++)
+	for (int camera_i = 0; camera_i < CAMERA_ID_NUM; camera_i++)
 	{
-		m_camera[i]->Init(_focus);
+		m_camera[camera_i]->Init(_map);
 	}
 
 	// カメラのニアーファー設定
@@ -72,7 +72,7 @@ void CCameraManager::Init(VECTOR _focus)
 //---------------------------
 //	毎フレームする処理
 //---------------------------
-void CCameraManager::Step(VECTOR _focus, float _rot, tagMapCenterId _mapCenterId, CPlayerManager* _playerManager)
+void CCameraManager::Step(VECTOR _focus, float _rot, int _mapCenterId, CPlayerManager* _playerManager)
 {
 	VECTOR playerPos = ZERO;
 	VECTOR focus = _focus;
@@ -81,7 +81,7 @@ void CCameraManager::Step(VECTOR _focus, float _rot, tagMapCenterId _mapCenterId
 	{
 		CMapCamera* mapCamera = dynamic_cast<CMapCamera*>(m_camera[m_id]);
 
-		mapCamera->Step(focus, _rot, _mapCenterId, _playerManager);
+		mapCamera->Step(_rot, _mapCenterId, _playerManager);
 	}
 	else
 	{
@@ -160,6 +160,8 @@ void CCameraManager::Exit()
 	{
 		if (m_camera[camera_i] != nullptr) 
 		{
+			m_camera[camera_i]->Exit();
+
 			delete m_camera[camera_i];
 
 			m_camera[camera_i] = nullptr;

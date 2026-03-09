@@ -1,7 +1,6 @@
 #include  "mapItemManager.h"
 #include "itemObject/bomb/bomb.h"
 #include "itemObject/box/box.h"
-#include "../map/map.h"
 
 using namespace std;
 
@@ -11,15 +10,6 @@ static const char* MODEL_PATH =				//モデルのパス
 };
 
 constexpr int MAP_FRAME_NUM = 89;				//スポーンする座標のフレームID
-
-constexpr int SPAWN_NUM[MAP_CENTER_NUM]		//マップごとのフレームの数
-{
-	4,
-	4,
-	4,
-	4,
-	4,
-};
 
 //-----------------------
 //	  コンストラクタ
@@ -45,19 +35,6 @@ void CMapItemManager::Init()
 	//アイテムが増えすぎないようにする
 	m_item.clear();
 
-	//アイテムの初期化
-	for (int map_i = 0; map_i < MAP_CENTER_NUM; map_i++)
-	{
-		for (int item_i = 0; item_i < SPAWN_NUM[map_i]; item_i++)
-		{
-			unique_ptr<CItemBase> box = make_unique<CBox>();
-
-			box->Init();
-
-			m_item.push_back(move(box));
-		}
-	}
-
 	m_hndl = -1;
 
 }
@@ -65,37 +42,40 @@ void CMapItemManager::Init()
 //-----------------------
 //	  モデルロード
 //-----------------------
-void CMapItemManager::Load()
+void CMapItemManager::Load(CMapBase* _map)
 {
 
 	m_hndl = MV1LoadModel(MODEL_PATH);
 
+	//アイテムをステージに必要な数だけ生成
+	for (int stage_i = 0; stage_i < _map->GetStageNum(); stage_i++)
+	{
+		//ステージの情報を取得
+		int stageHndl = _map->GetHndl(stage_i);
+		int stageFrameNum = _map->GetStageSpawnData(stage_i).mapItemFrameNum;
+
+		for (int spawnPos_i = 0; spawnPos_i < _map->GetStageSpawnData(stage_i).mapItemSpawnNum; spawnPos_i++)
+		{
+			//アイテムの出現座標を保存
+			VECTOR spawnPos = ZERO;
+			spawnPos = MV1GetFramePosition(stageHndl, stageFrameNum);
+			spawnPos = VAdd(spawnPos, _map->GetStagePos(stage_i));
+			stageFrameNum += 2;
+
+			//アイテムを生成して出現座標を設定する
+			unique_ptr<CItemBase> box = make_unique<CBox>();
+			box->Init();
+			box->SetPos(spawnPos);
+			box->SetSpawnPos(spawnPos);
+			m_item.push_back(move(box));
+		}
+	}
+
+	//アイテムのモデルロード
 	for (int item_i = 0; item_i < m_item.size(); item_i++)
 	{
 		m_item[item_i]->Load(m_hndl);
 	}
-
-	//マップのフレームハンドルをロード
-	int mapFrameHndl = MV1LoadModel(MAP_FRAME_PATH[MAP_ID_GRASSLAND]);
-
-	int mapFrameNum = MAP_FRAME_NUM;
-	for (int spawnPos_i = 0; spawnPos_i < m_item.size(); spawnPos_i++)
-	{
-		//アイテムの出現座標を保存
-		VECTOR spawnPos = ZERO;
-
-		spawnPos = MV1GetFramePosition(mapFrameHndl, mapFrameNum);
-		mapFrameNum += 2;
-
-		m_item[spawnPos_i]->SetSpawnPos(spawnPos);
-	}
-
-	///マップのフレームを削除
-	if (mapFrameHndl != -1)
-	{
-		MV1DeleteModel(mapFrameHndl);
-	}
-
 }
 
 //-----------------------

@@ -4,7 +4,6 @@
 #include "../weapon/sword/sword.h"
 #include "../weapon/gun/gun.h"
 #include"../weapon/ax/ax.h"
-#include "../../map/map.h"
 #include "../../system/effectData/effectData.h"
 #include "../../../lib/effekseer/effekseer.h"
 
@@ -38,16 +37,6 @@ static const char* MODEL_PATH[ITEM_NUM] =							//モデルのパス
 constexpr int MAP_FRAME_NUM = 56;			//マップのフレーム番号
 
 constexpr int SPAWN_TIME = 10 * 60;			//スポーンするまで時間
-
-constexpr int SPAWN_NUM[MAP_CENTER_NUM]		//マップごとのフレームの数
-	{
-		0,
-		4,
-		4,
-		4,
-		4,
-	};
-
 
 //-----------------------
 //	  コンストラクタ
@@ -125,27 +114,12 @@ void CSpawnItemManager::Init(CPlayerManager* _playerManager)
 
 	m_isItemSpawn = false;
 
-	int spawnNum = 0;
-	for (int map_i = 0; map_i < MAP_CENTER_NUM; map_i++)
-	{
-		m_spawnData.push_back(vector<tagSpawnData>());
-		spawnNum = SPAWN_NUM[map_i];
-
-		for (int spawn_i = 0; spawn_i < spawnNum; spawn_i++)
-		{
-			tagSpawnData spawnData;
-			spawnData.isSpawn = false;
-			spawnData.pos = ZERO;
-			m_spawnData[map_i].push_back(spawnData);
-		}
-	}
-
 }
 
 //-----------------------
 //	  モデルロード
 //-----------------------
-void CSpawnItemManager::Load()
+void CSpawnItemManager::Load(CMapBase* _map)
 {
 	//アイテムのモデル読み込み
 	for (int hndl_i = 0; hndl_i < ITEM_NUM; hndl_i++)
@@ -164,38 +138,26 @@ void CSpawnItemManager::Load()
 		m_item[spawn_i]->Load(hndl);
 	}
 
-	//マップのフレームハンドルをロード
-	int mapFrameHndl = MV1LoadModel(MAP_FRAME_PATH[MAP_ID_GRASSLAND]);
-
-	//フレームの番号
-	int frameNum = MAP_FRAME_NUM;
-
-	//出現位置をアイテムのスポーン情報に入力-------------------------------------	
-	for (int map_i = 0; map_i < m_spawnData.size(); map_i++)
+	for (int stage_i = 0; stage_i < _map->GetStageNum(); stage_i++)
 	{
-		for (int spawn_i = 0; spawn_i < m_spawnData[map_i].size(); spawn_i++)
+		//ステージの情報を取得
+		int stageHndl = _map->GetHndl(stage_i);
+		int frameNum = _map->GetStageSpawnData(stage_i).itemFrameNum;
+
+		m_spawnData.push_back(vector<tagSpawnData>());
+
+		for (int spawn_i = 0; spawn_i < _map->GetStageSpawnData(stage_i).mapItemSpawnNum; spawn_i++)
 		{
-			//出現座標保存用
-			VECTOR spawnPos = ZERO;
+			//スポーンデータを生成
+			tagSpawnData spawnData;
+			spawnData.isSpawn = false;
+			spawnData.pos = MV1GetFramePosition(stageHndl,frameNum);
+			spawnData.pos = VAdd(spawnData.pos,_map->GetStagePos(stage_i));
+			m_spawnData[stage_i].push_back(spawnData);
 
-			//フレームから出現座標を取得
-			spawnPos = MV1GetFramePosition(mapFrameHndl, frameNum);
-
-			//アイテムのスポーン情報に設定
-			m_spawnData[map_i][spawn_i].pos = spawnPos;
-
-			//フレームの番号を進める
+			//フレーム番号を進める
 			frameNum += 2;
-
 		}
-
-	}
-	//---------------------------------------------------------------------------
-
-	///マップのフレームを削除
-	if (mapFrameHndl != -1)
-	{
-		MV1DeleteModel(mapFrameHndl);
 	}
 
 }
@@ -213,34 +175,30 @@ void CSpawnItemManager::Step()
 		m_isItemSpawn = true;
 	}
 
-	int mapSpawnPosNum[MAP_CENTER_NUM] = { 0 };
-
 	//全てのスポーン座標がtrueになったらリセットする
 	for (int map_i = 0; map_i < m_spawnData.size(); map_i++)
 	{
+		int spawnNum = 0;
+
 		for (int spawnPos_i = 0; spawnPos_i < m_spawnData[map_i].size(); spawnPos_i++) 
 		{
 			//まだ出現していない場所はカウントしない
 			if (m_spawnData[map_i][spawnPos_i].isSpawn == false)continue;
 
-			mapSpawnPosNum[map_i]++;
+			spawnNum++;
 		}
-	}
 
-	//すべての座標にアイテムが出現したら全部の出現フラグをfalseにする------------------
-
-	for (int map_i = 0; map_i < m_spawnData.size(); map_i++)
-	{
-		if (mapSpawnPosNum[map_i] == m_spawnData[map_i].size()) 
+		//すべての座標にアイテムが出現したら全部の出現フラグをfalseにする------------------
+		if (spawnNum == m_spawnData.size())
 		{
 			for (int spawn_i = 0; spawn_i < m_spawnData[map_i].size(); spawn_i++)
 			{
 				m_spawnData[map_i][spawn_i].isSpawn = false;
 			}
 		}
+		//---------------------------------------------------------------------------------
 	}
 
-	//---------------------------------------------------------------------------------
 }
 
 //-----------------------
@@ -271,10 +229,10 @@ void CSpawnItemManager::Exit()
 }
 
 //アイテムを出現させる
-unique_ptr<CItemBase> CSpawnItemManager::SpawnItem(tagMapCenterId _mapId)
+unique_ptr<CItemBase> CSpawnItemManager::SpawnItem(int _stageId)
 {
 	//マップにアイテム出現場所がない場合nullptrを返す
-	if (m_spawnData[_mapId].size() == 0)
+	if (m_spawnData[_stageId].size() == 0)
 	{
 		//スポーンしているかをリセット
 		m_isItemSpawn = false;
@@ -402,12 +360,12 @@ unique_ptr<CItemBase> CSpawnItemManager::SpawnItem(tagMapCenterId _mapId)
 
 	while (true)
 	{
-		spawnPosId = GetRand(static_cast<int>( m_spawnData[_mapId].size()) - 1);
+		spawnPosId = GetRand(static_cast<int>( m_spawnData[_stageId].size()) - 1);
 
-		if (m_spawnData[_mapId][spawnPosId].isSpawn == false)
+		if (m_spawnData[_stageId][spawnPosId].isSpawn == false)
 		{
-			spawnItem->SetPos(m_spawnData[_mapId][spawnPosId].pos);
-			m_spawnData[_mapId][spawnPosId].isSpawn = true;
+			spawnItem->SetPos(m_spawnData[_stageId][spawnPosId].pos);
+			m_spawnData[_stageId][spawnPosId].isSpawn = true;
 			m_isItemSpawn = true;
 			break;
 		}
@@ -418,7 +376,7 @@ unique_ptr<CItemBase> CSpawnItemManager::SpawnItem(tagMapCenterId _mapId)
 	int effectId = CEffectData::GetId(EFFECT_SPAWNITEM);
 
 	//エフェクトを呼び出す
-	CEffekseerCtrl::Request(effectId, m_spawnData[_mapId][spawnPosId].pos, false);
+	CEffekseerCtrl::Request(effectId, m_spawnData[_stageId][spawnPosId].pos, false);
 
 	//スポーンしているかをリセット
 	m_isItemSpawn = false;
@@ -494,3 +452,4 @@ void CSpawnItemManager::ReturnItem(unique_ptr<CItemBase> _returnItme)
 	m_item.push_back(move(_returnItme));
 
 }
+

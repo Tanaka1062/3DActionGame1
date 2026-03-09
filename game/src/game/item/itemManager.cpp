@@ -33,12 +33,12 @@ void CItemManager::Init(CPlayerManager* _playerManager)
 //-----------------------
 //	  モデルロード
 //-----------------------
-void CItemManager::Load()
+void CItemManager::Load(CMapBase* _map)
 {
 
-	m_mapItemManager.Load();
-	m_spawnItemManager.Load();
-	m_coinManager.Load();
+	m_mapItemManager.Load(_map);
+	m_spawnItemManager.Load(_map);
+	m_coinManager.Load(_map);
 
 	//マップアイテムを代入
 	for (int mapItem_i = 0; mapItem_i < m_mapItemManager.GetItemNum(); mapItem_i++)

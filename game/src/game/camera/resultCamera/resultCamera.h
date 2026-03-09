@@ -2,6 +2,7 @@
 #pragma once
 #include <DxLib.h>
 #include "../cameraBase.h"
+#include "../../map/mapBase.h"
 
 class CResultCamera : public CCameraBase
 {
@@ -13,7 +14,7 @@ public:
 	CResultCamera();
 
 	//‰Šú‰»
-	void Init(VECTOR _focus);
+	void Init(CMapBase* _map);
 
 	// –ˆƒtƒŒ[ƒ€ŒÄ‚Ôˆ—
 	void Step(VECTOR _focus, float _rot);

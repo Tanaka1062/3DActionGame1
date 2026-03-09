@@ -3,7 +3,7 @@
 #include"../shot/shotManager.h"
 #include "../player/playerManager.h"
 #include "../goal/goal.h"
-#include "../map/map.h"
+#include "../map/mapBase.h"
 #include "../item/itemManager.h"
 #include "../attack/attackManager.h"
 #include "../../lib/model/3DObject.h"
@@ -25,10 +25,10 @@ public:
 	static void CheckHitPlayerToPlayer(CPlayerManager& _playerManager);
 
 	//プレイヤーとマップの当たり判定
-	static void CheckHitPlayerToMap(CPlayerManager& _playerManager, CMap& _map);
+	static void CheckHitPlayerToMap(CPlayerManager& _playerManager, CMapBase* _map);
 
 	//アイテムとマップの当たり判定
-	static void CheckHitItemToMap(CItemManager& _itemManager, CMap& _map);
+	static void CheckHitItemToMap(CItemManager& _itemManager, CMapBase* _map);
 
 	//アイテムとプレイヤーの当たり判定
 	static void CheckHitPlayerToItem(CPlayerManager& _playerManager, CItemManager& _itemManager);

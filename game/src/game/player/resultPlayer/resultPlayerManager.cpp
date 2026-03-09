@@ -126,7 +126,7 @@ void CResultPlayerManager::Load(CMapBase* _map)
 	//マップのフレームのハンドルをロード
 	int mapHndl = _map->GetHndl(0);
 
-	int frameId[3] = { 3,7,9 };
+	int frameId[3] = { 4,8,10 };
 	int frameIdNum = 0;
 
 	for (int player_i = 0; player_i < m_player.size(); player_i++)
@@ -137,7 +137,7 @@ void CResultPlayerManager::Load(CMapBase* _map)
 		//スポーン位置をセット
 		if (m_player[player_i]->GetIsWin() == true)
 		{
-			start = MV1GetFramePosition(mapHndl, 1);
+			start = MV1GetFramePosition(mapHndl, 2);
 		}
 		else
 		{

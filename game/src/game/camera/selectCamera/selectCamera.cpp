@@ -1,36 +1,29 @@
 #include "selectCamera.h"
 #include <math.h>
-#include "../../map/map.h"
 
 //定義関連====================================
 constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
+constexpr VECTOR INIT_POS = { -123.0f,35.0f,0.0f };
 //============================================
 
 //---------------------------------
 //		コンストラクタ
 //---------------------------------
 CSelectCamera::CSelectCamera() {
-	Init(ZERO);
+	Init(nullptr);
 }
 
 //---------------------------------
 //			初期化
 //---------------------------------
-void CSelectCamera::Init(VECTOR _focus)
+void CSelectCamera::Init(CMapBase* _map)
 {
-	CCameraBase::Init(ZERO);
-	m_focusPos = ZERO;
+	CCameraBase::Init(_map);
+	m_pos = INIT_POS;
+	if (_map == nullptr)return;
 
-	//フレームのハンドルをロード
-	int mapFrameHndl = MV1LoadModel(MAP_FRAME_PATH[MAP_ID_SELECT]);
+	m_focusPos = _map->GetStagePos(0);
 
-	m_pos = MV1GetFramePosition(mapFrameHndl,5);
-
-	///マップのフレームを削除
-	if (mapFrameHndl != -1)
-	{
-		MV1DeleteModel(mapFrameHndl);
-	}
 }
 
 //---------------------------------

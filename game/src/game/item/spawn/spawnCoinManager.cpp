@@ -1,5 +1,4 @@
 #include "spawnCoinManager.h"
-#include "../../map/map.h"
 #include "../coin/spawnCoin.h"
 #include "../coin/dropCoin.h"
 
@@ -13,15 +12,6 @@ static const char* MODEL_PATH =				//モデルのパス
 constexpr int MAP_FRAME_NUM = 130;			//マップのフレーム番号
 
 constexpr int DROP_COIN_MAX = 100;			//コインの最大量
-
-constexpr int SPAWN_NUM[MAP_CENTER_NUM]		//マップごとのフレームの数
-	{
-		22,
-		6,
-		21,
-		20,
-		9,
-	};
 
 //-----------------------
 //	  コンストラクタ
@@ -49,19 +39,6 @@ void CSpawnCoinManager::Init()
 	m_mapCoin.clear();
 	m_dropCoin.clear();
 	
-	//マップに出現するコインを生成
-	for (int map_i = 0; map_i < MAP_CENTER_NUM; map_i++)
-	{
-		for (int mapCoin_i = 0; mapCoin_i < SPAWN_NUM[map_i]; mapCoin_i++)
-		{
-			unique_ptr<CItemBase> mapCoin = make_unique<CSpawnCoin>();
-
-			mapCoin->Init();
-
-			m_mapCoin.push_back(move(mapCoin));
-		}
-	}
-
 	//ドロップするコインを生成
 	for (int dropCoin_i = 0; dropCoin_i < DROP_COIN_MAX; dropCoin_i++)
 	{
@@ -79,7 +56,7 @@ void CSpawnCoinManager::Init()
 //-----------------------
 //	  モデルロード
 //-----------------------
-void CSpawnCoinManager::Load()
+void CSpawnCoinManager::Load(CMapBase* _map)
 {
 	//アイテムのモデル読み込み
 	m_hndl = MV1LoadModel(MODEL_PATH);
@@ -94,34 +71,31 @@ void CSpawnCoinManager::Load()
 		m_dropCoin[dropCoin_i]->Load(m_hndl);
 	}
 
-	//マップのフレームハンドルをロード
-	int mapFrameHndl = MV1LoadModel(MAP_FRAME_PATH[MAP_ID_GRASSLAND]);
-
-	//フレームの番号
-	int frameNum = MAP_FRAME_NUM;
-
-	//出現位置をアイテムのスポーン情報に入力-------------------------------------	
-	for (int mapCoin_i = 0; mapCoin_i < m_mapCoin.size(); mapCoin_i++)
+	for (int stage_i = 0; stage_i < _map->GetStageNum(); stage_i++)
 	{
-		//出現座標保存用
-		VECTOR spawnPos = ZERO;
+		//ステージの情報を取得
+		int stageHndl = _map->GetHndl(stage_i);
+		int frameNum = _map->GetStageSpawnData(stage_i).coinFrameNum;
 
-		//フレームから出現座標を取得
-		spawnPos = MV1GetFramePosition(mapFrameHndl, frameNum);
+		//出現するコインを生成--------------------------------------------------------	
+		for (int mapCoin_i = 0; mapCoin_i < _map->GetStageSpawnData(stage_i).coinSpawnNum; mapCoin_i++)
+		{
+			//出現座標取得
+			VECTOR spawnPos = MV1GetFramePosition(stageHndl, frameNum);
+			spawnPos = VAdd(spawnPos,_map->GetStagePos(stage_i));
 
-		//マップのコインに出現座標を設定
-		m_mapCoin[mapCoin_i]->SetSpawnPos(spawnPos);
+			//コインを生成
+			unique_ptr<CItemBase> mapCoin = make_unique<CSpawnCoin>();
+			mapCoin->Init();
+			mapCoin->SetPos(spawnPos);
+			mapCoin->SetSpawnPos(spawnPos);
+			m_mapCoin.push_back(move(mapCoin));
 
-		//フレームの番号を進める
-		frameNum += 2;
+			//フレームの番号を進める
+			frameNum += 2;
 
-	}
-	//---------------------------------------------------------------------------
-
-	///マップのフレームを削除
-	if (mapFrameHndl != -1)
-	{
-		MV1DeleteModel(mapFrameHndl);
+		}
+		//---------------------------------------------------------------------------
 	}
 
 }

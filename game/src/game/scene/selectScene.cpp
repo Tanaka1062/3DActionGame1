@@ -54,10 +54,9 @@ void CSelectScene::Draw()
 void CSelectScene::Init()
 {
 	CSceneBase::Init();
-
-	CCameraManager::Init(ZERO);
-	CCameraManager::ChangeCamera(CCameraManager::CAMERA_ID_SELECT);
 	m_mapManager.Init(MAP_ID_SELECT);
+	CCameraManager::Init(ZERO,m_mapManager.GetMap());
+	CCameraManager::ChangeCamera(CCameraManager::CAMERA_ID_SELECT);
 	m_sky.Init();
 	m_selectPlayerManager.Init();
 

@@ -1,5 +1,6 @@
 #pragma once
 #include <DxLib.h>
+#include "../map/mapBase.h"
 
 //カメラのベースクラス
 class CCameraBase
@@ -11,11 +12,12 @@ protected:
 	VECTOR m_focusPos;	//カメラの注視点
 
 public:
-	//コンストラクタ
+	//コンストラクタ・デストラクタ
 	CCameraBase();
+	virtual ~CCameraBase();
 
 	//初期化
-	virtual void Init(VECTOR _focus);
+	virtual void Init(CMapBase* _map);
 
 	//毎フレームする処理
 	//_focus	:	プレイヤーの座標
@@ -24,6 +26,9 @@ public:
 
 	//カメラの更新
 	virtual void Update();
+
+	//カメラの終了処理
+	virtual void Exit();
 
 	//カメラの座標取得
 	VECTOR GetPos() { return m_pos; }
