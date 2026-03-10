@@ -58,19 +58,6 @@ void CSpawnCoinManager::Init()
 //-----------------------
 void CSpawnCoinManager::Load(CMapBase* _map)
 {
-	//アイテムのモデル読み込み
-	m_hndl = MV1LoadModel(MODEL_PATH);
-
-	//アイテムのモデルロード
-	for (int mapCoin_i = 0; mapCoin_i < m_mapCoin.size(); mapCoin_i++)
-	{
-		m_mapCoin[mapCoin_i]->Load(m_hndl);
-	}
-	for (int dropCoin_i = 0; dropCoin_i < m_dropCoin.size(); dropCoin_i++)
-	{
-		m_dropCoin[dropCoin_i]->Load(m_hndl);
-	}
-
 	for (int stage_i = 0; stage_i < _map->GetStageNum(); stage_i++)
 	{
 		//ステージの情報を取得
@@ -82,7 +69,6 @@ void CSpawnCoinManager::Load(CMapBase* _map)
 		{
 			//出現座標取得
 			VECTOR spawnPos = MV1GetFramePosition(stageHndl, frameNum);
-			spawnPos = VAdd(spawnPos,_map->GetStagePos(stage_i));
 
 			//コインを生成
 			unique_ptr<CItemBase> mapCoin = make_unique<CSpawnCoin>();
@@ -98,6 +84,18 @@ void CSpawnCoinManager::Load(CMapBase* _map)
 		//---------------------------------------------------------------------------
 	}
 
+	//アイテムのモデル読み込み
+	m_hndl = MV1LoadModel(MODEL_PATH);
+
+	//アイテムのモデルロード
+	for (int mapCoin_i = 0; mapCoin_i < m_mapCoin.size(); mapCoin_i++)
+	{
+		m_mapCoin[mapCoin_i]->Load(m_hndl);
+	}
+	for (int dropCoin_i = 0; dropCoin_i < m_dropCoin.size(); dropCoin_i++)
+	{
+		m_dropCoin[dropCoin_i]->Load(m_hndl);
+	}
 }
 
 //-----------------------

@@ -263,11 +263,8 @@ void CCollisionManager::CheckHitPlayerToMap(CPlayerManager& _playerManager, CMap
 
 		//当たり判定情報が格納される構造体
 		MV1_COLL_RESULT_POLY_DIM col;
-
-		for (int stage_i = 0; stage_i < _map->GetStageNum(); stage_i++)
-		{
 			//ステージが出現していない場合は処理をしない
-			if (_map->GetStageActive(stage_i) == false)continue;
+			if (_map->GetStageActive(_map->GetStageId()) == false)return;
 
 			col = MV1CollCheck_Sphere(_map->GetHndl(_map->GetStageId()), -1,
 				player->GetCenter(), player->GetRad());
@@ -363,7 +360,6 @@ void CCollisionManager::CheckHitPlayerToMap(CPlayerManager& _playerManager, CMap
 			}
 			player->SetShadowPos(shadowPos);
 
-		}
 
 	}
 }
@@ -383,12 +379,10 @@ void CCollisionManager::CheckHitItemToMap(CItemManager& _itemManager, CMapBase* 
 	{
 		if ((*item_i)->GetActive() == false)continue;
 
-		for (int stage_i = 0; stage_i < _map->GetStageNum(); stage_i++)
-		{
-			//ステージが出現していなかったら処理をしない
-			if (_map->GetStageActive(stage_i) == false)continue;
+		//ステージが出現していなかったら処理をしない
+			if (_map->GetStageActive(_map->GetStageId()) == false)return;
 
-			col = MV1CollCheck_Sphere(_map->GetHndl(stage_i), -1,
+			col = MV1CollCheck_Sphere(_map->GetHndl(_map->GetStageId()), -1,
 				(*item_i)->GetCenter(), (*item_i)->GetRad());
 
 			//ポリゴンと当たっていたか
@@ -430,7 +424,7 @@ void CCollisionManager::CheckHitItemToMap(CItemManager& _itemManager, CMapBase* 
 			{
 				shadowPos.y -= 0.01f * shadowPosY_i;
 
-				col = MV1CollCheck_Sphere(_map->GetHndl(stage_i), -1,
+				col = MV1CollCheck_Sphere(_map->GetHndl(_map->GetStageId()), -1,
 					shadowPos, 1.0f);
 
 				if (col.HitNum != 0)
@@ -444,8 +438,6 @@ void CCollisionManager::CheckHitItemToMap(CItemManager& _itemManager, CMapBase* 
 			}
 
 			(*item_i)->SetShadowPos(shadowPos);
-
-		}
 
 	}
 }

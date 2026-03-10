@@ -9,8 +9,6 @@ static const char* MODEL_PATH =				//モデルのパス
 	"data/model/item/box/box.mv1",
 };
 
-constexpr int MAP_FRAME_NUM = 89;				//スポーンする座標のフレームID
-
 //-----------------------
 //	  コンストラクタ
 //-----------------------
@@ -59,7 +57,6 @@ void CMapItemManager::Load(CMapBase* _map)
 			//アイテムの出現座標を保存
 			VECTOR spawnPos = ZERO;
 			spawnPos = MV1GetFramePosition(stageHndl, stageFrameNum);
-			spawnPos = VAdd(spawnPos, _map->GetStagePos(stage_i));
 			stageFrameNum += 2;
 
 			//アイテムを生成して出現座標を設定する

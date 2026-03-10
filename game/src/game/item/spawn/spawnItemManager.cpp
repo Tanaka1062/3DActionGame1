@@ -146,13 +146,12 @@ void CSpawnItemManager::Load(CMapBase* _map)
 
 		m_spawnData.push_back(vector<tagSpawnData>());
 
-		for (int spawn_i = 0; spawn_i < _map->GetStageSpawnData(stage_i).mapItemSpawnNum; spawn_i++)
+		for (int spawn_i = 0; spawn_i < _map->GetStageSpawnData(stage_i).itemSpawnNum; spawn_i++)
 		{
 			//スポーンデータを生成
 			tagSpawnData spawnData;
 			spawnData.isSpawn = false;
 			spawnData.pos = MV1GetFramePosition(stageHndl,frameNum);
-			spawnData.pos = VAdd(spawnData.pos,_map->GetStagePos(stage_i));
 			m_spawnData[stage_i].push_back(spawnData);
 
 			//フレーム番号を進める
@@ -189,7 +188,7 @@ void CSpawnItemManager::Step()
 		}
 
 		//すべての座標にアイテムが出現したら全部の出現フラグをfalseにする------------------
-		if (spawnNum == m_spawnData.size())
+		if (spawnNum == m_spawnData[map_i].size())
 		{
 			for (int spawn_i = 0; spawn_i < m_spawnData[map_i].size(); spawn_i++)
 			{

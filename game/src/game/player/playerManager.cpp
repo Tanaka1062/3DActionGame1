@@ -161,7 +161,6 @@ void CPlayerManager::Load(CMapBase* _map)
 
 			//フレームから座標を取得
 			pos = MV1GetFramePosition(mapHndl, frameNum);
-			pos = VAdd(pos, _map->GetStagePos(stage_i));
 
 			//フレームを次に進める
 			frameNum += 2;
