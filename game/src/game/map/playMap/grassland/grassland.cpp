@@ -16,9 +16,9 @@ constexpr VECTOR MOVE_SPEED = {0.0f,-10.0f,0.0f};	//動くスピード
 constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };			//VECTOR用初期化
 constexpr VECTOR SCALE = { 1.0f,1.0f,1.0f };		//大きさ
 constexpr int SHAKE_AMOUNT = 2;						//揺れる大きさ
-constexpr int SHAKE_TIME = 7;						//揺れるまでの時間
+constexpr int SHAKE_TIME = 4;						//揺れるまでの時間
 constexpr float FALL_MAX = -300.0f;					//最大の落下位置
-static const char* MAP_MODEL_PATH[STAGE_NUM] ={
+static const char* STAGE_MODEL_PATH[STAGE_NUM] ={
 	"data/model/map/playMap/testMap10/TestMap10-1.mv1",
 	"data/model/map/playMap/testMap10/TestMap10-2.mv1",
 	"data/model/map/playMap/testMap10/TestMap10-3.mv1",
@@ -71,6 +71,12 @@ constexpr int COIN_SPAWN_NUM[STAGE_NUM] = {
 	9,
 };
 
+static const char* OBJECT_MODEL_PATH = {
+	"data/model/map/playMap/testMap10/TestMap10-bridge.mv1",
+};
+constexpr VECTOR OBJECT_INIT_POS = { 0.0f,0.0f,300.0f };
+constexpr VECTOR OBJECT_SIZE = { 900.0f,50.0f,900.0f };
+
 //==========================================
 
 //------------------------
@@ -81,6 +87,10 @@ CGrassland::CGrassland()
 	for (int stage_i = 0; stage_i < STAGE_NUM; stage_i++)
 	{
 		m_stage.push_back(new CObject);
+	}
+	for (int object_ii = 0; object_ii < STAGE_NUM - 1; object_ii++)
+	{
+		m_object.push_back(new CObject);
 	}
 	CMapBase::Init();
 	Init();
@@ -105,6 +115,15 @@ void CGrassland::Init()
 
 	}
 
+	for (int object_i = 0; object_i < m_object.size(); object_i++)
+	{
+		VECTOR vec = OBJECT_INIT_POS;
+		vec = VAdd(vec, m_stage[object_i + 1]->GetPos());
+		m_object[object_i]->SetPos(vec);
+		m_object[object_i]->SetSize(OBJECT_SIZE);
+		m_object[object_i]->SetObjectType(OBJECT_TYPE_BOX);
+	}
+
 	m_stageId = 0;
 	m_isStageFall = false;
 	m_isStageShake = false;
@@ -117,10 +136,15 @@ void CGrassland::Load()
 {
 	for (int stage_i = 0; stage_i < m_stage.size(); stage_i++)
 	{
-		m_stage[stage_i]->LoadModel(MAP_MODEL_PATH[stage_i]);
+		m_stage[stage_i]->LoadModel(STAGE_MODEL_PATH[stage_i]);
 
 		CMapBase::Update();
 		MV1RefreshCollInfo(m_stage[stage_i]->GetHndl());
+	}
+
+	for (int object_i = 0; object_i < m_object.size(); object_i++)
+	{
+		m_object[object_i]->LoadModel(OBJECT_MODEL_PATH);
 	}
 }
 
@@ -141,17 +165,19 @@ void CGrassland::Step()
 
 		m_mapMoveTimer += MAP_MOVE_TIME;
 
+	}
+	else if (gameTime->GetTime() - m_mapMoveTimer == MAP_MOVE_TIME - SHAKE_TIME && m_stageId != m_stage.size() &&
+		m_isStageShake == false)
+	{
+		m_isStageShake = true;
+
 		m_stageId += 1;
 
 		if (m_stageId >= STAGE_NUM - 1)
 		{
 			m_stageId = STAGE_NUM - 1;
 		}
-	}
-	else if (gameTime->GetTime() - m_mapMoveTimer >= MAP_MOVE_TIME - SHAKE_TIME)
-	{
-		StageShake();
-		m_isStageShake = true;
+
 	}
 	int num = gameTime->GetTime() - m_mapMoveTimer;
 
@@ -171,13 +197,17 @@ void CGrassland::Step()
 //------------------------
 void CGrassland::StageMove()
 {
+
 	if (m_stageId - 1 >= 0)
 	{
+		if (m_stage[m_stageId - 1]->GetActive() == false)return;
+
 		VECTOR vec = m_stage[m_stageId - 1]->GetPos();
 		m_stage[m_stageId - 1]->SetPos(VAdd(vec,MOVE_SPEED));
 
 		if (m_stage[m_stageId - 1]->GetPos().y <= FALL_MAX)
 		{
+			m_stage[m_stageId - 1]->SetActive(false);
 			m_isStageFall = false;
 		}
 	}
@@ -188,14 +218,17 @@ void CGrassland::StageMove()
 //------------------------
 void CGrassland::StageShake()
 {
-	if (m_stageId  >= 0)
+
+	if (m_stageId - 1  >= 0)
 	{
+		if (m_stage[m_stageId - 1]->GetActive() == false)return;
+
 		VECTOR shake = { 0 };
 		shake.x = GetRand(SHAKE_AMOUNT) - (SHAKE_AMOUNT * 0.5);
 		shake.z = GetRand(SHAKE_AMOUNT) - (SHAKE_AMOUNT * 0.5);
 		
-		VECTOR vec = VAdd(POS[m_stageId],shake);
-		m_stage[m_stageId]->SetPos(vec);
+		VECTOR vec = VAdd(POS[m_stageId - 1],shake);
+		m_stage[m_stageId - 1]->SetPos(vec);
 	}
 }
 

@@ -32,6 +32,12 @@ CMapBase::~CMapBase()
 		delete m_stage[stage_i];
 	}
 	m_stage.clear();
+
+	for (int object_i = 0; object_i < m_object.size(); object_i++)
+	{
+		delete m_object[object_i];
+	}
+	m_object.clear();
 }
 
 //------------------------
@@ -74,6 +80,11 @@ void CMapBase::Update()
 	{
 		m_stage[stage_i]->Update();
 	}
+
+	for (int object_i = 0; object_i < m_object.size(); object_i++)
+	{
+		m_object[object_i]->Update();
+	}
 }
 
 //------------------------
@@ -86,6 +97,13 @@ void CMapBase::Draw()
 		if (m_stage[stage_i]->GetActive() == false)continue;
 
 		m_stage[stage_i]->Draw();
+	}
+
+	for (int object_i = 0; object_i < m_object.size(); object_i++)
+	{
+		if (m_object[object_i]->GetActive() == false)continue;
+
+		m_object[object_i]->Draw();
 	}
 }
 
@@ -100,5 +118,10 @@ void CMapBase::Exit()
 	}
 
 	m_stageSpawnData.clear();
+
+	for (int object_i = 0; object_i < m_object.size(); object_i++)
+	{
+		m_object[object_i]->Exit();
+	}
 }
 

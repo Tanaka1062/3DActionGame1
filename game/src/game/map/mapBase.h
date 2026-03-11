@@ -20,6 +20,7 @@ protected:
 		int coinSpawnNum;
 	};
 	std::vector<tagStageSpawnData>	m_stageSpawnData;	//ステージのスポーンデータ
+	std::vector<CObject*> m_object;						//ステージのオブジェクト
 public:
 	//コンストラクタ・デストラクタ
 	CMapBase();
@@ -60,5 +61,11 @@ public:
 
 	//ステージのスポーンデータ取得
 	tagStageSpawnData GetStageSpawnData(int _num) { return m_stageSpawnData[_num]; }
+
+	//オブジェクトを取得
+	CObject* GetStageObject(int _num) { return m_object[_num]; }
+
+	//オブジェクトの数を取得
+	int GetStageObjectNum() { return m_object.size(); }
 };
 

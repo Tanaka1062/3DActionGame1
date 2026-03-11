@@ -116,6 +116,8 @@ public:
 
 	//大きさを取得
 	VECTOR GetSize() { return m_size; }
+	//大きさを設定
+	void SetSize(VECTOR _size) { m_size = _size; }
 
 	//半径を取得
 	float GetRad() { return m_rad; }
@@ -141,6 +143,8 @@ public:
 
 	//オブジェクトのタイプを取得
 	tagObjectType GetObjectType() { return m_objectType; }
+	//オブジェクトのタイプを設定
+	void SetObjectType(tagObjectType _type) { m_objectType = _type; }
 
 	//-------------------------------
 

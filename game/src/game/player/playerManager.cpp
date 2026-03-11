@@ -381,7 +381,7 @@ void CPlayerManager::Draw()
 	m_crown.Draw();
 
 #ifdef DEBUG
-	DrawSphere3D(CCameraManager::GetFocusPos(), DIE_RADIUS, 16, GetColor(0, 0, 255), GetColor(0, 0, 255), FALSE);
+	//DrawSphere3D(CCameraManager::GetFocusPos(), DIE_RADIUS, 16, GetColor(0, 0, 255), GetColor(0, 0, 255), FALSE);
 #endif // DEBUG
 }
 
