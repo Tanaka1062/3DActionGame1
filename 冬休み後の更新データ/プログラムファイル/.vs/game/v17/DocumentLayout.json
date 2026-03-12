@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\\u51AC\u4F11\u307F\u5F8C\u306E\u66F4\u65B0\u30C7\u30FC\u30BF\\\u30D7\u30ED\u30B0\u30E9\u30E0\u30D5\u30A1\u30A4\u30EB\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\\u51AC\u4F11\u307F\u5F8C\u306E\u66F4\u65B0\u30C7\u30FC\u30BF\\\u30D7\u30ED\u30B0\u30E9\u30E0\u30D5\u30A1\u30A4\u30EB\\src\\game\\collisionManager\\collisionManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\collisionManager\\collisionManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\\u51AC\u4F11\u307F\u5F8C\u306E\u66F4\u65B0\u30C7\u30FC\u30BF\\\u30D7\u30ED\u30B0\u30E9\u30E0\u30D5\u30A1\u30A4\u30EB\\src\\game\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7F78DD73-FCA6-4149-AE0B-BB4943363632}|game.vcxproj|solutionrelative:src\\game\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "collisionManager.cpp",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\\u51AC\u4F11\u307F\u5F8C\u306E\u66F4\u65B0\u30C7\u30FC\u30BF\\\u30D7\u30ED\u30B0\u30E9\u30E0\u30D5\u30A1\u30A4\u30EB\\src\\game\\collisionManager\\collisionManager.cpp",
+              "RelativeDocumentMoniker": "src\\game\\collisionManager\\collisionManager.cpp",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\\u51AC\u4F11\u307F\u5F8C\u306E\u66F4\u65B0\u30C7\u30FC\u30BF\\\u30D7\u30ED\u30B0\u30E9\u30E0\u30D5\u30A1\u30A4\u30EB\\src\\game\\collisionManager\\collisionManager.cpp",
+              "RelativeToolTip": "src\\game\\collisionManager\\collisionManager.cpp",
+              "ViewState": "AgIAAHEBAAAAAAAAAAAAAIEBAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-03-12T08:42:11.062Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "main.cpp",
+              "DocumentMoniker": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\\u51AC\u4F11\u307F\u5F8C\u306E\u66F4\u65B0\u30C7\u30FC\u30BF\\\u30D7\u30ED\u30B0\u30E9\u30E0\u30D5\u30A1\u30A4\u30EB\\src\\game\\main.cpp",
+              "RelativeDocumentMoniker": "src\\game\\main.cpp",
+              "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\\u51AC\u4F11\u307F\u5F8C\u306E\u66F4\u65B0\u30C7\u30FC\u30BF\\\u30D7\u30ED\u30B0\u30E9\u30E0\u30D5\u30A1\u30A4\u30EB\\src\\game\\main.cpp",
+              "RelativeToolTip": "src\\game\\main.cpp",
+              "ViewState": "AgIAAEIAAAAAAAAAAADwv2MAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-03-12T08:37:38.852Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

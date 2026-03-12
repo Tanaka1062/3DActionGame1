@@ -90,6 +90,7 @@ void CCollisionManager::CheckHitObjectToObject(CObject* _objectA, CObject* _obje
 void CCollisionManager::CheckHitPlayerToPlayerAttack(CPlayerManager& _playerManager,
 	CAttackManager& _attackManager)
 {
+	return;
 	for (int player_j = 0; player_j < _playerManager.GetPlayerNum(); player_j++)
 	{
 		//プレイヤーのクラスを取得
@@ -112,6 +113,7 @@ void CCollisionManager::CheckHitPlayerToPlayerAttack(CPlayerManager& _playerMana
 //----------------------------------------------
 void CCollisionManager::CheckHitPlayerToPlayer(CPlayerManager& _playerManager)
 {
+	return;
 	for (int player1_i = 0; player1_i < _playerManager.GetPlayerNum(); player1_i++)
 	{
 		//プレイヤー1のクラスを取得
@@ -381,6 +383,7 @@ void CCollisionManager::CheckHitItemToItem(CItemManager& _itemManager)
 //----------------------------------------------
 void CCollisionManager::CheckHitPlayerToShot(CPlayerManager& _playerManager, CShotManager& _shotManager)
 {
+	return;
 	for (int player_i = 0; player_i < _playerManager.GetPlayerNum(); player_i++)
 	{
 		CPlayer* player = _playerManager.GetPlayer(player_i);

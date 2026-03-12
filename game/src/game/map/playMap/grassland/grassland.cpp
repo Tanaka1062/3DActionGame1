@@ -75,7 +75,6 @@ static const char* OBJECT_MODEL_PATH = {
 	"data/model/map/playMap/testMap10/TestMap10-bridge.mv1",
 };
 constexpr VECTOR OBJECT_INIT_POS = { 0.0f,0.0f,300.0f };
-constexpr VECTOR OBJECT_SIZE = { 900.0f,50.0f,900.0f };
 
 //==========================================
 
@@ -120,7 +119,6 @@ void CGrassland::Init()
 		VECTOR vec = OBJECT_INIT_POS;
 		vec = VAdd(vec, m_stage[object_i + 1]->GetPos());
 		m_object[object_i]->SetPos(vec);
-		m_object[object_i]->SetSize(OBJECT_SIZE);
 		m_object[object_i]->SetObjectType(OBJECT_TYPE_BOX);
 	}
 
@@ -145,6 +143,9 @@ void CGrassland::Load()
 	for (int object_i = 0; object_i < m_object.size(); object_i++)
 	{
 		m_object[object_i]->LoadModel(OBJECT_MODEL_PATH);
+
+		m_object[object_i]->Update();
+		MV1RefreshCollInfo(m_object[object_i]->GetHndl());
 	}
 }
 

@@ -15,8 +15,8 @@ private:
 	//オブジェクト同士の当たり判定
 	static void CheckHitObjectToObject(CObject& _objectA, CObject& _objectB);
 
-	//collと球の当たり判定
-	static void CheckHitCollToObject(int _collHndl, VECTOR _pos,float _rad);
+	//collとオブジェクトの当たり判定
+	static void CheckHitCollToObject(CObject& _collObject,CObject& _object);
 public:
 
 	//プレイヤーと攻撃判定の当たり判定

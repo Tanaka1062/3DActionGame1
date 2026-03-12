@@ -282,7 +282,7 @@ void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackMa
 	}
 
 	//丸影とプレイヤーの座標が離れていたら飛んでいる
-	if (m_pos.y - m_shadow.GetPos().y > 0.0f)
+	if (m_pos.y - m_shadow.GetPos().y > 1.0f)
 	{
 		m_isFlying = true;
 	}

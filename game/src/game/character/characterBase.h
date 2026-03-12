@@ -95,8 +95,8 @@ public:
 	//í—Ş‚ğİ’è
 	void SetType(tagCharacterType _type) { m_type = _type; }
 
-	//ŠÛ‰e‚ÌÀ•W‚ğİ’è
-	void SetShadowPos(VECTOR _pos) { m_shadow.SetPos(_pos); }
+	//ŠÛ‰e‚ğæ“¾
+	CShadow* GetShadow() { return &m_shadow; }
 
 protected:
 

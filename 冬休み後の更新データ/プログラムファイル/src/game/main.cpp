@@ -96,6 +96,9 @@ int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		//シーンの描画処理
 		scene.Draw();
 
+		DrawFormatString(60, 60, GetColor(255, 0, 0), "X = %f", CControllerManager::GetLX());
+		DrawFormatString(60, 90, GetColor(255, 0, 0), "Y = %f", CControllerManager::GetLY());
+
 		//エフェクシアの描画処理
 		CEffekseerCtrl::Draw();
 

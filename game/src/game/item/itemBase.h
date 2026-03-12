@@ -76,8 +76,8 @@ public:
 	//アイテムのドロップ
 	virtual void Drop(VECTOR _pos, float _rotY);
 
-	//丸影の座標を設定
-	void SetShadowPos(VECTOR _pos) { m_shadow.SetPos(_pos); }
+	//丸影を取得
+	CShadow* GetShadow() { return &m_shadow; }
 
 	//スポーン可能かを取得
 	bool GetIsSpawn() { return m_isSpawn; }

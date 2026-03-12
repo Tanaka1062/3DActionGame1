@@ -20,7 +20,7 @@ constexpr VECTOR INIT_POS = { 0.0f,1.0f,0.0f };			//初期座標
 constexpr float SHADOW_SIZE = 0.5f;						//丸影の大きさ
 constexpr int MAX_HP = 200;								//体力
 constexpr int ATK = 20;									//攻撃力
-constexpr float MOVE_SPEED = 1.2f;						//移動スピード
+constexpr float MOVE_SPEED = 1.2f * 1.5f;						//移動スピード
 constexpr float RADIUS = 10.0f;							//半径
 constexpr float JUMP_SPEED = 3.0f;						//ジャンプスピード
 constexpr int BLOWN_MAX = 100;							//吹き飛び最大値
@@ -180,7 +180,7 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 	}
 
 	//丸影とプレイヤーの座標が離れていたら飛んでいる
-	if (m_pos.y - m_shadow.GetPos().y > 0.0f)
+	if (m_pos.y - m_shadow.GetPos().y > 1.0f)
 	{
 		m_isFlying = true;
 	}

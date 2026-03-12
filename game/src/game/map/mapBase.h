@@ -53,6 +53,9 @@ public:
 	//ステージの座標を取得
 	VECTOR GetStagePos(int _num) { return m_stage[_num]->GetPos(); }
 
+	//ステージを取得
+	CObject* GetStage(int _num) { return m_stage[_num]; }
+
 	//ステージの数を取得
 	int GetStageNum() { return static_cast<int>(m_stage.size()); }
 

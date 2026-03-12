@@ -25,21 +25,21 @@ enum tagObjectType
 //3Dオブジェクトの基底クラス
 class CObject{
 protected:
-	VECTOR m_pos;					//座標
-	VECTOR m_speed;					//速度
-	VECTOR m_rot;					//回転角度
-	VECTOR m_scale;					//拡大縮小率
-	VECTOR m_size;					//大きさ
-	int m_hndl;						//オブジェクトのハンドル
-	float m_rad;					//半径
-	float m_gravity;				//重力
-	bool m_isActive;				//生存フラグ
-	bool m_isGravity;				//重力処理をするかどうかフラグ
-	bool m_isFlying;				//空中にいるかどうかフラグ
-	bool m_isPushed;				//押し出し処理をするかどうかフラグ
-	tagObjectName m_objectName;		//オブジェクトの名前
-	tagObjectType m_objectType;		//オブジェクトのタイプ
-	CObject* m_owner;				//オーナーオブジェクト
+	VECTOR			m_pos;			//座標
+	VECTOR			m_speed;		//速度
+	VECTOR			m_rot;			//回転角度
+	VECTOR			m_scale;		//拡大縮小率
+	VECTOR			m_size;			//大きさ
+	int				m_hndl;			//オブジェクトのハンドル
+	float			m_rad;			//半径
+	float			m_gravity;		//重力
+	bool			m_isActive;		//生存フラグ
+	bool			m_isGravity;	//重力処理をするかどうかフラグ
+	bool			m_isFlying;		//空中にいるかどうかフラグ
+	bool			m_isPushed;		//押し出し処理をするかどうかフラグ
+	tagObjectName	m_objectName;	//オブジェクトの名前
+	tagObjectType	m_objectType;	//オブジェクトのタイプ
+	CObject*		m_owner;		//オーナーオブジェクト
 
 public:
 	//コンストラクタ・デストラクタ

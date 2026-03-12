@@ -12,6 +12,7 @@ void CShadow::Init(VECTOR _pos, float _scale)
 	m_pos = _pos;
 	m_pos.y += 1.0f;
 	m_scale = { _scale,_scale,_scale };
+	m_isPosUpdate = false;
 }
 
 //ÉÇÉfÉãÇÃÉçÅ[Éh
@@ -28,5 +29,7 @@ void CShadow::Step(VECTOR _pos)
 {
 	m_pos.x = _pos.x;
 	m_pos.z = _pos.z;
+
+	m_isPosUpdate = false;
 }
 
