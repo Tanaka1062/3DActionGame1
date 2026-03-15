@@ -4,7 +4,7 @@
 
 //定義関連====================================
 constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };					//VECTOR用初期化
-constexpr VECTOR INIT_POS = { -130.0f,60.0f,0.0f };
+constexpr VECTOR INIT_POS = { -200.0f,70.0f,0.0f };
 constexpr float MOVE_SPEED = 1.2f;							//カメラの移動速度
 
 constexpr int MAP_FRAME_NUM = 4;							//マップのフレーム番号
@@ -15,6 +15,7 @@ constexpr float ROT_SPEED = 0.2f * (DX_PI_F / 180.0f);		//カメラの回転スピード
 
 constexpr float ROT_Y_MAX = 30.0f * (DX_PI_F / 180.0f);		//カメラの最大のY軸回転角度
 
+constexpr float OFFSET_X = -500.0f;
 //============================================
 
 //---------------------------------
