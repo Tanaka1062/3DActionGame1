@@ -4,7 +4,7 @@
 
 //定義関連====================================
 constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };					//VECTOR用初期化
-constexpr VECTOR INIT_POS = { -200.0f,70.0f,0.0f };
+constexpr VECTOR INIT_POS = { -300.0f,70.0f,0.0f };
 constexpr float MOVE_SPEED = 1.2f;							//カメラの移動速度
 
 constexpr int MAP_FRAME_NUM = 4;							//マップのフレーム番号
@@ -14,8 +14,9 @@ constexpr float CAMERA_LENGTH =  -120.0f;					//カメラとプレイヤーの距離
 constexpr float ROT_SPEED = 0.2f * (DX_PI_F / 180.0f);		//カメラの回転スピード
 
 constexpr float ROT_Y_MAX = 30.0f * (DX_PI_F / 180.0f);		//カメラの最大のY軸回転角度
-
-constexpr float OFFSET_X = -500.0f;
+constexpr float OFFSET_X = -190.0f;
+constexpr float MAX_Z = 50.0f;
+constexpr float CAMERA_FOLLOW_THRESHOLD = 5.0f;				//カメラの追従までの値
 //============================================
 
 //---------------------------------
@@ -78,6 +79,15 @@ void CMapCamera::Step(float _rot, int _stageCenterId, CPlayerManager* _playerMan
 
 	Move(_stageCenterId,_playerManager);
 
+	if (m_nextFocus.z >= m_stageCenterPos[_stageCenterId].z + MAX_Z)
+	{
+		m_nextFocus.z = m_stageCenterPos[_stageCenterId].z + MAX_Z;
+	}
+	else if (m_nextFocus.z <= m_stageCenterPos[_stageCenterId].z - MAX_Z)
+	{
+		m_nextFocus.z = m_stageCenterPos[_stageCenterId].z - MAX_Z;
+	}
+
 	m_rot.y = atan2f(m_pos.x - m_focusPos.x, m_pos.z - m_focusPos.z);
 
 	//カメラの注視点からベース
@@ -85,40 +95,40 @@ void CMapCamera::Step(float _rot, int _stageCenterId, CPlayerManager* _playerMan
 
 	VECTOR vec = VSub(m_nextPos, m_pos);
 
-	if (vec.x > 3.0f)
+	if (vec.x > CAMERA_FOLLOW_THRESHOLD)
 	{
 		m_pos.x += MOVE_SPEED;
 	}
-	else if (vec.x < -3.0f)
+	else if (vec.x < -CAMERA_FOLLOW_THRESHOLD)
 	{
 		m_pos.x -= MOVE_SPEED;
 	}
 
-	if (vec.z > 3.0f)
+	if (vec.z > CAMERA_FOLLOW_THRESHOLD)
 	{
 		m_pos.z += MOVE_SPEED;
 	}
-	else if(vec.z < -3.0f)
+	else if(vec.z < -CAMERA_FOLLOW_THRESHOLD)
 	{
 		m_pos.z -= MOVE_SPEED;
 	}
 
 	VECTOR vec2 = VSub(m_nextFocus, m_focusPos);
 
-	if (vec2.x > 3.0f)
+	if (vec2.x > CAMERA_FOLLOW_THRESHOLD)
 	{
 		m_focusPos.x += MOVE_SPEED;
 	}
-	else if (vec2.x < -3.0f)
+	else if (vec2.x < -CAMERA_FOLLOW_THRESHOLD)
 	{
 		m_focusPos.x -= MOVE_SPEED;
 	}
 
-	if (vec2.z > 3.0f)
+	if (vec2.z > CAMERA_FOLLOW_THRESHOLD)
 	{
 		m_focusPos.z += MOVE_SPEED;
 	}
-	else if (vec2.z < -3.0f)
+	else if (vec2.z < -CAMERA_FOLLOW_THRESHOLD)
 	{
 		m_focusPos.z -= MOVE_SPEED;
 	}
@@ -162,6 +172,7 @@ void CMapCamera::Move(int _stageCenterId,CPlayerManager* _playerManager)
 	if (m_focusPos.z > m_stageCenterPos[_stageCenterId].z &&m_state == MAP_MOVE_CAMERA)
 	{
 		m_nextFocus.z -= MOVE_SPEED;
+		m_basePos.x = INIT_POS.x;
 		m_nextPos.x = m_basePos.x;
 	}
 	else
@@ -176,6 +187,7 @@ void CMapCamera::Move(int _stageCenterId,CPlayerManager* _playerManager)
 		for (int player_i = 0; player_i < _playerManager->GetPlayerNum(); player_i++)
 		{
 			CPlayer* player = _playerManager->GetPlayer(player_i);
+			if (player->GetActive() == false)continue;
 			VECTOR vec = player->GetPos();
 			//それぞれの最大X,Zと最小X,Z
 			if (minX > vec.x || minX == 0.0f)
@@ -196,6 +208,19 @@ void CMapCamera::Move(int _stageCenterId,CPlayerManager* _playerManager)
 			}
 		}
 
+		if (maxZ - minZ >= 200.0f)
+		{
+			m_basePos.x = OFFSET_X - (maxZ - minZ) * 0.5f;
+		}
+		else if(maxZ - minZ >= 80.0f)
+		{
+			m_basePos.x = OFFSET_X + (maxZ - minZ) * 0.1f;
+		}
+
+		if (minX - m_basePos.x <= 130.0f)
+		{
+			m_basePos.x = minX - 130.0f;
+		}
 		//中央をカメラの注視点にする
 		m_nextFocus.x = (minX + maxX) / 2.0f;
 		m_nextFocus.z = (maxZ + minZ) / 2.0f;
