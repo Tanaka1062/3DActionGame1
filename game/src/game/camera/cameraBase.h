@@ -7,6 +7,7 @@ class CCameraBase
 {
 protected:
 	VECTOR m_pos;		// カメラの位置
+	VECTOR m_speed;		//カメラの加速度
 	VECTOR m_rot;		//カメラの回転値
 	VECTOR m_upVec;		// カメラ上方向
 	VECTOR m_focusPos;	//カメラの注視点
@@ -45,5 +46,9 @@ public:
 
 	//カメラの注視点を取得
 	VECTOR GetFocusPos() { return m_focusPos; }
+
+protected:
+	//座標に速度を加算する
+	void UpdataSpeed();
 };
 

@@ -5,8 +5,8 @@
 //定義関連====================================
 constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };					//VECTOR用初期化
 constexpr VECTOR INIT_POS = { -300.0f,70.0f,0.0f };
-constexpr float MOVE_SPEED = 1.2f;							//カメラの移動速度
-
+constexpr float MAP_MOVE_SPEED = 1.2f;						//マップ移動用カメラの移動速度
+constexpr float ZOOM_MOVE_SPEED = 0.4f;						//ズームカメラの移動速度
 constexpr int MAP_FRAME_NUM = 4;							//マップのフレーム番号
 
 constexpr float CAMERA_LENGTH =  -120.0f;					//カメラとプレイヤーの距離
@@ -22,6 +22,7 @@ constexpr float MAX_Z_DISTANCE = 200.0f;					//Z方向の最大距離
 constexpr float Z_DISTANCE_RATIO = 0.5f;					//Z方向の距離の割合
 constexpr float MIN_Z_DISTANCE = 80.0f;						//Z方向の最小距離
 constexpr float MIN_X_DISTANCE = 130.0f;					//X方向の最小距離
+constexpr int NEXT_POS_WAIT_TIME = 30;						//次の座標を更新する時間
 //============================================
 
 //---------------------------------
@@ -52,9 +53,6 @@ void CMapCamera::Init(CMapBase* _map)
 
 	m_pos = INIT_POS;
 	m_basePos = m_pos;
-	m_basePos.z = 0.0f;
-	m_basePos.x -= 80.0f;
-	m_basePos.y += 30.0f;
 
 	m_state = ZOOM_CAMERA;
 
@@ -69,6 +67,7 @@ void CMapCamera::Init(CMapBase* _map)
 
 	m_focusPos = m_stageCenterPos[0];
 
+	m_nextPosTime = 0;
 }
 
 //---------------------------------
@@ -100,47 +99,53 @@ void CMapCamera::Step(float _rot, int _stageCenterId, CPlayerManager* _playerMan
 
 	m_rot.y = atan2f(m_pos.x - m_focusPos.x, m_pos.z - m_focusPos.z);
 
-	//カメラの注視点からベース
-	m_nextPos = VAdd(m_focusPos, m_basePos);
+	if (m_nextPosTime >= NEXT_POS_WAIT_TIME)
+	{
+		//カメラの注視点からベース
+		m_nextPos = VAdd(m_focusPos, m_basePos);
+		m_nextPosTime = 0;
+	}
+	m_nextPosTime++;
 
 	VECTOR vec = VSub(m_nextPos, m_pos);
 
 	if (vec.x > CAMERA_FOLLOW_THRESHOLD)
 	{
-		m_pos.x += MOVE_SPEED;
+		
+		m_pos.x += MAP_MOVE_SPEED;
 	}
 	else if (vec.x < -CAMERA_FOLLOW_THRESHOLD)
 	{
-		m_pos.x -= MOVE_SPEED;
+		m_pos.x -= MAP_MOVE_SPEED;
 	}
 
 	if (vec.z > CAMERA_FOLLOW_THRESHOLD)
 	{
-		m_pos.z += MOVE_SPEED;
+		m_pos.z += MAP_MOVE_SPEED;
 	}
 	else if(vec.z < -CAMERA_FOLLOW_THRESHOLD)
 	{
-		m_pos.z -= MOVE_SPEED;
+		m_pos.z -= MAP_MOVE_SPEED;
 	}
 
 	VECTOR vec2 = VSub(m_nextFocus, m_focusPos);
 
 	if (vec2.x > CAMERA_FOLLOW_THRESHOLD)
 	{
-		m_focusPos.x += MOVE_SPEED;
+		m_focusPos.x += MAP_MOVE_SPEED;
 	}
 	else if (vec2.x < -CAMERA_FOLLOW_THRESHOLD)
 	{
-		m_focusPos.x -= MOVE_SPEED;
+		m_focusPos.x -= MAP_MOVE_SPEED;
 	}
 
 	if (vec2.z > CAMERA_FOLLOW_THRESHOLD)
 	{
-		m_focusPos.z += MOVE_SPEED;
+		m_focusPos.z += MAP_MOVE_SPEED;
 	}
 	else if (vec2.z < -CAMERA_FOLLOW_THRESHOLD)
 	{
-		m_focusPos.z -= MOVE_SPEED;
+		m_focusPos.z -= MAP_MOVE_SPEED;
 	}
 
 }
@@ -181,7 +186,7 @@ void CMapCamera::Move(int _stageCenterId,CPlayerManager* _playerManager)
 	//カメラの注視点を次のマップに移動させる
 	if (m_focusPos.z > m_stageCenterPos[_stageCenterId].z &&m_state == MAP_MOVE_CAMERA)
 	{
-		m_nextFocus.z -= MOVE_SPEED;
+		m_nextFocus.z -= MAP_MOVE_SPEED;
 		m_basePos.x = INIT_POS.x;
 		m_nextPos.x = m_basePos.x;
 	}
