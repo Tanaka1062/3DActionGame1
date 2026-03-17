@@ -375,9 +375,6 @@
     <ClCompile Include="src\game\player\resultPlayer\resultPlayerManager.cpp">
       <Filter>ソース ファイル\game\player\resultPlayer</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\camera\resultCamera\resultCamera.cpp">
-      <Filter>ソース ファイル\game\camera\resultCamera</Filter>
-    </ClCompile>
     <ClCompile Include="src\game\item\spawn\spawnItemManager.cpp">
       <Filter>ソース ファイル\game\item\spawn</Filter>
     </ClCompile>
@@ -431,6 +428,9 @@
     </ClCompile>
     <ClCompile Include="src\game\map\selectMap\selectMap.cpp">
       <Filter>ソース ファイル\game\map\selectMap</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\camera\resultCamera\resultCamera.cpp">
+      <Filter>ソース ファイル\game\camera\mapCamera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

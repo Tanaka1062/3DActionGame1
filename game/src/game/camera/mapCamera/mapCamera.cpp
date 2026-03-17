@@ -14,9 +14,14 @@ constexpr float CAMERA_LENGTH =  -120.0f;					//カメラとプレイヤーの距離
 constexpr float ROT_SPEED = 0.2f * (DX_PI_F / 180.0f);		//カメラの回転スピード
 
 constexpr float ROT_Y_MAX = 30.0f * (DX_PI_F / 180.0f);		//カメラの最大のY軸回転角度
-constexpr float OFFSET_X = -190.0f;
-constexpr float MAX_Z = 50.0f;
+constexpr float OFFSET_X = -190.0f;							//カメラと注視点の引く距離
+constexpr float MAX_Z = 50.0f;								//最大Z
+constexpr float MAX_X = 25.0f;								//最大X
 constexpr float CAMERA_FOLLOW_THRESHOLD = 5.0f;				//カメラの追従までの値
+constexpr float MAX_Z_DISTANCE = 200.0f;					//Z方向の最大距離
+constexpr float Z_DISTANCE_RATIO = 0.5f;					//Z方向の距離の割合
+constexpr float MIN_Z_DISTANCE = 80.0f;						//Z方向の最小距離
+constexpr float MIN_X_DISTANCE = 130.0f;					//X方向の最小距離
 //============================================
 
 //---------------------------------
@@ -86,6 +91,11 @@ void CMapCamera::Step(float _rot, int _stageCenterId, CPlayerManager* _playerMan
 	else if (m_nextFocus.z <= m_stageCenterPos[_stageCenterId].z - MAX_Z)
 	{
 		m_nextFocus.z = m_stageCenterPos[_stageCenterId].z - MAX_Z;
+	}
+
+	if (m_nextFocus.x <= m_stageCenterPos[_stageCenterId].x - MAX_X)
+	{
+		m_nextFocus.x = m_stageCenterPos[_stageCenterId].x - MAX_X;
 	}
 
 	m_rot.y = atan2f(m_pos.x - m_focusPos.x, m_pos.z - m_focusPos.z);
@@ -208,18 +218,22 @@ void CMapCamera::Move(int _stageCenterId,CPlayerManager* _playerManager)
 			}
 		}
 
-		if (maxZ - minZ >= 200.0f)
+		//Zの距離を求める
+		float DistanceZ = maxZ - minZ;
+		//最大距離以上離れていたらカメラを引く
+		if (DistanceZ >= MAX_Z_DISTANCE)
 		{
-			m_basePos.x = OFFSET_X - (maxZ - minZ) * 0.5f;
+			m_basePos.x = OFFSET_X - DistanceZ * Z_DISTANCE_RATIO;
 		}
-		else if(maxZ - minZ >= 80.0f)
+		//最小距離以下ならカメラを近づける
+		else if(DistanceZ <= MIN_Z_DISTANCE)
 		{
-			m_basePos.x = OFFSET_X + (maxZ - minZ) * 0.1f;
+			m_basePos.x = OFFSET_X + DistanceZ * Z_DISTANCE_RATIO;
 		}
-
-		if (minX - m_basePos.x <= 130.0f)
+		//一番手前がカメラに近かったらカメラを引く
+		if (minX - m_basePos.x <= MIN_X_DISTANCE)
 		{
-			m_basePos.x = minX - 130.0f;
+			m_basePos.x = minX - MIN_X_DISTANCE;
 		}
 		//中央をカメラの注視点にする
 		m_nextFocus.x = (minX + maxX) / 2.0f;
