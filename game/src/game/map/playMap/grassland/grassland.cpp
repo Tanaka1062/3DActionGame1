@@ -225,8 +225,8 @@ void CGrassland::StageShake()
 		if (m_stage[m_stageId - 1]->GetActive() == false)return;
 
 		VECTOR shake = { 0 };
-		shake.x = GetRand(SHAKE_AMOUNT) - (SHAKE_AMOUNT * 0.5);
-		shake.z = GetRand(SHAKE_AMOUNT) - (SHAKE_AMOUNT * 0.5);
+		shake.x = static_cast<float>(GetRand(SHAKE_AMOUNT) - (SHAKE_AMOUNT * 0.5));
+		shake.z = static_cast<float>(GetRand(SHAKE_AMOUNT) - (SHAKE_AMOUNT * 0.5));
 		
 		VECTOR vec = VAdd(POS[m_stageId - 1],shake);
 		m_stage[m_stageId - 1]->SetPos(vec);

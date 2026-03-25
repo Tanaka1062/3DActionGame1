@@ -64,7 +64,7 @@ static const int ATTACK_BLOWN[WEAPON_ID_NUM][ATTACK_NUM] =				//攻撃の吹き飛び度
 {
 	{40,40,80},
 	{40,40,80},
-	{40,50,80},
+	{100,100,100},
 	{60,60,80},
 };
 
@@ -94,6 +94,7 @@ CPlayer::CPlayer()
 	m_isJump = false;
 	m_attackNum = ATTACK_NONE;
 	m_money = INIT_MONEY;
+	m_attackId = -1;
 	m_padName = PAD_NONE;
 	m_weaponId = WEAPON_ID_HAND;
 	m_weaponDurability = 0;
@@ -292,6 +293,14 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 		m_hp = m_maxHp;
 	}
 
+	if (_attackManager->GetActive(m_attackId) == false)
+	{
+		m_attackId = -1;
+	}
+	else
+	{
+		_attackManager->SetPos(m_attackId,m_pos);
+	}
 }
 
 //-----------------------
@@ -740,6 +749,8 @@ void CPlayer::AttackIn()
 //-----------------------
 void CPlayer::Attack(CAttackManager* _attackManager, CShotManager* _shotManager)
 {
+	int attackTime = 1200;
+	int attackNum = attackTime / 30;
 
 	//攻撃の座標
 	VECTOR attackPos;
@@ -831,26 +842,25 @@ void CPlayer::Attack(CAttackManager* _attackManager, CShotManager* _shotManager)
 		//武器が斧の場合
 		case WEAPON_ID_AX:
 			CSoundManager::Play(CSoundManager::SE_AX, DX_PLAYTYPE_BACK);
-
 			switch (m_attackNum)
 			{
 			case 0:
 				//攻撃中のアニメーション
 				if (RequestAnim(ANIMID_ATTACK1_AX, 1.0f) == true)
 				{
-					_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
+					m_attackId = _attackManager->Request(attackPos, attackSize, atk, blown, m_name,attackNum,attackTime);
 				}
 				break;
 			case 1:
 				if (RequestAnim(ANIMID_ATTACK2_AX, 1.0f) == true)
 				{
-					_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
+					m_attackId = _attackManager->Request(attackPos, attackSize, atk, blown, m_name, attackNum, attackTime);
 				}
 				break;
 			case 2:
 				if (RequestAnim(ANIMID_ATTACK3_AX, 1.0f) == true)
 				{
-					_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
+					m_attackId = _attackManager->Request(attackPos, attackSize, atk, blown, m_name,attackNum, attackTime);
 				}
 				break;
 			}
@@ -1047,26 +1057,6 @@ void CPlayer::SkillIn()
 //-----------------------
 void CPlayer::Skill()
 {
-	//switch (m_weaponId)
-	//{
-	//case WEAPON_ID_HAND:
-	//	//攻撃中のアニメーション
-	//	if (RequestAnim(ANIMID_SKILLA, 1.0f))
-	//	{
-	//		//攻撃の呼び出し
-	//		m_attackManager->Request(GetCenter(), ATTACKB_SIZE, ATTACKB_ATK,0, m_name);
-	//	}
-	//	break;
-	//case WEAPON_ID_SWORD:
-	//	//攻撃中のアニメーション
-	//	if (RequestAnim(ANIMID_SKILLB, 1.0f))
-	//	{
-	//		//攻撃の呼び出し
-	//		m_attackManager->Request(GetCenter(), ATTACKB_SIZE, ATTACKB_ATK,0, m_name);
-	//	}
-	//	break;
-	//}
-
 	//アニメーションが終わったら待機状態に戻す
 	if (GetAnimEnd() == true)
 	{

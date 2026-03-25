@@ -35,8 +35,8 @@ public:
 	// _blown		:‚«”ò‚Ñ—Ê
 	// _name		:UŒ‚‚µ‚Ä‚¢‚éƒLƒƒƒ‰‚Ì–¼‘O
 	// _num			:˜A‘±UŒ‚‚Ì‰ñ”
-	// _nextTime	:˜A‘±UŒ‚‚ÌŸ‚ÌUŒ‚‚ª”­¶‚·‚é‚Ü‚Å‚ÌŠÔ
-	void Request(VECTOR _pos, float _rad, int _atk,int _blown, tagPlayerName _name,int _num = 1, int _nextTime = 0);
+	// _attackTime	:˜A‘±UŒ‚‚ÌŒo‰ßŠÔ
+	void Request(VECTOR _pos, float _rad, int _atk,int _blown, tagPlayerName _name,int _num = 1, int _attackTime = 0);
 
 	//UŒ‚—Í‚ğæ“¾
 	int GetAtk() { return m_atk; }
@@ -49,5 +49,9 @@ public:
 
 	//UŒ‚‚µ‚Ä‚¢‚éƒLƒƒƒ‰‚Ì–¼‘O‚ğæ“¾
 	tagPlayerName GetAttackName() { return m_attackName; }
+
+	int GetNum() { return m_num; }
+
+	int GetNumCount() { return m_numCount; }
 };
 

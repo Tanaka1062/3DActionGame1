@@ -38,6 +38,7 @@ protected:
 	int m_attackNum;				//攻撃の番号
 	int m_weaponDurability;			//武器の耐久度
 	int m_money;					//お金
+	int m_attackId;					//攻撃のID
 	tagPadName m_padName;			//コントローラーの名前
 	tagWeaponId m_weaponId;			//武器のID
 	tagPlayerName m_name;			//プレイヤーの名前

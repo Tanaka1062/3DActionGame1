@@ -4,14 +4,21 @@ using namespace std;
 
 static const char MODEL_PATH[] =
  "data/model/shot/shotTest.mv1" ;				//ロードするファイル名
+constexpr int ATTACK_MAX = 30;					//攻撃の最大個数
 
-list<CAttackBase*> CAttackManager::m_attack;
+vector<CAttackBase*> CAttackManager::m_attack;
 
 //------------------------
 //	  コンストラクタ
 //------------------------
 CAttackManager::CAttackManager()
 {
+	for (int attack_i = 0; attack_i < ATTACK_MAX; attack_i++)
+	{
+		CAttackBase* attack = new CAttackBase;
+		attack->Init();
+		m_attack.push_back(attack);
+	}
 	Init();
 }
 
@@ -35,26 +42,11 @@ void CAttackManager::Init()
 //------------------------
 void CAttackManager::Update()
 {
-	for (auto ite = m_attack.begin(); ite != m_attack.end();)
+	for (auto ite = m_attack.begin(); ite != m_attack.end();++ite)
 	{
+		if ((*ite)->GetActive() == false)continue;
 		//毎フレームする処理
 		(*ite)->Update();
-
-		//生存してない攻撃の当たり判定を消す
-		if ((*ite)->GetActive() == false)
-		{
-			//終了処理
-			(*ite)->Exit();
-
-			delete (*ite);
-
-			ite = m_attack.erase(ite);
-		}
-		else
-		{
-			++ite;
-		}
-
 	}
 }
 
@@ -68,6 +60,11 @@ void CAttackManager::Draw()
 		//描写処理
 		(*ite)->Draw();
 	}
+	DrawFormatString(120, 120, GetColor(255, 0, 0), "攻撃回数 %d/%d", m_attack[0]->GetNumCount(), m_attack[0]->GetNum());
+	DrawFormatString(120, 160, GetColor(255, 0, 0), "攻撃回数 %d/%d", m_attack[1]->GetNumCount(), m_attack[1]->GetNum());
+	DrawFormatString(120, 200, GetColor(255, 0, 0), "攻撃回数 %d/%d", m_attack[2]->GetNumCount(),m_attack[2]->GetNum());
+	DrawFormatString(120, 240, GetColor(255, 0, 0), "攻撃回数 %d/%d", m_attack[3]->GetNumCount(),m_attack[3]->GetNum());
+
 }
 
 //------------------------
@@ -90,15 +87,19 @@ void CAttackManager::Exit()
 //------------------------
 //	    攻撃の呼び出し
 //------------------------
-void CAttackManager::Request(VECTOR _pos, float _rad, int _atk, int _blown, tagPlayerName _name, int _num, int _nextTime)
+int CAttackManager::Request(VECTOR _pos, float _rad, int _atk, int _blown, tagPlayerName _name, int _num, int _nextTime)
 {
-	//攻撃の当たり判定のベースクラスにデータを入力
-	CAttackBase* attack = new CAttackBase;
-	attack->Init();
-	attack->Request(_pos, _rad, _atk, _blown, _name, _num, _nextTime);
+	for (int attack_i = 0; attack_i < m_attack.size(); attack_i++)
+	{
+		if (m_attack[attack_i]->GetActive() == false)
+		{
+			m_attack[attack_i]->Init();
+			m_attack[attack_i]->Request(_pos, _rad, _atk, _blown, _name, _num, _nextTime);
+			return attack_i;
+		}
+	}
 
-	//攻撃の当たり判定を追加
-	m_attack.push_back(attack);
+	return -1;
 }
 
 //------------------------
@@ -121,5 +122,25 @@ CAttackBase* CAttackManager::GetAttack(int _num)
 
 	}
 	return nullptr;
+}
+
+//------------------------
+//	攻撃の座標を設定する
+//------------------------
+void CAttackManager::SetPos(int _num, VECTOR _pos)
+{
+	if (m_attack.size() < _num)return;
+
+	m_attack[_num]->SetPos(_pos);
+}
+
+//------------------------
+//攻撃の生存フラグを取得
+//------------------------
+bool CAttackManager::GetActive(int _num)
+{
+	if (m_attack.size() < _num)return false;
+
+	return m_attack[_num]->GetActive();
 }
 

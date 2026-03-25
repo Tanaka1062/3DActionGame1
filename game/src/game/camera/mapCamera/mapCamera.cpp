@@ -75,14 +75,17 @@ void CMapCamera::Init(CMapBase* _map)
 //---------------------------------
 void CMapCamera::Step(float _rot, int _stageCenterId, CPlayerManager* _playerManager)
 {
+	//現在のステージの中心が本来のステージの中心と違ったら変更する
 	if (m_stageCenterId != _stageCenterId)
 	{
 		m_state = MAP_MOVE_CAMERA;
 		m_stageCenterId = _stageCenterId;
 	}
 
+	//カメラを動かす処理
 	Move(_stageCenterId,_playerManager);
 
+	//注視点をステージの中心から離れすぎないように調整する--------------------------------
 	if (m_nextFocus.z >= m_stageCenterPos[_stageCenterId].z + MAX_Z)
 	{
 		m_nextFocus.z = m_stageCenterPos[_stageCenterId].z + MAX_Z;
@@ -96,9 +99,12 @@ void CMapCamera::Step(float _rot, int _stageCenterId, CPlayerManager* _playerMan
 	{
 		m_nextFocus.x = m_stageCenterPos[_stageCenterId].x - MAX_X;
 	}
+	//------------------------------------------------------------------------------------
 
+	//カメラから注視点の方向をまとめる
 	m_rot.y = atan2f(m_pos.x - m_focusPos.x, m_pos.z - m_focusPos.z);
 
+	//本来いるべき座標を決められた時間に更新する
 	if (m_nextPosTime >= NEXT_POS_WAIT_TIME)
 	{
 		//カメラの注視点からベース
@@ -107,11 +113,10 @@ void CMapCamera::Step(float _rot, int _stageCenterId, CPlayerManager* _playerMan
 	}
 	m_nextPosTime++;
 
+	//カメラを本来いるべき座標に移動させる--------------------------
 	VECTOR vec = VSub(m_nextPos, m_pos);
-
 	if (vec.x > CAMERA_FOLLOW_THRESHOLD)
 	{
-		
 		m_pos.x += MAP_MOVE_SPEED;
 	}
 	else if (vec.x < -CAMERA_FOLLOW_THRESHOLD)
@@ -127,9 +132,10 @@ void CMapCamera::Step(float _rot, int _stageCenterId, CPlayerManager* _playerMan
 	{
 		m_pos.z -= MAP_MOVE_SPEED;
 	}
+	//--------------------------------------------------------------
 
+	//注視点を本来いるべき座標に移動させる--------------------------
 	VECTOR vec2 = VSub(m_nextFocus, m_focusPos);
-
 	if (vec2.x > CAMERA_FOLLOW_THRESHOLD)
 	{
 		m_focusPos.x += MAP_MOVE_SPEED;
@@ -138,7 +144,6 @@ void CMapCamera::Step(float _rot, int _stageCenterId, CPlayerManager* _playerMan
 	{
 		m_focusPos.x -= MAP_MOVE_SPEED;
 	}
-
 	if (vec2.z > CAMERA_FOLLOW_THRESHOLD)
 	{
 		m_focusPos.z += MAP_MOVE_SPEED;
@@ -147,6 +152,7 @@ void CMapCamera::Step(float _rot, int _stageCenterId, CPlayerManager* _playerMan
 	{
 		m_focusPos.z -= MAP_MOVE_SPEED;
 	}
+	//--------------------------------------------------------------
 
 }
 
@@ -166,6 +172,7 @@ void CMapCamera::Update()
 //---------------------------------
 void CMapCamera::Exit()
 {
+	//ステージの中心座標を全て消す
 	m_stageCenterPos.clear();
 }
 
@@ -190,6 +197,7 @@ void CMapCamera::Move(int _stageCenterId,CPlayerManager* _playerManager)
 		m_basePos.x = INIT_POS.x;
 		m_nextPos.x = m_basePos.x;
 	}
+	//カメラをプレイヤーの位置を参考に移動させる
 	else
 	{
 		m_state = ZOOM_CAMERA;

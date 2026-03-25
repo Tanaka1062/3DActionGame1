@@ -2,7 +2,7 @@
 
 #pragma once
 #include <iostream>
-#include <list>
+#include <vector>
 #include"attackBase.h"
 #include "../player/playerData.h"
 
@@ -10,7 +10,7 @@
 class CAttackManager
 {
 private:
-	static std::list<CAttackBase*> m_attack;			//攻撃の当たり判定のクラス
+	static std::vector<CAttackBase*> m_attack;			//攻撃の当たり判定のクラス
 public:
 	//コンストラクタ・デストラクタ
 	CAttackManager();
@@ -33,7 +33,7 @@ public:
 	// _name		:攻撃するキャラの名前
 	// _num			:連続攻撃の回数
 	// _nextTime	:連続攻撃の次の攻撃が発生するまでの時間
-	static void Request(VECTOR _pos, float _rad, int _atk, int _blown,tagPlayerName _name, int _num = 1,int _nextTime = 0);
+	static int Request(VECTOR _pos, float _rad, int _atk, int _blown,tagPlayerName _name, int _num = 1,int _nextTime = 0);
 
 	//攻撃の当たり判定の数を取得
 	static int GetNum() { return static_cast<int>(m_attack.size()); }
@@ -41,5 +41,10 @@ public:
 	//攻撃の当たり判定のアドレスを取得
 	static CAttackBase* GetAttack(int _num);
 
+	//攻撃の座標を設定する
+	static void SetPos(int _num,VECTOR _pos);
+
+	//攻撃の生存フラグを取得
+	static bool GetActive(int _num);
 };
 

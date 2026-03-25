@@ -69,6 +69,6 @@ public:
 	CObject* GetStageObject(int _num) { return m_object[_num]; }
 
 	//オブジェクトの数を取得
-	int GetStageObjectNum() { return m_object.size(); }
+	int GetStageObjectNum() { return static_cast<int>(m_object.size()); }
 };
 
