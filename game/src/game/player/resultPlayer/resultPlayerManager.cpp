@@ -18,11 +18,14 @@ enum tagModelName					//モデル一覧
 constexpr float TARGET_LEN = -200.0f;				//ターゲットと認識するまでの長さ
 constexpr float TARGET_MAX_DISTANCE = 40.0f;	//どれくらい法線から離せるか
 
-static const char* MODEL_PATH[PLAYER_NUM] =
-{ "data/model/player/playerTest7-1.mv1" ,
-  "data/model/player/playerTest7-2.mv1" ,
-  "data/model/player/playerTest7-3.mv1" ,
-  "data/model/player/playerTest7-4.mv1" ,};			//ロードするファイル名
+static const char* MODEL_PATH =					//モデルのパス
+{ "data/model/player/playerTest8.mv1" };
+
+static const char* MATERIAL_PATH[PLAYER_NUM] =	//マテリアルのパス
+{ "data/material/player/playerBody1.png",
+ "data/material/player/playerBody2.png",
+ "data/material/player/playerBody3.png",
+ "data/material/player/playerBody4.png", };
 
 //------------------------
 //	  コンストラクタ
@@ -56,6 +59,14 @@ void CResultPlayerManager::Init(CWinner* _winner)
 		for (int modelHndl_i = 0; modelHndl_i < MODEL_NUM; modelHndl_i++)
 		{
 			m_modelHndl.push_back(-1);
+		}
+	}
+
+	if (m_materialHndl.size() < PLAYER_NUM)
+	{
+		for (int material_i = 0; material_i < PLAYER_NUM; material_i++)
+		{
+			m_materialHndl.push_back(-1);
 		}
 	}
 
@@ -119,7 +130,16 @@ void CResultPlayerManager::Load(CMapBase* _map)
 	{
 		if (m_modelHndl[model_i] == -1)
 		{
-			m_modelHndl[model_i] = MV1LoadModel(MODEL_PATH[model_i]);
+			m_modelHndl[model_i] = MV1LoadModel(MODEL_PATH);
+		}
+	}
+
+	//マテリアルのロード
+	for (int material_i = 0; material_i < m_materialHndl.size(); material_i++)
+	{
+		if (m_materialHndl[material_i] == -1)
+		{
+			m_materialHndl[material_i] = LoadGraph(MATERIAL_PATH[material_i]);
 		}
 	}
 
@@ -146,6 +166,7 @@ void CResultPlayerManager::Load(CMapBase* _map)
 		}
 
 		m_player[player_i]->Load(m_modelHndl[player_i]);
+		MV1SetTextureGraphHandle(m_player[player_i]->GetHndl(), 0, m_materialHndl[player_i], FALSE);
 		m_player[player_i]->SetPos(start);
 		m_spawnPos.push_back(start);
 	}
@@ -212,7 +233,16 @@ void CResultPlayerManager::Exit()
 			m_modelHndl[model_i] = -1;
 		}
 	}
-
 	m_modelHndl.clear();
+
+	for (int material_i = 0; material_i < m_materialHndl.size(); material_i++)
+	{
+		if (m_materialHndl[material_i] != -1)
+		{
+			DeleteGraph(m_materialHndl[material_i]);
+			m_materialHndl[material_i] = -1;
+		}
+	}
+	m_materialHndl.clear();
 }
 

@@ -12,9 +12,6 @@ using namespace std;
 enum tagModelName					//モデル一覧
 {
 	MODEL_PLAYER1,					//プレイヤー1のモデル
-	MODEL_PLAYER2,					//プレイヤー2のモデル
-	MODEL_PLAYER3,					//プレイヤー3のモデル
-	MODEL_PLAYER4,					//プレイヤー4のモデル
 
 	MODEL_NUM,						//モデルの数
 };
@@ -25,12 +22,14 @@ constexpr float TARGET_MAX_DISTANCE = 40.0f;	//どれくらい法線から離せるか
 constexpr int MAP_FRAME_NUM = 7;				//マップのフレーム番号
 constexpr float DIE_RADIUS = 240.0f;			//画面外判定の半径
 
-static const char* MODEL_PATH[PLAYER_NUM] =
-{ "data/model/player/playerTest7-1.mv1" ,
-  "data/model/player/playerTest7-2.mv1" ,
-  "data/model/player/playerTest7-3.mv1" ,
-  "data/model/player/playerTest7-4.mv1" ,};			//ロードするファイル名
+static const char* MODEL_PATH =					//モデルのパス
+{ "data/model/player/playerTest8.mv1"};			
 
+static const char* MATERIAL_PATH[PLAYER_NUM] =	//マテリアルのパス
+{ "data/material/player/playerBody1.png",
+ "data/material/player/playerBody2.png",
+ "data/material/player/playerBody3.png",
+ "data/material/player/playerBody4.png", };
 
 //------------------------
 //	  コンストラクタ
@@ -72,6 +71,14 @@ void CPlayerManager::Init()
 		for (int modelHndl_i = 0; modelHndl_i < MODEL_NUM; modelHndl_i++)
 		{
 			m_modelHndl.push_back(-1);
+		}
+	}
+
+	if (m_materialHndl.size() < PLAYER_NUM)
+	{
+		for (int material_i = 0; material_i < PLAYER_NUM; material_i++)
+		{
+			m_materialHndl.push_back(-1);
 		}
 	}
 
@@ -137,14 +144,22 @@ void CPlayerManager::Load(CMapBase* _map)
 {
 
 	//モデルのロード
-	for (int model_i = 0; model_i < MODEL_NUM; model_i++)
+	for (int model_i = 0; model_i < m_modelHndl.size(); model_i++)
 	{
 		if (m_modelHndl[model_i] == -1)
 		{
-			m_modelHndl[model_i] = MV1LoadModel(MODEL_PATH[model_i]);
+			m_modelHndl[model_i] = MV1LoadModel(MODEL_PATH);
 		}
 	}
 
+	//マテリアルのロード
+	for (int material_i = 0; material_i < m_materialHndl.size(); material_i++)
+	{
+		if (m_materialHndl[material_i] == -1)
+		{
+			m_materialHndl[material_i] = LoadGraph(MATERIAL_PATH[material_i]);
+		}
+	}
 
 	//マップのリスポーン位置を取得して設定
 	for (int stage_i = 0; stage_i < _map->GetStageNum(); stage_i++)
@@ -175,8 +190,9 @@ void CPlayerManager::Load(CMapBase* _map)
 
 	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
-		m_player[player_i]->Load(m_modelHndl[player_i]);
+		m_player[player_i]->Load(m_modelHndl[MODEL_PLAYER1]);
 		m_player[player_i]->SetPos(m_spawnPos[0][player_i]);
+		MV1SetTextureGraphHandle(m_player[player_i]->GetHndl(), 0, m_materialHndl[player_i], FALSE);
 	}
 
 	//王冠のモデルロード
@@ -380,9 +396,6 @@ void CPlayerManager::Draw()
 
 	m_crown.Draw();
 
-#ifdef DEBUG
-	//DrawSphere3D(CCameraManager::GetFocusPos(), DIE_RADIUS, 16, GetColor(0, 0, 255), GetColor(0, 0, 255), FALSE);
-#endif // DEBUG
 }
 
 //------------------------
@@ -409,6 +422,16 @@ void CPlayerManager::Exit()
 		}
 	}
 	m_modelHndl.clear();
+
+	for (int material_i = 0; material_i < m_materialHndl.size(); material_i++)
+	{
+		if (m_materialHndl[material_i] != -1)
+		{
+			DeleteGraph(m_materialHndl[material_i]);
+			m_materialHndl[material_i] = -1;
+		}
+	}
+	m_materialHndl.clear();
 
 	for (int cpuFOV_i = 0; cpuFOV_i < m_cpuFOV.size(); cpuFOV_i++)
 	{

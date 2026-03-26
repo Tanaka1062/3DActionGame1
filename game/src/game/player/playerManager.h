@@ -12,6 +12,7 @@ class CPlayerManager
 private:
 	std::vector<CPlayer*> m_player;					//プレイヤーのクラス
 	std::vector <int> m_modelHndl;					//モデルのハンドル
+	std::vector<int>m_materialHndl;					//マテリアルのハンドル
 	std::vector <std::vector<VECTOR>> m_spawnPos;	//プレイヤーの出現座標
 	std::vector<CCpuPlayerFOV*>m_cpuFOV;			//CPUの視界範囲クラス
 	C3DUi m_crown;									//王冠

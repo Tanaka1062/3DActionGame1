@@ -46,5 +46,8 @@ public:
 
 	//攻撃の生存フラグを取得
 	static bool GetActive(int _num);
+	//攻撃の生存フラグを設定
+	static void SetActive(int _num,bool _active);
+
 };
 

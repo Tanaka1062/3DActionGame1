@@ -8,8 +8,9 @@
 class CSelectPlayerManager
 {
 private:
-	std::vector<CSelectPlayer*> m_player;			//プレイヤーのクラス
+	std::vector<CSelectPlayer*> m_player;	//プレイヤーのクラス
 	std::vector <int> m_modelHndl;			//モデルのハンドル
+	std::vector<int>m_materialHndl;			//マテリアルのハンドル
 	std::vector <VECTOR>m_spawnPos;			//プレイヤーの出現座標
 public:
 	//コンストラクタ・デストラクタ

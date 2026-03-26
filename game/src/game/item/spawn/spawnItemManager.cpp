@@ -11,9 +11,9 @@ using namespace std;
 
 constexpr int SPAWN_PROBABILITY_INIT[ITEM_NUM] =					//アイテムの出現確率の初期値
 {
-	5,
-	5,
-	5,
+	0,
+	0,
+	0,
 	5,
 };
 
@@ -22,7 +22,7 @@ constexpr int SPAWN_PROBABILITY_DECREASE[ITEM_NUM] =				//アイテムの出現確率の減
 	5,
 	5,
 	5,
-	5,
+	0,
 };
 
 static const char* MODEL_PATH[ITEM_NUM] =							//モデルのパス

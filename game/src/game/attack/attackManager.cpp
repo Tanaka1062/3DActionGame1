@@ -144,3 +144,13 @@ bool CAttackManager::GetActive(int _num)
 	return m_attack[_num]->GetActive();
 }
 
+//------------------------
+//UŒ‚‚Ì¶‘¶ƒtƒ‰ƒO‚ğİ’è
+//------------------------
+void CAttackManager::SetActive(int _num, bool _active)
+{
+	if (m_attack.size() < _num)return;
+
+	m_attack[_num]->SetActive(_active);
+}
+

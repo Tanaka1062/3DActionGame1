@@ -20,7 +20,7 @@ constexpr VECTOR INIT_POS = { 0.0f,1.0f,0.0f };			//初期座標
 constexpr float SHADOW_SIZE = 0.5f;						//丸影の大きさ
 constexpr int MAX_HP = 200;								//体力
 constexpr int ATK = 20;									//攻撃力
-constexpr float MOVE_SPEED = 1.2f * 1.5f;						//移動スピード
+constexpr float MOVE_SPEED = 1.2f * 1.5f;				//移動スピード
 constexpr float RADIUS = 10.0f;							//半径
 constexpr float JUMP_SPEED = 3.0f;						//ジャンプスピード
 constexpr int BLOWN_MAX = 100;							//吹き飛び最大値
@@ -72,7 +72,7 @@ static const float ATTACK_SIZE[WEAPON_ID_NUM][ATTACK_NUM] =
 {
 	{12.0f,12.0f,12.0f},
 	{16.0f,16.0f,20.0f},
-	{24.0f,24.0f,26.0f},
+	{28.0f,28.0f,28.0f},
 	{16.0f,16.0f,16.0f},
 };
 
@@ -223,8 +223,9 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 	//------------------------------------------------
 
 	//攻撃の呼び出し
-	if (CheckHitKey(KEY_INPUT_J) != 0 ||
-		CControllerManager::IsTrg(BUTTON_X, m_padName))
+	if ((CheckHitKey(KEY_INPUT_J) != 0 ||
+		CControllerManager::IsTrg(BUTTON_X, m_padName)) &&
+		m_attackId == -1)
 	{
 		RequestAttack();
 	}
@@ -300,6 +301,11 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 	else
 	{
 		_attackManager->SetPos(m_attackId,m_pos);
+	}
+
+	if (m_state != ATTACK)
+	{
+		_attackManager->SetActive(m_attackId,false);
 	}
 }
 
@@ -546,13 +552,6 @@ void CPlayer::Wait()
 		//待機アニメーションを再生
 		RequestAnim(ANIMID_WAIT, 0.5f, true);
 	}
-
-	//動いていたら歩き状態に移行
-	if (m_speed.x != 0.0f ||
-		m_speed.z != 0.0f)
-	{
-		m_state = WALK;
-	}
 	
 }
 
@@ -704,21 +703,9 @@ void CPlayer::AttackIn()
 			break;
 		//武器が斧の場合
 		case WEAPON_ID_AX:
-			switch (m_attackNum)
-			{
-			case 0:
-				//攻撃前のアニメーション
-				RequestAnim(ANIMID_ATTACK1_AX_IN, 1.0f);
-				break;
-			case 1:
-				//攻撃前のアニメーション
-				RequestAnim(ANIMID_ATTACK2_AX_IN, 1.0f);
-				break;
-			case 2:
-				//攻撃前のアニメーション
-				RequestAnim(ANIMID_ATTACK3_AX_IN, 1.0f);
-				break;
-			}
+			m_attackNum = 0;
+			//攻撃前のアニメーション
+			RequestAnim(ANIMID_ATTACK1_AX_IN, 0.5f);
 			break;
 		//武器が銃の場合
 		case WEAPON_ID_GUN:
@@ -749,8 +736,8 @@ void CPlayer::AttackIn()
 //-----------------------
 void CPlayer::Attack(CAttackManager* _attackManager, CShotManager* _shotManager)
 {
-	int attackTime = 1200;
-	int attackNum = attackTime / 30;
+	int attackTime = 180;
+	int attackNum = attackTime / 10;
 
 	//攻撃の座標
 	VECTOR attackPos;
@@ -842,27 +829,10 @@ void CPlayer::Attack(CAttackManager* _attackManager, CShotManager* _shotManager)
 		//武器が斧の場合
 		case WEAPON_ID_AX:
 			CSoundManager::Play(CSoundManager::SE_AX, DX_PLAYTYPE_BACK);
-			switch (m_attackNum)
+			//攻撃中のアニメーション
+			if (RequestAnim(ANIMID_ATTACK1_AX, 1.0f,true) == true)
 			{
-			case 0:
-				//攻撃中のアニメーション
-				if (RequestAnim(ANIMID_ATTACK1_AX, 1.0f) == true)
-				{
-					m_attackId = _attackManager->Request(attackPos, attackSize, atk, blown, m_name,attackNum,attackTime);
-				}
-				break;
-			case 1:
-				if (RequestAnim(ANIMID_ATTACK2_AX, 1.0f) == true)
-				{
-					m_attackId = _attackManager->Request(attackPos, attackSize, atk, blown, m_name, attackNum, attackTime);
-				}
-				break;
-			case 2:
-				if (RequestAnim(ANIMID_ATTACK3_AX, 1.0f) == true)
-				{
-					m_attackId = _attackManager->Request(attackPos, attackSize, atk, blown, m_name,attackNum, attackTime);
-				}
-				break;
+				m_attackId = _attackManager->Request(attackPos, attackSize, atk, blown, m_name,attackNum,attackTime);
 			}
 			break;
 		//武器が銃の場合
@@ -880,7 +850,7 @@ void CPlayer::Attack(CAttackManager* _attackManager, CShotManager* _shotManager)
 	}
 
 	//アニメーションが終わったら待機状態に戻す
-	if (GetAnimEnd() == true)
+	if (GetAnimEnd() == true || _attackManager->GetActive(m_attackId) == false)
 	{
 		//武器の耐久度が減る
 		if (m_weaponId != WEAPON_ID_HAND)
@@ -898,7 +868,7 @@ void CPlayer::Attack(CAttackManager* _attackManager, CShotManager* _shotManager)
 //-----------------------
 void CPlayer::AttackOut()
 {
-	if (m_isFlying == true)
+	if (m_isFlying == true && m_weaponId != WEAPON_ID_AX)
 	{
 		RequestAnim(ANIMID_AIR_ATTACK_HAND_OUT,1.2f);
 	}
@@ -947,21 +917,8 @@ void CPlayer::AttackOut()
 			break;
 		//武器が斧の場合
 		case WEAPON_ID_AX:
-			switch (m_attackNum)
-			{
-			case 0:
-				//攻撃後のアニメーション
-				RequestAnim(ANIMID_ATTACK1_AX_OUT, 0.8f);
-				break;
-			case 1:
-				//攻撃後のアニメーション
-				RequestAnim(ANIMID_ATTACK2_AX_OUT, 1.0f);
-				break;
-			case 2:
-				//攻撃後のアニメーション
-				RequestAnim(ANIMID_ATTACK3_AX_OUT, 1.0f);
-				break;
-			}
+			//攻撃後のアニメーション
+			RequestAnim(ANIMID_ATTACK1_AX_OUT, 0.5f);
 			break;
 		//武器が銃の場合
 		case WEAPON_ID_GUN:
@@ -1311,6 +1268,9 @@ void CPlayer::Move(float _rotY)
 	case WALK:
 	case AIR:
 		break;
+	case ATTACK:
+		if (m_weaponId != WEAPON_ID_AX)return;
+		break;
 	default:
 		return;
 	}
@@ -1362,13 +1322,6 @@ void CPlayer::Move(float _rotY)
 	}
 
 
-	//移動していたら歩きモーションに以降
-	if ((speed.x != 0.0f ||
-		speed.z != 0.0f) &&
-		m_state != AIR)
-	{
-		m_state = WALK;
-	}
 
 	////カメラの角度がオールゼロの時に進む速度
 	VECTOR defaultDir = { speed.x,0.0f,speed.z };
@@ -1383,6 +1336,16 @@ void CPlayer::Move(float _rotY)
 	m_speed.x = res.m[0][3];
 	m_speed.y = res.m[1][3];
 	m_speed.z = res.m[2][3];
+
+	if (m_state == ATTACK)return;
+
+	//移動していたら歩きモーションに以降
+	if ((m_speed.x != 0.0f ||
+		m_speed.z != 0.0f) &&
+		m_state != AIR)
+	{
+		m_state = WALK;
+	}
 
 	//移動方向を向く
 	if (m_speed.x != 0 || m_speed.z != 0)
