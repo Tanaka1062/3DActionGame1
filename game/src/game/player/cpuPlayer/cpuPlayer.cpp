@@ -55,7 +55,7 @@ enum tagAttackNum
 	ATTACK_NUM,			//UŒ‚‚Ì”
 };
 
-static const float ATTACK_MAGNIFICATION[WEAPON_ID_NUM][ATTACK_NUM] =	//UŒ‚‚Ì”{—¦
+constexpr float ATTACK_MAGNIFICATION[WEAPON_ID_NUM][ATTACK_NUM] =	//UŒ‚‚Ì”{—¦
 {
 	{0.5f,0.8f,1.0f},
 	{0.7f,1.0f,1.2f},
@@ -63,7 +63,7 @@ static const float ATTACK_MAGNIFICATION[WEAPON_ID_NUM][ATTACK_NUM] =	//UŒ‚‚Ì”{—
 	{1.0f,1.0f,1.0f},
 };
 
-static const int ATTACK_BLOWN[WEAPON_ID_NUM][ATTACK_NUM] =				//UŒ‚‚Ì‚«”ò‚Ñ“x
+constexpr int ATTACK_BLOWN[WEAPON_ID_NUM][ATTACK_NUM] =				//UŒ‚‚Ì‚«”ò‚Ñ“x
 {
 	{40,40,80},
 	{40,40,80},
@@ -71,11 +71,11 @@ static const int ATTACK_BLOWN[WEAPON_ID_NUM][ATTACK_NUM] =				//UŒ‚‚Ì‚«”ò‚Ñ“x
 	{60,60,80},
 };
 
-static const float ATTACK_SIZE[WEAPON_ID_NUM][ATTACK_NUM] =
+constexpr float ATTACK_SIZE[WEAPON_ID_NUM][ATTACK_NUM] =
 {
 	{12.0f,12.0f,12.0f},
-	{16.0f,16.0f,20.0f},
-	{24.0f,24.0f,26.0f},
+	{25.0f,25.0f,25.0f},
+	{28.0f,28.0f,28.0f},
 	{16.0f,16.0f,16.0f},
 };
 
@@ -323,8 +323,6 @@ void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackMa
 
 	//------------------------------------------------
 
-
-
 	//ˆÚ“®ˆ—
 	Move(_rotY);
 
@@ -356,6 +354,23 @@ void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackMa
 	if (m_hp >= m_maxHp)
 	{
 		m_hp = m_maxHp;
+	}
+
+	//UŒ‚‚Ì“–‚½‚è”»’è‚ªÁ‚¦‚½‚çUŒ‚‚ÌID‚ğ‰Šú‰»‚·‚é
+	if (_attackManager->GetActive(m_attackId) == false)
+	{
+		m_attackId = -1;
+	}
+	//UŒ‚’†‚Í“–‚½‚è”»’è‚ğƒvƒŒƒCƒ„[‚ÌˆÊ’u‚Éİ’è‚·‚é
+	else
+	{
+		_attackManager->SetPos(m_attackId, m_pos);
+	}
+
+	//UŒ‚’†‚Å‚Í‚È‚¢ê‡UŒ‚‚ğÁ‚·
+	if (m_state != ATTACK)
+	{
+		_attackManager->SetActive(m_attackId, false);
 	}
 }
 
@@ -418,9 +433,6 @@ void CCpuPlayer::HitCalc(CObject* _hitObject)
 		CItemBase* item = nullptr;
 
 		item = dynamic_cast<CItemBase*>(_hitObject);
-
-		//ƒAƒCƒeƒ€‚ªƒIƒuƒWƒFƒNƒgƒ^ƒCƒvˆÈŠO‚Ìê‡ˆ—‚ğ‚µ‚È‚¢
-		//if (item->GetItemType() != ITEM_TYPE_OBJECT)return;
 
 		if (m_cpuState == CPU_STATE_PICK_UP_ITEM && (m_state == WAIT || m_state == WALK))
 		{
@@ -503,15 +515,7 @@ void CCpuPlayer::Move(float _rotY)
 
 	float targetRotY = atan2f(m_pos.x - targetPos.x,m_pos.z - targetPos.z);
 
-	//ˆÚ“®‚µ‚Ä‚¢‚½‚ç•à‚«ƒ‚[ƒVƒ‡ƒ“‚ÉˆÈ~
-	if ((speed.x != 0.0f ||
-		speed.z != 0.0f) &&
-		m_state != AIR)
-	{
-		m_state = WALK;
-	}
-
-	////ƒJƒƒ‰‚ÌŠp“x‚ªƒI[ƒ‹ƒ[ƒ‚Ì‚Éi‚Ş‘¬“x
+	//ƒJƒƒ‰‚ÌŠp“x‚ªƒI[ƒ‹ƒ[ƒ‚Ì‚Éi‚Ş‘¬“x
 	VECTOR defaultDir = { speed.x,0.0f,speed.z };
 	//ã‹L‚ğs—ñ‚É•ÏŠ·
 	MATRIX dir = CMyMath::GetTranslateMatrix(defaultDir);
@@ -524,6 +528,16 @@ void CCpuPlayer::Move(float _rotY)
 	m_speed.x = res.m[0][3];
 	m_speed.y = res.m[1][3];
 	m_speed.z = res.m[2][3];
+
+	if (m_state == ATTACK)return;
+
+	//ˆÚ“®‚µ‚Ä‚¢‚½‚ç•à‚«ƒ‚[ƒVƒ‡ƒ“‚ÉˆÈ~
+	if ((speed.x != 0.0f ||
+		speed.z != 0.0f) &&
+		m_state != AIR)
+	{
+		m_state = WALK;
+	}
 
 	//ˆÚ“®•ûŒü‚ğŒü‚­
 	if (m_speed.x != 0 || m_speed.z != 0)
