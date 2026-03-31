@@ -112,9 +112,6 @@
     <Filter Include="ソース ファイル\game\item\weapon">
       <UniqueIdentifier>{8ed27464-3edc-4eeb-a2b3-38f9f7b0a640}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\game\item\weapon\sword">
-      <UniqueIdentifier>{c4e8e031-7d74-4e7b-a2fc-5219956ab404}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\game\item\weapon\ax">
       <UniqueIdentifier>{40aa1bd0-f82a-415b-8ba3-ff1bc3149138}</UniqueIdentifier>
     </Filter>
@@ -183,6 +180,9 @@
     </Filter>
     <Filter Include="ソース ファイル\game\map\selectMap">
       <UniqueIdentifier>{566e842c-178d-402c-85c9-ee0b0273083c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\game\item\weapon\hammer">
+      <UniqueIdentifier>{c4e8e031-7d74-4e7b-a2fc-5219956ab404}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -333,9 +333,6 @@
     <ClCompile Include="src\game\item\weapon\itemWeaponBase.cpp">
       <Filter>ソース ファイル\game\item\weapon</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\item\weapon\sword\sword.cpp">
-      <Filter>ソース ファイル\game\item\weapon\sword</Filter>
-    </ClCompile>
     <ClCompile Include="src\game\item\weapon\ax\ax.cpp">
       <Filter>ソース ファイル\game\item\weapon\ax</Filter>
     </ClCompile>
@@ -431,6 +428,9 @@
     </ClCompile>
     <ClCompile Include="src\game\camera\resultCamera\resultCamera.cpp">
       <Filter>ソース ファイル\game\camera\mapCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\item\weapon\hammer\hammer.cpp">
+      <Filter>ソース ファイル\game\item\weapon\hammer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -587,9 +587,6 @@
     <ClInclude Include="src\game\item\weapon\itemWeaponBase.h">
       <Filter>ソース ファイル\game\item\weapon</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\item\weapon\sword\sword.h">
-      <Filter>ソース ファイル\game\item\weapon\sword</Filter>
-    </ClInclude>
     <ClInclude Include="src\game\item\weapon\ax\ax.h">
       <Filter>ソース ファイル\game\item\weapon\ax</Filter>
     </ClInclude>
@@ -685,6 +682,9 @@
     </ClInclude>
     <ClInclude Include="src\game\map\selectMap\selectMap.h">
       <Filter>ソース ファイル\game\map\selectMap</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\item\weapon\hammer\hammer.h">
+      <Filter>ソース ファイル\game\item\weapon\hammer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

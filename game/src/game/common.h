@@ -1,5 +1,5 @@
 #pragma once
-#define DEBUG
+//#define DEBUG
 
 //プログラムの記法
 //TODO		：あとで手を付ける

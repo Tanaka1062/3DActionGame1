@@ -170,8 +170,8 @@
     <ClCompile Include="src\game\item\spawn\spawnItemManager.cpp" />
     <ClCompile Include="src\game\item\weapon\ax\ax.cpp" />
     <ClCompile Include="src\game\item\weapon\gun\gun.cpp" />
+    <ClCompile Include="src\game\item\weapon\hammer\hammer.cpp" />
     <ClCompile Include="src\game\item\weapon\itemWeaponBase.cpp" />
-    <ClCompile Include="src\game\item\weapon\sword\sword.cpp" />
     <ClCompile Include="src\game\main.cpp" />
     <ClCompile Include="src\game\map\mapBase.cpp" />
     <ClCompile Include="src\game\map\mapManager.cpp" />
@@ -256,8 +256,8 @@
     <ClInclude Include="src\game\item\spawn\spawnItemManager.h" />
     <ClInclude Include="src\game\item\weapon\ax\ax.h" />
     <ClInclude Include="src\game\item\weapon\gun\gun.h" />
+    <ClInclude Include="src\game\item\weapon\hammer\hammer.h" />
     <ClInclude Include="src\game\item\weapon\itemWeaponBase.h" />
-    <ClInclude Include="src\game\item\weapon\sword\sword.h" />
     <ClInclude Include="src\game\map\mapBase.h" />
     <ClInclude Include="src\game\map\mapManager.h" />
     <ClInclude Include="src\game\map\playMap\grassland\grassland.h" />

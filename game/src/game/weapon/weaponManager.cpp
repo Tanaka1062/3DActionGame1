@@ -2,7 +2,7 @@
 
 static const char* MODEL_PATH[WEAPON_ID_NUM] ={		//ロードするファイル名
 	"",
-	"data/model/weapon/sword/weapon_sword.mv1",
+	"data/model/weapon/hammer/weapon_hammer.mv1",
 	"data/model/weapon/ax/weapon_ax.mv1",
 	"data/model/weapon/gun/weapon_gun.mv1",
 };				

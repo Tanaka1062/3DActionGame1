@@ -39,9 +39,9 @@ constexpr float FIGHT_LEN = 40.0f;							//戦う距離
 constexpr float SHOT_SIZE = 10.0f;							//弾の大きさ
 constexpr float SHOT_SPEED = 2.5f;							//弾の速度
 constexpr int SHOT_LOST_TIME = 2 * 60;						//弾が消えるまでの時間
-constexpr float HAMMER_ATTACK_AIR_FALL_SPEED = 4.0f;		//ハンマーの空中攻撃の
-constexpr float HAMMER_FALL_FRAME = 3.0f;					//ハンマーの落下するまでのフレーム
-constexpr float HAMMER_FALL_MIN_LENGTH = 20.0f;				//ハンマーの落下攻撃ができる最小の高さ
+constexpr float HAMMER_ATTACK_AIR_FALL_SPEED = 4.0f;		//ハンマーの空中攻撃の落下スピード
+constexpr float HAMMER_FALL_FRAME = 13.0f;					//ハンマーの落下するまでのフレーム
+constexpr float HAMMER_FALL_MIN_LENGTH = 30.0f;				//ハンマーの落下攻撃ができる最小の高さ
 //-----------------------------------
 
 enum tagAttackNum
@@ -702,41 +702,41 @@ void CPlayer::AttackIn()
 		}
 
 		break;
-	//武器が剣の場合
-	case WEAPON_ID_SWORD:
+	//武器がハンマーの場合
+	case WEAPON_ID_HAMMER:
 		switch (m_attackNum)
 		{
 		case ATTACK_1:
 			//攻撃前のアニメーション
-			RequestAnim(ANIMID_ATTACK1_SWORD_IN, 1.6f);
+			RequestAnim(ANIMID_ATTACK1_HAMMER_IN, 0.6f);
 			break;
 		case ATTACK_2:
 			//攻撃前のアニメーション
-			RequestAnim(ANIMID_ATTACK2_SWORD_IN, 1.0f);
+			RequestAnim(ANIMID_ATTACK2_HAMMER_IN, 0.6f);
 			break;
 		case ATTACK_3:
 			//攻撃前のアニメーション
-			RequestAnim(ANIMID_ATTACK3_SWORD_IN, 1.0f);
+			RequestAnim(ANIMID_ATTACK3_HAMMER_IN, 0.6f);
 			break;
 		case ATTACK_AIR:
-			if (m_animData.m_id != ANIMID_ATTACK1_SWORD_IN)
+			if (m_animData.m_id != ANIMID_AIR_ATTACK_HAMMER_IN)
 			{
-				//float len = m_pos.y - m_shadow.GetPos().y;
-				//if (HAMMER_FALL_MIN_LENGTH >= len)
-				//{
-				//	m_state = WAIT;
-				//	return;
-				//}
+				float len = m_pos.y - m_shadow.GetPos().y;
+				if (HAMMER_FALL_MIN_LENGTH >= len)
+				{
+					m_state = WAIT;
+					return;
+				}
 			}
 			//空中の攻撃前アニメーション
-			RequestAnim(ANIMID_AIR_ATTACK_HAND_IN, 0.2f);
+			RequestAnim(ANIMID_AIR_ATTACK_HAMMER_IN, 0.7f);
 			if (m_animData.m_frame >= HAMMER_FALL_FRAME)
 			{
 				m_gravity = -HAMMER_ATTACK_AIR_FALL_SPEED;
 			}
 			else
 			{
-				m_gravity = 0.0f;
+				m_gravity = 0;
 			}
 			break;
 		}
@@ -763,7 +763,7 @@ void CPlayer::AttackIn()
 	}
 
 	//ハンマーの空中攻撃は着地するまで続く
-	if (m_weaponId == WEAPON_ID_SWORD &&
+	if (m_weaponId == WEAPON_ID_HAMMER &&
 		m_attackNum == ATTACK_AIR)
 	{
 		if (m_isFlying == false)
@@ -844,36 +844,36 @@ void CPlayer::Attack(CAttackManager* _attackManager, CShotManager* _shotManager)
 		}
 
 		break;
-	//武器が剣の場合
-	case WEAPON_ID_SWORD:
+	//武器がハンマーの場合
+	case WEAPON_ID_HAMMER:
 		CSoundManager::Play(CSoundManager::SE_SWORD, DX_PLAYTYPE_BACK);
 
 		switch (m_attackNum)
 		{
 		case ATTACK_1:
 			//攻撃中のアニメーション
-			if (RequestAnim(ANIMID_ATTACK1_SWORD, 1.0f) == true)
+			if (RequestAnim(ANIMID_ATTACK1_HAMMER, 0.6f) == true)
 			{
 				_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
 			}
 			break;
 		case ATTACK_2:
 			//攻撃中のアニメーション
-			if (RequestAnim(ANIMID_ATTACK2_SWORD, 1.0f) == true)
+			if (RequestAnim(ANIMID_ATTACK2_HAMMER, 0.6f) == true)
 			{
 				_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
 			}
 			break;
 		case ATTACK_3:
 			//攻撃中のアニメーション
-			if (RequestAnim(ANIMID_ATTACK3_SWORD, 1.0f) == true)
+			if (RequestAnim(ANIMID_ATTACK3_HAMMER, 0.6f) == true)
 			{
 				_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
 			}
 			break;
 		case ATTACK_AIR:
 			//空中の攻撃中アニメーション
-			if (RequestAnim(ANIMID_AIR_ATTACK_HAND, 1.0f) == true)
+			if (RequestAnim(ANIMID_AIR_ATTACK_HAMMER, 0.6f) == true)
 			{
 				_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
 			};
@@ -945,25 +945,25 @@ void CPlayer::AttackOut()
 		}
 	
 		break;
-	//武器が剣の場合
-	case WEAPON_ID_SWORD:
+	//武器がハンマーの場合
+	case WEAPON_ID_HAMMER:
 		switch (m_attackNum)
 		{
 		case ATTACK_1:
 			//攻撃後のアニメーション
-			RequestAnim(ANIMID_ATTACK1_SWORD_OUT, 0.8f);
+			RequestAnim(ANIMID_ATTACK1_HAMMER_OUT, 0.6f);
 			break;
 		case ATTACK_2:
 			//攻撃後のアニメーション
-			RequestAnim(ANIMID_ATTACK2_SWORD_OUT, 1.0f);
+			RequestAnim(ANIMID_ATTACK2_HAMMER_OUT, 0.6f);
 			break;
 		case ATTACK_3:
 			//攻撃後のアニメーション
-			RequestAnim(ANIMID_ATTACK3_SWORD_OUT, 1.0f);
+			RequestAnim(ANIMID_ATTACK3_HAMMER_OUT, 0.6f);
 			break;
 		case ATTACK_AIR:
 			//空中の攻撃後アニメーション
-			RequestAnim(ANIMID_AIR_ATTACK_HAND_OUT, 1.2f);
+			RequestAnim(ANIMID_AIR_ATTACK_HAMMER_OUT, 0.6f);
 			break;
 		}
 	
@@ -1032,7 +1032,7 @@ void CPlayer::SkillIn()
 		//攻撃前のアニメーション
 		RequestAnim(ANIMID_SKILLA_IN, 1.2f);
 		break;
-	case WEAPON_ID_SWORD:
+	case WEAPON_ID_HAMMER:
 		//攻撃前のアニメーション
 		RequestAnim(ANIMID_SKILLB_IN, 1.2f);
 
@@ -1084,7 +1084,7 @@ void CPlayer::SkillOut()
 		//攻撃後のアニメーション
 		RequestAnim(ANIMID_SKILLA_OUT, 0.3f);
 		break;
-	case WEAPON_ID_SWORD:
+	case WEAPON_ID_HAMMER:
 		//攻撃後のアニメーション
 		RequestAnim(ANIMID_SKILLB_OUT, 0.5f);
 		break;

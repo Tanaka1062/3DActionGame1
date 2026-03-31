@@ -19,7 +19,7 @@ enum tagItemName
 {
 	ITEM_NONE = -1,			//‰½‚à‚È‚¢	
 	ITEM_BOMB,				//”š’e
-	ITEM_SWORD,				//Œ•
+	ITEM_HAMMER,			//ƒnƒ“ƒ}[
 	ITEM_GUN,				//e
 	ITEM_AX,				//•€
 

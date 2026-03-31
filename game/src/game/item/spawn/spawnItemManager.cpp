@@ -1,7 +1,7 @@
 #include "spawnItemManager.h"
 #include "../itemObject/bomb/bomb.h"
 #include "../itemObject/box/box.h"
-#include "../weapon/sword/sword.h"
+#include "../weapon/hammer/hammer.h"
 #include "../weapon/gun/gun.h"
 #include"../weapon/ax/ax.h"
 #include "../../system/effectData/effectData.h"
@@ -12,23 +12,23 @@ using namespace std;
 constexpr int SPAWN_PROBABILITY_INIT[ITEM_NUM] =					//アイテムの出現確率の初期値
 {
 	0,
-	0,
-	0,
 	5,
+	0,
+	0,
 };
 
 constexpr int SPAWN_PROBABILITY_DECREASE[ITEM_NUM] =				//アイテムの出現確率の減少値
 {
 	5,
-	5,
-	5,
 	0,
+	5,
+	5,
 };
 
 static const char* MODEL_PATH[ITEM_NUM] =							//モデルのパス
 {
 	"data/model/item/bomb/bomb.mv1",
-	"data/model/item/weapon/sword/sword.mv1",
+	"data/model/item/weapon/hammer/hammer.mv1",
 	"data/model/item/weapon/gun/gun.mv1",
 	"data/model/item/weapon/ax/ax.mv1",
 
@@ -80,9 +80,9 @@ void CSpawnItemManager::Init(CPlayerManager* _playerManager)
 		{
 			m_item.push_back(make_unique<CBomb>());
 		}
-		else if (spawn_i <= SPAWN_ITEM_MAX * (ITEM_SWORD + 1))
+		else if (spawn_i <= SPAWN_ITEM_MAX * (ITEM_HAMMER + 1))
 		{
-			m_item.push_back(make_unique<CSword>());
+			m_item.push_back(make_unique<CHammer>());
 		}
 		else if (spawn_i <= SPAWN_ITEM_MAX * (ITEM_GUN)+1)
 		{
@@ -335,8 +335,8 @@ unique_ptr<CItemBase> CSpawnItemManager::SpawnItem(int _stageId)
 		case ITEM_BOMB:
 			spawnItem = make_unique<CBomb>();
 			break;
-		case ITEM_SWORD:
-			spawnItem = make_unique<CSword>();
+		case ITEM_HAMMER:
+			spawnItem = make_unique<CHammer>();
 			break;
 		case ITEM_GUN:
 			spawnItem = make_unique<CGun>();
@@ -410,8 +410,8 @@ unique_ptr<CItemBase> CSpawnItemManager::RequestItem(tagItemName _itemName)
 		case ITEM_BOMB:
 			spawnItem = make_unique<CBomb>();
 			break;
-		case ITEM_SWORD:
-			spawnItem = make_unique<CSword>();
+		case ITEM_HAMMER:
+			spawnItem = make_unique<CHammer>();
 			break;
 		case ITEM_GUN:
 			spawnItem = make_unique<CGun>();

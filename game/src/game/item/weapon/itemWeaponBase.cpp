@@ -42,9 +42,8 @@ void CWeaponBase::HitCalc(CObject* _hitObject)
 
 		player = dynamic_cast<CPlayer*>(_hitObject);
 
-		//プレイヤーがアイテムを取ろうとしていてなおかつ武器を持ってなかったらする処理
-		if (player->GetItemState() == ITEM_STATE_PICK_UP &&
-			player->GetWeaponId() == WEAPON_ID_HAND)
+		//プレイヤーが武器を持ってなかったらする処理
+		if (player->GetWeaponId() == WEAPON_ID_HAND)
 		{
 			//誰にも持たれていなかったら購入できる
 			if (m_owner == nullptr)

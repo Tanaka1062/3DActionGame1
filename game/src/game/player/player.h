@@ -10,7 +10,7 @@ constexpr int TRANSFORM_TIME = 10 * 60;					//変身している時間
 enum tagWeaponId
 {
 	WEAPON_ID_HAND,		//素手
-	WEAPON_ID_SWORD,	//剣
+	WEAPON_ID_HAMMER,	//ハンマー
 	WEAPON_ID_AX,		//斧
 	WEAPON_ID_GUN,		//銃
 
@@ -50,6 +50,9 @@ protected:
 
 	enum tagAnim {
 		ANIMID_AIR,						//空中にいるときのアニメーション
+		ANIMID_AIR_ATTACK_HAMMER,		//空中でハンマー攻撃中アニメーション
+		ANIMID_AIR_ATTACK_HAMMER_IN,	//空中でハンマー攻撃前アニメーション
+		ANIMID_AIR_ATTACK_HAMMER_OUT,	//空中でハンマー攻撃後アニメーション
 		ANIMID_AIR_ATTACK_HAND,			//空中で素手攻撃中アニメーション
 		ANIMID_AIR_ATTACK_HAND_IN,		//空中で素手攻撃前アニメーション
 		ANIMID_AIR_ATTACK_HAND_OUT,		//空中で素手攻撃後アニメーション
@@ -65,6 +68,15 @@ protected:
 		ANIMID_ATTACK1_GUN,				//銃攻撃1中アニメーション
 		ANIMID_ATTACK1_GUN_IN,			//銃攻撃1前アニメーション
 		ANIMID_ATTACK1_GUN_OUT,			//銃攻撃1後アニメーション
+		ANIMID_ATTACK1_HAMMER,			//ハンマー攻撃1中アニメーション
+		ANIMID_ATTACK1_HAMMER_IN,		//ハンマー攻撃1前アニメーション
+		ANIMID_ATTACK1_HAMMER_OUT,		//ハンマー攻撃1後アニメーション
+		ANIMID_ATTACK2_HAMMER,			//ハンマー攻撃2中アニメーション
+		ANIMID_ATTACK2_HAMMER_IN,		//ハンマー攻撃2前アニメーション
+		ANIMID_ATTACK2_HAMMER_OUT,		//ハンマー攻撃2後アニメーション
+		ANIMID_ATTACK3_HAMMER,			//ハンマー攻撃3中アニメーション
+		ANIMID_ATTACK3_HAMMER_IN,		//ハンマー攻撃3前アニメーション
+		ANIMID_ATTACK3_HAMMER_OUT,		//ハンマー攻撃3後アニメーション
 		ANIMID_ATTACK1_HAND,			//素手攻撃1中アニメーション
 		ANIMID_ATTACK1_HAND_IN,			//素手攻撃1前アニメーション
 		ANIMID_ATTACK1_HAND_OUT,		//素手攻撃1後アニメーション
@@ -74,15 +86,6 @@ protected:
 		ANIMID_ATTACK3_HAND,			//素手攻撃3中アニメーション
 		ANIMID_ATTACK3_HAND_IN,			//素手攻撃3前アニメーション
 		ANIMID_ATTACK3_HAND_OUT,		//素手攻撃3後アニメーション
-		ANIMID_ATTACK1_SWORD,			//剣攻撃1中アニメーション
-		ANIMID_ATTACK1_SWORD_IN,		//剣攻撃1前アニメーション
-		ANIMID_ATTACK1_SWORD_OUT,		//剣攻撃1後アニメーション
-		ANIMID_ATTACK2_SWORD,			//剣攻撃2中アニメーション
-		ANIMID_ATTACK2_SWORD_IN,		//剣攻撃2前アニメーション
-		ANIMID_ATTACK2_SWORD_OUT,		//剣攻撃2後アニメーション
-		ANIMID_ATTACK3_SWORD,			//剣攻撃3中アニメーション
-		ANIMID_ATTACK3_SWORD_IN,		//剣攻撃3前アニメーション
-		ANIMID_ATTACK3_SWORD_OUT,		//剣攻撃3後アニメーション
 		ANIMID_CHARGE,					//チャージ中のアニメーション
 		ANIMID_CHARGE_IN,				//チャージ前のアニメーション
 		ANIMID_CLAP,					//拍手のアニメーション
