@@ -9,6 +9,8 @@ enum tagEffectKind	//エフェクトの種類
 	EFFECT3,				//エフェクト３
 	EFFECT_EXPLOSION,		//爆発エフェクト
 	EFFECT_SPAWNITEM,		//アイテムスポーンエフェクト
+	EFFECT_SHOCK_WAVE,		//衝撃波エフェクト
+	EFFECT_COIN_GET,		//コイン獲得エフェクト
 
 	EFFECT_NUM,				//エフェクトの数
 };

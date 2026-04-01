@@ -876,6 +876,10 @@ void CPlayer::Attack(CAttackManager* _attackManager, CShotManager* _shotManager)
 			if (RequestAnim(ANIMID_AIR_ATTACK_HAMMER, 0.6f) == true)
 			{
 				_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
+				
+				int effectId = CEffectData::GetId(EFFECT_SHOCK_WAVE);
+				
+				CEffekseerCtrl::Request(effectId, attackPos, false);
 			};
 			break;
 		}

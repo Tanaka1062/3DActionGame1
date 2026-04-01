@@ -1,6 +1,8 @@
 #include "coinBase.h"
 #include "../../lib/myMath/myMath.h"
 #include "../../system/soundManager.h"
+#include "../../../lib/effekseer/effekseer.h"
+#include "../../system/effectData/effectData.h"
 
 constexpr float ROT_SPEED = 0.05f;			//回転速度
 constexpr int ADD_MONEY = 1;				//増えるお金の量
@@ -72,7 +74,6 @@ void CCoinBase::HitCalc(CObject* _hitObject)
 		if (m_state == ITEM_FLYING)return;
 
 		CSoundManager::Play(CSoundManager::SE_COINGET, DX_PLAYTYPE_BACK);
-
 		//プレイヤーデータ保存用
 		CPlayer* player = nullptr;
 
@@ -81,6 +82,12 @@ void CCoinBase::HitCalc(CObject* _hitObject)
 
 		//プレイヤーのお金を増やす
 		player->AddMoney(ADD_MONEY);
+
+		//呼び出すエフェクトのID
+		int effectId = CEffectData::GetId(EFFECT_COIN_GET);
+
+		//プレイヤーの位置にエフェクトを呼び出す
+		CEffekseerCtrl::Request(effectId, player->GetCenter(), false);
 
 		m_isActive = false;
 		m_owner = player;

@@ -11,7 +11,7 @@ using namespace std;
 
 constexpr int SPAWN_PROBABILITY_INIT[ITEM_NUM] =					//ƒAƒCƒeƒ€‚ÌoŒ»Šm—¦‚Ì‰Šú’l
 {
-	0,
+	5,
 	5,
 	0,
 	0,
@@ -19,7 +19,7 @@ constexpr int SPAWN_PROBABILITY_INIT[ITEM_NUM] =					//ƒAƒCƒeƒ€‚ÌoŒ»Šm—¦‚Ì‰Šú’
 
 constexpr int SPAWN_PROBABILITY_DECREASE[ITEM_NUM] =				//ƒAƒCƒeƒ€‚ÌoŒ»Šm—¦‚ÌŒ¸­’l
 {
-	5,
+	0,
 	0,
 	5,
 	5,
