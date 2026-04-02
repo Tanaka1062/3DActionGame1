@@ -14,7 +14,7 @@ constexpr int SPAWN_PROBABILITY_INIT[ITEM_NUM] =					//ƒAƒCƒeƒ€‚ÌoŒ»Šm—¦‚Ì‰Šú’
 	5,
 	5,
 	0,
-	0,
+	5,
 };
 
 constexpr int SPAWN_PROBABILITY_DECREASE[ITEM_NUM] =				//ƒAƒCƒeƒ€‚ÌoŒ»Šm—¦‚ÌŒ¸­’l
@@ -22,7 +22,7 @@ constexpr int SPAWN_PROBABILITY_DECREASE[ITEM_NUM] =				//ƒAƒCƒeƒ€‚ÌoŒ»Šm—¦‚ÌŒ¸
 	0,
 	0,
 	5,
-	5,
+	0,
 };
 
 static const char* MODEL_PATH[ITEM_NUM] =							//ƒ‚ƒfƒ‹‚ÌƒpƒX

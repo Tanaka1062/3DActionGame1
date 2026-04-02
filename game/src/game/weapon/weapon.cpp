@@ -1,4 +1,6 @@
 #include "weapon.h"
+#include "../system/effectData/effectData.h"
+#include "../../lib/effekseer/effekseer.h"
 
 //--------------
 //コンストラクタ
@@ -26,6 +28,7 @@ void CWeapon::Init()
 	{
 		m_weaponHndl[weaponHndl_i] = -1;
 	}
+	m_effectHndl = -1;
 }
 
 //--------------
@@ -39,10 +42,37 @@ void CWeapon::Load(int _hndl, int _weaponId)
 //--------------
 //毎フレームする処理
 //--------------
-void CWeapon::Step(tagWeaponId _playerWeaponId)
+void CWeapon::Step(tagWeaponId _playerWeaponId,tagState _state,VECTOR _playerPos)
 {
 	//武器ごとにモデルのハンドルを変更する
 	m_hndl = m_weaponHndl[_playerWeaponId];
+
+	//斧を使っていたらエフェクトを呼び出す
+	if (_playerWeaponId == WEAPON_ID_AX && _state == ATTACK)
+	{
+		if (m_effectHndl == -1)
+		{
+			int effectId = CEffectData::GetId(EFFECT_AX);
+
+			m_effectHndl = CEffekseerCtrl::Request(effectId, _playerPos, false);
+		}
+		else
+		{
+			CEffekseerCtrl::SetPosition(m_effectHndl, _playerPos);
+
+			if (CEffekseerCtrl::IsActive(m_effectHndl) == false)
+			{
+				m_effectHndl = -1;
+			}
+		}
+	}
+
+	//攻撃を止めたらエフェクトを止める
+	if (m_effectHndl != -1 && _state != ATTACK)
+	{
+		CEffekseerCtrl::Stop(m_effectHndl);
+		m_effectHndl = -1;
+	}
 }
 
 //--------------
@@ -59,6 +89,5 @@ void CWeapon::Update(int _hndl)
 	mat = MMult(mat, world);
 
 	MV1SetMatrix(m_hndl, mat);
-
 }
 

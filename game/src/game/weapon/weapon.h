@@ -7,6 +7,7 @@ class CWeapon : public CObject
 {
 private:
 	int m_weaponHndl[WEAPON_ID_NUM];	//武器のモデルハンドル保存用
+	int m_effectHndl;					//エフェクト保存用
 public:
 	//コンストラクタ・デストラクタ
 	CWeapon();
@@ -19,8 +20,7 @@ public:
 	void Load(int _hndl,int _weaponId);
 
 	//毎フレームする処理
-	void Step(tagWeaponId _playerWeaponId);
-
+	void Step(tagWeaponId _playerWeaponId, tagState _state, VECTOR _playerPos);
 
 	//更新処理
 	void Update(int _hndl);

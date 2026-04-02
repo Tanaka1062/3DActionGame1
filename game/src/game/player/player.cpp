@@ -30,6 +30,7 @@ constexpr float MONEY_DROP_RATE = 0.4f;						//落とすお金の割合
 constexpr float MONEY_RESPAWN_RATE = 0.5f;					//復活するときに消費するお金の割合
 constexpr float DIE_POS_Y = -100.0f;						//死ぬ高さ
 constexpr float FALL_OUT_DAMAGER_RATE = 0.3f;				//ステージから落下したときの割合ダメージ
+constexpr int GET_UP_MAX_TIME = 3 * 60;						//起き上がるまでの最大時間
 //----------------------------------------------
 
 //攻撃関連---------------------------
@@ -106,11 +107,14 @@ CPlayer::CPlayer()
 	m_attackNum = ATTACK_NONE;
 	m_money = INIT_MONEY;
 	m_attackId = -1;
+	m_effectId = -1;
 	m_padName = PAD_NONE;
 	m_weaponId = WEAPON_ID_HAND;
 	m_weaponDurability = 0;
 	m_itemState = ITEM_STATE_NONE;
 	m_targetPos = nullptr;
+	m_isCpu = false;
+	m_getUpTime = 0;
 }
 
 //-----------------------
@@ -138,11 +142,12 @@ void CPlayer::Init(tagPlayerName _name, tagPadName _padName)
 	m_weaponDurability = 0;
 	m_money = INIT_MONEY;
 	m_padName = _padName;
-	m_weaponId = WEAPON_ID_HAND;
+	m_weaponId = WEAPON_ID_HAMMER;
 	m_name = _name;
 	m_shadow.Init(m_pos, SHADOW_SIZE);
 	m_objectName = OBJECT_PLAYER;
 	m_isCpu = false;
+	m_getUpTime = 0;
 }
 
 //-----------------------
@@ -170,24 +175,35 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 
 	if (m_targetPos != nullptr && m_isFlying == false)
 	{
-		//プレイヤー同士の距離
-		VECTOR vLen = VSub(m_pos, *m_targetPos);
-		float fLen = VSize(vLen);
-
-		//戦いの距離になったら互いの方向を向く
-		if (fLen <= FIGHT_LEN)
+		switch (m_state)
 		{
-			float rotY1 = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
+		case BLOW_AWAY:
+		case DOWN:
+		case DOWN_IN:
+		case GET_UP:
+		case DIE:
+			break;
+		default:
+			//プレイヤー同士の距離
+			VECTOR vLen = VSub(m_pos, *m_targetPos);
+			float fLen = VSize(vLen);
 
-			m_rot.y = rotY1;
-		}
+			//戦いの距離になったら互いの方向を向く
+			if (fLen <= FIGHT_LEN)
+			{
+				float rotY1 = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
 
-		//プレイヤーの向きを変える
-		if (m_state == ITEM_THROW_IN)
-		{
-			float rotY = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
+				m_rot.y = rotY1;
+			}
 
-			m_rot.y = rotY;
+			//プレイヤーの向きを変える
+			if (m_state == ITEM_THROW_IN)
+			{
+				float rotY = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
+
+				m_rot.y = rotY;
+			}
+			break;
 		}
 	}
 
@@ -205,7 +221,7 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 		case ATTACK_IN:
 		case ATTACK:
 		case ATTACK_OUT:
-		case STAGGER:
+		case BLOW_AWAY:
 		case DIE:
 			break;
 		default:
@@ -224,11 +240,11 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 	//素手以外の場合耐久度が0以下になったら武器が壊れる
 	if (m_weaponId != WEAPON_ID_HAND)
 	{
-		if (m_weaponDurability <= 0)
-		{
-			m_weaponId = WEAPON_ID_HAND;
-			m_weaponDurability = 0;
-		}
+		//if (m_weaponDurability <= 0)
+		//{
+		//	m_weaponId = WEAPON_ID_HAND;
+		//	m_weaponDurability = 0;
+		//}
 	}
 
 	//------------------------------------------------
@@ -321,6 +337,16 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 	{
 		_attackManager->SetActive(m_attackId,false);
 	}
+
+	if (m_effectId != -1)
+	{
+		CEffekseerCtrl::SetPosition(m_effectId, GetCenter());
+
+		if (CEffekseerCtrl::IsActive(m_effectId) == false)
+		{
+			m_effectId = -1;
+		}
+	}
 }
 
 //-----------------------
@@ -398,6 +424,12 @@ void CPlayer::HitCalc(CObject* _hitObject)
 	//攻撃の当たり判定の場合の処理-----------------------------------------
 	if (_hitObject->GetObjectName() == OBJECT_ATTACK)
 	{
+		//ダウン状態と起き上がり中は判定をしない
+		if (m_state == DOWN ||
+			m_state == DOWN_IN ||
+			m_state == GET_UP)
+			return;
+
 		//当たり判定保存用
 		CAttackBase* attack = nullptr;
 
@@ -436,7 +468,20 @@ void CPlayer::HitCalc(CObject* _hitObject)
 		item = dynamic_cast<CItemBase*>(_hitObject);
 
 		//アイテムがオブジェクトタイプ以外の場合処理をしない
-		if (item->GetItemType() != ITEM_TYPE_OBJECT)return;
+		if (item->GetItemType() == ITEM_TYPE_COIN)
+		{
+			if (m_effectId != -1)
+			{
+				CEffekseerCtrl::Stop(m_effectId);
+				m_effectId = -1;
+			}
+
+			//呼び出すエフェクトのID
+			int effectId = CEffectData::GetId(EFFECT_COIN_GET);
+
+			//プレイヤーの位置にエフェクトを呼び出す
+			m_effectId = CEffekseerCtrl::Request(effectId, GetCenter(), false);
+		}
 
 	}
 	//---------------------------------------------------------------------
@@ -499,6 +544,14 @@ void CPlayer::HitAttack(int _atk, int _blown, float _rotY)
 
 		//落としたコイン量だけお金を減らす
 		m_money -= m_dropCoin;
+
+		//吹き飛ばされ状態
+		m_state = BLOW_AWAY;
+	}
+	else
+	{
+		//怯み状態にする
+		m_state = STAGGER;
 	}
 
 	//既に怯み状態なら処理をしない
@@ -521,9 +574,6 @@ void CPlayer::HitAttack(int _atk, int _blown, float _rotY)
 	m_speed.z = res.m[2][3];
 
 	//------------------------------------
-
-	//怯み状態にする
-	m_state = STAGGER;
 
 	//Hpを攻撃力分減らす
 	m_hp -= _atk;
@@ -1244,6 +1294,75 @@ void CPlayer::Stagger()
 	RequestAnim(ANIMID_HIT, 1.4f);
 
 	//被弾のアニメーションが終わったら戻す
+	if (GetAnimEnd() == true)
+	{
+		m_state = WAIT;
+	}
+}
+
+//-----------------------
+//		吹き飛んだ
+//-----------------------
+void CPlayer::BlowAway()
+{
+	//吹き飛んだアニメーション
+	RequestAnim(ANIMID_BLOW_AWAY, 1.0f);
+
+	//移動している反対方向を向く
+	if (m_speed.x != 0 || m_speed.z != 0)
+		m_rot.y = atan2f(m_speed.x, m_speed.z);
+
+	//着地したらダウン状態に移行する
+	if(GetAnimEnd() == true &&
+		m_isFlying == false)
+	{
+		m_state = DOWN;
+	}
+}
+
+//-----------------------
+//		 ダウン前
+//-----------------------
+void CPlayer::DownIn()
+{
+	//ダウン前のアニメーション
+	RequestAnim(ANIMID_DOWN_IN, 1.0f);
+
+	if (GetAnimEnd() == true)
+	{
+		m_state = DOWN;
+	}
+}
+
+//-----------------------
+//		  ダウン
+//-----------------------
+void CPlayer::Down()
+{
+	//ダウンのアニメーション
+	RequestAnim(ANIMID_DOWN, 1.0f, true);
+
+	m_getUpTime++;
+
+	//移動の入力をされたら起き上がりに移行する
+	if ((CControllerManager::GetLX(m_padName) != 0.0f ||
+		CControllerManager::GetLY(m_padName) != 0.0f) ||
+		m_getUpTime >= GET_UP_MAX_TIME)
+	{
+		m_getUpTime = 0;
+		m_state = GET_UP;
+	}
+}
+
+//-----------------------
+//		起き上がり
+//-----------------------
+void CPlayer::GetUp()
+{
+	//起き上がりのアニメーション
+	RequestAnim(ANIMID_GET_UP,0.8f);
+
+	//アニメーションが終わったら待機状態に戻す
 	if (GetAnimEnd() == true)
 	{
 		m_state = WAIT;

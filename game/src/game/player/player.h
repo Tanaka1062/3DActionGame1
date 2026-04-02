@@ -39,13 +39,14 @@ protected:
 	int m_weaponDurability;			//武器の耐久度
 	int m_money;					//お金
 	int m_attackId;					//攻撃のID
+	int m_effectId;					//エフェクトのID
 	tagPadName m_padName;			//コントローラーの名前
 	tagWeaponId m_weaponId;			//武器のID
 	tagPlayerName m_name;			//プレイヤーの名前
 	tagHaveItemState m_itemState;	//アイテムの状態
 	VECTOR* m_targetPos;			//相手の座標ポインタ
 	bool m_isCpu;					//cpuかどうかフラグ
-
+	int m_getUpTime;				//起き上がるまでの時間
 	//アニメーション一覧---------------------------
 
 	enum tagAnim {
@@ -86,12 +87,16 @@ protected:
 		ANIMID_ATTACK3_HAND,			//素手攻撃3中アニメーション
 		ANIMID_ATTACK3_HAND_IN,			//素手攻撃3前アニメーション
 		ANIMID_ATTACK3_HAND_OUT,		//素手攻撃3後アニメーション
+		ANIMID_BLOW_AWAY,				//吹き飛んでいるアニメーション
 		ANIMID_CHARGE,					//チャージ中のアニメーション
 		ANIMID_CHARGE_IN,				//チャージ前のアニメーション
 		ANIMID_CLAP,					//拍手のアニメーション
 		ANIMID_DEFAULT,					//デフォルトのアニメーション
 		ANIMID_DIE,						//死亡時のアニメーション
 		ANIMID_DODGEROLL,				//回避のアニメーション
+		ANIMID_DOWN,					//ダウン中のアニメーション
+		ANIMID_DOWN_IN,					//ダウン前のアニメーション
+		ANIMID_GET_UP,					//起き上がりのアニメーション
 		ANIMID_GUARD,					//ガード中アニメーション
 		ANIMID_GUARD_IN,				//ガード前アニメーション
 		ANIMID_GUARD_OUT,				//ガード後アニメーション
@@ -286,6 +291,18 @@ protected:
 
 	//怯み状態処理
 	void Stagger();
+
+	//吹き飛んだ
+	void BlowAway();
+
+	//ダウン前
+	void DownIn();
+
+	//ダウン
+	void Down();
+
+	//起き上がり
+	void GetUp();
 
 	//死亡
 	void Die();

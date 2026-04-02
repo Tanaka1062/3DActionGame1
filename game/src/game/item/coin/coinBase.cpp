@@ -83,12 +83,6 @@ void CCoinBase::HitCalc(CObject* _hitObject)
 		//プレイヤーのお金を増やす
 		player->AddMoney(ADD_MONEY);
 
-		//呼び出すエフェクトのID
-		int effectId = CEffectData::GetId(EFFECT_COIN_GET);
-
-		//プレイヤーの位置にエフェクトを呼び出す
-		CEffekseerCtrl::Request(effectId, player->GetCenter(), false);
-
 		m_isActive = false;
 		m_owner = player;
 	}

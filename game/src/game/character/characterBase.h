@@ -36,6 +36,10 @@ enum tagState						//キャラクターの状態
 	ITEM_THROW,						//アイテムを投げる
 	ITEM_THROW_OUT,					//アイテムを投げた後
 	STAGGER,						//怯み
+	BLOW_AWAY,						//吹き飛んだ状態
+	DOWN,							//ダウン状態
+	DOWN_IN,						//ダウン前
+	GET_UP,							//起き上がり状態
 	DIE,							//死亡
 	READY,							//準備完了
 	READY_OUT,						//準備完了を解除
@@ -168,6 +172,18 @@ protected:
 
 	//怯み
 	virtual void Stagger();
+
+	//吹き飛んだ
+	virtual void BlowAway();
+
+	//ダウン前
+	virtual void DownIn();
+
+	//ダウン
+	virtual void Down();
+
+	//起き上がり
+	virtual void GetUp();
 
 	//死亡
 	virtual void Die();

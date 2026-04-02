@@ -69,8 +69,10 @@ void CWeaponManager::Step(CPlayerManager& _playerManager)
 		bool isWeapon = false;
 		//ƒvƒŒƒCƒ„[‚Ì•Ší‚ÌID‚ðŽæ“¾
 		tagWeaponId weaponId = _playerManager.GetPlayer(player_i)->GetWeaponId();
+		tagState state = _playerManager.GetPlayer(player_i)->GetState();
+		VECTOR playerPos = _playerManager.GetPlayer(player_i)->GetCenter();
 
-		m_weapon[player_i].Step(weaponId);
+		m_weapon[player_i].Step(weaponId,state,playerPos);
 	}
 }
 

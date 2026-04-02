@@ -260,24 +260,35 @@ void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackMa
 
 	if (m_targetPos != nullptr)
 	{
-		//プレイヤー同士の距離
-		VECTOR vLen = VSub(m_pos, *m_targetPos);
-		float fLen = VSize(vLen);
-
-		//戦いの距離になったら互いの方向を向く
-		if (fLen <= FIGHT_LEN)
+		switch (m_state)
 		{
-			float rotY1 = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
+		case BLOW_AWAY:
+		case DOWN:
+		case DOWN_IN:
+		case GET_UP:
+		case DIE:
+			break;
+		default:
+			//プレイヤー同士の距離
+			VECTOR vLen = VSub(m_pos, *m_targetPos);
+			float fLen = VSize(vLen);
 
-			m_rot.y = rotY1;
-		}
+			//戦いの距離になったら互いの方向を向く
+			if (fLen <= FIGHT_LEN)
+			{
+				float rotY1 = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
 
-		//プレイヤーの向きを変える
-		if (m_state == ITEM_THROW_IN)
-		{
-			float rotY = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
+				m_rot.y = rotY1;
+			}
 
-			m_rot.y = rotY;
+			//プレイヤーの向きを変える
+			if (m_state == ITEM_THROW_IN)
+			{
+				float rotY = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
+
+				m_rot.y = rotY;
+			}
+			break;
 		}
 	}
 
@@ -295,7 +306,7 @@ void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackMa
 		case ATTACK_IN:
 		case ATTACK:
 		case ATTACK_OUT:
-		case STAGGER:
+		case BLOW_AWAY:
 		case DIE:
 			break;
 		default:
@@ -372,6 +383,12 @@ void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackMa
 	{
 		_attackManager->SetActive(m_attackId, false);
 	}
+
+	//自動で立ち上がるよう
+	if (m_state == DOWN)
+	{
+		m_state = GET_UP;
+	}
 }
 
 //-----------------------
@@ -394,6 +411,13 @@ void CCpuPlayer::HitCalc(CObject* _hitObject)
 	//攻撃の当たり判定の場合の処理-----------------------------------------
 	if (_hitObject->GetObjectName() == OBJECT_ATTACK)
 	{
+		//ダウン状態と起き上がり中は判定をしない
+		if (m_state == DOWN ||
+			m_state == DOWN_IN ||
+			m_state == GET_UP)
+			return;
+
+
 		//当たり判定保存用
 		CAttackBase* attack = nullptr;
 

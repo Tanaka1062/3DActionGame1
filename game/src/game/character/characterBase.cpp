@@ -178,6 +178,26 @@ void CCharacterBase::Step(CAttackManager* _attackManager, CShotManager* _shotMan
 		Stagger();
 		break;
 
+		//吹き飛んだ
+	case BLOW_AWAY:
+		BlowAway();
+		break;
+
+		//倒れる
+	case DOWN:
+		Down();
+		break;
+
+		//倒れる前
+	case DOWN_IN:
+		DownIn();
+		break;
+
+		//起き上がる
+	case GET_UP:
+		GetUp();
+		break;
+
 		//死亡
 	case DIE:
 		Die();
@@ -239,6 +259,13 @@ void CCharacterBase::HitAttack(int _atk, int _blown, float _rotY)
 	{
 		knockBack = VScale(knockBack, 10.0f);
 		m_blown = 0;
+		//吹き飛ばし状態にする
+		m_state = BLOW_AWAY;
+	}
+	else
+	{
+		//怯み状態にする
+		m_state = STAGGER;
 	}
 
 	//既に怯み状態なら処理をしない
@@ -262,9 +289,6 @@ void CCharacterBase::HitAttack(int _atk, int _blown, float _rotY)
 
 	//------------------------------------
 
-
-	//怯み状態にする
-	m_state = STAGGER;
 	//Hpを攻撃力分減らす
 	m_hp -= _atk;
 }
@@ -449,6 +473,38 @@ void CCharacterBase::ItemThrowOut()
 //			怯み
 //------------------------------
 void CCharacterBase::Stagger()
+{
+
+}
+
+//------------------------------
+//			吹き飛んだ
+//------------------------------
+void CCharacterBase::BlowAway()
+{
+
+}
+
+//------------------------------
+//			ダウン前
+//------------------------------
+void CCharacterBase::DownIn()
+{
+
+}
+
+//------------------------------
+//			ダウン
+//------------------------------
+void CCharacterBase::Down()
+{
+
+}
+
+//------------------------------
+//			起き上がり
+//------------------------------
+void CCharacterBase::GetUp()
 {
 
 }
