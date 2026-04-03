@@ -83,7 +83,6 @@ void CSceneManager::Factory()
 	//---------------------------
 	void CSceneManager::Draw()
 	{
-
 		m_scene->Draw();
 
 	}

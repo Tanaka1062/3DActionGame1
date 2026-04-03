@@ -142,7 +142,7 @@ void CPlayer::Init(tagPlayerName _name, tagPadName _padName)
 	m_weaponDurability = 0;
 	m_money = INIT_MONEY;
 	m_padName = _padName;
-	m_weaponId = WEAPON_ID_HAMMER;
+	m_weaponId = WEAPON_ID_HAND;
 	m_name = _name;
 	m_shadow.Init(m_pos, SHADOW_SIZE);
 	m_objectName = OBJECT_PLAYER;
@@ -240,11 +240,11 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 	//‘fèˆÈŠO‚Ìê‡‘Ï‹v“x‚ª0ˆÈ‰º‚É‚È‚Á‚½‚ç•Ší‚ª‰ó‚ê‚é
 	if (m_weaponId != WEAPON_ID_HAND)
 	{
-		//if (m_weaponDurability <= 0)
-		//{
-		//	m_weaponId = WEAPON_ID_HAND;
-		//	m_weaponDurability = 0;
-		//}
+		if (m_weaponDurability <= 0)
+		{
+			m_weaponId = WEAPON_ID_HAND;
+			m_weaponDurability = 0;
+		}
 	}
 
 	//------------------------------------------------

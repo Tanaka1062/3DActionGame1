@@ -42,6 +42,7 @@ void CPlayScene::Draw()
 		m_itemManager.Draw();
 		m_weaponManager.Draw();
 		m_playerManager.Draw();
+		m_3DUiManager->Draw();
 		m_uiManager.Draw();
 
 		CCameraManager::Draw();
@@ -70,6 +71,8 @@ void CPlayScene::Init()
 	m_winner = CWinner::GetInstance();
 	m_winner->Init();
 	m_eventManager.Init();
+	m_3DUiManager = C3DUiManager::GetInstance();
+	m_3DUiManager->Init();
 }
 
 //---------------------------
@@ -83,7 +86,7 @@ void CPlayScene::Load()
 	case 0:
 		m_mapManager.Load();
 		m_sky.Load();
-		m_playerManager.Load(m_mapManager.GetMap());
+		m_playerManager.Load(m_mapManager.GetMap(),m_3DUiManager);
 		m_shot.Load();
 		m_itemManager.Load(m_mapManager.GetMap());
 		m_weaponManager.Load();
@@ -116,7 +119,7 @@ void CPlayScene::Step()
 	//各種計算処理を実行
 	m_mapManager.Step();
 	m_sky.Step(CCameraManager::GetFocusPos());
-	m_playerManager.Step(&m_attackManager,&m_shot, CCameraManager::GetRot().y,m_mapManager.GetMap()->GetStageId());
+	m_playerManager.Step(&m_attackManager,&m_shot,m_3DUiManager, CCameraManager::GetRot().y,m_mapManager.GetMap()->GetStageId());
 	m_shot.Step();
 	m_itemManager.Step(&m_playerManager,m_mapManager.GetMap()->GetStageId());
 	m_weaponManager.Step(m_playerManager);
@@ -173,6 +176,7 @@ void CPlayScene::Exit()
 	m_weaponManager.Exit();
 	m_uiManager.Exit();
 	m_eventManager.Exit();
+	m_3DUiManager->Exit();
 	CCameraManager::Exit();
 
 	//エフェクトを全て消す

@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\game\3DUi\3DUi.cpp" />
+    <ClCompile Include="src\game\3DUi\3DUiManager.cpp" />
     <ClCompile Include="src\game\attack\attackBase.cpp" />
     <ClCompile Include="src\game\attack\attackManager.cpp" />
     <ClCompile Include="src\game\camera\cameraBase.cpp" />
@@ -224,6 +225,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game\3DUi\3DUi.h" />
+    <ClInclude Include="src\game\3DUi\3DUiManager.h" />
     <ClInclude Include="src\game\attack\attackBase.h" />
     <ClInclude Include="src\game\attack\attackManager.h" />
     <ClInclude Include="src\game\camera\cameraBase.h" />

@@ -22,6 +22,9 @@ constexpr float TARGET_MAX_DISTANCE = 40.0f;	//どれくらい法線から離せるか
 constexpr int MAP_FRAME_NUM = 7;				//マップのフレーム番号
 constexpr float DIE_RADIUS = 240.0f;			//画面外判定の半径
 
+constexpr int NAME_ACTIVE_TIME = 180;			//名前の表示時間
+constexpr float Ui_UP_Y = 40.0f;				//3DUiのどれだけあげるか
+
 static const char* MODEL_PATH =					//モデルのパス
 { "data/model/player/playerTest8.mv1"};			
 
@@ -131,16 +134,18 @@ void CPlayerManager::Init()
 		player->Init(name,padName);
 
 		m_player.push_back(player);
+
+		m_playerName[player_i].m_UiId = -1;
+		m_playerName[player_i].m_activeTime = 0;
 	}
 
-	//王冠の初期化
-	m_crown.Init();
+	m_crownId = -1;
 }
 
 //------------------------
 //	オブジェクトのロード
 //------------------------
-void CPlayerManager::Load(CMapBase* _map)
+void CPlayerManager::Load(CMapBase* _map, C3DUiManager* _3DUiManager)
 {
 
 	//モデルのロード
@@ -193,16 +198,41 @@ void CPlayerManager::Load(CMapBase* _map)
 		m_player[player_i]->Load(m_modelHndl[MODEL_PLAYER1]);
 		m_player[player_i]->SetPos(m_spawnPos[0][player_i]);
 		MV1SetTextureGraphHandle(m_player[player_i]->GetHndl(), 0, m_materialHndl[player_i], FALSE);
+	
+		tag3DUiName uiName = MT_NONE;
+
+		if (m_player[player_i]->GetIsCpu() == false)
+		{
+			switch (m_player[player_i]->GetPlayerName())
+			{
+			case PLAYER_1:
+				uiName = MT_PLAYER1_NAME;
+				break;
+			case PLAYER_2:
+				uiName = MT_PLAYER2_NAME;
+				break;
+			case PLAYER_3:
+				uiName = MT_PLAYER3_NAME;
+				break;
+			case PLAYER_4:
+				uiName = MT_PLAYER4_NAME;
+				break;
+			}
+		}
+		else
+		{
+			uiName = MT_CPU_NAME;
+		}
+		m_playerName[player_i].m_UiId = _3DUiManager->RequsetLoad(uiName);
 	}
 
-	//王冠のモデルロード
-	m_crown.Load();
+	m_crownId = _3DUiManager->RequsetLoad(MT_CROWN);
 }
 
 //------------------------
 //	毎フレームする処理
 //------------------------
-void CPlayerManager::Step(CAttackManager* _attackManager, CShotManager* _shotManager, float _rot, int _stageId)
+void CPlayerManager::Step(CAttackManager* _attackManager, CShotManager* _shotManager, C3DUiManager* _3DUiManager, float _rot, int _stageId)
 {
 	int topPlayerCoinCount = 0;	//現在の一番コインを持っている量
 	int topPlayerNum = -1;		//一番のプレイヤーの番号
@@ -333,8 +363,20 @@ void CPlayerManager::Step(CAttackManager* _attackManager, CShotManager* _shotMan
 				CCameraManager::GetFocusPos(), DIE_RADIUS) == true)
 			{
 				m_player[player_i]->Respawn(m_spawnPos[_stageId][player_i]);
+				m_playerName[player_i].m_activeTime = 0;
 			}
 		}
+
+		//プレイヤーの上に名前を表示する--------------------------------
+		if (NAME_ACTIVE_TIME >= m_playerName[player_i].m_activeTime)
+		{
+			C3DUi* name = _3DUiManager->GetUi(m_playerName[player_i].m_UiId);
+			name->SetIsActive(true);
+			VECTOR vec = m_player[player_i]->GetCenter();
+			vec.y += Ui_UP_Y;
+			name->SetPos(vec);
+		}
+		//--------------------------------------------------------------
 
 		m_player[player_i]->Step(_rot,targetPos,_attackManager,_shotManager);
 
@@ -359,16 +401,20 @@ void CPlayerManager::Step(CAttackManager* _attackManager, CShotManager* _shotMan
 	}
 
 	//一位に王冠を表示する-----------------------------------------------------------------
+	C3DUi* crown = _3DUiManager->GetUi(m_crownId);
 	if (isTieAtTop == false && topPlayerNum != -1)
 	{
-		m_crown.SetActive(true);
-		m_crown.Step(m_player[topPlayerNum]->GetPos(), m_player[topPlayerNum]->GetRad(), _rot);
+		crown->SetIsActive(true);
+		VECTOR vec = m_player[topPlayerNum]->GetCenter();
+		vec.y += Ui_UP_Y;
+		crown->SetPos(vec);
 	}
 	else
 	{
-		m_crown.SetActive(false);
+		crown->SetIsActive(false);
 	}
 	//-------------------------------------------------------------------------------------
+
 }
 
 //------------------------
@@ -380,7 +426,6 @@ void CPlayerManager::Update()
 	{
 		m_player[player_i]->Update();
 	}
-	m_crown.Update();
 }
 
 //------------------------
@@ -393,9 +438,6 @@ void CPlayerManager::Draw()
 		if (m_player[player_i]->GetActive() == false)continue;
 		m_player[player_i]->Draw();
 	}
-
-	m_crown.Draw();
-
 }
 
 //------------------------
@@ -443,8 +485,6 @@ void CPlayerManager::Exit()
 
 	//スポーン座標を全て消す
 	m_spawnPos.clear();
-
-	m_crown.Exit();
 }
 
 //------------------------

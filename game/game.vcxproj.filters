@@ -432,6 +432,9 @@
     <ClCompile Include="src\game\item\weapon\hammer\hammer.cpp">
       <Filter>ソース ファイル\game\item\weapon\hammer</Filter>
     </ClCompile>
+    <ClCompile Include="src\game\3DUi\3DUiManager.cpp">
+      <Filter>ソース ファイル\game\3DUi</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\lib\number.h">
@@ -685,6 +688,9 @@
     </ClInclude>
     <ClInclude Include="src\game\item\weapon\hammer\hammer.h">
       <Filter>ソース ファイル\game\item\weapon\hammer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\3DUi\3DUiManager.h">
+      <Filter>ソース ファイル\game\3DUi</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

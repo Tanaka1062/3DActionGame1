@@ -4,7 +4,7 @@
 #include "player.h"
 #include"cpuPlayer/cpuPlayerFOV.h"
 #include "../map/mapManager.h"
-#include "../3DUi/3DUi.h"
+#include "../3DUi/3DUiManager.h"
 
 //エネミーマネージャーのクラス
 class CPlayerManager
@@ -15,7 +15,13 @@ private:
 	std::vector<int>m_materialHndl;					//マテリアルのハンドル
 	std::vector <std::vector<VECTOR>> m_spawnPos;	//プレイヤーの出現座標
 	std::vector<CCpuPlayerFOV*>m_cpuFOV;			//CPUの視界範囲クラス
-	C3DUi m_crown;									//王冠
+	int m_crownId;									//王冠のUiId
+	struct tagName									//プレイヤーの名前
+	{
+		int m_UiId;									//プレイヤーの名前UiId
+		int m_activeTime;							//生存時間
+	};
+	tagName m_playerName[PLAYER_NUM];				//プレイヤーの名前UI
 
 public:
 	//コンストラクタ・デストラクタ
@@ -25,9 +31,9 @@ public:
 	//初期化
 	void Init();
 	//オブジェクトのロード
-	void Load(CMapBase* _map);
+	void Load(CMapBase* _map,C3DUiManager* _3DUiManager);
 	//毎フレームする処理
-	void Step(CAttackManager* _attackManager,CShotManager* _shotManager,float _rot,int _stageId);
+	void Step(CAttackManager* _attackManager,CShotManager* _shotManager, C3DUiManager* _3DUiManager,float _rot,int _stageId);
 	//数値の更新
 	void Update();
 	//オブジェクトの描写

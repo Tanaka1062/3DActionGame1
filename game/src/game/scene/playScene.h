@@ -13,6 +13,7 @@
 #include "../gameTime/gameTime.h"
 #include "../winner/winner.h"
 #include "../event/eventManager.h"
+#include "../3DUi/3DUiManager.h"
 
 //ゲーム本編を管理するクラス
 class CPlayScene :public CSceneBase
@@ -29,7 +30,8 @@ private:
 	CUiGameManager m_uiManager;				//uiのマネージャークラス
 	CGameTime* m_gameTime;					//ゲームの制限時間
 	CWinner* m_winner;						//勝利したプレイヤー
-	CEventManager m_eventManager;			//イベントのマネージャー
+	CEventManager m_eventManager;			//イベントのマネージャークラス
+	C3DUiManager* m_3DUiManager;			//3DUIのマネージャークラス
 
 public:
 
