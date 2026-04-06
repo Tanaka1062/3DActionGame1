@@ -164,6 +164,7 @@ void CCpuPlayer::Load(int _modelHndl)
 //-----------------------
 void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManager, CShotManager* _shotManager)
 {
+	return;
 	m_targetPos = _targetPos;
 
 	m_FOV->SetPos(CCameraManager::GetFocusPos());

@@ -60,10 +60,6 @@ void CAttackManager::Draw()
 		//•`Êˆ—
 		(*ite)->Draw();
 	}
-	DrawFormatString(120, 120, GetColor(255, 0, 0), "UŒ‚‰ñ” %d/%d", m_attack[0]->GetNumCount(), m_attack[0]->GetNum());
-	DrawFormatString(120, 160, GetColor(255, 0, 0), "UŒ‚‰ñ” %d/%d", m_attack[1]->GetNumCount(), m_attack[1]->GetNum());
-	DrawFormatString(120, 200, GetColor(255, 0, 0), "UŒ‚‰ñ” %d/%d", m_attack[2]->GetNumCount(),m_attack[2]->GetNum());
-	DrawFormatString(120, 240, GetColor(255, 0, 0), "UŒ‚‰ñ” %d/%d", m_attack[3]->GetNumCount(),m_attack[3]->GetNum());
 
 }
 

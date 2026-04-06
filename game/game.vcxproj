@@ -212,6 +212,7 @@
     <ClCompile Include="src\game\winner\winner.cpp" />
     <ClCompile Include="src\lib\2DUi\2DUi.cpp" />
     <ClCompile Include="src\lib\collision\collision.cpp" />
+    <ClCompile Include="src\lib\debug.cpp" />
     <ClCompile Include="src\lib\effekseer\effekseer.cpp" />
     <ClCompile Include="src\lib\input\controllerInput.cpp" />
     <ClCompile Include="src\lib\input\controllerManager.cpp" />
@@ -299,6 +300,7 @@
     <ClInclude Include="src\game\winner\winner.h" />
     <ClInclude Include="src\lib\2DUi\2DUi.h" />
     <ClInclude Include="src\lib\collision\collision.h" />
+    <ClInclude Include="src\lib\debug.h" />
     <ClInclude Include="src\lib\effekseer\effekseer.h" />
     <ClInclude Include="src\lib\input\controllerInput.h" />
     <ClInclude Include="src\lib\input\controllerManager.h" />

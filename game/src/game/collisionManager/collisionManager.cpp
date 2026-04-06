@@ -4,6 +4,7 @@
 #include "../../lib/effekseer/effekseer.h"
 #include "../system/effectData/effectData.h"
 #include "../../lib/myMath/myMath.h"
+#include "../../lib/debug.h"
 
 //----------------------------------------------
 //			オブジェクト同士の当たり判定
@@ -203,6 +204,8 @@ void CCollisionManager::CheckHitCollToObject(CObject& _collObject, CObject& _obj
 
 	col = MV1CollCheck_Sphere(_collObject.GetHndl(), -1, _object.GetCenter(), _object.GetRad());
 
+	if (_object.GetObjectName() != OBJECT_PLAYER)return;
+
 	//ポリゴンと当たっていたか
 	if (col.HitNum != 0)
 	{
@@ -229,11 +232,23 @@ void CCollisionManager::CheckHitCollToObject(CObject& _collObject, CObject& _obj
 			//法線の角度を取得
 			float angle = atan2f(normal.y, normal.x);
 
-			//角度が90度の場合重力のリセットをする
+			float a = angle * (180.0f / DX_PI_F);
+
+			//角度が90度の場合足元にあるかを判断する
 			if (angle == 90.0f * (DX_PI_F / 180.0f))
 			{
-				//重力をリセット
-				_object.GravityReset();
+				float fLenY = _object.GetCenter().y - col.Dim[j].HitPosition.y;
+
+				CDebug::m_numY[0] = _object.GetCenter().y;
+				CDebug::m_numY[1] = col.Dim[j].HitPosition.y;
+				CDebug::m_numY[2] = fLenY;
+				//足元にある場合重力をリセットする
+				if (_object.GetPos().y == col.Dim[j].HitPosition.y ||
+					fLenY <= _object.GetRad())
+				{
+					//重力をリセット
+					_object.GravityReset();
+				}
 			}
 
 		}

@@ -39,6 +39,12 @@ static const char* MATERIAL_PATH[PLAYER_NUM] =	//マテリアルのパス
 //------------------------
 CPlayerManager::CPlayerManager()
 {
+	m_crownId = -1;
+	for (int player_i = 0; player_i < PLAYER_NUM; player_i++)
+	{
+		m_playerName[player_i].m_activeTime = 0;
+		m_playerName[player_i].m_UiId = -1;
+	}
 }
 
 //------------------------
@@ -201,6 +207,7 @@ void CPlayerManager::Load(CMapBase* _map, C3DUiManager* _3DUiManager)
 	
 		tag3DUiName uiName = MT_NONE;
 
+		//プレイヤーの名前UIをロード------------------------------
 		if (m_player[player_i]->GetIsCpu() == false)
 		{
 			switch (m_player[player_i]->GetPlayerName())
@@ -224,8 +231,10 @@ void CPlayerManager::Load(CMapBase* _map, C3DUiManager* _3DUiManager)
 			uiName = MT_CPU_NAME;
 		}
 		m_playerName[player_i].m_UiId = _3DUiManager->RequsetLoad(uiName);
+		//--------------------------------------------------------
 	}
 
+	//王冠UIのロード
 	m_crownId = _3DUiManager->RequsetLoad(MT_CROWN);
 }
 
@@ -368,6 +377,7 @@ void CPlayerManager::Step(CAttackManager* _attackManager, CShotManager* _shotMan
 		}
 
 		//プレイヤーの上に名前を表示する--------------------------------
+		m_playerName[player_i].m_activeTime++;
 		if (NAME_ACTIVE_TIME >= m_playerName[player_i].m_activeTime)
 		{
 			C3DUi* name = _3DUiManager->GetUi(m_playerName[player_i].m_UiId);
@@ -375,6 +385,10 @@ void CPlayerManager::Step(CAttackManager* _attackManager, CShotManager* _shotMan
 			VECTOR vec = m_player[player_i]->GetCenter();
 			vec.y += Ui_UP_Y;
 			name->SetPos(vec);
+		}
+		else
+		{
+			_3DUiManager->GetUi(m_playerName[player_i].m_UiId)->SetIsActive(false);  
 		}
 		//--------------------------------------------------------------
 
@@ -511,3 +525,4 @@ bool CPlayerManager::GetIsEnd()
 
 	return false;
 }
+

@@ -435,6 +435,9 @@
     <ClCompile Include="src\game\3DUi\3DUiManager.cpp">
       <Filter>ソース ファイル\game\3DUi</Filter>
     </ClCompile>
+    <ClCompile Include="src\lib\debug.cpp">
+      <Filter>ソース ファイル\lib</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\lib\number.h">
@@ -691,6 +694,9 @@
     </ClInclude>
     <ClInclude Include="src\game\3DUi\3DUiManager.h">
       <Filter>ソース ファイル\game\3DUi</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lib\debug.h">
+      <Filter>ソース ファイル\lib</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

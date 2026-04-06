@@ -5,6 +5,7 @@
 #include"../collisionManager/collisionManager.h"
 #include "../../lib/effekseer/effekseer.h"
 #include "../camera/cameraManager.h"
+#include "../../lib/debug.h"
 
 //---------------------------
 //		コンストラクタ
@@ -44,6 +45,7 @@ void CPlayScene::Draw()
 		m_playerManager.Draw();
 		m_3DUiManager->Draw();
 		m_uiManager.Draw();
+		CDebug::Draw();
 
 		CCameraManager::Draw();
 		break;

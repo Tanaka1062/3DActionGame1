@@ -1,7 +1,7 @@
 #include "3DUi.h"
 
 constexpr float POS_Y_UP = 19.0f;			//Ç«ÇÍÇ≠ÇÁÇ¢è„Ç…è„Ç™ÇÈÇ©
-constexpr float MATERIAL_SIZE = 12.8f;		
+constexpr float MATERIAL_SIZE = 25.6f;		
 
 
 //--------------------------
