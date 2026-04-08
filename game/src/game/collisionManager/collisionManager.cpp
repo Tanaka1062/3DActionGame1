@@ -4,7 +4,6 @@
 #include "../../lib/effekseer/effekseer.h"
 #include "../system/effectData/effectData.h"
 #include "../../lib/myMath/myMath.h"
-#include "../../lib/debug.h"
 
 //----------------------------------------------
 //			オブジェクト同士の当たり判定
@@ -204,7 +203,6 @@ void CCollisionManager::CheckHitCollToObject(CObject& _collObject, CObject& _obj
 
 	col = MV1CollCheck_Sphere(_collObject.GetHndl(), -1, _object.GetCenter(), _object.GetRad());
 
-	if (_object.GetObjectName() != OBJECT_PLAYER)return;
 
 	//ポリゴンと当たっていたか
 	if (col.HitNum != 0)
@@ -223,7 +221,7 @@ void CCollisionManager::CheckHitCollToObject(CObject& _collObject, CObject& _obj
 			//法線をめり込んだ距離分掛け算する
 			vLen = VScale(col.Dim[j].Normal, fLen);
 
-			//プレイヤーの座標を計算した分だけ移動させる
+			//オブジェクトの座標を計算した分だけ移動させる
 			_object.SetPos(VAdd(_object.GetPos(), vLen));
 
 			//法線を取得
@@ -237,13 +235,11 @@ void CCollisionManager::CheckHitCollToObject(CObject& _collObject, CObject& _obj
 			//角度が90度の場合足元にあるかを判断する
 			if (angle == 90.0f * (DX_PI_F / 180.0f))
 			{
+				//オブジェクトの中心とヒットした面の高さの差
 				float fLenY = _object.GetCenter().y - col.Dim[j].HitPosition.y;
 
-				CDebug::m_numY[0] = _object.GetCenter().y;
-				CDebug::m_numY[1] = col.Dim[j].HitPosition.y;
-				CDebug::m_numY[2] = fLenY;
-				//足元にある場合重力をリセットする
-				if (_object.GetPos().y == col.Dim[j].HitPosition.y ||
+				//足元にヒットした面があり高さの差がオブジェクトの半径以内なら重力をリセットする
+				if (_object.GetPos().y - col.Dim[j].HitPosition.y >= -1.0f &&
 					fLenY <= _object.GetRad())
 				{
 					//重力をリセット
