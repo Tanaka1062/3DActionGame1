@@ -27,7 +27,7 @@ void CCameraBase::Init(CMapBase* _map)
 }
 
 //–ˆƒtƒŒ[ƒ€‚·‚éˆ—
-void CCameraBase::Step(VECTOR _pos)
+void CCameraBase::Step(int _hndl)
 {
 
 }

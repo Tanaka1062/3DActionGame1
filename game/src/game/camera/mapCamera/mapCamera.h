@@ -34,7 +34,7 @@ public:
 	void Init(CMapBase* _map);
 
 	// 毎フレーム呼ぶ処理
-	void Step(float _rot, int _stageCenterId,CPlayerManager* _playerManager);
+	void Step( int _stageCenterId,CPlayerManager* _playerManager);
 
 	//カメラの更新
 	void Update();

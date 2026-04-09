@@ -21,8 +21,7 @@ public:
 	virtual void Init(CMapBase* _map);
 
 	//毎フレームする処理
-	//_focus	:	カメラの座標
-	virtual void Step(VECTOR _pos);
+	virtual void Step(int _hndl);
 
 	//カメラの更新
 	virtual void Update();

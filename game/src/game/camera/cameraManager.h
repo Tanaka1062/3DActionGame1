@@ -32,12 +32,10 @@ public:
 	~CCameraManager();
 
 	//‰Šú‰»
-	static void Init(VECTOR _focus,CMapBase* _map = nullptr);
+	static void Init(CMapBase* _map = nullptr);
 
 	//–ˆƒtƒŒ[ƒ€‚·‚éˆ—
-	static void Step(VECTOR _focus, float _rot, int _mapCenterId = 0,CPlayerManager* _playerManager = nullptr);
-
-
+	static void Step(CMapManager* _mapManager = nullptr,CPlayerManager* _playerManager = nullptr);
 
 	//•\¦
 	static void Draw();

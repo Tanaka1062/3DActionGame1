@@ -71,7 +71,7 @@ void CResultScene::Init()
 	m_mapManager.Init(MAP_ID_RESULT);
 	m_resultPlayerManager.Init(m_winner);
 
-	CCameraManager::Init(ZERO,m_mapManager.GetMap());
+	CCameraManager::Init(m_mapManager.GetMap());
 	CCameraManager::ChangeCamera(CCameraManager::CAMERA_ID_RESULT);
 
 	VECTOR textPos = ZERO;
@@ -127,7 +127,7 @@ void CResultScene::Step()
 	m_sky.Step();
 	m_mapManager.Step();
 	m_resultPlayerManager.Step();
-	CCameraManager::Step(ZERO,0.0f);
+	CCameraManager::Step();
 
 	if (CKeyInput::IsTrg(KEY_SELECT) ||
 		CControllerManager::IsTrg(BUTTON_B))

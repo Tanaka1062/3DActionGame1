@@ -43,7 +43,7 @@ CCameraManager::~CCameraManager()
 //---------------------------
 //			初期化
 //---------------------------
-void CCameraManager::Init(VECTOR _focus, CMapBase* _map)
+void CCameraManager::Init(CMapBase* _map)
 {
 	//カメラを設定
 	m_camera[CAMERA_ID_MAP] = new CMapCamera;
@@ -72,20 +72,20 @@ void CCameraManager::Init(VECTOR _focus, CMapBase* _map)
 //---------------------------
 //	毎フレームする処理
 //---------------------------
-void CCameraManager::Step(VECTOR _focus, float _rot, int _mapCenterId, CPlayerManager* _playerManager)
+void CCameraManager::Step(CMapManager* _mapManager, CPlayerManager* _playerManager)
 {
 	VECTOR playerPos = ZERO;
-	VECTOR focus = _focus;
 
 	if (m_id == CAMERA_ID_MAP || _playerManager != nullptr)
 	{
 		CMapCamera* mapCamera = dynamic_cast<CMapCamera*>(m_camera[m_id]);
 
-		mapCamera->Step(_rot, _mapCenterId, _playerManager);
+		mapCamera->Step(_mapManager->GetMap()->GetStageId(), _playerManager);
 	}
 	else
 	{
-		m_camera[m_id]->Step(_focus, _rot);
+		int mapStageId = _mapManager->GetMap()->GetStageId();
+		m_camera[m_id]->Step(_mapManager->GetMap()->GetHndl(mapStageId));
 	}
 
 	//カメラのモード切替

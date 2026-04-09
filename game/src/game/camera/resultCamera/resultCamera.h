@@ -17,7 +17,7 @@ public:
 	void Init(CMapBase* _map);
 
 	// 毎フレーム呼ぶ処理
-	void Step(VECTOR _focus, float _rot);
+	void Step(int _hndl);
 
 	//カメラの更新
 	void Update();

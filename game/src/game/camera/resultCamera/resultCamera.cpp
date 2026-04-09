@@ -28,7 +28,7 @@ void CResultCamera::Init(CMapBase* _map)
 //---------------------------------
 //		毎フレームする処理
 //---------------------------------
-void CResultCamera::Step(VECTOR _focus, float _rot)
+void CResultCamera::Step(int _hndl)
 {
 	//カメラの方向ベクトルを基にY軸回転角度を計算
 	VECTOR dir = VSub(m_pos, m_focusPos);

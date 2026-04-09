@@ -73,7 +73,7 @@ void CMapCamera::Init(CMapBase* _map)
 //---------------------------------
 //		毎フレームする処理
 //---------------------------------
-void CMapCamera::Step(float _rot, int _stageCenterId, CPlayerManager* _playerManager)
+void CMapCamera::Step(int _stageCenterId, CPlayerManager* _playerManager)
 {
 	//現在のステージの中心が本来のステージの中心と違ったら変更する
 	if (m_stageCenterId != _stageCenterId)
