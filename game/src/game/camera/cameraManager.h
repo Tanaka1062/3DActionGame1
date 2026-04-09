@@ -11,9 +11,9 @@ public:
 	//カメラタイプID
 	enum tagCAMERA_ID
 	{
-		CAMERA_ID_PLAY,						//ゲームのメインカメラ
 		CAMERA_ID_MAP,						//マップのカメラ
 		CAMERA_ID_DEBUG,					//デバッグ時のカメラ
+		CAMERA_ID_TITLE,					//タイトル画面のカメラ
 		CAMERA_ID_SELECT,					//セレクト画面のカメラ
 		CAMERA_ID_RESULT,					//リザルト画面のカメラ
 
@@ -36,6 +36,8 @@ public:
 
 	//毎フレームする処理
 	static void Step(VECTOR _focus, float _rot, int _mapCenterId = 0,CPlayerManager* _playerManager = nullptr);
+
+
 
 	//表示
 	static void Draw();

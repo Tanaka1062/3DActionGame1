@@ -6,6 +6,7 @@ enum tagMapId
 	MAP_ID_GRASSLAND,	//草原ステージ
 	MAP_ID_SELECT,		//選択画面のマップ
 	MAP_ID_RESULT,		//リザルト画面のマップ
+	MAP_ID_TITLE,		//タイトル画面のマップ
 
 	MAP_NUM,			//マップの数
 };

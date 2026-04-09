@@ -163,9 +163,6 @@
     <Filter Include="ソース ファイル\game\ui\playerStatusPanel">
       <UniqueIdentifier>{46701614-a789-425a-b0d2-5be984d2601b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\game\camera\mapCamera\playCamera">
-      <UniqueIdentifier>{22017e20-cc7b-422a-9575-377e026daeae}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\game\map\stage">
       <UniqueIdentifier>{c236f8a6-dcc2-4c24-b171-56256a2ba144}</UniqueIdentifier>
     </Filter>
@@ -183,6 +180,12 @@
     </Filter>
     <Filter Include="ソース ファイル\game\item\weapon\hammer">
       <UniqueIdentifier>{c4e8e031-7d74-4e7b-a2fc-5219956ab404}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\game\map\titleMap">
+      <UniqueIdentifier>{7063da43-36fe-4489-a54a-33a2162ba17b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\game\camera\titleCamera">
+      <UniqueIdentifier>{cbf96ca4-ccc1-4416-83a9-bd0d5dfff9c2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -269,9 +272,6 @@
     </ClCompile>
     <ClCompile Include="src\game\camera\debugCamera\debugCamera.cpp">
       <Filter>ソース ファイル\game\camera\debugCamera</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\camera\playCamera\playCamera.cpp">
-      <Filter>ソース ファイル\game\camera\mapCamera\playCamera</Filter>
     </ClCompile>
     <ClCompile Include="src\game\camera\cameraBase.cpp">
       <Filter>ソース ファイル\game\camera</Filter>
@@ -426,9 +426,6 @@
     <ClCompile Include="src\game\map\selectMap\selectMap.cpp">
       <Filter>ソース ファイル\game\map\selectMap</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\camera\resultCamera\resultCamera.cpp">
-      <Filter>ソース ファイル\game\camera\mapCamera</Filter>
-    </ClCompile>
     <ClCompile Include="src\game\item\weapon\hammer\hammer.cpp">
       <Filter>ソース ファイル\game\item\weapon\hammer</Filter>
     </ClCompile>
@@ -437,6 +434,15 @@
     </ClCompile>
     <ClCompile Include="src\lib\debug.cpp">
       <Filter>ソース ファイル\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\map\titleMap\titleMap.cpp">
+      <Filter>ソース ファイル\game\map\titleMap</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\camera\resultCamera\resultCamera.cpp">
+      <Filter>ソース ファイル\game\camera\resultCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\camera\titleCamera\titleCamera.cpp">
+      <Filter>ソース ファイル\game\camera\titleCamera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -526,9 +532,6 @@
     </ClInclude>
     <ClInclude Include="src\game\camera\debugCamera\debugCamera.h">
       <Filter>ソース ファイル\game\camera\debugCamera</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\camera\playCamera\playCamera.h">
-      <Filter>ソース ファイル\game\camera\mapCamera\playCamera</Filter>
     </ClInclude>
     <ClInclude Include="src\game\camera\cameraBase.h">
       <Filter>ソース ファイル\game\camera</Filter>
@@ -697,6 +700,12 @@
     </ClInclude>
     <ClInclude Include="src\lib\debug.h">
       <Filter>ソース ファイル\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\map\titleMap\titleMap.h">
+      <Filter>ソース ファイル\game\map\titleMap</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\camera\titleCamera\titleCamera.h">
+      <Filter>ソース ファイル\game\camera\titleCamera</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

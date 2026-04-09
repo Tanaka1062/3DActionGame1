@@ -1,11 +1,11 @@
 #include "cameraManager.h"
 #include "../data.h"
 #include "../../lib/effekseer/effekseer.h"
-#include "playCamera/playCamera.h"
 #include "debugCamera/debugCamera.h"
 #include "mapCamera/mapCamera.h"
 #include "selectCamera/selectCamera.h"
 #include "resultCamera/resultCamera.h"
+#include "titleCamera/titleCamera.h"
 
 //定義関連====================================
 constexpr float CAMERA_NEAR = 1.0f;						//ニアー
@@ -46,9 +46,9 @@ CCameraManager::~CCameraManager()
 void CCameraManager::Init(VECTOR _focus, CMapBase* _map)
 {
 	//カメラを設定
-	m_camera[CAMERA_ID_PLAY] = new CPlayCamera;
 	m_camera[CAMERA_ID_MAP] = new CMapCamera;
 	m_camera[CAMERA_ID_DEBUG] = new CDbugCamera;
+	m_camera[CAMERA_ID_TITLE] = new CTitleCamera;
 	m_camera[CAMERA_ID_SELECT] = new CSelectCamera;
 	m_camera[CAMERA_ID_RESULT] = new CResultCamera;
 
@@ -103,11 +103,6 @@ void CCameraManager::Step(VECTOR _focus, float _rot, int _mapCenterId, CPlayerMa
 
 		m_id = CAMERA_ID_DEBUG;
 	}
-	//プレイモードに変更
-	if (CheckHitKey(KEY_INPUT_C) != 0)
-	{
-		m_id = CAMERA_ID_PLAY;
-	}
 
 	//プレイカメラの回転値を設定
 	m_rot = m_camera[m_id]->GetRot();
@@ -132,17 +127,7 @@ void CCameraManager::Draw()
 //---------------------------
 void CCameraManager::Update(VECTOR _tagetPos)
 {
-	//カメラの更新
-	//プレイカメラの場合はプレイヤーの座標を入れる
-	if (m_id == CAMERA_ID_PLAY)
-	{
-		CPlayCamera* camera = dynamic_cast<CPlayCamera*>(m_camera[m_id]);
-		camera->Update(_tagetPos);
-	}
-	else
-	{
-		m_camera[m_id]->Update();
-	}
+	m_camera[m_id]->Update();
 
 	//カメラの情報
 	VECTOR pos = m_camera[m_id]->GetPos();

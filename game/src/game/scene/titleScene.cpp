@@ -38,6 +38,7 @@ void CTitleScene::Draw()
 	default:
 		//UIの描写
 		m_uiManager.Draw();
+		m_mapManager.Draw();
 
 		break;
 	}
@@ -50,6 +51,7 @@ void CTitleScene::Draw()
 void CTitleScene::Init()
 {
 	CSceneBase::Init();
+	m_mapManager.Init(MAP_ID_TITLE);
 
 	//UIの初期化
 	m_uiManager.Init();
@@ -66,6 +68,7 @@ void CTitleScene::Load()
 	case 0:
 		//UIの画像ロード
 		m_uiManager.Load();
+		m_mapManager.Load();
 
 		m_LoadState = 1;
 		break;
@@ -91,6 +94,7 @@ void CTitleScene::Step()
 {
 	//UIの毎フレームする処理
 	m_uiManager.Step();
+	m_mapManager.Step();
 
 	if (CheckHitKey(KEY_INPUT_R) == 1)
 	{
@@ -115,6 +119,7 @@ void CTitleScene::Exit()
 	CSceneBase::Exit();
 	//UIの終了処理
 	m_uiManager.Exit();
+	m_mapManager.Exit();
 
 	CSoundManager::StopAll();
 }

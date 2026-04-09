@@ -147,9 +147,9 @@
     <ClCompile Include="src\game\camera\cameraManager.cpp" />
     <ClCompile Include="src\game\camera\debugCamera\debugCamera.cpp" />
     <ClCompile Include="src\game\camera\mapCamera\mapCamera.cpp" />
-    <ClCompile Include="src\game\camera\playCamera\playCamera.cpp" />
     <ClCompile Include="src\game\camera\resultCamera\resultCamera.cpp" />
     <ClCompile Include="src\game\camera\selectCamera\selectCamera.cpp" />
+    <ClCompile Include="src\game\camera\titleCamera\titleCamera.cpp" />
     <ClCompile Include="src\game\character\characterBase.cpp" />
     <ClCompile Include="src\game\collisionManager\collisionManager.cpp" />
     <ClCompile Include="src\game\event\eventBase.cpp" />
@@ -180,6 +180,7 @@
     <ClCompile Include="src\game\map\resultMap\resultMap.cpp" />
     <ClCompile Include="src\game\map\selectMap\selectMap.cpp" />
     <ClCompile Include="src\game\map\stage\stage.cpp" />
+    <ClCompile Include="src\game\map\titleMap\titleMap.cpp" />
     <ClCompile Include="src\game\player\cpuPlayer\cpuPlayer.cpp" />
     <ClCompile Include="src\game\player\cpuPlayer\cpuPlayerFOV.cpp" />
     <ClCompile Include="src\game\player\player.cpp" />
@@ -233,9 +234,9 @@
     <ClInclude Include="src\game\camera\cameraManager.h" />
     <ClInclude Include="src\game\camera\debugCamera\debugCamera.h" />
     <ClInclude Include="src\game\camera\mapCamera\mapCamera.h" />
-    <ClInclude Include="src\game\camera\playCamera\playCamera.h" />
     <ClInclude Include="src\game\camera\resultCamera\resultCamera.h" />
     <ClInclude Include="src\game\camera\selectCamera\selectCamera.h" />
+    <ClInclude Include="src\game\camera\titleCamera\titleCamera.h" />
     <ClInclude Include="src\game\character\characterBase.h" />
     <ClInclude Include="src\game\collisionManager\collisionManager.h" />
     <ClInclude Include="src\game\common.h" />
@@ -267,6 +268,7 @@
     <ClInclude Include="src\game\map\resultMap\resultMap.h" />
     <ClInclude Include="src\game\map\selectMap\selectMap.h" />
     <ClInclude Include="src\game\map\stage\stage.h" />
+    <ClInclude Include="src\game\map\titleMap\titleMap.h" />
     <ClInclude Include="src\game\player\cpuPlayer\cpuPlayer.h" />
     <ClInclude Include="src\game\player\cpuPlayer\cpuPlayerFOV.h" />
     <ClInclude Include="src\game\player\player.h" />

@@ -2,6 +2,7 @@
 #include "playMap/grassland/grassland.h"
 #include "selectMap/selectMap.h"
 #include "resultMap/resultMap.h"
+#include "titleMap/titleMap.h"
 
 //コンストラクタ・デストラクタ
 CMapManager::CMapManager()
@@ -26,6 +27,9 @@ void CMapManager::Init(tagMapId _mapId)
 		break;
 	case MAP_ID_RESULT:
 		m_map = new CResultMap;
+		break;
+	case MAP_ID_TITLE:
+		m_map = new CTitleMap;
 		break;
 	}
 	m_map->Init();

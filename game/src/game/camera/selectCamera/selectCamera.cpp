@@ -20,8 +20,6 @@ void CSelectCamera::Init(CMapBase* _map)
 {
 	CCameraBase::Init(_map);
 	m_pos = INIT_POS;
-	if (_map == nullptr)return;
-
 	m_focusPos = _map->GetStagePos(0);
 
 }
