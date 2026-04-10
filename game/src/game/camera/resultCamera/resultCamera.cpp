@@ -19,6 +19,8 @@ CResultCamera::CResultCamera() {
 //---------------------------------
 void CResultCamera::Init(CMapBase* _map)
 {
+	if (_map == nullptr)return;
+
 	CCameraBase::Init(_map);
 	m_pos = INIT_POS;
 	m_focusPos = FOCUS_POS;

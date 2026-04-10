@@ -3,7 +3,7 @@
 
 //定義関連====================================
 constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
-constexpr int MAP_FRAME_NUM = 4;				//マップのフレーム番号
+constexpr int MAP_FRAME_NUM = 2;				//マップのフレーム番号
 constexpr VECTOR FOCUS_POS = { 0.0f,30.0f,0.0f };
 //============================================
 
@@ -35,6 +35,8 @@ void CTitleCamera::Step(int _hndl)
 	//カメラの方向ベクトルを基にY軸回転角度を計算
 	VECTOR dir = VSub(m_pos, m_focusPos);
 	m_rot.y = atan2f(dir.x, dir.z);
+
+	m_pos = MV1GetFramePosition(_hndl, MAP_FRAME_NUM);
 
 }
 

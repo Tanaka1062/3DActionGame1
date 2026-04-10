@@ -3,6 +3,7 @@
 #include"../../lib/input/keyInput.h"
 #include"../../lib/input/controllerManager.h"
 #include "../system/soundManager.h"
+#include "../camera/cameraManager.h"
 
 //定義関連====================================
 //============================================
@@ -52,6 +53,7 @@ void CTitleScene::Init()
 {
 	CSceneBase::Init();
 	m_mapManager.Init(MAP_ID_TITLE);
+	CCameraManager::Init();
 
 	//UIの初期化
 	m_uiManager.Init();
@@ -95,6 +97,7 @@ void CTitleScene::Step()
 	//UIの毎フレームする処理
 	m_uiManager.Step();
 	m_mapManager.Step();
+	CCameraManager::Step(&m_mapManager);
 
 	if (CheckHitKey(KEY_INPUT_R) == 1)
 	{
@@ -120,6 +123,7 @@ void CTitleScene::Exit()
 	//UIの終了処理
 	m_uiManager.Exit();
 	m_mapManager.Exit();
+	CCameraManager::Exit();
 
 	CSoundManager::StopAll();
 }

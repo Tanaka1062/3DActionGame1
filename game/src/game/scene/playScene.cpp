@@ -64,7 +64,7 @@ void CPlayScene::Init()
 	m_itemManager.Init(&m_playerManager);
 	m_weaponManager.Init();
 	m_uiManager.Init(&m_playerManager,&m_itemManager);
-	CCameraManager::Init(ZERO,m_mapManager.GetMap());
+	CCameraManager::Init(m_mapManager.GetMap());
 	CCameraManager::ChangeCamera(CCameraManager::CAMERA_ID_MAP);
 	m_gameTime = CGameTime::GetInstance();
 	m_gameTime->Init();
@@ -124,7 +124,7 @@ void CPlayScene::Step()
 	m_itemManager.Step(&m_playerManager,m_mapManager.GetMap()->GetStageId());
 	m_weaponManager.Step(m_playerManager);
 	m_uiManager.Step(m_eventManager.GetNowEventName(),m_playerManager);
-	CCameraManager::Step(ZERO,0.0f,m_mapManager.GetMap()->GetStageId(), &m_playerManager);
+	CCameraManager::Step(&m_mapManager, &m_playerManager);
 	m_gameTime->Step();
 	m_winner->Step(&m_playerManager);
 	m_eventManager.Step(CCameraManager::GetFocusPos(),m_itemManager);
@@ -177,6 +177,7 @@ void CPlayScene::Exit()
 	m_uiManager.Exit();
 	m_eventManager.Exit();
 	m_3DUiManager->Exit();
+	C3DUiManager::DeleteInstance();
 	CCameraManager::Exit();
 
 	//エフェクトを全て消す

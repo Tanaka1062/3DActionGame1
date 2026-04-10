@@ -189,6 +189,7 @@ void CMapCamera::Rotate(VECTOR _focus)
 //---------------------------------
 void CMapCamera::Move(int _stageCenterId,CPlayerManager* _playerManager)
 {
+	if (_playerManager == nullptr)return;
 
 	//カメラの注視点を次のマップに移動させる
 	if (m_focusPos.z > m_stageCenterPos[_stageCenterId].z &&m_state == MAP_MOVE_CAMERA)

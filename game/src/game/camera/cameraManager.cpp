@@ -76,13 +76,13 @@ void CCameraManager::Step(CMapManager* _mapManager, CPlayerManager* _playerManag
 {
 	VECTOR playerPos = ZERO;
 
-	if (m_id == CAMERA_ID_MAP || _playerManager != nullptr)
+	if (m_id == CAMERA_ID_MAP && _playerManager != nullptr)
 	{
 		CMapCamera* mapCamera = dynamic_cast<CMapCamera*>(m_camera[m_id]);
 
 		mapCamera->Step(_mapManager->GetMap()->GetStageId(), _playerManager);
 	}
-	else
+	else if(_mapManager != nullptr)
 	{
 		int mapStageId = _mapManager->GetMap()->GetStageId();
 		m_camera[m_id]->Step(_mapManager->GetMap()->GetHndl(mapStageId));
