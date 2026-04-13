@@ -97,7 +97,7 @@ CPlayerStatusPanel::CPlayerStatusPanel()
 	//配置するハートを生成
 	for (int heart_i = 0; heart_i < HEART_NUM; heart_i++)
 	{
-		m_heart.push_back(new C2DUi);
+		m_heart.push_back(new C2DObject);
 	}
 
 	Init();

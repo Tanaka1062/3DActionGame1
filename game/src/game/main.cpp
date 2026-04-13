@@ -11,6 +11,7 @@
 #include"../lib/effekseer/effekseer.h"
 #include"system/effectData/effectData.h"
 #include "../lib/number.h"
+#include "../lib/system/fade.h"
 
 constexpr int EFFECT_MAX_NUM = 10;			//一度に表示できるエフェクトの最大数
 constexpr int PARTICLE_MAX_NUM = 2000;		//一度に表示できるパーティクルの最大数
@@ -69,6 +70,9 @@ int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	//数字の画像ロード
 	CNumber::Load();
 
+	//フェードの初期化
+	CFade::Init();
+
 	//ゲームメインループ
 	while (ProcessMessage() != -1)
 	{
@@ -80,10 +84,12 @@ int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		ClearDrawScreen();	// 画面クリア
 
 		//ここにゲームの本体を書く
-		
 
 		//シーンの実行処理
 		scene.Loop();
+
+		//フェードの更新
+		CFade::Step();
 
 		//キー入力の更新処理
 		CKeyInput::Update();
@@ -97,8 +103,11 @@ int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		//シーンの描画処理
 		scene.Draw();
 
-		//エフェクシアの描画処理
-		CEffekseerCtrl::Draw();
+		////エフェクシアの描画処理
+		//CEffekseerCtrl::Draw();
+
+		//フェードの描画処理
+		CFade::Draw();
 
 		//Fpsの表示
 		CFps::Print();

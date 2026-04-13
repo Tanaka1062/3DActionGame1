@@ -1,5 +1,5 @@
 #pragma once
-#include "../../lib/2DUi/2DUi.h"
+#include "../../lib/2D/2DObject.h"
 #include "../player/playerManager.h"
 #include <iostream>
 #include <vector>
@@ -12,7 +12,7 @@
 class CUiGameManager
 {
 private:
-	std::vector<C2DUi*> m_ui;								//UI
+	std::vector<C2DObject*> m_ui;								//UI
 	CTimeUi m_time;											//時間
 	CEventText m_eventText;									//イベントテキスト
 	CPlayerStatusPanel m_playerStautusPanel[PLAYER_NUM];	//プレイヤーのステータスパネル

@@ -31,9 +31,6 @@
     <Filter Include="ソース ファイル\lib\system">
       <UniqueIdentifier>{3657ca0a-d576-4121-b492-8fec446057f4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\lib\2DUi">
-      <UniqueIdentifier>{886b01e7-753d-4fcc-a0e5-36775fc5cafa}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\lib\model">
       <UniqueIdentifier>{5de6517a-29d4-4620-a978-498bacfd046d}</UniqueIdentifier>
     </Filter>
@@ -187,6 +184,9 @@
     <Filter Include="ソース ファイル\game\camera\titleCamera">
       <UniqueIdentifier>{cbf96ca4-ccc1-4416-83a9-bd0d5dfff9c2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\lib\2D">
+      <UniqueIdentifier>{235dcab0-4940-4e3b-bbfe-9654541f3afc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\number.cpp">
@@ -197,9 +197,6 @@
     </ClCompile>
     <ClCompile Include="src\lib\input\KeyInput.cpp">
       <Filter>ソース ファイル\lib\input</Filter>
-    </ClCompile>
-    <ClCompile Include="src\lib\2DUi\2DUi.cpp">
-      <Filter>ソース ファイル\lib\2DUi</Filter>
     </ClCompile>
     <ClCompile Include="src\lib\model\3DObject.cpp">
       <Filter>ソース ファイル\lib\model</Filter>
@@ -444,6 +441,9 @@
     <ClCompile Include="src\game\camera\titleCamera\titleCamera.cpp">
       <Filter>ソース ファイル\game\camera\titleCamera</Filter>
     </ClCompile>
+    <ClCompile Include="src\lib\2D\2DObject.cpp">
+      <Filter>ソース ファイル\lib\2D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\lib\number.h">
@@ -457,9 +457,6 @@
     </ClInclude>
     <ClInclude Include="src\lib\input\keyInput.h">
       <Filter>ソース ファイル\lib\input</Filter>
-    </ClInclude>
-    <ClInclude Include="src\lib\2DUi\2DUi.h">
-      <Filter>ソース ファイル\lib\2DUi</Filter>
     </ClInclude>
     <ClInclude Include="src\lib\model\3DObject.h">
       <Filter>ソース ファイル\lib\model</Filter>
@@ -706,6 +703,9 @@
     </ClInclude>
     <ClInclude Include="src\game\camera\titleCamera\titleCamera.h">
       <Filter>ソース ファイル\game\camera\titleCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lib\2D\2DObject.h">
+      <Filter>ソース ファイル\lib\2D</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

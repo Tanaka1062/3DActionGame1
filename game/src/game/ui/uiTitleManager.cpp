@@ -47,7 +47,7 @@ void CUiTitleManager::Init()
 
 	for (int ui_i = 0; ui_i < UI_NUM; ui_i++)
 	{
-		C2DUi* ui = new C2DUi;
+		C2DObject* ui = new C2DObject;
 
 		ui->Init(UI_POS[ui_i]);
 
@@ -60,7 +60,7 @@ void CUiTitleManager::Load()
 {
 	for (int ui_i = 0; ui_i < m_ui.size(); ui_i++)
 	{
-		m_ui[ui_i]->LoadGraphic(UI_GRAPHIC_PATH[ui_i]);
+		m_ui[ui_i]->Load(UI_GRAPHIC_PATH[ui_i]);
 	}
 }
 

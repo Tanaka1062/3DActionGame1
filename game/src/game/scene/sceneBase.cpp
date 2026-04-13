@@ -1,5 +1,6 @@
 #include "sceneBase.h"
 #include "../data.h"
+#include"../../lib/system/fade.h"
 
 //---------------------------
 //コンストラクタ
@@ -31,22 +32,39 @@ int CSceneBase::Loop()
 		//初期化
 		Init();
 
-		m_state = LOAD;	//ロードに進む
+		if (CFade::IsEndFadeIn() == true)
+		{
+			m_state = LOAD;	//ロードに進む
+		}
 		break;
 	case LOAD:
-		//データ読み込み
 		Load();
+		break;
+	case MAINWAIT:
+		if (CFade::IsEndFadeOut() == true)
+		{
+			CFade::RequestFadeIn();
+			m_state = MAIN;
+		}
 		break;
 	case MAIN:
 		//メイン処理
 		Step();
 		break;
+	case ENDWAIT:
+		CFade::RequestFadeOut();
+		m_state = END;
+		break;
 	case END:
 		//終了前処理
 		Exit();
 
-		m_state = INIT;	//初期化に進む
-		result = 0;
+		if (CFade::IsEndFadeOut() == true)
+		{
+			m_state = INIT;	//初期化に進む
+			result = 0;
+			CFade::RequestFadeIn();
+		}
 		break;
 	}
 
@@ -102,3 +120,4 @@ void CSceneBase::Exit()
 {
 	m_LoadBG.Exit();
 }
+

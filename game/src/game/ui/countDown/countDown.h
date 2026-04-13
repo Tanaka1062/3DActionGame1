@@ -1,7 +1,7 @@
 #pragma once
-#include "../../lib/2DUi/2DUi.h"
+#include "../../lib/2D/2DObject.h"
 
-class CCountDown :public C2DUi
+class CCountDown :public C2DObject
 {
 public:
 	enum tagCountNumber

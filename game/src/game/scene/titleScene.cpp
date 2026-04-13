@@ -4,6 +4,7 @@
 #include"../../lib/input/controllerManager.h"
 #include "../system/soundManager.h"
 #include "../camera/cameraManager.h"
+#include "../../lib/system/fade.h"
 
 //’è‹`ŠÖ˜A====================================
 //============================================
@@ -84,7 +85,8 @@ void CTitleScene::Load()
 	case 2:
 		SetUseASyncLoadFlag(FALSE);
 		CSoundManager::Play(CSoundManager::BGM_TITLE, DX_PLAYTYPE_LOOP);
-		m_state = MAIN;
+		m_state = MAINWAIT;
+		CFade::RequestFadeOut();
 		break;
 	}
 }
@@ -109,7 +111,7 @@ void CTitleScene::Step()
 		CControllerManager::SetId() == true ||
 		CControllerManager::IsTrg(BUTTON_B) == true)
 	{
-		m_state = END;
+		m_state = ENDWAIT;
 	}
 
 }

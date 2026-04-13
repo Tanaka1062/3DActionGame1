@@ -31,7 +31,7 @@ CEventText::~CEventText()
 //-----------------------
 void CEventText::Init()
 {
-	C2DUi::Init();
+	C2DObject::Init();
 	for (int event_i = 0; event_i < CEventManager::EVENT_NUM; event_i++)
 	{
 		m_textHndl[event_i] = -1;
@@ -60,17 +60,17 @@ void CEventText::Step(CEventManager::tagEventName _nowEvent)
 {
 	if (_nowEvent != CEventManager::EVENT_NONE)
 	{
-		m_hndl = m_textHndl[_nowEvent];
+		SetHndl(m_textHndl[_nowEvent]);
 		m_activeTime++;
 		if (m_activeTime >= ACTIVE_TIME)
 		{
-			m_hndl = -1;
+			SetHndl(-1);
 		}
 	}
 	else
 	{
 		m_activeTime = 0;
-		m_hndl = -1;
+		SetHndl(-1);
 	}
 }
 
@@ -79,7 +79,7 @@ void CEventText::Step(CEventManager::tagEventName _nowEvent)
 //-----------------------
 void CEventText::Exit()
 {
-	C2DUi::Exit();
+	C2DObject::Exit();
 
 	for (int event_i = 0; event_i < CEventManager::EVENT_NUM; event_i++)
 	{

@@ -1,8 +1,8 @@
 #pragma once
-#include "../../lib/2DUi/2DUi.h"
+#include "../../lib/2D/2DObject.h"
 #include "../../event/eventManager.h"
 
-class CEventText :public C2DUi
+class CEventText :public C2DObject
 {
 private:
 	int m_textHndl[CEventManager::EVENT_NUM];		//テキストハンドル

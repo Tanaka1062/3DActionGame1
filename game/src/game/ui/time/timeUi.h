@@ -1,10 +1,10 @@
 #pragma once
-#include "../../lib/2DUi/2DUi.h"
+#include "../../lib/2D/2DObject.h"
 
 class CTimeUi
 {
 private:
-	C2DUi m_division;	//‹æØ‚è
+	C2DObject m_division;	//‹æØ‚è
 	int m_oneM;			//•ªˆê‚ÌˆÊ
 	int m_tenS;			//•b\‚ÌˆÊ
 	int m_oneS;			//•bˆê‚ÌˆÊ

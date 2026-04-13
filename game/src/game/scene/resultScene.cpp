@@ -4,6 +4,7 @@
 #include"../../lib/input/controllerManager.h"
 #include "../system/soundManager.h"
 #include "../camera/cameraManager.h"
+#include "../../lib/system/fade.h"
 
 //定義関連====================================
 static const char* TEXT_GRAPHIC_PATH[PLAYER_NUM] =		//テキストのグラフィックパス
@@ -112,7 +113,8 @@ void CResultScene::Load()
 
 	case 2:
 		SetUseASyncLoadFlag(FALSE);
-		m_state = MAIN;
+		m_state = MAINWAIT;
+		CFade::RequestFadeOut();
 		break;
 	}
 
@@ -132,7 +134,7 @@ void CResultScene::Step()
 	if (CKeyInput::IsTrg(KEY_SELECT) ||
 		CControllerManager::IsTrg(BUTTON_B))
 	{
-		m_state = END;
+		m_state = ENDWAIT;
 	}
 
 	m_sky.Update();

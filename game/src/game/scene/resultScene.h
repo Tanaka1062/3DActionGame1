@@ -5,7 +5,7 @@
 #include "../sky/sky.h"
 #include "../map/mapManager.h"
 #include "../player/resultPlayer/resultPlayerManager.h"
-#include "../../lib/2DUi/2DUi.h"
+#include "../../lib/2D/2DObject.h"
 
 //ゲーム本編を管理するクラス
 class CResultScene :public CSceneBase
@@ -15,8 +15,8 @@ private:
 	CSky m_sky;									//天球
 	CMapManager m_mapManager;					//マップ
 	CResultPlayerManager m_resultPlayerManager;	//リザルトプレイヤー
-	C2DUi m_winPlayerText;						//勝利したプレイヤーのテキスト
-	C2DUi m_resultText;							//リザルト画面に表示されるテキスト
+	C2DObject m_winPlayerText;					//勝利したプレイヤーのテキスト
+	C2DObject m_resultText;						//リザルト画面に表示されるテキスト
 public:
 
 	//コンストラクタ

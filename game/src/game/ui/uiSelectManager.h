@@ -1,5 +1,5 @@
 #pragma once
-#include "../../lib/2DUi/2DUi.h"
+#include "../../lib/2D/2DObject.h"
 #include <iostream>
 #include <vector>
 #include "countDown/countDown.h"
@@ -7,7 +7,7 @@
 class CUiSelectManager
 {
 private:
-	std:: vector<C2DUi*>m_ui;		//UI
+	std:: vector<C2DObject*>m_ui;		//UI
 	CCountDown m_countDown;			//カウントダウン
 public:
 	//コンストラクタ・デストラクタ

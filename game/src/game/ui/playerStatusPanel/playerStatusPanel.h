@@ -1,5 +1,5 @@
 #pragma once
-#include "../../lib/2DUi/2DUi.h"
+#include "../../lib/2D/2DObject.h"
 #include <iostream>
 #include <vector>
 #include "../../player/playerData.h"
@@ -10,11 +10,11 @@ class CPlayerStatusPanel
 private:
 	VECTOR m_pos;							//中心座標
 	int m_money;							//お金の量
-	C2DUi m_panel;							//パネル
+	C2DObject m_panel;							//パネル
 	std::vector<int>m_iconHndl;				//アイコンの画像ハンドル
-	C2DUi m_icon;							//アイコン
+	C2DObject m_icon;							//アイコン
 	std::vector<int>m_heartHndl;			//ハートの画像ハンドル			
-	std::vector<C2DUi*>m_heart;				//ハート
+	std::vector<C2DObject*>m_heart;				//ハート
 	int m_playerMoney;						//プレイヤーのお金
 
 public:

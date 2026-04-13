@@ -32,7 +32,7 @@ CCountDown::~CCountDown()
 //-----------------------
 void CCountDown::Init()
 {
-	C2DUi::Init();
+	C2DObject::Init();
 	m_pos.x = WINDOW_SIZE_X / 2.0f;
 	m_pos.y = WINDOW_SIZE_Y / 2.0f;
 	m_isActive = false;

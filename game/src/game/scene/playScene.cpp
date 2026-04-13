@@ -5,6 +5,7 @@
 #include"../collisionManager/collisionManager.h"
 #include "../../lib/effekseer/effekseer.h"
 #include "../camera/cameraManager.h"
+#include "../../lib/system/fade.h"
 
 //---------------------------
 //		コンストラクタ
@@ -44,6 +45,9 @@ void CPlayScene::Draw()
 		m_playerManager.Draw();
 		m_3DUiManager->Draw();
 		m_uiManager.Draw();
+
+		//エフェクシアの描画処理
+		CEffekseerCtrl::Draw();
 
 		CCameraManager::Draw();
 		break;
@@ -105,7 +109,9 @@ void CPlayScene::Load()
 
 	case 2:
 		SetUseASyncLoadFlag(FALSE);
-		m_state = MAIN;
+		m_state = MAINWAIT;
+		CFade::RequestFadeOut();
+
 		break;
 	}
 
@@ -155,7 +161,7 @@ void CPlayScene::Step()
 	if (CKeyInput::IsTrg(KEY_SELECT) == true ||
 		m_gameTime->GetTimeEnd() == true)
 	{
-		m_state = END;
+		m_state = ENDWAIT;
 	}
 
 

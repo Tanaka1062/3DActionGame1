@@ -67,6 +67,8 @@ void CFade::Draw()
 //----------------------
 void CFade::RequestFadeIn()
 {
+	if (m_state == FADE_IN)return;
+
 	m_state = FADE_IN;
 	m_count = 255;
 
@@ -77,6 +79,8 @@ void CFade::RequestFadeIn()
 //-----------------------
 void CFade::RequestFadeOut()
 {
+	if (m_state == FADE_OUT)return;
+
 	m_state = FADE_OUT;
 	m_count = 0;
 

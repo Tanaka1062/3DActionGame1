@@ -4,6 +4,7 @@
 #include"../../lib/input/controllerManager.h"
 #include "../system/soundManager.h"
 #include "../camera/cameraManager.h"
+#include "../../lib/system/fade.h"
 
 //’è‹`ŠÖ˜A====================================
 //============================================
@@ -93,7 +94,8 @@ void CSelectScene::Load()
 	case 2:
 		SetUseASyncLoadFlag(FALSE);
 		CSoundManager::Play(CSoundManager::BGM_SELECT, DX_PLAYTYPE_LOOP);
-		m_state = MAIN;
+		m_state = MAINWAIT;
+		CFade::RequestFadeOut();
 		break;
 	}
 
@@ -122,7 +124,7 @@ void CSelectScene::Step()
 	if (CKeyInput::IsTrg(KEY_SELECT) ||
 		m_uiManager.GetCountDownEnd() == true)
 	{
-		m_state = END;
+		m_state = ENDWAIT;
 	}
 
 }
