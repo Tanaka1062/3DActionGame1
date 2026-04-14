@@ -124,6 +124,7 @@ void CSelectScene::Step()
 	if (CKeyInput::IsTrg(KEY_SELECT) ||
 		m_uiManager.GetCountDownEnd() == true)
 	{
+		CFade::RequestFadeOut();
 		m_state = ENDWAIT;
 	}
 

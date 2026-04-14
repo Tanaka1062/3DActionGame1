@@ -111,6 +111,7 @@ void CTitleScene::Step()
 		CControllerManager::SetId() == true ||
 		CControllerManager::IsTrg(BUTTON_B) == true)
 	{
+		CFade::RequestFadeOut();
 		m_state = ENDWAIT;
 	}
 

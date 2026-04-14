@@ -134,6 +134,7 @@ void CResultScene::Step()
 	if (CKeyInput::IsTrg(KEY_SELECT) ||
 		CControllerManager::IsTrg(BUTTON_B))
 	{
+		CFade::RequestFadeOut();
 		m_state = ENDWAIT;
 	}
 

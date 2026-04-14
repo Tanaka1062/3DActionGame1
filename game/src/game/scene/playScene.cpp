@@ -161,6 +161,7 @@ void CPlayScene::Step()
 	if (CKeyInput::IsTrg(KEY_SELECT) == true ||
 		m_gameTime->GetTimeEnd() == true)
 	{
+		CFade::RequestFadeOut();
 		m_state = ENDWAIT;
 	}
 

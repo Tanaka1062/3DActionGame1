@@ -31,11 +31,16 @@ int CSceneBase::Loop()
 	case INIT:
 		//初期化
 		Init();
+		m_state = LOAD;	//ロード待機処理に進む
+		CFade::RequestFadeIn();
 
+		break;
+	case LOADWAIT:
 		if (CFade::IsEndFadeIn() == true)
 		{
-			m_state = LOAD;	//ロードに進む
+			m_state = LOAD;
 		}
+
 		break;
 	case LOAD:
 		Load();
@@ -43,28 +48,28 @@ int CSceneBase::Loop()
 	case MAINWAIT:
 		if (CFade::IsEndFadeOut() == true)
 		{
-			CFade::RequestFadeIn();
-			m_state = MAIN;
 		}
+		CFade::RequestFadeIn();
+
+		m_state = MAIN;
+
 		break;
 	case MAIN:
 		//メイン処理
 		Step();
 		break;
 	case ENDWAIT:
-		CFade::RequestFadeOut();
-		m_state = END;
+		if (CFade::IsEndFadeOut() == true)
+		{
+			m_state = END;
+		}
+
 		break;
 	case END:
 		//終了前処理
 		Exit();
-
-		if (CFade::IsEndFadeOut() == true)
-		{
-			m_state = INIT;	//初期化に進む
-			result = 0;
-			CFade::RequestFadeIn();
-		}
+		m_state = INIT;	//初期化に進む
+		result = 0;
 		break;
 	}
 

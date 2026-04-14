@@ -10,6 +10,7 @@ protected:
 	enum tagScene
 	{
 		INIT,		//データ初期化
+		LOADWAIT,	//読み込み前の待機処理
 		LOAD,		//データ読み込み
 		MAINWAIT,	//本編前の待機処理
 		MAIN,		//本編実行
