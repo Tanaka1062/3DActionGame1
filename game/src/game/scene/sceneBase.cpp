@@ -46,9 +46,6 @@ int CSceneBase::Loop()
 		Load();
 		break;
 	case MAINWAIT:
-		if (CFade::IsEndFadeOut() == true)
-		{
-		}
 		CFade::RequestFadeIn();
 
 		m_state = MAIN;

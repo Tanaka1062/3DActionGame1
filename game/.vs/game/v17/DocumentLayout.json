@@ -350,7 +350,7 @@
               "RelativeDocumentMoniker": "src\\lib\\system\\fade.h",
               "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\lib\\system\\fade.h",
               "RelativeToolTip": "src\\lib\\system\\fade.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAUAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2026-04-13T03:45:56.334Z",
               "EditorCaption": ""
@@ -365,8 +365,7 @@
               "RelativeToolTip": "src\\game\\scene\\sceneBase.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-04-13T02:40:21.565Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-13T02:40:21.565Z"
             },
             {
               "$type": "Document",
@@ -660,8 +659,7 @@
               "RelativeToolTip": "src\\game\\scene\\selectScene.cpp",
               "ViewState": "AgIAAF4AAAAAAAAAAAAAAH4AAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-04-10T07:22:42.095Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-10T07:22:42.095Z"
             },
             {
               "$type": "Document",
@@ -673,8 +671,7 @@
               "RelativeToolTip": "src\\game\\scene\\resultScene.cpp",
               "ViewState": "AgIAAG0AAAAAAAAAAAAAAIgAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-04-09T10:02:29.728Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-09T10:02:29.728Z"
             },
             {
               "$type": "Document",
@@ -686,8 +683,7 @@
               "RelativeToolTip": "src\\game\\scene\\playScene.cpp",
               "ViewState": "AgIAAIoAAAAAAAAAAAAawKMAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-03-25T09:54:17.471Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-25T09:54:17.471Z"
             },
             {
               "$type": "Document",
@@ -699,8 +695,7 @@
               "RelativeToolTip": "src\\game\\player\\playerManager.cpp",
               "ViewState": "AgIAADcAAAAAAAAAAAAawE0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-03-26T07:08:23.501Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-26T07:08:23.501Z"
             },
             {
               "$type": "Document",
@@ -712,8 +707,7 @@
               "RelativeToolTip": "src\\game\\main.cpp",
               "ViewState": "AgIAAFEAAAAAAAAAAADgv3oAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-04-03T09:35:34.484Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-03T09:35:34.484Z"
             },
             {
               "$type": "Document",
@@ -723,7 +717,7 @@
               "RelativeDocumentMoniker": "src\\game\\scene\\sceneBase.cpp",
               "ToolTip": "C:\\Users\\2409417\\Desktop\\GitHub\\3DActionGame1\\game\\src\\game\\scene\\sceneBase.cpp",
               "RelativeToolTip": "src\\game\\scene\\sceneBase.cpp",
-              "ViewState": "AgIAACcAAAAAAAAAAAAAADQAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAADAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-04-13T03:46:55.947Z",
               "EditorCaption": ""
@@ -738,8 +732,7 @@
               "RelativeToolTip": "src\\game\\scene\\titleScene.cpp",
               "ViewState": "AgIAAFEAAAAAAAAAAADgv3EAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-04-09T01:31:00.034Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-09T01:31:00.034Z"
             },
             {
               "$type": "Document",
