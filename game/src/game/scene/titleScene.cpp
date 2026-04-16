@@ -35,6 +35,7 @@ void CTitleScene::Draw()
 	switch (m_state)
 	{
 	case CSceneBase::LOAD:
+	case MAINWAIT:
 		m_LoadBG.Draw();
 		break;
 	default:
@@ -79,14 +80,17 @@ void CTitleScene::Load()
 		if (GetASyncLoadNum() == 0)
 		{
 			m_LoadState = 2;
+			CFade::RequestFadeOut();
 		}
 		break;
 
 	case 2:
-		SetUseASyncLoadFlag(FALSE);
-		CSoundManager::Play(CSoundManager::BGM_TITLE, DX_PLAYTYPE_LOOP);
-		m_state = MAINWAIT;
-		CFade::RequestFadeOut();
+		if (CFade::IsEndFadeOut() == true)
+		{
+			SetUseASyncLoadFlag(FALSE);
+			CSoundManager::Play(CSoundManager::BGM_TITLE, DX_PLAYTYPE_LOOP);
+			m_state = MAINWAIT;
+		}
 		break;
 	}
 }
@@ -111,7 +115,6 @@ void CTitleScene::Step()
 		CControllerManager::SetId() == true ||
 		CControllerManager::IsTrg(BUTTON_B) == true)
 	{
-		CFade::RequestFadeOut();
 		m_state = ENDWAIT;
 	}
 

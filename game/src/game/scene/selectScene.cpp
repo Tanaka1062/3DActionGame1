@@ -34,6 +34,7 @@ void CSelectScene::Draw()
 	switch (m_state)
 	{
 	case CSceneBase::LOAD:
+	case MAINWAIT:
 		m_LoadBG.Draw();
 		break;
 	default:
@@ -88,14 +89,17 @@ void CSelectScene::Load()
 		if (GetASyncLoadNum() == 0)
 		{
 			m_LoadState = 2;
+			CFade::RequestFadeOut();
 		}
 		break;
 
 	case 2:
-		SetUseASyncLoadFlag(FALSE);
-		CSoundManager::Play(CSoundManager::BGM_SELECT, DX_PLAYTYPE_LOOP);
-		m_state = MAINWAIT;
-		CFade::RequestFadeOut();
+		if (CFade::IsEndFadeOut() == true)
+		{
+			SetUseASyncLoadFlag(FALSE);
+			CSoundManager::Play(CSoundManager::BGM_SELECT, DX_PLAYTYPE_LOOP);
+			m_state = MAINWAIT;
+		}
 		break;
 	}
 
@@ -124,7 +128,6 @@ void CSelectScene::Step()
 	if (CKeyInput::IsTrg(KEY_SELECT) ||
 		m_uiManager.GetCountDownEnd() == true)
 	{
-		CFade::RequestFadeOut();
 		m_state = ENDWAIT;
 	}
 

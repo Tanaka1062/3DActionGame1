@@ -46,7 +46,9 @@ void CResultScene::Draw()
 	switch (m_state)
 	{
 	case CSceneBase::LOAD:
+	case MAINWAIT:
 		m_LoadBG.Draw();
+
 		break;
 	default:
 		m_sky.Draw();
@@ -108,13 +110,16 @@ void CResultScene::Load()
 		if (GetASyncLoadNum() == 0)
 		{
 			m_LoadState = 2;
+			CFade::RequestFadeOut();
 		}
 		break;
 
 	case 2:
-		SetUseASyncLoadFlag(FALSE);
-		m_state = MAINWAIT;
-		CFade::RequestFadeOut();
+		if (CFade::IsEndFadeOut() == true)
+		{
+			SetUseASyncLoadFlag(FALSE);
+			m_state = MAINWAIT;
+		}
 		break;
 	}
 
@@ -134,7 +139,6 @@ void CResultScene::Step()
 	if (CKeyInput::IsTrg(KEY_SELECT) ||
 		CControllerManager::IsTrg(BUTTON_B))
 	{
-		CFade::RequestFadeOut();
 		m_state = ENDWAIT;
 	}
 
