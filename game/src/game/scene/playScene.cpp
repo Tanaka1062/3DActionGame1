@@ -159,7 +159,7 @@ void CPlayScene::Step()
 	m_attackManager.Update();
 	m_itemManager.Update();
 	m_weaponManager.Update(m_playerManager);
-	CCameraManager::Update(ZERO);
+	CCameraManager::Update();
 
 	if (CKeyInput::IsTrg(KEY_SELECT) == true ||
 		m_gameTime->GetTimeEnd() == true)

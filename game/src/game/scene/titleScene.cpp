@@ -105,6 +105,8 @@ void CTitleScene::Step()
 	m_mapManager.Step();
 	CCameraManager::Step(&m_mapManager);
 
+	CCameraManager::Update();
+
 	if (CheckHitKey(KEY_INPUT_R) == 1)
 	{
 		CControllerManager::Init();

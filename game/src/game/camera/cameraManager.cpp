@@ -126,7 +126,7 @@ void CCameraManager::Draw()
 //---------------------------
 //		ƒJƒƒ‰‚ÌXV
 //---------------------------
-void CCameraManager::Update(VECTOR _tagetPos)
+void CCameraManager::Update()
 {
 	m_camera[m_id]->Update();
 

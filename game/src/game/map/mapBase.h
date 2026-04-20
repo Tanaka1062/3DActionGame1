@@ -1,13 +1,13 @@
 #pragma once
 #include<DxLib.h>
-#include "../../lib/model/3DObject.h"
+#include "../../lib/model/actor.h"
 #include <iostream>
 #include <vector>
 
 class CMapBase
 {
 protected:
-	std::vector<CObject*>			m_stage;			//ステージ
+	std::vector<CActor*>			m_stage;			//ステージ
 	int								m_stageId;			//ステージのID
 	int								m_mapMoveTimer;		//マップの移動する時間
 	struct tagStageSpawnData							//ステージのスポーン情報

@@ -117,7 +117,7 @@ void CSelectScene::Step()
 	//UI‚Ì–ˆƒtƒŒ[ƒ€‚·‚éˆ—
 	m_uiManager.Step(m_selectPlayerManager.GetIsAllReady());
 
-	CCameraManager::Update(ZERO);
+	CCameraManager::Update();
 	m_sky.Update();
 	m_selectPlayerManager.Update();
 

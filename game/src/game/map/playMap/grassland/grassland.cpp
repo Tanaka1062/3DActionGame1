@@ -85,7 +85,7 @@ CGrassland::CGrassland()
 {
 	for (int stage_i = 0; stage_i < STAGE_NUM; stage_i++)
 	{
-		m_stage.push_back(new CObject);
+		m_stage.push_back(new CActor);
 	}
 	for (int object_ii = 0; object_ii < STAGE_NUM - 1; object_ii++)
 	{

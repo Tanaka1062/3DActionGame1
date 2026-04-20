@@ -145,7 +145,7 @@ void CResultScene::Step()
 	m_sky.Update();
 	m_mapManager.Update();
 	m_resultPlayerManager.Update();
-	CCameraManager::Update(ZERO);
+	CCameraManager::Update();
 }
 
 //---------------------------

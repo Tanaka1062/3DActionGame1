@@ -43,7 +43,7 @@ public:
 
 	//カメラの更新
 	// @_tagetPos	:カメラの注視点の座標
-	static void Update(VECTOR _tagetPos);
+	static void Update();
 
 	//終了処理
 	static void Exit();
