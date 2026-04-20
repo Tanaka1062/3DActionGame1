@@ -6,14 +6,14 @@
 class CShotBase:public CObject
 {
 private:
-	int m_lostTime;				//消える時間
-	int m_timeCount;			//時間カウント
-	int m_atk;					//攻撃力
-	float m_moveSpeed;			//移動スピード
-	int m_effectHndl;			//エフェクトのハンドル
-	tagPlayerName m_shotName;	//誰が弾を出したか
-	VECTOR* m_targetPos;		//ターゲットの座標ポインタ
-	bool m_isHoming;			//ホーミングしているかフラグ
+	int				m_lostTime;		//消える時間
+	int				m_timeCount;	//時間カウント
+	int				m_atk;			//攻撃力
+	float			m_moveSpeed;	//移動スピード
+	int				m_effectHndl;	//エフェクトのハンドル
+	tagPlayerName	m_shotName;		//誰が弾を出したか
+	VECTOR*			m_targetPos;	//ターゲットの座標ポインタ
+	bool			m_isHoming;		//ホーミングしているかフラグ
 
 public:
 	//コンストラクタ・デストラクタ

@@ -10,10 +10,10 @@
 class CSelectScene :public CSceneBase
 {
 private:
-	CUiSelectManager m_uiManager;
-	CMapManager m_mapManager;
-	CSky m_sky;
-	CSelectPlayerManager m_selectPlayerManager;
+	CUiSelectManager		m_uiManager;			//UIマネージャ
+	CMapManager				m_mapManager;			//マップマネージャ
+	CSky					m_sky;					//天球
+	CSelectPlayerManager	m_selectPlayerManager;	//セレクトのプレイヤーマネージャ
 
 public:
 

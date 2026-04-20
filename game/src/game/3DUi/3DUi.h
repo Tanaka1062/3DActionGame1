@@ -4,9 +4,9 @@
 class C3DUi
 {
 private:
-	int m_hndl;				//画像のハンドル
-	VECTOR m_pos;			//座標
-	bool m_isActive;		//生存フラグ
+	int		m_hndl;			//画像のハンドル
+	VECTOR	m_pos;			//座標
+	bool	m_isActive;		//生存フラグ
 
 public:
 	C3DUi();

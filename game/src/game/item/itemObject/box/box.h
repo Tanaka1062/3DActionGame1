@@ -4,8 +4,8 @@
 class CBox : public CItemObjectBase
 {
 private:
-	int m_spawnTime;		//時間カウント
-	VECTOR m_spawnPos;		//出現座標
+	int		m_spawnTime;	//時間カウント
+	VECTOR	m_spawnPos;		//出現座標
 
 public:
 	//コンストラクタ

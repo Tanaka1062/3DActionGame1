@@ -1,7 +1,7 @@
 #pragma once
 #include "mapBase.h"
 
-enum tagMapId
+enum tagMapId			//マップのID
 {
 	MAP_ID_GRASSLAND,	//草原ステージ
 	MAP_ID_SELECT,		//選択画面のマップ
@@ -14,7 +14,7 @@ enum tagMapId
 class CMapManager
 {
 private:
-	CMapBase* m_map;	
+	CMapBase* m_map;	//マップ	
 public:
 	//コンストラクタ・デストラクタ
 	CMapManager();

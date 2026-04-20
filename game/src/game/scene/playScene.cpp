@@ -69,7 +69,7 @@ void CPlayScene::Init()
 	m_itemManager.Init(&m_playerManager);
 	m_weaponManager.Init();
 	m_uiManager.Init(&m_playerManager,&m_itemManager);
-	CCameraManager::Init(m_mapManager.GetMap());
+	CCameraManager::Init(CCameraManager::CAMERA_ID_MAP,m_mapManager.GetMap());
 	CCameraManager::ChangeCamera(CCameraManager::CAMERA_ID_MAP);
 	m_gameTime = CGameTime::GetInstance();
 	m_gameTime->Init();

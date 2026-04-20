@@ -112,9 +112,6 @@
     <Filter Include="ソース ファイル\game\item\weapon\ax">
       <UniqueIdentifier>{40aa1bd0-f82a-415b-8ba3-ff1bc3149138}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\game\item\weapon\gun">
-      <UniqueIdentifier>{04ea11fb-3c85-4ddc-b258-3c39642df902}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\game\winner">
       <UniqueIdentifier>{a95fac4b-e1b8-4a2a-af36-9ef736a0f4a5}</UniqueIdentifier>
     </Filter>
@@ -159,9 +156,6 @@
     </Filter>
     <Filter Include="ソース ファイル\game\ui\playerStatusPanel">
       <UniqueIdentifier>{46701614-a789-425a-b0d2-5be984d2601b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\game\map\stage">
-      <UniqueIdentifier>{c236f8a6-dcc2-4c24-b171-56256a2ba144}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\game\map\resultMap">
       <UniqueIdentifier>{fcaaba61-a540-46fe-aebd-3381000643ef}</UniqueIdentifier>
@@ -333,9 +327,6 @@
     <ClCompile Include="src\game\item\weapon\ax\ax.cpp">
       <Filter>ソース ファイル\game\item\weapon\ax</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\item\weapon\gun\gun.cpp">
-      <Filter>ソース ファイル\game\item\weapon\gun</Filter>
-    </ClCompile>
     <ClCompile Include="src\game\winner\winner.cpp">
       <Filter>ソース ファイル\game\winner</Filter>
     </ClCompile>
@@ -404,9 +395,6 @@
     </ClCompile>
     <ClCompile Include="src\game\ui\playerStatusPanel\playerStatusPanel.cpp">
       <Filter>ソース ファイル\game\ui\playerStatusPanel</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\map\stage\stage.cpp">
-      <Filter>ソース ファイル\game\map\stage</Filter>
     </ClCompile>
     <ClCompile Include="src\game\map\mapBase.cpp">
       <Filter>ソース ファイル\game\map</Filter>
@@ -596,9 +584,6 @@
     <ClInclude Include="src\game\item\weapon\ax\ax.h">
       <Filter>ソース ファイル\game\item\weapon\ax</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\item\weapon\gun\gun.h">
-      <Filter>ソース ファイル\game\item\weapon\gun</Filter>
-    </ClInclude>
     <ClInclude Include="src\game\winner\winner.h">
       <Filter>ソース ファイル\game\winner</Filter>
     </ClInclude>
@@ -670,9 +655,6 @@
     </ClInclude>
     <ClInclude Include="src\game\ui\playerStatusPanel\playerStatusPanel.h">
       <Filter>ソース ファイル\game\ui\playerStatusPanel</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\map\stage\stage.h">
-      <Filter>ソース ファイル\game\map\stage</Filter>
     </ClInclude>
     <ClInclude Include="src\game\map\mapBase.h">
       <Filter>ソース ファイル\game\map</Filter>

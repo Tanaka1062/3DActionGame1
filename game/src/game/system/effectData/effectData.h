@@ -19,7 +19,7 @@ enum tagEffectKind	//エフェクトの種類
 class CEffectData
 {
 private:
-	static int m_id[EFFECT_NUM];			//エフェクトのID
+	static int m_id[EFFECT_NUM];	//エフェクトのID
 public:
 	//コンストラクタ
 	CEffectData();

@@ -10,8 +10,8 @@
 class CMapItemManager
 {
 private:
-	std::vector<std::unique_ptr<CItemBase>> m_item;
-	int m_hndl;											//アイテムのモデルハンドル
+	std::vector<std::unique_ptr<CItemBase>> m_item;		//アイテム
+	int										m_hndl;		//アイテムのモデルハンドル
 
 public:
 	//コンストラクタ・デストラクタ

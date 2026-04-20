@@ -9,18 +9,17 @@ private:
 	//ゲーム中に使用するシーン
 	enum tagScene
 	{
-		TITLE,		//タイトル画面
-		SELECT,		//セレクト画面
-		GAME,		//ゲーム本編
-		RESULT,		//リザルト画面
+		TITLE,				//タイトル画面
+		SELECT,				//セレクト画面
+		GAME,				//ゲーム本編
+		RESULT,				//リザルト画面
 
-		SCENE_NUM,	//シーンの数
+		SCENE_NUM,			//シーンの数
 	};
 
 	//各種シーン変数
-	tagScene m_sceneID;	//今のシーン
-
-	CSceneBase* m_scene;
+	tagScene	m_sceneID;	//シーンID
+	CSceneBase* m_scene;	//シーン
 
 	void Factory();
 

@@ -2,7 +2,6 @@
 #include "../itemObject/bomb/bomb.h"
 #include "../itemObject/box/box.h"
 #include "../weapon/hammer/hammer.h"
-#include "../weapon/gun/gun.h"
 #include"../weapon/ax/ax.h"
 #include "../../system/effectData/effectData.h"
 #include "../../../lib/effekseer/effekseer.h"
@@ -13,23 +12,20 @@ constexpr int SPAWN_PROBABILITY_INIT[ITEM_NUM] =					//ÉAÉCÉeÉÄÇÃèoåªämó¶ÇÃèâä˙í
 {
 	5,
 	5,
-	0,
 	5,
 };
 
 constexpr int SPAWN_PROBABILITY_DECREASE[ITEM_NUM] =				//ÉAÉCÉeÉÄÇÃèoåªämó¶ÇÃå∏è≠íl
 {
-	0,
-	0,
 	5,
-	0,
+	5,
+	5,
 };
 
 static const char* MODEL_PATH[ITEM_NUM] =							//ÉÇÉfÉãÇÃÉpÉX
 {
 	"data/model/item/bomb/bomb.mv1",
 	"data/model/item/weapon/hammer/hammer.mv1",
-	"data/model/item/weapon/gun/gun.mv1",
 	"data/model/item/weapon/ax/ax.mv1",
 
 };
@@ -83,10 +79,6 @@ void CSpawnItemManager::Init(CPlayerManager* _playerManager)
 		else if (spawn_i <= SPAWN_ITEM_MAX * (ITEM_HAMMER + 1))
 		{
 			m_item.push_back(make_unique<CHammer>());
-		}
-		else if (spawn_i <= SPAWN_ITEM_MAX * (ITEM_GUN)+1)
-		{
-			m_item.push_back(make_unique<CGun>());
 		}
 		else if (spawn_i <= SPAWN_ITEM_MAX * (ITEM_AX)+1)
 		{
@@ -338,9 +330,6 @@ unique_ptr<CItemBase> CSpawnItemManager::SpawnItem(int _stageId)
 		case ITEM_HAMMER:
 			spawnItem = make_unique<CHammer>();
 			break;
-		case ITEM_GUN:
-			spawnItem = make_unique<CGun>();
-			break;
 		case ITEM_AX:
 			spawnItem = make_unique<CAx>();
 			break;
@@ -412,9 +401,6 @@ unique_ptr<CItemBase> CSpawnItemManager::RequestItem(tagItemName _itemName)
 			break;
 		case ITEM_HAMMER:
 			spawnItem = make_unique<CHammer>();
-			break;
-		case ITEM_GUN:
-			spawnItem = make_unique<CGun>();
 			break;
 		case ITEM_AX:
 			spawnItem = make_unique<CAx>();

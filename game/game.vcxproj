@@ -170,7 +170,6 @@
     <ClCompile Include="src\game\item\spawn\spawnCoinManager.cpp" />
     <ClCompile Include="src\game\item\spawn\spawnItemManager.cpp" />
     <ClCompile Include="src\game\item\weapon\ax\ax.cpp" />
-    <ClCompile Include="src\game\item\weapon\gun\gun.cpp" />
     <ClCompile Include="src\game\item\weapon\hammer\hammer.cpp" />
     <ClCompile Include="src\game\item\weapon\itemWeaponBase.cpp" />
     <ClCompile Include="src\game\main.cpp" />
@@ -179,7 +178,6 @@
     <ClCompile Include="src\game\map\playMap\grassland\grassland.cpp" />
     <ClCompile Include="src\game\map\resultMap\resultMap.cpp" />
     <ClCompile Include="src\game\map\selectMap\selectMap.cpp" />
-    <ClCompile Include="src\game\map\stage\stage.cpp" />
     <ClCompile Include="src\game\map\titleMap\titleMap.cpp" />
     <ClCompile Include="src\game\player\cpuPlayer\cpuPlayer.cpp" />
     <ClCompile Include="src\game\player\cpuPlayer\cpuPlayerFOV.cpp" />
@@ -259,7 +257,6 @@
     <ClInclude Include="src\game\item\spawn\spawnCoinManager.h" />
     <ClInclude Include="src\game\item\spawn\spawnItemManager.h" />
     <ClInclude Include="src\game\item\weapon\ax\ax.h" />
-    <ClInclude Include="src\game\item\weapon\gun\gun.h" />
     <ClInclude Include="src\game\item\weapon\hammer\hammer.h" />
     <ClInclude Include="src\game\item\weapon\itemWeaponBase.h" />
     <ClInclude Include="src\game\map\mapBase.h" />
@@ -267,7 +264,6 @@
     <ClInclude Include="src\game\map\playMap\grassland\grassland.h" />
     <ClInclude Include="src\game\map\resultMap\resultMap.h" />
     <ClInclude Include="src\game\map\selectMap\selectMap.h" />
-    <ClInclude Include="src\game\map\stage\stage.h" />
     <ClInclude Include="src\game\map\titleMap\titleMap.h" />
     <ClInclude Include="src\game\player\cpuPlayer\cpuPlayer.h" />
     <ClInclude Include="src\game\player\cpuPlayer\cpuPlayerFOV.h" />

@@ -6,14 +6,14 @@
 class CAttackBase :public CObject
 {
 private:
-	bool m_isAttack;			//攻撃しているかフラグ
-	int m_atk;					//攻撃力
-	int m_blown;				//吹っ飛び蓄積量
-	int m_num;					//攻撃の回数
-	int m_numCount;				//攻撃の回数カウント
-	int m_nextTime;				//攻撃の発生するまでの時間
-	int m_timeCount;			//時間のカウント
-	tagPlayerName m_attackName;	//攻撃しているプレイヤー
+	bool			m_isAttack;			//攻撃しているかフラグ
+	int				m_atk;				//攻撃力
+	int				m_blown;			//吹っ飛び蓄積量
+	int				m_num;				//攻撃の回数
+	int				m_numCount;			//攻撃の回数カウント
+	int				m_nextTime;			//攻撃の発生するまでの時間
+	int				m_timeCount;		//時間のカウント
+	tagPlayerName	m_attackName;		//攻撃しているプレイヤー
 
 public:
 	//コンストラクタ

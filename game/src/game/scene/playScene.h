@@ -20,18 +20,18 @@ class CPlayScene :public CSceneBase
 {
 private:
 
-	CMapManager m_mapManager;				//マップ
-	CSky m_sky;								//空
-	CPlayerManager m_playerManager;			//プレイヤー
-	CShotManager m_shot;					//弾
-	CItemManager m_itemManager;				//アイテムマネージャークラス
-	CWeaponManager m_weaponManager;			//武器のマネージャークラス
-	CAttackManager m_attackManager;			//攻撃のマネージャークラス
-	CUiGameManager m_uiManager;				//uiのマネージャークラス
-	CGameTime* m_gameTime;					//ゲームの制限時間
-	CWinner* m_winner;						//勝利したプレイヤー
-	CEventManager m_eventManager;			//イベントのマネージャークラス
-	C3DUiManager* m_3DUiManager;			//3DUIのマネージャークラス
+	CMapManager		m_mapManager;		//マップ
+	CSky			m_sky;				//空
+	CPlayerManager	m_playerManager;	//プレイヤー
+	CShotManager	m_shot;				//弾
+	CItemManager	m_itemManager;		//アイテムマネージャークラス
+	CWeaponManager	m_weaponManager;	//武器のマネージャークラス
+	CAttackManager	m_attackManager;	//攻撃のマネージャークラス
+	CUiGameManager	m_uiManager;		//uiのマネージャークラス
+	CGameTime*		m_gameTime;			//ゲームの制限時間
+	CWinner*		m_winner;			//勝利したプレイヤー
+	CEventManager	m_eventManager;		//イベントのマネージャークラス
+	C3DUiManager*	m_3DUiManager;		//3DUIのマネージャークラス
 
 public:
 

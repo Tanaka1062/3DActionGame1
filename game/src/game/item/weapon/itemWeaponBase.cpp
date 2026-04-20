@@ -19,7 +19,7 @@ void CWeaponBase::Init()
 	CItemBase::Init();
 
 	m_id = WEAPON_ID_HAND;
-	m_weaponDurability = 0;
+	m_durability = 0;
 	m_itemType = ITEM_TYPE_WEAPON;
 }
 
@@ -72,7 +72,7 @@ void CWeaponBase::HitCalc(CObject* _hitObject)
 				if (isPickUp == true)
 				{
 					player->SetWeaponId(m_id);
-					player->SetWeaponDurability(m_weaponDurability);
+					player->SetWeaponDurability(m_durability);
 					m_isActive = false;
 				}
 

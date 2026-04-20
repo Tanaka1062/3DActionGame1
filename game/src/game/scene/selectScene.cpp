@@ -57,7 +57,7 @@ void CSelectScene::Init()
 {
 	CSceneBase::Init();
 	m_mapManager.Init(MAP_ID_SELECT);
-	CCameraManager::Init(m_mapManager.GetMap());
+	CCameraManager::Init(CCameraManager::CAMERA_ID_SELECT,m_mapManager.GetMap());
 	CCameraManager::ChangeCamera(CCameraManager::CAMERA_ID_SELECT);
 	m_sky.Init();
 	m_selectPlayerManager.Init();

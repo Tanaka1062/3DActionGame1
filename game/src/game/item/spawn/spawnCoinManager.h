@@ -13,7 +13,7 @@ private:
 
 	std::vector<std::unique_ptr<CItemBase>> m_mapCoin;		//マップのコイン保存用
 	std::vector<std::unique_ptr<CItemBase>> m_dropCoin;		//ドロップするコイン保存用
-	int m_hndl;												//アイテムのモデルハンドル
+	int										m_hndl;			//アイテムのモデルハンドル
 public:
 	//コンストラクタ・デストラクタ
 	CSpawnCoinManager();

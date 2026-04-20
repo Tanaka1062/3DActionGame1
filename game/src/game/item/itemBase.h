@@ -20,7 +20,6 @@ enum tagItemName
 	ITEM_NONE = -1,			//何もない	
 	ITEM_BOMB,				//爆弾
 	ITEM_HAMMER,			//ハンマー
-	ITEM_GUN,				//銃
 	ITEM_AX,				//斧
 
 	ITEM_NUM,				//アイテムの数
@@ -37,13 +36,13 @@ enum tagItemState
 class CItemBase :public CActor
 {
 protected:
-	bool m_isSpawn;			//スポーンするかフラグ
-	bool m_isBuy;			//購入されているか
-	int m_cost;				//価格
-	CShadow m_shadow;		//丸影のクラス
-	tagItemType m_itemType;	//アイテムのタイプ
-	tagItemState m_state;	//状態
-	tagItemName m_itemName;	//アイテムの名前
+	bool			m_isSpawn;	//スポーンするかフラグ
+	bool			m_isBuy;	//購入されているか
+	int				m_cost;		//価格
+	CShadow			m_shadow;	//丸影のクラス
+	tagItemType		m_itemType;	//アイテムのタイプ
+	tagItemState	m_state;	//状態
+	tagItemName		m_itemName;	//アイテムの名前
 
 public:
 	//コンストラクタ

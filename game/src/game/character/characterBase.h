@@ -22,9 +22,6 @@ enum tagState						//キャラクターの状態
 	ATTACK_IN,						//攻撃前
 	ATTACK,							//攻撃中
 	ATTACK_OUT,						//攻撃後
-	ITEM_USE_IN,					//アイテム使用前
-	ITEM_USE,						//アイテム使用中
-	ITEM_USE_OUT,					//アイテム使用後
 	ITEM_LIFT_UP,					//アイテムを持ち上げる
 	ITEM_PUT_DOWN,					//アイテムを下ろす
 	ITEM_THROW_IN,					//アイテムを投げる前
@@ -43,13 +40,13 @@ enum tagState						//キャラクターの状態
 class CCharacterBase:public CActor
 {
 protected:
-	int m_maxHp;						//体力の最大値
-	int m_hp;							//体力
-	int m_blown;						//吹っ飛び蓄積量
-	int m_atk;							//攻撃力
-	tagState m_state;					//状態
-	tagCharacterType m_type;			//種類
-	CShadow m_shadow;					//丸影のクラス
+	int					m_maxHp;	//体力の最大値
+	int					m_hp;		//体力
+	int					m_blown;	//吹っ飛び蓄積量
+	int					m_atk;		//攻撃力
+	tagState			m_state;	//状態
+	tagCharacterType	m_type;		//種類
+	CShadow				m_shadow;	//丸影のクラス
 
 public:
 	//コンストラクタ
@@ -114,9 +111,6 @@ protected:
 	//着地
 	virtual void Landing();
 
-	//回避
-	virtual void Dodgeroll();
-
 	//攻撃前
 	virtual void AttackIn();
 
@@ -125,30 +119,6 @@ protected:
 
 	//攻撃後
 	virtual void AttackOut();
-
-	//攻撃チャージ前
-	virtual void AttackChargeIn();
-
-	//攻撃チャージ
-	virtual void AttackCharge();
-
-	//スキル使用前
-	virtual void SkillIn();
-
-	//スキル使用
-	virtual void Skill();
-
-	//スキル使用後
-	virtual void SkillOut();
-
-	//アイテム使用前
-	virtual void ItemUseIn();
-
-	//アイテム使用中
-	virtual void ItemUse();
-
-	//アイテム使用後
-	virtual void ItemUseOut();
 
 	//アイテムを持ち上げる
 	virtual void ItemLiftUp();

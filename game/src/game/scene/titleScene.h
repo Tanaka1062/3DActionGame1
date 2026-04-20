@@ -8,8 +8,8 @@
 class CTitleScene :public CSceneBase
 {
 private:
-	CUiTitleManager m_uiManager;
-	CMapManager m_mapManager;
+	CUiTitleManager m_uiManager;	//UIマネージャ
+	CMapManager		m_mapManager;	//マップマネージャ
 
 public:
 

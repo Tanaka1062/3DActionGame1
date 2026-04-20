@@ -88,11 +88,6 @@ void CCharacterBase::Step(CAttackManager* _attackManager, CShotManager* _shotMan
 		Landing();
 		break;
 
-		//回避
-	case DODGEROLL:
-		Dodgeroll();
-		break;
-
 		//攻撃前
 	case ATTACK_IN:
 		AttackIn();
@@ -106,46 +101,6 @@ void CCharacterBase::Step(CAttackManager* _attackManager, CShotManager* _shotMan
 		//攻撃後
 	case ATTACK_OUT:
 		AttackOut();
-		break;
-
-		//攻撃チャージ前
-	case ATTACK_CHARGE_IN:
-		AttackChargeIn();
-		break;
-
-		//攻撃チャージ
-	case ATTACK_CHARGE:
-		AttackCharge();
-		break;
-
-		//スキル使用前
-	case SKILL_IN:
-		SkillIn();
-		break;
-
-		//スキル使用前
-	case SKILL:
-		Skill();
-		break;
-
-		//スキル使用前
-	case SKILL_OUT:
-		SkillOut();
-		break;
-
-		//アイテム前
-	case ITEM_USE_IN:
-		ItemUseIn();
-		break;
-
-		//アイテム中
-	case ITEM_USE:
-		ItemUse();
-		break;
-
-		//アイテム後
-	case ITEM_USE_OUT:
-		ItemUseOut();
 		break;
 
 		//アイテムを持ち上げる
@@ -334,14 +289,6 @@ void CCharacterBase::Landing()
 }
 
 //------------------------------
-//			  回避
-//------------------------------
-void CCharacterBase::Dodgeroll()
-{
-
-}
-
-//------------------------------
 //			攻撃前
 //------------------------------
 void CCharacterBase::AttackIn()
@@ -361,70 +308,6 @@ void CCharacterBase::Attack(CAttackManager* _attackManager, CShotManager* _shotM
 //			攻撃後
 //------------------------------
 void CCharacterBase::AttackOut()
-{
-
-}
-
-//------------------------------
-//		  攻撃チャージ前
-//------------------------------
-void CCharacterBase::AttackChargeIn()
-{
-
-}
-
-//------------------------------
-//		   攻撃チャージ
-//------------------------------
-void CCharacterBase::AttackCharge()
-{
-
-}
-
-//------------------------------
-//		  スキル使用前
-//------------------------------
-void CCharacterBase::SkillIn()
-{
-
-}
-
-//------------------------------
-//		  スキル使用
-//------------------------------
-void CCharacterBase::Skill()
-{
-
-}
-
-//------------------------------
-//		  スキル使用後
-//------------------------------
-void CCharacterBase::SkillOut()
-{
-
-}
-
-//------------------------------
-//		アイテム使用前
-//------------------------------
-void CCharacterBase::ItemUseIn()
-{
-
-}
-
-//------------------------------
-//		アイテム使用中
-//------------------------------
-void CCharacterBase::ItemUse()
-{
-
-}
-
-//------------------------------
-//		アイテム使用後
-//------------------------------
-void CCharacterBase::ItemUseOut()
 {
 
 }

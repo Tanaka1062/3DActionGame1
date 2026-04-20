@@ -55,7 +55,7 @@ void CTitleScene::Init()
 {
 	CSceneBase::Init();
 	m_mapManager.Init(MAP_ID_TITLE);
-	CCameraManager::Init();
+	CCameraManager::Init(CCameraManager::CAMERA_ID_TITLE,m_mapManager.GetMap());
 
 	//UI‚Ì‰Šú‰»
 	m_uiManager.Init();

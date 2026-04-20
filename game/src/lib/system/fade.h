@@ -14,8 +14,8 @@ typedef struct {
 class CFade
 {
 private:
-	static tagFadeSteate m_state;		//現在のフェード状況
-	static int m_count;				//フェードの時間のカウント
+	static tagFadeSteate	m_state;	//現在のフェード状況
+	static int				m_count;	//フェードの時間のカウント
 
 public:
 	//フェードを初期化する

@@ -21,7 +21,7 @@ void CHammer::Init()
 	m_cost = COST;
 	m_itemName = ITEM_HAMMER;
 	m_id = WEAPON_ID_HAMMER;
-	m_weaponDurability = DURABILITY;
+	m_durability = DURABILITY;
 
 	m_rot.x += 0.2f;
 }
