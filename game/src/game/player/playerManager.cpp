@@ -26,7 +26,7 @@ constexpr int NAME_ACTIVE_TIME = 180;			//名前の表示時間
 constexpr float Ui_UP_Y = 40.0f;				//3DUiのどれだけあげるか
 
 static const char* MODEL_PATH =					//モデルのパス
-{ "data/model/player/playerTest8.mv1"};			
+{ "data/model/player/player.mv1"};			
 
 static const char* MATERIAL_PATH[PLAYER_NUM] =	//マテリアルのパス
 { "data/material/player/playerBody1.png",

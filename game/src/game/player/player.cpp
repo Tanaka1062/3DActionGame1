@@ -61,7 +61,6 @@ constexpr float ATTACK_MAGNIFICATION[WEAPON_ID_NUM][ATTACK_NUM] =	//攻撃の倍率
 	{0.5f,0.8f,1.0f,1.0f},
 	{0.7f,1.0f,1.2f,1.0f},
 	{1.0f,1.2f,1.5f,1.0f},
-	{1.0f,1.0f,1.0f,1.0f},
 };
 
 constexpr int ATTACK_BLOWN[WEAPON_ID_NUM][ATTACK_NUM] =				//攻撃の吹き飛び度
@@ -69,7 +68,6 @@ constexpr int ATTACK_BLOWN[WEAPON_ID_NUM][ATTACK_NUM] =				//攻撃の吹き飛び度
 	{40,40,80,100},
 	{40,40,80,100},
 	{100,100,100,100},
-	{60,60,80,100},
 };
 
 constexpr float ATTACK_SIZE[WEAPON_ID_NUM][ATTACK_NUM] =			//攻撃の大きさ
@@ -77,14 +75,12 @@ constexpr float ATTACK_SIZE[WEAPON_ID_NUM][ATTACK_NUM] =			//攻撃の大きさ
 	{12.0f,12.0f,12.0f,12.0f},
 	{25.0f,25.0f,25.0f,25.0f},
 	{28.0f,28.0f,28.0f,12.0f},
-	{16.0f,16.0f,16.0f,12.0f},
 };
 
 constexpr float ATTACK_LENGTH[WEAPON_ID_NUM][ATTACK_NUM] =			//攻撃の長さ
 {
 	{15.0f,15.0f,15.0f,15.0f},
 	{15.0f,15.0f,15.0f,0.0f},
-	{15.0f,15.0f,15.0f,15.0f},
 	{15.0f,15.0f,15.0f,15.0f},
 };						
 
@@ -286,12 +282,6 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 
 	//ジャンプ処理
 	RequestJump();
-
-	//回避移行処理
-	RequestDodgeroll(_rotY);
-
-	//アイテム使用処理
-	Item();
 
 	//アイテムを手に入れていたら持ち上げる
 	if (m_itemState == ITEM_STATE_GET)
@@ -693,13 +683,6 @@ void CPlayer::Landing()
 }
 
 //-----------------------
-//		  回避
-//-----------------------
-void CPlayer::Dodgeroll()
-{
-}
-
-//-----------------------
 //		攻撃前
 //-----------------------
 void CPlayer::AttackIn()
@@ -707,24 +690,6 @@ void CPlayer::AttackIn()
 	if (m_isFlying == true)
 	{
 		m_attackNum = ATTACK_AIR;
-	}
-
-	if (m_weaponId != WEAPON_ID_GUN)
-	{
-
-		//進む速度
-		VECTOR defaultDir = { 0.0f,0.0f,-ATTACK_MOVE_SPEED };
-		//上記を行列に変換
-		MATRIX dir = CMyMath::GetTranslateMatrix(defaultDir);
-		//Y軸回転行列
-		MATRIX mRotY = CMyMath::GetYawMatrix(m_rot.y);
-		//行列の合成
-		MATRIX res = CMyMath::MatMult(mRotY, dir);
-
-		//移動をスピードに代入
-		m_speed.x = res.m[0][3];
-		m_speed.y = res.m[1][3];
-		m_speed.z = res.m[2][3];
 	}
 
 	switch (m_weaponId)
@@ -797,18 +762,6 @@ void CPlayer::AttackIn()
 		m_attackNum = 0;
 		//攻撃前のアニメーション
 		RequestAnim(ANIMID_ATTACK1_AX_IN, 0.5f);
-		break;
-	//武器が銃の場合
-	case WEAPON_ID_GUN:
-		//攻撃前のアニメーション
-		RequestAnim(ANIMID_ATTACK1_GUN_IN, 0.5f);
-
-		if (m_targetPos != nullptr)
-		{
-			float rotY = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
-			m_rot.y = rotY;
-		}
-
 		break;
 	}
 
@@ -943,16 +896,6 @@ void CPlayer::Attack(CAttackManager* _attackManager, CShotManager* _shotManager)
 			m_attackId = _attackManager->Request(attackPos, attackSize, atk, blown, m_name,attackNum,attackTime);
 		}
 		break;
-	//武器が銃の場合
-	case WEAPON_ID_GUN:
-		CSoundManager::Play(CSoundManager::SE_GUN, DX_PLAYTYPE_BACK);
-
-		if (RequestAnim(ANIMID_ATTACK1_GUN, 1.0f) == true)
-		{
-			VECTOR shotPos = MV1GetFramePosition(m_hndl, 11);
-			_shotManager->Request(shotPos,m_rot,attackSize,SHOT_SPEED,atk,SHOT_LOST_TIME,m_name);
-		}
-		break;
 	}
 
 	//アニメーションが終わったら待機状態に戻す
@@ -1027,177 +970,12 @@ void CPlayer::AttackOut()
 		//攻撃後のアニメーション
 		RequestAnim(ANIMID_ATTACK1_AX_OUT, 0.5f);
 		break;
-	//武器が銃の場合
-	case WEAPON_ID_GUN:
-		//攻撃後のアニメーション
-		RequestAnim(ANIMID_ATTACK1_GUN_OUT, 1.0f);
-		break;
 	}
 
 	//アニメーションが終わったら待機状態に戻す
 	if (GetAnimEnd() == true)
 	{
 		m_attackNum = ATTACK_NONE;
-		m_state = WAIT;
-	}
-
-}
-
-//-----------------------
-//	   攻撃チャージ前
-//-----------------------
-void CPlayer::AttackChargeIn()
-{
-	//アイテム使用前のアニメーション
-	RequestAnim(ANIMID_CHARGE_IN, 0.3f);
-
-	//アニメーションが終わったらアイテム使用中に移行
-	if (GetAnimEnd() == true)
-	{
-		m_state = ATTACK_CHARGE;
-	}
-
-}
-
-//-----------------------
-//	   攻撃チャージ
-//-----------------------
-void CPlayer::AttackCharge()
-{
-	//アイテム使用前のアニメーション
-	RequestAnim(ANIMID_CHARGE, 0.3f);
-
-	//アニメーションが終わったらアイテム使用中に移行
-	if (GetAnimEnd() == true)
-	{
-		m_state = SKILL_IN;
-	}
-
-}
-
-//-----------------------
-//		スキル使用前
-//-----------------------
-void CPlayer::SkillIn()
-{
-	switch (m_weaponId)
-	{
-	case WEAPON_ID_HAND:
-		//攻撃前のアニメーション
-		RequestAnim(ANIMID_SKILLA_IN, 1.2f);
-		break;
-	case WEAPON_ID_HAMMER:
-		//攻撃前のアニメーション
-		RequestAnim(ANIMID_SKILLB_IN, 1.2f);
-
-		//カメラの角度がオールゼロの時に進む速度
-		VECTOR defaultDir = { 0.0f,0.0f,-4.0f };
-		//上記を行列に変換
-		MATRIX dir = CMyMath::GetTranslateMatrix(defaultDir);
-		//Y軸回転行列
-		MATRIX mRotY = CMyMath::GetYawMatrix(m_rot.y);
-		//行列の合成
-		MATRIX res = CMyMath::MatMult(mRotY, dir);
-
-		//移動をスピードに代入
-		m_speed.x = res.m[0][3];
-		m_speed.y = res.m[1][3];
-		m_speed.z = res.m[2][3];
-		break;
-	}
-
-	//アニメーションが終わったら攻撃中に移行
-	if (GetAnimEnd() == true)
-	{
-		m_state = SKILL;
-	}
-
-}
-
-//-----------------------
-//		スキル使用
-//-----------------------
-void CPlayer::Skill()
-{
-	//アニメーションが終わったら待機状態に戻す
-	if (GetAnimEnd() == true)
-	{
-		m_state = SKILL_OUT;
-	}
-
-}
-
-//-----------------------
-//		スキル使用後
-//-----------------------
-void CPlayer::SkillOut()
-{
-	switch (m_weaponId)
-	{
-	case WEAPON_ID_HAND:
-		//攻撃後のアニメーション
-		RequestAnim(ANIMID_SKILLA_OUT, 0.3f);
-		break;
-	case WEAPON_ID_HAMMER:
-		//攻撃後のアニメーション
-		RequestAnim(ANIMID_SKILLB_OUT, 0.5f);
-		break;
-	}
-
-	//アニメーションが終わったら待機状態に戻す
-	if (GetAnimEnd() == true)
-	{
-		m_state = WAIT;
-	}
-
-}
-
-//-----------------------
-//	  アイテム使用前
-//-----------------------
-void CPlayer::ItemUseIn()
-{
-	//アイテム使用前のアニメーション
-	RequestAnim(ANIMID_ITEM_USE_IN, 1.0f);
-
-	//アニメーションが終わったらアイテム使用中に移行
-	if (GetAnimEnd() == true)
-	{
-		m_state = ITEM_USE;
-	}
-
-}
-
-//-----------------------
-//	 アイテム使用中
-//-----------------------
-void CPlayer::ItemUse()
-{
-	//アイテム使用中のアニメーション
-	if (RequestAnim(ANIMID_ITEM_USE, 1.0f))
-	{
-
-	}
-
-	//アニメーションが終わったら待機状態に戻す
-	if (GetAnimEnd() == true)
-	{
-		m_state = ITEM_USE_OUT;
-	}
-
-}
-
-//-----------------------
-//	 アイテム使用後
-//-----------------------
-void CPlayer::ItemUseOut()
-{
-	//アイテム使用後のアニメーション
-	RequestAnim(ANIMID_ITEM_USE_OUT, 1.0f);
-
-	//アニメーションが終わったら待機状態に戻す
-	if (GetAnimEnd() == true)
-	{
 		m_state = WAIT;
 	}
 
@@ -1593,85 +1371,6 @@ void CPlayer::RequestJump()
 }
 
 //-----------------------
-//	回避に移行する処理
-//-----------------------
-void CPlayer::RequestDodgeroll(float _rotY)
-{
-	return;
-
-	//アイテムを持ち上げている状態は処理をしない
-	if (m_itemState == ITEM_STATE_HAVE)return;
-
-	//待機状態と歩いてる状態以外は処理をしない
-	switch (m_state)
-	{
-	case WAIT:
-	case WALK:
-	case ATTACK_IN:
-	case ATTACK:
-	case ATTACK_OUT:
-	case ATTACK_CHARGE_IN:
-
-		break;
-	default:
-		return;
-	}
-
-	//コントローラーを使っているか
-	bool isController = false;
-
-	if (CControllerManager::GetLY(m_padName) != 0 ||
-		CControllerManager::GetLX(m_padName) != 0)
-	{
-		isController = true;
-	}
-
-	//入力方向ベクトル
-	VECTOR vec = { 0.0f,0.0f,0.0f };
-	//コントローラー用前進後退
-	if (isController == true)
-	{
-		vec.z = CControllerManager::GetLY(m_padName);
-	}
-
-	//左右にどれだけ移動するか
-	//コントローラー用左右移動
-	if (isController == true)
-	{
-		vec.x = -CControllerManager::GetLX(m_padName);
-	}
-
-}
-
-//-----------------------
-//	   アイテム処理
-//-----------------------
-void CPlayer::Item()
-{
-
-	//アイテムを持っていなかったら処理をしない
-	if (m_itemState != ITEM_STATE_HAVE)return;
-
-	//待機状態と歩いてる状態以外は処理をしない
-	switch (m_state)
-	{
-	case WAIT:
-	case WALK:
-		break;
-	default:
-		return;
-	}
-
-	//ボタンを押されたらアイテム使用前状態に移行
-	if (CheckHitKey(KEY_INPUT_K) != 0 ||
-		CControllerManager::IsTrg(BUTTON_A,m_padName) == true)
-	{
-		m_state = ITEM_USE_IN;
-	}
-
-}
-
-//-----------------------
 //	  アイテムを拾う
 //-----------------------
 void CPlayer::PickUpItem()
@@ -1714,13 +1413,4 @@ VECTOR CPlayer::GetItemHavePos()
 	return itemPos;
 }
 
-//-----------------------
-//	 武器の座標を取得
-//-----------------------
-VECTOR CPlayer::GetWeaponPos()
-{
-	VECTOR weaponPos = MV1GetFramePosition(m_hndl, 11);
-
-	return weaponPos;
-}
 

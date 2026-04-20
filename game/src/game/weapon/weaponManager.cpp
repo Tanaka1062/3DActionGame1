@@ -4,7 +4,6 @@ static const char* MODEL_PATH[WEAPON_ID_NUM] ={		//ロードするファイル名
 	"",
 	"data/model/weapon/hammer/weapon_hammer.mv1",
 	"data/model/weapon/ax/weapon_ax.mv1",
-	"data/model/weapon/gun/weapon_gun.mv1",
 };				
 
 //---------------------------
@@ -111,3 +110,4 @@ void CWeaponManager::Exit()
 		m_weapon[player_i].Exit();
 	}
 }
+

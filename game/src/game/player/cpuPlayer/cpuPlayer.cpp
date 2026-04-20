@@ -60,7 +60,6 @@ constexpr float ATTACK_MAGNIFICATION[WEAPON_ID_NUM][ATTACK_NUM] =	//攻撃の倍率
 	{0.5f,0.8f,1.0f},
 	{0.7f,1.0f,1.2f},
 	{1.0f,1.2f,1.5f},
-	{1.0f,1.0f,1.0f},
 };
 
 constexpr int ATTACK_BLOWN[WEAPON_ID_NUM][ATTACK_NUM] =				//攻撃の吹き飛び度
@@ -68,7 +67,6 @@ constexpr int ATTACK_BLOWN[WEAPON_ID_NUM][ATTACK_NUM] =				//攻撃の吹き飛び度
 	{40,40,80},
 	{40,40,80},
 	{40,50,80},
-	{60,60,80},
 };
 
 constexpr float ATTACK_SIZE[WEAPON_ID_NUM][ATTACK_NUM] =
@@ -76,7 +74,6 @@ constexpr float ATTACK_SIZE[WEAPON_ID_NUM][ATTACK_NUM] =
 	{12.0f,12.0f,12.0f},
 	{25.0f,25.0f,25.0f},
 	{28.0f,28.0f,28.0f},
-	{16.0f,16.0f,16.0f},
 };
 
 //---------------------------------------------------------
@@ -214,7 +211,7 @@ void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackMa
 		if (m_targetObject->GetObjectName() == OBJECT_PLAYER)
 		{
 			//銃と投げるアイテムはターゲットがいたら攻撃する
-			if ((m_itemState == ITEM_STATE_HAVE || m_weaponId == WEAPON_ID_GUN) &&
+			if (m_itemState == ITEM_STATE_HAVE  &&
 				m_targetPos != nullptr)
 			{
 				RequestAttack();
@@ -339,12 +336,6 @@ void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackMa
 
 	//ジャンプ処理
 	RequestJump();
-
-	//回避移行処理
-	RequestDodgeroll(_rotY);
-
-	//アイテム使用処理
-	Item();
 
 	//アイテムを手に入れていたら持ち上げる
 	if (m_itemState == ITEM_STATE_GET)

@@ -4,15 +4,12 @@
 #include"../../lib/input/controllerManager.h"
 #include "playerData.h"
 
-constexpr int TRANSFORM_TIME = 10 * 60;					//変身している時間
-
 //武器のID
 enum tagWeaponId
 {
 	WEAPON_ID_HAND,		//素手
 	WEAPON_ID_HAMMER,	//ハンマー
 	WEAPON_ID_AX,		//斧
-	WEAPON_ID_GUN,		//銃
 
 	WEAPON_ID_NUM,		//武器の種類
 };
@@ -60,15 +57,6 @@ protected:
 		ANIMID_ATTACK1_AX,				//斧攻撃1中アニメーション
 		ANIMID_ATTACK1_AX_IN,			//斧攻撃1前アニメーション
 		ANIMID_ATTACK1_AX_OUT,			//斧攻撃1後アニメーション
-		ANIMID_ATTACK2_AX,				//斧攻撃2中アニメーション
-		ANIMID_ATTACK2_AX_IN,			//斧攻撃2前アニメーション
-		ANIMID_ATTACK2_AX_OUT,			//斧攻撃2後アニメーション
-		ANIMID_ATTACK3_AX,				//斧攻撃3中アニメーション
-		ANIMID_ATTACK3_AX_IN,			//斧攻撃3前アニメーション
-		ANIMID_ATTACK3_AX_OUT,			//斧攻撃3後アニメーション
-		ANIMID_ATTACK1_GUN,				//銃攻撃1中アニメーション
-		ANIMID_ATTACK1_GUN_IN,			//銃攻撃1前アニメーション
-		ANIMID_ATTACK1_GUN_OUT,			//銃攻撃1後アニメーション
 		ANIMID_ATTACK1_HAMMER,			//ハンマー攻撃1中アニメーション
 		ANIMID_ATTACK1_HAMMER_IN,		//ハンマー攻撃1前アニメーション
 		ANIMID_ATTACK1_HAMMER_OUT,		//ハンマー攻撃1後アニメーション
@@ -88,34 +76,19 @@ protected:
 		ANIMID_ATTACK3_HAND_IN,			//素手攻撃3前アニメーション
 		ANIMID_ATTACK3_HAND_OUT,		//素手攻撃3後アニメーション
 		ANIMID_BLOW_AWAY,				//吹き飛んでいるアニメーション
-		ANIMID_CHARGE,					//チャージ中のアニメーション
-		ANIMID_CHARGE_IN,				//チャージ前のアニメーション
 		ANIMID_CLAP,					//拍手のアニメーション
 		ANIMID_DEFAULT,					//デフォルトのアニメーション
 		ANIMID_DIE,						//死亡時のアニメーション
-		ANIMID_DODGEROLL,				//回避のアニメーション
 		ANIMID_DOWN,					//ダウン中のアニメーション
 		ANIMID_DOWN_IN,					//ダウン前のアニメーション
 		ANIMID_GET_UP,					//起き上がりのアニメーション
-		ANIMID_GUARD,					//ガード中アニメーション
-		ANIMID_GUARD_IN,				//ガード前アニメーション
-		ANIMID_GUARD_OUT,				//ガード後アニメーション
 		ANIMID_HIT,						//被弾のアニメーション
-		ANIMID_ITEM_USE,				//アイテムを使用中のアニメーション
-		ANIMID_ITEM_USE_IN,				//アイテムを使用する前のアニメーション
-		ANIMID_ITEM_USE_OUT,			//アイテムを使用した後のアニメーション
 		ANIMID_JUMP,					//ジャンプするアニメーション
 		ANIMID_LANDING,					//着地するアニメーション
 		ANIMID_LIFT_UP,					//物を持ち上げるアニメーション
 		ANIMID_PUT_DOWN,				//物を下ろすアニメーション
 		ANIMID_READY,					//準備完了のアニメーション
 		ANIMID_READY_OUT,				//準備完了をやめるアニメーション
-		ANIMID_SKILLA,					//スキルA使用中のアニメーション
-		ANIMID_SKILLA_IN,				//スキルA使用前のアニメーション
-		ANIMID_SKILLA_OUT,				//スキルA使用後のアニメーション
-		ANIMID_SKILLB,					//スキルB使用中のアニメーション
-		ANIMID_SKILLB_IN,				//スキルB使用前のアニメーション
-		ANIMID_SKILLB_OUT,				//スキルB使用後のアニメーション
 		ANIMID_THROW,					//物を投げる中のアニメーション
 		ANIMID_THROW_IN,				//物を投げる前のアニメーション
 		ANIMID_THROW_OUT,				//物を投げる後のアニメーション
@@ -210,9 +183,6 @@ public:
 	//持っているアイテムの座標を取得
 	VECTOR GetItemHavePos();
 
-	//武器の座標を取得
-	VECTOR GetWeaponPos();
-
 	//座標をアドレスを取得
 	VECTOR* GetPosPoint() { return &m_pos; }
 
@@ -238,9 +208,6 @@ protected:
 	//着地状態処理
 	void Landing();
 
-	//回避状態処理
-	void Dodgeroll();
-
 	//攻撃前処理
 	void AttackIn();
 
@@ -249,30 +216,6 @@ protected:
 
 	//攻撃後処理
 	void AttackOut();
-
-	//攻撃チャージ前
-	void AttackChargeIn();
-
-	//攻撃チャージ
-	void AttackCharge();
-
-	//スキル使用前
-	void SkillIn();
-
-	//スキル使用
-	void Skill();
-
-	//スキル使用後
-	void SkillOut();
-
-	//アイテム使用前
-	void ItemUseIn();
-
-	//アイテム使用中
-	void ItemUse();
-
-	//アイテム使用後
-	void ItemUseOut();
 
 	//アイテムを持ち上げる
 	void ItemLiftUp();
@@ -327,12 +270,6 @@ protected:
 
 	//ジャンプの呼び出し処理
 	virtual void RequestJump();
-
-	//回避に移行する処理
-	void RequestDodgeroll(float _rotY);
-
-	//アイテム処理
-	void Item();
 
 	//アイテムを拾う
 	void PickUpItem();
