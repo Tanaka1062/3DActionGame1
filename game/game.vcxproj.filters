@@ -181,6 +181,9 @@
     <Filter Include="ソース ファイル\lib\2D">
       <UniqueIdentifier>{235dcab0-4940-4e3b-bbfe-9654541f3afc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\game\player\titlePlayer">
+      <UniqueIdentifier>{8c5d052b-8a60-4b8d-835c-475a8cf151e9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\number.cpp">
@@ -431,6 +434,12 @@
     </ClCompile>
     <ClCompile Include="src\lib\2D\2DObject.cpp">
       <Filter>ソース ファイル\lib\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\player\titlePlayer\titlePlayer.cpp">
+      <Filter>ソース ファイル\game\player\titlePlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\player\titlePlayer\titlePlayerManager.cpp">
+      <Filter>ソース ファイル\game\player\titlePlayer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -688,6 +697,12 @@
     </ClInclude>
     <ClInclude Include="src\lib\2D\2DObject.h">
       <Filter>ソース ファイル\lib\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\player\titlePlayer\titlePlayer.h">
+      <Filter>ソース ファイル\game\player\titlePlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\player\titlePlayer\titlePlayerManager.h">
+      <Filter>ソース ファイル\game\player\titlePlayer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

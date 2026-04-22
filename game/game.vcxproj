@@ -187,6 +187,8 @@
     <ClCompile Include="src\game\player\resultPlayer\resultPlayerManager.cpp" />
     <ClCompile Include="src\game\player\selectPlayer\selectPlayer.cpp" />
     <ClCompile Include="src\game\player\selectPlayer\selectPlayerManager.cpp" />
+    <ClCompile Include="src\game\player\titlePlayer\titlePlayer.cpp" />
+    <ClCompile Include="src\game\player\titlePlayer\titlePlayerManager.cpp" />
     <ClCompile Include="src\game\scene\playScene.cpp" />
     <ClCompile Include="src\game\scene\resultScene.cpp" />
     <ClCompile Include="src\game\scene\sceneBase.cpp" />
@@ -274,6 +276,8 @@
     <ClInclude Include="src\game\player\resultPlayer\resultPlayerManager.h" />
     <ClInclude Include="src\game\player\selectPlayer\selectPlayer.h" />
     <ClInclude Include="src\game\player\selectPlayer\selectPlayerManager.h" />
+    <ClInclude Include="src\game\player\titlePlayer\titlePlayer.h" />
+    <ClInclude Include="src\game\player\titlePlayer\titlePlayerManager.h" />
     <ClInclude Include="src\game\scene\playScene.h" />
     <ClInclude Include="src\game\scene\resultScene.h" />
     <ClInclude Include="src\game\scene\sceneBase.h" />
