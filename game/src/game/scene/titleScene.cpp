@@ -74,7 +74,7 @@ void CTitleScene::Load()
 		//UI‚Ì‰æ‘œƒ[ƒh
 		m_uiManager.Load();
 		m_mapManager.Load();
-		m_titlePlayerManager.Load(m_mapManager.GetMap());
+		m_titlePlayerManager.Load(m_mapManager.GetMap(),CCameraManager::GetPos());
 
 		m_LoadState = 1;
 		break;

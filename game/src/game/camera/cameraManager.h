@@ -59,5 +59,7 @@ public:
 	//カメラの注視点を取得
 	static VECTOR GetFocusPos() { return m_camera[m_id]->GetFocusPos(); }
 
+	//カメラの座標を取得
+	static VECTOR GetPos() { return m_camera[m_id]->GetPos(); }
 };
 

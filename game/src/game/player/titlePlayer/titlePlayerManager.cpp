@@ -146,11 +146,13 @@ void CTitlePlayerManager::Load(CMapBase* _map, VECTOR _cameraPos)
 		frameIdNum += 2;
 
 		//ƒJƒƒ‰‚Ì•ûŒü‚ðŒü‚­‚æ‚¤‚É’²®
-		float rotY = atan2f(_cameraPos.z - m_player[player_i]->GetPos().z, );
+		VECTOR rot = ZERO;
+		rot.y = atan2f(_cameraPos.x - start.x, _cameraPos.z - start.z);
 
 		m_player[player_i]->Load(m_modelHndl[player_i]);
 		MV1SetTextureGraphHandle(m_player[player_i]->GetHndl(), 0, m_materialHndl[player_i], FALSE);
 		m_player[player_i]->SetPos(start);
+		m_player[player_i]->SetRot(rot);
 		m_spawnPos.push_back(start);
 	}
 }
