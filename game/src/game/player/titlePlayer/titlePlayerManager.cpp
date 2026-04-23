@@ -110,7 +110,7 @@ void CTitlePlayerManager::Init()
 //------------------------
 //	オブジェクトのロード
 //------------------------
-void CTitlePlayerManager::Load(CMapBase* _map)
+void CTitlePlayerManager::Load(CMapBase* _map, VECTOR _cameraPos)
 {
 
 	//モデルのロード
@@ -142,15 +142,11 @@ void CTitlePlayerManager::Load(CMapBase* _map)
 		VECTOR start = { 0.0f,0.0f,0.0f };
 
 		//スポーン位置をセット
-		if (m_player[player_i]->GetIsWin() == true)
-		{
-			start = MV1GetFramePosition(mapHndl, 2);
-		}
-		else
-		{
-			start = MV1GetFramePosition(mapHndl, frameIdNum);
-			frameIdNum += 2;
-		}
+		start = MV1GetFramePosition(mapHndl, frameIdNum);
+		frameIdNum += 2;
+
+		//カメラの方向を向くように調整
+		float rotY = atan2f(_cameraPos.z - m_player[player_i]->GetPos().z, );
 
 		m_player[player_i]->Load(m_modelHndl[player_i]);
 		MV1SetTextureGraphHandle(m_player[player_i]->GetHndl(), 0, m_materialHndl[player_i], FALSE);

@@ -92,6 +92,10 @@ protected:
 		ANIMID_THROW,					//物を投げる中のアニメーション
 		ANIMID_THROW_IN,				//物を投げる前のアニメーション
 		ANIMID_THROW_OUT,				//物を投げる後のアニメーション
+		ANIMID_TITLE_POSE1,				//タイトルポーズ1のアニメーション
+		ANIMID_TITLE_POSE2,				//タイトルポーズ2のアニメーション
+		ANIMID_TITLE_POSE3,				//タイトルポーズ3のアニメーション
+		ANIMID_TITLE_POSE4,				//タイトルポーズ4のアニメーション
 		ANIMID_WAIT,					//待機状態のアニメーション
 		ANIMID_WAIT_LIFTING_UP,			//物を持ち上げている待機状態のアニメーション
 		ANIMID_WALK,					//歩きのアニメーション

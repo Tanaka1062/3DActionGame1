@@ -42,7 +42,7 @@ void CTitleScene::Draw()
 		//UI‚Ì•`Ê
 		m_uiManager.Draw();
 		m_mapManager.Draw();
-
+		m_titlePlayerManager.Draw();
 		break;
 	}
 
@@ -56,6 +56,7 @@ void CTitleScene::Init()
 	CSceneBase::Init();
 	m_mapManager.Init(MAP_ID_TITLE);
 	CCameraManager::Init(CCameraManager::CAMERA_ID_TITLE,m_mapManager.GetMap());
+	m_titlePlayerManager.Init();
 
 	//UI‚Ì‰Šú‰»
 	m_uiManager.Init();
@@ -73,6 +74,7 @@ void CTitleScene::Load()
 		//UI‚Ì‰æ‘œƒ[ƒh
 		m_uiManager.Load();
 		m_mapManager.Load();
+		m_titlePlayerManager.Load(m_mapManager.GetMap());
 
 		m_LoadState = 1;
 		break;
@@ -104,8 +106,10 @@ void CTitleScene::Step()
 	m_uiManager.Step();
 	m_mapManager.Step();
 	CCameraManager::Step(&m_mapManager);
+	m_titlePlayerManager.Step();
 
 	CCameraManager::Update();
+	m_titlePlayerManager.Update();
 
 	if (CheckHitKey(KEY_INPUT_R) == 1)
 	{
@@ -132,6 +136,7 @@ void CTitleScene::Exit()
 	m_uiManager.Exit();
 	m_mapManager.Exit();
 	CCameraManager::Exit();
+	m_titlePlayerManager.Exit();
 
 	CSoundManager::StopAll();
 }

@@ -3,13 +3,15 @@
 #include <DxLib.h>
 #include "../ui/uiTitleManager.h"
 #include "../map/mapManager.h"
+#include "../player/titlePlayer/titlePlayerManager.h"
 
 //ゲーム本編を管理するクラス
 class CTitleScene :public CSceneBase
 {
 private:
-	CUiTitleManager m_uiManager;	//UIマネージャ
-	CMapManager		m_mapManager;	//マップマネージャ
+	CUiTitleManager		m_uiManager;			//UIマネージャ
+	CMapManager			m_mapManager;			//マップマネージャ
+	CTitlePlayerManager	m_titlePlayerManager;	//タイトルプレイヤーマネージャ
 
 public:
 

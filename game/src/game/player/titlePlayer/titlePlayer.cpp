@@ -56,17 +56,29 @@ void CTitlePlayer::Load(int _modelHndl)
 void CTitlePlayer::Step()
 {
 	if (m_isActive == false)return;
-	VECTOR uiPos = m_pos;
-	uiPos.x -= 8.0f;
-	uiPos.y -= 5.0f;
-	if (m_isWin == true)
+
+	//最初はデフォルト
+	tagAnim animId = ANIMID_DEFAULT;
+
+	//名前によってアニメーションを変える
+	switch (m_name)
 	{
-		CPlayer::Winner();
+	case PLAYER_1:
+		animId = ANIMID_TITLE_POSE1;
+		break;
+	case PLAYER_2:
+		animId = ANIMID_TITLE_POSE2;
+		break;
+	case PLAYER_3:
+		animId = ANIMID_TITLE_POSE3;
+		break;
+	case PLAYER_4:
+		animId = ANIMID_TITLE_POSE4;
+		break;
 	}
-	else
-	{
-		CPlayer::Clap();
-	}
+
+	//アニメーション再生
+	RequestAnim(animId, 0.5f, true);
 }
 
 //-----------------------
