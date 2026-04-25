@@ -11,39 +11,6 @@
 #include "../item/itemBase.h"
 #include "../system/soundManager.h"
 
-//定義関連---------------------------
-
-//プレイヤー関連--------------------------------
-constexpr char MODEL_PATH[] =
- "data/model/player/playerTransformTest.mv1" ;				//ロードするファイル名
-constexpr VECTOR INIT_POS = { 0.0f,1.0f,0.0f };				//初期座標
-constexpr float SHADOW_SIZE = 0.5f;							//丸影の大きさ
-constexpr int MAX_HP = 200;									//体力
-constexpr int ATK = 20;										//攻撃力
-constexpr float MOVE_SPEED = 1.2f * 1.5f;					//移動スピード
-constexpr float RADIUS = 10.0f;								//半径
-constexpr float JUMP_SPEED = 3.0f;							//ジャンプスピード
-constexpr int BLOWN_MAX = 100;								//吹き飛び最大値
-constexpr VECTOR KNOCK_BACK_SPEED = { 0.0f,3.0f,-0.8f };	//吹き飛ぶスピード
-constexpr int INIT_MONEY = 0;								//最初の所持金
-constexpr float MONEY_DROP_RATE = 0.4f;						//落とすお金の割合
-constexpr float MONEY_RESPAWN_RATE = 0.5f;					//復活するときに消費するお金の割合
-constexpr float DIE_POS_Y = -100.0f;						//死ぬ高さ
-constexpr float FALL_OUT_DAMAGER_RATE = 0.3f;				//ステージから落下したときの割合ダメージ
-constexpr int GET_UP_MAX_TIME = 3 * 60;						//起き上がるまでの最大時間
-//----------------------------------------------
-
-//攻撃関連---------------------------
-constexpr int ATTACKB_ATK = 100;							//攻撃Bの攻撃力
-constexpr float ATTACK_MOVE_SPEED = 0.5f;					//攻撃時に前進する力
-constexpr float FIGHT_LEN = 40.0f;							//戦う距離
-constexpr float SHOT_SIZE = 10.0f;							//弾の大きさ
-constexpr float SHOT_SPEED = 2.5f;							//弾の速度
-constexpr int SHOT_LOST_TIME = 2 * 60;						//弾が消えるまでの時間
-constexpr float HAMMER_ATTACK_AIR_FALL_SPEED = 4.0f;		//ハンマーの空中攻撃の落下スピード
-constexpr float HAMMER_FALL_FRAME = 13.0f;					//ハンマーの落下するまでのフレーム
-constexpr float HAMMER_FALL_MIN_LENGTH = 30.0f;				//ハンマーの落下攻撃ができる最小の高さ
-//-----------------------------------
 
 enum tagAttackNum
 {
@@ -101,7 +68,7 @@ CPlayer::CPlayer()
 	m_atk = 0;
 	m_isJump = false;
 	m_attackNum = ATTACK_NONE;
-	m_money = INIT_MONEY;
+	m_money = PlayerData::INIT_MONEY;
 	m_attackId = -1;
 	m_effectId = -1;
 	m_padName = PAD_NONE;
@@ -130,17 +97,17 @@ void CPlayer::Init(tagPlayerName _name, tagPadName _padName)
 
 	m_dropCoin = 0;
 	m_pos = ZERO;
-	m_rad = RADIUS;
-	m_maxHp = MAX_HP;
+	m_rad = PlayerData::RADIUS;
+	m_maxHp = PlayerData::MAX_HP;
 	m_hp = m_maxHp;
-	m_atk = ATK;
+	m_atk = PlayerData::ATK;
 	m_attackNum = ATTACK_NONE;
 	m_weaponDurability = 0;
-	m_money = INIT_MONEY;
+	m_money = PlayerData::INIT_MONEY;
 	m_padName = _padName;
 	m_weaponId = WEAPON_ID_HAND;
 	m_name = _name;
-	m_shadow.Init(m_pos, SHADOW_SIZE);
+	m_shadow.Init(m_pos, PlayerData::SHADOW_SIZE);
 	m_objectName = OBJECT_PLAYER;
 	m_isCpu = false;
 	m_getUpTime = 0;
@@ -165,7 +132,7 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 	if (m_isJump == true)
 	{
 		m_isJump = false;
-		m_gravity = JUMP_SPEED;
+		m_gravity = PlayerData::JUMP_SPEED;
 		m_isFlying = true;
 	}
 
@@ -185,7 +152,7 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 			float fLen = VSize(vLen);
 
 			//戦いの距離になったら互いの方向を向く
-			if (fLen <= FIGHT_LEN)
+			if (fLen <= PlayerData::FIGHT_LEN)
 			{
 				float rotY1 = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
 
@@ -227,7 +194,7 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 	}
 
 	//指定した高度よりしたに落ちたら死んで復活する
-	if (m_pos.y <= DIE_POS_Y)
+	if (m_pos.y <= PlayerData::DIE_POS_Y)
 	{
 		m_isActive = false;
 	}
@@ -400,7 +367,7 @@ void CPlayer::Respawn(VECTOR _respawnPos)
 	//死んでいない場合
 	default:
 		m_state = WAIT;
-		m_hp -= static_cast<int>(m_maxHp * FALL_OUT_DAMAGER_RATE);
+		m_hp -= static_cast<int>(m_maxHp * PlayerData::FALL_OUT_DAMAGER_RATE);
 		break;
 	}
 }
@@ -522,15 +489,15 @@ void CPlayer::HitAttack(int _atk, int _blown, float _rotY)
 
 	m_blown += _blown;
 
-	VECTOR knockBack = KNOCK_BACK_SPEED;
+	VECTOR knockBack = PlayerData::KNOCK_BACK_SPEED;
 
-	if (m_blown >= BLOWN_MAX || m_state == AIR)
+	if (m_blown >= PlayerData::BLOWN_MAX || m_state == AIR)
 	{
 		knockBack = VScale(knockBack, 10.0f);
 		m_blown = 0;
 		
 		//コインを落とす量を求める
-		m_dropCoin = static_cast<int>(m_money * MONEY_DROP_RATE);
+		m_dropCoin = static_cast<int>(m_money * PlayerData::MONEY_DROP_RATE);
 
 		//落としたコイン量だけお金を減らす
 		m_money -= m_dropCoin;
@@ -592,6 +559,12 @@ bool CPlayer::SubMoney(int _subMoney)
 	m_money -= _subMoney;
 
 	return true;
+}
+
+//入力処理
+void CPlayer::InputStep()
+{
+
 }
 
 //-----------------------
@@ -737,7 +710,7 @@ void CPlayer::AttackIn()
 			if (m_animData.m_id != ANIMID_AIR_ATTACK_HAMMER_IN)
 			{
 				float len = m_pos.y - m_shadow.GetPos().y;
-				if (HAMMER_FALL_MIN_LENGTH >= len)
+				if (PlayerData::HAMMER_FALL_MIN_LENGTH >= len)
 				{
 					m_state = WAIT;
 					return;
@@ -745,9 +718,9 @@ void CPlayer::AttackIn()
 			}
 			//空中の攻撃前アニメーション
 			RequestAnim(ANIMID_AIR_ATTACK_HAMMER_IN, 0.7f);
-			if (m_animData.m_frame >= HAMMER_FALL_FRAME)
+			if (m_animData.m_frame >= PlayerData::HAMMER_FALL_FRAME)
 			{
-				m_gravity = -HAMMER_ATTACK_AIR_FALL_SPEED;
+				m_gravity = -PlayerData::HAMMER_ATTACK_AIR_FALL_SPEED;
 			}
 			else
 			{
@@ -1125,7 +1098,7 @@ void CPlayer::Down()
 	//移動の入力をされたら起き上がりに移行する
 	if ((CControllerManager::GetLX(m_padName) != 0.0f ||
 		CControllerManager::GetLY(m_padName) != 0.0f) ||
-		m_getUpTime >= GET_UP_MAX_TIME)
+		m_getUpTime >= PlayerData::GET_UP_MAX_TIME)
 	{
 		m_getUpTime = 0;
 		m_state = GET_UP;
@@ -1155,7 +1128,7 @@ void CPlayer::Die()
 	//死亡のアニメーション
 	if (RequestAnim(ANIMID_DIE, 0.5f) == true)
 	{
-		m_dropCoin = static_cast<int>(m_money * MONEY_RESPAWN_RATE);
+		m_dropCoin = static_cast<int>(m_money * PlayerData::MONEY_RESPAWN_RATE);
 		m_money -= m_dropCoin;
 	}
 
@@ -1211,7 +1184,7 @@ void CPlayer::Winner()
 //-----------------------
 //		移動処理
 //-----------------------
-void CPlayer::Move(float _rotY)
+void CPlayer::Move(float _rotY, VECTOR _inputVec)
 {
 	//待機状態と移動状態以外は移動を出来ないようにする
 	switch (m_state)
@@ -1230,16 +1203,10 @@ void CPlayer::Move(float _rotY)
 	//コントローラーを使っているか
 	bool isController = false;
 
-	if (CControllerManager::GetLY(m_padName) != 0 ||
-		CControllerManager::GetLX(m_padName) != 0)
-	{
-		isController = true;
-	}
 
-	float moveSpeed = MOVE_SPEED;
+	float moveSpeed = PlayerData::MOVE_SPEED;
 
-	//移動ベクトル
-	VECTOR speed = { 0.0f,0.0f,0.0f };
+	VECTOR speed = VScale(_inputVec, moveSpeed);
 	//コントローラー用前進後退
 	if (isController == true)
 	{

@@ -13,33 +13,8 @@
 
 //定義関連---------------------------
 
-//プレイヤー関連--------------------------------
-static const char MODEL_PATH[] =
- "data/model/player/playerTransformTest.mv1" ;			//ロードするファイル名
-constexpr VECTOR INIT_POS = { 0.0f,1.0f,0.0f };			//初期座標
-constexpr float SHADOW_SIZE = 0.5f;						//丸影の大きさ
-constexpr int MAX_HP = 200;								//体力
-constexpr int ATK = 20;									//攻撃力
-constexpr float MOVE_SPEED = 1.2f * 1.5f;						//移動スピード
-constexpr float RADIUS = 10.0f;							//半径
-constexpr float JUMP_SPEED = 3.0f;						//ジャンプスピード
-constexpr int BLOWN_MAX = 100;							//吹き飛び最大値
-static const VECTOR KNOCK_BACK_SPEED = { 0.0f,3.0f,-0.8f };	//吹き飛ぶスピード
-constexpr int INIT_MONEY = 0;							//最初の所持金
-constexpr float MONEY_DROP_RATE = 0.4f;					//落とすお金の割合
-constexpr float MONEY_RESPAWN_RATE = 0.5f;				//復活するときに消費するお金の割合
-constexpr float DIE_POS_Y = -100.0f;					//死ぬ高さ
-constexpr float FALL_OUT_DAMAGER_RATE = 0.3f;			//ステージから落下したときの割合ダメージ
-//----------------------------------------------
-
 //攻撃関連---------------------------
 constexpr float ATTACK_LENGTH = 15.0f;				//攻撃の長さ
-constexpr int ATTACKB_ATK = 100;					//攻撃Bの攻撃力
-constexpr float ATTACK_MOVE_SPEED = 0.5f;			//攻撃時に前進する力
-constexpr float FIGHT_LEN = 40.0f;					//戦う距離
-constexpr float SHOT_SIZE = 10.0f;					//弾の大きさ
-constexpr float SHOT_SPEED = 2.5f;					//弾の速度
-constexpr int SHOT_LOST_TIME = 2 * 60;				//弾が消えるまでの時間
 //-----------------------------------
 
 constexpr int ADD_CPU_STATE_PROBABILITY = 10;		//行動状態の上昇確率
@@ -175,7 +150,7 @@ void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackMa
 
 			float len = VSize(vec);
 
-			if (len <= ATTACK_LENGTH + RADIUS)
+			if (len <= ATTACK_LENGTH + PlayerData::RADIUS)
 			{
 				RequestAttack();
 			}
@@ -205,7 +180,7 @@ void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackMa
 	if (m_isJump == true)
 	{
 		m_isJump = false;
-		m_gravity = JUMP_SPEED;
+		m_gravity = PlayerData::JUMP_SPEED;
 		m_isFlying = true;
 	}
 
@@ -225,7 +200,7 @@ void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackMa
 			float fLen = VSize(vLen);
 
 			//戦いの距離になったら互いの方向を向く
-			if (fLen <= FIGHT_LEN)
+			if (fLen <= PlayerData::FIGHT_LEN)
 			{
 				float rotY1 = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
 
@@ -267,7 +242,7 @@ void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackMa
 	}
 
 	//指定した高度よりしたに落ちたら死んで復活する
-	if (m_pos.y <= DIE_POS_Y)
+	if (m_pos.y <= PlayerData::DIE_POS_Y)
 	{
 		m_isActive = false;
 	}
@@ -392,6 +367,7 @@ void CCpuPlayer::HitCalc(CObject* _hitObject)
 		//行動状態をリセット
 		m_cpuState = CPU_STATE_NONE;
 
+		return;
 	}
 	//---------------------------------------------------------------------
 
@@ -411,6 +387,7 @@ void CCpuPlayer::HitCalc(CObject* _hitObject)
 			m_cpuState = CPU_STATE_NONE;
 		}
 
+		return;
 	}
 	//---------------------------------------------------------------------
 
@@ -442,6 +419,7 @@ void CCpuPlayer::HitCalc(CObject* _hitObject)
 		//アイテムを落とす
 		m_itemState = ITEM_STATE_DROP;
 
+		return;
 	}
 
 	//---------------------------------------------------------------------
@@ -473,12 +451,12 @@ void CCpuPlayer::Move(float _rotY)
 
 	float len = VSize(vec);
 
-	if (len <= RADIUS)return;
+	if (len <= PlayerData::RADIUS)return;
 
-	float moveSpeed = MOVE_SPEED;
+	float moveSpeed = PlayerData::MOVE_SPEED;
 
 	//移動ベクトル
-	VECTOR speed = { 0.0f,0.0f,-MOVE_SPEED };
+	VECTOR speed = { 0.0f,0.0f,-PlayerData::MOVE_SPEED };
 
 	VECTOR targetPos = m_targetObject->GetPos();
 
