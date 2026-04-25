@@ -6,7 +6,6 @@ using namespace std;
 
 enum tagUiName
 {
-	UI_BACKGROUND,		//背景
 	UI_TITLE,			//タイトル
 	UI_START_TEXT,		//スタートテキスト
 
@@ -15,7 +14,6 @@ enum tagUiName
 
 static const char* UI_GRAPHIC_PATH[UI_NUM] =		//背景の画像パス
 {
-	"data/graphic/title/backGround.png",
 	"data/graphic/title/title.png",
 	"data/graphic/title/startText.png",
 
@@ -23,8 +21,7 @@ static const char* UI_GRAPHIC_PATH[UI_NUM] =		//背景の画像パス
 
 constexpr VECTOR UI_POS[UI_NUM] =					//UIの座標
 {
-	{static_cast<float>(WINDOW_SIZE_X * 0.5f),static_cast<float>(WINDOW_SIZE_Y * 0.5f),0.0f},
-	{static_cast<float>(WINDOW_SIZE_X * 0.5f),200.0f,0.0f},
+	{static_cast<float>(WINDOW_SIZE_X * 0.5f),180.0f,0.0f},
 	{static_cast<float>(WINDOW_SIZE_X * 0.5f),400.0f,0.0f},
 
 };
@@ -62,6 +59,7 @@ void CUiTitleManager::Load()
 	{
 		m_ui[ui_i]->Load(UI_GRAPHIC_PATH[ui_i]);
 	}
+
 }
 
 //毎フレームする処理

@@ -139,7 +139,9 @@ void CCameraManager::Update()
 	CEffekseerCtrl::UpdateAutoCamera();
 }
 
-//I—¹ˆ—
+//---------------------------
+//			I—¹ˆ—
+//---------------------------
 void CCameraManager::Exit()
 {
 	for (int camera_i = 0; camera_i < CAMERA_ID_NUM; camera_i++)
@@ -155,3 +157,11 @@ void CCameraManager::Exit()
 	}
 }
 
+//---------------------------
+//ƒJƒƒ‰‚ªˆÚ“®‚µ‚Ä‚¢‚é‚©‚ğæ“¾
+//---------------------------
+bool CCameraManager::GetIsMove()
+{
+	CMapCamera* mapCamera = dynamic_cast<CMapCamera*>(m_camera[CAMERA_ID_MAP]);
+	return mapCamera->GetIsMove();
+}

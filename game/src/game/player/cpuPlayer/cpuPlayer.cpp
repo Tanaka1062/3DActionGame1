@@ -83,21 +83,6 @@ constexpr float ATTACK_SIZE[WEAPON_ID_NUM][ATTACK_NUM] =
 //-----------------------
 CCpuPlayer::CCpuPlayer()
 {
-	m_name = PLAYER_NONE;
-	CCharacterBase::Init();
-	m_dropCoin = 0;
-	m_pos = ZERO;
-	m_rad = 0.0f;
-	m_maxHp = 0;
-	m_hp = 0;
-	m_atk = 0;
-	m_isJump = false;
-	m_attackNum = ATTACK_NONE;
-	m_money = INIT_MONEY;
-	m_padName = PAD_NONE;
-	m_weaponId = WEAPON_ID_HAND;
-	m_weaponDurability = 0;
-	m_itemState = ITEM_STATE_NONE;
 	m_targetPos = nullptr;
 	m_FOV = nullptr;
 	m_cpuState = CPU_STATE_NONE;
@@ -111,49 +96,18 @@ CCpuPlayer::CCpuPlayer()
 }
 
 //-----------------------
-//	デストラクタ
-//-----------------------
-CCpuPlayer::~CCpuPlayer()
-{
-	Exit();
-}
-
-//-----------------------
 //		初期化
 //-----------------------
 void CCpuPlayer::Init(tagPlayerName _name, tagPadName _padName)
 {
-	CCharacterBase::Init();
+	CPlayer::Init(_name, _padName);
 
-	m_dropCoin = 0;
-	m_pos = ZERO;
-	m_rad = RADIUS;
-	m_maxHp = MAX_HP;
-	m_hp = m_maxHp;
-	m_atk = ATK;
-	m_attackNum = ATTACK_NONE;
-	m_weaponDurability = 0;
-	m_money = INIT_MONEY;
-	m_padName = _padName;
-	m_weaponId = WEAPON_ID_HAND;
-	m_name = _name;
-	m_shadow.Init(m_pos, SHADOW_SIZE);
-	m_objectName = OBJECT_PLAYER;
 	m_FOV->Init();
 	m_cpuState = CPU_STATE_NONE;
 	m_targetObject = nullptr;
 	m_isCpu = true;
 	m_changeTime = 0;
 
-}
-
-//-----------------------
-//	モデルロード
-//-----------------------
-void CCpuPlayer::Load(int _modelHndl)
-{
-	CObject::DuplicateModel(_modelHndl);
-	m_shadow.Load();
 }
 
 //-----------------------

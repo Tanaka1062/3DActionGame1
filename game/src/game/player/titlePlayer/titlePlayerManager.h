@@ -21,7 +21,7 @@ public:
 	//初期化
 	void Init();
 	//オブジェクトのロード
-	void Load(CMapBase* _map,VECTOR _cameraPos);
+	void Load(CMapBase* _map);
 	//毎フレームする処理
 	void Step();
 	//数値の更新

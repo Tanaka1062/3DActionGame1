@@ -25,15 +25,11 @@ protected:
 	int				m_changeTime;							//状態が変化する時間
 
 public:
-	//コンストラクタ・デストラクタ
+	//コンストラクタ
 	CCpuPlayer();
-	~CCpuPlayer();
 
 	//初期化
 	void Init(tagPlayerName _name, tagPadName _padName);
-
-	//モデルロード
-	void Load(int _modelHndl);
 
 	//毎フレームする処理
 	void Step(float _rotY,VECTOR* _targetPos, CAttackManager* _attackManager, CShotManager* _shotManager);

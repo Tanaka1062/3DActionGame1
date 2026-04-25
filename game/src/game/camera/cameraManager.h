@@ -61,5 +61,8 @@ public:
 
 	//ƒJƒƒ‰‚ÌÀ•W‚ğæ“¾
 	static VECTOR GetPos() { return m_camera[m_id]->GetPos(); }
+
+	//ƒJƒƒ‰‚ªˆÚ“®‚µ‚Ä‚¢‚é‚©‚ğæ“¾
+	static bool GetIsMove();
 };
 

@@ -33,7 +33,8 @@ public:
 	//オブジェクトのロード
 	void Load(CMapBase* _map,C3DUiManager* _3DUiManager);
 	//毎フレームする処理
-	void Step(CAttackManager* _attackManager,CShotManager* _shotManager, C3DUiManager* _3DUiManager,float _rot,int _stageId);
+	void Step(CAttackManager* _attackManager, CShotManager* _shotManager,
+		C3DUiManager* _3DUiManager, float _rot, int _stageId, bool _isCameraMove);
 	//数値の更新
 	void Update();
 	//オブジェクトの描写

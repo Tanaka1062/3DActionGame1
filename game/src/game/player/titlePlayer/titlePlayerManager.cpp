@@ -5,18 +5,12 @@
 
 using namespace std;
 
-enum tagModelName					//モデル一覧
+enum tagModelName								//モデル一覧
 {
-	MODEL_PLAYER1,					//プレイヤー1のモデル
-	MODEL_PLAYER2,					//プレイヤー2のモデル
-	MODEL_PLAYER3,					//プレイヤー3のモデル
-	MODEL_PLAYER4,					//プレイヤー4のモデル
+	MODEL_PLAYER1,								//プレイヤー1のモデル
 
-	MODEL_NUM,						//モデルの数
+	MODEL_NUM,									//モデルの数
 };
-
-constexpr float TARGET_LEN = -200.0f;			//ターゲットと認識するまでの長さ
-constexpr float TARGET_MAX_DISTANCE = 40.0f;	//どれくらい法線から離せるか
 
 static const char* MODEL_PATH =					//モデルのパス
 { "data/model/player/player.mv1" };
@@ -26,6 +20,9 @@ static const char* MATERIAL_PATH[PLAYER_NUM] =	//マテリアルのパス
  "data/material/player/playerBody2.png",
  "data/material/player/playerBody3.png",
  "data/material/player/playerBody4.png", };
+
+constexpr int MAP_FRAME_NUM = 5;				//マップのフレーム番号
+constexpr int MAP_CAMERA_FRAME_NUM = 2;			//マップのカメラのフレーム番号
 
 //------------------------
 //	  コンストラクタ
@@ -110,7 +107,7 @@ void CTitlePlayerManager::Init()
 //------------------------
 //	オブジェクトのロード
 //------------------------
-void CTitlePlayerManager::Load(CMapBase* _map, VECTOR _cameraPos)
+void CTitlePlayerManager::Load(CMapBase* _map)
 {
 
 	//モデルのロード
@@ -134,7 +131,7 @@ void CTitlePlayerManager::Load(CMapBase* _map, VECTOR _cameraPos)
 	//マップのフレームのハンドルをロード
 	int mapHndl = _map->GetHndl(0);
 
-	int frameIdNum = 5;
+	int frameIdNum = MAP_FRAME_NUM;
 
 	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
@@ -146,10 +143,11 @@ void CTitlePlayerManager::Load(CMapBase* _map, VECTOR _cameraPos)
 		frameIdNum += 2;
 
 		//カメラの方向を向くように調整
+		VECTOR cameraPos = MV1GetFramePosition(_map->GetHndl(_map->GetStageId()), MAP_CAMERA_FRAME_NUM);
 		VECTOR rot = ZERO;
-		rot.y = atan2f(_cameraPos.x - start.x, _cameraPos.z - start.z);
+		rot.y = atan2f(start.x - cameraPos.x, start.z - cameraPos.z);
 
-		m_player[player_i]->Load(m_modelHndl[player_i]);
+		m_player[player_i]->Load(m_modelHndl[MODEL_PLAYER1]);
 		MV1SetTextureGraphHandle(m_player[player_i]->GetHndl(), 0, m_materialHndl[player_i], FALSE);
 		m_player[player_i]->SetPos(start);
 		m_player[player_i]->SetRot(rot);

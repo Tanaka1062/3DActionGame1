@@ -128,7 +128,7 @@ void CPlayScene::Step()
 	//ŠeíŒvZˆ—‚ğÀs
 	m_mapManager.Step();
 	m_sky.Step(CCameraManager::GetFocusPos());
-	m_playerManager.Step(&m_attackManager,&m_shot,m_3DUiManager, CCameraManager::GetRot().y,m_mapManager.GetMap()->GetStageId());
+	m_playerManager.Step(&m_attackManager,&m_shot,m_3DUiManager, CCameraManager::GetRot().y,m_mapManager.GetMap()->GetStageId(),CCameraManager::GetIsMove());
 	m_shot.Step();
 	m_itemManager.Step(&m_playerManager,m_mapManager.GetMap()->GetStageId());
 	m_weaponManager.Step(m_playerManager);

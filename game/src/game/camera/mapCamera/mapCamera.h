@@ -42,6 +42,9 @@ public:
 	//カメラの終了処理
 	void Exit();
 
+	//カメラが移動しているかを取得
+	bool GetIsMove();
+
 private:
 
 	//カメラの回転処理
