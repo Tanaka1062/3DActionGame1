@@ -1184,7 +1184,7 @@ void CPlayer::Winner()
 //-----------------------
 //		移動処理
 //-----------------------
-void CPlayer::Move(float _rotY, VECTOR _inputVec)
+void CPlayer::Move(float _rotY)
 {
 	//待機状態と移動状態以外は移動を出来ないようにする
 	switch (m_state)
@@ -1203,10 +1203,15 @@ void CPlayer::Move(float _rotY, VECTOR _inputVec)
 	//コントローラーを使っているか
 	bool isController = false;
 
+	if (CControllerManager::GetLY(m_padName) != 0.0f ||
+		CControllerManager::GetLX(m_padName) != 0.0f)
+	{
+		isController = true;
+	}
 
 	float moveSpeed = PlayerData::MOVE_SPEED;
 
-	VECTOR speed = VScale(_inputVec, moveSpeed);
+	VECTOR speed = ZERO;
 	//コントローラー用前進後退
 	if (isController == true)
 	{

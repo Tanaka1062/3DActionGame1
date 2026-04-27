@@ -308,7 +308,7 @@ protected:
 	void Winner();
 
 	//ˆÚ“®ˆ—
-	virtual void Move(float _rotY,VECTOR _inputVec);
+	virtual void Move(float _rotY);
 
 	//UŒ‚‚ğŒÄ‚Ño‚·ˆ—
 	virtual void RequestAttack();
