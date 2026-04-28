@@ -5,7 +5,7 @@
 #include "../data.h"
 #include "../player/playerManager.h"
 #include "itemObject/box/box.h"
-#include "mapItemManager.h"
+#include "spawn/mapItemManager.h"
 #include "spawn/spawnItemManager.h"
 #include "../map/mapBase.h"
 #include "spawn/spawnCoinManager.h"
