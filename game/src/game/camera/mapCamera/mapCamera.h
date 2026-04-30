@@ -10,20 +10,20 @@
 class CMapCamera : public CCameraBase
 {
 private:
-	std::vector<VECTOR>	m_stageCenterPos;
-	VECTOR	m_basePos;			//ベースの座標
-	VECTOR	m_nextPos;			//次の座標
-	VECTOR	m_nextFocus;		//次の注視点
+	std::vector<VECTOR>	m_stageCenterPos;	//ステージの中心座標
+	VECTOR				m_basePos;			//ベースの座標
+	VECTOR				m_nextPos;			//次の座標
+	VECTOR				m_nextFocus;		//次の注視点
 	enum tagCameraSate
 	{
-		MAP_MOVE_CAMERA,		//マップ移動用カメラ
-		ZOOM_CAMERA,			//ズームカメラ
+		MAP_MOVE_CAMERA,					//マップ移動用カメラ
+		ZOOM_CAMERA,						//ズームカメラ
 
-		CAMERA_STAE_NUM,		//カメラの状態の数
+		CAMERA_STAE_NUM,					//カメラの状態の数
 	};
-	tagCameraSate m_state;		//カメラの状態
-	int m_stageCenterId;		//ステージのId
-	int m_nextPosTime;			//次の座標を更新するまでの時間
+	tagCameraSate		m_state;			//カメラの状態
+	int					m_stageCenterId;	//ステージのId
+	int					m_nextPosTime;		//次の座標を更新するまでの時間
 
 public:
 	//コンストラクタ・デストラクタ
@@ -41,6 +41,9 @@ public:
 
 	//カメラの終了処理
 	void Exit();
+
+	//カメラが移動しているかを取得
+	bool GetIsMove();
 
 private:
 

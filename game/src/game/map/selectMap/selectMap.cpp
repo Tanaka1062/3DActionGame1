@@ -14,7 +14,7 @@ static const char* MAP_MODEL_PATH ={
 //------------------------
 CSelectMap::CSelectMap()
 {
-	m_stage.push_back(new CObject);
+	m_stage.push_back(new CActor);
 }
 
 //------------------------

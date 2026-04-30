@@ -11,12 +11,12 @@
 class CResultScene :public CSceneBase
 {
 private:
-	CWinner* m_winner;							//勝利したプレイヤー
-	CSky m_sky;									//天球
-	CMapManager m_mapManager;					//マップ
-	CResultPlayerManager m_resultPlayerManager;	//リザルトプレイヤー
-	C2DObject m_winPlayerText;					//勝利したプレイヤーのテキスト
-	C2DObject m_resultText;						//リザルト画面に表示されるテキスト
+	CWinner*				m_winner;				//勝利したプレイヤー
+	CSky					m_sky;					//天球
+	CMapManager				m_mapManager;			//マップ
+	CResultPlayerManager	m_resultPlayerManager;	//リザルトプレイヤー
+	C2DObject				m_winPlayerText;		//勝利したプレイヤーのテキスト
+	C2DObject				m_resultText;			//リザルト画面に表示されるテキスト
 public:
 
 	//コンストラクタ

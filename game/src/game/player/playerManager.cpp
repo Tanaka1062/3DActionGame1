@@ -20,13 +20,13 @@ constexpr float TARGET_LEN = -200.0f;			//ターゲットと認識するまでの長さ
 constexpr float TARGET_MAX_DISTANCE = 40.0f;	//どれくらい法線から離せるか
 
 constexpr int MAP_FRAME_NUM = 7;				//マップのフレーム番号
-constexpr float DIE_RADIUS = 240.0f;			//画面外判定の半径
+constexpr float DIE_RADIUS = 260.0f;			//画面外判定の半径
 
 constexpr int NAME_ACTIVE_TIME = 180;			//名前の表示時間
 constexpr float Ui_UP_Y = 40.0f;				//3DUiのどれだけあげるか
 
 static const char* MODEL_PATH =					//モデルのパス
-{ "data/model/player/playerTest8.mv1"};			
+{ "data/model/player/player.mv1"};			
 
 static const char* MATERIAL_PATH[PLAYER_NUM] =	//マテリアルのパス
 { "data/material/player/playerBody1.png",
@@ -241,7 +241,8 @@ void CPlayerManager::Load(CMapBase* _map, C3DUiManager* _3DUiManager)
 //------------------------
 //	毎フレームする処理
 //------------------------
-void CPlayerManager::Step(CAttackManager* _attackManager, CShotManager* _shotManager, C3DUiManager* _3DUiManager, float _rot, int _stageId)
+void CPlayerManager::Step(CAttackManager* _attackManager, CShotManager* _shotManager,
+	C3DUiManager* _3DUiManager, float _rot, int _stageId, bool _isCameraMove)
 {
 	int topPlayerCoinCount = 0;	//現在の一番コインを持っている量
 	int topPlayerNum = -1;		//一番のプレイヤーの番号
@@ -366,7 +367,7 @@ void CPlayerManager::Step(CAttackManager* _attackManager, CShotManager* _shotMan
 		}
 
 		//プレイヤーが死んでいたら復活させる
-		if (m_player[player_i]->GetActive() == false)
+		if (m_player[player_i]->GetActive() == false && _isCameraMove == false)
 		{
 			if (CCollision::CheckHitSphereToSphere(m_spawnPos[_stageId][player_i], m_player[player_i]->GetRad(),
 				CCameraManager::GetFocusPos(), DIE_RADIUS) == true)

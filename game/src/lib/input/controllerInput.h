@@ -24,14 +24,13 @@ enum tagControllerButton
 class CControllerInput
 {
 private:
-	unsigned int m_nowButton;				//現在のボタン情報
-	unsigned int m_beforeButton;			//1フレーム前のボタン
-	int m_LX;								//左レバーを左右の入力情報
-	int m_LY;								//左レバーを上下の入力情報
-	int m_RX;								//右レバーを左右の入力情報
-	int m_RY;								//右レバーを上下の入力情報
-
-	int m_controllerId;						//コントローラーのID情報
+	unsigned int	m_nowButton;	//現在のボタン情報
+	unsigned int	m_beforeButton;	//1フレーム前のボタン
+	int				m_LX;			//左レバーを左右の入力情報
+	int				m_LY;			//左レバーを上下の入力情報
+	int				m_RX;			//右レバーを左右の入力情報
+	int				m_RY;			//右レバーを上下の入力情報
+	int				m_controllerId;	//コントローラーのID情報
 public:
 	//コンストラクタ
 	CControllerInput();

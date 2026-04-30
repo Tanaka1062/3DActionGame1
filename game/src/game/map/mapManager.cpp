@@ -7,6 +7,7 @@
 //コンストラクタ・デストラクタ
 CMapManager::CMapManager()
 {
+	m_map = nullptr;
 }
 
 CMapManager::~CMapManager()

@@ -16,10 +16,10 @@ public:
 
 private:
 
-	int m_count;						//カウント
-	int m_timeCount;					//タイムカウント
-	int m_countHndl[COUNT_NUM];			//カウントの画像ハンドル
-	bool m_isEnd;						//カウントが終了したかフラグ
+	int		m_count;					//カウント
+	int		m_timeCount;				//タイムカウント
+	int		m_countHndl[COUNT_NUM];		//カウントの画像ハンドル
+	bool	m_isEnd;					//カウントが終了したかフラグ
 public:
 	//コンストラクタ・デストラクタ
 	CCountDown();

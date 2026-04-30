@@ -57,7 +57,7 @@ void CSelectScene::Init()
 {
 	CSceneBase::Init();
 	m_mapManager.Init(MAP_ID_SELECT);
-	CCameraManager::Init(m_mapManager.GetMap());
+	CCameraManager::Init(CCameraManager::CAMERA_ID_SELECT,m_mapManager.GetMap());
 	CCameraManager::ChangeCamera(CCameraManager::CAMERA_ID_SELECT);
 	m_sky.Init();
 	m_selectPlayerManager.Init();
@@ -117,7 +117,7 @@ void CSelectScene::Step()
 	//UIの毎フレームする処理
 	m_uiManager.Step(m_selectPlayerManager.GetIsAllReady());
 
-	CCameraManager::Update(ZERO);
+	CCameraManager::Update();
 	m_sky.Update();
 	m_selectPlayerManager.Update();
 
@@ -125,7 +125,7 @@ void CSelectScene::Step()
 	CControllerManager::SetId();
 
 	//スペースで終わる
-	if (CKeyInput::IsTrg(KEY_SELECT) ||
+	if (CKeyInput::IsTrg(KEY_SELECT) == true ||
 		m_uiManager.GetCountDownEnd() == true)
 	{
 		m_state = ENDWAIT;

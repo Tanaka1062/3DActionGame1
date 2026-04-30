@@ -6,7 +6,7 @@ using namespace std;
 
 static const char* MODEL_PATH =				//モデルのパス
 {
-	"data/model/item/powerCoin/coin.mv1",
+	"data/model/item/coin/coin.mv1",
 };
 
 constexpr int MAP_FRAME_NUM = 130;			//マップのフレーム番号

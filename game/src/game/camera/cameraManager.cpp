@@ -23,9 +23,6 @@ VECTOR CCameraManager::m_rot;
 //		コンストラクタ
 //---------------------------
 CCameraManager::CCameraManager() {
-	//初期カメラはプレイカメラ
-	m_id = CAMERA_ID_MAP;
-
 	for (int camera_i = 0; camera_i < CAMERA_ID_NUM; camera_i++)
 	{
 		m_camera[camera_i] = nullptr;
@@ -43,8 +40,10 @@ CCameraManager::~CCameraManager()
 //---------------------------
 //			初期化
 //---------------------------
-void CCameraManager::Init(CMapBase* _map)
+void CCameraManager::Init(tagCAMERA_ID _camera,CMapBase* _map)
 {
+	m_id = _camera;
+
 	//カメラを設定
 	m_camera[CAMERA_ID_MAP] = new CMapCamera;
 	m_camera[CAMERA_ID_DEBUG] = new CDbugCamera;
@@ -74,6 +73,8 @@ void CCameraManager::Init(CMapBase* _map)
 //---------------------------
 void CCameraManager::Step(CMapManager* _mapManager, CPlayerManager* _playerManager)
 {
+	if (m_id == CAMERA_ID_NONE)return;
+
 	VECTOR playerPos = ZERO;
 
 	if (m_id == CAMERA_ID_MAP && _playerManager != nullptr)
@@ -125,7 +126,7 @@ void CCameraManager::Draw()
 //---------------------------
 //		カメラの更新
 //---------------------------
-void CCameraManager::Update(VECTOR _tagetPos)
+void CCameraManager::Update()
 {
 	m_camera[m_id]->Update();
 
@@ -138,7 +139,9 @@ void CCameraManager::Update(VECTOR _tagetPos)
 	CEffekseerCtrl::UpdateAutoCamera();
 }
 
-//終了処理
+//---------------------------
+//			終了処理
+//---------------------------
 void CCameraManager::Exit()
 {
 	for (int camera_i = 0; camera_i < CAMERA_ID_NUM; camera_i++)
@@ -154,3 +157,11 @@ void CCameraManager::Exit()
 	}
 }
 
+//---------------------------
+//カメラが移動しているかを取得
+//---------------------------
+bool CCameraManager::GetIsMove()
+{
+	CMapCamera* mapCamera = dynamic_cast<CMapCamera*>(m_camera[CAMERA_ID_MAP]);
+	return mapCamera->GetIsMove();
+}

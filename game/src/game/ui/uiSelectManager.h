@@ -7,8 +7,8 @@
 class CUiSelectManager
 {
 private:
-	std:: vector<C2DObject*>m_ui;		//UI
-	CCountDown m_countDown;			//カウントダウン
+	std:: vector<C2DObject*>m_ui;			//UI
+	CCountDown				m_countDown;	//カウントダウン
 public:
 	//コンストラクタ・デストラクタ
 	CUiSelectManager();

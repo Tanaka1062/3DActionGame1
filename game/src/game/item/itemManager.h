@@ -5,7 +5,7 @@
 #include "../data.h"
 #include "../player/playerManager.h"
 #include "itemObject/box/box.h"
-#include "mapItemManager.h"
+#include "spawn/mapItemManager.h"
 #include "spawn/spawnItemManager.h"
 #include "../map/mapBase.h"
 #include "spawn/spawnCoinManager.h"
@@ -14,10 +14,10 @@
 class CItemManager
 {
 private:
-	std::list<std::unique_ptr<CItemBase>> m_item;		//アイテムのクラス
-	CMapItemManager m_mapItemManager;					//マップに置いてあるアイテムマネージャー
-	CSpawnItemManager m_spawnItemManager;				//スポーンするアイテムのマネージャー
-	CSpawnCoinManager m_coinManager;					//コインのマネージャークラス
+	std::list<std::unique_ptr<CItemBase>>	m_item;				//アイテムのクラス
+	CMapItemManager							m_mapItemManager;	//マップに置いてあるアイテムマネージャー
+	CSpawnItemManager						m_spawnItemManager;	//スポーンするアイテムのマネージャー
+	CSpawnCoinManager						m_coinManager;		//コインのマネージャークラス
 
 public:
 	//コンストラクタ・デストラクタ

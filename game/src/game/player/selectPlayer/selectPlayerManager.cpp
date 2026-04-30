@@ -5,21 +5,18 @@
 
 using namespace std;
 
-enum tagModelName					//モデル一覧
+enum tagModelName								//モデル一覧
 {
-	MODEL_PLAYER1,					//プレイヤー1のモデル
-	MODEL_PLAYER2,					//プレイヤー2のモデル
-	MODEL_PLAYER3,					//プレイヤー3のモデル
-	MODEL_PLAYER4,					//プレイヤー4のモデル
+	MODEL_PLAYER1,								//プレイヤー1のモデル
 
-	MODEL_NUM,						//モデルの数
+	MODEL_NUM,									//モデルの数
 };
 
 constexpr float TARGET_LEN = -200.0f;			//ターゲットと認識するまでの長さ
 constexpr float TARGET_MAX_DISTANCE = 40.0f;	//どれくらい法線から離せるか
 
 static const char* MODEL_PATH =					//モデルのパス
-{ "data/model/player/playerTest8.mv1" };
+{ "data/model/player/player.mv1" };
 
 static const char* MATERIAL_PATH[PLAYER_NUM] =	//マテリアルのパス
 { "data/material/player/playerBody1.png",
@@ -159,7 +156,7 @@ void CSelectPlayerManager::Load(CMapBase* _map)
 			break;
 		}
 
-		m_player[player_i]->Load(m_modelHndl[player_i]);
+		m_player[player_i]->Load(m_modelHndl[MODEL_PLAYER1]);
 		MV1SetTextureGraphHandle(m_player[player_i]->GetHndl(), 0, m_materialHndl[player_i], FALSE);
 		m_player[player_i]->SetPos(start);
 		m_spawnPos.push_back(start);

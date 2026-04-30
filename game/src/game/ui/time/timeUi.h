@@ -4,10 +4,10 @@
 class CTimeUi
 {
 private:
-	C2DObject m_division;	//‹æØ‚è
-	int m_oneM;			//•ªˆê‚ÌˆÊ
-	int m_tenS;			//•b\‚ÌˆÊ
-	int m_oneS;			//•bˆê‚ÌˆÊ
+	C2DObject	m_division;	//‹æØ‚è
+	int			m_oneM;		//•ªˆê‚ÌˆÊ
+	int			m_tenS;		//•b\‚ÌˆÊ
+	int			m_oneS;		//•bˆê‚ÌˆÊ
 public:
 	CTimeUi();
 	~CTimeUi();

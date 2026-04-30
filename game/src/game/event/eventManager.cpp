@@ -9,7 +9,8 @@ constexpr int EVENT_START_TIME = 50 * 60;			//”š’e‚ð—Ž‚Æ‚·‚Ü‚Å‚ÌŠÔŠu
 //---------------------------
 CEventManager::CEventManager()
 {
-	
+	m_eventTime = 0;
+	m_nowEvent = EVENT_NONE;
 }
 
 //---------------------------

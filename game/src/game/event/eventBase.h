@@ -13,9 +13,9 @@ enum tagEventType
 class CEventBase
 {
 protected:
-	int m_timeCount;		//制限時間
-	bool m_isActive;		//生存フラグ
-	tagEventType m_type;	//タイプ
+	int				m_timeCount;	//制限時間
+	bool			m_isActive;		//生存フラグ
+	tagEventType	m_type;			//タイプ
 
 public:
 	//コンストラクタ・デストラクタ

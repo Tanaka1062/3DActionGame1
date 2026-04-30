@@ -8,6 +8,8 @@
 CSceneBase::CSceneBase() {
 	//Å‰‚Íƒf[ƒ^‰Šú‰»
 	m_state = INIT;
+
+	Init();
 }
 
 //---------------------------

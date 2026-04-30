@@ -10,18 +10,18 @@
 class CPlayerManager
 {
 private:
-	std::vector<CPlayer*> m_player;					//プレイヤーのクラス
-	std::vector <int> m_modelHndl;					//モデルのハンドル
-	std::vector<int>m_materialHndl;					//マテリアルのハンドル
-	std::vector <std::vector<VECTOR>> m_spawnPos;	//プレイヤーの出現座標
-	std::vector<CCpuPlayerFOV*>m_cpuFOV;			//CPUの視界範囲クラス
-	int m_crownId;									//王冠のUiId
-	struct tagName									//プレイヤーの名前
+	std::vector<CPlayer*>				m_player;					//プレイヤーのクラス
+	std::vector <int>					m_modelHndl;				//モデルのハンドル
+	std::vector<int>					m_materialHndl;				//マテリアルのハンドル
+	std::vector <std::vector<VECTOR>>	m_spawnPos;					//プレイヤーの出現座標
+	std::vector<CCpuPlayerFOV*>			m_cpuFOV;					//CPUの視界範囲クラス
+	int									m_crownId;					//王冠のUiId
+	struct tagName													//プレイヤーの名前
 	{
-		int m_UiId;									//プレイヤーの名前UiId
-		int m_activeTime;							//生存時間
+		int								m_UiId;						//プレイヤーの名前UiId
+		int								m_activeTime;				//生存時間
 	};
-	tagName m_playerName[PLAYER_NUM];				//プレイヤーの名前UI
+	tagName								m_playerName[PLAYER_NUM];	//プレイヤーの名前UI
 
 public:
 	//コンストラクタ・デストラクタ
@@ -33,7 +33,8 @@ public:
 	//オブジェクトのロード
 	void Load(CMapBase* _map,C3DUiManager* _3DUiManager);
 	//毎フレームする処理
-	void Step(CAttackManager* _attackManager,CShotManager* _shotManager, C3DUiManager* _3DUiManager,float _rot,int _stageId);
+	void Step(CAttackManager* _attackManager, CShotManager* _shotManager,
+		C3DUiManager* _3DUiManager, float _rot, int _stageId, bool _isCameraMove);
 	//数値の更新
 	void Update();
 	//オブジェクトの描写

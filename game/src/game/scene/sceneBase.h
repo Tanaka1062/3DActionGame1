@@ -9,17 +9,17 @@ protected:
 	//シーン処理の流れ
 	enum tagScene
 	{
-		INIT,		//データ初期化
-		LOAD,		//データ読み込み
-		MAINWAIT,	//本編前の待機処理
-		MAIN,		//本編実行
-		ENDWAIT,	//終了前の待機処理
-		END,		//終了前のゲーム破棄
+		INIT,					//データ初期化
+		LOAD,					//データ読み込み
+		MAINWAIT,				//本編前の待機処理
+		MAIN,					//本編実行
+		ENDWAIT,				//終了前の待機処理
+		END,					//終了前のゲーム破棄
 	};
 
-	tagScene m_state;		//シーンの状態	
-	int m_LoadState;		//ロード状態
-	C2DObject m_LoadBG;		//ロード画面
+	tagScene	m_state;		//シーンの状態	
+	int			m_LoadState;	//ロード状態
+	C2DObject	m_LoadBG;		//ロード画面
 
 public:
 	//コンストラクタ

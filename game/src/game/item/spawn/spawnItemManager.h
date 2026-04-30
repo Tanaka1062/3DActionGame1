@@ -20,12 +20,12 @@ private:
 		bool isSpawn;									//出現したかどうか
 	};
 
-	std::vector<std::unique_ptr<CItemBase>> m_item;		//アイテム保存用
-	std::vector<int> m_spawnProbability;				//アイテムの出現確率
-	int m_hndl[ITEM_NUM];								//アイテムのモデルハンドル
-	int m_spawnTime;									//時間カウント
-	bool m_isItemSpawn;									//アイテムがスポーンするかどうか
-	std::vector<std::vector<tagSpawnData>> m_spawnData;	//アイテムのスポーン情報
+	std::vector<std::unique_ptr<CItemBase>> m_item;				//アイテム保存用
+	std::vector<int>						m_spawnProbability;	//アイテムの出現確率
+	int										m_hndl[ITEM_NUM];	//アイテムのモデルハンドル
+	int										m_spawnTime;		//時間カウント
+	bool									m_isItemSpawn;		//アイテムがスポーンするかどうか
+	std::vector<std::vector<tagSpawnData>>	m_spawnData;		//アイテムのスポーン情報
 public:
 	//コンストラクタ・デストラクタ
 	CSpawnItemManager();

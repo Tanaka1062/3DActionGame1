@@ -33,8 +33,8 @@ private:
 	CWinner();
 	~CWinner();
 
-	tagPlayerName m_winnerPlayer;		//勝利したプレイヤー
-	int m_playerGetCoin[PLAYER_NUM];	//プレイヤーの持っているコイン
+	tagPlayerName	m_winnerPlayer;					//勝利したプレイヤー
+	int				m_playerGetCoin[PLAYER_NUM];	//プレイヤーの持っているコイン
 
 public:
 

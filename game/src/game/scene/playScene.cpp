@@ -69,7 +69,7 @@ void CPlayScene::Init()
 	m_itemManager.Init(&m_playerManager);
 	m_weaponManager.Init();
 	m_uiManager.Init(&m_playerManager,&m_itemManager);
-	CCameraManager::Init(m_mapManager.GetMap());
+	CCameraManager::Init(CCameraManager::CAMERA_ID_MAP,m_mapManager.GetMap());
 	CCameraManager::ChangeCamera(CCameraManager::CAMERA_ID_MAP);
 	m_gameTime = CGameTime::GetInstance();
 	m_gameTime->Init();
@@ -128,7 +128,7 @@ void CPlayScene::Step()
 	//ŠeíŒvZˆ—‚ğÀs
 	m_mapManager.Step();
 	m_sky.Step(CCameraManager::GetFocusPos());
-	m_playerManager.Step(&m_attackManager,&m_shot,m_3DUiManager, CCameraManager::GetRot().y,m_mapManager.GetMap()->GetStageId());
+	m_playerManager.Step(&m_attackManager,&m_shot,m_3DUiManager, CCameraManager::GetRot().y,m_mapManager.GetMap()->GetStageId(),CCameraManager::GetIsMove());
 	m_shot.Step();
 	m_itemManager.Step(&m_playerManager,m_mapManager.GetMap()->GetStageId());
 	m_weaponManager.Step(m_playerManager);
@@ -159,7 +159,7 @@ void CPlayScene::Step()
 	m_attackManager.Update();
 	m_itemManager.Update();
 	m_weaponManager.Update(m_playerManager);
-	CCameraManager::Update(ZERO);
+	CCameraManager::Update();
 
 	if (CKeyInput::IsTrg(KEY_SELECT) == true ||
 		m_gameTime->GetTimeEnd() == true)

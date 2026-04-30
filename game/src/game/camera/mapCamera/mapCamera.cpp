@@ -177,6 +177,19 @@ void CMapCamera::Exit()
 }
 
 //---------------------------------
+//ƒJƒƒ‰‚ªˆÚ“®‚µ‚Ä‚¢‚é‚©‚ğæ“¾
+//---------------------------------
+bool CMapCamera::GetIsMove()
+{
+	if (m_state == MAP_MOVE_CAMERA)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+//---------------------------------
 //		ƒJƒƒ‰‚Ì‰ñ“]ˆ—
 //---------------------------------
 void CMapCamera::Rotate(VECTOR _focus)

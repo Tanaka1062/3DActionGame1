@@ -14,7 +14,7 @@ static const char* MAP_MODEL_PATH ={
 //------------------------
 CTitleMap::CTitleMap()
 {
-	m_stage.push_back(new CObject);
+	m_stage.push_back(new CActor);
 }
 
 //------------------------
@@ -36,6 +36,8 @@ void CTitleMap::Init()
 void CTitleMap::Load()
 {
 	m_stage[0]->LoadModel(MAP_MODEL_PATH);
+
+	m_stage[0]->RequestAnim(CTitleMap::ANIMID_MOVE, 0.2f);
 }
 
 //------------------------
@@ -43,6 +45,6 @@ void CTitleMap::Load()
 //------------------------
 void CTitleMap::Step()
 {
-	
+	m_stage[0]->Update();
 }
 

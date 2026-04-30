@@ -7,8 +7,8 @@
 class CShotManager
 {
 private:
-	std::list<CShotBase*> m_shot;			//弾のクラス
-	int m_hndl;							//弾のモデルハンドル
+	std::list<CShotBase*>	m_shot;		//弾のクラス
+	int						m_hndl;		//弾のモデルハンドル
 public:
 	//コンストラクタ・デストラクタ
 	CShotManager();

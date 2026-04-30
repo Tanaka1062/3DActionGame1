@@ -11,6 +11,7 @@ public:
 	//カメラタイプID
 	enum tagCAMERA_ID
 	{
+		CAMERA_ID_NONE = -1,				//初期化用
 		CAMERA_ID_MAP,						//マップのカメラ
 		CAMERA_ID_DEBUG,					//デバッグ時のカメラ
 		CAMERA_ID_TITLE,					//タイトル画面のカメラ
@@ -23,7 +24,7 @@ public:
 private:
 	static CCameraBase* m_camera[CAMERA_ID_NUM];	//カメラ
 	static tagCAMERA_ID m_id;						//カメラのタイプ
-	static VECTOR m_rot;							//カメラの回転値
+	static VECTOR		m_rot;						//カメラの回転値
 	
 public:
 
@@ -32,7 +33,7 @@ public:
 	~CCameraManager();
 
 	//初期化
-	static void Init(CMapBase* _map = nullptr);
+	static void Init(tagCAMERA_ID _camera = CAMERA_ID_NONE,CMapBase* _map = nullptr);
 
 	//毎フレームする処理
 	static void Step(CMapManager* _mapManager = nullptr,CPlayerManager* _playerManager = nullptr);
@@ -42,7 +43,7 @@ public:
 
 	//カメラの更新
 	// @_tagetPos	:カメラの注視点の座標
-	static void Update(VECTOR _tagetPos);
+	static void Update();
 
 	//終了処理
 	static void Exit();
@@ -58,5 +59,10 @@ public:
 	//カメラの注視点を取得
 	static VECTOR GetFocusPos() { return m_camera[m_id]->GetFocusPos(); }
 
+	//カメラの座標を取得
+	static VECTOR GetPos() { return m_camera[m_id]->GetPos(); }
+
+	//カメラが移動しているかを取得
+	static bool GetIsMove();
 };
 

@@ -39,10 +39,11 @@ void CTitleScene::Draw()
 		m_LoadBG.Draw();
 		break;
 	default:
+		m_mapManager.Draw();
+		m_sky.Draw();
+		m_titlePlayerManager.Draw();
 		//UIの描写
 		m_uiManager.Draw();
-		m_mapManager.Draw();
-
 		break;
 	}
 
@@ -55,7 +56,9 @@ void CTitleScene::Init()
 {
 	CSceneBase::Init();
 	m_mapManager.Init(MAP_ID_TITLE);
-	CCameraManager::Init();
+	m_sky.Init();
+	CCameraManager::Init(CCameraManager::CAMERA_ID_TITLE,m_mapManager.GetMap());
+	m_titlePlayerManager.Init();
 
 	//UIの初期化
 	m_uiManager.Init();
@@ -73,6 +76,8 @@ void CTitleScene::Load()
 		//UIの画像ロード
 		m_uiManager.Load();
 		m_mapManager.Load();
+		m_sky.Load();
+		m_titlePlayerManager.Load(m_mapManager.GetMap());
 
 		m_LoadState = 1;
 		break;
@@ -103,7 +108,13 @@ void CTitleScene::Step()
 	//UIの毎フレームする処理
 	m_uiManager.Step();
 	m_mapManager.Step();
+	m_sky.Step();
 	CCameraManager::Step(&m_mapManager);
+	m_titlePlayerManager.Step();
+
+	CCameraManager::Update();
+	m_sky.Update();
+	m_titlePlayerManager.Update();
 
 	if (CheckHitKey(KEY_INPUT_R) == 1)
 	{
@@ -111,7 +122,7 @@ void CTitleScene::Step()
 	}
 
 	//スペースで終わる
-	if (CKeyInput::IsTrg(KEY_SELECT) ||
+	if (CKeyInput::IsTrg(KEY_SELECT) == true ||
 		CControllerManager::SetId() == true ||
 		CControllerManager::IsTrg(BUTTON_B) == true)
 	{
@@ -129,7 +140,9 @@ void CTitleScene::Exit()
 	//UIの終了処理
 	m_uiManager.Exit();
 	m_mapManager.Exit();
+	m_sky.Exit();
 	CCameraManager::Exit();
+	m_titlePlayerManager.Exit();
 
 	CSoundManager::StopAll();
 }

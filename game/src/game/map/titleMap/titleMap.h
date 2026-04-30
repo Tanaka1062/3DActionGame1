@@ -5,6 +5,13 @@
 class CTitleMap : public CMapBase
 {
 private:
+	enum tagAnimId
+	{
+		ANIMID_DEFAULT,		//デフォルト
+		ANIMID_MOVE,		//移動
+
+		ANIMID_NUM,			//アニメーションの数
+	};
 public:
 	//コンストラクタ
 	CTitleMap();
