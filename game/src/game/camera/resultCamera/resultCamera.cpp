@@ -5,6 +5,7 @@
 constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
 constexpr VECTOR INIT_POS = { -50.0f,40.0f,0.0f };
 constexpr VECTOR FOCUS_POS = { 0.0f,30.0f,0.0f };
+constexpr int MAP_FRAME_NUM = 2;				//マップのフレーム番号
 //============================================
 
 //---------------------------------
@@ -36,6 +37,7 @@ void CResultCamera::Step(int _hndl)
 	VECTOR dir = VSub(m_pos, m_focusPos);
 	m_rot.y = atan2f(dir.x, dir.z);
 
+	m_pos = MV1GetFramePosition(_hndl, MAP_FRAME_NUM);
 }
 
 //---------------------------------

@@ -2,7 +2,7 @@
 #include <math.h>
 
 //定義関連====================================
-constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
+constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };			//VECTOR用初期化
 constexpr float CAMERA_BACK = 40.0f;				//カメラとプレイヤーの距離
 constexpr float CAMERA_OFFSET_Y = 40.0f;			//カメラの修正Y
 constexpr float TARGET_OFFSET_Y = 20.0f;			//ターゲットの修正Y

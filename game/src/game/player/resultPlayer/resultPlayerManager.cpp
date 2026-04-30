@@ -12,9 +12,6 @@ enum tagModelName								//モデル一覧
 	MODEL_NUM,									//モデルの数
 };
 
-constexpr float TARGET_LEN = -200.0f;			//ターゲットと認識するまでの長さ
-constexpr float TARGET_MAX_DISTANCE = 40.0f;	//どれくらい法線から離せるか
-
 static const char* MODEL_PATH =					//モデルのパス
 { "data/model/player/player.mv1" };
 
@@ -23,6 +20,8 @@ static const char* MATERIAL_PATH[PLAYER_NUM] =	//マテリアルのパス
  "data/material/player/playerBody2.png",
  "data/material/player/playerBody3.png",
  "data/material/player/playerBody4.png", };
+
+constexpr int MAP_FRAME_NUM = 4;				//マップのフレーム番号
 
 //------------------------
 //	  コンストラクタ
@@ -143,24 +142,15 @@ void CResultPlayerManager::Load(CMapBase* _map)
 	//マップのフレームのハンドルをロード
 	int mapHndl = _map->GetHndl(0);
 
-	int frameId[3] = { 4,8,10 };
-	int frameIdNum = 0;
+	int frameNum = MAP_FRAME_NUM;
 
 	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
 		//プレイヤーのスポーン位置をロード
 		VECTOR start = { 0.0f,0.0f,0.0f };
 
-		//スポーン位置をセット
-		if (m_player[player_i]->GetIsWin() == true)
-		{
-			start = MV1GetFramePosition(mapHndl, 2);
-		}
-		else
-		{
-			start = MV1GetFramePosition(mapHndl, frameId[frameIdNum]);
-			frameIdNum++;
-		}
+		start = MV1GetFramePosition(mapHndl, frameNum);
+		frameNum += 2;
 
 		m_player[player_i]->Load(m_modelHndl[MODEL_PLAYER1]);
 		MV1SetTextureGraphHandle(m_player[player_i]->GetHndl(), 0, m_materialHndl[player_i], FALSE);

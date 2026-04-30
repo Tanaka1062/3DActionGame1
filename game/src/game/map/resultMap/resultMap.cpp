@@ -2,7 +2,7 @@
 
 //定義関連==================================
 constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
-constexpr VECTOR SCALE = { 1.0f,1.0f,1.0f };		//大きさ
+constexpr VECTOR SCALE = { 1.0f,1.0f,1.0f };	//大きさ
 static const char* MAP_MODEL_PATH = {
 	"data/model/map/resultMap/resultMap.mv1",
 };					//ロードするファイル名
