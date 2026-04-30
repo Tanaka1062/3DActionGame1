@@ -125,7 +125,7 @@ void CSelectScene::Step()
 	CControllerManager::SetId();
 
 	//スペースで終わる
-	if (CKeyInput::IsTrg(KEY_SELECT) ||
+	if (CKeyInput::IsTrg(KEY_SELECT) == true ||
 		m_uiManager.GetCountDownEnd() == true)
 	{
 		m_state = ENDWAIT;

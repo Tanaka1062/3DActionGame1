@@ -122,7 +122,7 @@ void CTitleScene::Step()
 	}
 
 	//スペースで終わる
-	if (CKeyInput::IsTrg(KEY_SELECT) ||
+	if (CKeyInput::IsTrg(KEY_SELECT) == true ||
 		CControllerManager::SetId() == true ||
 		CControllerManager::IsTrg(BUTTON_B) == true)
 	{

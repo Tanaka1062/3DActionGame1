@@ -136,7 +136,7 @@ void CResultScene::Step()
 	m_resultPlayerManager.Step();
 	CCameraManager::Step();
 
-	if (CKeyInput::IsTrg(KEY_SELECT) ||
+	if (CKeyInput::IsTrg(KEY_SELECT) == true ||
 		CControllerManager::IsTrg(BUTTON_B))
 	{
 		m_state = ENDWAIT;
