@@ -114,6 +114,11 @@ public:
 	//‰ñ“]Šp“x‚ðÝ’è(VECTOR)
 	void SetRot(VECTOR _rot) { m_rot = _rot; }
 
+	//Šg‘åk¬—¦‚ðŽæ“¾
+	VECTOR GetScale() { return m_scale; }
+	//Šg‘åk¬—¦‚ðÝ’è
+	void SetScale(VECTOR _scale) { m_scale = _scale; }
+
 	//‘å‚«‚³‚ðŽæ“¾
 	VECTOR GetSize() { return m_size; }
 	//‘å‚«‚³‚ðÝ’è

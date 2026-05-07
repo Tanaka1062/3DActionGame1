@@ -59,14 +59,16 @@ void CResultPlayer::Step()
 	VECTOR uiPos = m_pos;
 	uiPos.x -= 8.0f;
 	uiPos.y -= 5.0f;
-	if (m_isWin == true)
-	{
-		CPlayer::Winner();
-	}
-	else
-	{
-		CPlayer::Clap();
-	}
+
+	CPlayer::Wish();
+	//if (m_isWin == true)
+	//{
+	//	CPlayer::Winner();
+	//}
+	//else
+	//{
+	//	CPlayer::Clap();
+	//}
 }
 
 //-----------------------

@@ -1182,6 +1182,15 @@ void CPlayer::Winner()
 }
 
 //-----------------------
+//	  願いモーション
+//-----------------------
+void CPlayer::Wish()
+{
+	//願いのアニメーション
+	RequestAnim(ANIMID_WISH, 0.8f, true);
+}
+
+//-----------------------
 //		移動処理
 //-----------------------
 void CPlayer::Move(float _rotY)

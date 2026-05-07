@@ -138,7 +138,7 @@ protected:
 		ANIMID_WALK,					//歩きのアニメーション
 		ANIMID_WALK_LIFTING_UP,			//物を持ち上げている歩きのアニメーション
 		ANIMID_WINNER,					//勝者のアニメーション
-
+		ANIMID_WISH,					//願っているアニメーション
 	};
 
 	//---------------------------------------------
@@ -306,6 +306,9 @@ protected:
 
 	//勝利モーション
 	void Winner();
+
+	//願いモーション
+	void Wish();
 
 	//移動処理
 	virtual void Move(float _rotY);

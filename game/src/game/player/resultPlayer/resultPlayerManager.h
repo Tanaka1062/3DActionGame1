@@ -23,7 +23,7 @@ public:
 	//オブジェクトのロード
 	void Load(CMapBase* _map);
 	//毎フレームする処理
-	void Step();
+	void Step(CMapBase* _map);
 	//数値の更新
 	void Update();
 	//オブジェクトの描写

@@ -133,7 +133,7 @@ void CResultScene::Step()
 {
 	m_sky.Step();
 	m_mapManager.Step();
-	m_resultPlayerManager.Step();
+	m_resultPlayerManager.Step(m_mapManager.GetMap());
 	CCameraManager::Step();
 
 	if (CKeyInput::IsTrg(KEY_SELECT) == true ||

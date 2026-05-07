@@ -22,6 +22,7 @@ static const char* MATERIAL_PATH[PLAYER_NUM] =	//マテリアルのパス
  "data/material/player/playerBody4.png", };
 
 constexpr int MAP_FRAME_NUM = 4;				//マップのフレーム番号
+constexpr float PODIUM_SIZE_Y = 5.7f;			//表彰台の高さ
 
 //------------------------
 //	  コンストラクタ
@@ -162,16 +163,18 @@ void CResultPlayerManager::Load(CMapBase* _map)
 //------------------------
 //	毎フレームする処理
 //------------------------
-void CResultPlayerManager::Step()
+void CResultPlayerManager::Step(CMapBase* _map)
 {
 	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
 		m_player[player_i]->Step();
 
-		if (CControllerManager::IsConnection(m_player[player_i]->GetPadName()) == true)
-		{
-			m_player[player_i]->SetActive(true);
-		}
+		//表彰台を取得
+		CObject* podium = _map->GetStageObject(player_i);
+		//表彰台の上の座標を求める
+		VECTOR podiumPos = podium->GetPos();
+		podiumPos.y = podium->GetPos().y + PODIUM_SIZE_Y * podium->GetScale().y;
+		m_player[player_i]->SetPos(podiumPos);
 	}
 
 }
