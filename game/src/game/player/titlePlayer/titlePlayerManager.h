@@ -2,7 +2,7 @@
 #include <iostream>
 #include <vector>
 #include "titlePlayer.h"
-#include "../../winner/winner.h"
+#include "../../ranking/ranking.h"
 #include "../../map/mapBase.h"
 
 //エネミーマネージャーのクラス

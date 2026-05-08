@@ -49,7 +49,7 @@ CResultPlayerManager::~CResultPlayerManager()
 //------------------------
 //		  初期化
 //------------------------
-void CResultPlayerManager::Init(CWinner* _winner)
+void CResultPlayerManager::Init(CRanking* _ranking)
 {
 	if (m_modelHndl.size() < MODEL_NUM)
 	{
@@ -101,15 +101,15 @@ void CResultPlayerManager::Init(CWinner* _winner)
 
 		m_player[player_i]->Init(name, padName);
 
-		if (_winner == nullptr)continue;
+		if (_ranking == nullptr)continue;
 
-		if (m_player[player_i]->GetPlayerName() == _winner->GetWinnerPlayerName())
+		if (m_player[player_i]->GetPlayerName() == _ranking->GetWinnerPlayerName())
 		{
 			m_player[player_i]->SetIsWin(true);
 		}
 
 		//ゲーム中の取得コイン量を取得
-		m_player[player_i]->SetMoney(_winner->GetPlayerGetCoin(m_player[player_i]->GetPlayerName()));
+		m_player[player_i]->SetMoney(_ranking->GetPlayerGetCoin(m_player[player_i]->GetPlayerName()));
 	}
 	
 	//スポーン座標を全て消す

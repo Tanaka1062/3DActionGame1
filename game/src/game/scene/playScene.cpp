@@ -73,8 +73,8 @@ void CPlayScene::Init()
 	CCameraManager::ChangeCamera(CCameraManager::CAMERA_ID_MAP);
 	m_gameTime = CGameTime::GetInstance();
 	m_gameTime->Init();
-	m_winner = CWinner::GetInstance();
-	m_winner->Init();
+	m_ranking = CRanking::GetInstance();
+	m_ranking->Init();
 	m_eventManager.Init();
 	m_3DUiManager = C3DUiManager::GetInstance();
 	m_3DUiManager->Init();
@@ -135,7 +135,7 @@ void CPlayScene::Step()
 	m_uiManager.Step(m_eventManager.GetNowEventName(),m_playerManager);
 	CCameraManager::Step(&m_mapManager, &m_playerManager);
 	m_gameTime->Step();
-	m_winner->Step(&m_playerManager);
+	m_ranking->Step(&m_playerManager);
 	m_eventManager.Step(CCameraManager::GetFocusPos(),m_itemManager);
 
 	//“–‚½‚è”»’è----------------------------------

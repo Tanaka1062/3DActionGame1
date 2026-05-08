@@ -24,7 +24,7 @@ CResultScene::CResultScene() {
 	//最初はデータ初期化
 	m_state = INIT;
 
-	m_winner = CWinner::GetInstance();
+	m_ranking = CRanking::GetInstance();
 }
 
 //---------------------------
@@ -34,7 +34,7 @@ CResultScene::~CResultScene() {
 	//安全のためにデータ破棄処理を呼び出し
 	Exit();
 
-	CWinner::DeleteInstance();
+	CRanking::DeleteInstance();
 }
 
 
@@ -72,7 +72,7 @@ void CResultScene::Init()
 
 	m_sky.Init();
 	m_mapManager.Init(MAP_ID_RESULT);
-	m_resultPlayerManager.Init(m_winner);
+	m_resultPlayerManager.Init(m_ranking);
 
 	CCameraManager::Init(CCameraManager::CAMERA_ID_RESULT,m_mapManager.GetMap());
 	CCameraManager::ChangeCamera(CCameraManager::CAMERA_ID_RESULT);
@@ -100,7 +100,7 @@ void CResultScene::Load()
 		m_sky.Load();
 		m_mapManager.Load();
 		m_resultPlayerManager.Load(m_mapManager.GetMap());
-		m_winPlayerText.Load(TEXT_GRAPHIC_PATH[m_winner->GetWinnerPlayerName()]);
+		m_winPlayerText.Load(TEXT_GRAPHIC_PATH[m_ranking->GetWinnerPlayerName()]);
 		m_resultText.Load("data/graphic/result/resultText.png");
 		CSoundManager::Play(CSoundManager::BGM_RESULT, DX_PLAYTYPE_LOOP);
 

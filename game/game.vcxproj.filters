@@ -112,9 +112,6 @@
     <Filter Include="ソース ファイル\game\item\weapon\ax">
       <UniqueIdentifier>{40aa1bd0-f82a-415b-8ba3-ff1bc3149138}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\game\winner">
-      <UniqueIdentifier>{a95fac4b-e1b8-4a2a-af36-9ef736a0f4a5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\game\3DUi">
       <UniqueIdentifier>{5357a3e1-7b5d-48dc-ac5b-1c81e770ad99}</UniqueIdentifier>
     </Filter>
@@ -183,6 +180,9 @@
     </Filter>
     <Filter Include="ソース ファイル\game\player\titlePlayer">
       <UniqueIdentifier>{8c5d052b-8a60-4b8d-835c-475a8cf151e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\game\ranking">
+      <UniqueIdentifier>{a95fac4b-e1b8-4a2a-af36-9ef736a0f4a5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -327,9 +327,6 @@
     <ClCompile Include="src\game\item\weapon\ax\ax.cpp">
       <Filter>ソース ファイル\game\item\weapon\ax</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\winner\winner.cpp">
-      <Filter>ソース ファイル\game\winner</Filter>
-    </ClCompile>
     <ClCompile Include="src\game\3DUi\3DUi.cpp">
       <Filter>ソース ファイル\game\3DUi</Filter>
     </ClCompile>
@@ -440,6 +437,9 @@
     </ClCompile>
     <ClCompile Include="src\game\item\spawn\mapItemManager.cpp">
       <Filter>ソース ファイル\game\item\spawn</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\ranking\ranking.cpp">
+      <Filter>ソース ファイル\game\ranking</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -590,9 +590,6 @@
     <ClInclude Include="src\game\item\weapon\ax\ax.h">
       <Filter>ソース ファイル\game\item\weapon\ax</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\winner\winner.h">
-      <Filter>ソース ファイル\game\winner</Filter>
-    </ClInclude>
     <ClInclude Include="src\game\3DUi\3DUi.h">
       <Filter>ソース ファイル\game\3DUi</Filter>
     </ClInclude>
@@ -703,6 +700,9 @@
     </ClInclude>
     <ClInclude Include="src\game\item\spawn\mapItemManager.h">
       <Filter>ソース ファイル\game\item\spawn</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\ranking\ranking.h">
+      <Filter>ソース ファイル\game\ranking</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

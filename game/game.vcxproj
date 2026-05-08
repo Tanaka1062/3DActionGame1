@@ -189,6 +189,7 @@
     <ClCompile Include="src\game\player\selectPlayer\selectPlayerManager.cpp" />
     <ClCompile Include="src\game\player\titlePlayer\titlePlayer.cpp" />
     <ClCompile Include="src\game\player\titlePlayer\titlePlayerManager.cpp" />
+    <ClCompile Include="src\game\ranking\ranking.cpp" />
     <ClCompile Include="src\game\scene\playScene.cpp" />
     <ClCompile Include="src\game\scene\resultScene.cpp" />
     <ClCompile Include="src\game\scene\sceneBase.cpp" />
@@ -210,7 +211,6 @@
     <ClCompile Include="src\game\ui\uiTitleManager.cpp" />
     <ClCompile Include="src\game\weapon\weapon.cpp" />
     <ClCompile Include="src\game\weapon\weaponManager.cpp" />
-    <ClCompile Include="src\game\winner\winner.cpp" />
     <ClCompile Include="src\lib\2D\2DObject.cpp" />
     <ClCompile Include="src\lib\collision\collision.cpp" />
     <ClCompile Include="src\lib\debug.cpp" />
@@ -278,6 +278,7 @@
     <ClInclude Include="src\game\player\selectPlayer\selectPlayerManager.h" />
     <ClInclude Include="src\game\player\titlePlayer\titlePlayer.h" />
     <ClInclude Include="src\game\player\titlePlayer\titlePlayerManager.h" />
+    <ClInclude Include="src\game\ranking\ranking.h" />
     <ClInclude Include="src\game\scene\playScene.h" />
     <ClInclude Include="src\game\scene\resultScene.h" />
     <ClInclude Include="src\game\scene\sceneBase.h" />
@@ -299,7 +300,6 @@
     <ClInclude Include="src\game\ui\uiTitleManager.h" />
     <ClInclude Include="src\game\weapon\weapon.h" />
     <ClInclude Include="src\game\weapon\weaponManager.h" />
-    <ClInclude Include="src\game\winner\winner.h" />
     <ClInclude Include="src\lib\2D\2DObject.h" />
     <ClInclude Include="src\lib\collision\collision.h" />
     <ClInclude Include="src\lib\debug.h" />

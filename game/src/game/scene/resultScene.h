@@ -1,7 +1,7 @@
 #pragma once
 #include "sceneBase.h"
 #include <DxLib.h>
-#include "../winner/winner.h"
+#include "../ranking/ranking.h"
 #include "../sky/sky.h"
 #include "../map/mapManager.h"
 #include "../player/resultPlayer/resultPlayerManager.h"
@@ -11,7 +11,7 @@
 class CResultScene :public CSceneBase
 {
 private:
-	CWinner*				m_winner;				//勝利したプレイヤー
+	CRanking*				m_ranking;				//プレイヤーの順位
 	CSky					m_sky;					//天球
 	CMapManager				m_mapManager;			//マップ
 	CResultPlayerManager	m_resultPlayerManager;	//リザルトプレイヤー

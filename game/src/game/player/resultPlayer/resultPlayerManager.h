@@ -2,7 +2,7 @@
 #include <iostream>
 #include <vector>
 #include "resultPlayer.h"
-#include "../../winner/winner.h"
+#include "../../ranking/ranking.h"
 #include "../../map/mapBase.h"
 
 //エネミーマネージャーのクラス
@@ -19,7 +19,7 @@ public:
 	~CResultPlayerManager();
 
 	//初期化
-	void Init(CWinner* _winner);
+	void Init(CRanking* _ranking);
 	//オブジェクトのロード
 	void Load(CMapBase* _map);
 	//毎フレームする処理
