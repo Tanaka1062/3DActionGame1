@@ -30,11 +30,7 @@ void CBox::Step()
 
 	if (m_isLift == true)
 	{
-		CPlayer* player = nullptr;
-		player = dynamic_cast<CPlayer*>(m_owner);
-
-		m_rot.y = player->GetRot().y;
-
+		m_rot.y = m_owner->GetRot().y;
 	}
 
 	if (m_isActive == false)

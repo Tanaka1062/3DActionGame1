@@ -1,6 +1,7 @@
 #include "resultMap.h"
 #include "../../player/playerData.h"
 #include "../../ranking/ranking.h"
+#include "../../../lib/input/keyInput.h"
 
 //定義関連==================================
 constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
@@ -13,7 +14,7 @@ static const char* OBJECT_MODEL_PATH = {		//オブジェクトのロードするファイル名
 	"data/model/map/resultMap/podium.mv1",
 };
 constexpr int OBJECT_FRAME_NUM = 4;				//マップのオブジェクトの配置フレーム
-constexpr float PODIUM_UP_SPEED = 0.03f;		//表彰台の動く速度
+constexpr float PODIUM_UP_SPEED = 0.08f;		//表彰台の動く速度
 
 constexpr float PODIUM_MAX_Y[PLAYER_NUM] =		//表彰台の最大の高さ
 {
@@ -82,6 +83,14 @@ void CResultMap::Step()
 	//順位管理クラス取得
 	CRanking* ranking = CRanking::GetInstance();
 
+	bool isButton = false;
+
+	if (CKeyInput::IsTrg(KEY_SELECT) == true ||
+		CControllerManager::IsTrg(BUTTON_B))
+	{
+		isButton = true;
+	}
+
 	//最大まで伸びた表彰台を数える
 	int podiumMaxNum = 0;
 	for (int object_i = 0; object_i < m_object.size(); object_i++)
@@ -97,6 +106,12 @@ void CResultMap::Step()
 			podiumMaxNum++;
 			scale.y = PODIUM_MAX_Y[ranking->GetPlayerRank(static_cast<tagPlayerName>(object_i))];
 		}
+
+		if (isButton == true)
+		{
+			scale.y = PODIUM_MAX_Y[ranking->GetPlayerRank(static_cast<tagPlayerName>(object_i))];
+		}
+
 		m_object[object_i]->SetScale(scale);
 	}
 	//全ての表彰台が最大まで伸びたらフラグをtrueにする

@@ -74,9 +74,9 @@ protected:
 
 public:
 
-	//座標出力
+	//座標を取得
 	VECTOR GetPos() { return m_pos; }
-	//角度出力
+	//角度を取得
 	float GetRot() { return m_rot; }
 	//生存フラグを取得
 	bool GetActive() { return m_isActive; }
@@ -86,6 +86,8 @@ public:
 	void SetPos(VECTOR _pos) { m_pos = _pos; }
 	//角度設定
 	void SetRot(float _rot) { m_rot = _rot; }
+	//生存フラグを取得
+	void SetActive(bool _active) { m_isActive = _active; }
 
 	//ハンドルを取得
 	void SetHndl(int _hndl) { m_hndl[0][0] = _hndl; }

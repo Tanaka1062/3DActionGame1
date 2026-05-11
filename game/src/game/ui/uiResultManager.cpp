@@ -1,7 +1,8 @@
 #include "uiResultManager.h"
 #include "../data.h"
-#include "../gameTime/gameTime.h"
 #include "../player/playerData.h"
+#include "../ranking/ranking.h"
+#include "../map/resultMap/resultMap.h"
 
 using namespace std;
 
@@ -30,58 +31,83 @@ static const char* UI_GRAPHIC_PATH[UI_NUM] =				//UIの画像パス
 
 constexpr VECTOR UI_POS[UI_NUM] =							//UIの座標
 {
-	{static_cast<float>(WINDOW_SIZE_X * 0.5f),180.0f,0.0f},
-	{static_cast<float>(WINDOW_SIZE_X * 0.5f),400.0f,0.0f},
+	{static_cast<float>(WINDOW_SIZE_X * 0.5f),static_cast<float>(WINDOW_SIZE_Y * 0.5f),0.0f},
+	{static_cast<float>(WINDOW_SIZE_X * 0.5f),540.0f,0.0f},
 
 };
 
 //コンストラクタ・デストラクタ
-CResultManager::CResultManager()
+CUiResultManager::CUiResultManager()
 {
-	Init();
-}
-
-CResultManager::~CResultManager()
-{
-	Exit();
-}
-
-void CResultManager::Init()
-{
-	//増えすぎないように
-	if (m_ui.size() == UI_NUM)return;
-
 	for (int ui_i = 0; ui_i < UI_NUM; ui_i++)
 	{
 		C2DObject* ui = new C2DObject;
 
-		ui->Init(UI_POS[ui_i]);
-
 		m_ui.push_back(ui);
+	}
+
+	Init();
+}
+
+CUiResultManager::~CUiResultManager()
+{
+	Exit();
+
+	for (int ui_i = 0; ui_i < m_ui.size(); ui_i++)
+	{
+		delete m_ui[ui_i];
+	}
+
+	//全て消す
+	m_ui.clear();
+}
+
+void CUiResultManager::Init()
+{
+	for (int ui_i = 0; ui_i < m_ui.size(); ui_i++)
+	{
+		m_ui[ui_i]->Init(UI_POS[ui_i]);
+		m_ui[ui_i]->SetActive(false);
 	}
 }
 
 //ロード
-void CResultManager::Load()
+void CUiResultManager::Load()
 {
 	for (int ui_i = 0; ui_i < m_ui.size(); ui_i++)
 	{
-		m_ui[ui_i]->Load(UI_GRAPHIC_PATH[ui_i]);
+		if (ui_i == UI_WIN_PLAYER_TEXT)
+		{
+			CRanking* ranking = CRanking::GetInstance();
+
+			m_ui[ui_i]->Load(UI_WIN_PLAYER_GRAPHIC_PATH[ranking->GetWinnerPlayerName()]);
+		}
+		else
+		{
+			m_ui[ui_i]->Load(UI_GRAPHIC_PATH[ui_i]);
+		}
 	}
 
 }
 
 //毎フレームする処理
-void CResultManager::Step()
+void CUiResultManager::Step(CMapBase* _map)
 {
-	for (int ui_i = 0; ui_i < m_ui.size(); ui_i++)
+	if (_map->GetMapId() == MAP_ID_RESULT)
 	{
-		m_ui[ui_i]->Step();
+		CResultMap* resultMap = dynamic_cast<CResultMap*>(_map);
+		if (resultMap->GetIsPodiumMoveEnd() == true)
+		{
+			for (int ui_i = 0; ui_i < m_ui.size(); ui_i++)
+			{
+				m_ui[ui_i]->SetActive(true);
+			}
+		}
 	}
 }
 
 //描写
-void CResultManager::Draw()
+void CUiResultManager::Draw()
 {
 	for (int ui_i = 0; ui_i < m_ui.size(); ui_i++)
 	{
@@ -90,16 +116,11 @@ void CResultManager::Draw()
 }
 
 //破棄
-void CResultManager::Exit()
+void CUiResultManager::Exit()
 {
 	for (int ui_i = 0; ui_i < m_ui.size(); ui_i++)
 	{
 		m_ui[ui_i]->Exit();
-
-		delete m_ui[ui_i];
 	}
-
-	//終わるときに全て消す
-	m_ui.clear();
 }
 
