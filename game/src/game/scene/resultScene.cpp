@@ -5,6 +5,7 @@
 #include "../system/soundManager.h"
 #include "../camera/cameraManager.h"
 #include "../../lib/system/fade.h"
+#include "../ranking/ranking.h"
 
 //定義関連====================================
 static const char* TEXT_GRAPHIC_PATH[PLAYER_NUM] =		//テキストのグラフィックパス
@@ -23,8 +24,6 @@ static const char* TEXT_GRAPHIC_PATH[PLAYER_NUM] =		//テキストのグラフィックパス
 CResultScene::CResultScene() {
 	//最初はデータ初期化
 	m_state = INIT;
-
-	m_ranking = CRanking::GetInstance();
 }
 
 //---------------------------
@@ -72,7 +71,7 @@ void CResultScene::Init()
 
 	m_sky.Init();
 	m_mapManager.Init(MAP_ID_RESULT);
-	m_resultPlayerManager.Init(m_ranking);
+	m_resultPlayerManager.Init();
 
 	CCameraManager::Init(CCameraManager::CAMERA_ID_RESULT,m_mapManager.GetMap());
 	CCameraManager::ChangeCamera(CCameraManager::CAMERA_ID_RESULT);
@@ -93,6 +92,7 @@ void CResultScene::Init()
 //---------------------------
 void CResultScene::Load()
 {
+	CRanking* ranking = CRanking::GetInstance();
 	CSceneBase::Load();
 	switch (m_LoadState)
 	{
@@ -100,7 +100,7 @@ void CResultScene::Load()
 		m_sky.Load();
 		m_mapManager.Load();
 		m_resultPlayerManager.Load(m_mapManager.GetMap());
-		m_winPlayerText.Load(TEXT_GRAPHIC_PATH[m_ranking->GetWinnerPlayerName()]);
+		m_winPlayerText.Load(TEXT_GRAPHIC_PATH[ranking->GetWinnerPlayerName()]);
 		m_resultText.Load("data/graphic/result/resultText.png");
 		CSoundManager::Play(CSoundManager::BGM_RESULT, DX_PLAYTYPE_LOOP);
 

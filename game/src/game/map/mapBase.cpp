@@ -43,8 +43,9 @@ CMapBase::~CMapBase()
 //------------------------
 //		‰Šú‰»
 //------------------------
-void CMapBase::Init()
+void CMapBase::Init(int _mapId)
 {
+	m_mapId = _mapId;
 	m_stageId = 0;
 	m_mapMoveTimer = 0;
 

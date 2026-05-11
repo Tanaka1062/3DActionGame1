@@ -157,6 +157,7 @@ void CCharacterBase::Step(CAttackManager* _attackManager, CShotManager* _shotMan
 	case DIE:
 		Die();
 		break;
+
 	}
 
 }
@@ -399,7 +400,6 @@ void CCharacterBase::Die()
 {
 
 }
-
 
 //-----------------------
 //	 ノックバック処理

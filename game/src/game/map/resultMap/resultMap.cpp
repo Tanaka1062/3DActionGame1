@@ -42,6 +42,7 @@ CResultMap::CResultMap()
 //------------------------
 void CResultMap::Init()
 {
+	m_isPodiumMoveEnd = false;
 	CMapBase::Init();
 	for (int stage_i = 0; stage_i < m_stage.size(); stage_i++)
 	{
@@ -81,6 +82,8 @@ void CResultMap::Step()
 	//順位管理クラス取得
 	CRanking* ranking = CRanking::GetInstance();
 
+	//最大まで伸びた表彰台を数える
+	int podiumMaxNum = 0;
 	for (int object_i = 0; object_i < m_object.size(); object_i++)
 	{
 		VECTOR scale = m_object[object_i]->GetScale();
@@ -91,9 +94,15 @@ void CResultMap::Step()
 		}
 		else
 		{
+			podiumMaxNum++;
 			scale.y = PODIUM_MAX_Y[ranking->GetPlayerRank(static_cast<tagPlayerName>(object_i))];
 		}
 		m_object[object_i]->SetScale(scale);
+	}
+	//全ての表彰台が最大まで伸びたらフラグをtrueにする
+	if (podiumMaxNum == m_object.size())
+	{
+		m_isPodiumMoveEnd = true;
 	}
 }
 

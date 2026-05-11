@@ -441,6 +441,9 @@
     <ClCompile Include="src\game\ranking\ranking.cpp">
       <Filter>ソース ファイル\game\ranking</Filter>
     </ClCompile>
+    <ClCompile Include="src\game\ui\uiResultManager.cpp">
+      <Filter>ソース ファイル\game\ui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\lib\number.h">
@@ -703,6 +706,9 @@
     </ClInclude>
     <ClInclude Include="src\game\ranking\ranking.h">
       <Filter>ソース ファイル\game\ranking</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\ui\uiResultManager.h">
+      <Filter>ソース ファイル\game\ui</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

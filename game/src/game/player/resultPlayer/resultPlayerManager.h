@@ -2,10 +2,9 @@
 #include <iostream>
 #include <vector>
 #include "resultPlayer.h"
-#include "../../ranking/ranking.h"
 #include "../../map/mapBase.h"
 
-//エネミーマネージャーのクラス
+//リザルトプレイヤーのマネージャーのクラス
 class CResultPlayerManager
 {
 private:
@@ -19,7 +18,7 @@ public:
 	~CResultPlayerManager();
 
 	//初期化
-	void Init(CRanking* _ranking);
+	void Init();
 	//オブジェクトのロード
 	void Load(CMapBase* _map);
 	//毎フレームする処理

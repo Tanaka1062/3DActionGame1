@@ -207,6 +207,7 @@
     <ClCompile Include="src\game\ui\playerStatusPanel\playerStatusPanel.cpp" />
     <ClCompile Include="src\game\ui\time\timeUi.cpp" />
     <ClCompile Include="src\game\ui\uiGameManager.cpp" />
+    <ClCompile Include="src\game\ui\uiResultManager.cpp" />
     <ClCompile Include="src\game\ui\uiSelectManager.cpp" />
     <ClCompile Include="src\game\ui\uiTitleManager.cpp" />
     <ClCompile Include="src\game\weapon\weapon.cpp" />
@@ -296,6 +297,7 @@
     <ClInclude Include="src\game\ui\playerStatusPanel\playerStatusPanel.h" />
     <ClInclude Include="src\game\ui\time\timeUi.h" />
     <ClInclude Include="src\game\ui\uiGameManager.h" />
+    <ClInclude Include="src\game\ui\uiResultManager.h" />
     <ClInclude Include="src\game\ui\uiSelectManager.h" />
     <ClInclude Include="src\game\ui\uiTitleManager.h" />
     <ClInclude Include="src\game\weapon\weapon.h" />

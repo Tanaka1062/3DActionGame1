@@ -2,6 +2,8 @@
 #include "../../lib/input/controllerManager.h"
 #include "../../data.h"
 #include "../../lib/myMath/myMath.h"
+#include "../../ranking/ranking.h"
+#include "../../map/resultMap/resultMap.h"
 
 using namespace std;
 
@@ -29,7 +31,7 @@ constexpr float PODIUM_SIZE_Y = 5.7f;			//表彰台の高さ
 //------------------------
 CResultPlayerManager::CResultPlayerManager()
 {
-	Init(nullptr);
+	Init();
 }
 
 //------------------------
@@ -49,7 +51,7 @@ CResultPlayerManager::~CResultPlayerManager()
 //------------------------
 //		  初期化
 //------------------------
-void CResultPlayerManager::Init(CRanking* _ranking)
+void CResultPlayerManager::Init()
 {
 	if (m_modelHndl.size() < MODEL_NUM)
 	{
@@ -99,17 +101,10 @@ void CResultPlayerManager::Init(CRanking* _ranking)
 
 		}
 
-		m_player[player_i]->Init(name, padName);
-
-		if (_ranking == nullptr)continue;
-
-		if (m_player[player_i]->GetPlayerName() == _ranking->GetWinnerPlayerName())
-		{
-			m_player[player_i]->SetIsWin(true);
-		}
-
-		//ゲーム中の取得コイン量を取得
-		m_player[player_i]->SetMoney(_ranking->GetPlayerGetCoin(m_player[player_i]->GetPlayerName()));
+		//順位を取得
+		CRanking* ranking = CRanking::GetInstance();
+		//初期化と試合の順位を設定する
+		m_player[player_i]->Init(name, padName,ranking->GetPlayerRank(name));
 	}
 	
 	//スポーン座標を全て消す
@@ -165,9 +160,17 @@ void CResultPlayerManager::Load(CMapBase* _map)
 //------------------------
 void CResultPlayerManager::Step(CMapBase* _map)
 {
+	bool isPodiumMoveEnd = false;
+
+	if (_map->GetMapId() == MAP_ID_RESULT)
+	{
+		CResultMap* resultMap = dynamic_cast<CResultMap*>(_map);
+		isPodiumMoveEnd = resultMap->GetIsPodiumMoveEnd();
+	}
+
 	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
-		m_player[player_i]->Step();
+		m_player[player_i]->Step(isPodiumMoveEnd);
 
 		//表彰台を取得
 		CObject* podium = _map->GetStageObject(player_i);

@@ -1163,32 +1163,6 @@ void CPlayer::ReadyOut()
 	}
 }
 
-//-----------------------
-//		   拍手
-//-----------------------
-void CPlayer::Clap()
-{
-	//拍手のアニメーション
-	RequestAnim(ANIMID_CLAP, 0.8f,true);
-}
-
-//-----------------------
-//	   勝利モーション
-//-----------------------
-void CPlayer::Winner()
-{
-	//勝利のアニメーション
-	RequestAnim(ANIMID_WINNER, 0.8f,true);
-}
-
-//-----------------------
-//	  願いモーション
-//-----------------------
-void CPlayer::Wish()
-{
-	//願いのアニメーション
-	RequestAnim(ANIMID_WISH, 0.8f, true);
-}
 
 //-----------------------
 //		移動処理
