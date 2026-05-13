@@ -14,14 +14,14 @@ static const char* OBJECT_MODEL_PATH = {		//オブジェクトのロードするファイル名
 	"data/model/map/resultMap/podium.mv1",
 };
 constexpr int OBJECT_FRAME_NUM = 4;				//マップのオブジェクトの配置フレーム
-constexpr float PODIUM_UP_SPEED = 0.08f;		//表彰台の動く速度
+constexpr float PODIUM_UP_SPEED = 2.0f;			//表彰台の動く速度
 
 constexpr float PODIUM_MAX_Y[PLAYER_NUM] =		//表彰台の最大の高さ
 {
-	10.0f,
-	8.0f,
-	6.0f,
-	4.0f,
+	200.0f,
+	175.0f,
+	160.0f,
+	150.0f,
 };
 //==========================================
 
@@ -95,24 +95,24 @@ void CResultMap::Step()
 	int podiumMaxNum = 0;
 	for (int object_i = 0; object_i < m_object.size(); object_i++)
 	{
-		VECTOR scale = m_object[object_i]->GetScale();
-		//順位ごとに設定された大きさまで表彰台を伸ばす
-		if (PODIUM_MAX_Y[ranking->GetPlayerRank(static_cast<tagPlayerName>(object_i))] > scale.y)
+		VECTOR pos = m_object[object_i]->GetPos();
+		//順位ごとに設定された大きさまで表彰台を移動させる
+		if (PODIUM_MAX_Y[ranking->GetPlayerRank(static_cast<tagPlayerName>(object_i))] > pos.y)
 		{
-			scale.y += PODIUM_UP_SPEED;
+			pos.y += PODIUM_UP_SPEED;
 		}
 		else
 		{
 			podiumMaxNum++;
-			scale.y = PODIUM_MAX_Y[ranking->GetPlayerRank(static_cast<tagPlayerName>(object_i))];
+			pos.y = PODIUM_MAX_Y[ranking->GetPlayerRank(static_cast<tagPlayerName>(object_i))];
 		}
 
 		if (isButton == true)
 		{
-			scale.y = PODIUM_MAX_Y[ranking->GetPlayerRank(static_cast<tagPlayerName>(object_i))];
+			pos.y = PODIUM_MAX_Y[ranking->GetPlayerRank(static_cast<tagPlayerName>(object_i))];
 		}
 
-		m_object[object_i]->SetScale(scale);
+		m_object[object_i]->SetPos(pos);
 	}
 	//全ての表彰台が最大まで伸びたらフラグをtrueにする
 	if (podiumMaxNum == m_object.size())

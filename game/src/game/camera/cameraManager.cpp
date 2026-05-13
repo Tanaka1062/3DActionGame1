@@ -165,3 +165,4 @@ bool CCameraManager::GetIsMove()
 	CMapCamera* mapCamera = dynamic_cast<CMapCamera*>(m_camera[CAMERA_ID_MAP]);
 	return mapCamera->GetIsMove();
 }
+

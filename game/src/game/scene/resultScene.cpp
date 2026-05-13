@@ -112,7 +112,7 @@ void CResultScene::Step()
 	m_mapManager.Step();
 	m_resultPlayerManager.Step(m_mapManager.GetMap());
 	m_uiManager.Step(m_mapManager.GetMap());
-	CCameraManager::Step();
+	CCameraManager::Step(&m_mapManager);
 
 	bool isPodiumMoveEnd = false;
 

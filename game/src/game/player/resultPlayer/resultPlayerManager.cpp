@@ -24,7 +24,6 @@ static const char* MATERIAL_PATH[PLAYER_NUM] =	//マテリアルのパス
  "data/material/player/playerBody4.png", };
 
 constexpr int MAP_FRAME_NUM = 4;				//マップのフレーム番号
-constexpr float PODIUM_SIZE_Y = 5.7f;			//表彰台の高さ
 
 //------------------------
 //	  コンストラクタ
@@ -174,9 +173,8 @@ void CResultPlayerManager::Step(CMapBase* _map)
 
 		//表彰台を取得
 		CObject* podium = _map->GetStageObject(player_i);
-		//表彰台の上の座標を求める
+		//表彰台の位置に座標を設定する
 		VECTOR podiumPos = podium->GetPos();
-		podiumPos.y = podium->GetPos().y + PODIUM_SIZE_Y * podium->GetScale().y;
 		m_player[player_i]->SetPos(podiumPos);
 	}
 
