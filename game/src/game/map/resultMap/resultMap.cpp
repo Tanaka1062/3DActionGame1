@@ -13,15 +13,15 @@ static const char* MAP_MODEL_PATH = {			//ロードするファイル名
 static const char* OBJECT_MODEL_PATH = {		//オブジェクトのロードするファイル名
 	"data/model/map/resultMap/podium.mv1",
 };
-constexpr int OBJECT_FRAME_NUM = 4;				//マップのオブジェクトの配置フレーム
-constexpr float PODIUM_UP_SPEED = 2.0f;			//表彰台の動く速度
+constexpr int OBJECT_FRAME_NUM = 10;			//マップのオブジェクトの配置フレーム
+constexpr float PODIUM_UP_SPEED = 1.7f;			//表彰台の動く速度
 
 constexpr float PODIUM_MAX_Y[PLAYER_NUM] =		//表彰台の最大の高さ
 {
-	200.0f,
-	175.0f,
-	160.0f,
-	150.0f,
+	300.0f,
+	260.0f,
+	230.0f,
+	190.0f,
 };
 //==========================================
 
