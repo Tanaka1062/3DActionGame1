@@ -91,6 +91,7 @@ void CUiGameManager::Draw()
 	{
 		m_playerStautusPanel[playerStautusPanel_i].Draw();
 	}
+
 }
 
 //”jŠü

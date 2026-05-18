@@ -74,7 +74,7 @@ void CPlayScene::Init()
 	m_gameTime = CGameTime::GetInstance();
 	m_gameTime->Init();
 	m_ranking = CRanking::GetInstance();
-	m_ranking->Init();
+	m_ranking->Init(m_mapManager.GetMap()->GetStageNum());
 	m_eventManager.Init();
 	m_3DUiManager = C3DUiManager::GetInstance();
 	m_3DUiManager->Init();
@@ -135,7 +135,7 @@ void CPlayScene::Step()
 	m_uiManager.Step(m_eventManager.GetNowEventName(),m_playerManager);
 	CCameraManager::Step(&m_mapManager, &m_playerManager);
 	m_gameTime->Step();
-	m_ranking->Step(&m_playerManager);
+	m_ranking->Step(&m_playerManager,m_mapManager.GetMap()->GetStageId());
 	m_eventManager.Step(CCameraManager::GetFocusPos(),m_itemManager);
 
 	//“–‚½‚è”»’è----------------------------------

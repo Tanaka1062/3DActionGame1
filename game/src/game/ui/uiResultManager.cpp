@@ -3,6 +3,7 @@
 #include "../player/playerData.h"
 #include "../ranking/ranking.h"
 #include "../map/resultMap/resultMap.h"
+#include <algorithm>
 
 using namespace std;
 
@@ -113,6 +114,61 @@ void CUiResultManager::Draw()
 	{
 		m_ui[ui_i]->Draw();
 	}
+
+	int x = 64;
+	int y = 64;
+	CRanking* ranking = CRanking::GetInstance();
+	for (int i = 0; i < ranking->GetPlayerDataNum(); i++)
+	{
+		for (int player_i = 0; player_i < PLAYER_NUM; player_i++)
+		{
+			DrawFormatString(x + (140 * i), y + (32 * player_i), GetColor(255, 0, 0), "ƒvƒŒƒCƒ„[%d = %d",
+				player_i, ranking->GetPlayerData(i, player_i).m_coinNum);
+		}
+	}
+	int startX = 120;
+	int startY = 700;
+	int endX = WINDOW_SIZE_X - 120;
+	int len = endX - startX;
+	int len2 = len / ranking->GetPlayerDataNum();
+
+	int lineX[PLAYER_NUM];
+	fill(lineX, lineX + PLAYER_NUM, startX);
+	int lineY[PLAYER_NUM];
+	fill(lineY, lineY + PLAYER_NUM, startY);
+	for (int i = 0; i < ranking->GetPlayerDataNum(); i++)
+	{
+		for (int player_i = 0; player_i < PLAYER_NUM; player_i++)
+		{
+			int lineX2 = startX + (len2 * (i + 1));
+			int lineY2 = startY - (10 * ranking->GetPlayerData(i, player_i).m_coinNum);
+			float dx = lineX2 - lineX[player_i];
+			float dy = lineY2 - lineY[player_i];
+			float length = sqrtf(dx * dx + dy + dy);
+			dx /= length;
+			dy /= length;
+
+			float px = -dy;
+			float py = dx;
+
+			int thickness = 20;
+
+			for (int j = -thickness; j <= thickness; j++)
+			{
+				DrawLine(
+					lineX[player_i] + px * j,
+					lineY[player_i] + py * j,
+					lineX2 + px * j,
+					lineY2 + py * j,
+					PLAYER_COLOR[player_i]
+				);
+			}
+			//DrawLine(lineX[player_i], lineY[player_i], lineX2, lineY2, PLAYER_COLOR[player_i]);
+			lineX[player_i] = lineX2;
+			lineY[player_i] = lineY2;
+		}
+	}
+
 }
 
 //”jŠü

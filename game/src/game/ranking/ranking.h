@@ -37,17 +37,22 @@ private:
 
 	struct tagRankingData
 	{
-		tagPlayerName			m_name;
-		int						m_coin;
+		tagPlayerName						m_name;
+		int									m_coin;
 	};
-	std::vector<tagRankingData> m_rankingData;					//順位データ
+	std::vector<tagRankingData>				m_rankingData;		//順位データ
+	struct tagPlayerData
+	{
+		int									m_coinNum;						
+	};
+	std::vector<std::vector<tagPlayerData>>	m_playerData;		//プレイヤーデータ
 public:
 
 	//初期化
-	void Init();
+	void Init(int _stageNum = 0);
 
 	//ステップ
-	void Step(CPlayerManager* _playerManager);
+	void Step(CPlayerManager* _playerManager,int _stageId);
 
 	//勝者を取得
 	tagPlayerName GetWinnerPlayerName() { return m_rankingData[0].m_name; }
@@ -58,5 +63,10 @@ public:
 	//プレイヤーの順位を取得
 	int GetPlayerRank(tagPlayerName _playerName);
 
+	//プレイヤーデータの数
+	int GetPlayerDataNum() { return static_cast<int>(m_playerData.size()); }
+
+	//プレイヤーデータを取得
+	tagPlayerData GetPlayerData(int _dataId,int _playerId) { return m_playerData[_dataId][_playerId]; }
 };
 

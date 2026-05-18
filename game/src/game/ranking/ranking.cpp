@@ -1,6 +1,7 @@
 #include "ranking.h"
 #include <algorithm>
 
+using namespace std;
 CRanking* CRanking::m_instanse = nullptr;
 
 CRanking::CRanking()
@@ -21,17 +22,26 @@ CRanking::~CRanking()
 }
 
 //初期化
-void CRanking::Init()
+void CRanking::Init(int _stageNum)
 {
 	for (int ranking_i = 0;  ranking_i < m_rankingData.size();  ranking_i++)
 	{
 		m_rankingData[ranking_i].m_coin = 0;
 		m_rankingData[ranking_i].m_name = PLAYER_NONE;
 	}
+
+	//プレイヤーデータを破棄する
+	m_playerData.clear();
+	//プレイヤーデータをステージ分生成する
+	for (int stage_i = 0; stage_i < _stageNum; stage_i++)
+	{
+		m_playerData.push_back(vector<tagPlayerData>(PLAYER_NUM));
+	}
+	m_playerData;
 }
 
 //ステップ
-void CRanking::Step(CPlayerManager* _playerManager)
+void CRanking::Step(CPlayerManager* _playerManager, int _stageId)
 {
 
 	//最高コイン保存用
@@ -44,6 +54,7 @@ void CRanking::Step(CPlayerManager* _playerManager)
 
 		m_rankingData[player_i].m_coin = player->GetMoney();
 		m_rankingData[player_i].m_name = player->GetPlayerName();
+		m_playerData[_stageId][player_i].m_coinNum = player->GetMoney();
 	}
 
 	//コインの数で順位を決める

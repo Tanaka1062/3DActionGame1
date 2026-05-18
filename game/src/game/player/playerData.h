@@ -1,4 +1,6 @@
-#pragma once
+#pragma once 
+#include<DxLib.h>
+
 enum tagPlayerName
 {
 	PLAYER_NONE = -1,	//何もなし(初期化用)
@@ -8,5 +10,13 @@ enum tagPlayerName
 	PLAYER_4,			//プレイヤー4
 
 	PLAYER_NUM,			//プレイヤーの数
+};
+
+static const int PLAYER_COLOR[PLAYER_NUM] =
+{
+	GetColor(255,0,0),
+	GetColor(0,0,255),
+	GetColor(255,50,255),
+	GetColor(255,255,50),
 };
 
