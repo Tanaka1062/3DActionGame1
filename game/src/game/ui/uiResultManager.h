@@ -3,11 +3,13 @@
 #include <iostream>
 #include <vector>
 #include "../map/mapBase.h"
+#include "resultLineGraph/resultLineGraph.h"
 
 class CUiResultManager
 {
 private:
-	std::vector<C2DObject*>m_ui;		//UI
+	std::vector<C2DObject*>	m_ui;		//UI
+	CResultLineGraph		m_lineGraph;//折れ線グラフ
 public:
 	//コンストラクタ・デストラクタ
 	CUiResultManager();

@@ -205,6 +205,7 @@
     <ClCompile Include="src\game\ui\countDown\countDown.cpp" />
     <ClCompile Include="src\game\ui\eventText\eventText.cpp" />
     <ClCompile Include="src\game\ui\playerStatusPanel\playerStatusPanel.cpp" />
+    <ClCompile Include="src\game\ui\resultLineGraph\resultLineGraph.cpp" />
     <ClCompile Include="src\game\ui\time\timeUi.cpp" />
     <ClCompile Include="src\game\ui\uiGameManager.cpp" />
     <ClCompile Include="src\game\ui\uiResultManager.cpp" />
@@ -295,6 +296,7 @@
     <ClInclude Include="src\game\ui\countDown\countDown.h" />
     <ClInclude Include="src\game\ui\eventText\eventText.h" />
     <ClInclude Include="src\game\ui\playerStatusPanel\playerStatusPanel.h" />
+    <ClInclude Include="src\game\ui\resultLineGraph\resultLineGraph.h" />
     <ClInclude Include="src\game\ui\time\timeUi.h" />
     <ClInclude Include="src\game\ui\uiGameManager.h" />
     <ClInclude Include="src\game\ui\uiResultManager.h" />

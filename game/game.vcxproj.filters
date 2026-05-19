@@ -184,6 +184,9 @@
     <Filter Include="ソース ファイル\game\ranking">
       <UniqueIdentifier>{a95fac4b-e1b8-4a2a-af36-9ef736a0f4a5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\game\ui\resultLineGraph">
+      <UniqueIdentifier>{3bf6f5a2-721f-49ab-9cff-4d95677bcf6f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\number.cpp">
@@ -443,6 +446,9 @@
     </ClCompile>
     <ClCompile Include="src\game\ui\uiResultManager.cpp">
       <Filter>ソース ファイル\game\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\ui\resultLineGraph\resultLineGraph.cpp">
+      <Filter>ソース ファイル\game\ui\resultLineGraph</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -709,6 +715,9 @@
     </ClInclude>
     <ClInclude Include="src\game\ui\uiResultManager.h">
       <Filter>ソース ファイル\game\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\ui\resultLineGraph\resultLineGraph.h">
+      <Filter>ソース ファイル\game\ui\resultLineGraph</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
