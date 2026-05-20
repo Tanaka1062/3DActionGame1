@@ -10,6 +10,16 @@ constexpr VECTOR START_LINE = { 120.0f,700.0f,0.0f };
 constexpr float LINE_LENGTH = static_cast<float>(WINDOW_SIZE_X - 120.0f);
 constexpr int LINE_SPEED = 2;
 
+//UIのグラフィックパス
+const char* GRAPHIC_UI_PATH =
+{
+	"data/graphic/result/lineGraph.png",
+};
+
+constexpr int UI_BLEND = 200;						//UIの透明度
+constexpr VECTOR UI_INIT_POS =						//UIの初期座標
+{ WINDOW_SIZE_HALF_X,WINDOW_SIZE_HALF_Y,0.0f };	
+
 //コンストラクタ
 CResultLineGraph::CResultLineGraph()
 {
@@ -26,12 +36,14 @@ CResultLineGraph::~CResultLineGraph()
 void CResultLineGraph::Init()
 {
 	m_lineLen = START_LINE.x;
+
+	m_ui.Init(UI_INIT_POS);
 }
 
 //ロード
 void CResultLineGraph::Load()
 {
-
+	m_ui.Load(GRAPHIC_UI_PATH);
 }
 
 //毎フレームする処理
@@ -44,6 +56,13 @@ void CResultLineGraph::Step()
 //描写処理
 void CResultLineGraph::Draw()
 {
+	//画像の透明度を変更
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, UI_BLEND);
+	m_ui.Draw();
+	//画像の透明度を元に戻す
+	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+
+
 	CRanking* ranking = CRanking::GetInstance();
 
 	int len = static_cast<int>((LINE_LENGTH - START_LINE.x)) / ranking->GetPlayerDataNum();
@@ -84,6 +103,6 @@ void CResultLineGraph::Draw()
 //終了処理
 void CResultLineGraph::Exit()
 {
-
+	m_ui.Draw();
 }
 

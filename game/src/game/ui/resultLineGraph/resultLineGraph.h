@@ -1,8 +1,11 @@
 #pragma once
+#include "../../lib/2D/2DObject.h"
+
 class CResultLineGraph
 {
 private:
-	int m_lineLen;		//線の長さ
+	int			m_lineLen;	//線の長さ
+	C2DObject	m_ui;		//ui	
 public:
 	//コンストラクタ・デストラクタ
 	CResultLineGraph();

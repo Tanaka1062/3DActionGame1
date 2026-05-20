@@ -73,6 +73,7 @@ constexpr int PANEL_SIZE_X = 320;									//パネルの横の大きさ
 constexpr int PANEL_SIZE_Y = 150;									//パネルの縦の大きさ
 constexpr VECTOR PANEL_INIT_POS =									//パネルの初期座標
 { static_cast<float>(PANEL_SIZE_X * 0.5),static_cast<float>(WINDOW_SIZE_Y - PANEL_SIZE_Y * 0.5),0.0f};
+constexpr int PANEL_BLEND = 200;									//パネルの透明度
 
 constexpr float MONEY_NUMBER_SIZE = 0.5f;							//お金の大きさ
 constexpr VECTOR MONEY_NUMBER_INIT_POS = { 70.0f,-40.0f,0.0f };		//お金の初期座標
@@ -148,6 +149,8 @@ void CPlayerStatusPanel::Init()
 	{
 		m_heart[heart_i]->Init();
 	}
+
+	
 
 	m_playerMoney = 0;
 }
@@ -271,8 +274,10 @@ void CPlayerStatusPanel::Step(CPlayer* _player)
 //-----------------------------------
 void CPlayerStatusPanel::Draw()
 {
-	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 200);
+	//画像の透明度を変更
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, PANEL_BLEND);
 	m_panel.Draw();
+	//画像の透明度を元に戻す
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 	m_icon.Draw();
 	for (int heart_i = 0; heart_i < m_heart.size(); heart_i++)
