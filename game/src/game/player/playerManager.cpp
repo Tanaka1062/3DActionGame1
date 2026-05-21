@@ -23,8 +23,8 @@ constexpr int MAP_FRAME_NUM = 7;				//マップのフレーム番号
 constexpr float DIE_RADIUS = 260.0f;			//画面外判定の半径
 
 constexpr int NAME_ACTIVE_TIME = 180;			//名前の表示時間
-constexpr float NAME_UP_Y = 40.0f;				//名前がどれだけ上にあるか
-constexpr float CROWN_UP_Y = 10.0f;				//王冠がどれだけ上にあるか
+constexpr float NAME_UP_Y = 45.0f;				//名前がどれだけ上にあるか
+constexpr float CROWN_UP_Y = 35.0f;				//王冠がどれだけ上にあるか
 
 static const char* MODEL_PATH =					//モデルのパス
 { "data/model/player/player.mv1"};			
@@ -374,6 +374,7 @@ void CPlayerManager::Step(CAttackManager* _attackManager, CShotManager* _shotMan
 				m_player[player_i]->Respawn(m_spawnPos[_stageId][player_i]);
 			}
 		}
+
 
 		//プレイヤーの上に名前を表示する--------------------------------
 		C3DUi* name = _3DUiManager->GetUi(m_playerName[player_i]);

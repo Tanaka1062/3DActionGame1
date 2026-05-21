@@ -59,8 +59,9 @@ void CResultLineGraph::Load()
 	{
 		tagPlayerName name = static_cast<tagPlayerName>(player_i);
 		VECTOR pos = PANEL_INIT_POS;
-
-		m_playerPanel[player_i].Load(name,PANEL_INIT_POS * ranking->GetPlayerRank(name));
+		pos.y += 100.0f * ranking->GetPlayerRank(name);
+		int money = ranking->GetPlayerGetCoin(name);
+		m_playerPanel[player_i].Load(name, pos, money);
 	}
 }
 
@@ -139,7 +140,7 @@ void CResultLineGraph::Exit()
 	m_ui.Draw();
 	for (int player_i = 0; player_i < PLAYER_NUM; player_i++)
 	{
-		m_playerPanel[player_i].Draw();
+		m_playerPanel[player_i].Exit();
 	}
 }
 

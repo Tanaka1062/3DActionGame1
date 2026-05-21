@@ -126,39 +126,6 @@ void CUiResultManager::Draw()
 
 	m_lineGraph.Draw();
 
-	//int x = 64;
-	//int y = 64;
-	//CRanking* ranking = CRanking::GetInstance();
-	//for (int i = 0; i < ranking->GetPlayerDataNum(); i++)
-	//{
-	//	for (int player_i = 0; player_i < PLAYER_NUM; player_i++)
-	//	{
-	//		DrawFormatString(x + (140 * i), y + (32 * player_i), GetColor(255, 0, 0), "ƒvƒŒƒCƒ„[%d = %d",
-	//			player_i, ranking->GetPlayerData(i, player_i).m_coinNum);
-	//	}
-	//}
-	//int startX = 120;
-	//int startY = 700;
-	//int endX = WINDOW_SIZE_X - 120;
-	//int len = endX - startX;
-	//int len2 = len / ranking->GetPlayerDataNum();
-
-	//int lineX[PLAYER_NUM];
-	//fill(lineX, lineX + PLAYER_NUM, startX);
-	//int lineY[PLAYER_NUM];
-	//fill(lineY, lineY + PLAYER_NUM, startY);
-	//for (int i = 0; i < ranking->GetPlayerDataNum(); i++)
-	//{
-	//	for (int player_i = 0; player_i < PLAYER_NUM; player_i++)
-	//	{
-	//		int lineX2 = startX + (len2 * (i + 1));
-	//		int lineY2 = startY - (10 * ranking->GetPlayerData(i, player_i).m_coinNum);
-	//		DrawLine(lineX[player_i], lineY[player_i] + player_i, lineX2, lineY2 + player_i, PLAYER_COLOR[player_i],5);
-	//		lineX[player_i] = lineX2;
-	//		lineY[player_i] = lineY2;
-	//	}
-	//}
-
 }
 
 //”jŠü

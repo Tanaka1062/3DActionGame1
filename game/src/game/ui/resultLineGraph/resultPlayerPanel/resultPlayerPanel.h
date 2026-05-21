@@ -23,7 +23,7 @@ public:
 	void Init();
 
 	//‰æ‘œƒ[ƒh
-	void Load(tagPlayerName _playerName,VECTOR _pos);
+	void Load(tagPlayerName _playerName,VECTOR _pos,int _money);
 
 	//•`Êˆ—
 	void Draw();

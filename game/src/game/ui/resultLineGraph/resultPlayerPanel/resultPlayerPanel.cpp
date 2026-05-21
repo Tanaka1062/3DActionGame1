@@ -106,12 +106,10 @@ void CResultPlayerPanel::Init()
 //-----------------------------------
 //			   画像ロード
 //-----------------------------------
-void CResultPlayerPanel::Load(tagPlayerName _playerName, VECTOR _pos)
+void CResultPlayerPanel::Load(tagPlayerName _playerName, VECTOR _pos,int _money)
 {
 	//中心座標を設定
 	m_pos = _pos;
-	//パネルが横一列にならぶように配置をずらす
-	m_pos.x += _playerName * PANEL_SIZE_X;
 	m_panel.SetPos(m_pos);
 
 	//アイコンの座標を設定
@@ -128,7 +126,7 @@ void CResultPlayerPanel::Load(tagPlayerName _playerName, VECTOR _pos)
 			ICON_SIZE_X, ICON_SIZE_Y, m_iconHndl.data());
 	}
 
-
+	m_money = _money;
 }
 
 //-----------------------------------
