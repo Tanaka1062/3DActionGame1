@@ -187,11 +187,17 @@
     <Filter Include="ソース ファイル\game\ui\resultLineGraph">
       <UniqueIdentifier>{3bf6f5a2-721f-49ab-9cff-4d95677bcf6f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\game\system\number">
+      <UniqueIdentifier>{dd37c3dd-9a89-486f-96de-339fed62921b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\game\system\sound">
+      <UniqueIdentifier>{ed345210-a602-4586-adf0-76399ae69ca7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\game\ui\resultLineGraph\resultPlayerPanel">
+      <UniqueIdentifier>{177ad48a-9e13-4beb-b096-ac865be49215}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\lib\number.cpp">
-      <Filter>ソース ファイル\lib</Filter>
-    </ClCompile>
     <ClCompile Include="src\lib\input\controllerInput.cpp">
       <Filter>ソース ファイル\lib\input</Filter>
     </ClCompile>
@@ -230,9 +236,6 @@
     </ClCompile>
     <ClCompile Include="src\game\main.cpp">
       <Filter>ソース ファイル\game</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\system\soundManager.cpp">
-      <Filter>ソース ファイル\game\system</Filter>
     </ClCompile>
     <ClCompile Include="src\game\sky\sky.cpp">
       <Filter>ソース ファイル\game\sky</Filter>
@@ -450,11 +453,17 @@
     <ClCompile Include="src\game\ui\resultLineGraph\resultLineGraph.cpp">
       <Filter>ソース ファイル\game\ui\resultLineGraph</Filter>
     </ClCompile>
+    <ClCompile Include="src\game\system\sound\soundManager.cpp">
+      <Filter>ソース ファイル\game\system\sound</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\system\number\number.cpp">
+      <Filter>ソース ファイル\game\system\number</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\ui\resultLineGraph\resultPlayerPanel\resultPlayerPanel.cpp">
+      <Filter>ソース ファイル\game\ui\resultLineGraph\resultPlayerPanel</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\lib\number.h">
-      <Filter>ソース ファイル\lib</Filter>
-    </ClInclude>
     <ClInclude Include="src\game\data.h">
       <Filter>ソース ファイル\game</Filter>
     </ClInclude>
@@ -493,9 +502,6 @@
     </ClInclude>
     <ClInclude Include="src\game\scene\titleScene.h">
       <Filter>ソース ファイル\game\scene</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\system\soundManager.h">
-      <Filter>ソース ファイル\game\system</Filter>
     </ClInclude>
     <ClInclude Include="src\game\sky\sky.h">
       <Filter>ソース ファイル\game\sky</Filter>
@@ -718,6 +724,15 @@
     </ClInclude>
     <ClInclude Include="src\game\ui\resultLineGraph\resultLineGraph.h">
       <Filter>ソース ファイル\game\ui\resultLineGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\system\sound\soundManager.h">
+      <Filter>ソース ファイル\game\system\sound</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\system\number\number.h">
+      <Filter>ソース ファイル\game\system\number</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\ui\resultLineGraph\resultPlayerPanel\resultPlayerPanel.h">
+      <Filter>ソース ファイル\game\ui\resultLineGraph\resultPlayerPanel</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

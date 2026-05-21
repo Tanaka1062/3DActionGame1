@@ -201,11 +201,13 @@
     <ClCompile Include="src\game\shot\shotManager.cpp" />
     <ClCompile Include="src\game\sky\sky.cpp" />
     <ClCompile Include="src\game\system\effectData\effectData.cpp" />
-    <ClCompile Include="src\game\system\soundManager.cpp" />
+    <ClCompile Include="src\game\system\number\number.cpp" />
+    <ClCompile Include="src\game\system\sound\soundManager.cpp" />
     <ClCompile Include="src\game\ui\countDown\countDown.cpp" />
     <ClCompile Include="src\game\ui\eventText\eventText.cpp" />
     <ClCompile Include="src\game\ui\playerStatusPanel\playerStatusPanel.cpp" />
     <ClCompile Include="src\game\ui\resultLineGraph\resultLineGraph.cpp" />
+    <ClCompile Include="src\game\ui\resultLineGraph\resultPlayerPanel\resultPlayerPanel.cpp" />
     <ClCompile Include="src\game\ui\time\timeUi.cpp" />
     <ClCompile Include="src\game\ui\uiGameManager.cpp" />
     <ClCompile Include="src\game\ui\uiResultManager.cpp" />
@@ -223,7 +225,6 @@
     <ClCompile Include="src\lib\model\3DObject.cpp" />
     <ClCompile Include="src\lib\model\actor.cpp" />
     <ClCompile Include="src\lib\myMath\myMath.cpp" />
-    <ClCompile Include="src\lib\number.cpp" />
     <ClCompile Include="src\lib\system\fade.cpp" />
     <ClCompile Include="src\lib\system\fps.cpp" />
   </ItemGroup>
@@ -292,11 +293,13 @@
     <ClInclude Include="src\game\shot\shotManager.h" />
     <ClInclude Include="src\game\sky\sky.h" />
     <ClInclude Include="src\game\system\effectData\effectData.h" />
-    <ClInclude Include="src\game\system\soundManager.h" />
+    <ClInclude Include="src\game\system\number\number.h" />
+    <ClInclude Include="src\game\system\sound\soundManager.h" />
     <ClInclude Include="src\game\ui\countDown\countDown.h" />
     <ClInclude Include="src\game\ui\eventText\eventText.h" />
     <ClInclude Include="src\game\ui\playerStatusPanel\playerStatusPanel.h" />
     <ClInclude Include="src\game\ui\resultLineGraph\resultLineGraph.h" />
+    <ClInclude Include="src\game\ui\resultLineGraph\resultPlayerPanel\resultPlayerPanel.h" />
     <ClInclude Include="src\game\ui\time\timeUi.h" />
     <ClInclude Include="src\game\ui\uiGameManager.h" />
     <ClInclude Include="src\game\ui\uiResultManager.h" />
@@ -314,7 +317,6 @@
     <ClInclude Include="src\lib\model\3DObject.h" />
     <ClInclude Include="src\lib\model\actor.h" />
     <ClInclude Include="src\lib\myMath\myMath.h" />
-    <ClInclude Include="src\lib\number.h" />
     <ClInclude Include="src\lib\system\fade.h" />
     <ClInclude Include="src\lib\system\fps.h" />
   </ItemGroup>

@@ -16,12 +16,7 @@ private:
 	std::vector <std::vector<VECTOR>>	m_spawnPos;					//プレイヤーの出現座標
 	std::vector<CCpuPlayerFOV*>			m_cpuFOV;					//CPUの視界範囲クラス
 	int									m_crownId;					//王冠のUiId
-	struct tagName													//プレイヤーの名前
-	{
-		int								m_UiId;						//プレイヤーの名前UiId
-		int								m_activeTime;				//生存時間
-	};
-	tagName								m_playerName[PLAYER_NUM];	//プレイヤーの名前UI
+	int									m_playerName[PLAYER_NUM];	//プレイヤーの名前UI
 
 public:
 	//コンストラクタ・デストラクタ

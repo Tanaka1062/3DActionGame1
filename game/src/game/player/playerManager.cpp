@@ -23,7 +23,8 @@ constexpr int MAP_FRAME_NUM = 7;				//マップのフレーム番号
 constexpr float DIE_RADIUS = 260.0f;			//画面外判定の半径
 
 constexpr int NAME_ACTIVE_TIME = 180;			//名前の表示時間
-constexpr float Ui_UP_Y = 40.0f;				//3DUiのどれだけあげるか
+constexpr float NAME_UP_Y = 40.0f;				//名前がどれだけ上にあるか
+constexpr float CROWN_UP_Y = 10.0f;				//王冠がどれだけ上にあるか
 
 static const char* MODEL_PATH =					//モデルのパス
 { "data/model/player/player.mv1"};			
@@ -42,8 +43,7 @@ CPlayerManager::CPlayerManager()
 	m_crownId = -1;
 	for (int player_i = 0; player_i < PLAYER_NUM; player_i++)
 	{
-		m_playerName[player_i].m_activeTime = 0;
-		m_playerName[player_i].m_UiId = -1;
+		m_playerName[player_i] = -1;
 	}
 }
 
@@ -141,8 +141,7 @@ void CPlayerManager::Init()
 
 		m_player.push_back(player);
 
-		m_playerName[player_i].m_UiId = -1;
-		m_playerName[player_i].m_activeTime = 0;
+		m_playerName[player_i] = -1;
 	}
 
 	m_crownId = -1;
@@ -208,7 +207,7 @@ void CPlayerManager::Load(CMapBase* _map, C3DUiManager* _3DUiManager)
 		tag3DUiName uiName = MT_NONE;
 
 		//プレイヤーの名前UIをロード------------------------------
-		if (m_player[player_i]->GetIsCpu() == false)
+		if (/*m_player[player_i]->GetIsCpu() == false*/ true)
 		{
 			switch (m_player[player_i]->GetPlayerName())
 			{
@@ -230,7 +229,7 @@ void CPlayerManager::Load(CMapBase* _map, C3DUiManager* _3DUiManager)
 		{
 			uiName = MT_CPU_NAME;
 		}
-		m_playerName[player_i].m_UiId = _3DUiManager->RequsetLoad(uiName);
+		m_playerName[player_i] = _3DUiManager->RequsetLoad(uiName);
 		//--------------------------------------------------------
 	}
 
@@ -373,24 +372,15 @@ void CPlayerManager::Step(CAttackManager* _attackManager, CShotManager* _shotMan
 				CCameraManager::GetFocusPos(), DIE_RADIUS) == true)
 			{
 				m_player[player_i]->Respawn(m_spawnPos[_stageId][player_i]);
-				m_playerName[player_i].m_activeTime = 0;
 			}
 		}
 
 		//プレイヤーの上に名前を表示する--------------------------------
-		m_playerName[player_i].m_activeTime++;
-		if (NAME_ACTIVE_TIME >= m_playerName[player_i].m_activeTime)
-		{
-			C3DUi* name = _3DUiManager->GetUi(m_playerName[player_i].m_UiId);
-			name->SetIsActive(true);
-			VECTOR vec = m_player[player_i]->GetCenter();
-			vec.y += Ui_UP_Y;
-			name->SetPos(vec);
-		}
-		else
-		{
-			_3DUiManager->GetUi(m_playerName[player_i].m_UiId)->SetIsActive(false);  
-		}
+		C3DUi* name = _3DUiManager->GetUi(m_playerName[player_i]);
+		name->SetIsActive(true);
+		VECTOR vec = m_player[player_i]->GetCenter();
+		vec.y += NAME_UP_Y;
+		name->SetPos(vec);
 		//--------------------------------------------------------------
 
 		m_player[player_i]->Step(_rot,targetPos,_attackManager,_shotManager);
@@ -421,7 +411,7 @@ void CPlayerManager::Step(CAttackManager* _attackManager, CShotManager* _shotMan
 	{
 		crown->SetIsActive(true);
 		VECTOR vec = m_player[topPlayerNum]->GetCenter();
-		vec.y += Ui_UP_Y;
+		vec.y += CROWN_UP_Y;
 		crown->SetPos(vec);
 	}
 	else

@@ -1,6 +1,6 @@
 #include "playerStatusPanel.h"
 #include "../../data.h"
-#include "../../lib/number.h"
+#include "../../system/number/number.h"
 
 using namespace std;
 
@@ -77,6 +77,7 @@ constexpr int PANEL_BLEND = 200;									//パネルの透明度
 
 constexpr float MONEY_NUMBER_SIZE = 0.5f;							//お金の大きさ
 constexpr VECTOR MONEY_NUMBER_INIT_POS = { 70.0f,-40.0f,0.0f };		//お金の初期座標
+constexpr int MONEY_DIGIT = 2;										//お金の表示桁数
 
 //-----------------------------------
 //			コンストラクタ
@@ -285,11 +286,7 @@ void CPlayerStatusPanel::Draw()
 		m_heart[heart_i]->Draw();
 	}
 
-	int ten = m_money / 10;
-	int one = m_money % 10;
-	VECTOR moneyNumberPos = VAdd(m_pos, MONEY_NUMBER_INIT_POS);
-	CNumber::RequestNumber(static_cast<int>(moneyNumberPos.x), static_cast<int>(moneyNumberPos.y), ten, MONEY_NUMBER_SIZE);
-	CNumber::RequestNumber(static_cast<int>(moneyNumberPos.x + (NUM_SIZE * MONEY_NUMBER_SIZE)), static_cast<int>(moneyNumberPos.y), one, MONEY_NUMBER_SIZE);
+	CNumber::RequestNumber(VAdd(m_pos,MONEY_NUMBER_INIT_POS), m_money, MONEY_NUMBER_SIZE, MONEY_DIGIT);
 }
 
 //-----------------------------------

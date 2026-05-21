@@ -2,7 +2,7 @@
 #include "../data.h"
 #include"../../lib/input/keyInput.h"
 #include"../../lib/input/controllerManager.h"
-#include "../system/soundManager.h"
+#include "../system/sound/soundManager.h"
 #include "../camera/cameraManager.h"
 #include "../../lib/system/fade.h"
 

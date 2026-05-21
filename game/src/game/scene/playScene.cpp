@@ -1,6 +1,6 @@
 #include "playScene.h"
 #include "../../lib/collision/collision.h"
-#include "../system/soundManager.h"
+#include "../system/sound/soundManager.h"
 #include "../../lib/input/keyInput.h"
 #include"../collisionManager/collisionManager.h"
 #include "../../lib/effekseer/effekseer.h"

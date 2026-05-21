@@ -1,12 +1,13 @@
 #include "timeUi.h"
 #include "../../data.h"
-#include "../../lib/number.h"
+#include "../../system/number/number.h"
 
 static const char GRAPHIC_PATH[] =
  "data/graphic/ui/division.png" ;				//ロードするファイル名
 
-constexpr int POS_X = WINDOW_SIZE_X / 2;
-constexpr int POS_Y = 100;
+constexpr VECTOR INIT_POS =						//初期座標	
+{ WINDOW_SIZE_HALF_X,100.0f,0.0f };				
+constexpr int SECOND_DIGIT = 2;					//秒の桁数
 
 CTimeUi::CTimeUi()
 {
@@ -21,14 +22,13 @@ CTimeUi::~CTimeUi()
 //初期化
 void CTimeUi::Init()
 {
-	m_oneM = 0;
-	m_tenS = 0;
-	m_oneS = 0;
+	m_minute = 0;
+	m_second = 0;
 
 	VECTOR pos = ZERO;
 
-	pos.x = static_cast<float>(POS_X - NUM_SIZE / 2);
-	pos.y = static_cast<float>(POS_Y);
+	pos.x = INIT_POS.x - static_cast<float>(CNumber::NUM_SIZE) * 0.5f;
+	pos.y = INIT_POS.y;
 
 	m_division.Init(pos);
 }
@@ -43,19 +43,19 @@ void CTimeUi::Load()
 void CTimeUi::Step(int _time)
 {
 
-	m_oneM = _time / 60;
-	m_tenS = (_time % 60) / 10;
-	m_oneS = (_time % 60) % 10;
+	m_minute = _time / 60;
+	m_second = _time - (m_minute * 60);
 
 }
 
 //描画処理
 void CTimeUi::Draw()
 {
-	CNumber::RequestNumber(POS_X - NUM_SIZE, POS_Y,m_oneM,1.0f);
+	//分を表示
+	CNumber::RequestNumber(INIT_POS.x - static_cast<float>(CNumber::NUM_SIZE),INIT_POS.y,m_minute);
 	m_division.Draw();
-	CNumber::RequestNumber(POS_X + NUM_SIZE / 8, POS_Y, m_tenS, 1.0f);
-	CNumber::RequestNumber(POS_X + NUM_SIZE, POS_Y, m_oneS, 1.0f);
+	//秒を表示
+	CNumber::RequestNumber(INIT_POS.x + static_cast<float>(CNumber::NUM_SIZE / 8), INIT_POS.y, m_second,1.0f, SECOND_DIGIT);
 
 }
 

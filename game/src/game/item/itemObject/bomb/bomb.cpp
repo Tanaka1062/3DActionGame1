@@ -2,7 +2,7 @@
 #include "../../../attack/attackManager.h"
 #include "../../../../lib/effekseer/effekseer.h"
 #include "../../../system/effectData/effectData.h"
-#include "../../../system/soundManager.h"
+#include "../../../system/sound/soundManager.h"
 
 constexpr int EXPLOSION_TIME = 5 * 60;				//”š”­‚·‚éŽžŠÔ
 constexpr int EXPLOSION_IN_TIME = 1 * 60;			//”š”­‚·‚é‘O‚ÌŽžŠÔ

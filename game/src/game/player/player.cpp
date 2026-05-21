@@ -9,7 +9,7 @@
 #include "../../lib/effekseer/effekseer.h"
 #include "../system/effectData/effectData.h"
 #include "../item/itemBase.h"
-#include "../system/soundManager.h"
+#include "../system/sound/soundManager.h"
 
 
 enum tagAttackNum

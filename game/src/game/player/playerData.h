@@ -12,7 +12,7 @@ enum tagPlayerName
 	PLAYER_NUM,			//ÉvÉåÉCÉÑÅ[ÇÃêî
 };
 
-static const int PLAYER_COLOR[PLAYER_NUM] =
+static const unsigned int PLAYER_COLOR[PLAYER_NUM] =
 {
 	GetColor(255,0,0),
 	GetColor(0,0,255),

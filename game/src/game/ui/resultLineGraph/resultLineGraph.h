@@ -1,11 +1,14 @@
 #pragma once
 #include "../../lib/2D/2DObject.h"
+#include "resultPlayerPanel/resultPlayerPanel.h"
+
 
 class CResultLineGraph
 {
 private:
-	int			m_lineLen;	//線の長さ
-	C2DObject	m_ui;		//ui	
+	int					m_lineLen;					//線の長さ
+	C2DObject			m_ui;						//ui	
+	CResultPlayerPanel	m_playerPanel[PLAYER_NUM];	//プレイヤーパネル
 public:
 	//コンストラクタ・デストラクタ
 	CResultLineGraph();

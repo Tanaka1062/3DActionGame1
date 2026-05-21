@@ -10,7 +10,7 @@
 #include"../lib/input/controllerManager.h"
 #include"../lib/effekseer/effekseer.h"
 #include"system/effectData/effectData.h"
-#include "../lib/number.h"
+#include "system/number/number.h"
 #include "../lib/system/fade.h"
 
 constexpr int EFFECT_MAX_NUM = 10;			//一度に表示できるエフェクトの最大数
@@ -27,7 +27,7 @@ int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 	// スクリーン設定
 	ChangeWindowMode(TRUE);			// フルスクリーンorウィンドウモード
-	SetGraphMode(WINDOW_SIZE_X, WINDOW_SIZE_Y, 32);	// ウィンドウのサイズ
+	SetGraphMode(static_cast<int>(WINDOW_SIZE_X), static_cast<int>(WINDOW_SIZE_Y), 32);	// ウィンドウのサイズ
 	
 #ifndef _DEBUG
 	// リリース版はログを出さない
@@ -102,9 +102,6 @@ int  WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 		//シーンの描画処理
 		scene.Draw();
-
-		////エフェクシアの描画処理
-		//CEffekseerCtrl::Draw();
 
 		//フェードの描画処理
 		CFade::Draw();
