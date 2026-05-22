@@ -9,7 +9,7 @@ namespace PlayerData{
 
 //プレイヤー関連--------------------------------
 	constexpr char MODEL_PATH[] =
-		"data/model/player/playerTransformTest.mv1";				//ロードするファイル名
+		"data/model/player/playerTransformTest.mv1";			//ロードするファイル名
 	constexpr VECTOR INIT_POS = { 0.0f,1.0f,0.0f };				//初期座標
 	constexpr float SHADOW_SIZE = 0.5f;							//丸影の大きさ
 	constexpr int MAX_HP = 200;									//体力

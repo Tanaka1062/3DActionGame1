@@ -9,6 +9,15 @@
 //ゲーム本編を管理するクラス
 class CResultScene :public CSceneBase
 {
+public:
+	enum tagState
+	{
+		RANKING,			//順位決め
+		GRAPH,				//グラフ表示
+		NEXT_SCENE,			//次のシーンに移行
+
+		STATE_NUM,			//状態の数
+	};
 private:
 	CSky					m_sky;					//天球
 	CMapManager				m_mapManager;			//マップ

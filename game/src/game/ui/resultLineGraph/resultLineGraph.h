@@ -1,7 +1,7 @@
 #pragma once
 #include "../../lib/2D/2DObject.h"
 #include "resultPlayerPanel/resultPlayerPanel.h"
-
+#include "../../scene/resultScene.h"
 
 class CResultLineGraph
 {
@@ -21,7 +21,7 @@ public:
 	void Load();
 
 	//–ˆƒtƒŒ[ƒ€‚·‚éˆ—
-	void Step();
+	void Step(CResultScene::tagState _state);
 
 	//•`Êˆ—
 	void Draw();
