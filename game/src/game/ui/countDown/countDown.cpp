@@ -33,8 +33,8 @@ CCountDown::~CCountDown()
 void CCountDown::Init()
 {
 	C2DObject::Init();
-	m_pos.x = WINDOW_SIZE_X / 2.0f;
-	m_pos.y = WINDOW_SIZE_Y / 2.0f;
+	m_pos.x = WINDOW_SIZE_HALF_X;
+	m_pos.y = WINDOW_SIZE_HALF_Y;
 	m_isActive = false;
 	m_count = COUNT_3;
 	m_timeCount = 0;

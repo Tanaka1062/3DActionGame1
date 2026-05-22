@@ -108,12 +108,6 @@ void CResultScene::Load()
 //---------------------------
 void CResultScene::Step()
 {
-	m_sky.Step();
-	m_mapManager.Step();
-	m_resultPlayerManager.Step(m_mapManager.GetMap());
-	m_uiManager.Step(m_mapManager.GetMap());
-	CCameraManager::Step(&m_mapManager);
-
 	bool isPodiumMoveEnd = false;
 
 	if (m_mapManager.GetMap()->GetMapId() == MAP_ID_RESULT)
@@ -122,9 +116,13 @@ void CResultScene::Step()
 		isPodiumMoveEnd = resultMap->GetIsPodiumMoveEnd();
 	}
 
-	if ((CKeyInput::IsTrg(KEY_SELECT) == true ||
-		CControllerManager::IsTrg(BUTTON_B)) &&
-		isPodiumMoveEnd == true)
+	m_sky.Step();
+	m_mapManager.Step();
+	m_resultPlayerManager.Step(m_mapManager.GetMap());
+	m_uiManager.Step(isPodiumMoveEnd);
+	CCameraManager::Step(&m_mapManager);
+
+	if (m_uiManager.GetIsGraphEnd() == true)
 	{
 		m_state = ENDWAIT;
 	}

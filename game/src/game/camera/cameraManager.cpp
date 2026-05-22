@@ -12,7 +12,7 @@ constexpr float CAMERA_NEAR = 1.0f;						//ニアー
 constexpr float CAMERA_FAR = 5000.0f;					//ファー
 constexpr float CAMERA_PERS = 60.0f * DX_PI_F / 180.0f;	//パース
 constexpr float ASPECT_RATIO =							//アスペクト比
-static_cast<float>(WINDOW_SIZE_X / WINDOW_SIZE_Y);
+WINDOW_SIZE_X / WINDOW_SIZE_Y;
 //============================================
 
 CCameraBase* CCameraManager::m_camera[CAMERA_ID_NUM];

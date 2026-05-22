@@ -7,7 +7,7 @@
 using namespace std;
 
 constexpr VECTOR START_LINE = { 78.0f,609.0f,0.0f };						//はじめの線の座標
-constexpr float LINE_LENGTH = static_cast<float>(WINDOW_SIZE_X - 288.0f);	//線の長さ
+constexpr float LINE_LENGTH = WINDOW_SIZE_X - 288.0f;						//線の長さ
 constexpr int LINE_SPEED = 3;												//線の伸びるスピード
 constexpr int LINE_LENGTH_Y = 10;											//線の縦の長さ
 
@@ -46,6 +46,8 @@ void CResultLineGraph::Init()
 	{
 		m_playerPanel[player_i].Init();
 	}
+
+	m_isMaxLine = false;
 }
 
 //ロード
@@ -68,8 +70,14 @@ void CResultLineGraph::Load()
 //毎フレームする処理
 void CResultLineGraph::Step()
 {
-	//伸ばす
-	m_lineLen += LINE_SPEED;
+	if (LINE_LENGTH <= m_lineLen)
+		m_isMaxLine = true;
+
+	if (m_isMaxLine == false)
+	{
+		//伸ばす
+		m_lineLen += LINE_SPEED;
+	}
 }
 
 //描写処理
@@ -128,6 +136,7 @@ void CResultLineGraph::Draw()
 	}
 	//---------------------------------------------------------------------------------
 
+	//プレイヤーのパネルを表示
 	for (int player_i = 0; player_i < PLAYER_NUM; player_i++)
 	{
 		m_playerPanel[player_i].Draw();
@@ -137,7 +146,7 @@ void CResultLineGraph::Draw()
 //終了処理
 void CResultLineGraph::Exit()
 {
-	m_ui.Draw();
+	m_ui.Exit();
 	for (int player_i = 0; player_i < PLAYER_NUM; player_i++)
 	{
 		m_playerPanel[player_i].Exit();

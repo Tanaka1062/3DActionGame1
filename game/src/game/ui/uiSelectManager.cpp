@@ -22,8 +22,8 @@ static const char* UI_GRAPHIC_PATH[UI_NUM] =		//背景の画像パス
 
 static const VECTOR UI_POS[UI_NUM] =					//UIの座標
 {
-	{static_cast<float>(WINDOW_SIZE_X * 0.5f),static_cast<float>(WINDOW_SIZE_Y * 0.5f) + 100.0f,0.0f},
-	{static_cast<float>(WINDOW_SIZE_X * 0.5f),static_cast<float>(WINDOW_SIZE_Y * 0.5f) + 300.0f,0.0f},
+	{WINDOW_SIZE_HALF_X,WINDOW_SIZE_HALF_Y + 100.0f,0.0f},
+	{WINDOW_SIZE_HALF_X,WINDOW_SIZE_HALF_Y + 300.0f,0.0f},
 };
 
 //コンストラクタ・デストラクタ

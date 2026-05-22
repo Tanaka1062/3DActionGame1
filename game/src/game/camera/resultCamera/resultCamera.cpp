@@ -1,5 +1,7 @@
 #include "resultCamera.h"
 #include <math.h>
+#include "../../map/resultMap/resultMap.h"
+#include "../../map/mapManager.h"
 
 //定義関連====================================
 constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };			//VECTOR用初期化
@@ -27,7 +29,7 @@ void CResultCamera::Init(CMapBase* _map)
 	CCameraBase::Init(_map);
 	m_pos = INIT_POS;
 	m_focusPos = FOCUS_POS;
-
+	m_mapBase = _map;
 }
 
 //---------------------------------
@@ -35,6 +37,16 @@ void CResultCamera::Init(CMapBase* _map)
 //---------------------------------
 void CResultCamera::Step(int _hndl)
 {
+	if (m_mapBase->GetMapId() == MAP_ID_RESULT)
+	{
+		CResultMap* resultMap = dynamic_cast<CResultMap*>(m_mapBase);
+
+		if (resultMap->GetIsPodiumMoveEnd() == true)
+		{
+			m_focusPos.y = FOCUS_MAX_Y;
+		}
+	}
+
 	//注視点を最大の高さまで上昇させる
 	if (m_focusPos.y < FOCUS_MAX_Y)
 	{

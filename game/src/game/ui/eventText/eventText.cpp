@@ -8,7 +8,7 @@ static const char* TEXT_GRAPHIC_PATH[CEventManager::EVENT_NUM] =		//背景の画像パ
 
 };
 constexpr int ACTIVE_TIME = 300;										//表示する時間
-constexpr VECTOR TEXT_POS = { WINDOW_SIZE_X * 0.5f,100.0f,0.0f };		//テキストの座標
+constexpr VECTOR TEXT_POS = { WINDOW_SIZE_HALF_X,100.0f,0.0f };			//テキストの座標
 
 //-----------------------
 //	  コンストラクタ

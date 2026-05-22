@@ -7,8 +7,8 @@
 class CResultCamera : public CCameraBase
 {
 private:
-	VECTOR m_focusPos;	//カメラの注視点
-
+	VECTOR		m_focusPos;	//カメラの注視点
+	CMapBase*	m_mapBase;	//マップベース
 public:
 	//コンストラクタ
 	CResultCamera();

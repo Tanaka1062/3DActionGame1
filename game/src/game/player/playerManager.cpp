@@ -207,7 +207,7 @@ void CPlayerManager::Load(CMapBase* _map, C3DUiManager* _3DUiManager)
 		tag3DUiName uiName = MT_NONE;
 
 		//プレイヤーの名前UIをロード------------------------------
-		if (/*m_player[player_i]->GetIsCpu() == false*/ true)
+		if (m_player[player_i]->GetIsCpu() == false)
 		{
 			switch (m_player[player_i]->GetPlayerName())
 			{

@@ -10,9 +10,9 @@ static const char MODEL_PATH[] =
 constexpr VECTOR GET_COIN_POS[PLAYER_NUM] =
 {
 	{115.0f,60.0f,0.0f},
-	{static_cast<float>(WINDOW_SIZE_X - 115),60.0f,0.0f},
+	{WINDOW_SIZE_X - 115.0f,60.0f,0.0f},
 	{115.0f,120.0f,0.0f},
-	{static_cast<float>(WINDOW_SIZE_X - 115),120.0f,0.0f},
+	{WINDOW_SIZE_X - 115.0f,120.0f,0.0f},
 
 };
 
