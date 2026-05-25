@@ -2,6 +2,7 @@
 #include "../../data.h"
 #include "../../lib/myMath/myMath.h"
 #include <math.h>
+#include "../../system/sound/soundManager.h"
 
 //’è‹`ŠÖ˜A---------------------------
 
@@ -63,11 +64,13 @@ void CSelectPlayer::Step()
 	{
 		if (m_isReady == true)
 		{
+			CSoundManager::Play(CSoundManager::SE_READY_OFF, DX_PLAYTYPE_BACK);
 			m_state = READY_OUT;
 			m_isReady = false;
 		}
 		else
 		{
+			CSoundManager::Play(CSoundManager::SE_READY_ON, DX_PLAYTYPE_BACK);
 			m_state = READY;
 			m_isReady = true;
 		}

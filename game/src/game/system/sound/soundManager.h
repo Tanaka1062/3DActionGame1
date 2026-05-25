@@ -17,16 +17,21 @@ public:
 		BGM_GAME,		//BGM ゲーム本編
 		BGM_TITLE,		//BGM タイトル
 		BGM_RESULT,		//BGM リザルト
+		BGM_DRUMROLL,	//BGM ドラムロール
 		BGM_SELECT,		//BGM 選択画面
-		SE_GUN,			//SE 銃を撃った音
+		SE_TITLE_START,	//SE タイトルのスタート音
+		SE_JOIN,		//SE ゲームに参加する音
+		SE_READY_ON,	//SE 準備が完了する音
+		SE_READY_OFF,	//SE 準備をキャンセルする音
 		SE_SWORD,		//SE 剣を振った音
 		SE_AX,			//SE 斧を振った音
 		SE_HAND,		//SE 素手で攻撃した音
 		SE_HIT,			//SE 攻撃が当たった時の音
 		SE_COINDROP,	//SE コインを落とした音
 		SE_COINGET,		//SE コインを取得した音
-		SE_BUY,			//SE アイテムを購入した音
 		SE_EXPLOSION,	//SE 爆発音
+		SE_PODIUM_STOP,	//SE 表彰台が止まる音
+		SE_APPLAUSE,	//SE 拍手の音
 
 		SOUND_NUM,		//BGM,SEの総数
 	};

@@ -2,6 +2,7 @@
 #include "../../player/playerData.h"
 #include "../../ranking/ranking.h"
 #include "../../../lib/input/keyInput.h"
+#include "../../system/sound/soundManager.h"
 
 //定義関連==================================
 constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
@@ -35,6 +36,7 @@ CResultMap::CResultMap()
 	for (int player_i = 0; player_i < PLAYER_NUM; player_i++)
 	{
 		m_object.push_back(new CObject);
+		m_isPodiumMoveEnd.push_back(false);
 	}
 }
 
@@ -43,7 +45,7 @@ CResultMap::CResultMap()
 //------------------------
 void CResultMap::Init()
 {
-	m_isPodiumMoveEnd = false;
+	m_isPodiumAllMoveEnd = false;
 	CMapBase::Init();
 	for (int stage_i = 0; stage_i < m_stage.size(); stage_i++)
 	{
@@ -53,6 +55,7 @@ void CResultMap::Init()
 	for (int object_i = 0; object_i < m_object.size(); object_i++)
 	{
 		m_object[object_i]->Init();
+		m_isPodiumMoveEnd[object_i] = false;
 	}
 }
 
@@ -101,10 +104,15 @@ void CResultMap::Step()
 		{
 			pos.y += PODIUM_UP_SPEED;
 		}
-		else
+		else if(m_isPodiumMoveEnd[object_i] == false)
+		{
+			m_isPodiumMoveEnd[object_i] = true;
+			pos.y = PODIUM_MAX_Y[ranking->GetPlayerRank(static_cast<tagPlayerName>(object_i))];
+		}
+
+		if (m_isPodiumMoveEnd[object_i] == true)
 		{
 			podiumMaxNum++;
-			pos.y = PODIUM_MAX_Y[ranking->GetPlayerRank(static_cast<tagPlayerName>(object_i))];
 		}
 
 		if (isButton == true)
@@ -117,7 +125,7 @@ void CResultMap::Step()
 	//全ての表彰台が最大まで伸びたらフラグをtrueにする
 	if (podiumMaxNum == m_object.size())
 	{
-		m_isPodiumMoveEnd = true;
+		m_isPodiumAllMoveEnd = true;
 	}
 }
 

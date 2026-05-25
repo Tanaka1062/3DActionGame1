@@ -79,7 +79,7 @@ void CResultScene::Load()
 		m_mapManager.Load();
 		m_resultPlayerManager.Load(m_mapManager.GetMap());
 		m_uiManager.Load();
-		CSoundManager::Play(CSoundManager::BGM_RESULT, DX_PLAYTYPE_LOOP);
+		CSoundManager::Play(CSoundManager::BGM_DRUMROLL, DX_PLAYTYPE_LOOP);
 
 		m_LoadState = 1;
 		break;
@@ -113,7 +113,7 @@ void CResultScene::Step()
 	if (m_mapManager.GetMap()->GetMapId() == MAP_ID_RESULT)
 	{
 		CResultMap* resultMap = dynamic_cast<CResultMap*>(m_mapManager.GetMap());
-		isPodiumMoveEnd = resultMap->GetIsPodiumMoveEnd();
+		isPodiumMoveEnd = resultMap->GetIsPodiumAllMoveEnd();
 	}
 
 	m_sky.Step();

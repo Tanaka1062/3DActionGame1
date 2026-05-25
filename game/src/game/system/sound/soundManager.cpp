@@ -17,8 +17,6 @@ constexpr int SOUND_VOLUME[CSoundManager::tagSound::SOUND_NUM] =
 	255,
 	255,
 	255,
-	255,
-	255,
 
 };
 
@@ -41,17 +39,21 @@ void CSoundManager::Load()
 		"data/sound/game/gameBGM.mp3",
 		"data/sound/title/titleBGM.mp3",
 		"data/sound/result/resultBGM.mp3",
+		"data/sound/result/drumrollBGM.mp3",
 		"data/sound/select/selectBGM.mp3",
-		"data/sound/game/gunSE.mp3",
+		"data/sound/title/titleStartSE.mp3",
+		"data/sound/select/joinSE.mp3",
+		"data/sound/select/readyOnSE.mp3",
+		"data/sound/select/readyOffSE.mp3",
 		"data/sound/game/swordSE.mp3",
 		"data/sound/game/axSE.mp3",
 		"data/sound/game/handSE.mp3",
 		"data/sound/game/hitSE.mp3",
 		"data/sound/game/coinDropSE.mp3",
 		"data/sound/game/coinGetSE.mp3",
-		"data/sound/game/buySE.mp3",
 		"data/sound/game/explosionSE.mp3",
-
+		"data/sound/result/podiumStopSE.mp3",
+		"data/sound/result/applauseSE.mp3",
 	};
 	// -------------------------------------
 

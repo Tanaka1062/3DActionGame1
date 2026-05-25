@@ -164,7 +164,7 @@ void CResultPlayerManager::Step(CMapBase* _map)
 	if (_map->GetMapId() == MAP_ID_RESULT)
 	{
 		CResultMap* resultMap = dynamic_cast<CResultMap*>(_map);
-		isPodiumMoveEnd = resultMap->GetIsPodiumMoveEnd();
+		isPodiumMoveEnd = resultMap->GetIsPodiumAllMoveEnd();
 	}
 
 	for (int player_i = 0; player_i < m_player.size(); player_i++)

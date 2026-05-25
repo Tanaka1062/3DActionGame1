@@ -126,6 +126,8 @@ void CTitleScene::Step()
 		CControllerManager::SetId() == true ||
 		CControllerManager::IsTrg(BUTTON_B) == true)
 	{
+		CSoundManager::Play(CSoundManager::SE_TITLE_START,DX_PLAYTYPE_BACK);
+
 		m_state = ENDWAIT;
 	}
 

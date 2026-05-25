@@ -41,7 +41,7 @@ void CResultCamera::Step(int _hndl)
 	{
 		CResultMap* resultMap = dynamic_cast<CResultMap*>(m_mapBase);
 
-		if (resultMap->GetIsPodiumMoveEnd() == true)
+		if (resultMap->GetIsPodiumAllMoveEnd() == true)
 		{
 			m_focusPos.y = FOCUS_MAX_Y;
 		}

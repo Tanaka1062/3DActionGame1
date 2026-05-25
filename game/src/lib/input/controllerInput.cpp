@@ -35,7 +35,9 @@ void CControllerInput::Init()
 	m_nowButton = 0;
 	m_beforeButton = 0;
 	m_LX = 0;
-	m_LY = 0;	
+	m_LY = 0;
+	m_RX = 0;
+	m_LX = 0;
 	m_controllerId = -1;
 }
 

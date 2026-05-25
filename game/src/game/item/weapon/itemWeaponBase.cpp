@@ -55,10 +55,6 @@ void CWeaponBase::HitCalc(CObject* _hitObject)
 					//‚¨‹à‚ª‘«‚è‚½‚çŽ‚¿ã‚°‚ê‚é
 					if (player->SubMoney(m_cost) == true)
 					{
-						if (m_cost > 0)
-						{
-							CSoundManager::Play(CSoundManager::SE_BUY, DX_PLAYTYPE_BACK);
-						}
 
 						isPickUp = true;
 					}

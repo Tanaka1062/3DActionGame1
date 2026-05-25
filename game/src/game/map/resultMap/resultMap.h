@@ -5,7 +5,9 @@
 class CResultMap : public CMapBase
 {
 private:
-	bool m_isPodiumMoveEnd;		//表彰台が動き終わったか
+	std::vector<bool>	m_isPodiumMoveEnd;		//表彰台が動き終わったか
+	bool				m_isPodiumAllMoveEnd;	//表彰台が全て動き終わったか
+
 public:
 	//コンストラクタ
 	CResultMap();
@@ -19,7 +21,7 @@ public:
 	//毎フレームする処理
 	void Step();
 
-	//表彰台が動き終わったかを取得
-	bool GetIsPodiumMoveEnd() { return m_isPodiumMoveEnd; }
+	//表彰台が全て動き終わったかを取得
+	bool GetIsPodiumAllMoveEnd() { return m_isPodiumAllMoveEnd; }
 };
 
