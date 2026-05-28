@@ -83,6 +83,7 @@ void CResultMap::Load()
 //------------------------
 void CResultMap::Step()
 {
+
 	//順位管理クラス取得
 	CRanking* ranking = CRanking::GetInstance();
 
@@ -98,6 +99,7 @@ void CResultMap::Step()
 	int podiumMaxNum = 0;
 	for (int object_i = 0; object_i < m_object.size(); object_i++)
 	{
+
 		VECTOR pos = m_object[object_i]->GetPos();
 		//順位ごとに設定された大きさまで表彰台を移動させる
 		if (PODIUM_MAX_Y[ranking->GetPlayerRank(static_cast<tagPlayerName>(object_i))] > pos.y)
@@ -106,6 +108,7 @@ void CResultMap::Step()
 		}
 		else if(m_isPodiumMoveEnd[object_i] == false)
 		{
+			CSoundManager::Play(CSoundManager::SE_PODIUM_STOP,DX_PLAYTYPE_BACK);
 			m_isPodiumMoveEnd[object_i] = true;
 			pos.y = PODIUM_MAX_Y[ranking->GetPlayerRank(static_cast<tagPlayerName>(object_i))];
 		}
@@ -123,8 +126,15 @@ void CResultMap::Step()
 		m_object[object_i]->SetPos(pos);
 	}
 	//全ての表彰台が最大まで伸びたらフラグをtrueにする
-	if (podiumMaxNum == m_object.size())
+	if (podiumMaxNum == m_object.size() &&
+		m_isPodiumAllMoveEnd == false)
 	{
+		//拍手SEを再生
+		CSoundManager::Play(CSoundManager::SE_APPLAUSE, DX_PLAYTYPE_BACK);
+		//ドラムロールを止める
+		CSoundManager::Stop(CSoundManager::BGM_DRUMROLL);
+		//BGMを再生
+		CSoundManager::Play(CSoundManager::BGM_RESULT);
 		m_isPodiumAllMoveEnd = true;
 	}
 }

@@ -278,6 +278,12 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 		m_hp = m_maxHp;
 	}
 
+	//コインが最大数を超えないように
+	if (m_money >= PlayerData::MONEY_MAX)
+	{
+		m_money = PlayerData::MONEY_MAX;
+	}
+
 	//攻撃の当たり判定が消えたら攻撃のIDを初期化する
 	if (_attackManager->GetActive(m_attackId) == false)
 	{
@@ -618,7 +624,7 @@ void CPlayer::Walk()
 //-----------------------
 void CPlayer::Jump()
 {
-	RequestAnim(ANIMID_JUMP, 2.0f);
+	RequestAnim(ANIMID_JUMP, PlayerData::JUMP_ANIM_SPEED);
 
 	if (GetAnimEnd() == true)
 	{
@@ -645,7 +651,7 @@ void CPlayer::Air()
 //-----------------------
 void CPlayer::Landing()
 {
-	RequestAnim(ANIMID_LANDING, 1.0f);
+	RequestAnim(ANIMID_LANDING, PlayerData::LANDING_ANIM_SPEED);
 
 	if (GetAnimEnd() == true)
 	{
@@ -822,7 +828,7 @@ void CPlayer::Attack(CAttackManager* _attackManager, CShotManager* _shotManager)
 		break;
 	//武器がハンマーの場合
 	case WEAPON_ID_HAMMER:
-		CSoundManager::Play(CSoundManager::SE_SWORD, DX_PLAYTYPE_BACK);
+		CSoundManager::Play(CSoundManager::SE_HAMMER, DX_PLAYTYPE_BACK);
 
 		switch (m_attackNum)
 		{

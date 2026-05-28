@@ -20,11 +20,14 @@ namespace PlayerData{
 	constexpr int BLOWN_MAX = 100;								//吹き飛び最大値
 	constexpr VECTOR KNOCK_BACK_SPEED = { 0.0f,3.0f,-0.8f };	//吹き飛ぶスピード
 	constexpr int INIT_MONEY = 0;								//最初の所持金
+	constexpr int MONEY_MAX = 50;								//コインを持てる最大の数
 	constexpr float MONEY_DROP_RATE = 0.4f;						//落とすお金の割合
 	constexpr float MONEY_RESPAWN_RATE = 0.5f;					//復活するときに消費するお金の割合
 	constexpr float DIE_POS_Y = -100.0f;						//死ぬ高さ
 	constexpr float FALL_OUT_DAMAGER_RATE = 0.3f;				//ステージから落下したときの割合ダメージ
 	constexpr int GET_UP_MAX_TIME = 3 * 60;						//起き上がるまでの最大時間
+	constexpr float LANDING_ANIM_SPEED = 3.0f;					//着地するまでの速さ
+	constexpr float JUMP_ANIM_SPEED = 3.0f;						//ジャンプするまでの速さ
 	//----------------------------------------------
 
 	//攻撃関連---------------------------

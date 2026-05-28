@@ -17,6 +17,13 @@ constexpr int SOUND_VOLUME[CSoundManager::tagSound::SOUND_NUM] =
 	255,
 	255,
 	255,
+	255,
+	255,
+	255,
+	255,
+	255,
+	255,
+	255,
 
 };
 
@@ -45,7 +52,7 @@ void CSoundManager::Load()
 		"data/sound/select/joinSE.mp3",
 		"data/sound/select/readyOnSE.mp3",
 		"data/sound/select/readyOffSE.mp3",
-		"data/sound/game/swordSE.mp3",
+		"data/sound/game/hammerSE.mp3",
 		"data/sound/game/axSE.mp3",
 		"data/sound/game/handSE.mp3",
 		"data/sound/game/hitSE.mp3",

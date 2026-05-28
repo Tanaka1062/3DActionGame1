@@ -23,7 +23,7 @@ public:
 		SE_JOIN,		//SE ゲームに参加する音
 		SE_READY_ON,	//SE 準備が完了する音
 		SE_READY_OFF,	//SE 準備をキャンセルする音
-		SE_SWORD,		//SE 剣を振った音
+		SE_HAMMER,		//SE ハンマーを振った音
 		SE_AX,			//SE 斧を振った音
 		SE_HAND,		//SE 素手で攻撃した音
 		SE_HIT,			//SE 攻撃が当たった時の音
