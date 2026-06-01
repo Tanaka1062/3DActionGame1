@@ -70,9 +70,6 @@
     <Filter Include="ソース ファイル\lib\effekseer">
       <UniqueIdentifier>{f8cc2464-89a2-42d1-809b-271ec42468ae}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\game\camera\debugCamera">
-      <UniqueIdentifier>{578ef763-b049-4f80-ba2b-727e3fe82f73}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\game\system\effectData">
       <UniqueIdentifier>{fb345ed7-3d28-46b3-95c0-5b3036b6b10e}</UniqueIdentifier>
     </Filter>
@@ -269,9 +266,6 @@
     </ClCompile>
     <ClCompile Include="src\lib\effekseer\effekseer.cpp">
       <Filter>ソース ファイル\lib\effekseer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\camera\debugCamera\debugCamera.cpp">
-      <Filter>ソース ファイル\game\camera\debugCamera</Filter>
     </ClCompile>
     <ClCompile Include="src\game\camera\cameraBase.cpp">
       <Filter>ソース ファイル\game\camera</Filter>
@@ -538,9 +532,6 @@
     </ClInclude>
     <ClInclude Include="src\lib\effekseer\effekseer.h">
       <Filter>ソース ファイル\lib\effekseer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\camera\debugCamera\debugCamera.h">
-      <Filter>ソース ファイル\game\camera\debugCamera</Filter>
     </ClInclude>
     <ClInclude Include="src\game\camera\cameraBase.h">
       <Filter>ソース ファイル\game\camera</Filter>

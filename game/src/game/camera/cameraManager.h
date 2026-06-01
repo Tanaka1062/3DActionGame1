@@ -13,7 +13,6 @@ public:
 	{
 		CAMERA_ID_NONE = -1,						//初期化用
 		CAMERA_ID_MAP,								//マップのカメラ
-		CAMERA_ID_DEBUG,							//デバッグ時のカメラ
 		CAMERA_ID_TITLE,							//タイトル画面のカメラ
 		CAMERA_ID_SELECT,							//セレクト画面のカメラ
 		CAMERA_ID_RESULT,							//リザルト画面のカメラ

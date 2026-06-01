@@ -6,11 +6,11 @@ vector<int> CSoundManager::m_hndl;
 
 constexpr int SOUND_VOLUME[CSoundManager::tagSound::SOUND_NUM] =
 {
-	255,
-	255,
-	255,
-	255,
-	255,
+	150,
+	150,
+	150,
+	150,
+	150,
 	255,
 	255,
 	255,
@@ -98,6 +98,8 @@ void CSoundManager::Exit()
 //---------------------------
 bool CSoundManager::Play(tagSound _id, int _type, bool _isStart)
 {
+	int result = PlaySoundMem(m_hndl[_id], _type, _isStart);
+
 	return PlaySoundMem(m_hndl[_id], _type,_isStart) ? true : false;
 }
 

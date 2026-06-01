@@ -513,6 +513,16 @@ void CPlayer::HitAttack(int _atk, int _blown, float _rotY)
 	}
 	else
 	{
+		//斧の攻撃中に怯んだら音を止める
+		if (m_weaponId == WEAPON_ID_AX &&
+			m_state == ATTACK)
+		{
+			if (CSoundManager::IsPlay(CSoundManager::SE_AX) == true)
+			{
+				CSoundManager::Stop(CSoundManager::SE_AX);
+			}
+		}
+
 		//怯み状態にする
 		m_state = STAGGER;
 	}
@@ -868,7 +878,10 @@ void CPlayer::Attack(CAttackManager* _attackManager, CShotManager* _shotManager)
 		break;
 	//武器が斧の場合
 	case WEAPON_ID_AX:
-		CSoundManager::Play(CSoundManager::SE_AX, DX_PLAYTYPE_BACK);
+		if (CSoundManager::IsPlay(CSoundManager::SE_AX) == false)
+		{
+			CSoundManager::Play(CSoundManager::SE_AX, DX_PLAYTYPE_LOOP);
+		}
 		//攻撃中のアニメーション
 		if (RequestAnim(ANIMID_ATTACK1_AX, 1.0f,true) == true)
 		{
@@ -948,6 +961,7 @@ void CPlayer::AttackOut()
 	case WEAPON_ID_AX:
 		//攻撃後のアニメーション
 		RequestAnim(ANIMID_ATTACK1_AX_OUT, 0.5f);
+		CSoundManager::Stop(CSoundManager::SE_AX);
 		break;
 	}
 

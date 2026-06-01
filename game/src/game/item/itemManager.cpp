@@ -68,6 +68,7 @@ void CItemManager::Step(CPlayerManager* _playerManager, int _stageId)
 	m_coinManager.Step();
 
 
+	
 	//スポーンしたらアイテムを増やす
 	if (m_spawnItemManager.GetIsItemSpawn() == true)
 	{
