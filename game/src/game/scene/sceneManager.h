@@ -11,6 +11,7 @@ private:
 	{
 		TITLE,				//タイトル画面
 		SELECT,				//セレクト画面
+		MAP_SELECT,			//マップセレクト画面
 		GAME,				//ゲーム本編
 		RESULT,				//リザルト画面
 

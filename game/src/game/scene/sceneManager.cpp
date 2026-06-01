@@ -3,6 +3,7 @@
 #include "titleScene.h"
 #include "resultScene.h"
 #include "selectScene.h"
+#include "mapSelectScene.h"
 #include"../system/sound/soundManager.h"
 #include"../../lib/effekseer/effekseer.h"
 #include "../gameTime/gameTime.h"
@@ -61,6 +62,10 @@ void CSceneManager::Factory()
 			m_scene = new CSelectScene;
 			break;
 		case SELECT:
+			m_sceneID = MAP_SELECT;
+			m_scene = new CMapSelectScene;
+			break;
+		case MAP_SELECT:
 			m_sceneID = GAME;
 			m_scene = new CPlayScene;
 			break;

@@ -193,6 +193,12 @@
     <Filter Include="ソース ファイル\game\ui\resultLineGraph\resultPlayerPanel">
       <UniqueIdentifier>{177ad48a-9e13-4beb-b096-ac865be49215}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\game\backGround">
+      <UniqueIdentifier>{cf27f1da-c079-4e67-aa3e-c1657690f459}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\game\ui\mapSelect">
+      <UniqueIdentifier>{95e83de7-b112-4682-b0f4-92ca6e3a33f8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\input\controllerInput.cpp">
@@ -455,6 +461,18 @@
     </ClCompile>
     <ClCompile Include="src\game\ui\resultLineGraph\resultPlayerPanel\resultPlayerPanel.cpp">
       <Filter>ソース ファイル\game\ui\resultLineGraph\resultPlayerPanel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\scene\mapSelectScene.cpp">
+      <Filter>ソース ファイル\game\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\backGround\mapSelectBG.cpp">
+      <Filter>ソース ファイル\game\backGround</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\ui\uiMapSelectManager.cpp">
+      <Filter>ソース ファイル\game\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\ui\mapSelect\mapSelect.cpp">
+      <Filter>ソース ファイル\game\ui\mapSelect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -724,6 +742,18 @@
     </ClInclude>
     <ClInclude Include="src\game\ui\resultLineGraph\resultPlayerPanel\resultPlayerPanel.h">
       <Filter>ソース ファイル\game\ui\resultLineGraph\resultPlayerPanel</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\scene\mapSelectScene.h">
+      <Filter>ソース ファイル\game\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\backGround\mapSelectBG.h">
+      <Filter>ソース ファイル\game\backGround</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\ui\uiMapSelectManager.h">
+      <Filter>ソース ファイル\game\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\ui\mapSelect\mapSelect.h">
+      <Filter>ソース ファイル\game\ui\mapSelect</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

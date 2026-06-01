@@ -143,6 +143,7 @@
     <ClCompile Include="src\game\3DUi\3DUiManager.cpp" />
     <ClCompile Include="src\game\attack\attackBase.cpp" />
     <ClCompile Include="src\game\attack\attackManager.cpp" />
+    <ClCompile Include="src\game\backGround\mapSelectBG.cpp" />
     <ClCompile Include="src\game\camera\cameraBase.cpp" />
     <ClCompile Include="src\game\camera\cameraManager.cpp" />
     <ClCompile Include="src\game\camera\mapCamera\mapCamera.cpp" />
@@ -189,6 +190,7 @@
     <ClCompile Include="src\game\player\titlePlayer\titlePlayer.cpp" />
     <ClCompile Include="src\game\player\titlePlayer\titlePlayerManager.cpp" />
     <ClCompile Include="src\game\ranking\ranking.cpp" />
+    <ClCompile Include="src\game\scene\mapSelectScene.cpp" />
     <ClCompile Include="src\game\scene\playScene.cpp" />
     <ClCompile Include="src\game\scene\resultScene.cpp" />
     <ClCompile Include="src\game\scene\sceneBase.cpp" />
@@ -204,11 +206,13 @@
     <ClCompile Include="src\game\system\sound\soundManager.cpp" />
     <ClCompile Include="src\game\ui\countDown\countDown.cpp" />
     <ClCompile Include="src\game\ui\eventText\eventText.cpp" />
+    <ClCompile Include="src\game\ui\mapSelect\mapSelect.cpp" />
     <ClCompile Include="src\game\ui\playerStatusPanel\playerStatusPanel.cpp" />
     <ClCompile Include="src\game\ui\resultLineGraph\resultLineGraph.cpp" />
     <ClCompile Include="src\game\ui\resultLineGraph\resultPlayerPanel\resultPlayerPanel.cpp" />
     <ClCompile Include="src\game\ui\time\timeUi.cpp" />
     <ClCompile Include="src\game\ui\uiGameManager.cpp" />
+    <ClCompile Include="src\game\ui\uiMapSelectManager.cpp" />
     <ClCompile Include="src\game\ui\uiResultManager.cpp" />
     <ClCompile Include="src\game\ui\uiSelectManager.cpp" />
     <ClCompile Include="src\game\ui\uiTitleManager.cpp" />
@@ -232,6 +236,7 @@
     <ClInclude Include="src\game\3DUi\3DUiManager.h" />
     <ClInclude Include="src\game\attack\attackBase.h" />
     <ClInclude Include="src\game\attack\attackManager.h" />
+    <ClInclude Include="src\game\backGround\mapSelectBG.h" />
     <ClInclude Include="src\game\camera\cameraBase.h" />
     <ClInclude Include="src\game\camera\cameraManager.h" />
     <ClInclude Include="src\game\camera\mapCamera\mapCamera.h" />
@@ -280,6 +285,7 @@
     <ClInclude Include="src\game\player\titlePlayer\titlePlayer.h" />
     <ClInclude Include="src\game\player\titlePlayer\titlePlayerManager.h" />
     <ClInclude Include="src\game\ranking\ranking.h" />
+    <ClInclude Include="src\game\scene\mapSelectScene.h" />
     <ClInclude Include="src\game\scene\playScene.h" />
     <ClInclude Include="src\game\scene\resultScene.h" />
     <ClInclude Include="src\game\scene\sceneBase.h" />
@@ -295,11 +301,13 @@
     <ClInclude Include="src\game\system\sound\soundManager.h" />
     <ClInclude Include="src\game\ui\countDown\countDown.h" />
     <ClInclude Include="src\game\ui\eventText\eventText.h" />
+    <ClInclude Include="src\game\ui\mapSelect\mapSelect.h" />
     <ClInclude Include="src\game\ui\playerStatusPanel\playerStatusPanel.h" />
     <ClInclude Include="src\game\ui\resultLineGraph\resultLineGraph.h" />
     <ClInclude Include="src\game\ui\resultLineGraph\resultPlayerPanel\resultPlayerPanel.h" />
     <ClInclude Include="src\game\ui\time\timeUi.h" />
     <ClInclude Include="src\game\ui\uiGameManager.h" />
+    <ClInclude Include="src\game\ui\uiMapSelectManager.h" />
     <ClInclude Include="src\game\ui\uiResultManager.h" />
     <ClInclude Include="src\game\ui\uiSelectManager.h" />
     <ClInclude Include="src\game\ui\uiTitleManager.h" />
