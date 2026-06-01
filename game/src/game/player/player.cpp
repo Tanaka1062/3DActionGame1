@@ -9,7 +9,7 @@
 #include "../../lib/effekseer/effekseer.h"
 #include "../system/effectData/effectData.h"
 #include "../item/itemBase.h"
-#include "../system/soundManager.h"
+#include "../system/sound/soundManager.h"
 
 
 enum tagAttackNum
@@ -278,6 +278,12 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 		m_hp = m_maxHp;
 	}
 
+	//コインが最大数を超えないように
+	if (m_money >= PlayerData::MONEY_MAX)
+	{
+		m_money = PlayerData::MONEY_MAX;
+	}
+
 	//攻撃の当たり判定が消えたら攻撃のIDを初期化する
 	if (_attackManager->GetActive(m_attackId) == false)
 	{
@@ -507,6 +513,16 @@ void CPlayer::HitAttack(int _atk, int _blown, float _rotY)
 	}
 	else
 	{
+		//斧の攻撃中に怯んだら音を止める
+		if (m_weaponId == WEAPON_ID_AX &&
+			m_state == ATTACK)
+		{
+			if (CSoundManager::IsPlay(CSoundManager::SE_AX) == true)
+			{
+				CSoundManager::Stop(CSoundManager::SE_AX);
+			}
+		}
+
 		//怯み状態にする
 		m_state = STAGGER;
 	}
@@ -618,7 +634,7 @@ void CPlayer::Walk()
 //-----------------------
 void CPlayer::Jump()
 {
-	RequestAnim(ANIMID_JUMP, 2.0f);
+	RequestAnim(ANIMID_JUMP, PlayerData::JUMP_ANIM_SPEED);
 
 	if (GetAnimEnd() == true)
 	{
@@ -645,7 +661,7 @@ void CPlayer::Air()
 //-----------------------
 void CPlayer::Landing()
 {
-	RequestAnim(ANIMID_LANDING, 1.0f);
+	RequestAnim(ANIMID_LANDING, PlayerData::LANDING_ANIM_SPEED);
 
 	if (GetAnimEnd() == true)
 	{
@@ -822,7 +838,7 @@ void CPlayer::Attack(CAttackManager* _attackManager, CShotManager* _shotManager)
 		break;
 	//武器がハンマーの場合
 	case WEAPON_ID_HAMMER:
-		CSoundManager::Play(CSoundManager::SE_SWORD, DX_PLAYTYPE_BACK);
+		CSoundManager::Play(CSoundManager::SE_HAMMER, DX_PLAYTYPE_BACK);
 
 		switch (m_attackNum)
 		{
@@ -862,7 +878,10 @@ void CPlayer::Attack(CAttackManager* _attackManager, CShotManager* _shotManager)
 		break;
 	//武器が斧の場合
 	case WEAPON_ID_AX:
-		CSoundManager::Play(CSoundManager::SE_AX, DX_PLAYTYPE_BACK);
+		if (CSoundManager::IsPlay(CSoundManager::SE_AX) == false)
+		{
+			CSoundManager::Play(CSoundManager::SE_AX, DX_PLAYTYPE_LOOP);
+		}
 		//攻撃中のアニメーション
 		if (RequestAnim(ANIMID_ATTACK1_AX, 1.0f,true) == true)
 		{
@@ -942,6 +961,7 @@ void CPlayer::AttackOut()
 	case WEAPON_ID_AX:
 		//攻撃後のアニメーション
 		RequestAnim(ANIMID_ATTACK1_AX_OUT, 0.5f);
+		CSoundManager::Stop(CSoundManager::SE_AX);
 		break;
 	}
 
@@ -1163,23 +1183,6 @@ void CPlayer::ReadyOut()
 	}
 }
 
-//-----------------------
-//		   拍手
-//-----------------------
-void CPlayer::Clap()
-{
-	//拍手のアニメーション
-	RequestAnim(ANIMID_CLAP, 0.8f,true);
-}
-
-//-----------------------
-//	   勝利モーション
-//-----------------------
-void CPlayer::Winner()
-{
-	//勝利のアニメーション
-	RequestAnim(ANIMID_WINNER, 0.8f,true);
-}
 
 //-----------------------
 //		移動処理

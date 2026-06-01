@@ -6,37 +6,41 @@
 class CResultPlayer:public CPlayer 
 {
 private:
-	bool m_isWin;			//勝利したかどうか
+	int m_rank;				//順位
+	enum tagResultState		//リザルトの状態
+	{
+		WISH,				//願う
+		POSE_IN,			//ポーズ前
+		POSE,				//ポーズ
+	};
+	tagResultState m_resultState;
 public:
 	//コンストラクタ・デストラクタ
 	CResultPlayer();
-	~CResultPlayer();
 
 	//初期化
-	void Init(tagPlayerName _name, tagPadName _padName);
+	void Init(tagPlayerName _name, tagPadName _padName,int _rank);
 
 	//モデルロード
 	void Load(int _modelHndl);
 
 	//毎フレームする処理
-	void Step();
+	void Step(bool _podiumMoveEnd);
 
 	//描写処理
 	void Draw();
 
-	//更新処理
-	void Update();
-
-	//終了処理
-	void Exit();
-
-	//勝利しているかを取得
-	bool GetIsWin() { return m_isWin; }
-
-	//勝利しているかを設定
-	void SetIsWin(bool _win) { m_isWin = _win; }
-
 private:
+
+	//願いモーション
+	void Wish();
+
+	//リザルト前モーション
+	void ResultPoseIn();
+
+	//リザルトモーション
+	void ResultPose();
+
 
 };
 

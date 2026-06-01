@@ -8,11 +8,8 @@ constexpr VECTOR INIT_POS = { -300.0f,70.0f,0.0f };
 constexpr float MAP_MOVE_SPEED = 1.2f;						//マップ移動用カメラの移動速度
 constexpr float ZOOM_MOVE_SPEED = 0.4f;						//ズームカメラの移動速度
 constexpr int MAP_FRAME_NUM = 4;							//マップのフレーム番号
-
 constexpr float CAMERA_LENGTH =  -120.0f;					//カメラとプレイヤーの距離
-
 constexpr float ROT_SPEED = 0.2f * (DX_PI_F / 180.0f);		//カメラの回転スピード
-
 constexpr float ROT_Y_MAX = 30.0f * (DX_PI_F / 180.0f);		//カメラの最大のY軸回転角度
 constexpr float OFFSET_X = -190.0f;							//カメラと注視点の引く距離
 constexpr float MAX_Z = 50.0f;								//最大Z

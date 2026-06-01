@@ -76,8 +76,8 @@ void C2DObject::Step()
 void C2DObject::Draw(float _size)
 {
 	if (m_isActive == false || m_hndl.size() == 0)return;
-
-	DrawRotaGraph((int)m_pos.x, (int)m_pos.y, _size, m_rot, m_hndl[m_animData.m_animId][m_animData.m_frame], TRUE);
+	int a = 0;
+	a = DrawRotaGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y), _size, m_rot, m_hndl[m_animData.m_animId][m_animData.m_frame], TRUE);
 
 }
 

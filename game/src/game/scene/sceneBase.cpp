@@ -86,8 +86,8 @@ void CSceneBase::Init()
 
 	VECTOR loadBGPos = ZERO;
 
-	loadBGPos.x = WINDOW_SIZE_X * 0.5f;
-	loadBGPos.y = WINDOW_SIZE_Y * 0.5f;
+	loadBGPos.x = WINDOW_SIZE_HALF_X;
+	loadBGPos.y = WINDOW_SIZE_HALF_Y;
 
 	m_LoadBG.Init(loadBGPos);
 }

@@ -9,7 +9,7 @@ namespace PlayerData{
 
 //プレイヤー関連--------------------------------
 	constexpr char MODEL_PATH[] =
-		"data/model/player/playerTransformTest.mv1";				//ロードするファイル名
+		"data/model/player/playerTransformTest.mv1";			//ロードするファイル名
 	constexpr VECTOR INIT_POS = { 0.0f,1.0f,0.0f };				//初期座標
 	constexpr float SHADOW_SIZE = 0.5f;							//丸影の大きさ
 	constexpr int MAX_HP = 200;									//体力
@@ -20,11 +20,14 @@ namespace PlayerData{
 	constexpr int BLOWN_MAX = 100;								//吹き飛び最大値
 	constexpr VECTOR KNOCK_BACK_SPEED = { 0.0f,3.0f,-0.8f };	//吹き飛ぶスピード
 	constexpr int INIT_MONEY = 0;								//最初の所持金
+	constexpr int MONEY_MAX = 50;								//コインを持てる最大の数
 	constexpr float MONEY_DROP_RATE = 0.4f;						//落とすお金の割合
 	constexpr float MONEY_RESPAWN_RATE = 0.5f;					//復活するときに消費するお金の割合
 	constexpr float DIE_POS_Y = -100.0f;						//死ぬ高さ
 	constexpr float FALL_OUT_DAMAGER_RATE = 0.3f;				//ステージから落下したときの割合ダメージ
 	constexpr int GET_UP_MAX_TIME = 3 * 60;						//起き上がるまでの最大時間
+	constexpr float LANDING_ANIM_SPEED = 3.0f;					//着地するまでの速さ
+	constexpr float JUMP_ANIM_SPEED = 3.0f;						//ジャンプするまでの速さ
 	//----------------------------------------------
 
 	//攻撃関連---------------------------
@@ -113,7 +116,6 @@ protected:
 		ANIMID_ATTACK3_HAND_IN,			//素手攻撃3前アニメーション
 		ANIMID_ATTACK3_HAND_OUT,		//素手攻撃3後アニメーション
 		ANIMID_BLOW_AWAY,				//吹き飛んでいるアニメーション
-		ANIMID_CLAP,					//拍手のアニメーション
 		ANIMID_DEFAULT,					//デフォルトのアニメーション
 		ANIMID_DIE,						//死亡時のアニメーション
 		ANIMID_DOWN,					//ダウン中のアニメーション
@@ -126,6 +128,14 @@ protected:
 		ANIMID_PUT_DOWN,				//物を下ろすアニメーション
 		ANIMID_READY,					//準備完了のアニメーション
 		ANIMID_READY_OUT,				//準備完了をやめるアニメーション
+		ANIMID_RESULT_POSE1,			//リザルト画面の1位ポーズのアニメーション
+		ANIMID_RESULT_POSE1_IN,			//リザルト画面の1位ポーズ前のアニメーション
+		ANIMID_RESULT_POSE2,			//リザルト画面の2位ポーズのアニメーション
+		ANIMID_RESULT_POSE2_IN,			//リザルト画面の2位ポーズ前のアニメーション
+		ANIMID_RESULT_POSE3,			//リザルト画面の3位ポーズのアニメーション
+		ANIMID_RESULT_POSE3_IN,			//リザルト画面の3位ポーズ前のアニメーション
+		ANIMID_RESULT_POSE4,			//リザルト画面の4位ポーズのアニメーション
+		ANIMID_RESULT_POSE4_IN,			//リザルト画面の4位ポーズ前のアニメーション
 		ANIMID_THROW,					//物を投げる中のアニメーション
 		ANIMID_THROW_IN,				//物を投げる前のアニメーション
 		ANIMID_THROW_OUT,				//物を投げる後のアニメーション
@@ -137,8 +147,7 @@ protected:
 		ANIMID_WAIT_LIFTING_UP,			//物を持ち上げている待機状態のアニメーション
 		ANIMID_WALK,					//歩きのアニメーション
 		ANIMID_WALK_LIFTING_UP,			//物を持ち上げている歩きのアニメーション
-		ANIMID_WINNER,					//勝者のアニメーション
-
+		ANIMID_WISH,					//願っているアニメーション
 	};
 
 	//---------------------------------------------
@@ -300,12 +309,6 @@ protected:
 
 	//準備完了を解除
 	void ReadyOut();
-
-	//拍手
-	void Clap();
-
-	//勝利モーション
-	void Winner();
 
 	//移動処理
 	virtual void Move(float _rotY);

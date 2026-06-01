@@ -2,6 +2,8 @@
 #include "../../lib/input/controllerManager.h"
 #include "../../data.h"
 #include "../../lib/myMath/myMath.h"
+#include "../../ranking/ranking.h"
+#include "../../map/resultMap/resultMap.h"
 
 using namespace std;
 
@@ -12,9 +14,6 @@ enum tagModelName								//モデル一覧
 	MODEL_NUM,									//モデルの数
 };
 
-constexpr float TARGET_LEN = -200.0f;			//ターゲットと認識するまでの長さ
-constexpr float TARGET_MAX_DISTANCE = 40.0f;	//どれくらい法線から離せるか
-
 static const char* MODEL_PATH =					//モデルのパス
 { "data/model/player/player.mv1" };
 
@@ -24,12 +23,14 @@ static const char* MATERIAL_PATH[PLAYER_NUM] =	//マテリアルのパス
  "data/material/player/playerBody3.png",
  "data/material/player/playerBody4.png", };
 
+constexpr int MAP_FRAME_NUM = 4;				//マップのフレーム番号
+
 //------------------------
 //	  コンストラクタ
 //------------------------
 CResultPlayerManager::CResultPlayerManager()
 {
-	Init(nullptr);
+	Init();
 }
 
 //------------------------
@@ -49,7 +50,7 @@ CResultPlayerManager::~CResultPlayerManager()
 //------------------------
 //		  初期化
 //------------------------
-void CResultPlayerManager::Init(CWinner* _winner)
+void CResultPlayerManager::Init()
 {
 	if (m_modelHndl.size() < MODEL_NUM)
 	{
@@ -99,17 +100,10 @@ void CResultPlayerManager::Init(CWinner* _winner)
 
 		}
 
-		m_player[player_i]->Init(name, padName);
-
-		if (_winner == nullptr)continue;
-
-		if (m_player[player_i]->GetPlayerName() == _winner->GetWinnerPlayerName())
-		{
-			m_player[player_i]->SetIsWin(true);
-		}
-
-		//ゲーム中の取得コイン量を取得
-		m_player[player_i]->SetMoney(_winner->GetPlayerGetCoin(m_player[player_i]->GetPlayerName()));
+		//順位を取得
+		CRanking* ranking = CRanking::GetInstance();
+		//初期化と試合の順位を設定する
+		m_player[player_i]->Init(name, padName,ranking->GetPlayerRank(name));
 	}
 	
 	//スポーン座標を全て消す
@@ -143,24 +137,15 @@ void CResultPlayerManager::Load(CMapBase* _map)
 	//マップのフレームのハンドルをロード
 	int mapHndl = _map->GetHndl(0);
 
-	int frameId[3] = { 4,8,10 };
-	int frameIdNum = 0;
+	int frameNum = MAP_FRAME_NUM;
 
 	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
 		//プレイヤーのスポーン位置をロード
 		VECTOR start = { 0.0f,0.0f,0.0f };
 
-		//スポーン位置をセット
-		if (m_player[player_i]->GetIsWin() == true)
-		{
-			start = MV1GetFramePosition(mapHndl, 2);
-		}
-		else
-		{
-			start = MV1GetFramePosition(mapHndl, frameId[frameIdNum]);
-			frameIdNum++;
-		}
+		start = MV1GetFramePosition(mapHndl, frameNum);
+		frameNum += 2;
 
 		m_player[player_i]->Load(m_modelHndl[MODEL_PLAYER1]);
 		MV1SetTextureGraphHandle(m_player[player_i]->GetHndl(), 0, m_materialHndl[player_i], FALSE);
@@ -172,16 +157,25 @@ void CResultPlayerManager::Load(CMapBase* _map)
 //------------------------
 //	毎フレームする処理
 //------------------------
-void CResultPlayerManager::Step()
+void CResultPlayerManager::Step(CMapBase* _map)
 {
+	bool isPodiumMoveEnd = false;
+
+	if (_map->GetMapId() == MAP_ID_RESULT)
+	{
+		CResultMap* resultMap = dynamic_cast<CResultMap*>(_map);
+		isPodiumMoveEnd = resultMap->GetIsPodiumAllMoveEnd();
+	}
+
 	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
-		m_player[player_i]->Step();
+		m_player[player_i]->Step(isPodiumMoveEnd);
 
-		if (CControllerManager::IsConnection(m_player[player_i]->GetPadName()) == true)
-		{
-			m_player[player_i]->SetActive(true);
-		}
+		//表彰台を取得
+		CObject* podium = _map->GetStageObject(player_i);
+		//表彰台の位置に座標を設定する
+		VECTOR podiumPos = podium->GetPos();
+		m_player[player_i]->SetPos(podiumPos);
 	}
 
 }

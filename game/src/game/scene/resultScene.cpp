@@ -2,44 +2,33 @@
 #include "../data.h"
 #include "../../lib/input/keyInput.h"
 #include"../../lib/input/controllerManager.h"
-#include "../system/soundManager.h"
+#include "../system/sound/soundManager.h"
 #include "../camera/cameraManager.h"
 #include "../../lib/system/fade.h"
-
-//定義関連====================================
-static const char* TEXT_GRAPHIC_PATH[PLAYER_NUM] =		//テキストのグラフィックパス
-{
-	"data/graphic/result/resultText1.png",
-	"data/graphic/result/resultText2.png",
-	"data/graphic/result/resultText3.png",
-	"data/graphic/result/resultText4.png",
-
-};
-//============================================
+#include "../ranking/ranking.h"
+#include "../map/resultMap/resultMap.h"
 
 //---------------------------
-//コンストラクタ
+//		コンストラクタ
 //---------------------------
 CResultScene::CResultScene() {
 	//最初はデータ初期化
 	m_state = INIT;
-
-	m_winner = CWinner::GetInstance();
 }
 
 //---------------------------
-//デストラクタ
+//		デストラクタ
 //---------------------------
 CResultScene::~CResultScene() {
 	//安全のためにデータ破棄処理を呼び出し
 	Exit();
 
-	CWinner::DeleteInstance();
+	CRanking::DeleteInstance();
 }
 
 
 //---------------------------
-//描画処理
+//			描画処理
 //---------------------------
 void CResultScene::Draw()
 {
@@ -54,9 +43,7 @@ void CResultScene::Draw()
 		m_sky.Draw();
 		m_mapManager.Draw();
 		m_resultPlayerManager.Draw();
-		m_winPlayerText.Draw();
-		m_resultText.Draw();
-
+		m_uiManager.Draw();
 		break;
 	}
 
@@ -64,7 +51,7 @@ void CResultScene::Draw()
 }
 
 //---------------------------
-//初期化
+//			初期化
 //---------------------------
 void CResultScene::Init()
 {
@@ -72,27 +59,18 @@ void CResultScene::Init()
 
 	m_sky.Init();
 	m_mapManager.Init(MAP_ID_RESULT);
-	m_resultPlayerManager.Init(m_winner);
-
+	m_resultPlayerManager.Init();
+	m_uiManager.Init();
 	CCameraManager::Init(CCameraManager::CAMERA_ID_RESULT,m_mapManager.GetMap());
 	CCameraManager::ChangeCamera(CCameraManager::CAMERA_ID_RESULT);
-
-	VECTOR textPos = ZERO;
-	textPos.x = WINDOW_SIZE_X * 0.5f;
-	textPos.y = WINDOW_SIZE_Y * 0.5f;
-
-	m_winPlayerText.Init(textPos);
-
-	textPos.y += 200.0f;
-
-	m_resultText.Init(textPos);
 }
 
 //---------------------------
-//データ読み込み
+//		データ読み込み
 //---------------------------
 void CResultScene::Load()
 {
+	CRanking* ranking = CRanking::GetInstance();
 	CSceneBase::Load();
 	switch (m_LoadState)
 	{
@@ -100,9 +78,8 @@ void CResultScene::Load()
 		m_sky.Load();
 		m_mapManager.Load();
 		m_resultPlayerManager.Load(m_mapManager.GetMap());
-		m_winPlayerText.Load(TEXT_GRAPHIC_PATH[m_winner->GetWinnerPlayerName()]);
-		m_resultText.Load("data/graphic/result/resultText.png");
-		CSoundManager::Play(CSoundManager::BGM_RESULT, DX_PLAYTYPE_LOOP);
+		m_uiManager.Load();
+		CSoundManager::Play(CSoundManager::BGM_DRUMROLL, DX_PLAYTYPE_LOOP);
 
 		m_LoadState = 1;
 		break;
@@ -127,17 +104,25 @@ void CResultScene::Load()
 }
 
 //---------------------------
-//メイン処理
+//		  メイン処理
 //---------------------------
 void CResultScene::Step()
 {
+	bool isPodiumMoveEnd = false;
+
+	if (m_mapManager.GetMap()->GetMapId() == MAP_ID_RESULT)
+	{
+		CResultMap* resultMap = dynamic_cast<CResultMap*>(m_mapManager.GetMap());
+		isPodiumMoveEnd = resultMap->GetIsPodiumAllMoveEnd();
+	}
+
 	m_sky.Step();
 	m_mapManager.Step();
-	m_resultPlayerManager.Step();
-	CCameraManager::Step();
+	m_resultPlayerManager.Step(m_mapManager.GetMap());
+	m_uiManager.Step(isPodiumMoveEnd);
+	CCameraManager::Step(&m_mapManager);
 
-	if (CKeyInput::IsTrg(KEY_SELECT) == true ||
-		CControllerManager::IsTrg(BUTTON_B))
+	if (m_uiManager.GetIsGraphEnd() == true)
 	{
 		m_state = ENDWAIT;
 	}
@@ -149,7 +134,7 @@ void CResultScene::Step()
 }
 
 //---------------------------
-//終了前処理
+//		  終了前処理
 //---------------------------
 void CResultScene::Exit()
 {
@@ -157,8 +142,7 @@ void CResultScene::Exit()
 	m_sky.Exit();
 	m_mapManager.Exit();
 	m_resultPlayerManager.Exit();
-	m_winPlayerText.Exit();
-	m_resultText.Exit();
+	m_uiManager.Exit();
 	CCameraManager::Exit();
 
 	CSoundManager::StopAll();

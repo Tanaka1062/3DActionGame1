@@ -2,6 +2,7 @@
 #include "../../lib/input/controllerManager.h"
 #include "../../data.h"
 #include "../../lib/myMath/myMath.h"
+#include "../../system/sound/soundManager.h"
 
 using namespace std;
 
@@ -173,8 +174,11 @@ void CSelectPlayerManager::Step()
 	{
 		m_player[player_i]->Step();
 
-		if (CControllerManager::IsConnection(m_player[player_i]->GetPadName()) == true)
+		if (CControllerManager::IsConnection(m_player[player_i]->GetPadName()) == true &&
+			m_player[player_i]->GetActive() == false)
 		{
+			CSoundManager::Play(CSoundManager::SE_JOIN, DX_PLAYTYPE_BACK);
+
 			m_player[player_i]->SetActive(true);
 		}
 	}

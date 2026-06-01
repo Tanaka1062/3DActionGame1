@@ -11,7 +11,7 @@
 #include "../player/playerManager.h"
 #include "../ui/uiGameManager.h"
 #include "../gameTime/gameTime.h"
-#include "../winner/winner.h"
+#include "../ranking/ranking.h"
 #include "../event/eventManager.h"
 #include "../3DUi/3DUiManager.h"
 
@@ -29,7 +29,7 @@ private:
 	CAttackManager	m_attackManager;	//攻撃のマネージャークラス
 	CUiGameManager	m_uiManager;		//uiのマネージャークラス
 	CGameTime*		m_gameTime;			//ゲームの制限時間
-	CWinner*		m_winner;			//勝利したプレイヤー
+	CRanking*		m_ranking;			//プレイヤーの順位
 	CEventManager	m_eventManager;		//イベントのマネージャークラス
 	C3DUiManager*	m_3DUiManager;		//3DUIのマネージャークラス
 

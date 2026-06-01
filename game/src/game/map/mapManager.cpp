@@ -33,7 +33,7 @@ void CMapManager::Init(tagMapId _mapId)
 		m_map = new CTitleMap;
 		break;
 	}
-	m_map->Init();
+	m_map->Init(static_cast<int>(_mapId));
 }
 
 //ƒ‚ƒfƒ‹ƒ[ƒh

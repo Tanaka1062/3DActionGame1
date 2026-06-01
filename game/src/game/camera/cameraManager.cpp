@@ -1,7 +1,6 @@
 #include "cameraManager.h"
 #include "../data.h"
 #include "../../lib/effekseer/effekseer.h"
-#include "debugCamera/debugCamera.h"
 #include "mapCamera/mapCamera.h"
 #include "selectCamera/selectCamera.h"
 #include "resultCamera/resultCamera.h"
@@ -12,7 +11,7 @@ constexpr float CAMERA_NEAR = 1.0f;						//ニアー
 constexpr float CAMERA_FAR = 5000.0f;					//ファー
 constexpr float CAMERA_PERS = 60.0f * DX_PI_F / 180.0f;	//パース
 constexpr float ASPECT_RATIO =							//アスペクト比
-static_cast<float>(WINDOW_SIZE_X / WINDOW_SIZE_Y);
+WINDOW_SIZE_X / WINDOW_SIZE_Y;
 //============================================
 
 CCameraBase* CCameraManager::m_camera[CAMERA_ID_NUM];
@@ -46,7 +45,6 @@ void CCameraManager::Init(tagCAMERA_ID _camera,CMapBase* _map)
 
 	//カメラを設定
 	m_camera[CAMERA_ID_MAP] = new CMapCamera;
-	m_camera[CAMERA_ID_DEBUG] = new CDbugCamera;
 	m_camera[CAMERA_ID_TITLE] = new CTitleCamera;
 	m_camera[CAMERA_ID_SELECT] = new CSelectCamera;
 	m_camera[CAMERA_ID_RESULT] = new CResultCamera;
@@ -90,20 +88,6 @@ void CCameraManager::Step(CMapManager* _mapManager, CPlayerManager* _playerManag
 	}
 
 	//カメラのモード切替
-	//デバックモードに変更
-	if (CheckHitKey(KEY_INPUT_B) != 0)
-	{
-		//変更前のカメラの座標
-		VECTOR pos = m_camera[m_id]->GetPos();
-		//変更前のカメラの角度
-		VECTOR rot = m_camera[m_id]->GetRot();
-
-		//デバックカメラに座標と角度を設定
-		m_camera[CAMERA_ID_DEBUG]->SetPos(pos);
-		m_camera[CAMERA_ID_DEBUG]->SetRot(rot);
-
-		m_id = CAMERA_ID_DEBUG;
-	}
 
 	//プレイカメラの回転値を設定
 	m_rot = m_camera[m_id]->GetRot();
@@ -115,12 +99,6 @@ void CCameraManager::Step(CMapManager* _mapManager, CPlayerManager* _playerManag
 //---------------------------
 void CCameraManager::Draw()
 {
-	//デバックカメラの描写処理
-	if (m_id == CAMERA_ID_DEBUG)
-	{
-		CDbugCamera* camera = dynamic_cast<CDbugCamera*>(m_camera[m_id]);
-		camera->Draw();
-	}
 }
 
 //---------------------------
@@ -165,3 +143,4 @@ bool CCameraManager::GetIsMove()
 	CMapCamera* mapCamera = dynamic_cast<CMapCamera*>(m_camera[CAMERA_ID_MAP]);
 	return mapCamera->GetIsMove();
 }
+

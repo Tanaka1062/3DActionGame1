@@ -4,6 +4,28 @@ using namespace std;
 
 vector<int> CSoundManager::m_hndl;
 
+constexpr int SOUND_VOLUME[CSoundManager::tagSound::SOUND_NUM] =
+{
+	150,
+	150,
+	150,
+	150,
+	150,
+	255,
+	255,
+	255,
+	255,
+	255,
+	255,
+	255,
+	255,
+	255,
+	255,
+	255,
+	255,
+	255,
+
+};
 
 //---------------------------
 //		èâä˙âª
@@ -24,24 +46,29 @@ void CSoundManager::Load()
 		"data/sound/game/gameBGM.mp3",
 		"data/sound/title/titleBGM.mp3",
 		"data/sound/result/resultBGM.mp3",
+		"data/sound/result/drumrollBGM.mp3",
 		"data/sound/select/selectBGM.mp3",
-		"data/sound/game/gunSE.mp3",
-		"data/sound/game/swordSE.mp3",
+		"data/sound/title/titleStartSE.mp3",
+		"data/sound/select/joinSE.mp3",
+		"data/sound/select/readyOnSE.mp3",
+		"data/sound/select/readyOffSE.mp3",
+		"data/sound/game/hammerSE.mp3",
 		"data/sound/game/axSE.mp3",
 		"data/sound/game/handSE.mp3",
 		"data/sound/game/hitSE.mp3",
 		"data/sound/game/coinDropSE.mp3",
 		"data/sound/game/coinGetSE.mp3",
-		"data/sound/game/buySE.mp3",
 		"data/sound/game/explosionSE.mp3",
-
+		"data/sound/result/podiumStopSE.mp3",
+		"data/sound/result/applauseSE.mp3",
 	};
 	// -------------------------------------
 
-	for (int i = 0; i < SOUND_NUM; i++)
+	for (int sound_i = 0; sound_i < SOUND_NUM; sound_i++)
 	{
-		int hndl = LoadSoundMem(SOUND_PATH[i]);
+		int hndl = LoadSoundMem(SOUND_PATH[sound_i]);
 		m_hndl.push_back(hndl);
+		ChangeVolumeSoundMem(SOUND_VOLUME[sound_i], hndl);
 	}
 
 }
@@ -71,6 +98,8 @@ void CSoundManager::Exit()
 //---------------------------
 bool CSoundManager::Play(tagSound _id, int _type, bool _isStart)
 {
+	int result = PlaySoundMem(m_hndl[_id], _type, _isStart);
+
 	return PlaySoundMem(m_hndl[_id], _type,_isStart) ? true : false;
 }
 

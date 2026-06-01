@@ -2,7 +2,7 @@
 #include "../data.h"
 #include"../../lib/input/keyInput.h"
 #include"../../lib/input/controllerManager.h"
-#include "../system/soundManager.h"
+#include "../system/sound/soundManager.h"
 #include "../camera/cameraManager.h"
 #include "../../lib/system/fade.h"
 
@@ -126,6 +126,8 @@ void CTitleScene::Step()
 		CControllerManager::SetId() == true ||
 		CControllerManager::IsTrg(BUTTON_B) == true)
 	{
+		CSoundManager::Play(CSoundManager::SE_TITLE_START,DX_PLAYTYPE_BACK);
+
 		m_state = ENDWAIT;
 	}
 

@@ -18,17 +18,9 @@ CResultPlayer::CResultPlayer()
 }
 
 //-----------------------
-//	デストラクタ
-//-----------------------
-CResultPlayer::~CResultPlayer()
-{
-	Exit();
-}
-
-//-----------------------
 //		初期化
 //-----------------------
-void CResultPlayer::Init(tagPlayerName _name, tagPadName _padName)
+void CResultPlayer::Init(tagPlayerName _name, tagPadName _padName, int _rank)
 {
 	CCharacterBase::Init();
 	m_padName = _padName;
@@ -38,7 +30,8 @@ void CResultPlayer::Init(tagPlayerName _name, tagPadName _padName)
 	m_isGravity = false;
 	m_state = WAIT;
 	m_rot.y = 90.0f * (DX_PI_F/180.0f);
-	m_isWin = false;
+	m_rank = _rank;
+	m_resultState = WISH;
 }
 
 //-----------------------
@@ -53,19 +46,28 @@ void CResultPlayer::Load(int _modelHndl)
 //-----------------------
 //毎フレームする処理
 //-----------------------
-void CResultPlayer::Step()
+void CResultPlayer::Step(bool _podiumMoveEnd)
 {
 	if (m_isActive == false)return;
 	VECTOR uiPos = m_pos;
 	uiPos.x -= 8.0f;
 	uiPos.y -= 5.0f;
-	if (m_isWin == true)
+
+	switch (m_resultState)
 	{
-		CPlayer::Winner();
-	}
-	else
-	{
-		CPlayer::Clap();
+	case CResultPlayer::WISH:
+		Wish();
+		if (_podiumMoveEnd == true)
+		{
+			m_resultState = POSE_IN;
+		}
+		break;
+	case CResultPlayer::POSE_IN:
+		ResultPoseIn();
+		break;
+	case CResultPlayer::POSE:
+		ResultPose();
+		break;
 	}
 }
 
@@ -91,16 +93,33 @@ void CResultPlayer::Draw()
 }
 
 //-----------------------
-//		更新処理
+//	  願いモーション
 //-----------------------
-void CResultPlayer::Update()
+void CResultPlayer::Wish()
 {
-	CCharacterBase::Update();
+	//願いのアニメーション
+	RequestAnim(ANIMID_WISH, 0.8f, true);
 }
 
-//終了処理
-void CResultPlayer::Exit()
+//-----------------------
+// リザルト前モーション
+//-----------------------
+void CResultPlayer::ResultPoseIn()
 {
-	CCharacterBase::Exit();
+	RequestAnim(ANIMID_RESULT_POSE1_IN + (m_rank * 2) , 0.3f);
+
+	if (GetAnimEnd() == true)
+	{
+		m_resultState = POSE;
+	}
+}
+
+//-----------------------
+//	   勝利モーション
+//-----------------------
+void CResultPlayer::ResultPose()
+{
+	//勝利のアニメーション
+	RequestAnim(ANIMID_RESULT_POSE1 + (m_rank * 2), 0.5f, true);
 }
 

@@ -3,7 +3,7 @@
 #include "titleScene.h"
 #include "resultScene.h"
 #include "selectScene.h"
-#include"../system/soundManager.h"
+#include"../system/sound/soundManager.h"
 #include"../../lib/effekseer/effekseer.h"
 #include "../gameTime/gameTime.h"
 

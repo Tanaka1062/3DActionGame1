@@ -1,6 +1,6 @@
 #include "spawnCoin.h"
 #include "../../lib/myMath/myMath.h"
-#include "../../system/soundManager.h"
+#include "../../system/sound/soundManager.h"
 #include "../../data.h"
 
 constexpr int SPAWN_TIME = 12 * 60;		//ƒXƒ|[ƒ“‚·‚é‚Ü‚Å‚ÌŠÔ

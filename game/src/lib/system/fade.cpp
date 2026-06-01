@@ -53,7 +53,7 @@ void CFade::Draw()
 		//まずはここでアルファ値をセットする
 		SetDrawBlendMode(DX_BLENDMODE_ALPHA, m_count);
 		//フェード用の黒い四角を表示
-		DrawBox(0, 0, WINDOW_SIZE_X, WINDOW_SIZE_Y,
+		DrawBox(0, 0, static_cast<int>(WINDOW_SIZE_X), static_cast<int>(WINDOW_SIZE_Y),
 			GetColor(0, 0, 0), TRUE);
 
 		//他の画像に影響を出さないように、初期設定に戻す

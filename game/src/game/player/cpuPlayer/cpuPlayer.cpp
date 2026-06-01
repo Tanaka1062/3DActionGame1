@@ -286,6 +286,11 @@ void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackMa
 	{
 		m_hp = m_maxHp;
 	}
+	//ƒRƒCƒ“‚ªÅ‘å”‚ð’´‚¦‚È‚¢‚æ‚¤‚É
+	if (m_money >= PlayerData::MONEY_MAX)
+	{
+		m_money = PlayerData::MONEY_MAX;
+	}
 
 	//UŒ‚‚Ì“–‚½‚è”»’è‚ªÁ‚¦‚½‚çUŒ‚‚ÌID‚ð‰Šú‰»‚·‚é
 	if (_attackManager->GetActive(m_attackId) == false)

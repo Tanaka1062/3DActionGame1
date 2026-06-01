@@ -6,8 +6,8 @@ using namespace std;
 
 //定義関連==================================
 constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
-constexpr VECTOR SCALE = { 1.0f,1.0f,1.0f };		//大きさ
-constexpr int MAP_MOVE_TIME = 30;			//ステージが移動するまでの時間
+constexpr VECTOR SCALE = { 1.0f,1.0f,1.0f };	//大きさ
+constexpr int MAP_MOVE_TIME = 30;				//ステージが移動するまでの時間
 
 //==========================================
 
@@ -43,8 +43,9 @@ CMapBase::~CMapBase()
 //------------------------
 //		初期化
 //------------------------
-void CMapBase::Init()
+void CMapBase::Init(int _mapId)
 {
+	m_mapId = _mapId;
 	m_stageId = 0;
 	m_mapMoveTimer = 0;
 

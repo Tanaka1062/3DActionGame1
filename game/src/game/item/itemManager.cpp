@@ -1,5 +1,5 @@
 #include "itemManager.h"
-#include "../system/soundManager.h"
+#include "../system/sound/soundManager.h"
 
 using namespace std;
 
@@ -68,6 +68,7 @@ void CItemManager::Step(CPlayerManager* _playerManager, int _stageId)
 	m_coinManager.Step();
 
 
+	
 	//スポーンしたらアイテムを増やす
 	if (m_spawnItemManager.GetIsItemSpawn() == true)
 	{

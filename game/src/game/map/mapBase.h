@@ -7,6 +7,7 @@
 class CMapBase
 {
 protected:
+	int								m_mapId;			//マップのID
 	std::vector<CActor*>			m_stage;			//ステージ
 	int								m_stageId;			//ステージのID
 	int								m_mapMoveTimer;		//マップの移動する時間
@@ -27,7 +28,7 @@ public:
 	virtual~CMapBase();
 
 	//初期化
-	virtual void Init();
+	virtual void Init(int _mapId = -1);
 
 	//モデルロード
 	virtual void Load();
@@ -56,10 +57,13 @@ public:
 	//ステージを取得
 	CObject* GetStage(int _num) { return m_stage[_num]; }
 
+	//マップIDを取得
+	int GetMapId() { return m_mapId; }
+
 	//ステージの数を取得
 	int GetStageNum() { return static_cast<int>(m_stage.size()); }
 
-	//現在のマップIDを取得
+	//現在のステージIDを取得
 	int GetStageId() { return m_stageId; }
 
 	//ステージのスポーンデータ取得
