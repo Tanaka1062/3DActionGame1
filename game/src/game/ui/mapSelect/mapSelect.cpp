@@ -9,10 +9,15 @@ namespace {
 		"data/graphic/mapSelect/grassland/stage1.png",
 	};
 
-	constexpr VECTOR INIT_POS = 
+	constexpr VECTOR INIT_POS =
 	{ WINDOW_SIZE_HALF_X,WINDOW_SIZE_HALF_Y,0.0f };					//マップの初期座標
-	constexpr float MAP_SPACING = 200.0f + WINDOW_SIZE_X;			//マップ同士の距離
-	constexpr float MAP_SCALE = 0.5f;								//マップの大きさ
+	constexpr float MAP_SPACING = 300.0f;							//マップ同士の距離
+	constexpr float MAP_SCALE = 0.1f;								//マップの大きさ
+
+	//constexpr VECTOR INIT_POS = 
+	//{ WINDOW_SIZE_HALF_X,WINDOW_SIZE_HALF_Y,0.0f };					//マップの初期座標
+	//constexpr float MAP_SPACING = 200.0f + WINDOW_SIZE_X;			//マップ同士の距離
+	//constexpr float MAP_SCALE = 0.5f;								//マップの大きさ
 	constexpr float MAP_MOVE_SPEED = 6.0f;							//マップの移動スピード
 
 	constexpr float STICK_DEAD_ZONE = 0.3f;							//スティックのデットゾーン
@@ -38,7 +43,7 @@ void CMapSelect::Init()
 		pos.x += MAP_SPACING * map_i;
 		m_map[map_i].Init(pos);
 	}
-	m_nowMap = MAP_1;
+	m_nowMap = static_cast<int>(MAP_1);
 }
 
 //画像ロード
@@ -54,7 +59,7 @@ void CMapSelect::Load()
 void CMapSelect::Step()
 {
 	if (CControllerManager::GetLX() > STICK_DEAD_ZONE &&
-		m_nowMap < MAP_NUM)
+		m_nowMap < MAP_NUM - 1)
 	{
 		m_nowMap++;
 	}
