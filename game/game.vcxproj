@@ -176,6 +176,7 @@
     <ClCompile Include="src\game\map\mapBase.cpp" />
     <ClCompile Include="src\game\map\mapManager.cpp" />
     <ClCompile Include="src\game\map\playMap\grassland\grassland.cpp" />
+    <ClCompile Include="src\game\map\playMap\playMapData.cpp" />
     <ClCompile Include="src\game\map\resultMap\resultMap.cpp" />
     <ClCompile Include="src\game\map\selectMap\selectMap.cpp" />
     <ClCompile Include="src\game\map\titleMap\titleMap.cpp" />
@@ -270,6 +271,7 @@
     <ClInclude Include="src\game\map\mapBase.h" />
     <ClInclude Include="src\game\map\mapManager.h" />
     <ClInclude Include="src\game\map\playMap\grassland\grassland.h" />
+    <ClInclude Include="src\game\map\playMap\playMapData.h" />
     <ClInclude Include="src\game\map\resultMap\resultMap.h" />
     <ClInclude Include="src\game\map\selectMap\selectMap.h" />
     <ClInclude Include="src\game\map\titleMap\titleMap.h" />

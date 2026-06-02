@@ -474,6 +474,9 @@
     <ClCompile Include="src\game\ui\mapSelect\mapSelect.cpp">
       <Filter>ソース ファイル\game\ui\mapSelect</Filter>
     </ClCompile>
+    <ClCompile Include="src\game\map\playMap\playMapData.cpp">
+      <Filter>ソース ファイル\game\map\playMap</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game\data.h">
@@ -754,6 +757,9 @@
     </ClInclude>
     <ClInclude Include="src\game\ui\mapSelect\mapSelect.h">
       <Filter>ソース ファイル\game\ui\mapSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\map\playMap\playMapData.h">
+      <Filter>ソース ファイル\game\map\playMap</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

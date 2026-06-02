@@ -1,21 +1,14 @@
 #pragma once
 #include "../lib/2D/2DObject.h"
+#include "../../map/playMap/playMapData.h"
 
 class CMapSelect
 {
-public:
-	enum tagMapSelect
-	{
-		MAP_1,		//マップ1つ目
-		MAP_2,		//マップ2つ目
-
-		MAP_NUM,	//マップの数
-	};
-
 private:
-
-	C2DObject		m_map[MAP_NUM];		//マップ
-	int				m_nowMap;			//選択されているマップ
+	C2DObject		m_map[playMap::MAP_NUM];		//マップ
+	float			m_mapScale[playMap::MAP_NUM];	//マップの大きさ
+	int				m_nowMap;						//選択されているマップ
+	bool			m_isMove;						//移動フラグ
 public:
 	//コンストラクタ・デストラクタ
 	CMapSelect();
