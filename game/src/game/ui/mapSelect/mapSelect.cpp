@@ -71,7 +71,7 @@ void CMapSelect::Step()
 	if (m_isMove == false)
 	{
 		CPlayMapData* mapData = CPlayMapData::GetInstance();
-
+		//ƒ}ƒbƒvIDÝ’è
 		mapData->SetSelectMap(static_cast<playMap::tagMapSelect>(m_nowMap));
 
 		if (CControllerManager::GetLX() > STICK_DEAD_ZONE &&

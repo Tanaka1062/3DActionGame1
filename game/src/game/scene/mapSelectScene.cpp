@@ -34,6 +34,7 @@ void CMapSelectScene::Draw()
 	{
 	case CSceneBase::LOAD:
 	case MAINWAIT:
+		m_bg.Draw();
 		m_LoadBG.Draw();
 		break;
 	default:
@@ -49,6 +50,7 @@ void CMapSelectScene::Draw()
 void CMapSelectScene::Init()
 {
 	CSceneBase::Init();
+	m_bg.Init();
 	m_uiManager.Init();
 }
 
@@ -61,6 +63,7 @@ void CMapSelectScene::Load()
 	switch (m_LoadState)
 	{
 	case 0:
+		m_bg.Load();
 		m_uiManager.Load();
 
 		m_LoadState = 1;
@@ -90,6 +93,7 @@ void CMapSelectScene::Load()
 //---------------------------
 void CMapSelectScene::Step()
 {
+	m_bg.Step();
 	m_uiManager.Step();
 
 	//スペースで終わる
@@ -105,6 +109,7 @@ void CMapSelectScene::Step()
 //---------------------------
 void CMapSelectScene::Exit()
 {
+	m_bg.Exit();
 	CSceneBase::Exit();
 	m_uiManager.Exit();
 	CSoundManager::StopAll();

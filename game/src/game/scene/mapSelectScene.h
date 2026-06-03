@@ -2,12 +2,14 @@
 #include "sceneBase.h"
 #include <DxLib.h>
 #include "../ui/uiMapSelectManager.h"
+#include "../backGround/mapSelectBG.h"
 
 //マップ選択画面を管理するクラス
 class CMapSelectScene :public CSceneBase
 {
 private:
-	CUiMapSelectManager m_uiManager;		
+	CUiMapSelectManager m_uiManager;	
+	CMapSelectBG		m_bg;
 public:
 
 	//コンストラクタ
