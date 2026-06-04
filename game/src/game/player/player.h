@@ -70,20 +70,20 @@ enum tagHaveItemState
 class CPlayer:public CCharacterBase
 {
 protected:
-	int m_dropCoin;					//コインを落とす数
-	bool m_isJump;					//ジャンプしているかフラグ
-	int m_attackNum;				//攻撃の番号
-	int m_weaponDurability;			//武器の耐久度
-	int m_money;					//お金
-	int m_attackId;					//攻撃のID
-	int m_effectId;					//エフェクトのID
-	tagPadName m_padName;			//コントローラーの名前
-	tagWeaponId m_weaponId;			//武器のID
-	tagPlayerName m_name;			//プレイヤーの名前
-	tagHaveItemState m_itemState;	//アイテムの状態
-	VECTOR* m_targetPos;			//相手の座標ポインタ
-	bool m_isCpu;					//cpuかどうかフラグ
-	int m_getUpTime;				//起き上がるまでの時間
+	int					m_dropCoin;				//コインを落とす数
+	bool				m_isJump;				//ジャンプしているかフラグ
+	int					m_attackNum;			//攻撃の番号
+	int					m_weaponDurability;		//武器の耐久度
+	int					m_money;				//お金
+	int					m_attackId;				//攻撃のID
+	int					m_effectId;				//エフェクトのID
+	tagPadName			m_padName;				//コントローラーの名前
+	tagWeaponId			m_weaponId;				//武器のID
+	tagPlayerName		m_name;					//プレイヤーの名前
+	tagHaveItemState	m_itemState;			//アイテムの状態
+	VECTOR*				m_targetPos;			//相手の座標ポインタ
+	bool				m_isCpu;				//cpuかどうかフラグ
+	int					m_getUpTime;			//起き上がるまでの時間
 	//アニメーション一覧---------------------------
 
 	enum tagAnim {

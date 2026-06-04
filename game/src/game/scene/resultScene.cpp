@@ -35,7 +35,7 @@ void CResultScene::Draw()
 	switch (m_state)
 	{
 	case CSceneBase::LOAD:
-	case MAINWAIT:
+	case MAIN_WAIT:
 		m_LoadBG.Draw();
 
 		break;
@@ -95,7 +95,7 @@ void CResultScene::Load()
 		if (CFade::IsEndFadeOut() == true)
 		{
 			SetUseASyncLoadFlag(FALSE);
-			m_state = MAINWAIT;
+			m_state = MAIN_WAIT;
 		}
 		break;
 	}
@@ -124,7 +124,7 @@ void CResultScene::Step()
 
 	if (m_uiManager.GetIsGraphEnd() == true)
 	{
-		m_state = ENDWAIT;
+		m_state = END_WAIT;
 	}
 
 	m_sky.Update();

@@ -35,7 +35,7 @@ void CTitleScene::Draw()
 	switch (m_state)
 	{
 	case CSceneBase::LOAD:
-	case MAINWAIT:
+	case MAIN_WAIT:
 		m_LoadBG.Draw();
 		break;
 	default:
@@ -94,7 +94,7 @@ void CTitleScene::Load()
 		{
 			SetUseASyncLoadFlag(FALSE);
 			CSoundManager::Play(CSoundManager::BGM_TITLE, DX_PLAYTYPE_LOOP);
-			m_state = MAINWAIT;
+			m_state = MAIN_WAIT;
 		}
 		break;
 	}
@@ -121,14 +121,13 @@ void CTitleScene::Step()
 		CControllerManager::Init();
 	}
 
-	//スペースで終わる
 	if (CKeyInput::IsTrg(KEY_SELECT) == true ||
 		CControllerManager::SetId() == true ||
 		CControllerManager::IsTrg(BUTTON_B) == true)
 	{
 		CSoundManager::Play(CSoundManager::SE_TITLE_START,DX_PLAYTYPE_BACK);
 
-		m_state = ENDWAIT;
+		m_state = END_WAIT;
 	}
 
 }

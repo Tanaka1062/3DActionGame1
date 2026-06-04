@@ -73,25 +73,6 @@ void CUiSelectManager::Step(bool _allReady)
 	}
 
 	m_countDown.Step(_allReady);
-
-	for (int pad_i = 0; pad_i < PAD_NUM; pad_i++)
-	{
-		if (CControllerManager::IsConnection(static_cast<tagPadName>(pad_i)) == true)
-		{
-			switch (pad_i)
-			{
-			case PAD_1:
-
-				break;
-			case PAD_2:
-				break;
-			case PAD_3:
-				break;
-			case PAD_4:
-				break;
-			}
-		}
-	}
 }
 
 //•`ŽÊ

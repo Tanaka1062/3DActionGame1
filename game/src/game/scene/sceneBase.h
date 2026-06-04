@@ -11,9 +11,9 @@ protected:
 	{
 		INIT,					//データ初期化
 		LOAD,					//データ読み込み
-		MAINWAIT,				//本編前の待機処理
+		MAIN_WAIT,				//本編前の待機処理
 		MAIN,					//本編実行
-		ENDWAIT,				//終了前の待機処理
+		END_WAIT,				//終了前の待機処理
 		END,					//終了前のゲーム破棄
 	};
 

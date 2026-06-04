@@ -33,7 +33,7 @@ void CMapSelectScene::Draw()
 	switch (m_state)
 	{
 	case CSceneBase::LOAD:
-	case MAINWAIT:
+	case MAIN_WAIT:
 		m_LoadBG.Draw();
 		break;
 	default:
@@ -81,7 +81,7 @@ void CMapSelectScene::Load()
 		{
 			SetUseASyncLoadFlag(FALSE);
 			CSoundManager::Play(CSoundManager::BGM_SELECT, DX_PLAYTYPE_LOOP);
-			m_state = MAINWAIT;
+			m_state = MAIN_WAIT;
 		}
 		break;
 	}
@@ -96,10 +96,10 @@ void CMapSelectScene::Step()
 	m_bg.Step();
 	m_uiManager.Step();
 
-	//スペースで終わる
-	if (CKeyInput::IsTrg(KEY_SELECT) == true)
+	if (CKeyInput::IsTrg(KEY_SELECT) == true ||
+		m_uiManager.GetIsMapSelect())
 	{
-		m_state = ENDWAIT;
+		m_state = END_WAIT;
 	}
 
 }

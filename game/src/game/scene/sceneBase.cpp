@@ -39,7 +39,7 @@ int CSceneBase::Loop()
 	case LOAD:
 		Load();
 		break;
-	case MAINWAIT:
+	case MAIN_WAIT:
 		CFade::RequestFadeIn();
 		m_state = MAIN;
 		break;
@@ -48,9 +48,9 @@ int CSceneBase::Loop()
 		Step();
 		
 		break;
-	case ENDWAIT:
-		m_state = END;
+	case END_WAIT:
 		CFade::RequestFadeOut();
+		m_state = END;
 
 		break;
 	case END:

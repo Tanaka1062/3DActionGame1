@@ -18,6 +18,10 @@ private:
 	int				m_nowMap;						//選択されているマップ
 	bool			m_isMove;						//移動フラグ
 	C2DObject		m_arrow[ARROW_NUM];				//矢印
+	C2DObject		m_text;							//テキスト
+	C2DObject		m_mapText[playMap::MAP_NUM];	//マップテキスト
+	float			m_mapTextScale;					//マップテキストの大きさ
+	bool			m_isMapSelect;					//マップ選択フラグ
 public:
 	//コンストラクタ・デストラクタ
 	CMapSelect();
@@ -38,5 +42,7 @@ public:
 	//終了処理
 	void Exit();
 
+	//マップ選択フラグ取得
+	bool GetIsMapSelect() { return m_isMapSelect; }
 };
 

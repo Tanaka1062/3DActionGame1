@@ -23,5 +23,7 @@ public:
 	//破棄
 	void Exit();
 
+	//マップ選択フラグ取得
+	bool GetIsMapSelect() { return m_mapSelect.GetIsMapSelect(); }
 };
 

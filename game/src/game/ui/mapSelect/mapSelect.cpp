@@ -21,16 +21,33 @@ namespace {
 
 	constexpr float STICK_DEAD_ZONE = 0.3f;							//スティックのデットゾーン
 
-	static const char* ARROW_GRAPHIC_PATH[CMapSelect::ARROW_NUM]	//矢印の画像
+	static const char* ARROW_GRAPHIC_PATH[CMapSelect::ARROW_NUM] =	//矢印の画像
 	{
 		"data/graphic/mapSelect/L_Arrow.png",
 		"data/graphic/mapSelect/R_Arrow.png",
 	};
-	constexpr VECTOR ARROW_INIT_POS[CMapSelect::ARROW_NUM]			//矢印の初期座標
+	constexpr VECTOR ARROW_INIT_POS[CMapSelect::ARROW_NUM]	=		//矢印の初期座標
 	{
 		{120.0f,WINDOW_SIZE_HALF_Y,0.0f},
 		{WINDOW_SIZE_X - 120.0f,WINDOW_SIZE_HALF_Y,0.0f},
 	};
+
+	static const char* TEXT_GRAPHIC_PATH =							//テキストの画像パス
+	{
+		"data/graphic/mapSelect/mapSelectText.png",
+	};
+	constexpr VECTOR TEXT_INIT_POS =								//テキストの初期座標
+	{ WINDOW_SIZE_HALF_X,WINDOW_SIZE_Y - 50.0f,0.0f };	
+
+	static const char* MAP_TEXT_GRAPHIC_PATH[playMap::MAP_NUM] =	//マップテキストの画像パス
+	{
+		"data/graphic/mapSelect/grassland/mapText.png",
+		"data/graphic/mapSelect/grassland/mapText.png",
+	};
+	constexpr VECTOR MAP_TEXT_INIT_POS =							//マップテキストの初期座標
+	{ WINDOW_SIZE_HALF_X,WINDOW_SIZE_HALF_Y - 200.0f,0.0f };
+	constexpr float MAP_TEXT_SCALE_MAX = 1.0f;						//マップテキストの最大の大きさ
+	constexpr float MAP_TEXT_SCALE_CHANGE_SPEED = 0.06f;			//マップテキストの大きさが変わる速さ
 }
 
 //コンストラクタ
@@ -61,6 +78,7 @@ void CMapSelect::Init()
 		{
 			m_mapScale[map_i] = MAP_SCALE_MIN;
 		}
+		m_mapText[map_i].Init(MAP_TEXT_INIT_POS);
 	}
 	m_nowMap = static_cast<int>(playMap::MAP_1);
 	m_isMove = false;
@@ -69,6 +87,9 @@ void CMapSelect::Init()
 	{
 		m_arrow[arrow_i].Init(ARROW_INIT_POS[arrow_i]);
 	}
+	m_text.Init(TEXT_INIT_POS);
+	m_mapTextScale = MAP_TEXT_SCALE_MAX;
+	m_isMapSelect = false;
 }
 
 //画像ロード
@@ -77,12 +98,16 @@ void CMapSelect::Load()
 	for (int map_i = 0; map_i < playMap::MAP_NUM; map_i++)
 	{
 		m_map[map_i].Load(STAGE_GRAPHIC_PATH[map_i]);
+
+		m_mapText[map_i].Load(MAP_TEXT_GRAPHIC_PATH[map_i]);
 	}
 
 	for (int arrow_i = 0; arrow_i < CMapSelect::ARROW_NUM; arrow_i++)
 	{
 		m_arrow[arrow_i].Load(ARROW_GRAPHIC_PATH[arrow_i]);
 	}
+
+	m_text.Load(TEXT_GRAPHIC_PATH);
 }
 
 //毎フレームする処理
@@ -122,6 +147,24 @@ void CMapSelect::Step()
 		{
 			m_arrow[CMapSelect::LEFT].SetActive(false);
 		}
+		m_text.SetActive(true);
+
+		//マップテキストを徐々に大きくする
+		if (m_mapTextScale < MAP_TEXT_SCALE_MAX)
+		{
+			m_mapTextScale += MAP_TEXT_SCALE_CHANGE_SPEED;
+		}
+
+		//マップの決定
+		if (CControllerManager::IsTrg(BUTTON_B))
+		{
+			m_isMapSelect = true;
+		}
+	}
+	else
+	{
+		m_mapTextScale = 0.0f;
+		m_text.SetActive(false);
 	}
 	//---------------------------------------------------------------------
 
@@ -186,11 +229,15 @@ void CMapSelect::Drow()
 	{
 		m_map[map_i].Draw(m_mapScale[map_i]);
 	}
+	
+	m_mapText[m_nowMap].Draw(m_mapTextScale);
 
 	for (int arrow_i = 0; arrow_i < CMapSelect::ARROW_NUM; arrow_i++)
 	{
 		m_arrow[arrow_i].Draw();
 	}
+
+	m_text.Draw();
 }
 
 //終了処理
@@ -199,11 +246,15 @@ void CMapSelect::Exit()
 	for (int map_i = 0; map_i < playMap::MAP_NUM; map_i++)
 	{
 		m_map[map_i].Exit();
+
+		m_mapText[map_i].Exit();
 	}
 
 	for (int arrow_i = 0; arrow_i < CMapSelect::ARROW_NUM; arrow_i++)
 	{
 		m_arrow[arrow_i].Exit();
 	}
+
+	m_text.Exit();
 }
 

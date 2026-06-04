@@ -33,7 +33,7 @@ void CPlayScene::Draw()
 	switch (m_state)
 	{
 	case CSceneBase::LOAD:
-	case MAINWAIT:
+	case MAIN_WAIT:
 		m_LoadBG.Draw();
 		break;
 	default:
@@ -113,7 +113,7 @@ void CPlayScene::Load()
 		if (CFade::IsEndFadeOut() == true)
 		{
 			SetUseASyncLoadFlag(FALSE);
-			m_state = MAINWAIT;
+			m_state = MAIN_WAIT;
 		}
 		break;
 	}
@@ -164,7 +164,7 @@ void CPlayScene::Step()
 	if (CKeyInput::IsTrg(KEY_SELECT) == true ||
 		m_gameTime->GetTimeEnd() == true)
 	{
-		m_state = ENDWAIT;
+		m_state = END_WAIT;
 	}
 
 

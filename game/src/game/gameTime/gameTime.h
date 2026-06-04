@@ -31,10 +31,10 @@ private:
 	CGameTime();
 	~CGameTime();
 
-	int m_timeCount;		//経過時間
-	bool m_isEnd;			//終わったかフラグ
-	int m_startTime;		//開始時間
-	int m_endTime;			//終了時間
+	int		m_timeCount;		//経過時間
+	bool	m_isEnd;			//終わったかフラグ
+	int		m_startTime;		//開始時間
+	int		m_endTime;			//終了時間
 
 public:
 	
