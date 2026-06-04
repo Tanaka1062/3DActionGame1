@@ -31,6 +31,8 @@ namespace
 			"data/graphic/mapSelect/grassland/stage5.png",
 		},
 	};
+	constexpr int ALPHA_MAX = 200;					//最大の透明度
+	constexpr int ALPHA_MIN = 30;					//最小の透明度
 }
 
 //---------------------------
@@ -69,8 +71,11 @@ void CMapSelectBG::Init()
 			m_bgHndl[playMap_i][bg_i] = -1;
 		}
 	}
-	m_bgId = -1;
+	m_bgId = 0;
+	m_mapId = static_cast<int>(playMap::MAP_1);
 	m_bg.Init(INIT_POS);
+	m_alpha = ALPHA_MAX;
+	m_isFadeOutEnd = false;
 }
 
 //---------------------------
@@ -94,6 +99,45 @@ void CMapSelectBG::Load()
 //---------------------------
 void CMapSelectBG::Step()
 {
+	CPlayMapData* playMapData = CPlayMapData::GetInstance();
+	//マップが切り替わると背景を変更する
+	if (m_mapId != playMapData->GetSelectMap())
+	{
+		m_mapId = playMapData->GetSelectMap();
+		m_bgId = 0;
+		m_alpha = ALPHA_MAX;
+	}
+
+	if (m_isFadeOutEnd == false)
+	{
+		//背景を徐々に透明にする
+		m_alpha--;
+		//完全に透明になったら背景を変更する
+		if (m_alpha <= ALPHA_MIN)
+		{
+			m_bgId++;
+			//背景の数を超えたら初期値に戻す
+			if (m_bgId >= BG_NUM[m_mapId])
+			{
+				m_bgId = 0;
+			}
+			m_isFadeOutEnd = true;
+		}
+
+	}
+	else
+	{
+		//背景を徐々に表示する
+		m_alpha++;
+		//最大の透明度を超えたら透明になるように戻す
+		if (m_alpha >= ALPHA_MAX)
+		{
+			m_isFadeOutEnd = false;
+		}
+	}
+
+	//背景画像更新
+	m_bg.SetHndl(m_bgHndl[m_mapId][m_bgId]);
 }
 
 //---------------------------
@@ -101,7 +145,12 @@ void CMapSelectBG::Step()
 //---------------------------
 void CMapSelectBG::Draw()
 {
+	//画像の透明度を変更
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, m_alpha);
 	m_bg.Draw();
+	//画像の透明度を元に戻す
+	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+
 }
 
 //---------------------------

@@ -9,7 +9,10 @@ class CMapSelectBG
 private:
 	std::vector<int>	m_bgHndl[playMap::MAP_NUM];		//背景の画像ハンドル
 	int					m_bgId;							//背景のID
+	int					m_mapId;						//マップのID
 	C2DObject			m_bg;							//背景
+	int					m_alpha;						//透明度
+	bool				m_isFadeOutEnd;					//完全に透明になったかフラグ
 public:
 	//コンストラクタ・デストラクタ
 	CMapSelectBG();

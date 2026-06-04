@@ -18,7 +18,7 @@ const char* GRAPHIC_UI_PATH =
 	"data/graphic/result/lineGraph.png",
 };
 
-constexpr int UI_BLEND = 200;						//UIの透明度
+constexpr int UI_ALPHA = 200;						//UIの透明度
 constexpr VECTOR UI_INIT_POS =						//UIの初期座標
 { WINDOW_SIZE_HALF_X,WINDOW_SIZE_HALF_Y,0.0f };	
 
@@ -85,7 +85,7 @@ void CResultLineGraph::Step()
 void CResultLineGraph::Draw()
 {
 	//画像の透明度を変更
-	SetDrawBlendMode(DX_BLENDMODE_ALPHA, UI_BLEND);
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, UI_ALPHA);
 	m_ui.Draw();
 	//画像の透明度を元に戻す
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);

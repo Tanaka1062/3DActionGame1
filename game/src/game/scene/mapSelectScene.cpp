@@ -34,10 +34,10 @@ void CMapSelectScene::Draw()
 	{
 	case CSceneBase::LOAD:
 	case MAINWAIT:
-		m_bg.Draw();
 		m_LoadBG.Draw();
 		break;
 	default:
+		m_bg.Draw();
 		m_uiManager.Draw();
 		break;
 	}

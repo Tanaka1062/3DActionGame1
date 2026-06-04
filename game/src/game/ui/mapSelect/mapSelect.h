@@ -4,11 +4,20 @@
 
 class CMapSelect
 {
+public:
+	enum tagArrow
+	{
+		LEFT,
+		RIGHT,
+
+		ARROW_NUM,
+	};
 private:
 	C2DObject		m_map[playMap::MAP_NUM];		//マップ
 	float			m_mapScale[playMap::MAP_NUM];	//マップの大きさ
 	int				m_nowMap;						//選択されているマップ
 	bool			m_isMove;						//移動フラグ
+	C2DObject		m_arrow[ARROW_NUM];				//矢印
 public:
 	//コンストラクタ・デストラクタ
 	CMapSelect();

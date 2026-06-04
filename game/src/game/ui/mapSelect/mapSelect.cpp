@@ -9,7 +9,7 @@ namespace {
 		"data/graphic/mapSelect/grassland/stage1.png",
 	};
 
-	constexpr VECTOR INIT_POS = 
+	constexpr VECTOR MAP_INIT_POS = 
 	{ WINDOW_SIZE_HALF_X,WINDOW_SIZE_HALF_Y,0.0f };					//マップの初期座標
 	constexpr float MAP_SPACING = 200.0f + WINDOW_SIZE_X;			//マップ同士の距離
 	constexpr float MAP_SCALE_MIN = 0.3f;							//マップの最小の大きさ
@@ -20,6 +20,17 @@ namespace {
 	constexpr float MAP_STOP_DISTANCE = 10.0f;						//マップ停止距離
 
 	constexpr float STICK_DEAD_ZONE = 0.3f;							//スティックのデットゾーン
+
+	static const char* ARROW_GRAPHIC_PATH[CMapSelect::ARROW_NUM]	//矢印の画像
+	{
+		"data/graphic/mapSelect/L_Arrow.png",
+		"data/graphic/mapSelect/R_Arrow.png",
+	};
+	constexpr VECTOR ARROW_INIT_POS[CMapSelect::ARROW_NUM]			//矢印の初期座標
+	{
+		{120.0f,WINDOW_SIZE_HALF_Y,0.0f},
+		{WINDOW_SIZE_X - 120.0f,WINDOW_SIZE_HALF_Y,0.0f},
+	};
 }
 
 //コンストラクタ
@@ -38,7 +49,7 @@ void CMapSelect::Init()
 {
 	for (int map_i = 0; map_i < playMap::MAP_NUM; map_i++)
 	{
-		VECTOR pos = INIT_POS;
+		VECTOR pos = MAP_INIT_POS;
 		pos.x += MAP_SPACING * map_i;
 		m_map[map_i].Init(pos);
 
@@ -53,6 +64,11 @@ void CMapSelect::Init()
 	}
 	m_nowMap = static_cast<int>(playMap::MAP_1);
 	m_isMove = false;
+
+	for (int arrow_i = 0; arrow_i < CMapSelect::ARROW_NUM; arrow_i++)
+	{
+		m_arrow[arrow_i].Init(ARROW_INIT_POS[arrow_i]);
+	}
 }
 
 //画像ロード
@@ -61,6 +77,11 @@ void CMapSelect::Load()
 	for (int map_i = 0; map_i < playMap::MAP_NUM; map_i++)
 	{
 		m_map[map_i].Load(STAGE_GRAPHIC_PATH[map_i]);
+	}
+
+	for (int arrow_i = 0; arrow_i < CMapSelect::ARROW_NUM; arrow_i++)
+	{
+		m_arrow[arrow_i].Load(ARROW_GRAPHIC_PATH[arrow_i]);
 	}
 }
 
@@ -73,16 +94,33 @@ void CMapSelect::Step()
 		CPlayMapData* mapData = CPlayMapData::GetInstance();
 		//マップID設定
 		mapData->SetSelectMap(static_cast<playMap::tagMapSelect>(m_nowMap));
-
-		if (CControllerManager::GetLX() > STICK_DEAD_ZONE &&
-			m_nowMap < playMap::MAP_NUM - 1)
+		//一番右のマップが選択されていない場合矢印を表示
+		if (m_nowMap < playMap::MAP_NUM - 1)
 		{
-			m_nowMap++;
+			m_arrow[CMapSelect::RIGHT].SetActive(true);
+			//入力があると次のマップに移動する
+			if (CControllerManager::GetLX() > STICK_DEAD_ZONE)
+			{
+				m_nowMap++;
+			}
 		}
-		else if (CControllerManager::GetLX() < -STICK_DEAD_ZONE &&
-			m_nowMap > playMap::MAP_1)
+		else
 		{
-			m_nowMap--;
+			m_arrow[CMapSelect::RIGHT].SetActive(false);
+		}
+		//一番左のマップが表示されていない場合
+		if (m_nowMap > playMap::MAP_1)
+		{
+			m_arrow[CMapSelect::LEFT].SetActive(true);
+			//入力があると前のマップに移動する
+			if (CControllerManager::GetLX() < -STICK_DEAD_ZONE)
+			{
+				m_nowMap--;
+			}
+		}
+		else
+		{
+			m_arrow[CMapSelect::LEFT].SetActive(false);
 		}
 	}
 	//---------------------------------------------------------------------
@@ -90,7 +128,7 @@ void CMapSelect::Step()
 	for (int map_i = 0; map_i < playMap::MAP_NUM; map_i++)
 	{
 		//マップ移動処理-------------------------------------------------------
-		float posX = INIT_POS.x + MAP_SPACING * map_i;
+		float posX = MAP_INIT_POS.x + MAP_SPACING * map_i;
 		posX -= m_nowMap * MAP_SPACING;
 		VECTOR mapPos = m_map[map_i].GetPos();
 		if (abs(posX - mapPos.x) <= MAP_STOP_DISTANCE)
@@ -148,6 +186,11 @@ void CMapSelect::Drow()
 	{
 		m_map[map_i].Draw(m_mapScale[map_i]);
 	}
+
+	for (int arrow_i = 0; arrow_i < CMapSelect::ARROW_NUM; arrow_i++)
+	{
+		m_arrow[arrow_i].Draw();
+	}
 }
 
 //終了処理
@@ -156,6 +199,11 @@ void CMapSelect::Exit()
 	for (int map_i = 0; map_i < playMap::MAP_NUM; map_i++)
 	{
 		m_map[map_i].Exit();
+	}
+
+	for (int arrow_i = 0; arrow_i < CMapSelect::ARROW_NUM; arrow_i++)
+	{
+		m_arrow[arrow_i].Exit();
 	}
 }
 
