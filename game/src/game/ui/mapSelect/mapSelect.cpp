@@ -3,12 +3,13 @@
 #include "../../lib/input/controllerManager.h"
 
 namespace {
-	static const char* STAGE_GRAPHIC_PATH[playMap::MAP_NUM] =	//マップの画像パス
+
+	//マップ関連定義------------------------------------------------------------------
+	static const char* STAGE_GRAPHIC_PATH[playMap::MAP_NUM] =		//マップの画像パス
 	{
 		"data/graphic/mapSelect/grassland/stage1.png",
 		"data/graphic/mapSelect/grassland/stage1.png",
 	};
-
 	constexpr VECTOR MAP_INIT_POS = 
 	{ WINDOW_SIZE_HALF_X,WINDOW_SIZE_HALF_Y,0.0f };					//マップの初期座標
 	constexpr float MAP_SPACING = 200.0f + WINDOW_SIZE_X;			//マップ同士の距離
@@ -18,36 +19,46 @@ namespace {
 	constexpr float MAP_SCALE_STOP_DISTANCE = 0.05f;				//マップの大きさの停止距離				
 	constexpr float MAP_MOVE_SPEED = 30.0f;							//マップの移動スピード
 	constexpr float MAP_STOP_DISTANCE = 10.0f;						//マップ停止距離
+	//--------------------------------------------------------------------------------
 
 	constexpr float STICK_DEAD_ZONE = 0.3f;							//スティックのデットゾーン
 
+	//矢印関連定義--------------------------------------------------------------------
 	static const char* ARROW_GRAPHIC_PATH[CMapSelect::ARROW_NUM] =	//矢印の画像
 	{
 		"data/graphic/mapSelect/L_Arrow.png",
 		"data/graphic/mapSelect/R_Arrow.png",
 	};
+	constexpr float ARROW_SIZE = 128;								//矢印の画像サイズ
+	constexpr float ARROW_ANIM_NUM = 4;								//矢印のアニメーションの数
+	constexpr int	ARROW_ANIM_SPEED = 20;							//矢印のアニメーション再生速度
 	constexpr VECTOR ARROW_INIT_POS[CMapSelect::ARROW_NUM]	=		//矢印の初期座標
 	{
 		{120.0f,WINDOW_SIZE_HALF_Y,0.0f},
 		{WINDOW_SIZE_X - 120.0f,WINDOW_SIZE_HALF_Y,0.0f},
 	};
+	//--------------------------------------------------------------------------------
 
+	//テキスト関連定義----------------------------------------------------------------
 	static const char* TEXT_GRAPHIC_PATH =							//テキストの画像パス
 	{
 		"data/graphic/mapSelect/mapSelectText.png",
 	};
 	constexpr VECTOR TEXT_INIT_POS =								//テキストの初期座標
 	{ WINDOW_SIZE_HALF_X,WINDOW_SIZE_Y - 50.0f,0.0f };	
+	//--------------------------------------------------------------------------------
 
+	//マップテキスト関連定義----------------------------------------------------------
 	static const char* MAP_TEXT_GRAPHIC_PATH[playMap::MAP_NUM] =	//マップテキストの画像パス
 	{
 		"data/graphic/mapSelect/grassland/mapText.png",
 		"data/graphic/mapSelect/grassland/mapText.png",
 	};
 	constexpr VECTOR MAP_TEXT_INIT_POS =							//マップテキストの初期座標
-	{ WINDOW_SIZE_HALF_X,WINDOW_SIZE_HALF_Y - 200.0f,0.0f };
+	{ WINDOW_SIZE_HALF_X,80.0f,0.0f };
 	constexpr float MAP_TEXT_SCALE_MAX = 1.0f;						//マップテキストの最大の大きさ
 	constexpr float MAP_TEXT_SCALE_CHANGE_SPEED = 0.06f;			//マップテキストの大きさが変わる速さ
+	//--------------------------------------------------------------------------------
 }
 
 //コンストラクタ
@@ -104,7 +115,8 @@ void CMapSelect::Load()
 
 	for (int arrow_i = 0; arrow_i < CMapSelect::ARROW_NUM; arrow_i++)
 	{
-		m_arrow[arrow_i].Load(ARROW_GRAPHIC_PATH[arrow_i]);
+		m_arrow[arrow_i].Load(ARROW_GRAPHIC_PATH[arrow_i],ARROW_ANIM_NUM,ARROW_SIZE,ARROW_SIZE);
+		m_arrow[arrow_i].RequestAnim(0,ARROW_ANIM_SPEED);
 	}
 
 	m_text.Load(TEXT_GRAPHIC_PATH);
@@ -220,6 +232,11 @@ void CMapSelect::Step()
 		//---------------------------------------------------------------------
 	}
 
+	//矢印のアニメーション
+	for (int arrow_i = 0; arrow_i < ARROW_NUM; arrow_i++)
+	{
+		m_arrow[arrow_i].Step();
+	}
 }
 
 //描写処理

@@ -51,6 +51,18 @@ public:
 	//当たり判定後の処理
 	virtual void HitCalc();
 
+	//画像のアニメーションを呼び出し
+//_animId	:再生させるアニメID
+//_animSpeed:何フレームで画像を進めるか
+//_isLoop	:ループ再生するか(デフォルトはループする)
+	void RequestAnim(int _animId, int _animSpeed, bool _isLoop = true);
+
+	//アニメーション再生
+	void AnimStep();
+
+	//アニメーション停止
+	void AnimStop();
+
 protected:
 	//画像をロードする関数
 	//_hndlPath		:画像のパス
@@ -59,18 +71,6 @@ protected:
 	//_sizeY		:分割した画像の大きさ縦
 	//メモ			:状態が複数ある場合は状態の数だけ呼び出してロードしてください
 	void LoadGraphic(const char* _hndlPath,int _allNum = 1,  int _sizeX = 1, int _sizeY = 1);
-
-	//画像のアニメーションを呼び出し
-	//_animId	:再生させるアニメID
-	//_animSpeed:何フレームで画像を進めるか
-	//_isLoop	:ループ再生するか(デフォルトはループする)
-	void RequestAnim(int _animId,int _animSpeed,bool _isLoop = true);
-
-	//アニメーション再生
-	void AnimStep();
-
-	//アニメーション停止
-	void AnimStop();
 
 public:
 

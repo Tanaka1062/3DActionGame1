@@ -32,7 +32,7 @@ namespace
 		},
 	};
 	constexpr int ALPHA_MAX = 200;					//Å‘å‚Ì“§–¾“x
-	constexpr int ALPHA_MIN = 30;					//Å¬‚Ì“§–¾“x
+	constexpr int ALPHA_MIN = 60;					//Å¬‚Ì“§–¾“x
 }
 
 //---------------------------

@@ -107,48 +107,6 @@ void C2DObject::HitCalc()
 }
 
 //---------------------------
-//	画像をロードする関数
-//---------------------------
-void C2DObject::LoadGraphic(const char* _hndlPath, int _allNum , int _sizeX, int _sizeY)
-{
-	//ハンドルが空なら処理をしない
-	if (_hndlPath == nullptr)return;
-
-	vector<int> hndl;
-
-	//一枚だけの場合
-	if (_allNum == 1)
-	{
-		if (m_hndl[0][0] == -1)
-		{
-			//画像を一枚ロードする
-			m_hndl[0][0] = LoadGraph(_hndlPath);
-		}
-	}
-	//複数ある場合は分けてロードする
-	else
-	{
-		//分割分ハンドルを作成する
-		for (int hndl_i = 0; hndl_i < _allNum; hndl_i++)
-		{
-			hndl.push_back(-1);
-		}
-
-		//画像をロードする
-		LoadDivGraph(_hndlPath, _allNum, _allNum , 1, _sizeX, _sizeY, &hndl[0]);
-
-		//一番最初の画像が無い場合消す
-		if (m_hndl[0][0] == -1)
-		{
-			m_hndl.clear();
-		}
-		
-		//ロードした画像を追加する
-		m_hndl.push_back(hndl);
-	}
-}
-
-//---------------------------
 //画像のアニメーションを呼び出し
 //---------------------------
 void C2DObject::RequestAnim(int _animId, int _animSpeed, bool _isLoop)
@@ -202,4 +160,47 @@ void C2DObject::AnimStop()
 
 	m_animData.m_speed = 0;
 }
+
+//---------------------------
+//	画像をロードする関数
+//---------------------------
+void C2DObject::LoadGraphic(const char* _hndlPath, int _allNum , int _sizeX, int _sizeY)
+{
+	//ハンドルが空なら処理をしない
+	if (_hndlPath == nullptr)return;
+
+	vector<int> hndl;
+
+	//一枚だけの場合
+	if (_allNum == 1)
+	{
+		if (m_hndl[0][0] == -1)
+		{
+			//画像を一枚ロードする
+			m_hndl[0][0] = LoadGraph(_hndlPath);
+		}
+	}
+	//複数ある場合は分けてロードする
+	else
+	{
+		//分割分ハンドルを作成する
+		for (int hndl_i = 0; hndl_i < _allNum; hndl_i++)
+		{
+			hndl.push_back(-1);
+		}
+
+		//画像をロードする
+		LoadDivGraph(_hndlPath, _allNum, _allNum , 1, _sizeX, _sizeY, &hndl[0]);
+
+		//一番最初の画像が無い場合消す
+		if (m_hndl[0][0] == -1)
+		{
+			m_hndl.clear();
+		}
+		
+		//ロードした画像を追加する
+		m_hndl.push_back(hndl);
+	}
+}
+
 
