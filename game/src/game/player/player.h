@@ -41,30 +41,68 @@ namespace PlayerData{
 	constexpr float HAMMER_FALL_FRAME = 13.0f;					//ハンマーの落下するまでのフレーム
 	constexpr float HAMMER_FALL_MIN_LENGTH = 30.0f;				//ハンマーの落下攻撃ができる最小の高さ
 	//-----------------------------------
+	enum tagAttackNum
+	{
+		ATTACK_NONE = -1,	//攻撃をしていない
+		ATTACK,				//攻撃
+		ATTACK_AIR,			//空中の攻撃
+
+		ATTACK_NUM,			//攻撃の数
+	};
+
+	//武器のID
+	enum tagWeaponId
+	{
+		WEAPON_ID_HAND,		//素手
+		WEAPON_ID_HAMMER,	//ハンマー
+		WEAPON_ID_AX,		//斧
+
+		WEAPON_ID_NUM,		//武器の種類
+	};
+
+	constexpr float ATTACK_MAGNIFICATION[WEAPON_ID_NUM][ATTACK_NUM] =	//攻撃の倍率
+	{
+		{0.5f,1.0f},
+		{0.7f,1.0f},
+		{1.0f,1.0f},
+	};
+
+	constexpr int ATTACK_BLOWN[WEAPON_ID_NUM][ATTACK_NUM] =				//攻撃の吹き飛び度
+	{
+		{100,100},
+		{100,100},
+		{100,100},
+	};
+
+	constexpr float ATTACK_SIZE[WEAPON_ID_NUM][ATTACK_NUM] =			//攻撃の大きさ
+	{
+		{12.0f,12.0f},
+		{25.0f,25.0f},
+		{28.0f,12.0f},
+	};
+
+	constexpr float ATTACK_LENGTH[WEAPON_ID_NUM][ATTACK_NUM] =			//攻撃の長さ
+	{
+		{15.0f,15.0f},
+		{15.0f,0.0f},
+		{15.0f,15.0f},
+	};
+
+
+	//アイテムの状態
+	enum tagHaveItemState
+	{
+		ITEM_STATE_NONE = -1,		//アイテムを持っていない
+		ITEM_STATE_PICK_UP,			//アイテムを取ろうとしている
+		ITEM_STATE_PUT_DOWN,		//アイテムを下ろす
+		ITEM_STATE_GET,				//アイテムを手に入れる
+		ITEM_STATE_HAVE,			//アイテムを持っている
+		ITEM_STATE_THROW,			//アイテムを投げる
+		ITEM_STATE_DROP,			//アイテムを落とした
+	};
 
 };
 
-//武器のID
-enum tagWeaponId
-{
-	WEAPON_ID_HAND,		//素手
-	WEAPON_ID_HAMMER,	//ハンマー
-	WEAPON_ID_AX,		//斧
-
-	WEAPON_ID_NUM,		//武器の種類
-};
-
-//アイテムの状態
-enum tagHaveItemState
-{
-	ITEM_STATE_NONE = -1,		//アイテムを持っていない
-	ITEM_STATE_PICK_UP,			//アイテムを取ろうとしている
-	ITEM_STATE_PUT_DOWN,		//アイテムを下ろす
-	ITEM_STATE_GET,				//アイテムを手に入れる
-	ITEM_STATE_HAVE,			//アイテムを持っている
-	ITEM_STATE_THROW,			//アイテムを投げる
-	ITEM_STATE_DROP,			//アイテムを落とした
-};
 
 //プレイヤークラス
 class CPlayer:public CCharacterBase
@@ -78,9 +116,9 @@ protected:
 	int					m_attackId;				//攻撃のID
 	int					m_effectId;				//エフェクトのID
 	tagPadName			m_padName;				//コントローラーの名前
-	tagWeaponId			m_weaponId;				//武器のID
+	PlayerData::tagWeaponId			m_weaponId;				//武器のID
 	tagPlayerName		m_name;					//プレイヤーの名前
-	tagHaveItemState	m_itemState;			//アイテムの状態
+	PlayerData::tagHaveItemState	m_itemState;			//アイテムの状態
 	VECTOR*				m_targetPos;			//相手の座標ポインタ
 	bool				m_isCpu;				//cpuかどうかフラグ
 	int					m_getUpTime;			//起き上がるまでの時間
@@ -94,27 +132,15 @@ protected:
 		ANIMID_AIR_ATTACK_HAND,			//空中で素手攻撃中アニメーション
 		ANIMID_AIR_ATTACK_HAND_IN,		//空中で素手攻撃前アニメーション
 		ANIMID_AIR_ATTACK_HAND_OUT,		//空中で素手攻撃後アニメーション
-		ANIMID_ATTACK1_AX,				//斧攻撃1中アニメーション
-		ANIMID_ATTACK1_AX_IN,			//斧攻撃1前アニメーション
-		ANIMID_ATTACK1_AX_OUT,			//斧攻撃1後アニメーション
-		ANIMID_ATTACK1_HAMMER,			//ハンマー攻撃1中アニメーション
-		ANIMID_ATTACK1_HAMMER_IN,		//ハンマー攻撃1前アニメーション
-		ANIMID_ATTACK1_HAMMER_OUT,		//ハンマー攻撃1後アニメーション
-		ANIMID_ATTACK2_HAMMER,			//ハンマー攻撃2中アニメーション
-		ANIMID_ATTACK2_HAMMER_IN,		//ハンマー攻撃2前アニメーション
-		ANIMID_ATTACK2_HAMMER_OUT,		//ハンマー攻撃2後アニメーション
-		ANIMID_ATTACK3_HAMMER,			//ハンマー攻撃3中アニメーション
-		ANIMID_ATTACK3_HAMMER_IN,		//ハンマー攻撃3前アニメーション
-		ANIMID_ATTACK3_HAMMER_OUT,		//ハンマー攻撃3後アニメーション
-		ANIMID_ATTACK1_HAND,			//素手攻撃1中アニメーション
-		ANIMID_ATTACK1_HAND_IN,			//素手攻撃1前アニメーション
-		ANIMID_ATTACK1_HAND_OUT,		//素手攻撃1後アニメーション
-		ANIMID_ATTACK2_HAND,			//素手攻撃2中アニメーション
-		ANIMID_ATTACK2_HAND_IN,			//素手攻撃2前アニメーション
-		ANIMID_ATTACK2_HAND_OUT,		//素手攻撃2後アニメーション
-		ANIMID_ATTACK3_HAND,			//素手攻撃3中アニメーション
-		ANIMID_ATTACK3_HAND_IN,			//素手攻撃3前アニメーション
-		ANIMID_ATTACK3_HAND_OUT,		//素手攻撃3後アニメーション
+		ANIMID_ATTACK_AX,				//斧攻撃中アニメーション
+		ANIMID_ATTACK_AX_IN,			//斧攻撃前アニメーション
+		ANIMID_ATTACK_AX_OUT,			//斧攻撃後アニメーション
+		ANIMID_ATTACK_HAMMER,			//ハンマー攻撃中アニメーション
+		ANIMID_ATTACK_HAMMER_IN,		//ハンマー攻撃前アニメーション
+		ANIMID_ATTACK_HAMMER_OUT,		//ハンマー攻撃後アニメーション
+		ANIMID_ATTACK_HAND,				//素手攻撃中アニメーション
+		ANIMID_ATTACK_HAND_IN,			//素手攻撃前アニメーション
+		ANIMID_ATTACK_HAND_OUT,			//素手攻撃後アニメーション
 		ANIMID_BLOW_AWAY,				//吹き飛んでいるアニメーション
 		ANIMID_DEFAULT,					//デフォルトのアニメーション
 		ANIMID_DIE,						//死亡時のアニメーション
@@ -196,9 +222,9 @@ public:
 	tagPadName GetPadName() { return m_padName; }
 
 	//武器のIDを取得
-	tagWeaponId GetWeaponId() { return m_weaponId; }
+	PlayerData::tagWeaponId GetWeaponId() { return m_weaponId; }
 	//武器のIDを設定
-	void SetWeaponId(tagWeaponId _weaponId) { m_weaponId = _weaponId; }
+	void SetWeaponId(PlayerData::tagWeaponId _weaponId) { m_weaponId = _weaponId; }
 
 	//武器の耐久度をセットする
 	void SetWeaponDurability(int _durability) { m_weaponDurability = _durability; }
@@ -207,10 +233,10 @@ public:
 	tagPlayerName GetPlayerName() { return m_name; }
 
 	//アイテムの状態を取得
-	tagHaveItemState GetItemState() { return m_itemState; }
+	PlayerData::tagHaveItemState GetItemState() { return m_itemState; }
 
 	//アイテムの状態を設定
-	void SetItemState(tagHaveItemState _itemState) { m_itemState = _itemState; }
+	void SetItemState(PlayerData::tagHaveItemState _itemState) { m_itemState = _itemState; }
 
 	//体力を増やす
 	void AddHp(int _addNum) { m_hp += _addNum; }

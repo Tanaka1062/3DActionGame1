@@ -15,6 +15,7 @@ public:
 private:
 	C2DObject		m_map[playMap::MAP_NUM];		//マップ
 	float			m_mapScale[playMap::MAP_NUM];	//マップの大きさ
+	C2DObject		m_frame[playMap::MAP_NUM];		//フレーム
 	int				m_nowMap;						//選択されているマップ
 	bool			m_isMove;						//移動フラグ
 	C2DObject		m_arrow[ARROW_NUM];				//矢印

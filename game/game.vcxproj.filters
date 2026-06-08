@@ -199,6 +199,9 @@
     <Filter Include="ソース ファイル\game\ui\mapSelect">
       <UniqueIdentifier>{95e83de7-b112-4682-b0f4-92ca6e3a33f8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\game\map\playMap\test">
+      <UniqueIdentifier>{67cdfb36-f6b8-46b7-b3de-a62ed23364b4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\input\controllerInput.cpp">
@@ -476,6 +479,9 @@
     </ClCompile>
     <ClCompile Include="src\game\map\playMap\playMapData.cpp">
       <Filter>ソース ファイル\game\map\playMap</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\map\playMap\test\test.cpp">
+      <Filter>ソース ファイル\game\map\playMap\test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -760,6 +766,9 @@
     </ClInclude>
     <ClInclude Include="src\game\map\playMap\playMapData.h">
       <Filter>ソース ファイル\game\map\playMap</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\map\playMap\test\test.h">
+      <Filter>ソース ファイル\game\map\playMap\test</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

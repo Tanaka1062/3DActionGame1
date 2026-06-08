@@ -62,7 +62,7 @@ void CPlayScene::Draw()
 void CPlayScene::Init()
 {
 	CSceneBase::Init();
-	m_mapManager.Init(MAP_ID_GRASSLAND);
+	m_mapManager.Init(MAP_ID_PLAY_MAP);
 	m_sky.Init();
 	m_playerManager.Init();
 	m_shot.Init();

@@ -1,6 +1,6 @@
 #include "weaponManager.h"
 
-static const char* MODEL_PATH[WEAPON_ID_NUM] ={		//ロードするファイル名
+static const char* MODEL_PATH[PlayerData::WEAPON_ID_NUM] ={		//ロードするファイル名
 	"",
 	"data/model/weapon/hammer/weapon_hammer.mv1",
 	"data/model/weapon/ax/weapon_ax.mv1",
@@ -38,10 +38,10 @@ void CWeaponManager::Init()
 //---------------------------
 void CWeaponManager::Load()
 {
-	int hndl[WEAPON_ID_NUM] = { -1 };
+	int hndl[PlayerData::WEAPON_ID_NUM] = { -1 };
 
 	//武器のモデルハンドルロード
-	for (int weaponHnd_i = 0; weaponHnd_i < WEAPON_ID_NUM; weaponHnd_i++)
+	for (int weaponHnd_i = 0; weaponHnd_i < PlayerData::WEAPON_ID_NUM; weaponHnd_i++)
 	{
 		hndl[weaponHnd_i] = MV1LoadModel(MODEL_PATH[weaponHnd_i]);
 	}
@@ -49,7 +49,7 @@ void CWeaponManager::Load()
 	//武器のクラスにモデルをコピー
 	for (int player_i = 0; player_i < PLAYER_NUM; player_i++)
 	{
-		for (int weaponHnd_i = 0; weaponHnd_i < WEAPON_ID_NUM; weaponHnd_i++)
+		for (int weaponHnd_i = 0; weaponHnd_i < PlayerData::WEAPON_ID_NUM; weaponHnd_i++)
 		{
 			m_weapon[player_i].Load(hndl[weaponHnd_i],weaponHnd_i);
 		}
@@ -67,7 +67,7 @@ void CWeaponManager::Step(CPlayerManager& _playerManager)
 		//武器を持っているかを保存
 		bool isWeapon = false;
 		//プレイヤーの武器のIDを取得
-		tagWeaponId weaponId = _playerManager.GetPlayer(player_i)->GetWeaponId();
+		PlayerData::tagWeaponId weaponId = _playerManager.GetPlayer(player_i)->GetWeaponId();
 		tagState state = _playerManager.GetPlayer(player_i)->GetState();
 		VECTOR playerPos = _playerManager.GetPlayer(player_i)->GetCenter();
 
@@ -84,7 +84,7 @@ void CWeaponManager::Update(CPlayerManager& _playerManager)
 	{
 		//プレイヤーのハンドルを取得
 		int hndl = _playerManager.GetPlayer(player_i)->GetHndl();
-		tagWeaponId weaponId = _playerManager.GetPlayer(player_i)->GetWeaponId();
+		PlayerData::tagWeaponId weaponId = _playerManager.GetPlayer(player_i)->GetWeaponId();
 		m_weapon[player_i].Update(hndl);
 	}
 }

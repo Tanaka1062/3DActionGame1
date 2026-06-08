@@ -21,16 +21,26 @@ namespace {
 	constexpr float MAP_STOP_DISTANCE = 10.0f;						//マップ停止距離
 	//--------------------------------------------------------------------------------
 
+	//フレーム関連定義----------------------------------------------------------------
+	constexpr const char* FRAME_GRAPHIC_PATH =						//フレームの画像パス
+	{ "data/graphic/mapSelect/frame.png" };
+	constexpr int FRAME_SIZE_X = 960;								//フレームの画像サイズ横
+	constexpr int FRAME_SIZE_Y = 540;								//フレームの画像サイズ縦
+	constexpr int FRAME_ANIM_NUM = 4;								//フレームのアニメーションの数
+	constexpr int FRAME_ANIM_SPEED = 20;							//フレームのアニメーション再生速度
+	constexpr float FRAME_SCALE_RATIO = 2.0f;						//フレームの大きさの倍率
+	//--------------------------------------------------------------------------------
+
 	constexpr float STICK_DEAD_ZONE = 0.3f;							//スティックのデットゾーン
 
 	//矢印関連定義--------------------------------------------------------------------
-	static const char* ARROW_GRAPHIC_PATH[CMapSelect::ARROW_NUM] =	//矢印の画像
+	static const char* ARROW_GRAPHIC_PATH[CMapSelect::ARROW_NUM] =	//矢印の画像パス
 	{
 		"data/graphic/mapSelect/L_Arrow.png",
 		"data/graphic/mapSelect/R_Arrow.png",
 	};
-	constexpr float ARROW_SIZE = 128;								//矢印の画像サイズ
-	constexpr float ARROW_ANIM_NUM = 4;								//矢印のアニメーションの数
+	constexpr int	ARROW_SIZE = 128;								//矢印の画像サイズ
+	constexpr int   ARROW_ANIM_NUM = 4;								//矢印のアニメーションの数
 	constexpr int	ARROW_ANIM_SPEED = 20;							//矢印のアニメーション再生速度
 	constexpr VECTOR ARROW_INIT_POS[CMapSelect::ARROW_NUM]	=		//矢印の初期座標
 	{
@@ -80,6 +90,7 @@ void CMapSelect::Init()
 		VECTOR pos = MAP_INIT_POS;
 		pos.x += MAP_SPACING * map_i;
 		m_map[map_i].Init(pos);
+		m_frame[map_i].Init(pos);
 
 		if (map_i == playMap::MAP_1)
 		{
@@ -109,7 +120,8 @@ void CMapSelect::Load()
 	for (int map_i = 0; map_i < playMap::MAP_NUM; map_i++)
 	{
 		m_map[map_i].Load(STAGE_GRAPHIC_PATH[map_i]);
-
+		m_frame[map_i].Load(FRAME_GRAPHIC_PATH,FRAME_ANIM_NUM, FRAME_SIZE_X, FRAME_SIZE_Y);
+		m_frame[map_i].RequestAnim(0,FRAME_ANIM_SPEED);
 		m_mapText[map_i].Load(MAP_TEXT_GRAPHIC_PATH[map_i]);
 	}
 
@@ -202,6 +214,7 @@ void CMapSelect::Step()
 			mapPos.x -= MAP_MOVE_SPEED;
 		}
 		m_map[map_i].SetPos(mapPos);
+		m_frame[map_i].SetPos(mapPos);
 		//---------------------------------------------------------------------
 
 		//マップの大きさ変更処理-----------------------------------------------
@@ -230,6 +243,9 @@ void CMapSelect::Step()
 			}
 		}
 		//---------------------------------------------------------------------
+		
+		//フレームのアニメーション
+		m_frame[map_i].Step();
 	}
 
 	//矢印のアニメーション
@@ -245,6 +261,7 @@ void CMapSelect::Drow()
 	for (int map_i = 0; map_i < playMap::MAP_NUM; map_i++)
 	{
 		m_map[map_i].Draw(m_mapScale[map_i]);
+		m_frame[map_i].Draw(m_mapScale[map_i] * FRAME_SCALE_RATIO);
 	}
 	
 	m_mapText[m_nowMap].Draw(m_mapTextScale);
@@ -263,7 +280,7 @@ void CMapSelect::Exit()
 	for (int map_i = 0; map_i < playMap::MAP_NUM; map_i++)
 	{
 		m_map[map_i].Exit();
-
+		m_frame[map_i].Exit();
 		m_mapText[map_i].Exit();
 	}
 

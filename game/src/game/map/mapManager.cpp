@@ -3,7 +3,8 @@
 #include "selectMap/selectMap.h"
 #include "resultMap/resultMap.h"
 #include "titleMap/titleMap.h"
-
+#include "playMap/playMapData.h"
+#include "playMap/test/test.h"
 //コンストラクタ・デストラクタ
 CMapManager::CMapManager()
 {
@@ -18,10 +19,12 @@ CMapManager::~CMapManager()
 //初期化
 void CMapManager::Init(tagMapId _mapId)
 {
+
 	switch (_mapId)
 	{
-	case MAP_ID_GRASSLAND:
-		m_map = new CGrassland;
+	case MAP_ID_PLAY_MAP:
+		//マップを変更
+		ChangePlayMap();
 		break;
 	case MAP_ID_SELECT:
 		m_map = new CSelectMap;
@@ -70,5 +73,21 @@ void CMapManager::Exit()
 
 	delete m_map;
 	m_map = nullptr;
+}
+
+//ゲーム本編のマップ切り替え
+void CMapManager::ChangePlayMap()
+{
+	CPlayMapData* mapData = CPlayMapData::GetInstance();
+	switch (mapData->GetSelectMap())
+	{
+	case playMap::MAP_1:
+		m_map = new CGrassland;
+		break;
+	case playMap::MAP_2:
+		m_map = new CTest;
+		break;
+	}
+
 }
 

@@ -20,7 +20,7 @@ void CAx::Init()
 
 	m_cost = COST;
 	m_itemName = ITEM_AX;
-	m_id = WEAPON_ID_AX;
+	m_id = PlayerData::WEAPON_ID_AX;
 	m_durability = DURABILITY;
 
 	m_rot.x += 0.2f;

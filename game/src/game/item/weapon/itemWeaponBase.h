@@ -5,8 +5,8 @@
 class CWeaponBase :public CItemBase
 {
 protected:
-	tagWeaponId m_id;				//•Ší‚ÌID
-	int			m_durability;		//•Ší‚Ì‘Ï‹v“x
+	PlayerData::tagWeaponId m_id;				//•Ší‚ÌID
+	int						m_durability;		//•Ší‚Ì‘Ï‹v“x
 
 public:
 	CWeaponBase();

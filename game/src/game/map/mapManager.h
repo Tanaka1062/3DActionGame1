@@ -4,7 +4,7 @@
 enum tagMapId			//マップのID
 {
 	MAP_ID_NONE = -1,	//初期化用
-	MAP_ID_GRASSLAND,	//草原ステージ
+	MAP_ID_PLAY_MAP,	//ゲーム本編のマップ
 	MAP_ID_SELECT,		//選択画面のマップ
 	MAP_ID_RESULT,		//リザルト画面のマップ
 	MAP_ID_TITLE,		//タイトル画面のマップ
@@ -41,5 +41,9 @@ public:
 
 	//マップのアドレスを取得
 	CMapBase* GetMap() { return m_map; }
+
+private:
+	//ゲーム本編のマップ切り替え
+	void ChangePlayMap();
 };
 

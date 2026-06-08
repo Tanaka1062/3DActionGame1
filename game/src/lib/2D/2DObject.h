@@ -80,7 +80,8 @@ public:
 	float GetRot() { return m_rot; }
 	//生存フラグを取得
 	bool GetActive() { return m_isActive; }
-
+	//ハンドルを取得
+	int GetHndl() { return m_hndl[0][0]; }
 
 	//座標設定
 	void SetPos(VECTOR _pos) { m_pos = _pos; }
