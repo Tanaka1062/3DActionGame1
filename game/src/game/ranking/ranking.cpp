@@ -2,8 +2,9 @@
 #include <algorithm>
 
 using namespace std;
-CRanking* CRanking::m_instanse = nullptr;
+CRanking* CRanking::m_instance = nullptr;
 
+//コンストラクタ
 CRanking::CRanking()
 {
 	for (int player_i = 0; player_i < PLAYER_NUM; player_i++)
@@ -14,11 +15,6 @@ CRanking::CRanking()
 		m_rankingData.push_back(rankData);
 	}
 	Init();
-}
-
-CRanking::~CRanking()
-{
-
 }
 
 //初期化

@@ -6,14 +6,11 @@ CGameTime* CGameTime::m_instance = nullptr;
 
 constexpr int END_TIME = 3 * 60;	//終わるまでの時間
 
+//コンストラクタ
 CGameTime::CGameTime()
 {
 	m_timeCount = 0;
 	m_isEnd = false;
-}
-
-CGameTime::~CGameTime()
-{
 }
 
 //初期化

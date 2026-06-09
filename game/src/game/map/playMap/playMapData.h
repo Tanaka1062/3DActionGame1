@@ -14,8 +14,9 @@ namespace playMap
 
 class CPlayMapData
 {
-public:
+private:
 	static CPlayMapData* m_instance;		//インスタンス
+public:
 
 	static CPlayMapData* GetInstance()
 	{

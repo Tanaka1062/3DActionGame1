@@ -62,10 +62,12 @@ void CSpawnCoinManager::Load(CMapBase* _map)
 	{
 		//ステージの情報を取得
 		int stageHndl = _map->GetHndl(stage_i);
-		int frameNum = _map->GetStageSpawnData(stage_i).coinFrameNum;
+		CMapBase::tagStageSpawnData stageSpawnData = _map->GetStageSpawnData(stage_i);
+		int frameNum = stageSpawnData.coinFrameNum;
+		int spawnNum = stageSpawnData.coinSpawnNum;
 
 		//出現するコインを生成--------------------------------------------------------	
-		for (int mapCoin_i = 0; mapCoin_i < _map->GetStageSpawnData(stage_i).coinSpawnNum; mapCoin_i++)
+		for (int mapCoin_i = 0; mapCoin_i < spawnNum; mapCoin_i++)
 		{
 			//出現座標取得
 			VECTOR spawnPos = MV1GetFramePosition(stageHndl, frameNum);

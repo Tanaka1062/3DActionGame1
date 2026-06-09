@@ -11,6 +11,8 @@
 #include "../item/itemBase.h"
 #include "../system/sound/soundManager.h"
 
+using namespace PlayerData;
+
 //-----------------------
 //	コンストラクタ
 //-----------------------
@@ -25,14 +27,14 @@ CPlayer::CPlayer()
 	m_hp = 0;
 	m_atk = 0;
 	m_isJump = false;
-	m_attackNum = PlayerData::ATTACK_NONE;
-	m_money = PlayerData::INIT_MONEY;
+	m_attackNum = ATTACK_NONE;
+	m_money = INIT_MONEY;
 	m_attackId = -1;
 	m_effectId = -1;
 	m_padName = PAD_NONE;
-	m_weaponId = PlayerData::WEAPON_ID_HAND;
+	m_weaponId = WEAPON_ID_HAND;
 	m_weaponDurability = 0;
-	m_itemState = PlayerData::ITEM_STATE_NONE;
+	m_itemState = ITEM_STATE_NONE;
 	m_targetPos = nullptr;
 	m_isCpu = false;
 	m_getUpTime = 0;
@@ -55,17 +57,17 @@ void CPlayer::Init(tagPlayerName _name, tagPadName _padName)
 
 	m_dropCoin = 0;
 	m_pos = ZERO;
-	m_rad = PlayerData::RADIUS;
-	m_maxHp = PlayerData::MAX_HP;
+	m_rad = RADIUS;
+	m_maxHp = MAX_HP;
 	m_hp = m_maxHp;
-	m_atk = PlayerData::ATK;
-	m_attackNum = PlayerData::ATTACK_NONE;
+	m_atk = ATK;
+	m_attackNum = ATTACK_NONE;
 	m_weaponDurability = 0;
-	m_money = PlayerData::INIT_MONEY;
+	m_money = INIT_MONEY;
 	m_padName = _padName;
-	m_weaponId = PlayerData::WEAPON_ID_HAND;
+	m_weaponId = WEAPON_ID_HAND;
 	m_name = _name;
-	m_shadow.Init(m_pos, PlayerData::SHADOW_SIZE);
+	m_shadow.Init(m_pos, SHADOW_SIZE);
 	m_objectName = OBJECT_PLAYER;
 	m_isCpu = false;
 	m_getUpTime = 0;
@@ -90,7 +92,7 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 	if (m_isJump == true)
 	{
 		m_isJump = false;
-		m_gravity = PlayerData::JUMP_SPEED;
+		m_gravity = JUMP_SPEED;
 		m_isFlying = true;
 	}
 
@@ -110,7 +112,7 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 			float fLen = VSize(vLen);
 
 			//戦いの距離になったら互いの方向を向く
-			if (fLen <= PlayerData::FIGHT_LEN)
+			if (fLen <= FIGHT_LEN)
 			{
 				float rotY1 = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
 
@@ -152,18 +154,18 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 	}
 
 	//指定した高度よりしたに落ちたら死んで復活する
-	if (m_pos.y <= PlayerData::DIE_POS_Y)
+	if (m_pos.y <= DIE_POS_Y)
 	{
 		m_isActive = false;
 	}
 
 	//武器の耐久度処理--------------------------------
 	//素手以外の場合耐久度が0以下になったら武器が壊れる
-	if (m_weaponId != PlayerData::WEAPON_ID_HAND)
+	if (m_weaponId != WEAPON_ID_HAND)
 	{
 		if (m_weaponDurability <= 0)
 		{
-			m_weaponId = PlayerData::WEAPON_ID_HAND;
+			m_weaponId = WEAPON_ID_HAND;
 			m_weaponDurability = 0;
 		}
 	}
@@ -195,16 +197,16 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 	RequestJump();
 
 	//アイテムを手に入れていたら持ち上げる
-	if (m_itemState == PlayerData::ITEM_STATE_GET)
+	if (m_itemState == ITEM_STATE_GET)
 	{
-		m_itemState = PlayerData::ITEM_STATE_HAVE;
+		m_itemState = ITEM_STATE_HAVE;
 		m_state = ITEM_LIFT_UP;
 	}
 
 	//アイテムを取ろうとしていたら持っていない状態に戻す
-	if (m_itemState == PlayerData::ITEM_STATE_PICK_UP)
+	if (m_itemState == ITEM_STATE_PICK_UP)
 	{
-		m_itemState = PlayerData::ITEM_STATE_NONE;
+		m_itemState = ITEM_STATE_NONE;
 	}
 
 	if (CheckHitKey(KEY_INPUT_I) != 0 ||
@@ -223,9 +225,9 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 	}
 
 	//コインが最大数を超えないように
-	if (m_money >= PlayerData::MONEY_MAX)
+	if (m_money >= MONEY_MAX)
 	{
-		m_money = PlayerData::MONEY_MAX;
+		m_money = MONEY_MAX;
 	}
 
 	//攻撃の当たり判定が消えたら攻撃のIDを初期化する
@@ -294,13 +296,17 @@ void CPlayer::Update()
 
 }
 
-//終了処理
+//-----------------------
+//		 終了処理
+//-----------------------
 void CPlayer::Exit()
 {
 	CCharacterBase::Exit();
 }
 
-//復活処理
+//-----------------------
+//		 復活処理
+//-----------------------
 void CPlayer::Respawn(VECTOR _respawnPos)
 {
 	m_pos = _respawnPos;
@@ -310,19 +316,21 @@ void CPlayer::Respawn(VECTOR _respawnPos)
 	//死んでいた場合
 	case tagState::DIE:
 		m_hp = m_maxHp;
-		m_weaponId = PlayerData::WEAPON_ID_HAND;
+		m_weaponId = WEAPON_ID_HAND;
 		m_weaponDurability = 0;
 		m_state = tagState::WAIT;
 		break;
 	//死んでいない場合
 	default:
 		m_state = tagState::WAIT;
-		m_hp -= static_cast<int>(m_maxHp * PlayerData::FALL_OUT_DAMAGER_RATE);
+		m_hp -= static_cast<int>(m_maxHp * FALL_OUT_DAMAGER_RATE);
 		break;
 	}
 }
 
-//当たり判定後の処理
+//-----------------------
+//	当たり判定後の処理
+//-----------------------
 void CPlayer::HitCalc(CObject* _hitObject)
 {
 	//_hitObjectがnullだったら処理をしない
@@ -361,7 +369,7 @@ void CPlayer::HitCalc(CObject* _hitObject)
 		CEffekseerCtrl::Request(effectId, GetCenter(), false);
 
 		//アイテムを落とす
-		m_itemState = PlayerData::ITEM_STATE_DROP;
+		m_itemState = ITEM_STATE_DROP;
 
 	}
 	//---------------------------------------------------------------------
@@ -419,7 +427,7 @@ void CPlayer::HitCalc(CObject* _hitObject)
 		CEffekseerCtrl::Request(effectId, GetCenter(), false);
 
 		//アイテムを落とす
-		m_itemState = PlayerData::ITEM_STATE_DROP;
+		m_itemState = ITEM_STATE_DROP;
 
 	}
 
@@ -439,15 +447,15 @@ void CPlayer::HitAttack(int _atk, int _blown, float _rotY)
 
 	m_blown += _blown;
 
-	VECTOR knockBack = PlayerData::KNOCK_BACK_SPEED;
+	VECTOR knockBack = KNOCK_BACK_SPEED;
 
-	if (m_blown >= PlayerData::BLOWN_MAX || m_state == AIR)
+	if (m_blown >= BLOWN_MAX || m_state == AIR)
 	{
 		knockBack = VScale(knockBack, 10.0f);
 		m_blown = 0;
 		
 		//コインを落とす量を求める
-		m_dropCoin = static_cast<int>(m_money * PlayerData::MONEY_DROP_RATE);
+		m_dropCoin = static_cast<int>(m_money * MONEY_DROP_RATE);
 
 		//落としたコイン量だけお金を減らす
 		m_money -= m_dropCoin;
@@ -458,7 +466,7 @@ void CPlayer::HitAttack(int _atk, int _blown, float _rotY)
 	else
 	{
 		//斧の攻撃中に怯んだら音を止める
-		if (m_weaponId == PlayerData::WEAPON_ID_AX &&
+		if (m_weaponId == WEAPON_ID_AX &&
 			m_state == tagState::ATTACK)
 		{
 			if (CSoundManager::IsPlay(CSoundManager::SE_AX) == true)
@@ -496,7 +504,9 @@ void CPlayer::HitAttack(int _atk, int _blown, float _rotY)
 	m_hp -= _atk;
 }
 
-//重力リセット
+//-----------------------
+//	   重力リセット
+//-----------------------
 void CPlayer::GravityReset()
 {
 	CObject::GravityReset();
@@ -507,7 +517,9 @@ void CPlayer::GravityReset()
 	}
 }
 
-//お金を減らす
+//-----------------------
+//	   お金を減らす
+//-----------------------
 bool CPlayer::SubMoney(int _subMoney)
 {
 	//消費量が今のお金より少なかったら購入しない
@@ -521,7 +533,9 @@ bool CPlayer::SubMoney(int _subMoney)
 	return true;
 }
 
-//入力処理
+//-----------------------
+//		入力処理
+//-----------------------
 void CPlayer::InputStep()
 {
 
@@ -533,7 +547,7 @@ void CPlayer::InputStep()
 void CPlayer::Wait()
 {
 	//アイテムを持っている場合待機のモーションが変わる
-	if (m_itemState == PlayerData::ITEM_STATE_HAVE)
+	if (m_itemState == ITEM_STATE_HAVE)
 	{
 		//物を持ち上げた状態の待機アニメーションを再生
 		RequestAnim(ANIMID_WAIT_LIFTING_UP, 0.5f, true);
@@ -552,7 +566,7 @@ void CPlayer::Wait()
 void CPlayer::Walk()
 {
 	//アイテムを持っている場合歩きのモーションが変わる
-	if (m_itemState == PlayerData::ITEM_STATE_HAVE)
+	if (m_itemState == ITEM_STATE_HAVE)
 	{
 		//物を持ち上げた状態の歩くアニメーション
 		RequestAnim(ANIMID_WALK_LIFTING_UP, 1.0f, true);
@@ -578,7 +592,7 @@ void CPlayer::Walk()
 //-----------------------
 void CPlayer::Jump()
 {
-	RequestAnim(ANIMID_JUMP, PlayerData::JUMP_ANIM_SPEED);
+	RequestAnim(ANIMID_JUMP, JUMP_ANIM_SPEED);
 
 	if (GetAnimEnd() == true)
 	{
@@ -605,7 +619,7 @@ void CPlayer::Air()
 //-----------------------
 void CPlayer::Landing()
 {
-	RequestAnim(ANIMID_LANDING, PlayerData::LANDING_ANIM_SPEED);
+	RequestAnim(ANIMID_LANDING, LANDING_ANIM_SPEED);
 
 	if (GetAnimEnd() == true)
 	{
@@ -622,20 +636,20 @@ void CPlayer::AttackIn()
 {
 	if (m_isFlying == true)
 	{
-		m_attackNum = PlayerData::ATTACK_AIR;
+		m_attackNum = ATTACK_AIR;
 	}
 
 	switch (m_weaponId)
 	{
 	//武器が素手の場合
-	case PlayerData::WEAPON_ID_HAND:
+	case WEAPON_ID_HAND:
 		switch (m_attackNum)
 		{
-		case PlayerData::tagAttackNum::ATTACK:
+		case tagAttackNum::ATTACK:
 			//攻撃前のアニメーション
 			RequestAnim(ANIMID_ATTACK_HAND_IN, 0.7f);
 			break;
-		case PlayerData::tagAttackNum::ATTACK_AIR:
+		case tagAttackNum::ATTACK_AIR:
 			//空中の攻撃前アニメーション
 			RequestAnim(ANIMID_AIR_ATTACK_HAND_IN, 1.0f);
 			break;
@@ -643,18 +657,18 @@ void CPlayer::AttackIn()
 
 		break;
 	//武器がハンマーの場合
-	case PlayerData::WEAPON_ID_HAMMER:
+	case WEAPON_ID_HAMMER:
 		switch (m_attackNum)
 		{
-		case PlayerData::tagAttackNum::ATTACK:
+		case tagAttackNum::ATTACK:
 			//攻撃前のアニメーション
 			RequestAnim(ANIMID_ATTACK_HAMMER_IN, 0.6f);
 			break;
-		case PlayerData::tagAttackNum::ATTACK_AIR:
+		case tagAttackNum::ATTACK_AIR:
 			if (m_animData.m_id != ANIMID_AIR_ATTACK_HAMMER_IN)
 			{
 				float len = m_pos.y - m_shadow.GetPos().y;
-				if (PlayerData::HAMMER_FALL_MIN_LENGTH >= len)
+				if (HAMMER_FALL_MIN_LENGTH >= len)
 				{
 					m_state = WAIT;
 					return;
@@ -662,9 +676,9 @@ void CPlayer::AttackIn()
 			}
 			//空中の攻撃前アニメーション
 			RequestAnim(ANIMID_AIR_ATTACK_HAMMER_IN, 0.7f);
-			if (m_animData.m_frame >= PlayerData::HAMMER_FALL_FRAME)
+			if (m_animData.m_frame >= HAMMER_FALL_FRAME)
 			{
-				m_gravity = -PlayerData::HAMMER_ATTACK_AIR_FALL_SPEED;
+				m_gravity = -HAMMER_ATTACK_AIR_FALL_SPEED;
 			}
 			else
 			{
@@ -675,7 +689,7 @@ void CPlayer::AttackIn()
 
 		break;
 	//武器が斧の場合
-	case PlayerData::WEAPON_ID_AX:
+	case WEAPON_ID_AX:
 		m_attackNum = 0;
 		//攻撃前のアニメーション
 		RequestAnim(ANIMID_ATTACK_AX_IN, 0.5f);
@@ -683,8 +697,8 @@ void CPlayer::AttackIn()
 	}
 
 	//ハンマーの空中攻撃は着地するまで続く
-	if (m_weaponId == PlayerData::WEAPON_ID_HAMMER &&
-		m_attackNum == PlayerData::ATTACK_AIR)
+	if (m_weaponId == WEAPON_ID_HAMMER &&
+		m_attackNum == ATTACK_AIR)
 	{
 		if (m_isFlying == false)
 		{
@@ -711,36 +725,36 @@ void CPlayer::Attack(CAttackManager* _attackManager, CShotManager* _shotManager)
 
 	//攻撃の座標
 	VECTOR attackPos;
-	attackPos.x = -sinf(m_rot.y) * PlayerData::ATTACK_LENGTH[m_weaponId][m_attackId];
-	attackPos.z = -cosf(m_rot.y) * PlayerData::ATTACK_LENGTH[m_weaponId][m_attackId];
+	attackPos.x = -sinf(m_rot.y) * ATTACK_LENGTH[m_weaponId][m_attackId];
+	attackPos.z = -cosf(m_rot.y) * ATTACK_LENGTH[m_weaponId][m_attackId];
 
 	attackPos = VAdd(attackPos, m_pos);
 
 	attackPos.y = m_pos.y;
 
 	//攻撃力を計算
-	int atk = static_cast<int>(m_atk * PlayerData::ATTACK_MAGNIFICATION[m_weaponId][m_attackNum]);
+	int atk = static_cast<int>(m_atk * ATTACK_MAGNIFICATION[m_weaponId][m_attackNum]);
 
-	int blown = PlayerData::ATTACK_BLOWN[m_weaponId][m_attackNum];
+	int blown = ATTACK_BLOWN[m_weaponId][m_attackNum];
 
-	float attackSize = PlayerData::ATTACK_SIZE[m_weaponId][m_attackNum];
+	float attackSize = ATTACK_SIZE[m_weaponId][m_attackNum];
 
 	switch (m_weaponId)
 	{
 	//武器が素手の場合
-	case PlayerData::WEAPON_ID_HAND:
+	case WEAPON_ID_HAND:
 		CSoundManager::Play(CSoundManager::SE_HAND, DX_PLAYTYPE_BACK);
 
 		switch (m_attackNum)
 		{
-		case PlayerData::tagAttackNum::ATTACK:
+		case tagAttackNum::ATTACK:
 			//攻撃中のアニメーション
 			if (RequestAnim(ANIMID_ATTACK_HAND, 1.0f) == true)
 			{
 				_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
 			}
 			break;
-		case PlayerData::ATTACK_AIR:
+		case ATTACK_AIR:
 			//空中の攻撃中アニメーション
 			if (RequestAnim(ANIMID_AIR_ATTACK_HAND, 1.2f) == true)
 			{
@@ -751,19 +765,19 @@ void CPlayer::Attack(CAttackManager* _attackManager, CShotManager* _shotManager)
 
 		break;
 	//武器がハンマーの場合
-	case PlayerData::WEAPON_ID_HAMMER:
+	case WEAPON_ID_HAMMER:
 		CSoundManager::Play(CSoundManager::SE_HAMMER, DX_PLAYTYPE_BACK);
 
 		switch (m_attackNum)
 		{
-		case PlayerData::tagAttackNum::ATTACK:
+		case tagAttackNum::ATTACK:
 			//攻撃中のアニメーション
 			if (RequestAnim(ANIMID_ATTACK_HAMMER, 0.6f) == true)
 			{
 				_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
 			}
 			break;
-		case PlayerData::tagAttackNum::ATTACK_AIR:
+		case tagAttackNum::ATTACK_AIR:
 			//空中の攻撃中アニメーション
 			if (RequestAnim(ANIMID_AIR_ATTACK_HAMMER, 0.6f) == true)
 			{
@@ -777,7 +791,7 @@ void CPlayer::Attack(CAttackManager* _attackManager, CShotManager* _shotManager)
 		}
 		break;
 	//武器が斧の場合
-	case PlayerData::WEAPON_ID_AX:
+	case WEAPON_ID_AX:
 		if (CSoundManager::IsPlay(CSoundManager::SE_AX) == false)
 		{
 			CSoundManager::Play(CSoundManager::SE_AX, DX_PLAYTYPE_LOOP);
@@ -794,7 +808,7 @@ void CPlayer::Attack(CAttackManager* _attackManager, CShotManager* _shotManager)
 	if (GetAnimEnd() == true || _attackManager->GetActive(m_attackId) == false)
 	{
 		//武器の耐久度が減る
-		if (m_weaponId != PlayerData::WEAPON_ID_HAND)
+		if (m_weaponId != WEAPON_ID_HAND)
 		{
 			m_weaponDurability--;
 		}
@@ -812,14 +826,14 @@ void CPlayer::AttackOut()
 	switch (m_weaponId)
 	{
 	//武器が素手の場合
-	case PlayerData::WEAPON_ID_HAND:
+	case WEAPON_ID_HAND:
 		switch (m_attackNum)
 		{
-		case PlayerData::tagAttackNum::ATTACK:
+		case tagAttackNum::ATTACK:
 			//攻撃後のアニメーション
 			RequestAnim(ANIMID_ATTACK_HAND_OUT, 0.5f);
 			break;
-		case PlayerData::tagAttackNum::ATTACK_AIR:
+		case tagAttackNum::ATTACK_AIR:
 			//空中の攻撃後アニメーション
 			RequestAnim(ANIMID_AIR_ATTACK_HAND_OUT, 1.2f);
 			break;
@@ -827,14 +841,14 @@ void CPlayer::AttackOut()
 	
 		break;
 	//武器がハンマーの場合
-	case PlayerData::WEAPON_ID_HAMMER:
+	case WEAPON_ID_HAMMER:
 		switch (m_attackNum)
 		{
-		case PlayerData::tagAttackNum::ATTACK:
+		case tagAttackNum::ATTACK:
 			//攻撃後のアニメーション
 			RequestAnim(ANIMID_ATTACK_HAMMER_OUT, 0.6f);
 			break;
-		case PlayerData::tagAttackNum::ATTACK_AIR:
+		case tagAttackNum::ATTACK_AIR:
 			//空中の攻撃後アニメーション
 			RequestAnim(ANIMID_AIR_ATTACK_HAMMER_OUT, 0.6f);
 			break;
@@ -842,7 +856,7 @@ void CPlayer::AttackOut()
 	
 		break;
 	//武器が斧の場合
-	case PlayerData::WEAPON_ID_AX:
+	case WEAPON_ID_AX:
 		//攻撃後のアニメーション
 		RequestAnim(ANIMID_ATTACK_AX_OUT, 0.5f);
 		CSoundManager::Stop(CSoundManager::SE_AX);
@@ -852,7 +866,7 @@ void CPlayer::AttackOut()
 	//アニメーションが終わったら待機状態に戻す
 	if (GetAnimEnd() == true)
 	{
-		m_attackNum = PlayerData::ATTACK_NONE;
+		m_attackNum = ATTACK_NONE;
 		m_state = WAIT;
 	}
 
@@ -884,7 +898,7 @@ void CPlayer::ItemPutDown()
 	//アニメーションが終わったら待機状態に戻す
 	if (GetAnimEnd() == true)
 	{
-		m_itemState = PlayerData::ITEM_STATE_NONE;
+		m_itemState = ITEM_STATE_NONE;
 		m_state = WAIT;
 	}
 
@@ -917,7 +931,7 @@ void CPlayer::ItemThrow()
 	//アニメーションが終わったらアイテムを投げた後状態にする
 	if (GetAnimEnd() == true)
 	{
-		m_itemState = PlayerData::ITEM_STATE_THROW;
+		m_itemState = ITEM_STATE_THROW;
 		m_state = ITEM_THROW_OUT;
 	}
 
@@ -934,7 +948,7 @@ void CPlayer::ItemThrowOut()
 	//アニメーションが終わったら待機状態に戻す
 	if (GetAnimEnd() == true)
 	{
-		m_itemState = PlayerData::ITEM_STATE_NONE;
+		m_itemState = ITEM_STATE_NONE;
 		m_state = WAIT;
 	}
 
@@ -1002,7 +1016,7 @@ void CPlayer::Down()
 	//移動の入力をされたら起き上がりに移行する
 	if ((CControllerManager::GetLX(m_padName) != 0.0f ||
 		CControllerManager::GetLY(m_padName) != 0.0f) ||
-		m_getUpTime >= PlayerData::GET_UP_MAX_TIME)
+		m_getUpTime >= GET_UP_MAX_TIME)
 	{
 		m_getUpTime = 0;
 		m_state = GET_UP;
@@ -1032,7 +1046,7 @@ void CPlayer::Die()
 	//死亡のアニメーション
 	if (RequestAnim(ANIMID_DIE, 0.5f) == true)
 	{
-		m_dropCoin = static_cast<int>(m_money * PlayerData::MONEY_RESPAWN_RATE);
+		m_dropCoin = static_cast<int>(m_money * MONEY_RESPAWN_RATE);
 		m_money -= m_dropCoin;
 	}
 
@@ -1081,7 +1095,7 @@ void CPlayer::Move(float _rotY)
 	case tagState::AIR:
 		break;
 	case tagState::ATTACK:
-		if (m_weaponId != PlayerData::WEAPON_ID_AX)return;
+		if (m_weaponId != WEAPON_ID_AX)return;
 		break;
 	default:
 		return;
@@ -1096,7 +1110,7 @@ void CPlayer::Move(float _rotY)
 		isController = true;
 	}
 
-	float moveSpeed = PlayerData::MOVE_SPEED;
+	float moveSpeed = MOVE_SPEED;
 
 	VECTOR speed = ZERO;
 	//コントローラー用前進後退
@@ -1170,27 +1184,27 @@ void CPlayer::RequestAttack()
 
 	switch (m_state)
 	{
-	case AIR:
-	case WAIT:
-	case WALK:
-	case ATTACK_OUT:
+	case tagState::AIR:
+	case tagState::WAIT:
+	case tagState::WALK:
+	case tagState::ATTACK_OUT:
 		break;
 	default:
 		return;
 	}
 
 	//アイテムを持ち上げている状態ではアイテムを投げる
-	if (m_itemState == PlayerData::ITEM_STATE_HAVE)
+	if (m_itemState == ITEM_STATE_HAVE)
 	{
 		//攻撃ボタンを押したら投げる
-		m_state = ITEM_THROW_IN;
+		m_state = tagState::ITEM_THROW_IN;
 
 		return;
 	}
 
 	//攻撃してない時に攻撃前に移行する
-	m_state = ATTACK_IN;
-	m_attackId = PlayerData::tagAttackNum::ATTACK;
+	m_state = tagState::ATTACK_IN;
+	m_attackId = tagAttackNum::ATTACK;
 }
 
 //-----------------------
@@ -1200,8 +1214,8 @@ void CPlayer::RequestJump()
 {
 	switch (m_state)
 	{
-	case WAIT:
-	case WALK:
+	case tagState::WAIT:
+	case tagState::WALK:
 		break;
 	default:
 		return;
@@ -1210,7 +1224,7 @@ void CPlayer::RequestJump()
 	if ((CControllerManager::IsTrg(BUTTON_A, m_padName) && !m_isFlying) ||
 		(CheckHitKey(KEY_INPUT_SPACE) && !m_isFlying))
 	{
-		m_state = JUMP;
+		m_state = tagState::JUMP;
 
 	}
 
@@ -1226,8 +1240,8 @@ void CPlayer::PickUpItem()
 
 	switch (m_state)
 	{
-	case WAIT:
-	case WALK:
+	case tagState::WAIT:
+	case tagState::WALK:
 		break;
 	default:
 		return;
@@ -1236,15 +1250,15 @@ void CPlayer::PickUpItem()
 	//アイテムを取得・下ろす
 
 	//アイテムをすでに持っている場合はアイテムを下ろす
-	if (m_itemState == PlayerData::ITEM_STATE_HAVE)
+	if (m_itemState == ITEM_STATE_HAVE)
 	{
-		m_state = ITEM_PUT_DOWN;
-		m_itemState = PlayerData::ITEM_STATE_PUT_DOWN;
+		m_state = tagState::ITEM_PUT_DOWN;
+		m_itemState = ITEM_STATE_PUT_DOWN;
 	}
 	//アイテムを持っていない場合アイテムを取得する
 	else
 	{
-		m_itemState = PlayerData::ITEM_STATE_PICK_UP;
+		m_itemState = ITEM_STATE_PICK_UP;
 	}
 
 }

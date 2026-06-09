@@ -1,8 +1,14 @@
 #include "itemObjectBase.h"
 #include "../../../lib/myMath/myMath.h"
 	
-constexpr float THROW_SPEED = 12.0f;				//投げられるスピード
-constexpr float RADIUS = 10.0f;						//半径
+using namespace PlayerData;
+
+namespace ItemObjectBase
+{
+	constexpr float THROW_SPEED = 12.0f;				//投げられるスピード
+	constexpr float RADIUS = 10.0f;						//半径
+
+}
 
 CItemObjectBase::CItemObjectBase()
 {
@@ -14,7 +20,7 @@ void CItemObjectBase::Init()
 {
 	CItemBase::Init();
 
-	m_rad = RADIUS;
+	m_rad = ItemObjectBase::RADIUS;
 	m_isLift = false;
 	m_isDrop = false;
 	m_isPushed = true;
@@ -43,14 +49,14 @@ void CItemObjectBase::Step()
 		m_pos = player->GetItemHavePos();
 
 		//アイテムを手放したら落とす
-		if (player->GetItemState() == PlayerData::ITEM_STATE_NONE)
+		if (player->GetItemState() == ITEM_STATE_NONE)
 		{
 			m_owner = nullptr;
 			m_isLift = false;
 		}
 
 		//アイテムを落としていたら
-		if (player->GetItemState() == PlayerData::ITEM_STATE_DROP)
+		if (player->GetItemState() == ITEM_STATE_DROP)
 		{
 			m_isDrop = true;
 			m_owner = nullptr;
@@ -58,13 +64,13 @@ void CItemObjectBase::Step()
 		}
 
 		//投げられたいたら投げる処理にする
-		if (player->GetItemState() == PlayerData::ITEM_STATE_THROW)
+		if (player->GetItemState() == ITEM_STATE_THROW)
 		{
 			m_isLift = false;
 			m_isDrop = true;
 
 			//角度ゼロで進む速度
-			VECTOR defaultDir = { 0.0f,-0.5f,-THROW_SPEED };
+			VECTOR defaultDir = { 0.0f,-0.5f,-ItemObjectBase::THROW_SPEED };
 			//上記を行列に変換する
 			MATRIX dir = CMyMath::GetTranslateMatrix(defaultDir);
 			//Y軸回転行列
@@ -130,8 +136,8 @@ void CItemObjectBase::HitCalc(CObject* _hitObject)
 		player = dynamic_cast<CPlayer*>(_hitObject);
 
 		//プレイヤーがアイテムを取ろうとしていたらする処理
-		if (player->GetItemState() == PlayerData::ITEM_STATE_PICK_UP &&
-			player->GetWeaponId() == PlayerData::WEAPON_ID_HAND)
+		if (player->GetItemState() == ITEM_STATE_PICK_UP &&
+			player->GetWeaponId() == WEAPON_ID_HAND)
 		{
 			//誰にも持たれていなかったら購入できる
 			if (m_owner == nullptr)
@@ -157,7 +163,7 @@ void CItemObjectBase::HitCalc(CObject* _hitObject)
 					m_isBuy = true;
 					m_isLift = true;
 					m_owner = player;
-					player->SetItemState(PlayerData::ITEM_STATE_GET);
+					player->SetItemState(ITEM_STATE_GET);
 				}
 
 			}

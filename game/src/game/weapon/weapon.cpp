@@ -2,6 +2,8 @@
 #include "../system/effectData/effectData.h"
 #include "../../lib/effekseer/effekseer.h"
 
+using namespace PlayerData;
+
 //--------------
 //コンストラクタ
 //--------------
@@ -24,7 +26,7 @@ CWeapon::~CWeapon()
 void CWeapon::Init()
 {
 	CObject::Init();
-	for (int weaponHndl_i = 0; weaponHndl_i < PlayerData::WEAPON_ID_NUM; weaponHndl_i++)
+	for (int weaponHndl_i = 0; weaponHndl_i < WEAPON_ID_NUM; weaponHndl_i++)
 	{
 		m_weaponHndl[weaponHndl_i] = -1;
 	}
@@ -42,13 +44,13 @@ void CWeapon::Load(int _hndl, int _weaponId)
 //--------------
 //毎フレームする処理
 //--------------
-void CWeapon::Step(PlayerData::tagWeaponId _playerWeaponId,tagState _state,VECTOR _playerPos)
+void CWeapon::Step(tagWeaponId _playerWeaponId,tagState _state,VECTOR _playerPos)
 {
 	//武器ごとにモデルのハンドルを変更する
 	m_hndl = m_weaponHndl[_playerWeaponId];
 
 	//斧を使っていたらエフェクトを呼び出す
-	if (_playerWeaponId == PlayerData::WEAPON_ID_AX && _state == ATTACK)
+	if (_playerWeaponId == WEAPON_ID_AX && _state == tagState::ATTACK)
 	{
 		if (m_effectHndl == -1)
 		{
@@ -68,7 +70,7 @@ void CWeapon::Step(PlayerData::tagWeaponId _playerWeaponId,tagState _state,VECTO
 	}
 
 	//攻撃を止めたらエフェクトを止める
-	if (m_effectHndl != -1 && _state != ATTACK)
+	if (m_effectHndl != -1 && _state != tagState::ATTACK)
 	{
 		CEffekseerCtrl::Stop(m_effectHndl);
 		m_effectHndl = -1;

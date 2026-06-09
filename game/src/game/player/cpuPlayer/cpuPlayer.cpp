@@ -11,16 +11,14 @@
 #include "../../item/itemBase.h"
 #include "../../camera/cameraManager.h"
 
+using namespace PlayerData;
+
+
 //定義関連---------------------------
-
-//攻撃関連---------------------------
-constexpr float ATTACK_LENGTH = 15.0f;				//攻撃の長さ
-//-----------------------------------
-
+constexpr float ATTACK_START_DISTANCE = 15.0f;		//攻撃に移行する距離
 constexpr int ADD_CPU_STATE_PROBABILITY = 10;		//行動状態の上昇確率
 constexpr int CPU_STATE_CHANGE_TIME = 3 * 60;		//行動が変わるまでの時間
-
-//---------------------------------------------------------
+//-----------------------------------
 
 //-----------------------
 //	コンストラクタ
@@ -109,7 +107,7 @@ void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackMa
 		if (m_targetObject->GetObjectName() == OBJECT_PLAYER)
 		{
 			//銃と投げるアイテムはターゲットがいたら攻撃する
-			if (m_itemState == PlayerData::ITEM_STATE_HAVE  &&
+			if (m_itemState == ITEM_STATE_HAVE  &&
 				m_targetPos != nullptr)
 			{
 				RequestAttack();
@@ -119,7 +117,7 @@ void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackMa
 
 			float len = VSize(vec);
 
-			if (len <= ATTACK_LENGTH + PlayerData::RADIUS)
+			if (len <= ATTACK_START_DISTANCE + RADIUS)
 			{
 				RequestAttack();
 			}
@@ -130,8 +128,8 @@ void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackMa
 	{
 		switch (m_state)
 		{
-		case WAIT:
-		case WALK:
+		case tagState::WAIT:
+		case tagState::WALK:
 			m_attackNum = 0;
 			break;
 		}
@@ -143,13 +141,13 @@ void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackMa
 	if (m_state == ATTACK_OUT)
 	{
 		m_cpuState = CPU_STATE_NONE;
-		m_attackNum = PlayerData::ATTACK_NONE;
+		m_attackNum = ATTACK_NONE;
 	}
 
 	if (m_isJump == true)
 	{
 		m_isJump = false;
-		m_gravity = PlayerData::JUMP_SPEED;
+		m_gravity = JUMP_SPEED;
 		m_isFlying = true;
 	}
 
@@ -169,7 +167,7 @@ void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackMa
 			float fLen = VSize(vLen);
 
 			//戦いの距離になったら互いの方向を向く
-			if (fLen <= PlayerData::FIGHT_LEN)
+			if (fLen <= FIGHT_LEN)
 			{
 				float rotY1 = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
 
@@ -198,31 +196,31 @@ void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackMa
 	{
 		switch (m_state)
 		{
-		case ATTACK_IN:
-		case ATTACK:
-		case ATTACK_OUT:
-		case BLOW_AWAY:
-		case DIE:
+		case tagState::ATTACK_IN:
+		case tagState::ATTACK:
+		case tagState::ATTACK_OUT:
+		case tagState::BLOW_AWAY:
+		case tagState::DIE:
 			break;
 		default:
-			m_state = AIR;
+			m_state = tagState::AIR;
 			break;
 		}
 	}
 
 	//指定した高度よりしたに落ちたら死んで復活する
-	if (m_pos.y <= PlayerData::DIE_POS_Y)
+	if (m_pos.y <= DIE_POS_Y)
 	{
 		m_isActive = false;
 	}
 
 	//武器の耐久度処理--------------------------------
 	//素手以外の場合耐久度が0以下になったら武器が壊れる
-	if (m_weaponId != PlayerData::WEAPON_ID_HAND)
+	if (m_weaponId != WEAPON_ID_HAND)
 	{
 		if (m_weaponDurability <= 0)
 		{
-			m_weaponId = PlayerData::WEAPON_ID_HAND;
+			m_weaponId = WEAPON_ID_HAND;
 			m_weaponDurability = 0;
 		}
 	}
@@ -236,16 +234,16 @@ void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackMa
 	RequestJump();
 
 	//アイテムを手に入れていたら持ち上げる
-	if (m_itemState == PlayerData::ITEM_STATE_GET)
+	if (m_itemState == ITEM_STATE_GET)
 	{
-		m_itemState = PlayerData::ITEM_STATE_HAVE;
+		m_itemState = ITEM_STATE_HAVE;
 		m_state = ITEM_LIFT_UP;
 	}
 
 	//アイテムを取ろうとしていたら持っていない状態に戻す
-	if (m_itemState == PlayerData::ITEM_STATE_PICK_UP && m_cpuState != CPU_STATE_PICK_UP_ITEM)
+	if (m_itemState == ITEM_STATE_PICK_UP && m_cpuState != CPU_STATE_PICK_UP_ITEM)
 	{
-		m_itemState = PlayerData::ITEM_STATE_NONE;
+		m_itemState = ITEM_STATE_NONE;
 	}
 
 	CCharacterBase::Step(_attackManager,_shotManager);
@@ -256,9 +254,9 @@ void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackMa
 		m_hp = m_maxHp;
 	}
 	//コインが最大数を超えないように
-	if (m_money >= PlayerData::MONEY_MAX)
+	if (m_money >= MONEY_MAX)
 	{
-		m_money = PlayerData::MONEY_MAX;
+		m_money = MONEY_MAX;
 	}
 
 	//攻撃の当たり判定が消えたら攻撃のIDを初期化する
@@ -273,15 +271,15 @@ void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackMa
 	}
 
 	//攻撃中ではない場合攻撃を消す
-	if (m_state != ATTACK)
+	if (m_state != tagState::ATTACK)
 	{
 		_attackManager->SetActive(m_attackId, false);
 	}
 
 	//自動で立ち上がるよう
-	if (m_state == DOWN)
+	if (m_state == tagState::DOWN)
 	{
-		m_state = GET_UP;
+		m_state = tagState::GET_UP;
 	}
 }
 
@@ -306,9 +304,9 @@ void CCpuPlayer::HitCalc(CObject* _hitObject)
 	if (_hitObject->GetObjectName() == OBJECT_ATTACK)
 	{
 		//ダウン状態と起き上がり中は判定をしない
-		if (m_state == DOWN ||
-			m_state == DOWN_IN ||
-			m_state == GET_UP)
+		if (m_state == tagState::DOWN ||
+			m_state == tagState::DOWN_IN ||
+			m_state == tagState::GET_UP)
 			return;
 
 
@@ -336,7 +334,7 @@ void CCpuPlayer::HitCalc(CObject* _hitObject)
 		CEffekseerCtrl::Request(effectId, GetCenter(), false);
 
 		//アイテムを落とす
-		m_itemState = PlayerData::ITEM_STATE_DROP;
+		m_itemState = ITEM_STATE_DROP;
 		
 		//行動状態をリセット
 		m_cpuState = CPU_STATE_NONE;
@@ -391,7 +389,7 @@ void CCpuPlayer::HitCalc(CObject* _hitObject)
 		CEffekseerCtrl::Request(effectId, GetCenter(), false);
 
 		//アイテムを落とす
-		m_itemState = PlayerData::ITEM_STATE_DROP;
+		m_itemState = ITEM_STATE_DROP;
 
 		return;
 	}
@@ -425,12 +423,12 @@ void CCpuPlayer::Move(float _rotY)
 
 	float len = VSize(vec);
 
-	if (len <= PlayerData::RADIUS)return;
+	if (len <= RADIUS)return;
 
-	float moveSpeed = PlayerData::MOVE_SPEED;
+	float moveSpeed = MOVE_SPEED;
 
 	//移動ベクトル
-	VECTOR speed = { 0.0f,0.0f,-PlayerData::MOVE_SPEED };
+	VECTOR speed = { 0.0f,0.0f,-MOVE_SPEED };
 
 	VECTOR targetPos = m_targetObject->GetPos();
 
@@ -450,14 +448,14 @@ void CCpuPlayer::Move(float _rotY)
 	m_speed.y = res.m[1][3];
 	m_speed.z = res.m[2][3];
 
-	if (m_state == ATTACK)return;
+	if (m_state == tagState::ATTACK)return;
 
 	//移動していたら歩きモーションに以降
 	if ((speed.x != 0.0f ||
 		speed.z != 0.0f) &&
-		m_state != AIR)
+		m_state != tagState::AIR)
 	{
-		m_state = WALK;
+		m_state = tagState::WALK;
 	}
 
 	//移動方向を向く
@@ -473,8 +471,8 @@ void CCpuPlayer::RequestJump()
 {
 	switch (m_state)
 	{
-	case WAIT:
-	case WALK:
+	case tagState::WAIT:
+	case tagState::WALK:
 		break;
 	default:
 		return;
@@ -483,7 +481,7 @@ void CCpuPlayer::RequestJump()
 	if ((CControllerManager::IsTrg(BUTTON_A, m_padName) && !m_isFlying) ||
 		(CheckHitKey(KEY_INPUT_SPACE) && !m_isFlying))
 	{
-		m_state = JUMP;
+		m_state = tagState::JUMP;
 
 	}
 
@@ -520,7 +518,7 @@ void CCpuPlayer::ChangeCpuState()
 			break;
 		case OBJECT_ITEM:
 			//アイテムを持っている状態なら持つアイテムをカウントしない
-			if (m_itemState == PlayerData::ITEM_STATE_HAVE)
+			if (m_itemState == ITEM_STATE_HAVE)
 			{
 				//持つアイテムか調べる
 				CItemBase* item = dynamic_cast<CItemBase*>(object);

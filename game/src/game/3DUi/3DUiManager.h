@@ -18,9 +18,10 @@ enum tag3DUiName
 
 class C3DUiManager
 {
+private:
+	static C3DUiManager* m_instance;		//インスタンス
 public:
 	
-	static C3DUiManager* m_instance;		//インスタンス
 
 	//インスタンスの取得
 	static C3DUiManager* GetInstance()		

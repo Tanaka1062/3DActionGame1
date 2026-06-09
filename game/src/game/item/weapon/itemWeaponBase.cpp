@@ -1,6 +1,8 @@
 #include "itemWeaponBase.h"
 #include "../../system/sound/soundManager.h"
 
+using namespace PlayerData;
+
 constexpr float ROT_SPEED = 0.01f;				//回転速度
 
 CWeaponBase::CWeaponBase()
@@ -18,7 +20,7 @@ void CWeaponBase::Init()
 {
 	CItemBase::Init();
 
-	m_id = PlayerData::WEAPON_ID_HAND;
+	m_id = WEAPON_ID_HAND;
 	m_durability = 0;
 	m_itemType = ITEM_TYPE_WEAPON;
 }
@@ -43,7 +45,7 @@ void CWeaponBase::HitCalc(CObject* _hitObject)
 		player = dynamic_cast<CPlayer*>(_hitObject);
 
 		//プレイヤーが武器を持ってなかったらする処理
-		if (player->GetWeaponId() == PlayerData::WEAPON_ID_HAND)
+		if (player->GetWeaponId() == WEAPON_ID_HAND)
 		{
 			//誰にも持たれていなかったら購入できる
 			if (m_owner == nullptr)

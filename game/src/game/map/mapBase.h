@@ -6,11 +6,7 @@
 
 class CMapBase
 {
-protected:
-	int								m_mapId;			//マップのID
-	std::vector<CActor*>			m_stage;			//ステージ
-	int								m_stageId;			//ステージのID
-	int								m_mapMoveTimer;		//マップの移動する時間
+public:
 	struct tagStageSpawnData							//ステージのスポーン情報
 	{
 		int							mapItemFrameNum;	//マップ全体のアイテムのフレームの数
@@ -20,6 +16,11 @@ protected:
 		int							coinFrameNum;		//コインフレームの数
 		int							coinSpawnNum;		//コインスポーンの数
 	};
+protected:
+	int								m_mapId;			//マップのID
+	std::vector<CActor*>			m_stage;			//ステージ
+	int								m_stageId;			//ステージのID
+	int								m_mapMoveTimer;		//マップの移動する時間
 	std::vector<tagStageSpawnData>	m_stageSpawnData;	//ステージのスポーンデータ
 	std::vector<CObject*>			m_object;			//ステージのオブジェクト
 public:

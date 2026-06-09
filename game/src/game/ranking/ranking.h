@@ -7,33 +7,34 @@
 //プレイヤーの順位を保存するクラス
 class CRanking
 {
-public:
+private:
+	static CRanking* m_instance;			//インスタンス
 
-	static CRanking* m_instanse;			//インスタンス
+public:
 
 	static CRanking* GetInstance()
 	{
-		if (m_instanse == nullptr)
+		if (m_instance == nullptr)
 		{
-			m_instanse = new CRanking;
+			m_instance = new CRanking;
 		}
 
-		return m_instanse;
+		return m_instance;
 	}
 
 	static void DeleteInstance()
 	{
-		if (m_instanse != nullptr)
+		if (m_instance != nullptr)
 		{
-			delete m_instanse;
-			m_instanse = nullptr;
+			delete m_instance;
+			m_instance = nullptr;
 		}
 	}
 
 
 private:
+	//コンストラクタ
 	CRanking();
-	~CRanking();
 
 	struct tagRankingData
 	{

@@ -1,5 +1,7 @@
 #include "hammer.h"
 
+using namespace PlayerData;
+
 constexpr int COST = 0;						//âøäi
 constexpr int DURABILITY = 20;				//ïêäÌÇÃëœãvìx
 
@@ -20,7 +22,7 @@ void CHammer::Init()
 
 	m_cost = COST;
 	m_itemName = ITEM_HAMMER;
-	m_id = PlayerData::WEAPON_ID_HAMMER;
+	m_id = WEAPON_ID_HAMMER;
 	m_durability = DURABILITY;
 
 	m_rot.x += 0.2f;

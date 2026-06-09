@@ -50,14 +50,16 @@ void CMapItemManager::Load(CMapBase* _map)
 	{
 		//ステージの情報を取得
 		int stageHndl = _map->GetHndl(stage_i);
-		int stageFrameNum = _map->GetStageSpawnData(stage_i).mapItemFrameNum;
+		CMapBase::tagStageSpawnData stageSpawnData = _map->GetStageSpawnData(stage_i);
+		int frameNum = stageSpawnData.mapItemFrameNum;
+		int spawnNum = stageSpawnData.mapItemSpawnNum;
 
-		for (int spawnPos_i = 0; spawnPos_i < _map->GetStageSpawnData(stage_i).mapItemSpawnNum; spawnPos_i++)
+		for (int spawnPos_i = 0; spawnPos_i < spawnNum; spawnPos_i++)
 		{
 			//アイテムの出現座標を保存
 			VECTOR spawnPos = ZERO;
-			spawnPos = MV1GetFramePosition(stageHndl, stageFrameNum);
-			stageFrameNum += 2;
+			spawnPos = MV1GetFramePosition(stageHndl, frameNum);
+			frameNum += 2;
 
 			//アイテムを生成して出現座標を設定する
 			unique_ptr<CItemBase> box = make_unique<CBox>();

@@ -2,10 +2,9 @@
 
 class CGameTime
 {
-public:
-
+private:
 	static CGameTime* m_instance;		//インスタンス
-
+public:
 
 	static CGameTime* GetInstance()
 	{
@@ -28,8 +27,8 @@ public:
 
 
 private:
+	//コンストラクタ
 	CGameTime();
-	~CGameTime();
 
 	int		m_timeCount;		//経過時間
 	bool	m_isEnd;			//終わったかフラグ

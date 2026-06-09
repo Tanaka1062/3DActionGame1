@@ -134,11 +134,13 @@ void CSpawnItemManager::Load(CMapBase* _map)
 	{
 		//ステージの情報を取得
 		int stageHndl = _map->GetHndl(stage_i);
-		int frameNum = _map->GetStageSpawnData(stage_i).itemFrameNum;
+		CMapBase::tagStageSpawnData stageSpawnData = _map->GetStageSpawnData(stage_i);
+		int frameNum = stageSpawnData.itemFrameNum;
+		int spawnNum = stageSpawnData.itemSpawnNum;
 
 		m_spawnData.push_back(vector<tagSpawnData>());
 
-		for (int spawn_i = 0; spawn_i < _map->GetStageSpawnData(stage_i).itemSpawnNum; spawn_i++)
+		for (int spawn_i = 0; spawn_i < spawnNum; spawn_i++)
 		{
 			//スポーンデータを生成
 			tagSpawnData spawnData;
