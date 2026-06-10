@@ -62,10 +62,10 @@ void CPlayer::Init(tagPlayerName _name, tagPadName _padName)
 	m_hp = m_maxHp;
 	m_atk = ATK;
 	m_attackNum = ATTACK_NONE;
-	m_weaponDurability = 100;
+	m_weaponDurability = 0;
 	m_money = INIT_MONEY;
 	m_padName = _padName;
-	m_weaponId = WEAPON_ID_AX;
+	m_weaponId = WEAPON_ID_HAND;
 	m_name = _name;
 	m_shadow.Init(m_pos, SHADOW_SIZE);
 	m_objectName = OBJECT_PLAYER;
@@ -1268,5 +1268,4 @@ VECTOR CPlayer::GetItemHavePos()
 
 	return itemPos;
 }
-
 

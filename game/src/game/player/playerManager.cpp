@@ -342,7 +342,7 @@ void CPlayerManager::Step(CAttackManager* _attackManager, CShotManager* _shotMan
 			v1.y = 0.0f;
 
 			//プレイヤーの視点の終点からターゲットまでの距離を求める
-			v2 = VSub(m_player[target_i]->GetPos(), endPos);
+			v2 = VSub(m_player[player_i]->GetPos(), endPos);
 			v2.y = 0.0f;
 
 			//v1とv2の内積を求める
