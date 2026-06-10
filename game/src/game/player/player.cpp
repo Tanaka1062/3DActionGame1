@@ -62,10 +62,10 @@ void CPlayer::Init(tagPlayerName _name, tagPadName _padName)
 	m_hp = m_maxHp;
 	m_atk = ATK;
 	m_attackNum = ATTACK_NONE;
-	m_weaponDurability = 0;
+	m_weaponDurability = 100;
 	m_money = INIT_MONEY;
 	m_padName = _padName;
-	m_weaponId = WEAPON_ID_HAND;
+	m_weaponId = WEAPON_ID_AX;
 	m_name = _name;
 	m_shadow.Init(m_pos, SHADOW_SIZE);
 	m_objectName = OBJECT_PLAYER;
@@ -720,9 +720,6 @@ void CPlayer::AttackIn()
 //-----------------------
 void CPlayer::Attack(CAttackManager* _attackManager, CShotManager* _shotManager)
 {
-	int attackTime = 180;
-	int attackNum = attackTime / 10;
-
 	//攻撃の座標
 	VECTOR attackPos;
 	attackPos.x = -sinf(m_rot.y) * ATTACK_LENGTH[m_weaponId][m_attackId];
@@ -799,7 +796,7 @@ void CPlayer::Attack(CAttackManager* _attackManager, CShotManager* _shotManager)
 		//攻撃中のアニメーション
 		if (RequestAnim(ANIMID_ATTACK_AX, 1.0f,true) == true)
 		{
-			m_attackId = _attackManager->Request(attackPos, attackSize, atk, blown, m_name,attackNum,attackTime);
+			m_attackId = _attackManager->Request(attackPos, attackSize, atk, blown, m_name, AX_ATTACK_NUM, AX_ATTACK_TIME);
 		}
 		break;
 	}
@@ -1204,7 +1201,6 @@ void CPlayer::RequestAttack()
 
 	//攻撃してない時に攻撃前に移行する
 	m_state = tagState::ATTACK_IN;
-	m_attackId = tagAttackNum::ATTACK;
 }
 
 //-----------------------

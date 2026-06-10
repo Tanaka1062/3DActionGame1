@@ -37,6 +37,8 @@ namespace PlayerData{
 	constexpr float SHOT_SIZE = 10.0f;							//弾の大きさ
 	constexpr float SHOT_SPEED = 2.5f;							//弾の速度
 	constexpr int SHOT_LOST_TIME = 2 * 60;						//弾が消えるまでの時間
+	constexpr int AX_ATTACK_TIME = 180;							//斧の攻撃する時間
+	constexpr int AX_ATTACK_NUM = AX_ATTACK_TIME / 10;			//斧の攻撃回数
 	constexpr float HAMMER_ATTACK_AIR_FALL_SPEED = 4.0f;		//ハンマーの空中攻撃の落下スピード
 	constexpr float HAMMER_FALL_FRAME = 13.0f;					//ハンマーの落下するまでのフレーム
 	constexpr float HAMMER_FALL_MIN_LENGTH = 30.0f;				//ハンマーの落下攻撃ができる最小の高さ
