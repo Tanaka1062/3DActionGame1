@@ -32,7 +32,7 @@ void CEffectData::Load()
 		"data/effect/shockWave.efk",
 		"data/effect/coinGet.efk",
 		"data/effect/ax_effect.efk",
-
+		"data/effect/handAttack.efk",
 	};
 	// -------------------------------------
 

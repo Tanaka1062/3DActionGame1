@@ -31,8 +31,9 @@ CAttackManager::~CAttackManager()
 
 	for (int attack_i = 0; attack_i < m_attack.size(); attack_i++)
 	{
-		m_attack[]
+		delete m_attack[attack_i];
 	}
+	m_attack.clear();
 }
 
 //------------------------
@@ -51,11 +52,10 @@ void CAttackManager::Init()
 //------------------------
 void CAttackManager::Update()
 {
-	for (auto ite = m_attack.begin(); ite != m_attack.end();++ite)
+	for (int attack_i = 0; attack_i < m_attack.size(); attack_i++)
 	{
-		if ((*ite)->GetActive() == false)continue;
-		//–ˆƒtƒŒ[ƒ€‚·‚éˆ—
-		(*ite)->Update();
+		if (m_attack[attack_i]->GetActive() == false)continue;
+		m_attack[attack_i]->Update();
 	}
 }
 
@@ -64,10 +64,9 @@ void CAttackManager::Update()
 //------------------------
 void CAttackManager::Draw()
 {
-	for (auto ite = m_attack.begin(); ite != m_attack.end(); ++ite)
+	for (int attack_i = 0; attack_i < m_attack.size(); attack_i++)
 	{
-		//•`ŽÊˆ—
-		(*ite)->Draw();
+		m_attack[attack_i]->Draw();
 	}
 
 }
@@ -77,10 +76,9 @@ void CAttackManager::Draw()
 //------------------------
 void CAttackManager::Exit()
 {
-	for (auto ite = m_attack.begin(); ite != m_attack.end();)
+	for (int attack_i = 0; attack_i < m_attack.size(); attack_i++)
 	{
-		//I—¹ˆ—
-		(*ite)->Exit();
+		m_attack[attack_i]->Exit();
 	}
 }
 

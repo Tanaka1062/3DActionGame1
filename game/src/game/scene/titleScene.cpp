@@ -35,6 +35,7 @@ void CTitleScene::Draw()
 	switch (m_state)
 	{
 	case CSceneBase::LOAD:
+	case INIT:
 	case MAIN_WAIT:
 		m_LoadBG.Draw();
 		break;

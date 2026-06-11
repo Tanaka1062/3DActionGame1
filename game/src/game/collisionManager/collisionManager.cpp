@@ -335,17 +335,17 @@ void CCollisionManager::CheckHitCollToObject(CObject& _collObject, CObject& _obj
 //	 	 プレイヤーと攻撃判定の当たり判定
 //----------------------------------------------
 void CCollisionManager::CheckHitPlayerToPlayerAttack(CPlayerManager& _playerManager,
-	CAttackManager& _attackManager)
+	CAttackManager* _attackManager)
 {
 	for (int player_j = 0; player_j < _playerManager.GetPlayerNum(); player_j++)
 	{
 		//プレイヤーのクラスを取得
 		CPlayer* player = _playerManager.GetPlayer(player_j);
 
-		for (int attack_i = 0; attack_i < _attackManager.GetNum(); attack_i++)
+		for (int attack_i = 0; attack_i < _attackManager->GetNum(); attack_i++)
 		{
 			//攻撃のクラスを取得
-			CAttackBase* attack = _attackManager.GetAttack(attack_i);
+			CAttackBase* attack = _attackManager->GetAttack(attack_i);
 
 			//当たり判定
 			CheckHitObjectToObject(*player, *attack);

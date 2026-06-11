@@ -366,7 +366,7 @@ unique_ptr<CItemBase> CSpawnItemManager::SpawnItem(int _stageId)
 	int effectId = CEffectData::GetId(EFFECT_SPAWNITEM);
 
 	//エフェクトを呼び出す
-	CEffekseerCtrl::Request(effectId, m_spawnData[_stageId][spawnPosId].pos, false);
+	CEffekseerCtrl::Request(effectId, m_spawnData[_stageId][spawnPosId].pos,V_ZERO, false);
 
 	//スポーンしているかをリセット
 	m_isItemSpawn = false;

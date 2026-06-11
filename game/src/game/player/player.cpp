@@ -21,7 +21,7 @@ CPlayer::CPlayer()
 	m_name = PLAYER_NONE;
 	CCharacterBase::Init();
 	m_dropCoin = 0;
-	m_pos = ZERO;
+	m_pos = V_ZERO;
 	m_rad = 0.0f;
 	m_maxHp = 0;
 	m_hp = 0;
@@ -56,7 +56,7 @@ void CPlayer::Init(tagPlayerName _name, tagPadName _padName)
 	CCharacterBase::Init();
 
 	m_dropCoin = 0;
-	m_pos = ZERO;
+	m_pos = V_ZERO;
 	m_rad = RADIUS;
 	m_maxHp = MAX_HP;
 	m_hp = m_maxHp;
@@ -366,7 +366,7 @@ void CPlayer::HitCalc(CObject* _hitObject)
 		int effectId = CEffectData::GetId(EFFECT_ATTACK);
 
 		//エフェクトを呼び出す
-		CEffekseerCtrl::Request(effectId, GetCenter(), false);
+		CEffekseerCtrl::Request(effectId, GetCenter(),m_rot, false);
 
 		//アイテムを落とす
 		m_itemState = ITEM_STATE_DROP;
@@ -395,7 +395,7 @@ void CPlayer::HitCalc(CObject* _hitObject)
 			int effectId = CEffectData::GetId(EFFECT_COIN_GET);
 
 			//プレイヤーの位置にエフェクトを呼び出す
-			m_effectId = CEffekseerCtrl::Request(effectId, GetCenter(), false);
+			m_effectId = CEffekseerCtrl::Request(effectId, GetCenter(), m_rot, false);
 		}
 
 	}
@@ -424,7 +424,7 @@ void CPlayer::HitCalc(CObject* _hitObject)
 		int effectId = CEffectData::GetId(EFFECT_ATTACK);
 
 		//エフェクトを呼び出す
-		CEffekseerCtrl::Request(effectId, GetCenter(), false);
+		CEffekseerCtrl::Request(effectId, GetCenter(), m_rot,false);
 
 		//アイテムを落とす
 		m_itemState = ITEM_STATE_DROP;
@@ -647,7 +647,13 @@ void CPlayer::AttackIn()
 		{
 		case tagAttackNum::ATTACK:
 			//攻撃前のアニメーション
-			RequestAnim(ANIMID_ATTACK_HAND_IN, 0.7f);
+			if (RequestAnim(ANIMID_ATTACK_HAND_IN, 0.7f) == true)
+			{
+				int effectId = CEffectData::GetId(EFFECT_HAND);
+
+				CEffekseerCtrl::Request(effectId, m_pos, m_rot,false);
+			}
+
 			break;
 		case tagAttackNum::ATTACK_AIR:
 			//空中の攻撃前アニメーション
@@ -782,7 +788,7 @@ void CPlayer::Attack(CAttackManager* _attackManager, CShotManager* _shotManager)
 				
 				int effectId = CEffectData::GetId(EFFECT_SHOCK_WAVE);
 				
-				CEffekseerCtrl::Request(effectId, attackPos, false);
+				CEffekseerCtrl::Request(effectId, attackPos,m_rot, false);
 			};
 			break;
 		}
@@ -1109,7 +1115,7 @@ void CPlayer::Move(float _rotY)
 
 	float moveSpeed = MOVE_SPEED;
 
-	VECTOR speed = ZERO;
+	VECTOR speed = V_ZERO;
 	//コントローラー用前進後退
 	if (isController == true)
 	{

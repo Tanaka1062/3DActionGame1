@@ -25,7 +25,7 @@ void CTimeUi::Init()
 	m_minute = 0;
 	m_second = 0;
 
-	VECTOR pos = ZERO;
+	VECTOR pos = V_ZERO;
 
 	pos.x = INIT_POS.x - static_cast<float>(CNumber::NUM_SIZE) * 0.5f;
 	pos.y = INIT_POS.y;

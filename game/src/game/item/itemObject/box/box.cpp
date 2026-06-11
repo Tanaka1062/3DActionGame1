@@ -17,7 +17,7 @@ void CBox::Init()
 	CItemObjectBase::Init();
 
 	m_spawnTime = SPAWN_TIME;
-	m_spawnPos = ZERO;
+	m_spawnPos = V_ZERO;
 	m_isSpawn = false;
 }
 
@@ -63,7 +63,7 @@ void CBox::Spawn()
 {
 	m_isActive = true;
 	m_pos = m_spawnPos;
-	m_rot = ZERO;
+	m_rot = V_ZERO;
 }
 
 //-------------------------
@@ -72,6 +72,8 @@ void CBox::Spawn()
 void CBox::Break()
 {
 	m_isActive = false;
-	CAttackManager::Request(m_pos, m_rad, ATK,0, PLAYER_NONE);
+
+	CAttackManager* attack = CAttackManager::GetInstance();
+	attack->Request(m_pos, m_rad, ATK,0, PLAYER_NONE);
 }
 

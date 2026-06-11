@@ -21,7 +21,7 @@ public:
 
 	//プレイヤーと攻撃判定の当たり判定
 	static void CheckHitPlayerToPlayerAttack(CPlayerManager& _playerManager,
-		CAttackManager& _attackManager);
+		CAttackManager* _attackManager);
 
 	//プレイヤーとプレイヤーの当たり判定
 	static void CheckHitPlayerToPlayer(CPlayerManager& _playerManager);

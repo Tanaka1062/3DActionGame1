@@ -84,7 +84,7 @@ void CSceneBase::Init()
 {
 	m_LoadState = 0;
 
-	VECTOR loadBGPos = ZERO;
+	VECTOR loadBGPos = V_ZERO;
 
 	loadBGPos.x = WINDOW_SIZE_HALF_X;
 	loadBGPos.y = WINDOW_SIZE_HALF_Y;

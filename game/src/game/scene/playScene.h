@@ -26,7 +26,7 @@ private:
 	CShotManager	m_shot;				//弾
 	CItemManager	m_itemManager;		//アイテムマネージャークラス
 	CWeaponManager	m_weaponManager;	//武器のマネージャークラス
-	CAttackManager	m_attackManager;	//攻撃のマネージャークラス
+	CAttackManager*	m_attackManager;	//攻撃のマネージャークラス
 	CUiGameManager	m_uiManager;		//uiのマネージャークラス
 	CGameTime*		m_gameTime;			//ゲームの制限時間
 	CRanking*		m_ranking;			//プレイヤーの順位

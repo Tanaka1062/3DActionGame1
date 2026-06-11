@@ -90,9 +90,11 @@ void CBomb::Explosion()
 	int effectId = CEffectData::GetId(EFFECT_EXPLOSION);
 
 	//エフェクトを呼び出す
-	CEffekseerCtrl::Request(effectId, m_pos, false);
+	CEffekseerCtrl::Request(effectId, m_pos,m_rot, false);
 
-	CAttackManager::Request(explosionPos, EXPLOSION_RADIUS, EXPLOSION_ATK,100, PLAYER_NONE);
+	CAttackManager* attack = CAttackManager::GetInstance();
+
+	attack->Request(explosionPos, EXPLOSION_RADIUS, EXPLOSION_ATK,100, PLAYER_NONE);
 
 	RequestAnim(ANIMID_DEFAULT, 1.0f, true);
 }

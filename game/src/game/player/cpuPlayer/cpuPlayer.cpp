@@ -13,7 +13,6 @@
 
 using namespace PlayerData;
 
-
 //定義関連---------------------------
 constexpr float ATTACK_START_DISTANCE = 15.0f;		//攻撃に移行する距離
 constexpr int ADD_CPU_STATE_PROBABILITY = 10;		//行動状態の上昇確率
@@ -331,7 +330,7 @@ void CCpuPlayer::HitCalc(CObject* _hitObject)
 		int effectId = CEffectData::GetId(EFFECT_ATTACK);
 
 		//エフェクトを呼び出す
-		CEffekseerCtrl::Request(effectId, GetCenter(), false);
+		CEffekseerCtrl::Request(effectId, GetCenter(), V_ZERO,false);
 
 		//アイテムを落とす
 		m_itemState = ITEM_STATE_DROP;
@@ -386,7 +385,7 @@ void CCpuPlayer::HitCalc(CObject* _hitObject)
 		int effectId = CEffectData::GetId(EFFECT_ATTACK);
 
 		//エフェクトを呼び出す
-		CEffekseerCtrl::Request(effectId, GetCenter(), false);
+		CEffekseerCtrl::Request(effectId, GetCenter(), V_ZERO,false);
 
 		//アイテムを落とす
 		m_itemState = ITEM_STATE_DROP;

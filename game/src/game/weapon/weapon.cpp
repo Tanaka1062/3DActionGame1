@@ -1,6 +1,7 @@
 #include "weapon.h"
 #include "../system/effectData/effectData.h"
 #include "../../lib/effekseer/effekseer.h"
+#include "../data.h"
 
 using namespace PlayerData;
 
@@ -56,7 +57,7 @@ void CWeapon::Step(tagWeaponId _playerWeaponId,tagState _state,VECTOR _playerPos
 		{
 			int effectId = CEffectData::GetId(EFFECT_AX);
 
-			m_effectHndl = CEffekseerCtrl::Request(effectId, _playerPos, false);
+			m_effectHndl = CEffekseerCtrl::Request(effectId, _playerPos,V_ZERO, false);
 		}
 		else
 		{

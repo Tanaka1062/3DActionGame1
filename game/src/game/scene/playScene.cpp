@@ -33,6 +33,7 @@ void CPlayScene::Draw()
 	switch (m_state)
 	{
 	case CSceneBase::LOAD:
+	case INIT:
 	case MAIN_WAIT:
 		m_LoadBG.Draw();
 		break;
@@ -40,7 +41,7 @@ void CPlayScene::Draw()
 		m_mapManager.Draw();
 		m_sky.Draw();
 		m_shot.Draw();
-		m_attackManager.Draw();
+		m_attackManager->Draw();
 		m_itemManager.Draw();
 		m_weaponManager.Draw();
 		m_playerManager.Draw();
@@ -68,6 +69,8 @@ void CPlayScene::Init()
 	m_shot.Init();
 	m_itemManager.Init(&m_playerManager);
 	m_weaponManager.Init();
+	m_attackManager = CAttackManager::GetInstance();
+	m_attackManager->Init();
 	m_uiManager.Init(&m_playerManager,&m_itemManager);
 	CCameraManager::Init(CCameraManager::CAMERA_ID_MAP,m_mapManager.GetMap());
 	CCameraManager::ChangeCamera(CCameraManager::CAMERA_ID_MAP);
@@ -128,7 +131,7 @@ void CPlayScene::Step()
 	//ŠeŽíŒvŽZˆ—‚ðŽÀs
 	m_mapManager.Step();
 	m_sky.Step(CCameraManager::GetFocusPos());
-	m_playerManager.Step(&m_attackManager,&m_shot,m_3DUiManager, CCameraManager::GetRot().y,m_mapManager.GetMap()->GetStageId(),CCameraManager::GetIsMove());
+	m_playerManager.Step(m_attackManager,&m_shot,m_3DUiManager, CCameraManager::GetRot().y,m_mapManager.GetMap()->GetStageId(),CCameraManager::GetIsMove());
 	m_shot.Step();
 	m_itemManager.Step(&m_playerManager,m_mapManager.GetMap()->GetStageId());
 	m_weaponManager.Step(m_playerManager);
@@ -144,7 +147,7 @@ void CPlayScene::Step()
 	CCollisionManager::CheckHitPlayerToMap(m_playerManager, m_mapManager.GetMap());
 	CCollisionManager::CheckHitItemToMap(m_itemManager, m_mapManager.GetMap());
 	CCollisionManager::CheckHitPlayerToItem(m_playerManager, m_itemManager);
-	CCollisionManager::CheckHitPlayerToPlayerAttack(m_playerManager, m_attackManager);
+	CCollisionManager::CheckHitPlayerToPlayerAttack(m_playerManager,m_attackManager);
 	CCollisionManager::CheckHitItemToItem(m_itemManager);
 	CCollisionManager::CheckHitPlayerToShot(m_playerManager, m_shot);
 	CCollisionManager::CheckHitCpuPlayerFOVToPlayer(m_playerManager);
@@ -156,7 +159,7 @@ void CPlayScene::Step()
 	m_sky.Update();
 	m_playerManager.Update();
 	m_shot.Update();
-	m_attackManager.Update();
+	m_attackManager->Update();
 	m_itemManager.Update();
 	m_weaponManager.Update(m_playerManager);
 	CCameraManager::Update();
@@ -179,7 +182,7 @@ void CPlayScene::Exit()
 	m_mapManager.Exit();
 	m_sky.Exit();
 	m_playerManager.Exit();
-	m_attackManager.Exit();
+	m_attackManager->Exit();
 	m_shot.Exit();
 	m_itemManager.Exit();
 	m_weaponManager.Exit();

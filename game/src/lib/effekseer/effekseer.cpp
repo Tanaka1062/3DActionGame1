@@ -466,7 +466,7 @@ void	CEffekseerCtrl::Draw(void)
 //---------------------------------
 //		エフェクト呼び出し
 //---------------------------------
-int	CEffekseerCtrl::Request(int ID, VECTOR pos, bool isLoop)
+int	CEffekseerCtrl::Request(int ID, VECTOR pos, VECTOR rot, bool isLoop)
 {
 	if (m_eff == nullptr || ID < 0) return -1;
 
@@ -479,6 +479,7 @@ int	CEffekseerCtrl::Request(int ID, VECTOR pos, bool isLoop)
 			m_eff[number].SetLoop(isLoop);
 			m_eff[number].SetID(ID);
 			m_eff[number].SetTrans(pos);
+			m_eff[number].SetRot(rot);
 			m_eff[number].SetScale(VGet(1.0f, 1.0f, 1.0f));
 			m_useID = (number + 1) % m_allNum;
 			return number;

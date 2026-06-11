@@ -73,7 +73,7 @@ void CCameraManager::Step(CMapManager* _mapManager, CPlayerManager* _playerManag
 {
 	if (m_id == CAMERA_ID_NONE)return;
 
-	VECTOR playerPos = ZERO;
+	VECTOR playerPos = V_ZERO;
 
 	if (m_id == CAMERA_ID_MAP && _playerManager != nullptr)
 	{
