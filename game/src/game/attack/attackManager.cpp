@@ -1,12 +1,12 @@
 #include "attackManager.h"
 
 using namespace std;
+CAttackManager* CAttackManager::m_instance = nullptr;
 
 static const char MODEL_PATH[] =
  "data/model/shot/shotTest.mv1" ;				//ロードするファイル名
 constexpr int ATTACK_MAX = 30;					//攻撃の最大個数
 
-vector<CAttackBase*> CAttackManager::m_attack;
 
 //------------------------
 //	  コンストラクタ
@@ -28,6 +28,11 @@ CAttackManager::CAttackManager()
 CAttackManager::~CAttackManager()
 {
 	Exit();
+
+	for (int attack_i = 0; attack_i < m_attack.size(); attack_i++)
+	{
+		m_attack[]
+	}
 }
 
 //------------------------
@@ -35,6 +40,10 @@ CAttackManager::~CAttackManager()
 //------------------------
 void CAttackManager::Init()
 {
+	for (int attack_i = 0; attack_i < m_attack.size(); attack_i++)
+	{
+		m_attack[attack_i]->Init();
+	}
 }
 
 //------------------------
@@ -72,11 +81,6 @@ void CAttackManager::Exit()
 	{
 		//終了処理
 		(*ite)->Exit();
-
-		delete (*ite);
-
-		//終了処理が終わった攻撃判定を消す
-		ite = m_attack.erase(ite);
 	}
 }
 

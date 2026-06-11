@@ -141,7 +141,7 @@ void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackMa
 	if (m_state == ATTACK_OUT)
 	{
 		m_cpuState = CPU_STATE_NONE;
-		m_attackNum = ATTACK_NONE;
+		m_attackNum = 0;
 	}
 
 	if (m_isJump == true)

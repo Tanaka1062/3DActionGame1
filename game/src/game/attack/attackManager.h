@@ -8,20 +8,43 @@
 class CAttackManager
 {
 private:
-	static std::vector<CAttackBase*> m_attack;			//攻撃の当たり判定のクラス
+	static CAttackManager* m_instance;		//インスタンス
 public:
+
+	static CAttackManager* GetInstance()
+	{
+		if (m_instance == nullptr)
+		{
+			m_instance = new CAttackManager;
+		}
+
+		return m_instance;
+	}
+
+	static void DeleteInstance()
+	{
+		if (m_instance != nullptr)
+		{
+			delete m_instance;
+			m_instance = nullptr;
+		}
+	}
+
+private:
 	//コンストラクタ・デストラクタ
 	CAttackManager();
 	~CAttackManager();
 
+	std::vector<CAttackBase*> m_attack;			//攻撃の当たり判定のクラス
+public:
 	//初期化
-	static void Init();
+	void Init();
 	//更新処理
-	static void Update();
+	void Update();
 	//オブジェクトの描写
-	static void Draw();
+	void Draw();
 	//終了処理
-	static void Exit();
+	void Exit();
 
 	//攻撃の呼び出し
 	// _pos			:呼び出す座標
@@ -31,21 +54,21 @@ public:
 	// _name		:攻撃するキャラの名前
 	// _num			:連続攻撃の回数
 	// _nextTime	:連続攻撃の次の攻撃が発生するまでの時間
-	static int Request(VECTOR _pos, float _rad, int _atk, int _blown,tagPlayerName _name, int _num = 1,int _nextTime = 0);
+	int Request(VECTOR _pos, float _rad, int _atk, int _blown,tagPlayerName _name, int _num = 1,int _nextTime = 0);
 
 	//攻撃の当たり判定の数を取得
-	static int GetNum() { return static_cast<int>(m_attack.size()); }
+	int GetNum() { return static_cast<int>(m_attack.size()); }
 
 	//攻撃の当たり判定のアドレスを取得
-	static CAttackBase* GetAttack(int _num);
+	CAttackBase* GetAttack(int _num);
 
 	//攻撃の座標を設定する
-	static void SetPos(int _num,VECTOR _pos);
+	void SetPos(int _num,VECTOR _pos);
 
 	//攻撃の生存フラグを取得
-	static bool GetActive(int _num);
+	bool GetActive(int _num);
 	//攻撃の生存フラグを設定
-	static void SetActive(int _num,bool _active);
+	void SetActive(int _num,bool _active);
 
 };
 

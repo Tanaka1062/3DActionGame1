@@ -287,73 +287,59 @@ void CPlayerManager::Step(CAttackManager* _attackManager, CShotManager* _shotMan
 			//同じプレイヤーはスキップする
 			if (player_i == target_i)continue;
 
-			float fArea;		// 面積を保存
-			float fBottom;		// 底辺を保存
-			float fLength;		// ターゲットとプレイヤーの目線の最短距離を保存
-			VECTOR v1, v2;		//ベクトル保存用
+			float fArea;					// 面積を保存
+			float fBottom;					// 底辺を保存
+			float fLength;					// ターゲットとプレイヤーの目線の最短距離を保存
 
-			//終点からターゲットまでの距離を求める
-			v1 = VSub(m_player[target_i]->GetPos(), endPos);
-			v1.y = 0.0f;
+			VECTOR endPosToTargetVec;	//終点からターゲットまでの距離
+			endPosToTargetVec = VSub(m_player[target_i]->GetPos(), endPos);
+			endPosToTargetVec.y = 0.0f;
 
-			//終点からプレイヤーまでの距離を求める
-			v2 = VSub(playerPos, endPos);
-			v2.y = 0.0f;
+			VECTOR endPosToPlayerVec;	//終点からプレイヤーまでの距離
+			endPosToPlayerVec = VSub(playerPos, endPos);
+			endPosToPlayerVec.y = 0.0f;
 
 			//上の二つの外積を求める
-			VECTOR cross = VCross(v1, v2);
+			VECTOR cross = VCross(endPosToTargetVec, endPosToPlayerVec);
 
 			//外積から平行四辺形の面積を求める
-			fArea = cross.x * cross.x + cross.y * cross.y + cross.z * cross.z;
-			fArea = sqrt(fArea);
+			fArea = VSize(cross);
 
-			//終点からプレイヤーまでの距離を求める
-			v1 = VSub(playerPos, endPos);
-			v1.y = 0.0f;
-
-			//v1を使って平行四辺形の底辺を求める
-			fBottom = v1.x * v1.x + v1.y * v1.y + v1.z * v1.z;
-			fBottom = sqrtf(fBottom);
+			//終点からプレイヤーまでの距離を使って平行四辺形の底辺を求める
+			fBottom = VSize(endPosToPlayerVec); 
 
 			//面積から底辺を割って離れている距離を求める
 			fLength = fArea / fBottom;
 
-			//プレイヤーからターゲットまでの距離を求める
-			v1 = VSub(m_player[target_i]->GetPos(), playerPos);
-			v1.y = 0.0f;
+			VECTOR playerToTargetVec;	//プレイヤーからターゲットまでの距離
+			playerToTargetVec = VSub(m_player[target_i]->GetPos(), playerPos);
+			playerToTargetVec.y = 0.0f;
 
-			//プレイヤーからプレイヤーの視点の終点までの距離を求める
-			v2 = VSub(endPos, playerPos);
-			v2.y = 0.0f;
+			VECTOR playerToEndPosVec;	//プレイヤーから終点までの距離を求める
+			playerToEndPosVec = VSub(endPos, playerPos);
+			playerToEndPosVec.y = 0.0f;
 
-			//v1とv2の内積を求める
-			float fDot = VDot(v1,v2);
+			//プレイヤーからターゲットまでの距離とプレイヤーから終点までの距離の内積を求める
+			float fDot = VDot(playerToTargetVec,playerToEndPosVec);
 
-			//内積が0以下なら範囲に入っているので最短距離を求めて保存
+			//内積が0以下ならターゲットが線分の始点より外側にあるので
+			//プレイヤーとの距離を最短距離として使用
 			if (fDot < 0.0f)
 			{
-				VECTOR v3 = VSub(m_player[target_i]->GetPos(),playerPos );
-				v3.y = 0.0f;
-				fLength = sqrtf((v3.x * v3.x) + (v3.y * v3.y) + (v3.z * v3.z));
+				//プレイヤーからターゲットの距離を求める
+				VECTOR playerToTargetVec = VSub(m_player[target_i]->GetPos(),playerPos );
+				playerToTargetVec.y = 0.0f;
+				fLength = VSize(playerToTargetVec);
 			}
 
-			//プレイヤーの視点の終点からターゲットまでの距離を求める
-			v1 = VSub(m_player[target_i]->GetPos(), endPos);
-			v1.y = 0.0f;
+			//終点からターゲットまでの距離と終点からプレイヤーまでの距離の内積を求める
+			fDot = VDot(endPosToTargetVec, endPosToPlayerVec);
 
-			//プレイヤーの視点の終点からターゲットまでの距離を求める
-			v2 = VSub(m_player[player_i]->GetPos(), endPos);
-			v2.y = 0.0f;
-
-			//v1とv2の内積を求める
-			fDot = VDot(v1, v2);
-
-			//内積が0以下なら範囲に入っているので最短距離を求めて保存
+			//内積が0以下ならターゲットが線分の終点より外側にあるので
+			//終点との距離を最短距離として使用
 			if (fDot < 0.0f)
 			{
-				VECTOR V3 = VSub(m_player[target_i]->GetPos(), endPos);
-				V3.y = 0.0f;
-				fLength = sqrt((V3.x * V3.x) + (V3.y * V3.y) + (V3.z * V3.z));
+				fLength = VSize(endPosToPlayerVec);
 			}
 
 			//最短距離が今の最小距離以下なら長さを保存してターゲットを保存
