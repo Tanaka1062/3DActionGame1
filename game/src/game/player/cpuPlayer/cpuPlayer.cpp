@@ -330,7 +330,7 @@ void CCpuPlayer::HitCalc(CObject* _hitObject)
 		int effectId = CEffectData::GetId(EFFECT_ATTACK);
 
 		//エフェクトを呼び出す
-		CEffekseerCtrl::Request(effectId, GetCenter(), V_ZERO,false);
+		CEffekseerCtrl::Request(effectId, GetCenter(),false);
 
 		//アイテムを落とす
 		m_itemState = ITEM_STATE_DROP;
@@ -385,7 +385,7 @@ void CCpuPlayer::HitCalc(CObject* _hitObject)
 		int effectId = CEffectData::GetId(EFFECT_ATTACK);
 
 		//エフェクトを呼び出す
-		CEffekseerCtrl::Request(effectId, GetCenter(), V_ZERO,false);
+		CEffekseerCtrl::Request(effectId, GetCenter(),false);
 
 		//アイテムを落とす
 		m_itemState = ITEM_STATE_DROP;

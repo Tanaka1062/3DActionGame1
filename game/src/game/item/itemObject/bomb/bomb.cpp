@@ -90,7 +90,7 @@ void CBomb::Explosion()
 	int effectId = CEffectData::GetId(EFFECT_EXPLOSION);
 
 	//エフェクトを呼び出す
-	CEffekseerCtrl::Request(effectId, m_pos,m_rot, false);
+	CEffekseerCtrl::Request(effectId, m_pos, false);
 
 	CAttackManager* attack = CAttackManager::GetInstance();
 

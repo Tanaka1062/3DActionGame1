@@ -93,7 +93,7 @@ public:
 	//	ID		:	エフェクトID
 	//	pos		:	初期位置
 	//	isLoop	:	エフェクトがループするか
-	static int Request(int ID, VECTOR pos, VECTOR rot, bool isLoop);
+	static int Request(int ID, VECTOR pos, bool isLoop);
 	//	指定エフェクト停止
 	static void Stop(int hndl);
 	//	全エフェクト停止
@@ -160,3 +160,4 @@ public:
 	//	ループ情報取得
 	inline bool	IsLoop(void) { return m_isLoop; }
 };
+

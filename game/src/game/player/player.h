@@ -103,6 +103,14 @@ namespace PlayerData{
 		ITEM_STATE_DROP,			//アイテムを落とした
 	};
 
+	//エフェクトハンドルの種類
+	enum tagEffectHndl
+	{
+		EF_HNDL_COIN_GET,			//エフェクトコインゲット
+		EF_HNDL_ATTACK,				//エフェクト攻撃
+
+		EF_HNDL_NUM,				//エフェクトの数
+	};
 };
 
 
@@ -116,7 +124,7 @@ protected:
 	int								m_weaponDurability;	//武器の耐久度
 	int								m_money;			//お金
 	int								m_attackId;			//攻撃のID
-	int								m_effectId;			//エフェクトのID
+	int								m_effectHndl[PlayerData::EF_HNDL_NUM];		//エフェクトのハンドル
 	tagPadName						m_padName;			//コントローラーの名前
 	PlayerData::tagWeaponId			m_weaponId;			//武器のID
 	tagPlayerName					m_name;				//プレイヤーの名前
@@ -273,7 +281,7 @@ public:
 protected:
 
 	//入力処理
-	virtual void InputStep();
+	virtual void InputStep(float _rotY);
 
 	//待機状態処理
 	void Wait();
@@ -338,8 +346,11 @@ protected:
 	//準備完了を解除
 	void ReadyOut();
 
+	//移動入力
+	VECTOR MoveInput(float _rotY);
+
 	//移動処理
-	virtual void Move(float _rotY);
+	virtual void Move(VECTOR _moveVec);
 
 	//攻撃を呼び出す処理
 	virtual void RequestAttack();

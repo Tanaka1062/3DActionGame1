@@ -30,7 +30,10 @@ CPlayer::CPlayer()
 	m_attackNum = ATTACK_NONE;
 	m_money = INIT_MONEY;
 	m_attackId = -1;
-	m_effectId = -1;
+	for (int effectHndl_i = 0; effectHndl_i < PlayerData::EF_HNDL_NUM; effectHndl_i++)
+	{
+		m_effectHndl[effectHndl_i] = -1;
+	}
 	m_padName = PAD_NONE;
 	m_weaponId = WEAPON_ID_HAND;
 	m_weaponDurability = 0;
@@ -89,6 +92,7 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 {
 	m_targetPos = _targetPos;
 
+	//ジャンプの上昇処理
 	if (m_isJump == true)
 	{
 		m_isJump = false;
@@ -171,32 +175,7 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 	}
 
 	//------------------------------------------------
-
-	//攻撃の呼び出し
-	if ((CheckHitKey(KEY_INPUT_J) != 0 ||
-		CControllerManager::IsTrg(BUTTON_X, m_padName)) &&
-		m_attackId == -1)
-	{
-		RequestAttack();
-	}
-	else
-	{
-		switch (m_state)
-		{
-		case tagState::WAIT:
-		case tagState::WALK:
-			m_attackNum = 0;
-			break;
-		}
-	}
-
-	//移動処理
-	Move(_rotY);
-
-	//ジャンプ処理
-	RequestJump();
-
-	//アイテムを手に入れていたら持ち上げる
+		//アイテムを手に入れていたら持ち上げる
 	if (m_itemState == ITEM_STATE_GET)
 	{
 		m_itemState = ITEM_STATE_HAVE;
@@ -209,14 +188,7 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 		m_itemState = ITEM_STATE_NONE;
 	}
 
-	if (CheckHitKey(KEY_INPUT_I) != 0 ||
-		CControllerManager::IsTrg(BUTTON_B, m_padName) == true)
-	{
-		//アイテムを拾う処理
-		PickUpItem();
-	}
-
-	CCharacterBase::Step(_attackManager,_shotManager);
+	CCharacterBase::Step(_attackManager, _shotManager);
 
 	//体力が増えすぎないように
 	if (m_hp >= m_maxHp)
@@ -238,24 +210,32 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 	//攻撃中は当たり判定をプレイヤーの位置に設定する
 	else
 	{
-		_attackManager->SetPos(m_attackId,m_pos);
+		_attackManager->SetPos(m_attackId, m_pos);
 	}
 
 	//攻撃中ではない場合攻撃を消す
 	if (m_state != tagState::ATTACK)
 	{
-		_attackManager->SetActive(m_attackId,false);
+		_attackManager->SetActive(m_attackId, false);
 	}
 
-	if (m_effectId != -1)
+	//エフェクトをプレイヤーに追従させる
+	for (int effectHndl_i = 0; effectHndl_i < PlayerData::EF_HNDL_NUM; effectHndl_i++)
 	{
-		CEffekseerCtrl::SetPosition(m_effectId, GetCenter());
-
-		if (CEffekseerCtrl::IsActive(m_effectId) == false)
+		if (m_effectHndl[effectHndl_i] != -1)
 		{
-			m_effectId = -1;
+			CEffekseerCtrl::SetPosition(m_effectHndl[effectHndl_i], GetCenter());
+			CEffekseerCtrl::SetRot(m_effectHndl[effectHndl_i], m_rot);
+			if (CEffekseerCtrl::IsActive(m_effectHndl[effectHndl_i]) == false)
+			{
+				m_effectHndl[effectHndl_i] = -1;
+			}
 		}
 	}
+
+	//入力処理
+	InputStep(_rotY);
+
 }
 
 //-----------------------
@@ -366,7 +346,7 @@ void CPlayer::HitCalc(CObject* _hitObject)
 		int effectId = CEffectData::GetId(EFFECT_ATTACK);
 
 		//エフェクトを呼び出す
-		CEffekseerCtrl::Request(effectId, GetCenter(),m_rot, false);
+		CEffekseerCtrl::Request(effectId, GetCenter(), false);
 
 		//アイテムを落とす
 		m_itemState = ITEM_STATE_DROP;
@@ -382,20 +362,20 @@ void CPlayer::HitCalc(CObject* _hitObject)
 
 		item = dynamic_cast<CItemBase*>(_hitObject);
 
-		//アイテムがオブジェクトタイプ以外の場合処理をしない
+		//アイテムがコインタイプ以外の場合処理をしない
 		if (item->GetItemType() == ITEM_TYPE_COIN)
 		{
-			if (m_effectId != -1)
+			if (m_effectHndl[PlayerData::EF_HNDL_COIN_GET] != -1)
 			{
-				CEffekseerCtrl::Stop(m_effectId);
-				m_effectId = -1;
+				CEffekseerCtrl::Stop(m_effectHndl[PlayerData::EF_HNDL_COIN_GET]);
+				m_effectHndl[PlayerData::EF_HNDL_COIN_GET] = -1;
 			}
 
 			//呼び出すエフェクトのID
 			int effectId = CEffectData::GetId(EFFECT_COIN_GET);
 
 			//プレイヤーの位置にエフェクトを呼び出す
-			m_effectId = CEffekseerCtrl::Request(effectId, GetCenter(), m_rot, false);
+			m_effectHndl[PlayerData::EF_HNDL_COIN_GET] = CEffekseerCtrl::Request(effectId, GetCenter(), false);
 		}
 
 	}
@@ -424,7 +404,7 @@ void CPlayer::HitCalc(CObject* _hitObject)
 		int effectId = CEffectData::GetId(EFFECT_ATTACK);
 
 		//エフェクトを呼び出す
-		CEffekseerCtrl::Request(effectId, GetCenter(), m_rot,false);
+		CEffekseerCtrl::Request(effectId, GetCenter(),false);
 
 		//アイテムを落とす
 		m_itemState = ITEM_STATE_DROP;
@@ -536,8 +516,43 @@ bool CPlayer::SubMoney(int _subMoney)
 //-----------------------
 //		入力処理
 //-----------------------
-void CPlayer::InputStep()
+void CPlayer::InputStep(float _rotY)
 {
+	//攻撃の呼び出し
+	if ((CheckHitKey(KEY_INPUT_J) != 0 ||
+		CControllerManager::IsTrg(BUTTON_X, m_padName)) &&
+		m_attackId == -1)
+	{
+		RequestAttack();
+	}
+	else
+	{
+		switch (m_state)
+		{
+		case tagState::WAIT:
+		case tagState::WALK:
+			m_attackNum = 0;
+			break;
+		}
+	}
+
+	//移動処理
+	Move(MoveInput(_rotY));
+
+	if ((CControllerManager::IsTrg(BUTTON_A, m_padName) && !m_isFlying) ||
+		(CheckHitKey(KEY_INPUT_SPACE) && !m_isFlying))
+	{
+		//ジャンプ処理
+		RequestJump();
+	}
+
+	if (CheckHitKey(KEY_INPUT_I) != 0 ||
+		CControllerManager::IsTrg(BUTTON_B, m_padName) == true)
+	{
+		//アイテムを拾う処理
+		PickUpItem();
+	}
+
 
 }
 
@@ -651,7 +666,8 @@ void CPlayer::AttackIn()
 			{
 				int effectId = CEffectData::GetId(EFFECT_HAND);
 
-				CEffekseerCtrl::Request(effectId, m_pos, m_rot,false);
+				m_effectHndl[PlayerData::EF_HNDL_ATTACK] = CEffekseerCtrl::Request(effectId, m_pos, false);
+				CEffekseerCtrl::SetRot(m_effectHndl[PlayerData::EF_HNDL_ATTACK],m_rot);
 			}
 
 			break;
@@ -788,7 +804,7 @@ void CPlayer::Attack(CAttackManager* _attackManager, CShotManager* _shotManager)
 				
 				int effectId = CEffectData::GetId(EFFECT_SHOCK_WAVE);
 				
-				CEffekseerCtrl::Request(effectId, attackPos,m_rot, false);
+				CEffekseerCtrl::Request(effectId, attackPos, false);
 			};
 			break;
 		}
@@ -1084,26 +1100,11 @@ void CPlayer::ReadyOut()
 	}
 }
 
-
 //-----------------------
-//		移動処理
+//		 移動入力
 //-----------------------
-void CPlayer::Move(float _rotY)
+VECTOR CPlayer::MoveInput(float _rotY)
 {
-	//待機状態と移動状態以外は移動を出来ないようにする
-	switch (m_state)
-	{
-	case tagState::WAIT:
-	case tagState::WALK:
-	case tagState::AIR:
-		break;
-	case tagState::ATTACK:
-		if (m_weaponId != WEAPON_ID_AX)return;
-		break;
-	default:
-		return;
-	}
-
 	//コントローラーを使っているか
 	bool isController = false;
 
@@ -1158,10 +1159,36 @@ void CPlayer::Move(float _rotY)
 	//行列の合成
 	MATRIX res = CMyMath::MatMult(mRotY, dir);
 
+	//行列をVECTORに代入
+	VECTOR move = V_ZERO;
+	move.x = res.m[0][3];
+	move.y = res.m[1][3];
+	move.z = res.m[2][3];
+
+	return move;
+}
+
+//-----------------------
+//		移動処理
+//-----------------------
+void CPlayer::Move(VECTOR _move)
+{
+	//待機状態と移動状態以外は移動を出来ないようにする
+	switch (m_state)
+	{
+	case tagState::WAIT:
+	case tagState::WALK:
+	case tagState::AIR:
+		break;
+	case tagState::ATTACK:
+		if (m_weaponId != WEAPON_ID_AX)return;
+		break;
+	default:
+		return;
+	}
+
 	//移動をスピードに代入
-	m_speed.x = res.m[0][3];
-	m_speed.y = res.m[1][3];
-	m_speed.z = res.m[2][3];
+	m_speed = _move;
 
 	if (m_state == tagState::ATTACK)return;
 
@@ -1223,13 +1250,7 @@ void CPlayer::RequestJump()
 		return;
 	}
 
-	if ((CControllerManager::IsTrg(BUTTON_A, m_padName) && !m_isFlying) ||
-		(CheckHitKey(KEY_INPUT_SPACE) && !m_isFlying))
-	{
-		m_state = tagState::JUMP;
-
-	}
-
+	m_state = tagState::JUMP;
 }
 
 //-----------------------

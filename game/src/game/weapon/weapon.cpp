@@ -57,7 +57,7 @@ void CWeapon::Step(tagWeaponId _playerWeaponId,tagState _state,VECTOR _playerPos
 		{
 			int effectId = CEffectData::GetId(EFFECT_AX);
 
-			m_effectHndl = CEffekseerCtrl::Request(effectId, _playerPos,V_ZERO, false);
+			m_effectHndl = CEffekseerCtrl::Request(effectId, _playerPos, false);
 		}
 		else
 		{
