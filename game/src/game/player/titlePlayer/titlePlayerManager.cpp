@@ -144,7 +144,7 @@ void CTitlePlayerManager::Load(CMapBase* _map)
 
 		//ƒJƒƒ‰‚Ì•ûŒü‚ðŒü‚­‚æ‚¤‚É’²®
 		VECTOR cameraPos = MV1GetFramePosition(_map->GetHndl(_map->GetStageId()), MAP_CAMERA_FRAME_NUM);
-		VECTOR rot = ZERO;
+		VECTOR rot = V_ZERO;
 		rot.y = atan2f(start.x - cameraPos.x, start.z - cameraPos.z);
 
 		m_player[player_i]->Load(m_modelHndl[MODEL_PLAYER1]);

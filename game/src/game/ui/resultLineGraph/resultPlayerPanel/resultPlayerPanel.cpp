@@ -88,7 +88,7 @@ CResultPlayerPanel::~CResultPlayerPanel()
 //-----------------------------------
 void CResultPlayerPanel::Init()
 {
-	m_pos = ZERO;
+	m_pos = V_ZERO;
 
 	m_panel.Init();
 

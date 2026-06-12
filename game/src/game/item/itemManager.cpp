@@ -87,7 +87,7 @@ void CItemManager::Step(CPlayerManager* _playerManager, int _stageId)
 			(*item_i)->GetIsSpawn() == true)
 		{
 			//‘¬“x‚ðƒ[ƒ‚É‚·‚é
-			(*item_i)->SetSpeed(ZERO);
+			(*item_i)->SetSpeed(V_ZERO);
 
 			if ((*item_i)->GetItemType() != ITEM_TYPE_COIN)
 			{

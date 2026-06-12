@@ -57,7 +57,7 @@ void CMapItemManager::Load(CMapBase* _map)
 		for (int spawnPos_i = 0; spawnPos_i < spawnNum; spawnPos_i++)
 		{
 			//アイテムの出現座標を保存
-			VECTOR spawnPos = ZERO;
+			VECTOR spawnPos = V_ZERO;
 			spawnPos = MV1GetFramePosition(stageHndl, frameNum);
 			frameNum += 2;
 
