@@ -250,3 +250,4 @@ void CObject::Gravity()
 {
 	m_gravity -= GRAVITIY;
 }
+
