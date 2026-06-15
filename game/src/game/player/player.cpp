@@ -866,13 +866,14 @@ void CPlayer::AttackOut()
 
 			if (m_animData.m_id == ANIMID_ATTACK_HAMMER_OUT)
 			{
+				RequestJump();
 				float len = m_pos.y - m_shadow.GetPos().y;
-				if (HAMMER_FALL_MIN_LENGTH >= len)
+				if (HAMMER_FALL_MIN_LENGTH <= len)
 				{
 					m_state = ATTACK_IN;
 					m_attackNum = ATTACK_NONE;
 				}
-				m_gravity -= HAMMER_JUMP_SPEED;
+				m_gravity = -HAMMER_JUMP_SPEED;
 			}
 
 			break;
