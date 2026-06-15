@@ -28,10 +28,11 @@ namespace PlayerData{
 	constexpr int GET_UP_MAX_TIME = 3 * 60;						//起き上がるまでの最大時間
 	constexpr float LANDING_ANIM_SPEED = 3.0f;					//着地するまでの速さ
 	constexpr float JUMP_ANIM_SPEED = 3.0f;						//ジャンプするまでの速さ
+	constexpr float FLYING_HEIGHT_THRESHOLD = 1.2f;				//空中にいるかの高さ差のしきい値
+	constexpr float HAMMER_JUMP_SPEED = 4.0f;					//ハンマーのジャンプスピード
 	//----------------------------------------------
 
 	//攻撃関連---------------------------
-	constexpr int ATTACKB_ATK = 100;							//攻撃Bの攻撃力
 	constexpr float ATTACK_MOVE_SPEED = 0.5f;					//攻撃時に前進する力
 	constexpr float FIGHT_LEN = 40.0f;							//戦う距離
 	constexpr float SHOT_SIZE = 10.0f;							//弾の大きさ

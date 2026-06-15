@@ -56,11 +56,11 @@ void CCpuPlayer::Init(tagPlayerName _name, tagPadName _padName)
 //-----------------------
 void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManager, CShotManager* _shotManager)
 {
-	m_targetPos = _targetPos;
 
 	m_FOV->SetPos(CCameraManager::GetFocusPos());
-
 	m_FOV->Step(this);
+
+	CPlayer::Step(_rotY,_targetPos,_attackManager,_shotManager);
 
 	//行動状態が無かったら変更する
 	if (m_cpuState == CPU_STATE_NONE || m_targetObject == nullptr)
@@ -99,180 +99,12 @@ void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackMa
 
 	//-----------------------------------------------------------------------------------
 
-	//相手が攻撃可能範囲にいたら攻撃する-------------------------------------------------
-	if (m_cpuState == CPU_STATE_ATTACK && m_targetObject != nullptr)
-	{
-
-		if (m_targetObject->GetObjectName() == OBJECT_PLAYER)
-		{
-			//銃と投げるアイテムはターゲットがいたら攻撃する
-			if (m_itemState == ITEM_STATE_HAVE  &&
-				m_targetPos != nullptr)
-			{
-				RequestAttack();
-			}
-
-			VECTOR vec = VSub(m_pos, m_targetObject->GetPos());
-
-			float len = VSize(vec);
-
-			if (len <= ATTACK_START_DISTANCE + RADIUS)
-			{
-				RequestAttack();
-			}
-
-		}
-	}
-	else
-	{
-		switch (m_state)
-		{
-		case tagState::WAIT:
-		case tagState::WALK:
-			m_attackNum = 0;
-			break;
-		}
-	}
-
-	//-----------------------------------------------------------------------------------
 
 	//最後の攻撃が終わったら行動を変更する
 	if (m_state == ATTACK_OUT)
 	{
 		m_cpuState = CPU_STATE_NONE;
 		m_attackNum = 0;
-	}
-
-	if (m_isJump == true)
-	{
-		m_isJump = false;
-		m_gravity = JUMP_SPEED;
-		m_isFlying = true;
-	}
-
-	if (m_targetPos != nullptr)
-	{
-		switch (m_state)
-		{
-		case BLOW_AWAY:
-		case DOWN:
-		case DOWN_IN:
-		case GET_UP:
-		case DIE:
-			break;
-		default:
-			//プレイヤー同士の距離
-			VECTOR vLen = VSub(m_pos, *m_targetPos);
-			float fLen = VSize(vLen);
-
-			//戦いの距離になったら互いの方向を向く
-			if (fLen <= FIGHT_LEN)
-			{
-				float rotY1 = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
-
-				m_rot.y = rotY1;
-			}
-
-			//プレイヤーの向きを変える
-			if (m_state == ITEM_THROW_IN)
-			{
-				float rotY = atan2f(m_pos.x - m_targetPos->x, m_pos.z - m_targetPos->z);
-
-				m_rot.y = rotY;
-			}
-			break;
-		}
-	}
-
-	//丸影とプレイヤーの座標が離れていたら飛んでいる
-	if (m_pos.y - m_shadow.GetPos().y > 1.0f)
-	{
-		m_isFlying = true;
-	}
-
-	//空中にいたら状態を空中に変える
-	if (m_isFlying == true)
-	{
-		switch (m_state)
-		{
-		case tagState::ATTACK_IN:
-		case tagState::ATTACK:
-		case tagState::ATTACK_OUT:
-		case tagState::BLOW_AWAY:
-		case tagState::DIE:
-			break;
-		default:
-			m_state = tagState::AIR;
-			break;
-		}
-	}
-
-	//指定した高度よりしたに落ちたら死んで復活する
-	if (m_pos.y <= DIE_POS_Y)
-	{
-		m_isActive = false;
-	}
-
-	//武器の耐久度処理--------------------------------
-	//素手以外の場合耐久度が0以下になったら武器が壊れる
-	if (m_weaponId != WEAPON_ID_HAND)
-	{
-		if (m_weaponDurability <= 0)
-		{
-			m_weaponId = WEAPON_ID_HAND;
-			m_weaponDurability = 0;
-		}
-	}
-
-	//------------------------------------------------
-
-	//移動処理
-	Move(_rotY);
-
-	//ジャンプ処理
-	RequestJump();
-
-	//アイテムを手に入れていたら持ち上げる
-	if (m_itemState == ITEM_STATE_GET)
-	{
-		m_itemState = ITEM_STATE_HAVE;
-		m_state = ITEM_LIFT_UP;
-	}
-
-	//アイテムを取ろうとしていたら持っていない状態に戻す
-	if (m_itemState == ITEM_STATE_PICK_UP && m_cpuState != CPU_STATE_PICK_UP_ITEM)
-	{
-		m_itemState = ITEM_STATE_NONE;
-	}
-
-	CCharacterBase::Step(_attackManager,_shotManager);
-
-	//体力が増えすぎないように
-	if (m_hp >= m_maxHp)
-	{
-		m_hp = m_maxHp;
-	}
-	//コインが最大数を超えないように
-	if (m_money >= MONEY_MAX)
-	{
-		m_money = MONEY_MAX;
-	}
-
-	//攻撃の当たり判定が消えたら攻撃のIDを初期化する
-	if (_attackManager->GetActive(m_attackId) == false)
-	{
-		m_attackId = -1;
-	}
-	//攻撃中は当たり判定をプレイヤーの位置に設定する
-	else
-	{
-		_attackManager->SetPos(m_attackId, m_pos);
-	}
-
-	//攻撃中ではない場合攻撃を消す
-	if (m_state != tagState::ATTACK)
-	{
-		_attackManager->SetActive(m_attackId, false);
 	}
 
 	//自動で立ち上がるよう
@@ -398,6 +230,52 @@ void CCpuPlayer::HitCalc(CObject* _hitObject)
 }
 
 //-----------------------
+//		入力処理
+//-----------------------
+void CCpuPlayer::InputStep(float _rotY)
+{
+	//相手が攻撃可能範囲にいたら攻撃する-------------------------------------------------
+	if (m_cpuState == CPU_STATE_ATTACK && m_targetObject != nullptr)
+	{
+
+		if (m_targetObject->GetObjectName() == OBJECT_PLAYER)
+		{
+			//銃と投げるアイテムはターゲットがいたら攻撃する
+			if (m_itemState == ITEM_STATE_HAVE &&
+				m_targetPos != nullptr)
+			{
+				RequestAttack();
+			}
+
+			VECTOR vec = VSub(m_pos, m_targetObject->GetPos());
+
+			float len = VSize(vec);
+
+			if (len <= ATTACK_START_DISTANCE + RADIUS)
+			{
+				RequestAttack();
+			}
+
+		}
+	}
+	else
+	{
+		switch (m_state)
+		{
+		case tagState::WAIT:
+		case tagState::WALK:
+			m_attackNum = 0;
+			break;
+		}
+	}
+
+	//-----------------------------------------------------------------------------------
+
+	//移動処理
+	Move(_rotY);
+}
+
+//-----------------------
 //		移動処理
 //-----------------------
 void CCpuPlayer::Move(float _rotY)
@@ -460,29 +338,6 @@ void CCpuPlayer::Move(float _rotY)
 	//移動方向を向く
 	if (m_speed.x != 0 || m_speed.z != 0)
 		m_rot.y = atan2f(-m_speed.x,-m_speed.z);
-
-}
-
-//-----------------------
-//ジャンプの呼び出し処理
-//-----------------------
-void CCpuPlayer::RequestJump()
-{
-	switch (m_state)
-	{
-	case tagState::WAIT:
-	case tagState::WALK:
-		break;
-	default:
-		return;
-	}
-
-	if ((CControllerManager::IsTrg(BUTTON_A, m_padName) && !m_isFlying) ||
-		(CheckHitKey(KEY_INPUT_SPACE) && !m_isFlying))
-	{
-		m_state = tagState::JUMP;
-
-	}
 
 }
 

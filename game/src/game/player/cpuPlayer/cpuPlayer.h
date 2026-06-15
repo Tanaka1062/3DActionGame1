@@ -5,6 +5,9 @@
 #include "../playerData.h"
 #include "cpuPlayerFOV.h"
 
+constexpr float CPU_JUMP_LENGTH = -30.0f;		//ジャンプ判定の長さ
+constexpr float CPU_JUMP_RANGE = 5.0f;			//ジャンプ判定の範囲
+
 //プレイヤークラス
 class CCpuPlayer:public CPlayer
 {
@@ -43,12 +46,12 @@ public:
 	CCpuPlayerFOV* SetFOV(CCpuPlayerFOV* _FOV) { return m_FOV = _FOV; }
 
 protected:
+	
+	//入力処理
+	void InputStep(float _rotY);
 
 	//移動処理
 	void Move(float _rotY);
-
-	//ジャンプの呼び出し処理
-	void RequestJump();
 
 	//行動を変更
 	void ChangeCpuState();

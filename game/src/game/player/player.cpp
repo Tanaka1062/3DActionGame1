@@ -65,10 +65,10 @@ void CPlayer::Init(tagPlayerName _name, tagPadName _padName)
 	m_hp = m_maxHp;
 	m_atk = ATK;
 	m_attackNum = ATTACK_NONE;
-	m_weaponDurability = 0;
+	m_weaponDurability = 100;
 	m_money = INIT_MONEY;
 	m_padName = _padName;
-	m_weaponId = WEAPON_ID_HAND;
+	m_weaponId = WEAPON_ID_HAMMER;
 	m_name = _name;
 	m_shadow.Init(m_pos, SHADOW_SIZE);
 	m_objectName = OBJECT_PLAYER;
@@ -135,7 +135,7 @@ void CPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackManag
 	}
 
 	//丸影とプレイヤーの座標が離れていたら飛んでいる
-	if (m_pos.y - m_shadow.GetPos().y > 1.0f)
+	if (m_pos.y - m_shadow.GetPos().y > FLYING_HEIGHT_THRESHOLD)
 	{
 		m_isFlying = true;
 	}
@@ -791,10 +791,7 @@ void CPlayer::Attack(CAttackManager* _attackManager, CShotManager* _shotManager)
 		{
 		case tagAttackNum::ATTACK:
 			//攻撃中のアニメーション
-			if (RequestAnim(ANIMID_ATTACK_HAMMER, 0.6f) == true)
-			{
-				_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
-			}
+			RequestAnim(ANIMID_ATTACK_HAMMER, 0.6f);
 			break;
 		case tagAttackNum::ATTACK_AIR:
 			//空中の攻撃中アニメーション
@@ -865,7 +862,19 @@ void CPlayer::AttackOut()
 		{
 		case tagAttackNum::ATTACK:
 			//攻撃後のアニメーション
-			RequestAnim(ANIMID_ATTACK_HAMMER_OUT, 0.6f);
+			RequestAnim(ANIMID_ATTACK_HAMMER_OUT, 0.6f,true);
+
+			if (m_animData.m_id == ANIMID_ATTACK_HAMMER_OUT)
+			{
+				float len = m_pos.y - m_shadow.GetPos().y;
+				if (HAMMER_FALL_MIN_LENGTH >= len)
+				{
+					m_state = ATTACK_IN;
+					m_attackNum = ATTACK_NONE;
+				}
+				m_gravity -= HAMMER_JUMP_SPEED;
+			}
+
 			break;
 		case tagAttackNum::ATTACK_AIR:
 			//空中の攻撃後アニメーション

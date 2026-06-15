@@ -4,6 +4,13 @@
 #include "../../lib/effekseer/effekseer.h"
 #include "../system/effectData/effectData.h"
 #include "../../lib/myMath/myMath.h"
+#include "../player/cpuPlayer/cpuPlayer.h"
+
+namespace
+{
+	constexpr float GROUND_CONTACT_OFFSET = -1.0f;		//地面の接触判定用の補正値
+	constexpr float GROUND_CONTACT_EPSILON = 0.01f;		//地面の接触判定用の誤差許容値
+}
 
 //----------------------------------------------
 //			オブジェクト同士の当たり判定
@@ -239,8 +246,8 @@ void CCollisionManager::CheckHitCollToObject(CObject& _collObject, CObject& _obj
 				float fLenY = _object.GetCenter().y - col.Dim[j].HitPosition.y;
 
 				//足元にヒットした面があり高さの差がオブジェクトの半径以内なら重力をリセットする
-				if (_object.GetPos().y - col.Dim[j].HitPosition.y >= -1.0f &&
-					fLenY <= _object.GetRad())
+				if (_object.GetPos().y - col.Dim[j].HitPosition.y >= GROUND_CONTACT_OFFSET &&
+					fLenY <= _object.GetRad() + GROUND_CONTACT_EPSILON)
 				{
 					//重力をリセット
 					_object.GravityReset();
@@ -299,7 +306,7 @@ void CCollisionManager::CheckHitCollToObject(CObject& _collObject, CObject& _obj
 			VECTOR vec = player->GetCenter();
 
 			//障害物の判定を行う座標までの距離
-			VECTOR defaultDir = { 0.0f,0.0f,-30.0f };
+			VECTOR defaultDir = { 0.0f,0.0f,CPU_JUMP_LENGTH };
 			//上記を行列に変換
 			MATRIX dir = CMyMath::GetTranslateMatrix(defaultDir);
 			//Y軸回転行列
@@ -310,7 +317,7 @@ void CCollisionManager::CheckHitCollToObject(CObject& _collObject, CObject& _obj
 			vec.x += res.m[0][3];
 			vec.z += res.m[2][3];
 
-			col = MV1CollCheck_Sphere(_collObject.GetHndl(), -1, vec, 5.0f);
+			col = MV1CollCheck_Sphere(_collObject.GetHndl(), -1, vec, CPU_JUMP_RANGE);
 
 			if (col.HitNum != 0)
 			{
