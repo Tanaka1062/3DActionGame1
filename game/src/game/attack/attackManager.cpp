@@ -152,3 +152,13 @@ void CAttackManager::SetActive(int _num, bool _active)
 	m_attack[_num]->SetActive(_active);
 }
 
+//------------------------
+//攻撃のヒットフラグを取得
+//------------------------
+bool CAttackManager::GetIsHit(int _num)
+{
+	if (m_attack.size() < _num)return false;
+
+	return m_attack[_num]->GetIsHit();
+}
+

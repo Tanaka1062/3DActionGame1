@@ -14,6 +14,7 @@ private:
 	int				m_nextTime;			//攻撃の発生するまでの時間
 	int				m_timeCount;		//時間のカウント
 	tagPlayerName	m_attackName;		//攻撃しているプレイヤー
+	bool			m_isHit;			//命中したかフラグ
 
 public:
 	//コンストラクタ
@@ -50,8 +51,9 @@ public:
 	//攻撃しているキャラの名前を取得
 	tagPlayerName GetAttackName() { return m_attackName; }
 
-	int GetNum() { return m_num; }
-
-	int GetNumCount() { return m_numCount; }
+	//攻撃ヒットフラグを設定
+	void SetIsHit(bool _isHit) { m_isHit = _isHit; }
+	//攻撃ヒットフラグを取得
+	bool GetIsHit() { return m_isHit; }
 };
 

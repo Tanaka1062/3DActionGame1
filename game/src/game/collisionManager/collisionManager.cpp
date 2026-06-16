@@ -321,7 +321,7 @@ void CCollisionManager::CheckHitCollToObject(CObject& _collObject, CObject& _obj
 
 			if (col.HitNum != 0)
 			{
-				player->SetState(JUMP);
+				player->RequestJump();
 			}
 			//–ˆ‰ñƒf[ƒ^‚ğíœ
 			MV1CollResultPolyDimTerminate(col);

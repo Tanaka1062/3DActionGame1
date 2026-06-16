@@ -68,7 +68,7 @@ void CPlayer::Init(tagPlayerName _name, tagPadName _padName)
 	m_weaponDurability = 100;
 	m_money = INIT_MONEY;
 	m_padName = _padName;
-	m_weaponId = WEAPON_ID_HAMMER;
+	m_weaponId = WEAPON_ID_AX;
 	m_name = _name;
 	m_shadow.Init(m_pos, SHADOW_SIZE);
 	m_objectName = OBJECT_PLAYER;
@@ -335,6 +335,9 @@ void CPlayer::HitCalc(CObject* _hitObject)
 
 		//©•ª‚ªo‚µ‚½UŒ‚‚Ìê‡ˆ—‚ğ‚µ‚È‚¢
 		if (attack->GetAttackName() == m_name)return;
+
+		//UŒ‚‚ª–½’†‚µ‚½‚±‚Æ‚ğİ’è‚·‚é
+		attack->SetIsHit(true);
 
 		//ƒmƒbƒNƒoƒbƒN‚Ì•ûŒü
 		float rot = atan2f(attack->GetPos().x - GetCenter().x,

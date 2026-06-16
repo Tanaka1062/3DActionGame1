@@ -25,6 +25,7 @@ void CAttackBase::Init()
 	m_timeCount = 0;
 	m_attackName = PLAYER_NONE;
 	m_objectName = OBJECT_ATTACK;
+	m_isHit = false;
 }
 
 //----------------------
@@ -78,5 +79,6 @@ void CAttackBase::Request(VECTOR _pos, float _rad, int _atk, int _blown, tagPlay
 	m_nextTime = _attackTime / _num;
 	m_isActive = true;
 	m_isAttack = true;
+	m_isHit = false;
 }
 

@@ -99,13 +99,24 @@ void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackMa
 
 	//-----------------------------------------------------------------------------------
 
-
-	//最後の攻撃が終わったら行動を変更する
-	if (m_state == ATTACK_OUT)
+	//攻撃状態中の行動変化
+	if (m_cpuState == CPU_STATE_ATTACK)
 	{
-		m_cpuState = CPU_STATE_NONE;
-		m_attackNum = 0;
+		if (_attackManager->GetIsHit(m_attackId) == true)
+		{
+			//ChangeCpuState();
+		}
+		else
+		{
+			//最後の攻撃が終わったら行動を変更する
+			if (m_state == ATTACK_OUT)
+			{
+				m_cpuState = CPU_STATE_NONE;
+				m_attackNum = 0;
+			}
+		}
 	}
+
 
 	//自動で立ち上がるよう
 	if (m_state == tagState::DOWN)
@@ -283,9 +294,12 @@ void CCpuPlayer::Move(float _rotY)
 	//待機状態と移動状態以外は移動を出来ないようにする
 	switch (m_state)
 	{
-	case WAIT:
-	case WALK:
-	case AIR:
+	case tagState::WAIT:
+	case tagState::WALK:
+	case tagState::AIR:
+		break;
+	case tagState::ATTACK:
+		if (m_weaponId != WEAPON_ID_AX)return;
 		break;
 	default:
 		return;

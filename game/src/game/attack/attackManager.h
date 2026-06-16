@@ -70,5 +70,7 @@ public:
 	//攻撃の生存フラグを設定
 	void SetActive(int _num,bool _active);
 
+	//攻撃のヒットフラグを取得
+	bool GetIsHit(int _num);
 };
 
