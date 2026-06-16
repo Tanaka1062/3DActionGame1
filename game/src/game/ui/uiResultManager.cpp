@@ -17,7 +17,7 @@ enum tagUiName
 	UI_NUM,					//UIの数
 };
 
-static const char* UI_WIN_PLAYER_GRAPHIC_PATH[PLAYER_NUM] =	//勝利したプレイヤーテキストの画像パス
+constexpr const char* UI_WIN_PLAYER_GRAPHIC_PATH[PLAYER_NUM] =	//勝利したプレイヤーテキストの画像パス
 {
 	"data/graphic/result/resultTextPlayer1.png",
 	"data/graphic/result/resultTextPlayer2.png",
@@ -25,7 +25,7 @@ static const char* UI_WIN_PLAYER_GRAPHIC_PATH[PLAYER_NUM] =	//勝利したプレイヤー
 	"data/graphic/result/resultTextPlayer4.png",
 };
 
-static const char* UI_GRAPHIC_PATH[UI_NUM] =				//UIの画像パス
+constexpr const char* UI_GRAPHIC_PATH[UI_NUM] =				//UIの画像パス
 {
 	"",
 	"data/graphic/result/resultText1.png",

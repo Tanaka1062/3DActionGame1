@@ -2,7 +2,7 @@
 
 using namespace PlayerData;
 
-static const char* WEAPON_MODEL_PATH[WEAPON_ID_NUM] ={		//ロードするファイル名
+constexpr const char* WEAPON_MODEL_PATH[WEAPON_ID_NUM] ={		//ロードするファイル名
 	"",
 	"data/model/weapon/hammer/weapon_hammer.mv1",
 	"data/model/weapon/ax/weapon_ax.mv1",

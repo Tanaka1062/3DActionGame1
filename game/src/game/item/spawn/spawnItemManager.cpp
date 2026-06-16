@@ -22,7 +22,7 @@ constexpr int SPAWN_PROBABILITY_DECREASE[ITEM_NUM] =				//アイテムの出現確率の減
 	5,
 };
 
-static const char* MODEL_PATH[ITEM_NUM] =							//モデルのパス
+constexpr const char* MODEL_PATH[ITEM_NUM] =							//モデルのパス
 {
 	"data/model/item/bomb/bomb.mv1",
 	"data/model/item/weapon/hammer/hammer.mv1",

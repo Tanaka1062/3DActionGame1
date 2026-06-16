@@ -6,7 +6,7 @@ using namespace std;
 
 constexpr int UI_MAX_NUM = 10;			//UIÇÃêî
 
-static const char* MATERIAL_PATH[MT_NUM] =
+constexpr const char* MATERIAL_PATH[MT_NUM] =
 {
 	"data/material/3DUi/crown.png",
 	"data/material/3DUi/player1Name.png",

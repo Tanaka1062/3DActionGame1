@@ -1,6 +1,6 @@
 #include "shadow.h"
 
-static const char* MODEL_PATH =
+constexpr const char* MODEL_PATH =
  "data/model/shadow/shadow.mv1" ;
 
 

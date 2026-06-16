@@ -12,7 +12,7 @@ enum tagUiName
 	UI_NUM,				//UI‚Ì”
 };
 
-static const char* UI_GRAPHIC_PATH[UI_NUM] =		//”wŒi‚Ì‰æ‘œƒpƒX
+constexpr const char* UI_GRAPHIC_PATH[UI_NUM] =		//”wŒi‚Ì‰æ‘œƒpƒX
 {
 	"data/graphic/title/title.png",
 	"data/graphic/title/startText.png",

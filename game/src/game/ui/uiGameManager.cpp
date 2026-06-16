@@ -4,7 +4,7 @@
 
 using namespace std;
 
-static const char MODEL_PATH[] =
+constexpr const char MODEL_PATH[] =
  "data/graphic/ui/powerUpGauge.png" ;			//ロードするファイル名
 
 constexpr VECTOR GET_COIN_POS[PLAYER_NUM] =

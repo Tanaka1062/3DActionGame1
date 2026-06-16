@@ -7,11 +7,11 @@
 //定義関連==================================
 constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
 constexpr VECTOR SCALE = { 1.0f,1.0f,1.0f };	//大きさ
-static const char* MAP_MODEL_PATH = {			//ロードするファイル名
+constexpr const char* MAP_MODEL_PATH = {			//ロードするファイル名
 	"data/model/map/resultMap/resultMap.mv1",
 };					
 
-static const char* OBJECT_MODEL_PATH = {		//オブジェクトのロードするファイル名
+constexpr const char* OBJECT_MODEL_PATH = {		//オブジェクトのロードするファイル名
 	"data/model/map/resultMap/podium.mv1",
 };
 constexpr int OBJECT_FRAME_NUM = 10;			//マップのオブジェクトの配置フレーム

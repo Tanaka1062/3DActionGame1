@@ -1,7 +1,7 @@
 #include "countDown.h"
 #include "../../data.h"
 
-static 	const char* GRAPHIC_PATH[CCountDown::COUNT_NUM] =		//画像のパス
+constexpr 	const char* GRAPHIC_PATH[CCountDown::COUNT_NUM] =		//画像のパス
 {
 	"data/graphic/ui/countDown0.png",
 	"data/graphic/ui/countDown1.png",

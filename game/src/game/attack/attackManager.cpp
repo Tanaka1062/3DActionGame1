@@ -3,7 +3,7 @@
 using namespace std;
 CAttackManager* CAttackManager::m_instance = nullptr;
 
-static const char MODEL_PATH[] =
+constexpr const char MODEL_PATH[] =
  "data/model/shot/shotTest.mv1" ;				//ロードするファイル名
 constexpr int ATTACK_MAX = 30;					//攻撃の最大個数
 

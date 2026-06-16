@@ -14,7 +14,7 @@ constexpr VECTOR SCALE = { 1.0f,1.0f,1.0f };		//大きさ
 constexpr int SHAKE_AMOUNT = 2;						//揺れる大きさ
 constexpr int SHAKE_TIME = 4;						//揺れるまでの時間
 constexpr float FALL_MAX = -300.0f;					//最大の落下位置
-static const char* STAGE_MODEL_PATH[STAGE_NUM] ={
+constexpr const char* STAGE_MODEL_PATH[STAGE_NUM] ={
 	"data/model/map/playMap/testMap10/TestMap10-1.mv1",
 
 };					//ロードするファイル名
@@ -39,7 +39,7 @@ constexpr int COIN_SPAWN_NUM[STAGE_NUM] = {
 	22,
 };
 
-static const char* OBJECT_MODEL_PATH = {
+constexpr const char* OBJECT_MODEL_PATH = {
 	"data/model/map/playMap/testMap10/TestMap10-bridge.mv1",
 };
 constexpr VECTOR OBJECT_INIT_POS = { 0.0f,0.0f,345.0f };

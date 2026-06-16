@@ -12,10 +12,10 @@ enum tagModelName								//モデル一覧
 	MODEL_NUM,									//モデルの数
 };
 
-static const char* MODEL_PATH =					//モデルのパス
+constexpr const char* MODEL_PATH =					//モデルのパス
 { "data/model/player/player.mv1" };
 
-static const char* MATERIAL_PATH[PLAYER_NUM] =	//マテリアルのパス
+constexpr const char* MATERIAL_PATH[PLAYER_NUM] =	//マテリアルのパス
 { "data/material/player/playerBody1.png",
  "data/material/player/playerBody2.png",
  "data/material/player/playerBody3.png",

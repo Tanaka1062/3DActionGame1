@@ -1,7 +1,7 @@
 #include "eventText.h"
 #include "../../data.h"
 
-static const char* TEXT_GRAPHIC_PATH[CEventManager::EVENT_NUM] =		//”wŒi‚Ì‰æ‘œƒpƒX
+constexpr const char* TEXT_GRAPHIC_PATH[CEventManager::EVENT_NUM] =		//”wŒi‚Ì‰æ‘œƒpƒX
 {
 	"data/graphic/ui/bombPartyText.png",
 	"data/graphic/ui/coinPartyText.png",

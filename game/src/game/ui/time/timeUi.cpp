@@ -2,7 +2,7 @@
 #include "../../data.h"
 #include "../../system/number/number.h"
 
-static const char GRAPHIC_PATH[] =
+constexpr const char GRAPHIC_PATH[] =
  "data/graphic/ui/division.png" ;				//ロードするファイル名
 
 constexpr VECTOR INIT_POS =						//初期座標	

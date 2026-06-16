@@ -5,7 +5,7 @@
 namespace {
 
 	//マップ関連定義------------------------------------------------------------------
-	static const char* STAGE_GRAPHIC_PATH[playMap::MAP_NUM] =		//マップの画像パス
+	constexpr const char* STAGE_GRAPHIC_PATH[playMap::MAP_NUM] =		//マップの画像パス
 	{
 		"data/graphic/mapSelect/grassland/stage1.png",
 		"data/graphic/mapSelect/grassland/stage1.png",
@@ -34,7 +34,7 @@ namespace {
 	constexpr float STICK_DEAD_ZONE = 0.3f;							//スティックのデットゾーン
 
 	//矢印関連定義--------------------------------------------------------------------
-	static const char* ARROW_GRAPHIC_PATH[CMapSelect::ARROW_NUM] =	//矢印の画像パス
+	constexpr const char* ARROW_GRAPHIC_PATH[CMapSelect::ARROW_NUM] =	//矢印の画像パス
 	{
 		"data/graphic/mapSelect/L_Arrow.png",
 		"data/graphic/mapSelect/R_Arrow.png",
@@ -50,7 +50,7 @@ namespace {
 	//--------------------------------------------------------------------------------
 
 	//テキスト関連定義----------------------------------------------------------------
-	static const char* TEXT_GRAPHIC_PATH =							//テキストの画像パス
+	constexpr const char* TEXT_GRAPHIC_PATH =							//テキストの画像パス
 	{
 		"data/graphic/mapSelect/mapSelectText.png",
 	};
@@ -59,7 +59,7 @@ namespace {
 	//--------------------------------------------------------------------------------
 
 	//マップテキスト関連定義----------------------------------------------------------
-	static const char* MAP_TEXT_GRAPHIC_PATH[playMap::MAP_NUM] =	//マップテキストの画像パス
+	constexpr const char* MAP_TEXT_GRAPHIC_PATH[playMap::MAP_NUM] =	//マップテキストの画像パス
 	{
 		"data/graphic/mapSelect/grassland/mapText.png",
 		"data/graphic/mapSelect/grassland/mapText.png",

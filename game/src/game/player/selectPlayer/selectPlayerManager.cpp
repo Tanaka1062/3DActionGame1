@@ -16,10 +16,10 @@ enum tagModelName								//モデル一覧
 constexpr float TARGET_LEN = -200.0f;			//ターゲットと認識するまでの長さ
 constexpr float TARGET_MAX_DISTANCE = 40.0f;	//どれくらい法線から離せるか
 
-static const char* MODEL_PATH =					//モデルのパス
+constexpr const char* MODEL_PATH =					//モデルのパス
 { "data/model/player/player.mv1" };
 
-static const char* MATERIAL_PATH[PLAYER_NUM] =	//マテリアルのパス
+constexpr const char* MATERIAL_PATH[PLAYER_NUM] =	//マテリアルのパス
 { "data/material/player/playerBody1.png",
  "data/material/player/playerBody2.png",
  "data/material/player/playerBody3.png",

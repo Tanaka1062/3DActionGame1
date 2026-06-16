@@ -2,7 +2,7 @@
 
 using namespace std;
 
-static const char MODEL_PATH[] =
+constexpr const char MODEL_PATH[] =
  "data/model/shot/shotTest.mv1" ;				//ロードするファイル名
 
 //------------------------

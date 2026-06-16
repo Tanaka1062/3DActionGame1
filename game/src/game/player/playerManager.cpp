@@ -26,10 +26,10 @@ constexpr int NAME_ACTIVE_TIME = 180;			//名前の表示時間
 constexpr float NAME_UP_Y = 45.0f;				//名前がどれだけ上にあるか
 constexpr float CROWN_UP_Y = 35.0f;				//王冠がどれだけ上にあるか
 
-static const char* MODEL_PATH =					//モデルのパス
+constexpr const char* MODEL_PATH =					//モデルのパス
 { "data/model/player/player.mv1"};			
 
-static const char* MATERIAL_PATH[PLAYER_NUM] =	//マテリアルのパス
+constexpr const char* MATERIAL_PATH[PLAYER_NUM] =	//マテリアルのパス
 { "data/material/player/playerBody1.png",
  "data/material/player/playerBody2.png",
  "data/material/player/playerBody3.png",

@@ -13,7 +13,7 @@ constexpr int LINE_LENGTH_Y_MAX = 12;										//縦の線の最大の長さ
 constexpr int LINE_LENGTH_Y = 10;											//線の縦の長さ
 
 //UIのグラフィックパス
-const char* GRAPHIC_UI_PATH =
+constexpr const char* GRAPHIC_UI_PATH =
 {
 	"data/graphic/result/lineGraph.png",
 };

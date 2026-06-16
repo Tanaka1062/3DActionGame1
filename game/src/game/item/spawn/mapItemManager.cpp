@@ -4,7 +4,7 @@
 
 using namespace std;
 
-static const char* MODEL_PATH =				//モデルのパス
+constexpr const char* MODEL_PATH =				//モデルのパス
 {
 	"data/model/item/box/box.mv1",
 };
