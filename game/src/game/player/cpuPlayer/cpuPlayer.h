@@ -26,7 +26,6 @@ protected:
 	CCpuPlayerFOV*	m_FOV;									//視界範囲クラス
 	CObject*		m_targetObject;							//ターゲットになっているオブジェクト
 	int				m_changeTime;							//状態が変化する時間
-	bool			m_isHitAttack;							//攻撃が命中したかフラグ
 
 public:
 	//コンストラクタ

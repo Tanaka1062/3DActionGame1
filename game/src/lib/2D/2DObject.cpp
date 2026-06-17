@@ -202,4 +202,3 @@ void C2DObject::LoadGraphic(const char* _hndlPath, int _allNum , int _sizeX, int
 	}
 }
 
-

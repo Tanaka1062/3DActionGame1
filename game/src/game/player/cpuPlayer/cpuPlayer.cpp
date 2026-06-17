@@ -102,11 +102,7 @@ void CCpuPlayer::Step(float _rotY, VECTOR* _targetPos, CAttackManager* _attackMa
 	//攻撃状態中の行動変化
 	if (m_cpuState == CPU_STATE_ATTACK)
 	{
-		if (_attackManager->GetIsHit(m_attackId) == true)
-		{
-			//ChangeCpuState();
-		}
-		else
+		if (_attackManager->GetIsHit(m_attackId) == false)
 		{
 			//最後の攻撃が終わったら行動を変更する
 			if (m_state == ATTACK_OUT)
