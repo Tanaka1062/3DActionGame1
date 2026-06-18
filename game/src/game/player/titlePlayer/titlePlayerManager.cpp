@@ -37,13 +37,7 @@ CTitlePlayerManager::CTitlePlayerManager()
 //------------------------
 CTitlePlayerManager::~CTitlePlayerManager()
 {
-	for (int player_i = 0; player_i < m_player.size(); player_i++)
-	{
-		delete m_player[player_i];
-
-		m_player[player_i]->Exit();
-
-	}
+	Exit();
 }
 
 //------------------------
@@ -73,7 +67,7 @@ void CTitlePlayerManager::Init()
 		//ƒvƒŒƒCƒ„[‚ª‚¢‚È‚©‚Á‚½‚ç‘‚â‚·
 		if (m_player.size() < PLAYER_NUM)
 		{
-			m_player.push_back(new CTitlePlayer);
+			m_player.push_back(make_unique<CTitlePlayer>());
 		}
 
 		tagPlayerName name = PLAYER_NONE;
@@ -203,8 +197,6 @@ void CTitlePlayerManager::Exit()
 	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
 		m_player[player_i]->Exit();
-
-		delete m_player[player_i];
 	}
 	m_player.clear();
 

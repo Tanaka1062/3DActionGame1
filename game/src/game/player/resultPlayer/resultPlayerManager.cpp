@@ -38,13 +38,7 @@ CResultPlayerManager::CResultPlayerManager()
 //------------------------
 CResultPlayerManager::~CResultPlayerManager()
 {
-	for (int player_i = 0; player_i < m_player.size(); player_i++)
-	{
-		delete m_player[player_i];
-
-		m_player[player_i]->Exit();
-
-	}
+	Exit();
 }
 
 //------------------------
@@ -76,7 +70,7 @@ void CResultPlayerManager::Init()
 		//ƒvƒŒƒCƒ„[‚ª‚¢‚È‚©‚Á‚½‚ç‘‚â‚·
 		if (m_player.size() < PLAYER_NUM)
 		{
-			m_player.push_back(new CResultPlayer);
+			m_player.push_back(make_unique<CResultPlayer>());
 		}
 
 		tagPlayerName name = PLAYER_NONE;
@@ -212,7 +206,6 @@ void CResultPlayerManager::Exit()
 	{
 		m_player[player_i]->Exit();
 
-		delete m_player[player_i];
 	}
 	m_player.clear();
 

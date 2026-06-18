@@ -17,9 +17,9 @@ public:
 		EVENT_NUM,					//イベントの数
 	};
 private:
-	std::vector<CEventBase*>	m_event;		//イベント
-	int							m_eventTime;	//イベントが始まるまでの時間
-	tagEventName				m_nowEvent;		//現在のイベント
+	std::vector<std::unique_ptr<CEventBase>>	m_event;		//イベント
+	int											m_eventTime;	//イベントが始まるまでの時間
+	tagEventName								m_nowEvent;		//現在のイベント
 
 public:
 

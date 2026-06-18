@@ -15,10 +15,9 @@ enum tagMapId			//マップのID
 class CMapManager
 {
 private:
-	CMapBase* m_map;	//マップ	
+	std::unique_ptr<CMapBase> m_map;	//マップ	
 public:
-	//コンストラクタ・デストラクタ
-	CMapManager();
+	//デストラクタ
 	~CMapManager();
 
 	//初期化
@@ -40,7 +39,7 @@ public:
 	void Exit();
 
 	//マップのアドレスを取得
-	CMapBase* GetMap() { return m_map; }
+	CMapBase* GetMap() { return m_map.get(); }
 
 private:
 	//ゲーム本編のマップ切り替え

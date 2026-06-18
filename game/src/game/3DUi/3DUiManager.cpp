@@ -24,7 +24,7 @@ C3DUiManager::C3DUiManager()
 {
 	for (int ui_i = 0; ui_i < UI_MAX_NUM; ui_i++)
 	{
-		m_3DUi.push_back(new C3DUi);
+		m_3DUi.push_back(make_unique<C3DUi>());
 	}
 
 	Init();
@@ -37,10 +37,6 @@ C3DUiManager::~C3DUiManager()
 {
 	Exit();
 
-	for (int ui_i = 0; ui_i < m_3DUi.size(); ui_i++)
-	{
-		delete m_3DUi[ui_i];
-	}
 	m_3DUi.clear();
 }
 
@@ -93,10 +89,10 @@ int C3DUiManager::RequsetLoad(int _3DUiId)
 		}
 	}
 
-	C3DUi* ui = new C3DUi;
+	unique_ptr<C3DUi> ui = make_unique<C3DUi>();
 	ui->Init();
 	ui->Load(MATERIAL_PATH[_3DUiId]);
-	m_3DUi.push_back(ui);
+	m_3DUi.push_back(move(ui));
 
 	return static_cast<int>(m_3DUi.size() - 1);
 }

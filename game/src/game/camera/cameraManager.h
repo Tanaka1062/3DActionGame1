@@ -21,14 +21,12 @@ public:
 	};
 
 private:
-	static CCameraBase* m_camera[CAMERA_ID_NUM];	//カメラ
-	static tagCAMERA_ID m_id;						//カメラのタイプ
-	static VECTOR		m_rot;						//カメラの回転値
+	static std::unique_ptr<CCameraBase> m_camera;	//カメラ
+	static tagCAMERA_ID					m_id;		//カメラのタイプ
 	
 public:
 
-	//コンストラクタ・デストラクタ
-	CCameraManager();
+	//デストラクタ
 	~CCameraManager();
 
 	//初期化
@@ -36,9 +34,6 @@ public:
 
 	//毎フレームする処理
 	static void Step(CMapManager* _mapManager = nullptr,CPlayerManager* _playerManager = nullptr);
-
-	//表示
-	static void Draw();
 
 	//カメラの更新
 	// @_tagetPos	:カメラの注視点の座標
@@ -53,13 +48,13 @@ public:
  	static tagCAMERA_ID GetID() { return m_id; }
 
 	//カメラの回転値の取得
-	static VECTOR  GetRot() { return m_rot; }
+	static VECTOR  GetRot() { return m_camera->GetRot(); }
 
 	//カメラの注視点を取得
-	static VECTOR GetFocusPos() { return m_camera[m_id]->GetFocusPos(); }
+	static VECTOR GetFocusPos() { return m_camera->GetFocusPos(); }
 
 	//カメラの座標を取得
-	static VECTOR GetPos() { return m_camera[m_id]->GetPos(); }
+	static VECTOR GetPos() { return m_camera->GetPos(); }
 
 	//カメラが移動しているかを取得
 	static bool GetIsMove();

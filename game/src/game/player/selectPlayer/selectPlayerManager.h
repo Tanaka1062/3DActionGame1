@@ -8,10 +8,10 @@
 class CSelectPlayerManager
 {
 private:
-	std::vector<CSelectPlayer*> m_player;		//プレイヤーのクラス
-	std::vector <int>			m_modelHndl;	//モデルのハンドル
-	std::vector<int>			m_materialHndl;	//マテリアルのハンドル
-	std::vector <VECTOR>		m_spawnPos;		//プレイヤーの出現座標
+	std::vector<std::unique_ptr<CSelectPlayer>> m_player;		//プレイヤーのクラス
+	std::vector <int>							m_modelHndl;	//モデルのハンドル
+	std::vector<int>							m_materialHndl;	//マテリアルのハンドル
+	std::vector <VECTOR>						m_spawnPos;		//プレイヤーの出現座標
 public:
 	//コンストラクタ・デストラクタ
 	CSelectPlayerManager();
@@ -34,7 +34,7 @@ public:
 	int GetPlayerNum() { return static_cast<int>(m_player.size()); }
 
 	//プレイヤーを取得
-	CPlayer* GetPlayer(int _num) { return m_player[_num]; }
+	CPlayer* GetPlayer(int _num) { return m_player[_num].get(); }
 
 	//全員の準備が完了しているか
 	bool GetIsAllReady();

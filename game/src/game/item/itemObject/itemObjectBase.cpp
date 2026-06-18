@@ -7,7 +7,7 @@ namespace ItemObjectBase
 {
 	constexpr float THROW_SPEED = 12.0f;				//投げられるスピード
 	constexpr float RADIUS = 10.0f;						//半径
-
+	constexpr float FLYING_DOWN_SPEED = 0.91f;			//空中の減速スピード
 }
 
 CItemObjectBase::CItemObjectBase()
@@ -98,8 +98,8 @@ void CItemObjectBase::Step()
 	//飛んでいる状態ならだんだん速度を落とす
 	if (m_state == ITEM_FLYING)
 	{
-		m_speed.x *= 0.91f;
-		m_speed.z *= 0.91f;
+		m_speed.x *= ItemObjectBase::FLYING_DOWN_SPEED;
+		m_speed.z *= ItemObjectBase::FLYING_DOWN_SPEED;
 
 		VECTOR speed = m_speed;
 

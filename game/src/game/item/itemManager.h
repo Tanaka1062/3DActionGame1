@@ -24,7 +24,6 @@ public:
 	CItemManager();
 	~CItemManager();
 
-
 	//ƒRƒs[‚ğ‹Ö~‚·‚é
 	CItemManager(const CItemManager&) = delete;
 	CItemManager& operator = (const CItemManager&) = delete;

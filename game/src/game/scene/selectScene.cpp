@@ -39,7 +39,6 @@ void CSelectScene::Draw()
 		m_LoadBG.Draw();
 		break;
 	default:
-		CCameraManager::Draw();
 		m_mapManager.Draw();
 		m_sky.Draw();
 		m_selectPlayerManager.Draw();

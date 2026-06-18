@@ -35,7 +35,7 @@ private:
 	CAttackManager();
 	~CAttackManager();
 
-	std::vector<CAttackBase*> m_attack;			//攻撃の当たり判定のクラス
+	std::vector<std::unique_ptr<CAttackBase>> m_attack;			//攻撃の当たり判定のクラス
 public:
 	//初期化
 	void Init();

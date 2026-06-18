@@ -38,14 +38,8 @@ CSelectPlayerManager::CSelectPlayerManager()
 //------------------------
 CSelectPlayerManager::~CSelectPlayerManager()
 {
-	for (int player_i = 0; player_i < m_player.size(); player_i++)
-	{
-		delete m_player[player_i];
-
-		m_player[player_i]->Exit();
-
-	}
-}
+	Exit();
+ }
 
 //------------------------
 //		  ‰Šú‰»
@@ -76,7 +70,7 @@ void CSelectPlayerManager::Init()
 		//ƒvƒŒƒCƒ„[‚ª‚¢‚È‚©‚Á‚½‚ç‘‚â‚·
 		if (m_player.size() < PLAYER_NUM)
 		{
-			m_player.push_back(new CSelectPlayer);
+			m_player.push_back(make_unique<CSelectPlayer>());
 		}
 
 		tagPlayerName name = PLAYER_NONE;
@@ -218,8 +212,6 @@ void CSelectPlayerManager::Exit()
 	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
 		m_player[player_i]->Exit();
-
-		delete m_player[player_i];
 	}
 	m_player.clear();
 

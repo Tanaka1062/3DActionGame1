@@ -45,7 +45,7 @@ public:
 	}
 
 private:
-	std::vector<C3DUi*> m_3DUi;
+	std::vector<std::unique_ptr<C3DUi>> m_3DUi;
 public:
 	//コンストラクタ・デストラクタ
 	C3DUiManager();
@@ -64,7 +64,7 @@ public:
 	int RequsetLoad(int _3DUiId);
 
 	//UIを取得
-	C3DUi* GetUi(int _3DUiId) { return m_3DUi[_3DUiId]; }
+	C3DUi* GetUi(int _3DUiId) { return m_3DUi[_3DUiId].get(); }
 
 };
 

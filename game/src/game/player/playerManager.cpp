@@ -52,14 +52,7 @@ CPlayerManager::CPlayerManager()
 //------------------------
 CPlayerManager::~CPlayerManager()
 {
-	for (int player_i = 0; player_i < m_player.size(); player_i++)
-	{
-
-		m_player[player_i]->Exit();
-
-		delete m_player[player_i];
-
-	}
+	Exit();
 
 	for (int cpuFOV_i = 0; cpuFOV_i < m_cpuFOV.size(); cpuFOV_i++)
 	{
@@ -101,19 +94,19 @@ void CPlayerManager::Init()
 		//コントローラーの名前を取得
 		tagPadName padName = CControllerManager::GetName(player_i);
 
-		CPlayer* player = nullptr;
+		unique_ptr<CPlayer> player = nullptr;
 
 		//コントローラーが接続されているかでCPUかを判断
 		if (CControllerManager::IsConnection(padName) == true)
 		{
-			player = new CPlayer;
+			player = make_unique<CPlayer>();
 		}
 		else
 		{
-			CCpuPlayer* cpuPlayer = new CCpuPlayer;
+			unique_ptr<CCpuPlayer> cpuPlayer = make_unique<CCpuPlayer>();
 			cpuPlayer->SetFOV(m_cpuFOV[player_i]);
 
-			player = cpuPlayer;
+			player = move(cpuPlayer);
 		}
 
 		tagPlayerName name = PLAYER_NONE;
@@ -139,7 +132,7 @@ void CPlayerManager::Init()
 
 		player->Init(name,padName);
 
-		m_player.push_back(player);
+		m_player.push_back(move(player));
 
 		m_playerName[player_i] = -1;
 	}
@@ -439,11 +432,7 @@ void CPlayerManager::Exit()
 {
 	for (int player_i = 0; player_i < m_player.size(); player_i++)
 	{
-
 		m_player[player_i]->Exit();
-
-		delete m_player[player_i];
-
 	}
 	m_player.clear();
 

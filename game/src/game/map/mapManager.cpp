@@ -5,12 +5,10 @@
 #include "titleMap/titleMap.h"
 #include "playMap/playMapData.h"
 #include "playMap/test/test.h"
-//コンストラクタ・デストラクタ
-CMapManager::CMapManager()
-{
-	m_map = nullptr;
-}
 
+using namespace std;
+
+//デストラクタ
 CMapManager::~CMapManager()
 {
 	Exit();
@@ -27,13 +25,13 @@ void CMapManager::Init(tagMapId _mapId)
 		ChangePlayMap();
 		break;
 	case MAP_ID_SELECT:
-		m_map = new CSelectMap;
+		m_map = make_unique<CSelectMap>();
 		break;
 	case MAP_ID_RESULT:
-		m_map = new CResultMap;
+		m_map = make_unique<CResultMap>();
 		break;
 	case MAP_ID_TITLE:
-		m_map = new CTitleMap;
+		m_map = make_unique<CTitleMap>();
 		break;
 	}
 	m_map->Init(static_cast<int>(_mapId));
@@ -71,8 +69,7 @@ void CMapManager::Exit()
 	if (m_map == nullptr)return;
 	m_map->Exit();
 
-	delete m_map;
-	m_map = nullptr;
+	m_map.reset();
 }
 
 //ゲーム本編のマップ切り替え
@@ -82,10 +79,10 @@ void CMapManager::ChangePlayMap()
 	switch (mapData->GetSelectMap())
 	{
 	case playMap::MAP_1:
-		m_map = new CGrassland;
+		m_map = make_unique<CGrassland>();
 		break;
 	case playMap::MAP_2:
-		m_map = new CTest;
+		m_map = make_unique<CTest>();
 		break;
 	}
 

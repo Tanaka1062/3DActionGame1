@@ -2,6 +2,8 @@
 #include "itemEvent/bombParty/bombParty.h"
 #include "itemEvent/coinParty/coinParty.h"
 
+using namespace std;
+
 constexpr int EVENT_START_TIME = 50 * 60;			//”š’e‚ğ—‚Æ‚·‚Ü‚Å‚ÌŠÔŠu
 
 //---------------------------
@@ -27,8 +29,8 @@ CEventManager::~CEventManager()
 void CEventManager::Init()
 {
 	//ƒCƒxƒ“ƒg‚ğì¬
-	m_event.push_back(new CBombPaty);
-	m_event.push_back(new CCoinPaty);
+	m_event.push_back(make_unique<CBombPaty>());
+	m_event.push_back(make_unique<CCoinPaty>());
 
 	for (int event_i = 0; event_i < m_event.size(); event_i++)
 	{
@@ -53,7 +55,7 @@ void CEventManager::Step(VECTOR _center, CItemManager& _itemManager)
 		activeEventNum++;
 		if (m_event[event_i]->GetType() == EVENT_ITEM_TYPE)
 		{
-			CItemEventBase* itemEvent = dynamic_cast<CItemEventBase*>(m_event[event_i]);
+			CItemEventBase* itemEvent = dynamic_cast<CItemEventBase*>(m_event[event_i].get());
 
 			itemEvent->Step(_center,_itemManager);
 		}
@@ -85,7 +87,6 @@ void CEventManager::Exit()
 	for (int event_i = 0; event_i < m_event.size(); event_i++)
 	{
 		m_event[event_i]->Exit();
-		delete m_event[event_i];
 	}
 	m_event.clear();
 }

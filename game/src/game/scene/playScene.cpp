@@ -50,8 +50,6 @@ void CPlayScene::Draw()
 
 		//エフェクシアの描画処理
 		CEffekseerCtrl::Draw();
-
-		CCameraManager::Draw();
 		break;
 	}
 	

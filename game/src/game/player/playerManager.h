@@ -10,13 +10,13 @@
 class CPlayerManager
 {
 private:
-	std::vector<CPlayer*>				m_player;					//プレイヤーのクラス
-	std::vector <int>					m_modelHndl;				//モデルのハンドル
-	std::vector<int>					m_materialHndl;				//マテリアルのハンドル
-	std::vector <std::vector<VECTOR>>	m_spawnPos;					//プレイヤーの出現座標
-	std::vector<CCpuPlayerFOV*>			m_cpuFOV;					//CPUの視界範囲クラス
-	int									m_crownId;					//王冠のUiId
-	int									m_playerName[PLAYER_NUM];	//プレイヤーの名前UI
+	std::vector<std::unique_ptr<CPlayer>>	m_player;					//プレイヤーのクラス
+	std::vector <int>						m_modelHndl;				//モデルのハンドル
+	std::vector<int>						m_materialHndl;				//マテリアルのハンドル
+	std::vector <std::vector<VECTOR>>		m_spawnPos;					//プレイヤーの出現座標
+	std::vector<CCpuPlayerFOV*>				m_cpuFOV;					//CPUの視界範囲クラス
+	int										m_crownId;					//王冠のUiId
+	int										m_playerName[PLAYER_NUM];	//プレイヤーの名前UI
 
 public:
 	//コンストラクタ・デストラクタ
@@ -41,7 +41,7 @@ public:
 	int GetPlayerNum() { return static_cast<int>(m_player.size()); }
 
 	//プレイヤーを取得
-	CPlayer* GetPlayer(int _num) { return m_player[_num]; }
+	CPlayer* GetPlayer(int _num) { return m_player[_num].get(); }
 
 	//CPUの視界範囲の数を取得
 	int GetCpuPlayerFOVNum() { return static_cast<int>(m_cpuFOV.size()); }

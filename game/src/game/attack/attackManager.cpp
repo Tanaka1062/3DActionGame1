@@ -15,9 +15,7 @@ CAttackManager::CAttackManager()
 {
 	for (int attack_i = 0; attack_i < ATTACK_MAX; attack_i++)
 	{
-		CAttackBase* attack = new CAttackBase;
-		attack->Init();
-		m_attack.push_back(attack);
+		m_attack.push_back(make_unique<CAttackBase>());
 	}
 	Init();
 }
@@ -29,10 +27,6 @@ CAttackManager::~CAttackManager()
 {
 	Exit();
 
-	for (int attack_i = 0; attack_i < m_attack.size(); attack_i++)
-	{
-		delete m_attack[attack_i];
-	}
 	m_attack.clear();
 }
 
@@ -107,19 +101,7 @@ CAttackBase* CAttackManager::GetAttack(int _num)
 {
 	//引数より攻撃の数が少なければnullを返す
 	if (_num > m_attack.size())return nullptr;
-	//攻撃の数をカウントする変数
-	int count = 0;
-	for (auto ite = m_attack.begin(); ite != m_attack.end(); ++ite)
-	{
-		//引数の数字と同じならアドレスを返す
-		if (count == _num)
-		{
-			return *ite;
-		}
-		count++;
-
-	}
-	return nullptr;
+	return m_attack[_num].get();
 }
 
 //------------------------
