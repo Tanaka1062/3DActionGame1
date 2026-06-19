@@ -1,12 +1,14 @@
 #pragma once
 #include "../player/playerManager.h"
 #include "weapon.h"
+#include <iostream>
+#include <array>
 
 //武器のマネージャークラス
 class CWeaponManager
 {
 private:
-	CWeapon m_weapon[PLAYER_NUM];		//武器
+	std::array<CWeapon, PLAYER_NUM> m_weapon;		//武器
 public:
 	//コンストラクタ・デストラクタ
 	CWeaponManager();

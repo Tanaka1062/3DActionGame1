@@ -29,7 +29,7 @@ CWeaponManager::~CWeaponManager()
 //---------------------------
 void CWeaponManager::Init()
 {
-	for (int i = 0; i < PAD_NUM; i++)
+	for (int i = 0; i < m_weapon.size(); i++)
 	{
 		m_weapon[i].Init();
 	}

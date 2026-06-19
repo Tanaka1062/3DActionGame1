@@ -1,14 +1,25 @@
 #pragma once
 #include "../../lib/2D/2DObject.h"
 #include <iostream>
-#include <vector>
+#include <array>
 #include "countDown/countDown.h"
+
+namespace UiSelectData
+{
+	enum tagUiName
+	{
+		UI_TEXT,		//テキスト
+		UI_TEXT2,		//テキスト２
+
+		UI_NUM,			//UIの数
+	};
+}
 
 class CUiSelectManager
 {
 private:
-	std:: vector<C2DObject*>m_ui;			//UI
-	CCountDown				m_countDown;	//カウントダウン
+	std:: array<std::unique_ptr<C2DObject>,UiSelectData::UI_NUM>	m_ui;			//UI
+	CCountDown														m_countDown;	//カウントダウン
 public:
 	//コンストラクタ・デストラクタ
 	CUiSelectManager();

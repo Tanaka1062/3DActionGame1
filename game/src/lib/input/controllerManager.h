@@ -15,7 +15,7 @@ enum tagPadName
 
 struct ControllerIdData								//コントローラーのIDデータ
 {
-	int Id;											//ID
+	int	 Id;											//ID
 	bool isConnection;								//接続フラグ
 };
 

@@ -1,12 +1,24 @@
 #pragma once
 #include "../../lib/2D/2DObject.h"
 #include <iostream>
-#include <vector>
+#include <array>
+
+namespace UiTitleData
+{
+	enum tagUiName
+	{
+		UI_TITLE,			//タイトル
+		UI_START_TEXT,		//スタートテキスト
+
+		UI_NUM,				//UIの数
+	};
+
+}
 
 class CUiTitleManager
 {
 private:
-	std::vector<C2DObject*>m_ui;		//UI
+	std::array<std::unique_ptr<C2DObject>, UiTitleData::UI_NUM>	m_ui;		//UI
 public:
 	//コンストラクタ・デストラクタ
 	CUiTitleManager();

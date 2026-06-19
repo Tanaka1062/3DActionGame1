@@ -4,22 +4,15 @@
 
 using namespace std;
 
-enum tagUiName
-{
-	UI_TITLE,			//タイトル
-	UI_START_TEXT,		//スタートテキスト
 
-	UI_NUM,				//UIの数
-};
-
-constexpr const char* UI_GRAPHIC_PATH[UI_NUM] =		//背景の画像パス
+constexpr const char* UI_GRAPHIC_PATH[UiTitleData::UI_NUM] =		//背景の画像パス
 {
 	"data/graphic/title/title.png",
 	"data/graphic/title/startText.png",
 
 };
 
-constexpr VECTOR UI_POS[UI_NUM] =					//UIの座標
+constexpr VECTOR UI_POS[UiTitleData::UI_NUM] =					//UIの座標
 {
 	{WINDOW_SIZE_HALF_X,180.0f,0.0f},
 	{WINDOW_SIZE_HALF_X,400.0f,0.0f},
@@ -39,16 +32,10 @@ CUiTitleManager::~CUiTitleManager()
 
 void CUiTitleManager::Init()
 {
-	//増えすぎないように
-	if (m_ui.size() == UI_NUM)return;
 
-	for (int ui_i = 0; ui_i < UI_NUM; ui_i++)
+	for (int ui_i = 0; ui_i < m_ui.size(); ui_i++)
 	{
-		C2DObject* ui = new C2DObject;
-
-		ui->Init(UI_POS[ui_i]);
-
-		m_ui.push_back(ui);
+		m_ui[ui_i]->Init(UI_POS[ui_i]);
 	}
 }
 
@@ -86,11 +73,6 @@ void CUiTitleManager::Exit()
 	for (int ui_i = 0; ui_i < m_ui.size(); ui_i++)
 	{
 		m_ui[ui_i]->Exit();
-
-		delete m_ui[ui_i];
 	}
-
-	//終わるときに全て消す
-	m_ui.clear();
 }
 

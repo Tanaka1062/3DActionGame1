@@ -43,11 +43,6 @@ void CUiGameManager::Init(CPlayerManager* _playerManager,
 //ロード
 void CUiGameManager::Load()
 {
-	for (int i = 0; i < m_ui.size(); i++)
-	{
-		
-	}
-
 	m_time.Load();
 	m_eventText.Load();
 
@@ -60,11 +55,6 @@ void CUiGameManager::Load()
 //毎フレームする処理
 void CUiGameManager::Step(CEventManager::tagEventName _nowEvent, CPlayerManager& _playerManager)
 {
-	for (int i = 0; i < m_ui.size(); i++)
-	{
-		m_ui[i]->Step();
-	}
-
 	CGameTime* gameTime = CGameTime::GetInstance();
 
 	m_time.Step(gameTime->GetEndTime() - gameTime->GetTime());
@@ -79,11 +69,6 @@ void CUiGameManager::Step(CEventManager::tagEventName _nowEvent, CPlayerManager&
 //描写
 void CUiGameManager::Draw()
 {
-	for (int i = 0; i < m_ui.size(); i++)
-	{
-		m_ui[i]->Draw();
-	}
-
 	m_time.Draw();
 	m_eventText.Draw();
 	
@@ -97,15 +82,6 @@ void CUiGameManager::Draw()
 //破棄
 void CUiGameManager::Exit()
 {
-
-	for (int i = 0; i < m_ui.size(); i++)
-	{
-		m_ui[i]->Exit();
-
-		delete m_ui[i];
-	}
-	m_ui.clear();
-
 	m_time.Exit();
 	m_eventText.Exit();
 

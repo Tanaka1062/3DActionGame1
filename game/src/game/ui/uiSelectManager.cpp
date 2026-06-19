@@ -5,22 +5,14 @@
 
 using namespace std;
 
-enum tagUiName
-{
-	UI_TEXT,		//テキスト
-	UI_TEXT2,		//テキスト２
-
-	UI_NUM,				//UIの数
-};
-
-constexpr const char* UI_GRAPHIC_PATH[UI_NUM] =		//背景の画像パス
+constexpr const char* UI_GRAPHIC_PATH[UiSelectData::UI_NUM] =		//背景の画像パス
 {
 	"data/graphic/select/selectText.png",
 	"data/graphic/select/selectText2.png",
 
 };
 
-static const VECTOR UI_POS[UI_NUM] =					//UIの座標
+static const VECTOR UI_POS[UiSelectData::UI_NUM] =					//UIの座標
 {
 	{WINDOW_SIZE_HALF_X,WINDOW_SIZE_HALF_Y + 100.0f,0.0f},
 	{WINDOW_SIZE_HALF_X,WINDOW_SIZE_HALF_Y + 300.0f,0.0f},
@@ -39,16 +31,9 @@ CUiSelectManager::~CUiSelectManager()
 
 void CUiSelectManager::Init()
 {
-	//増えすぎないようにする
-	if (m_ui.size() == UI_NUM)return;
-
-	for (int ui_i = 0; ui_i < UI_NUM; ui_i++)
+	for (int ui_i = 0; ui_i < m_ui.size(); ui_i++)
 	{
-		C2DObject* ui = new C2DObject;
-
-		ui->Init(UI_POS[ui_i]);
-
-		m_ui.push_back(ui);
+		m_ui[ui_i]->Init();
 	}
 
 	m_countDown.Init();
@@ -91,12 +76,7 @@ void CUiSelectManager::Exit()
 	for (int ui_i = 0; ui_i < m_ui.size(); ui_i++)
 	{
 		m_ui[ui_i]->Exit();
-
-		delete m_ui[ui_i];
 	}
 	m_countDown.Exit();
-
-	//終わるときに全て消す
-	m_ui.clear();
 }
 

@@ -12,7 +12,6 @@
 class CUiGameManager
 {
 private:
-	std::vector<C2DObject*> m_ui;								//UI
 	CTimeUi					m_time;								//時間
 	CEventText				m_eventText;						//イベントテキスト
 	CPlayerStatusPanel		m_playerStautusPanel[PLAYER_NUM];	//プレイヤーのステータスパネル

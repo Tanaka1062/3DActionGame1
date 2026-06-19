@@ -27,6 +27,7 @@ CAttackManager::~CAttackManager()
 {
 	Exit();
 
+	//UŒ‚”»’èÁ‹
 	m_attack.clear();
 }
 

@@ -56,8 +56,6 @@ void CShotManager::Step()
 			//終了処理
 			(*ite)->Exit();
 
-			delete (*ite);
-
 			ite = m_shot.erase(ite);
 		}
 		else
@@ -103,8 +101,6 @@ void CShotManager::Exit()
 		//終了処理
 		(*ite)->Exit();
 
-		delete (*ite);
-
 		//終了処理が終わった弾を消す
 		ite = m_shot.erase(ite);
 	}
@@ -117,13 +113,13 @@ void CShotManager::Request(VECTOR _pos, VECTOR _rot, float _rad, float _speed, i
 	tagPlayerName _name,int _effectHndl, VECTOR* _targetPos)
 {
 	//弾のベースクラスにデータを入力
-	CShotBase* shot = new CShotBase;
+	unique_ptr<CShotBase> shot = unique_ptr<CShotBase>();
 	shot->Init();
 	shot->Load(m_hndl);
 	shot->Request(_pos,_rot,_rad,_speed,_atk,_lostTime,_name,_effectHndl,_targetPos);
 	
 	//弾を追加
-	m_shot.push_back(shot);
+	m_shot.push_back(move(shot));
 }
 
 //------------------------
@@ -140,7 +136,7 @@ CShotBase* CShotManager::GetShot(int _num)
 		//引数の数字と同じならアドレスを返す
 		if (count == _num)
 		{
-			return *ite;
+			return (*ite).get();
 		}
 		count++;
 

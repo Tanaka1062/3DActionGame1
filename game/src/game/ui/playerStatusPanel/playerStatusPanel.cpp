@@ -99,7 +99,7 @@ CPlayerStatusPanel::CPlayerStatusPanel()
 	//配置するハートを生成
 	for (int heart_i = 0; heart_i < HEART_NUM; heart_i++)
 	{
-		m_heart.push_back(new C2DObject);
+		m_heart.push_back(unique_ptr<C2DObject>());
 	}
 
 	Init();
@@ -113,13 +113,7 @@ CPlayerStatusPanel::~CPlayerStatusPanel()
 	Exit();
 
 	//配置するハートを破棄
-	for (int heart_i = 0; heart_i < m_heart.size(); heart_i++)
-	{
-		m_heart[heart_i]->Exit();
-		delete m_heart[heart_i];
-	}
 	m_heart.clear();
-
 }
 
 //-----------------------------------

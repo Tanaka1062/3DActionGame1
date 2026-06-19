@@ -8,15 +8,6 @@
 
 using namespace std;
 
-enum tagUiName
-{
-	UI_WIN_PLAYER_TEXT,		//Ÿ—˜‚µ‚½ƒvƒŒƒCƒ„[ƒeƒLƒXƒg
-	UI_RESULT_TEXT_1,		//ƒŠƒUƒ‹ƒgƒeƒLƒXƒg1
-	UI_RESULT_TEXT_2,		//ƒŠƒUƒ‹ƒgƒeƒLƒXƒg2
-
-	UI_NUM,					//UI‚Ì”
-};
-
 constexpr const char* UI_WIN_PLAYER_GRAPHIC_PATH[PLAYER_NUM] =	//Ÿ—˜‚µ‚½ƒvƒŒƒCƒ„[ƒeƒLƒXƒg‚Ì‰æ‘œƒpƒX
 {
 	"data/graphic/result/resultTextPlayer1.png",
@@ -25,14 +16,14 @@ constexpr const char* UI_WIN_PLAYER_GRAPHIC_PATH[PLAYER_NUM] =	//Ÿ—˜‚µ‚½ƒvƒŒƒCƒ
 	"data/graphic/result/resultTextPlayer4.png",
 };
 
-constexpr const char* UI_GRAPHIC_PATH[UI_NUM] =				//UI‚Ì‰æ‘œƒpƒX
+constexpr const char* UI_GRAPHIC_PATH[UiResultData::UI_NUM] =				//UI‚Ì‰æ‘œƒpƒX
 {
 	"",
 	"data/graphic/result/resultText1.png",
 	"data/graphic/result/resultText2.png",
 };
 
-constexpr VECTOR UI_POS[UI_NUM] =							//UI‚ÌÀ•W
+constexpr VECTOR UI_POS[UiResultData::UI_NUM] =							//UI‚ÌÀ•W
 {
 	{WINDOW_SIZE_HALF_X,WINDOW_SIZE_HALF_Y,0.0f},
 	{WINDOW_SIZE_HALF_X,540.0f,0.0f},
@@ -40,30 +31,16 @@ constexpr VECTOR UI_POS[UI_NUM] =							//UI‚ÌÀ•W
 };
 
 
-//ƒRƒ“ƒXƒgƒ‰ƒNƒ^EƒfƒXƒgƒ‰ƒNƒ^
+//ƒRƒ“ƒXƒgƒ‰ƒNƒ^
 CUiResultManager::CUiResultManager()
 {
-	for (int ui_i = 0; ui_i < UI_NUM; ui_i++)
-	{
-		C2DObject* ui = new C2DObject;
-
-		m_ui.push_back(ui);
-	}
-
 	Init();
 }
 
+//ƒfƒXƒgƒ‰ƒNƒ^
 CUiResultManager::~CUiResultManager()
 {
 	Exit();
-
-	for (int ui_i = 0; ui_i < m_ui.size(); ui_i++)
-	{
-		delete m_ui[ui_i];
-	}
-
-	//‘S‚ÄÁ‚·
-	m_ui.clear();
 }
 
 void CUiResultManager::Init()
@@ -84,7 +61,7 @@ void CUiResultManager::Load()
 {
 	for (int ui_i = 0; ui_i < m_ui.size(); ui_i++)
 	{
-		if (ui_i == UI_WIN_PLAYER_TEXT)
+		if (ui_i == UiResultData::UI_WIN_PLAYER_TEXT)
 		{
 			CRanking* ranking = CRanking::GetInstance();
 
@@ -139,12 +116,12 @@ void CUiResultManager::Step(bool _isPodiumMoveEnd)
 //•`Ê
 void CUiResultManager::Draw()
 {
-	m_ui[UI_WIN_PLAYER_TEXT]->Draw();
+	m_ui[UiResultData::UI_WIN_PLAYER_TEXT]->Draw();
 
 	switch (m_state)
 	{
 	case CUiResultManager::RANKING:
-		m_ui[UI_RESULT_TEXT_1]->Draw();
+		m_ui[UiResultData::UI_RESULT_TEXT_1]->Draw();
 		break;
 	case CUiResultManager::GRAPH:
 		m_lineGraph.Draw();
@@ -152,7 +129,7 @@ void CUiResultManager::Draw()
 		//ÅŒã‚Ü‚Åü‚ª“’B‚µ‚½‚çƒeƒLƒXƒg2‚ğ•\¦‚·‚é
 		if (m_lineGraph.GetIsMaxLine() == true)
 		{
-			m_ui[UI_RESULT_TEXT_2]->Draw();
+			m_ui[UiResultData::UI_RESULT_TEXT_2]->Draw();
 		}
 		break;
 	}

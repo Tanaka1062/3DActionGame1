@@ -22,10 +22,8 @@ constexpr const char* MATERIAL_PATH[MT_NUM] =
 //------------------------
 C3DUiManager::C3DUiManager()
 {
-	for (int ui_i = 0; ui_i < UI_MAX_NUM; ui_i++)
-	{
-		m_3DUi.push_back(make_unique<C3DUi>());
-	}
+	//3DUIê∂ê¨
+	m_3DUi.resize(UI_MAX_NUM);
 
 	Init();
 }

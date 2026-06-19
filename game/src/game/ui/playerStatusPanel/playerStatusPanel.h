@@ -8,14 +8,14 @@
 class CPlayerStatusPanel
 {
 private:
-	VECTOR					m_pos;			//中心座標
-	int						m_money;		//お金の量
-	C2DObject				m_panel;		//パネル
-	std::vector<int>		m_iconHndl;		//アイコンの画像ハンドル
-	C2DObject				m_icon;			//アイコン
-	std::vector<int>		m_heartHndl;	//ハートの画像ハンドル			
-	std::vector<C2DObject*>	m_heart;		//ハート
-	int						m_playerMoney;	//プレイヤーのお金
+	VECTOR									m_pos;			//中心座標
+	int										m_money;		//お金の量
+	C2DObject								m_panel;		//パネル
+	std::vector<int>						m_iconHndl;		//アイコンの画像ハンドル
+	C2DObject								m_icon;			//アイコン
+	std::vector<int>						m_heartHndl;	//ハートの画像ハンドル			
+	std::vector<std::unique_ptr<C2DObject>>	m_heart;		//ハート
+	int										m_playerMoney;	//プレイヤーのお金
 
 public:
 	//コンストラクタ・デストラクタ
