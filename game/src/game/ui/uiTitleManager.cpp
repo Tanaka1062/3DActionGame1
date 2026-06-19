@@ -35,7 +35,7 @@ void CUiTitleManager::Init()
 
 	for (int ui_i = 0; ui_i < m_ui.size(); ui_i++)
 	{
-		m_ui[ui_i]->Init(UI_POS[ui_i]);
+		m_ui[ui_i].Init(UI_POS[ui_i]);
 	}
 }
 
@@ -44,7 +44,7 @@ void CUiTitleManager::Load()
 {
 	for (int ui_i = 0; ui_i < m_ui.size(); ui_i++)
 	{
-		m_ui[ui_i]->Load(UI_GRAPHIC_PATH[ui_i]);
+		m_ui[ui_i].Load(UI_GRAPHIC_PATH[ui_i]);
 	}
 
 }
@@ -54,7 +54,7 @@ void CUiTitleManager::Step()
 {
 	for (int ui_i = 0; ui_i < m_ui.size(); ui_i++)
 	{
-		m_ui[ui_i]->Step();
+		m_ui[ui_i].Step();
 	}
 }
 
@@ -63,7 +63,7 @@ void CUiTitleManager::Draw()
 {
 	for (int ui_i = 0; ui_i < m_ui.size(); ui_i++)
 	{
-		m_ui[ui_i]->Draw();
+		m_ui[ui_i].Draw();
 	}
 }
 
@@ -72,7 +72,7 @@ void CUiTitleManager::Exit()
 {
 	for (int ui_i = 0; ui_i < m_ui.size(); ui_i++)
 	{
-		m_ui[ui_i]->Exit();
+		m_ui[ui_i].Exit();
 	}
 }
 

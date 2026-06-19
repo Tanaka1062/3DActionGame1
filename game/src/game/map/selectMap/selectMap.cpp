@@ -1,5 +1,7 @@
 #include "selectMap.h"
 
+using namespace std;
+
 //’è‹`ŠÖ˜A==================================
 constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR—p‰Šú‰»
 constexpr VECTOR SCALE = { 1.0f,1.0f,1.0f };		//‘å‚«‚³
@@ -14,7 +16,7 @@ constexpr const char* MAP_MODEL_PATH ={
 //------------------------
 CSelectMap::CSelectMap()
 {
-	m_stage.push_back(new CActor);
+	m_stage.push_back(make_unique<CActor>());
 }
 
 //------------------------

@@ -18,7 +18,7 @@ namespace UiTitleData
 class CUiTitleManager
 {
 private:
-	std::array<std::unique_ptr<C2DObject>, UiTitleData::UI_NUM>	m_ui;		//UI
+	std::array<C2DObject, UiTitleData::UI_NUM>	m_ui;		//UI
 public:
 	//コンストラクタ・デストラクタ
 	CUiTitleManager();

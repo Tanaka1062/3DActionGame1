@@ -33,7 +33,7 @@ void CUiSelectManager::Init()
 {
 	for (int ui_i = 0; ui_i < m_ui.size(); ui_i++)
 	{
-		m_ui[ui_i]->Init();
+		m_ui[ui_i].Init(UI_POS[ui_i]);
 	}
 
 	m_countDown.Init();
@@ -44,7 +44,7 @@ void CUiSelectManager::Load()
 {
 	for (int ui_i = 0; ui_i < m_ui.size(); ui_i++)
 	{
-		m_ui[ui_i]->Load(UI_GRAPHIC_PATH[ui_i]);
+		m_ui[ui_i].Load(UI_GRAPHIC_PATH[ui_i]);
 	}
 	m_countDown.Load();
 }
@@ -54,7 +54,7 @@ void CUiSelectManager::Step(bool _allReady)
 {
 	for (int ui_i = 0; ui_i < m_ui.size(); ui_i++)
 	{
-		m_ui[ui_i]->Step();
+		m_ui[ui_i].Step();
 	}
 
 	m_countDown.Step(_allReady);
@@ -65,7 +65,7 @@ void CUiSelectManager::Draw()
 {
 	for (int ui_i = 0; ui_i < m_ui.size(); ui_i++)
 	{
-		m_ui[ui_i]->Draw();
+		m_ui[ui_i].Draw();
 	}
 	m_countDown.Draw();
 }
@@ -75,7 +75,7 @@ void CUiSelectManager::Exit()
 {
 	for (int ui_i = 0; ui_i < m_ui.size(); ui_i++)
 	{
-		m_ui[ui_i]->Exit();
+		m_ui[ui_i].Exit();
 	}
 	m_countDown.Exit();
 }

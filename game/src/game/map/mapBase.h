@@ -17,12 +17,12 @@ public:
 		int							coinSpawnNum;		//コインスポーンの数
 	};
 protected:
-	int								m_mapId;			//マップのID
-	std::vector<CActor*>			m_stage;			//ステージ
-	int								m_stageId;			//ステージのID
-	int								m_mapMoveTimer;		//マップの移動する時間
-	std::vector<tagStageSpawnData>	m_stageSpawnData;	//ステージのスポーンデータ
-	std::vector<CObject*>			m_object;			//ステージのオブジェクト
+	int										m_mapId;			//マップのID
+	std::vector<std::unique_ptr<CActor>>	m_stage;			//ステージ
+	int										m_stageId;			//ステージのID
+	int										m_mapMoveTimer;		//マップの移動する時間
+	std::vector<tagStageSpawnData>			m_stageSpawnData;	//ステージのスポーンデータ
+	std::vector<std::unique_ptr<CObject>>	m_object;			//ステージのオブジェクト
 public:
 	//コンストラクタ・デストラクタ
 	CMapBase();
@@ -56,7 +56,7 @@ public:
 	VECTOR GetStagePos(int _num) { return m_stage[_num]->GetPos(); }
 
 	//ステージを取得
-	CObject* GetStage(int _num) { return m_stage[_num]; }
+	CObject* GetStage(int _num) { return m_stage[_num].get(); }
 
 	//マップIDを取得
 	int GetMapId() { return m_mapId; }
@@ -71,7 +71,7 @@ public:
 	tagStageSpawnData GetStageSpawnData(int _num) { return m_stageSpawnData[_num]; }
 
 	//オブジェクトを取得
-	CObject* GetStageObject(int _num) { return m_object[_num]; }
+	CObject* GetStageObject(int _num) { return m_object[_num].get(); }
 
 	//オブジェクトの数を取得
 	int GetStageObjectNum() { return static_cast<int>(m_object.size()); }

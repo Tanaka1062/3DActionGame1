@@ -4,7 +4,7 @@
 
 using namespace std;
 
-constexpr int EVENT_START_TIME = 50 * 60;			//爆弾を落とすまでの間隔
+constexpr int EVENT_START_TIME = 50 * 60;			//イベントが始まる間隔
 
 //---------------------------
 //		コンストラクタ
@@ -29,8 +29,8 @@ CEventManager::~CEventManager()
 void CEventManager::Init()
 {
 	//イベントを作成
-	m_event.push_back(make_unique<CBombPaty>());
-	m_event.push_back(make_unique<CCoinPaty>());
+	m_event[EVENT_BOMBPARTY] = make_unique<CBombPaty>();
+	m_event[EVENT_COINPARTY] = make_unique<CCoinPaty>();
 
 	for (int event_i = 0; event_i < m_event.size(); event_i++)
 	{
@@ -88,6 +88,5 @@ void CEventManager::Exit()
 	{
 		m_event[event_i]->Exit();
 	}
-	m_event.clear();
 }
 

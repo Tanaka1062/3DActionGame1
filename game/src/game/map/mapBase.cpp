@@ -26,17 +26,7 @@ CMapBase::CMapBase()
 CMapBase::~CMapBase()
 {
 	Exit();
-
-	for (int stage_i = 0; stage_i < m_stage.size(); stage_i++)
-	{
-		delete m_stage[stage_i];
-	}
 	m_stage.clear();
-
-	for (int object_i = 0; object_i < m_object.size(); object_i++)
-	{
-		delete m_object[object_i];
-	}
 	m_object.clear();
 }
 

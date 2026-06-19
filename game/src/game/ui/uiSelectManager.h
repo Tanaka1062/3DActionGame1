@@ -18,8 +18,8 @@ namespace UiSelectData
 class CUiSelectManager
 {
 private:
-	std:: array<std::unique_ptr<C2DObject>,UiSelectData::UI_NUM>	m_ui;			//UI
-	CCountDown														m_countDown;	//カウントダウン
+	std:: array<C2DObject,UiSelectData::UI_NUM>	m_ui;			//UI
+	CCountDown									m_countDown;	//カウントダウン
 public:
 	//コンストラクタ・デストラクタ
 	CUiSelectManager();

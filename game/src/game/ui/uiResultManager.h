@@ -26,10 +26,10 @@ private:
 		GRAPH,					//グラフ表示
 	};
 
-	std::array<std::unique_ptr<C2DObject>,UiResultData::UI_NUM>	m_ui;			//UI
-	CResultLineGraph											m_lineGraph;	//折れ線グラフ
-	tagState													m_state;		//状態
-	bool														m_isGraphEnd;	//グラフ終了フラグ
+	std::array<C2DObject,UiResultData::UI_NUM>	m_ui;			//UI
+	CResultLineGraph							m_lineGraph;	//折れ線グラフ
+	tagState									m_state;		//状態
+	bool										m_isGraphEnd;	//グラフ終了フラグ
 public:
 	//コンストラクタ・デストラクタ
 	CUiResultManager();

@@ -3,7 +3,6 @@
 #include "../../system/number/number.h"
 
 using namespace std;
-
 //パネルの名前
 enum tagPlayerStatusPanel
 {
@@ -13,28 +12,6 @@ enum tagPlayerStatusPanel
 	PANEL_PLAYER4,							//プレイヤー4のパネル
 
 	PANEL_NUM,								//パネルの数
-};
-
-enum tagIconState
-{
-	ICON_NORMAL,							//ノーマルアイコン
-	ICON_STAGGER,							//怯みアイコン
-	ICON_DIE,								//死亡アイコン
-	ICON_ATTACK,							//攻撃アイコン
-		
-	ICON_STATE_NUM,							//アイコンの状態の数
-};
-
-//ハートの状態
-enum tagHeartState
-{
-	HEART_EMPTY,							//空
-	HEART_QUARTER,							//4分の1
-	HEART_HALF,								//半分
-	HEART_THREE_QUARTER,					//4分の3
-	HEART_FULL,								//満タン
-
-	HEART_STATE_NUM,						//ハートの状態の数
 };
 
 //パネルのグラフィックパス
@@ -67,7 +44,6 @@ constexpr int ICON_SIZE_Y = 90;										//アイコンの縦の大きさ
 
 constexpr int HEART_SIZE_X = 21;									//ハートの横の大きさ
 constexpr int HEART_SIZE_Y = 18;									//ハートの縦の大きさ
-constexpr int HEART_NUM = 8;										//ハートの数
 
 constexpr int PANEL_SIZE_X = 320;									//パネルの横の大きさ
 constexpr int PANEL_SIZE_Y = 150;									//パネルの縦の大きさ
@@ -84,24 +60,6 @@ constexpr int MONEY_DIGIT = 2;										//お金の表示桁数
 //-----------------------------------
 CPlayerStatusPanel::CPlayerStatusPanel()
 {
-	//アイコンの画像ハンドル生成
-	for (int iconHndl_i = 0; iconHndl_i < ICON_STATE_NUM; iconHndl_i++)
-	{
-		m_iconHndl.push_back(-1);
-	}
-
-	//ハートの画像ハンドル生成
-	for (int heartHndl_i = 0; heartHndl_i < HEART_STATE_NUM; heartHndl_i++)
-	{
-		m_heartHndl.push_back(-1);
-	}
-
-	//配置するハートを生成
-	for (int heart_i = 0; heart_i < HEART_NUM; heart_i++)
-	{
-		m_heart.push_back(unique_ptr<C2DObject>());
-	}
-
 	Init();
 }
 
@@ -111,9 +69,6 @@ CPlayerStatusPanel::CPlayerStatusPanel()
 CPlayerStatusPanel::~CPlayerStatusPanel()
 {
 	Exit();
-
-	//配置するハートを破棄
-	m_heart.clear();
 }
 
 //-----------------------------------
@@ -142,7 +97,7 @@ void CPlayerStatusPanel::Init()
 	//配置するハートを初期化
 	for (int heart_i = 0; heart_i < m_heart.size(); heart_i++)
 	{
-		m_heart[heart_i]->Init();
+		m_heart[heart_i].Init();
 	}
 
 	
@@ -182,7 +137,7 @@ void CPlayerStatusPanel::Load(tagPlayerName _playerName)
 		{
 			pos.x += heart_i * HEART_SIZE_X;
 		}
-		m_heart[heart_i]->SetPos(pos);
+		m_heart[heart_i].SetPos(pos);
 	}
 
 	m_panel.Load(GRAPHIC_PANEL_PATH[_playerName]);
@@ -251,12 +206,12 @@ void CPlayerStatusPanel::Step(CPlayer* _player)
 	{
 		if (heartNum >= HEART_STATE_NUM - 1)
 		{
-			m_heart[heart_i]->SetHndl(m_heartHndl[HEART_FULL]);
+			m_heart[heart_i].SetHndl(m_heartHndl[HEART_FULL]);
 			heartNum -= HEART_STATE_NUM - 1;
 		}
 		else
 		{
-			m_heart[heart_i]->SetHndl(m_heartHndl[heartNum]);
+			m_heart[heart_i].SetHndl(m_heartHndl[heartNum]);
 			heartNum = 0;
 		}
 	}
@@ -277,7 +232,7 @@ void CPlayerStatusPanel::Draw()
 	m_icon.Draw();
 	for (int heart_i = 0; heart_i < m_heart.size(); heart_i++)
 	{
-		m_heart[heart_i]->Draw();
+		m_heart[heart_i].Draw();
 	}
 
 	CNumber::RequestNumber(VAdd(m_pos,MONEY_NUMBER_INIT_POS), m_money, MONEY_NUMBER_SIZE, MONEY_DIGIT);
@@ -311,7 +266,7 @@ void CPlayerStatusPanel::Exit()
 
 	for (int heart_i = 0; heart_i < m_heart.size(); heart_i++)
 	{
-		m_heart[heart_i]->Exit();
+		m_heart[heart_i].Exit();
 	}
 }
 

@@ -1,6 +1,8 @@
 #include "grassland.h"
 #include "../../../gameTime/gameTime.h"
 
+using namespace std;
+
 //定義関連==================================
 constexpr int STAGE_NUM = 5;					//ステージの数
 constexpr VECTOR POS[STAGE_NUM] =
@@ -85,11 +87,11 @@ CGrassland::CGrassland()
 {
 	for (int stage_i = 0; stage_i < STAGE_NUM; stage_i++)
 	{
-		m_stage.push_back(new CActor);
+		m_stage.push_back(make_unique<CActor>());
 	}
 	for (int object_ii = 0; object_ii < STAGE_NUM - 1; object_ii++)
 	{
-		m_object.push_back(new CObject);
+		m_object.push_back(make_unique<CObject>());
 	}
 	CMapBase::Init();
 	Init();

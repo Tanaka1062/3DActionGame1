@@ -1,7 +1,7 @@
 #pragma once
 #include "eventBase.h"
 #include <iostream>
-#include <vector>
+#include <array>
 #include "../item/itemManager.h"
 
 class CEventManager
@@ -17,9 +17,9 @@ public:
 		EVENT_NUM,					//イベントの数
 	};
 private:
-	std::vector<std::unique_ptr<CEventBase>>	m_event;		//イベント
-	int											m_eventTime;	//イベントが始まるまでの時間
-	tagEventName								m_nowEvent;		//現在のイベント
+	std::array<std::unique_ptr<CEventBase>,EVENT_NUM>	m_event;		//イベント
+	int													m_eventTime;	//イベントが始まるまでの時間
+	tagEventName										m_nowEvent;		//現在のイベント
 
 public:
 

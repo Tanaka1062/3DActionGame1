@@ -1,8 +1,9 @@
 #include "resultMap.h"
-#include "../../player/playerData.h"
 #include "../../ranking/ranking.h"
 #include "../../../lib/input/keyInput.h"
 #include "../../system/sound/soundManager.h"
+
+using namespace std;
 
 //定義関連==================================
 constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
@@ -31,12 +32,10 @@ constexpr float PODIUM_MAX_Y[PLAYER_NUM] =		//表彰台の最大の高さ
 //------------------------
 CResultMap::CResultMap()
 {
-	m_stage.push_back(new CActor);
-
-	for (int player_i = 0; player_i < PLAYER_NUM; player_i++)
+	m_stage.push_back(make_unique<CActor>());
+	for (int podium_i = 0; podium_i < PLAYER_NUM; podium_i++)
 	{
-		m_object.push_back(new CObject);
-		m_isPodiumMoveEnd.push_back(false);
+		m_object.push_back(make_unique<CObject>());
 	}
 }
 

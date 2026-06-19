@@ -47,8 +47,8 @@ void CUiResultManager::Init()
 {
 	for (int ui_i = 0; ui_i < m_ui.size(); ui_i++)
 	{
-		m_ui[ui_i]->Init(UI_POS[ui_i]);
-		m_ui[ui_i]->SetActive(false);
+		m_ui[ui_i].Init(UI_POS[ui_i]);
+		m_ui[ui_i].SetActive(false);
 	}
 
 	m_lineGraph.Init();
@@ -65,11 +65,11 @@ void CUiResultManager::Load()
 		{
 			CRanking* ranking = CRanking::GetInstance();
 
-			m_ui[ui_i]->Load(UI_WIN_PLAYER_GRAPHIC_PATH[ranking->GetWinnerPlayerName()]);
+			m_ui[ui_i].Load(UI_WIN_PLAYER_GRAPHIC_PATH[ranking->GetWinnerPlayerName()]);
 		}
 		else
 		{
-			m_ui[ui_i]->Load(UI_GRAPHIC_PATH[ui_i]);
+			m_ui[ui_i].Load(UI_GRAPHIC_PATH[ui_i]);
 		}
 	}
 
@@ -86,7 +86,7 @@ void CUiResultManager::Step(bool _isPodiumMoveEnd)
 		{
 			for (int ui_i = 0; ui_i < m_ui.size(); ui_i++)
 			{
-				m_ui[ui_i]->SetActive(true);
+				m_ui[ui_i].SetActive(true);
 			}
 
 			//ボタンを押したらシーンをグラフに変更
@@ -116,12 +116,12 @@ void CUiResultManager::Step(bool _isPodiumMoveEnd)
 //描写
 void CUiResultManager::Draw()
 {
-	m_ui[UiResultData::UI_WIN_PLAYER_TEXT]->Draw();
+	m_ui[UiResultData::UI_WIN_PLAYER_TEXT].Draw();
 
 	switch (m_state)
 	{
 	case CUiResultManager::RANKING:
-		m_ui[UiResultData::UI_RESULT_TEXT_1]->Draw();
+		m_ui[UiResultData::UI_RESULT_TEXT_1].Draw();
 		break;
 	case CUiResultManager::GRAPH:
 		m_lineGraph.Draw();
@@ -129,7 +129,7 @@ void CUiResultManager::Draw()
 		//最後まで線が到達したらテキスト2を表示する
 		if (m_lineGraph.GetIsMaxLine() == true)
 		{
-			m_ui[UiResultData::UI_RESULT_TEXT_2]->Draw();
+			m_ui[UiResultData::UI_RESULT_TEXT_2].Draw();
 		}
 		break;
 	}
@@ -141,7 +141,7 @@ void CUiResultManager::Exit()
 {
 	for (int ui_i = 0; ui_i < m_ui.size(); ui_i++)
 	{
-		m_ui[ui_i]->Exit();
+		m_ui[ui_i].Exit();
 	}
 
 	m_lineGraph.Exit();

@@ -47,7 +47,6 @@ CMapSelectBG::CMapSelectBG()
 			m_bgHndl[playMap_i].push_back(-1);
 		}
 	}
-
 	Init();
 }
 
