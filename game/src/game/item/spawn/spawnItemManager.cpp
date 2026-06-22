@@ -135,8 +135,8 @@ void CSpawnItemManager::Load(CMapBase* _map)
 		//ステージの情報を取得
 		int stageHndl = _map->GetHndl(stage_i);
 		CMapBase::tagStageSpawnData stageSpawnData = _map->GetStageSpawnData(stage_i);
-		int frameNum = stageSpawnData.itemFrameNum;
-		int spawnNum = stageSpawnData.itemSpawnNum;
+		int frameNum = stageSpawnData.m_itemFrameNum;
+		int spawnNum = stageSpawnData.m_itemSpawnNum;
 
 		m_spawnData.push_back(vector<tagSpawnData>());
 
@@ -144,8 +144,8 @@ void CSpawnItemManager::Load(CMapBase* _map)
 		{
 			//スポーンデータを生成
 			tagSpawnData spawnData;
-			spawnData.isSpawn = false;
-			spawnData.pos = MV1GetFramePosition(stageHndl,frameNum);
+			spawnData.m_isSpawn = false;
+			spawnData.m_pos = MV1GetFramePosition(stageHndl,frameNum);
 			m_spawnData[stage_i].push_back(spawnData);
 
 			//フレーム番号を進める
@@ -176,7 +176,7 @@ void CSpawnItemManager::Step()
 		for (int spawnPos_i = 0; spawnPos_i < m_spawnData[map_i].size(); spawnPos_i++) 
 		{
 			//まだ出現していない場所はカウントしない
-			if (m_spawnData[map_i][spawnPos_i].isSpawn == false)continue;
+			if (m_spawnData[map_i][spawnPos_i].m_isSpawn == false)continue;
 
 			spawnNum++;
 		}
@@ -186,7 +186,7 @@ void CSpawnItemManager::Step()
 		{
 			for (int spawn_i = 0; spawn_i < m_spawnData[map_i].size(); spawn_i++)
 			{
-				m_spawnData[map_i][spawn_i].isSpawn = false;
+				m_spawnData[map_i][spawn_i].m_isSpawn = false;
 			}
 		}
 		//---------------------------------------------------------------------------------
@@ -352,10 +352,10 @@ unique_ptr<CItemBase> CSpawnItemManager::SpawnItem(int _stageId)
 	{
 		spawnPosId = GetRand(static_cast<int>( m_spawnData[_stageId].size()) - 1);
 
-		if (m_spawnData[_stageId][spawnPosId].isSpawn == false)
+		if (m_spawnData[_stageId][spawnPosId].m_isSpawn == false)
 		{
-			spawnItem->SetPos(m_spawnData[_stageId][spawnPosId].pos);
-			m_spawnData[_stageId][spawnPosId].isSpawn = true;
+			spawnItem->SetPos(m_spawnData[_stageId][spawnPosId].m_pos);
+			m_spawnData[_stageId][spawnPosId].m_isSpawn = true;
 			m_isItemSpawn = true;
 			break;
 		}
@@ -366,7 +366,7 @@ unique_ptr<CItemBase> CSpawnItemManager::SpawnItem(int _stageId)
 	int effectId = CEffectData::GetId(EFFECT_SPAWNITEM);
 
 	//エフェクトを呼び出す
-	CEffekseerCtrl::Request(effectId, m_spawnData[_stageId][spawnPosId].pos, false);
+	CEffekseerCtrl::Request(effectId, m_spawnData[_stageId][spawnPosId].m_pos, false);
 
 	//スポーンしているかをリセット
 	m_isItemSpawn = false;

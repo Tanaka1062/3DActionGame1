@@ -1,13 +1,17 @@
 #pragma once
 
 #include <DxLib.h>
+#include <iostream>
+#include <array>
 
 class CNumber
 {
 public:
-	static const int NUM_SIZE = 64;			//数字のサイズ
+	static constexpr int NUMBER_SIZE = 64;		//数字のサイズ
 private:
-	static int m_hndl[10];		//画像ハンドル
+	static constexpr int NUMBER_NUM = 10;		//数字の画像の数
+
+	static std::array<int,NUMBER_NUM> m_hndl;	//画像ハンドル
 
 public:
 	// データを初期化

@@ -107,12 +107,12 @@ void CGrassland::Init()
 		m_stage[stage_i]->Init();
 		m_stage[stage_i]->SetPos(POS[stage_i]);
 
-		m_stageSpawnData[stage_i].coinFrameNum = COIN_FRAME_NUM[stage_i];
-		m_stageSpawnData[stage_i].coinSpawnNum = COIN_SPAWN_NUM[stage_i];
-		m_stageSpawnData[stage_i].itemFrameNum = ITEM_FRAME_NUM[stage_i];
-		m_stageSpawnData[stage_i].itemSpawnNum = ITEM_SPAWN_NUM[stage_i];
-		m_stageSpawnData[stage_i].mapItemFrameNum = MAPITEM_FRAME_NUM[stage_i];
-		m_stageSpawnData[stage_i].mapItemSpawnNum = MAPITEM_SPAWN_NUM[stage_i];
+		m_stageSpawnData[stage_i].m_coinFrameNum = COIN_FRAME_NUM[stage_i];
+		m_stageSpawnData[stage_i].m_coinSpawnNum = COIN_SPAWN_NUM[stage_i];
+		m_stageSpawnData[stage_i].m_itemFrameNum = ITEM_FRAME_NUM[stage_i];
+		m_stageSpawnData[stage_i].m_itemSpawnNum = ITEM_SPAWN_NUM[stage_i];
+		m_stageSpawnData[stage_i].m_mapItemFrameNum = MAPITEM_FRAME_NUM[stage_i];
+		m_stageSpawnData[stage_i].m_mapItemSpawnNum = MAPITEM_SPAWN_NUM[stage_i];
 
 	}
 

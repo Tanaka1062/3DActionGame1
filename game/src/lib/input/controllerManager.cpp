@@ -26,12 +26,12 @@ void CControllerManager::Init()
 		DX_INPUT_PAD4,
 	};
 
-	for (int i = 0; i < PAD_NUM; i++)
+	for (int pad_i = 0; pad_i < PAD_NUM; pad_i++)
 	{
-		m_controller[i].Init();
+		m_controller[pad_i].Init();
 
-		m_controlerIdData[i].Id = controllerId[i];
-		m_controlerIdData[i].isConnection = false;
+		m_controlerIdData[pad_i].m_Id = controllerId[pad_i];
+		m_controlerIdData[pad_i].m_isConnection = false;
 	}
 }
 
@@ -40,9 +40,9 @@ void CControllerManager::Init()
 //-------------------------------
 void CControllerManager::Update()
 {
-	for (int i = 0; i < PAD_NUM; i++)
+	for (int pad_i = 0; pad_i < PAD_NUM; pad_i++)
 	{
-		m_controller[i].Update();
+		m_controller[pad_i].Update();
 	}
 }
 
@@ -110,13 +110,13 @@ bool CControllerManager::SetId()
 			if (m_controller[controller_j].GetId() != -1)continue;
 	
 			//すでに使われていたらスキップする
-			if (m_controlerIdData[controllerId_i].isConnection == true)continue;
+			if (m_controlerIdData[controllerId_i].m_isConnection == true)continue;
 
-			if (PAD_INPUT_2 == GetJoypadInputState(m_controlerIdData[controllerId_i].Id))
+			if (PAD_INPUT_2 == GetJoypadInputState(m_controlerIdData[controllerId_i].m_Id))
 			{
 				
-				m_controller[controller_j].SetId(m_controlerIdData[controllerId_i].Id);
-				m_controlerIdData[controllerId_i].isConnection = true;
+				m_controller[controller_j].SetId(m_controlerIdData[controllerId_i].m_Id);
+				m_controlerIdData[controllerId_i].m_isConnection = true;
 				return true;
 
 			}

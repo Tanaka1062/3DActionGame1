@@ -78,12 +78,12 @@ void CSoundManager::Load()
 //---------------------------
 void CSoundManager::Exit()
 {
-	for (int i = 0; i < m_hndl.size(); i++)
+	for (int sound_i = 0; sound_i < m_hndl.size(); sound_i++)
 	{
-		if (m_hndl[i] != -1)
+		if (m_hndl[sound_i] != -1)
 		{
-			DeleteSoundMem(m_hndl[i]);
-			m_hndl[i] = -1;
+			DeleteSoundMem(m_hndl[sound_i]);
+			m_hndl[sound_i] = -1;
 		}
 	}
 
@@ -116,10 +116,10 @@ void CSoundManager::Stop(tagSound soundID)
 //---------------------------
 void CSoundManager::StopAll()
 {
-	for (int i = 0; i < m_hndl.size(); i++)
+	for (int sound_i = 0; sound_i < m_hndl.size(); sound_i++)
 	{
 		//‚Æ‚è‚ ‚¦‚¸‚·‚×‚Ä‚ðƒ‹[ƒv‚µ‚Ä’âŽ~‚·‚é
-		StopSoundMem(m_hndl[i]);
+		StopSoundMem(m_hndl[sound_i]);
 	}
 
 }

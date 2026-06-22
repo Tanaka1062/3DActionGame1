@@ -29,9 +29,9 @@ CWeaponManager::~CWeaponManager()
 //---------------------------
 void CWeaponManager::Init()
 {
-	for (int i = 0; i < m_weapon.size(); i++)
+	for (int weapon_i = 0; weapon_i < m_weapon.size(); weapon_i++)
 	{
-		m_weapon[i].Init();
+		m_weapon[weapon_i].Init();
 	}
 }
 

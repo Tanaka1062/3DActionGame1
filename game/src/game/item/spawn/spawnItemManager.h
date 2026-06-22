@@ -16,8 +16,8 @@ private:
 
 	struct tagSpawnData									//スポーンデータ
 	{
-		VECTOR pos;										//出現する座標
-		bool isSpawn;									//出現したかどうか
+		VECTOR	m_pos;									//出現する座標
+		bool	m_isSpawn;								//出現したかどうか
 	};
 
 	std::vector<std::unique_ptr<CItemBase>> m_item;				//アイテム保存用

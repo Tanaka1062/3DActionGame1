@@ -397,10 +397,10 @@ void CCollisionManager::CheckHitPlayerToPlayer(CPlayerManager& _playerManager)
 //----------------------------------------------
 void CCollisionManager::CheckHitPlayerToMap(CPlayerManager& _playerManager, CMapBase* _map)
 {
-	for (int i = 0; i < _playerManager.GetPlayerNum(); i++)
+	for (int player_i = 0; player_i < _playerManager.GetPlayerNum(); player_i++)
 	{
 		//プレイヤーのクラスを取得
-		CPlayer* player = _playerManager.GetPlayer(i);
+		CPlayer* player = _playerManager.GetPlayer(player_i);
 
 		//プレイヤーが死んでいたらスキップ
 		if (player->GetActive() == false)continue;

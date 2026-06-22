@@ -8,9 +8,6 @@ enum tagFadeSteate {
 	FADE_OUT_WAIT,		//フェードアウト後の真っ暗状態
 };
 
-typedef struct {
-}FADE_DATA;
-
 class CFade
 {
 private:

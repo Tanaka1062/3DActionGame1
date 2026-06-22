@@ -27,7 +27,7 @@ void CTimeUi::Init()
 
 	VECTOR pos = V_ZERO;
 
-	pos.x = INIT_POS.x - static_cast<float>(CNumber::NUM_SIZE) * 0.5f;
+	pos.x = INIT_POS.x - static_cast<float>(CNumber::NUMBER_SIZE) * 0.5f;
 	pos.y = INIT_POS.y;
 
 	m_division.Init(pos);
@@ -52,10 +52,10 @@ void CTimeUi::Step(int _time)
 void CTimeUi::Draw()
 {
 	//•ª‚ð•\Ž¦
-	CNumber::RequestNumber(INIT_POS.x - static_cast<float>(CNumber::NUM_SIZE),INIT_POS.y,m_minute);
+	CNumber::RequestNumber(INIT_POS.x - static_cast<float>(CNumber::NUMBER_SIZE),INIT_POS.y,m_minute);
 	m_division.Draw();
 	//•b‚ð•\Ž¦
-	CNumber::RequestNumber(INIT_POS.x + static_cast<float>(CNumber::NUM_SIZE / 8), INIT_POS.y, m_second,1.0f, SECOND_DIGIT);
+	CNumber::RequestNumber(INIT_POS.x + static_cast<float>(CNumber::NUMBER_SIZE / 8), INIT_POS.y, m_second,1.0f, SECOND_DIGIT);
 
 }
 

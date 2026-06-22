@@ -9,12 +9,12 @@ class CMapBase
 public:
 	struct tagStageSpawnData							//ステージのスポーン情報
 	{
-		int							mapItemFrameNum;	//マップ全体のアイテムのフレームの数
-		int							mapItemSpawnNum;	//マップ全体のアイテムの出現座標の数
-		int							itemFrameNum;		//アイテムフレームの数
-		int							itemSpawnNum;		//アイテムスポーンの数
-		int							coinFrameNum;		//コインフレームの数
-		int							coinSpawnNum;		//コインスポーンの数
+		int							m_mapItemFrameNum;	//マップ全体のアイテムのフレームの数
+		int							m_mapItemSpawnNum;	//マップ全体のアイテムの出現座標の数
+		int							m_itemFrameNum;		//アイテムフレームの数
+		int							m_itemSpawnNum;		//アイテムスポーンの数
+		int							m_coinFrameNum;		//コインフレームの数
+		int							m_coinSpawnNum;		//コインスポーンの数
 	};
 protected:
 	int										m_mapId;			//マップのID

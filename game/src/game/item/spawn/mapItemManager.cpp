@@ -51,8 +51,8 @@ void CMapItemManager::Load(CMapBase* _map)
 		//ステージの情報を取得
 		int stageHndl = _map->GetHndl(stage_i);
 		CMapBase::tagStageSpawnData stageSpawnData = _map->GetStageSpawnData(stage_i);
-		int frameNum = stageSpawnData.mapItemFrameNum;
-		int spawnNum = stageSpawnData.mapItemSpawnNum;
+		int frameNum = stageSpawnData.m_mapItemFrameNum;
+		int spawnNum = stageSpawnData.m_mapItemSpawnNum;
 
 		for (int spawnPos_i = 0; spawnPos_i < spawnNum; spawnPos_i++)
 		{

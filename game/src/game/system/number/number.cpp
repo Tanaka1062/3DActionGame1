@@ -1,13 +1,15 @@
 #include "number.h"
 
-int CNumber::m_hndl[10];		//画像ハンドル
+using namespace std;
+
+array<int,CNumber::NUMBER_NUM> CNumber::m_hndl;		//画像ハンドル
 
 // データを初期化
 void CNumber::Init()
 {
-	for (int i = 0;i < 10; i++)
+	for (int hndl_i = 0; hndl_i < 10; hndl_i++)
 	{
-		m_hndl[i] = -1;
+		m_hndl[hndl_i] = -1;
 	}
 }
 
@@ -21,7 +23,7 @@ void CNumber::Load()
 		//画像データ読み込み
 		//失敗していたら-1が変数に入る
 		success = LoadDivGraph("data/graphic/ui/number.png",
-			10, 10, 1, NUM_SIZE, NUM_SIZE, m_hndl);
+			NUMBER_NUM, NUMBER_NUM, 1, NUMBER_SIZE, NUMBER_SIZE, &m_hndl[0]);
 	}
 
 }
@@ -29,14 +31,14 @@ void CNumber::Load()
 // 終了前に行う
 void CNumber::Exit()
 {
-	for (int i = 0;i < 10; i++)
+	for (int hndl_i = 0; hndl_i < m_hndl.size(); hndl_i++)
 	{
 		//ハンドルが-1でなければ、何かしらロードがされているはず
-		if (m_hndl[i] != -1)
+		if (m_hndl[hndl_i] != -1)
 		{
 			//画像メモリ上から破棄する
-			DeleteGraph(m_hndl[i]);
-			m_hndl[i] = -1;
+			DeleteGraph(m_hndl[hndl_i]);
+			m_hndl[hndl_i] = -1;
 		}
 
 	}
@@ -72,7 +74,7 @@ void CNumber::RequestNumber(float _x, float _y, int _number, float _size, int _d
 
 
 	//横にずらす量
-	float x = NUM_SIZE * _size;
+	float x = NUMBER_SIZE * _size;
 	//表示する数字
 	int number = _number;
 
