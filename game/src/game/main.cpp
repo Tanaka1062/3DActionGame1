@@ -15,7 +15,7 @@
 
 constexpr int EFFECT_MAX_NUM = 10;			//一度に表示できるエフェクトの最大数
 constexpr int PARTICLE_MAX_NUM = 2000;		//一度に表示できるパーティクルの最大数
-constexpr const char* GAME_NAME =				//ゲームのタイトル
+constexpr const char* GAME_NAME =			//ゲームのタイトル
 "COINウォーズ";
 
 // プログラムは WinMain から始まります

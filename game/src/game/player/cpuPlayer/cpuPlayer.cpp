@@ -200,6 +200,12 @@ void CCpuPlayer::HitCalc(CObject* _hitObject)
 		//コインに触れたときにエフェクトを表示する
 		if (item->GetItemType() == ITEM_TYPE_COIN)
 		{
+			if (m_effectHndl[PlayerData::EF_HNDL_COIN_GET] != -1)
+			{
+				CEffekseerCtrl::Stop(m_effectHndl[PlayerData::EF_HNDL_COIN_GET]);
+				m_effectHndl[PlayerData::EF_HNDL_COIN_GET] = -1;
+			}
+
 			//呼び出すエフェクトのID
 			int effectId = CEffectData::GetId(EFFECT_COIN_GET);
 
