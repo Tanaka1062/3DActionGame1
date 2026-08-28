@@ -8,7 +8,7 @@
 
 using namespace std;
 
-constexpr const char* UI_WIN_PLAYER_GRAPHIC_PATH[PLAYER_NUM] =	//Ÿ—˜‚µ‚½ƒvƒŒƒCƒ„[ƒeƒLƒXƒg‚Ì‰æ‘œƒpƒX
+constexpr const char*	UI_WIN_PLAYER_GRAPHIC_PATH[PLAYER_NUM] =	//Ÿ—˜‚µ‚½ƒvƒŒƒCƒ„[ƒeƒLƒXƒg‚Ì‰æ‘œƒpƒX
 {
 	"data/graphic/result/resultTextPlayer1.png",
 	"data/graphic/result/resultTextPlayer2.png",
@@ -16,14 +16,14 @@ constexpr const char* UI_WIN_PLAYER_GRAPHIC_PATH[PLAYER_NUM] =	//Ÿ—˜‚µ‚½ƒvƒŒƒCƒ
 	"data/graphic/result/resultTextPlayer4.png",
 };
 
-constexpr const char* UI_GRAPHIC_PATH[UiResultData::UI_NUM] =				//UI‚Ì‰æ‘œƒpƒX
+constexpr const char*	UI_GRAPHIC_PATH[UiResultData::UI_NUM] =		//UI‚Ì‰æ‘œƒpƒX
 {
 	"",
 	"data/graphic/result/resultText1.png",
 	"data/graphic/result/resultText2.png",
 };
 
-constexpr VECTOR UI_POS[UiResultData::UI_NUM] =							//UI‚ÌÀ•W
+constexpr VECTOR		UI_POS[UiResultData::UI_NUM] =				//UI‚ÌÀ•W
 {
 	{WINDOW_SIZE_HALF_X,WINDOW_SIZE_HALF_Y,0.0f},
 	{WINDOW_SIZE_HALF_X,540.0f,0.0f},

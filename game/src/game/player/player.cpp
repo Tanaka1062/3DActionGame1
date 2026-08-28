@@ -788,8 +788,6 @@ void CPlayer::Attack(CAttackManager* _attackManager, CShotManager* _shotManager)
 		break;
 	//武器がハンマーの場合
 	case WEAPON_ID_HAMMER:
-		CSoundManager::Play(CSoundManager::SE_HAMMER, DX_PLAYTYPE_BACK);
-
 		switch (m_attackNum)
 		{
 		case tagAttackNum::ATTACK:
@@ -800,6 +798,7 @@ void CPlayer::Attack(CAttackManager* _attackManager, CShotManager* _shotManager)
 			//空中の攻撃中アニメーション
 			if (RequestAnim(ANIMID_AIR_ATTACK_HAMMER, 0.6f) == true)
 			{
+				CSoundManager::Play(CSoundManager::SE_HAMMER, DX_PLAYTYPE_BACK);
 				_attackManager->Request(attackPos, attackSize, atk, blown, m_name);
 				
 				int effectId = CEffectData::GetId(EFFECT_SHOCK_WAVE);

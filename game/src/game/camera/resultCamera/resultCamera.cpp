@@ -4,12 +4,12 @@
 #include "../../map/mapManager.h"
 
 //定義関連====================================
-constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };			//VECTOR用初期化
-constexpr VECTOR INIT_POS = { -60.0f,40.0f,0.0f };	//カメラの初期座標
-constexpr float CAMERA_OFFSET_Y = 10.0f;			//注視点からカメラがどれだけ上にあるか
-constexpr VECTOR FOCUS_POS = { 0.0f,30.0f,0.0f };	//注視点の初期座標
-constexpr float FOCUS_MAX_Y = 300.0f;				//注視点の最大の高さ
-constexpr float FOCUS_UP_SPEED = 1.5f;				//注視点の上昇スピード
+constexpr VECTOR	ZERO = { 0.0f,0.0f,0.0f };			//VECTOR用初期化
+constexpr VECTOR	INIT_POS = { -60.0f,40.0f,0.0f };	//カメラの初期座標
+constexpr float		CAMERA_OFFSET_Y = 10.0f;			//注視点からカメラがどれだけ上にあるか
+constexpr VECTOR	FOCUS_POS = { 0.0f,30.0f,0.0f };	//注視点の初期座標
+constexpr float		FOCUS_MAX_Y = 300.0f;				//注視点の最大の高さ
+constexpr float		FOCUS_UP_SPEED = 1.5f;				//注視点の上昇スピード
 //============================================
 
 //---------------------------------

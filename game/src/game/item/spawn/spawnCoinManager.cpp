@@ -8,9 +8,7 @@ constexpr const char* MODEL_PATH =				//モデルのパス
 {
 	"data/model/item/coin/coin.mv1",
 };
-
 constexpr int MAP_FRAME_NUM = 130;			//マップのフレーム番号
-
 constexpr int DROP_COIN_MAX = 100;			//コインの最大量
 
 //-----------------------

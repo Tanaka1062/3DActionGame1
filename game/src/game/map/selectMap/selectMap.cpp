@@ -3,11 +3,11 @@
 using namespace std;
 
 //定義関連==================================
-constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
-constexpr VECTOR SCALE = { 1.0f,1.0f,1.0f };		//大きさ
-constexpr const char* MAP_MODEL_PATH ={
+constexpr VECTOR		ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
+constexpr VECTOR		SCALE = { 1.0f,1.0f,1.0f };		//大きさ
+constexpr const char*	MAP_MODEL_PATH ={				//ロードするファイル名
 	"data/model/map/selectMap/selectMap.mv1",
-};					//ロードするファイル名
+};				
 
 //==========================================
 

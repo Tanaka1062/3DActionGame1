@@ -6,11 +6,11 @@
 
 using namespace std;
 
-constexpr VECTOR START_LINE = { 78.0f,609.0f,0.0f };						//はじめの線の座標
-constexpr float LINE_LENGTH = WINDOW_SIZE_X - 288.0f;						//線の長さ
-constexpr int LINE_SPEED = 3;												//線の伸びるスピード
-constexpr int LINE_LENGTH_Y_MAX = 12;										//縦の線の最大の長さ
-constexpr int LINE_LENGTH_Y = 10;											//線の縦の長さ
+constexpr VECTOR	START_LINE = { 78.0f,609.0f,0.0f };			//はじめの線の座標
+constexpr float		LINE_LENGTH = WINDOW_SIZE_X - 288.0f;		//線の長さ
+constexpr int		LINE_SPEED = 3;								//線の伸びるスピード
+constexpr int		LINE_LENGTH_Y_MAX = 12;						//縦の線の最大の長さ
+constexpr int		LINE_LENGTH_Y = 10;							//線の縦の長さ
 
 //UIのグラフィックパス
 constexpr const char* GRAPHIC_UI_PATH =

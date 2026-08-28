@@ -5,7 +5,7 @@
 #include "../../system/effectData/effectData.h"
 
 constexpr float ROT_SPEED = 0.05f;			//‰ñ“]‘¬“x
-constexpr int ADD_MONEY = 1;				//‘‚¦‚é‚¨‹à‚Ì—Ê
+constexpr int	ADD_MONEY = 1;				//‘‚¦‚é‚¨‹à‚Ì—Ê
 
 CCoinBase::CCoinBase()
 {

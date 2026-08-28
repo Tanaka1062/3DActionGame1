@@ -4,12 +4,12 @@
 #include "../../../system/effectData/effectData.h"
 #include "../../../system/sound/soundManager.h"
 
-constexpr int EXPLOSION_TIME = 5 * 60;				//爆発する時間
-constexpr int EXPLOSION_IN_TIME = 1 * 60;			//爆発する前の時間
+constexpr int	EXPLOSION_TIME = 5 * 60;			//爆発する時間
+constexpr int	EXPLOSION_IN_TIME = 1 * 60;			//爆発する前の時間
 constexpr float EXPLOSION_RADIUS = 60.0f;			//爆発の半径
 constexpr float POWER_UP_EXPLOSION_RADIUS = 1.0f;	//パワーアップ後の爆発の半径
-constexpr int EXPLOSION_ATK = 50;					//爆発の攻撃力
-constexpr int COST = 0;								//価格
+constexpr int	EXPLOSION_ATK = 50;					//爆発の攻撃力
+constexpr int	COST = 0;							//価格
 
 //アニメーション一覧----------------------------------
 enum tagAnim

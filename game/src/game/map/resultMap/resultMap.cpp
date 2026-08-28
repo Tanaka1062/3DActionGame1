@@ -6,19 +6,18 @@
 using namespace std;
 
 //定義関連==================================
-constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
-constexpr VECTOR SCALE = { 1.0f,1.0f,1.0f };	//大きさ
-constexpr const char* MAP_MODEL_PATH = {			//ロードするファイル名
+constexpr VECTOR		ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
+constexpr VECTOR		SCALE = { 1.0f,1.0f,1.0f };		//大きさ
+constexpr const char*	MAP_MODEL_PATH = {				//ロードするファイル名
 	"data/model/map/resultMap/resultMap.mv1",
 };					
 
-constexpr const char* OBJECT_MODEL_PATH = {		//オブジェクトのロードするファイル名
+constexpr const char*	OBJECT_MODEL_PATH = {			//オブジェクトのロードするファイル名
 	"data/model/map/resultMap/podium.mv1",
 };
-constexpr int OBJECT_FRAME_NUM = 10;			//マップのオブジェクトの配置フレーム
-constexpr float PODIUM_UP_SPEED = 1.7f;			//表彰台の動く速度
-
-constexpr float PODIUM_MAX_Y[PLAYER_NUM] =		//表彰台の最大の高さ
+constexpr int			OBJECT_FRAME_NUM = 10;			//マップのオブジェクトの配置フレーム
+constexpr float			PODIUM_UP_SPEED = 1.7f;			//表彰台の動く速度
+constexpr float			PODIUM_MAX_Y[PLAYER_NUM] =		//表彰台の最大の高さ
 {
 	300.0f,
 	260.0f,

@@ -14,24 +14,20 @@ constexpr int SPAWN_PROBABILITY_INIT[ITEM_NUM] =					//ƒAƒCƒeƒ€‚ÌoŒ»Šm—¦‚Ì‰Šú’
 	5,
 	5,
 };
-
 constexpr int SPAWN_PROBABILITY_DECREASE[ITEM_NUM] =				//ƒAƒCƒeƒ€‚ÌoŒ»Šm—¦‚ÌŒ¸­’l
 {
 	5,
 	5,
 	5,
 };
-
-constexpr const char* MODEL_PATH[ITEM_NUM] =							//ƒ‚ƒfƒ‹‚ÌƒpƒX
+constexpr const char* MODEL_PATH[ITEM_NUM] =						//ƒ‚ƒfƒ‹‚ÌƒpƒX
 {
 	"data/model/item/bomb/bomb.mv1",
 	"data/model/item/weapon/hammer/hammer.mv1",
 	"data/model/item/weapon/ax/ax.mv1",
 
 };
-
 constexpr int MAP_FRAME_NUM = 56;			//ƒ}ƒbƒv‚ÌƒtƒŒ[ƒ€”Ô†
-
 constexpr int SPAWN_TIME = 10 * 60;			//ƒXƒ|[ƒ“‚·‚é‚Ü‚ÅŠÔ
 
 //-----------------------

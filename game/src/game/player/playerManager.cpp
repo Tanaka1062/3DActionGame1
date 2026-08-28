@@ -16,20 +16,16 @@ enum tagModelName					//モデル一覧
 	MODEL_NUM,						//モデルの数
 };
 
-constexpr float TARGET_LEN = -200.0f;			//ターゲットと認識するまでの長さ
-constexpr float TARGET_MAX_DISTANCE = 40.0f;	//どれくらい法線から離せるか
-
-constexpr int MAP_FRAME_NUM = 7;				//マップのフレーム番号
-constexpr float DIE_RADIUS = 260.0f;			//画面外判定の半径
-
-constexpr int NAME_ACTIVE_TIME = 180;			//名前の表示時間
-constexpr float NAME_UP_Y = 45.0f;				//名前がどれだけ上にあるか
-constexpr float CROWN_UP_Y = 35.0f;				//王冠がどれだけ上にあるか
-
-constexpr const char* MODEL_PATH =					//モデルのパス
+constexpr float			TARGET_LEN = -200.0f;			//ターゲットと認識するまでの長さ
+constexpr float			TARGET_MAX_DISTANCE = 40.0f;	//どれくらい法線から離せるか
+constexpr int			MAP_FRAME_NUM = 7;				//マップのフレーム番号
+constexpr float			DIE_RADIUS = 260.0f;			//画面外判定の半径
+constexpr int			NAME_ACTIVE_TIME = 180;			//名前の表示時間
+constexpr float			NAME_UP_Y = 45.0f;				//名前がどれだけ上にあるか
+constexpr float			CROWN_UP_Y = 35.0f;				//王冠がどれだけ上にあるか
+constexpr const char*	MODEL_PATH =					//モデルのパス
 { "data/model/player/player.mv1"};			
-
-constexpr const char* MATERIAL_PATH[PLAYER_NUM] =	//マテリアルのパス
+constexpr const char*	MATERIAL_PATH[PLAYER_NUM] =		//マテリアルのパス
 { "data/material/player/playerBody1.png",
  "data/material/player/playerBody2.png",
  "data/material/player/playerBody3.png",

@@ -39,21 +39,21 @@ const char* GRAPHIC_HEART_PATH =
 	"data/graphic/ui/heart.png",
 };
 
-constexpr int ICON_SIZE_X = 88;										//アイコンの横の大きさ
-constexpr int ICON_SIZE_Y = 90;										//アイコンの縦の大きさ
+constexpr int		ICON_SIZE_X = 88;									//アイコンの横の大きさ
+constexpr int		ICON_SIZE_Y = 90;									//アイコンの縦の大きさ
 
-constexpr int HEART_SIZE_X = 21;									//ハートの横の大きさ
-constexpr int HEART_SIZE_Y = 18;									//ハートの縦の大きさ
+constexpr int		HEART_SIZE_X = 21;									//ハートの横の大きさ
+constexpr int		HEART_SIZE_Y = 18;									//ハートの縦の大きさ
 
-constexpr int PANEL_SIZE_X = 320;									//パネルの横の大きさ
-constexpr int PANEL_SIZE_Y = 150;									//パネルの縦の大きさ
-constexpr VECTOR PANEL_INIT_POS =									//パネルの初期座標
+constexpr int		PANEL_SIZE_X = 320;									//パネルの横の大きさ
+constexpr int		PANEL_SIZE_Y = 150;									//パネルの縦の大きさ
+constexpr VECTOR	PANEL_INIT_POS =									//パネルの初期座標
 { static_cast<float>(PANEL_SIZE_X * 0.5),static_cast<float>(WINDOW_SIZE_Y - PANEL_SIZE_Y * 0.5),0.0f};
-constexpr int PANEL_BLEND = 200;									//パネルの透明度
+constexpr int		PANEL_BLEND = 200;									//パネルの透明度
 
-constexpr float MONEY_NUMBER_SIZE = 0.5f;							//お金の大きさ
-constexpr VECTOR MONEY_NUMBER_INIT_POS = { 70.0f,-40.0f,0.0f };		//お金の初期座標
-constexpr int MONEY_DIGIT = 2;										//お金の表示桁数
+constexpr float		MONEY_NUMBER_SIZE = 0.5f;							//お金の大きさ
+constexpr VECTOR	MONEY_NUMBER_INIT_POS = { 70.0f,-40.0f,0.0f };		//お金の初期座標
+constexpr int		MONEY_DIGIT = 2;									//お金の表示桁数
 
 //-----------------------------------
 //			コンストラクタ

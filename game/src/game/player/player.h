@@ -8,8 +8,6 @@ namespace PlayerData{
 	//定義関連---------------------------
 
 //プレイヤー関連--------------------------------
-	constexpr char MODEL_PATH[] =
-		"data/model/player/playerTransformTest.mv1";			//ロードするファイル名
 	constexpr VECTOR INIT_POS = { 0.0f,1.0f,0.0f };				//初期座標
 	constexpr float SHADOW_SIZE = 0.5f;							//丸影の大きさ
 	constexpr int MAX_HP = 200;									//体力
@@ -35,9 +33,6 @@ namespace PlayerData{
 	//攻撃関連---------------------------
 	constexpr float ATTACK_MOVE_SPEED = 0.5f;					//攻撃時に前進する力
 	constexpr float FIGHT_LEN = 40.0f;							//戦う距離
-	constexpr float SHOT_SIZE = 10.0f;							//弾の大きさ
-	constexpr float SHOT_SPEED = 2.5f;							//弾の速度
-	constexpr int SHOT_LOST_TIME = 2 * 60;						//弾が消えるまでの時間
 	constexpr int AX_ATTACK_TIME = 180;							//斧の攻撃する時間
 	constexpr int AX_ATTACK_NUM = AX_ATTACK_TIME / 10;			//斧の攻撃回数
 	constexpr float HAMMER_ATTACK_AIR_FALL_SPEED = 4.0f;		//ハンマーの空中攻撃の落下スピード

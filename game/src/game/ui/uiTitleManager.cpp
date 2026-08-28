@@ -5,14 +5,14 @@
 using namespace std;
 
 
-constexpr const char* UI_GRAPHIC_PATH[UiTitleData::UI_NUM] =		//背景の画像パス
+constexpr const char*	UI_GRAPHIC_PATH[UiTitleData::UI_NUM] =		//背景の画像パス
 {
 	"data/graphic/title/title.png",
 	"data/graphic/title/startText.png",
 
 };
 
-constexpr VECTOR UI_POS[UiTitleData::UI_NUM] =					//UIの座標
+constexpr VECTOR		UI_POS[UiTitleData::UI_NUM] =				//UIの座標
 {
 	{WINDOW_SIZE_HALF_X,180.0f,0.0f},
 	{WINDOW_SIZE_HALF_X,400.0f,0.0f},

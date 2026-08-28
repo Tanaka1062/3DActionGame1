@@ -1,9 +1,9 @@
 #include "bombParty.h"
 
-constexpr int DROP_BOMB = 10;			//落とす爆弾量
-constexpr int DROP_TIME = 65;			//爆弾を落とすまでの間隔
-constexpr int MAX_DROP_POS_X = 300;		//落とす座標の横
-constexpr int MAX_DROP_POS_Z = 300;		//落とす座標の奥行き
+constexpr int	DROP_BOMB = 10;			//落とす爆弾量
+constexpr int	DROP_TIME = 65;			//爆弾を落とすまでの間隔
+constexpr int	MAX_DROP_POS_X = 300;	//落とす座標の横
+constexpr int	MAX_DROP_POS_Z = 300;	//落とす座標の奥行き
 constexpr float DROP_POS_Y = 100.0f;	//落とす高さ
 
 //----------------------

@@ -45,19 +45,19 @@ namespace {
 		"data/graphic/ui/player4Icon.png",
 	};
 
-	constexpr float SCALE = 0.7f;										//大きさ
+	constexpr float		SCALE = 0.7f;									//大きさ
 
-	constexpr int ICON_SIZE_X = 88;										//アイコンの横の大きさ
-	constexpr int ICON_SIZE_Y = 90;										//アイコンの縦の大きさ
-	constexpr VECTOR ICON_INIT_POS = { 51.0f,10.0f,0.0f };				//アイコンの初期座標
+	constexpr int		ICON_SIZE_X = 88;								//アイコンの横の大きさ
+	constexpr int		ICON_SIZE_Y = 90;								//アイコンの縦の大きさ
+	constexpr VECTOR	ICON_INIT_POS = { 51.0f,10.0f,0.0f };			//アイコンの初期座標
 
-	constexpr int PANEL_SIZE_X = 320;									//パネルの横の大きさ
-	constexpr int PANEL_SIZE_Y = 150;									//パネルの縦の大きさ
-	constexpr int PANEL_BLEND = 200;									//パネルの透明度
+	constexpr int		PANEL_SIZE_X = 320;								//パネルの横の大きさ
+	constexpr int		PANEL_SIZE_Y = 150;								//パネルの縦の大きさ
+	constexpr int		PANEL_BLEND = 200;								//パネルの透明度
 
-	constexpr float MONEY_NUMBER_SIZE = 0.5f;							//お金の大きさ
-	constexpr VECTOR MONEY_NUMBER_INIT_POS = { 58.0f,-25.0f,0.0f };		//お金の初期座標
-	constexpr int MONEY_DIGIT = 2;										//お金の表示桁数
+	constexpr float		MONEY_NUMBER_SIZE = 0.5f;						//お金の大きさ
+	constexpr VECTOR	MONEY_NUMBER_INIT_POS = { 58.0f,-25.0f,0.0f };	//お金の初期座標
+	constexpr int		MONEY_DIGIT = 2;								//お金の表示桁数
 
 }
 

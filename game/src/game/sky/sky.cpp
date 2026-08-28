@@ -2,12 +2,12 @@
 //#include<DxLib.h>
 
 //定義関連==================================
-constexpr float ALL_SCALE = 22.0f;
-constexpr VECTOR SCALE = { ALL_SCALE, ALL_SCALE, ALL_SCALE };
-constexpr float ROTATE_SPEED = 0.1f;				//回転速度
-constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
-constexpr char SKY_MODEL_PATH[] =
- "data/model/sky/sky.mv1" ;	//ロードするファイル名
+constexpr float		ALL_SCALE = 22.0f;
+constexpr VECTOR	SCALE = { ALL_SCALE, ALL_SCALE, ALL_SCALE };
+constexpr float		ROTATE_SPEED = 0.1f;							//回転速度
+constexpr VECTOR	ZERO = { 0.0f,0.0f,0.0f };						//VECTOR用初期化
+constexpr char		SKY_MODEL_PATH[] =
+ "data/model/sky/sky.mv1" ;											//ロードするファイル名
 //==========================================
 
 //---------------------------

@@ -1,8 +1,8 @@
 #include "cameraBase.h"
 
-constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };			//VECTOR用初期化
-constexpr VECTOR CAMERA_UP = { 0.0f,1.0f,0.0f };	//カメラの上方向
-constexpr float DECELERATION = 0.9f;				//減速度
+constexpr VECTOR	ZERO = { 0.0f,0.0f,0.0f };			//VECTOR用初期化
+constexpr VECTOR	CAMERA_UP = { 0.0f,1.0f,0.0f };		//カメラの上方向
+constexpr float		DECELERATION = 0.9f;				//減速度
 
 //コンストラクタ
 CCameraBase::CCameraBase()

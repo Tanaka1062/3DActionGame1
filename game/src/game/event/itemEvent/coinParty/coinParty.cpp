@@ -1,10 +1,10 @@
 #include "coinParty.h"
 
-constexpr int DROP_COIN = 30;			//落とすコイン量
-constexpr int DROP_TIME = 30;			//コインを落とすまでの間隔
-constexpr int MAX_DROP_POS_X = 300;		//落とす座標の横
-constexpr int MAX_DROP_POS_Z = 300;		//落とす座標の奥行き
-constexpr float DROP_POS_Y = 100.0f;		//落とす高さ
+constexpr int	DROP_COIN = 30;			//落とすコイン量
+constexpr int	DROP_TIME = 30;			//コインを落とすまでの間隔
+constexpr int	MAX_DROP_POS_X = 300;	//落とす座標の横
+constexpr int	MAX_DROP_POS_Z = 300;	//落とす座標の奥行き
+constexpr float DROP_POS_Y = 100.0f;	//落とす高さ
 
 //----------------------
 //	  コンストラクタ

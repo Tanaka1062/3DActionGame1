@@ -2,9 +2,9 @@
 #include <math.h>
 
 //定義関連====================================
-constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
-constexpr int MAP_FRAME_NUM = 2;				//マップのフレーム番号
-constexpr VECTOR FOCUS_POS = { 0.0f,30.0f,0.0f };
+constexpr VECTOR	ZERO = { 0.0f,0.0f,0.0f };		//VECTOR用初期化
+constexpr int		MAP_FRAME_NUM = 2;				//マップのフレーム番号
+constexpr VECTOR	FOCUS_POS = { 0.0f,30.0f,0.0f };
 //============================================
 
 //---------------------------------

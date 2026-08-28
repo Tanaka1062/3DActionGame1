@@ -3,23 +3,23 @@
 #include "../../map/mapBase.h"
 
 //定義関連====================================
-constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };					//VECTOR用初期化
-constexpr VECTOR INIT_POS = { -300.0f,70.0f,0.0f };
-constexpr float MAP_MOVE_SPEED = 1.2f;						//マップ移動用カメラの移動速度
-constexpr float ZOOM_MOVE_SPEED = 0.4f;						//ズームカメラの移動速度
-constexpr int MAP_FRAME_NUM = 4;							//マップのフレーム番号
-constexpr float CAMERA_LENGTH =  -120.0f;					//カメラとプレイヤーの距離
-constexpr float ROT_SPEED = 0.2f * (DX_PI_F / 180.0f);		//カメラの回転スピード
-constexpr float ROT_Y_MAX = 30.0f * (DX_PI_F / 180.0f);		//カメラの最大のY軸回転角度
-constexpr float OFFSET_X = -190.0f;							//カメラと注視点の引く距離
-constexpr float MAX_Z = 50.0f;								//最大Z
-constexpr float MAX_X = 25.0f;								//最大X
-constexpr float CAMERA_FOLLOW_THRESHOLD = 5.0f;				//カメラの追従までの値
-constexpr float MAX_Z_DISTANCE = 200.0f;					//Z方向の最大距離
-constexpr float Z_DISTANCE_RATIO = 0.5f;					//Z方向の距離の割合
-constexpr float MIN_Z_DISTANCE = 80.0f;						//Z方向の最小距離
-constexpr float MIN_X_DISTANCE = 130.0f;					//X方向の最小距離
-constexpr int NEXT_POS_WAIT_TIME = 30;						//次の座標を更新する時間
+constexpr VECTOR	ZERO = { 0.0f,0.0f,0.0f };					//VECTOR用初期化
+constexpr VECTOR	INIT_POS = { -300.0f,70.0f,0.0f };
+constexpr float		MAP_MOVE_SPEED = 1.2f;						//マップ移動用カメラの移動速度
+constexpr float		ZOOM_MOVE_SPEED = 0.4f;						//ズームカメラの移動速度
+constexpr int		MAP_FRAME_NUM = 4;							//マップのフレーム番号
+constexpr float		CAMERA_LENGTH =  -120.0f;					//カメラとプレイヤーの距離
+constexpr float		ROT_SPEED = 0.2f * (DX_PI_F / 180.0f);		//カメラの回転スピード
+constexpr float		ROT_Y_MAX = 30.0f * (DX_PI_F / 180.0f);		//カメラの最大のY軸回転角度
+constexpr float		OFFSET_X = -190.0f;							//カメラと注視点の引く距離
+constexpr float		MAX_Z = 50.0f;								//最大Z
+constexpr float		MAX_X = 25.0f;								//最大X
+constexpr float		CAMERA_FOLLOW_THRESHOLD = 5.0f;				//カメラの追従までの値
+constexpr float		MAX_Z_DISTANCE = 200.0f;					//Z方向の最大距離
+constexpr float		Z_DISTANCE_RATIO = 0.5f;					//Z方向の距離の割合
+constexpr float		MIN_Z_DISTANCE = 80.0f;						//Z方向の最小距離
+constexpr float		MIN_X_DISTANCE = 130.0f;					//X方向の最小距離
+constexpr int		NEXT_POS_WAIT_TIME = 30;					//次の座標を更新する時間
 //============================================
 
 //---------------------------------

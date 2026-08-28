@@ -2,10 +2,10 @@
 #include "../../data.h"
 #include "../../system/number/number.h"
 
-constexpr const char GRAPHIC_PATH[] =
+constexpr const char	GRAPHIC_PATH[] =
  "data/graphic/ui/division.png" ;				//ロードするファイル名
 
-constexpr VECTOR INIT_POS =						//初期座標	
+constexpr VECTOR		INIT_POS =				//初期座標	
 { WINDOW_SIZE_HALF_X,100.0f,0.0f };				
 constexpr int SECOND_DIGIT = 2;					//秒の桁数
 

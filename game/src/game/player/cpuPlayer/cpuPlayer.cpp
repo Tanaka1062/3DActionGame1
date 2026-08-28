@@ -15,8 +15,8 @@ using namespace PlayerData;
 
 //定義関連---------------------------
 constexpr float ATTACK_START_DISTANCE = 15.0f;		//攻撃に移行する距離
-constexpr int ADD_CPU_STATE_PROBABILITY = 10;		//行動状態の上昇確率
-constexpr int CPU_STATE_CHANGE_TIME = 3 * 60;		//行動が変わるまでの時間
+constexpr int	ADD_CPU_STATE_PROBABILITY = 10;		//行動状態の上昇確率
+constexpr int	CPU_STATE_CHANGE_TIME = 3 * 60;		//行動が変わるまでの時間
 //-----------------------------------
 
 //-----------------------

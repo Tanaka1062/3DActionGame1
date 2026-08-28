@@ -14,13 +14,13 @@ constexpr VECTOR POS[STAGE_NUM] =
 	{0.0f,0.0f,-2760.0f},
 };
 
-constexpr VECTOR MOVE_SPEED = {0.0f,-10.0f,0.0f};	//動くスピード
-constexpr VECTOR ZERO = { 0.0f,0.0f,0.0f };			//VECTOR用初期化
-constexpr VECTOR SCALE = { 1.0f,1.0f,1.0f };		//大きさ
-constexpr int SHAKE_AMOUNT = 2;						//揺れる大きさ
-constexpr int SHAKE_TIME = 4;						//揺れるまでの時間
-constexpr float FALL_MAX = -300.0f;					//最大の落下位置
-constexpr const char* STAGE_MODEL_PATH[STAGE_NUM] ={
+constexpr VECTOR		MOVE_SPEED = {0.0f,-10.0f,0.0f};	//動くスピード
+constexpr VECTOR		ZERO = { 0.0f,0.0f,0.0f };			//VECTOR用初期化
+constexpr VECTOR		SCALE = { 1.0f,1.0f,1.0f };			//大きさ
+constexpr int			SHAKE_AMOUNT = 2;					//揺れる大きさ
+constexpr int			SHAKE_TIME = 4;						//揺れるまでの時間
+constexpr float			FALL_MAX = -300.0f;					//最大の落下位置
+constexpr const char*	STAGE_MODEL_PATH[STAGE_NUM] ={
 	"data/model/map/playMap/testMap10/TestMap10-1.mv1",
 	"data/model/map/playMap/testMap10/TestMap10-2.mv1",
 	"data/model/map/playMap/testMap10/TestMap10-3.mv1",
