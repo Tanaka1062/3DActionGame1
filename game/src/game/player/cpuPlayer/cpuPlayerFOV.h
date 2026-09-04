@@ -1,5 +1,5 @@
 #pragma once
-#include "../../lib/model/3DObject.h"
+#include "../../../lib/model/3DObject.h"
 #include <iostream>
 #include<vector>
 

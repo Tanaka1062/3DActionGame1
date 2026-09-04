@@ -1,7 +1,7 @@
 #include "titlePlayerManager.h"
-#include "../../lib/input/controllerManager.h"
+#include "../../../lib/input/controllerManager.h"
 #include "../../data.h"
-#include "../../lib/myMath/myMath.h"
+#include "../../../lib/myMath/myMath.h"
 
 using namespace std;
 

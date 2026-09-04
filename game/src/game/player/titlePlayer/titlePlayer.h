@@ -1,6 +1,6 @@
 #pragma once
 #include "../player.h"
-#include"../../lib/input/controllerManager.h"
+#include"../../../lib/input/controllerManager.h"
 
 //プレイヤークラス
 class CTitlePlayer:public CPlayer 

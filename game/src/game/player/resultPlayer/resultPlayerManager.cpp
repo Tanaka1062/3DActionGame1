@@ -1,7 +1,7 @@
 #include "resultPlayerManager.h"
-#include "../../lib/input/controllerManager.h"
+#include "../../../lib/input/controllerManager.h"
 #include "../../data.h"
-#include "../../lib/myMath/myMath.h"
+#include "../../../lib/myMath/myMath.h"
 #include "../../ranking/ranking.h"
 #include "../../map/resultMap/resultMap.h"
 

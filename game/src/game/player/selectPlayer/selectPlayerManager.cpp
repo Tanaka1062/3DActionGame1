@@ -1,7 +1,7 @@
 #include "selectPlayerManager.h"
-#include "../../lib/input/controllerManager.h"
+#include "../../../lib/input/controllerManager.h"
 #include "../../data.h"
-#include "../../lib/myMath/myMath.h"
+#include "../../../lib/myMath/myMath.h"
 #include "../../system/sound/soundManager.h"
 
 using namespace std;

@@ -1,5 +1,5 @@
 #include "coinBase.h"
-#include "../../lib/myMath/myMath.h"
+#include "../../../lib/myMath/myMath.h"
 #include "../../system/sound/soundManager.h"
 #include "../../../lib/effekseer/effekseer.h"
 #include "../../system/effectData/effectData.h"

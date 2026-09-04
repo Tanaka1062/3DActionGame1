@@ -1,7 +1,7 @@
 #pragma once
 #include "../player.h"
 #include "../../shot/shotManager.h"
-#include"../../lib/input/controllerManager.h"
+#include"../../../lib/input/controllerManager.h"
 #include "../playerData.h"
 #include "cpuPlayerFOV.h"
 

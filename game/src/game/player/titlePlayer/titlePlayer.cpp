@@ -1,6 +1,6 @@
 #include "titlePlayer.h"
 #include "../../data.h"
-#include "../../lib/myMath/myMath.h"
+#include "../../../lib/myMath/myMath.h"
 #include <math.h>
 
 //’è‹`ŠÖ˜A---------------------------

@@ -1,6 +1,6 @@
 #include "selectPlayer.h"
 #include "../../data.h"
-#include "../../lib/myMath/myMath.h"
+#include "../../../lib/myMath/myMath.h"
 #include <math.h>
 #include "../../system/sound/soundManager.h"
 
