@@ -4,10 +4,14 @@
 using namespace std;
 
 //定義関連==================================
-constexpr int STAGE_NUM = 1;					//ステージの数
+constexpr int STAGE_NUM = 5;					//ステージの数
 constexpr VECTOR POS[STAGE_NUM] =
 {
 	{0.0f,0.0f,0.0f},
+	{0.0f,0.0f,-690.0f },
+	{0.0f,0.0f,-1380.0f},
+	{0.0f,0.0f,-2070.0f},
+	{0.0f,0.0f,-2760.0f},
 };
 
 constexpr VECTOR MOVE_SPEED = {0.0f,-10.0f,0.0f};	//動くスピード
@@ -17,32 +21,59 @@ constexpr int SHAKE_AMOUNT = 2;						//揺れる大きさ
 constexpr int SHAKE_TIME = 4;						//揺れるまでの時間
 constexpr float FALL_MAX = -300.0f;					//最大の落下位置
 constexpr const char* STAGE_MODEL_PATH[STAGE_NUM] ={
-	"data/model/map/playMap/testMap10/TestMap10-1.mv1",
-
+	"data/model/map/playMap/testMap2/TestMap2-1.mv1",
+	"data/model/map/playMap/testMap2/TestMap2-2.mv1",
+	"data/model/map/playMap/testMap2/TestMap2-3.mv1",
+	"data/model/map/playMap/testMap2/TestMap2-4.mv1",
+	"data/model/map/playMap/testMap2/TestMap2-5.mv1",
 };					//ロードするファイル名
 constexpr int MAP_MOVE_TIME = 30;			//ステージが移動するまでの時間
 
 constexpr int MAPITEM_FRAME_NUM[STAGE_NUM] = {
-	16,
+	25,
+	0,
+	0,
+	0,
+	0,
 };
 constexpr int MAPITEM_SPAWN_NUM[STAGE_NUM] = {
 	4,
+	0,
+	0,
+	0,
+	0,
 };
 constexpr int ITEM_FRAME_NUM[STAGE_NUM] = {
-	0,
+	16,
+	16,
+	16,
+	16,
+	16,
 };
 constexpr int ITEM_SPAWN_NUM[STAGE_NUM] = {
-	0,
+	4,
+	4,
+	4,
+	4,
+	4,
 };
 constexpr int COIN_FRAME_NUM[STAGE_NUM] = {
-	25,
+	34,
+	26,
+	26,
+	26,
+	26,
 };
 constexpr int COIN_SPAWN_NUM[STAGE_NUM] = {
-	22,
+	20,
+	14,
+	23,
+	14,
+	16,
 };
 
 constexpr const char* OBJECT_MODEL_PATH = {
-	"data/model/map/playMap/testMap10/TestMap10-bridge.mv1",
+	"data/model/map/playMap/testMap2/grassland-bridge.mv1",
 };
 constexpr VECTOR OBJECT_INIT_POS = { 0.0f,0.0f,345.0f };
 

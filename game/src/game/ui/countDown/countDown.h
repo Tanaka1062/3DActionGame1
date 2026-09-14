@@ -1,5 +1,5 @@
 #pragma once
-#include "../../lib/2D/2DObject.h"
+#include "../../../lib/2D/2DObject.h"
 
 class CCountDown :public C2DObject
 {

@@ -1,8 +1,8 @@
 #pragma once
 #include<DxLib.h>
-#include "../../mapBase.h"
+#include "../playMapBase.h"
 
-class CGrassland :public CMapBase
+class CGrassland :public CPlayMapBase
 {
 private:
 	bool m_isStageFall;		//ステージが落下するかどうか
@@ -20,11 +20,5 @@ public:
 	//毎フレームする処理
 	void Step();
 
-private:
-	//ステージの移動処理
-	void StageMove();
-
-	//ステージの揺れる処理
-	void StageShake();
 };
 

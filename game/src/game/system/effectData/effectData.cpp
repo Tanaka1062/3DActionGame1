@@ -1,5 +1,5 @@
 #include"effectData.h"
-#include"../../lib/effekseer/effekseer.h"
+#include"../../../lib/effekseer/effekseer.h"
 
 int CEffectData::m_id[EFFECT_NUM];
 

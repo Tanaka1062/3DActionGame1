@@ -15,17 +15,13 @@ constexpr VECTOR POS[STAGE_NUM] =
 };
 
 constexpr VECTOR		MOVE_SPEED = {0.0f,-10.0f,0.0f};	//動くスピード
-constexpr VECTOR		ZERO = { 0.0f,0.0f,0.0f };			//VECTOR用初期化
-constexpr VECTOR		SCALE = { 1.0f,1.0f,1.0f };			//大きさ
-constexpr int			SHAKE_AMOUNT = 2;					//揺れる大きさ
 constexpr int			SHAKE_TIME = 4;						//揺れるまでの時間
-constexpr float			FALL_MAX = -300.0f;					//最大の落下位置
 constexpr const char*	STAGE_MODEL_PATH[STAGE_NUM] ={
-	"data/model/map/playMap/testMap10/TestMap10-1.mv1",
-	"data/model/map/playMap/testMap10/TestMap10-2.mv1",
-	"data/model/map/playMap/testMap10/TestMap10-3.mv1",
-	"data/model/map/playMap/testMap10/TestMap10-4.mv1",
-	"data/model/map/playMap/testMap10/TestMap10-5.mv1",
+	"data/model/map/playMap/grassland/grassland-1.mv1",
+	"data/model/map/playMap/grassland/grassland-2.mv1",
+	"data/model/map/playMap/grassland/grassland-3.mv1",
+	"data/model/map/playMap/grassland/grassland-4.mv1",
+	"data/model/map/playMap/grassland/grassland-5.mv1",
 
 };					//ロードするファイル名
 constexpr int MAP_MOVE_TIME = 30;			//ステージが移動するまでの時間
@@ -74,7 +70,7 @@ constexpr int COIN_SPAWN_NUM[STAGE_NUM] = {
 };
 
 constexpr const char* OBJECT_MODEL_PATH = {
-	"data/model/map/playMap/testMap10/TestMap10-bridge.mv1",
+	"data/model/map/playMap/grassland/grassland-bridge.mv1",
 };
 constexpr VECTOR OBJECT_INIT_POS = { 0.0f,0.0f,345.0f };
 
@@ -156,7 +152,7 @@ void CGrassland::Load()
 //------------------------
 void CGrassland::Step()
 {
-	StageMove();
+	StageMove(MOVE_SPEED);
 
 	CGameTime* gameTime = CGameTime::GetInstance();
 
@@ -186,52 +182,12 @@ void CGrassland::Step()
 
 	if (m_isStageFall == true)
 	{
-		StageMove();
+		StageMove(MOVE_SPEED);
 	}
 
 	if (m_isStageShake == true)
 	{
-		StageShake();
-	}
-}
-
-//------------------------
-//	ステージの移動処理
-//------------------------
-void CGrassland::StageMove()
-{
-
-	if (m_stageId - 1 >= 0)
-	{
-		if (m_stage[m_stageId - 1]->GetActive() == false)return;
-
-		VECTOR vec = m_stage[m_stageId - 1]->GetPos();
-		m_stage[m_stageId - 1]->SetPos(VAdd(vec,MOVE_SPEED));
-
-		if (m_stage[m_stageId - 1]->GetPos().y <= FALL_MAX)
-		{
-			m_stage[m_stageId - 1]->SetActive(false);
-			m_isStageFall = false;
-		}
-	}
-}
-
-//------------------------
-//	ステージの揺れる処理
-//------------------------
-void CGrassland::StageShake()
-{
-
-	if (m_stageId - 1  >= 0)
-	{
-		if (m_stage[m_stageId - 1]->GetActive() == false)return;
-
-		VECTOR shake = { 0 };
-		shake.x = static_cast<float>(GetRand(SHAKE_AMOUNT) - (SHAKE_AMOUNT * 0.5));
-		shake.z = static_cast<float>(GetRand(SHAKE_AMOUNT) - (SHAKE_AMOUNT * 0.5));
-		
-		VECTOR vec = VAdd(POS[m_stageId - 1],shake);
-		m_stage[m_stageId - 1]->SetPos(vec);
+		StageShake(POS[m_stageId - 1]);
 	}
 }
 

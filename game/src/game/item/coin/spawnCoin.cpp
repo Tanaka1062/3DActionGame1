@@ -1,5 +1,5 @@
 #include "spawnCoin.h"
-#include "../../lib/myMath/myMath.h"
+#include "../../../lib/myMath/myMath.h"
 #include "../../system/sound/soundManager.h"
 #include "../../data.h"
 
