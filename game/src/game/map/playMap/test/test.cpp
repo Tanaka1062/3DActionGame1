@@ -21,11 +21,11 @@ constexpr int SHAKE_AMOUNT = 2;						//揺れる大きさ
 constexpr int SHAKE_TIME = 4;						//揺れるまでの時間
 constexpr float FALL_MAX = -300.0f;					//最大の落下位置
 constexpr const char* STAGE_MODEL_PATH[STAGE_NUM] ={
-	"data/model/map/playMap/testMap2/TestMap2-1.mv1",
-	"data/model/map/playMap/testMap2/TestMap2-2.mv1",
-	"data/model/map/playMap/testMap2/TestMap2-3.mv1",
-	"data/model/map/playMap/testMap2/TestMap2-4.mv1",
-	"data/model/map/playMap/testMap2/TestMap2-5.mv1",
+	"data/model/map/playMap/testMap2/2Map-1.mv1",
+	"data/model/map/playMap/testMap2/2Map-2.mv1",
+	"data/model/map/playMap/testMap2/2Map-3.mv1",
+	"data/model/map/playMap/testMap2/2Map-4.mv1",
+	"data/model/map/playMap/testMap2/2Map-5.mv1",
 };					//ロードするファイル名
 constexpr int MAP_MOVE_TIME = 30;			//ステージが移動するまでの時間
 

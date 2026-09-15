@@ -12,13 +12,15 @@ constexpr float		CAMERA_LENGTH =  -120.0f;					//カメラとプレイヤーの距離
 constexpr float		ROT_SPEED = 0.2f * (DX_PI_F / 180.0f);		//カメラの回転スピード
 constexpr float		ROT_Y_MAX = 30.0f * (DX_PI_F / 180.0f);		//カメラの最大のY軸回転角度
 constexpr float		OFFSET_X = -190.0f;							//カメラと注視点の引く距離
-constexpr float		MAX_Z = 50.0f;								//最大Z
 constexpr float		MAX_X = 25.0f;								//最大X
+constexpr float		MAX_Y = 5.0f;								//最大Y
+constexpr float		MAX_Z = 50.0f;								//最大Z
 constexpr float		CAMERA_FOLLOW_THRESHOLD = 5.0f;				//カメラの追従までの値
 constexpr float		MAX_Z_DISTANCE = 200.0f;					//Z方向の最大距離
 constexpr float		Z_DISTANCE_RATIO = 0.5f;					//Z方向の距離の割合
 constexpr float		MIN_Z_DISTANCE = 80.0f;						//Z方向の最小距離
 constexpr float		MIN_X_DISTANCE = 130.0f;					//X方向の最小距離
+constexpr float		MAX_Y_DISTANCE = 5.0f;						//Y方向の最大距離
 constexpr int		NEXT_POS_WAIT_TIME = 30;					//次の座標を更新する時間
 //============================================
 
@@ -83,6 +85,20 @@ void CMapCamera::Step(int _stageCenterId, CPlayerManager* _playerManager)
 	Move(_stageCenterId,_playerManager);
 
 	//注視点をステージの中心から離れすぎないように調整する--------------------------------
+	if (m_nextFocus.x <= m_stageCenterPos[_stageCenterId].x - MAX_X)
+	{
+		m_nextFocus.x = m_stageCenterPos[_stageCenterId].x - MAX_X;
+	}
+	
+	if (m_nextFocus.y >= m_stageCenterPos[_stageCenterId].y - MAX_Y)
+	{
+		m_nextFocus.y = m_stageCenterPos[_stageCenterId].y - MAX_Y;
+	}
+	else if (m_nextFocus.y <= m_stageCenterPos[_stageCenterId].y - MAX_Y)
+	{
+		m_nextFocus.y = m_stageCenterPos[_stageCenterId].y - MAX_Y;
+	}
+	
 	if (m_nextFocus.z >= m_stageCenterPos[_stageCenterId].z + MAX_Z)
 	{
 		m_nextFocus.z = m_stageCenterPos[_stageCenterId].z + MAX_Z;
@@ -90,11 +106,6 @@ void CMapCamera::Step(int _stageCenterId, CPlayerManager* _playerManager)
 	else if (m_nextFocus.z <= m_stageCenterPos[_stageCenterId].z - MAX_Z)
 	{
 		m_nextFocus.z = m_stageCenterPos[_stageCenterId].z - MAX_Z;
-	}
-
-	if (m_nextFocus.x <= m_stageCenterPos[_stageCenterId].x - MAX_X)
-	{
-		m_nextFocus.x = m_stageCenterPos[_stageCenterId].x - MAX_X;
 	}
 	//------------------------------------------------------------------------------------
 
@@ -149,6 +160,15 @@ void CMapCamera::Step(int _stageCenterId, CPlayerManager* _playerManager)
 	{
 		m_focusPos.z -= MAP_MOVE_SPEED;
 	}
+	if (vec2.y > 0.0f)
+	{
+		m_focusPos.y -= MAP_MOVE_SPEED;
+	}
+	else if (vec2.y < 0.0f)
+	{
+		m_focusPos.y += MAP_MOVE_SPEED;
+	}
+
 	//--------------------------------------------------------------
 
 }
@@ -217,6 +237,8 @@ void CMapCamera::Move(int _stageCenterId,CPlayerManager* _playerManager)
 		float maxX = 0.0f;
 		float minZ = 0.0f;
 		float maxZ = 0.0f;
+		float maxY = 0.0f;
+		float minY = 0.0f;
 
 		for (int player_i = 0; player_i < _playerManager->GetPlayerNum(); player_i++)
 		{
@@ -232,6 +254,14 @@ void CMapCamera::Move(int _stageCenterId,CPlayerManager* _playerManager)
 			{
 				maxX = vec.x;
 			}
+			if (minY > vec.y || minY == 0.0f)
+			{
+				minY = vec.y;
+			}
+			if (minY < vec.y || maxY == 0.0f)
+			{
+				maxY = vec.y;
+			}
 			if (minZ > vec.z || minZ == 0.0f)
 			{
 				minZ = vec.z;
@@ -242,18 +272,13 @@ void CMapCamera::Move(int _stageCenterId,CPlayerManager* _playerManager)
 			}
 		}
 
-		//Zの距離を求める
-		float DistanceZ = maxZ - minZ;
-		//最大距離以上離れていたらカメラを引く
-		if (DistanceZ >= MAX_Z_DISTANCE)
-		{
-			m_basePos.x = OFFSET_X - DistanceZ * Z_DISTANCE_RATIO;
-		}
-		//最小距離以下ならカメラを近づける
-		else if(DistanceZ <= MIN_Z_DISTANCE)
-		{
-			m_basePos.x = OFFSET_X + DistanceZ * Z_DISTANCE_RATIO;
-		}
+		//Yの距離を求める
+		//float DistanceY = maxY - minY;
+		//if (DistanceY >= MAX_Y_DISTANCE)
+		//{
+		//	m_basePos.y = 0.0f;
+		//}
+
 		//一番手前がカメラに近かったらカメラを引く
 		if (minX - m_basePos.x <= MIN_X_DISTANCE)
 		{
@@ -262,7 +287,7 @@ void CMapCamera::Move(int _stageCenterId,CPlayerManager* _playerManager)
 		//中央をカメラの注視点にする
 		m_nextFocus.x = (minX + maxX) / 2.0f;
 		m_nextFocus.z = (maxZ + minZ) / 2.0f;
-
+		m_nextFocus.y = (maxY + minY) / 2.0f;
 	}
 }
 
